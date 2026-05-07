@@ -396,6 +396,14 @@
                 "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage_chrX.png",
                 "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage_chrY.png",
                 "methylation",
+                "methylation/pileup",
+                "methylation/pileup/HG002_Revio",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.combined.bed.gz",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.combined.bed.gz.tbi",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.hap1.bed.gz",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.hap1.bed.gz.tbi",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bed.gz",
+                "methylation/pileup/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bed.gz.tbi",
                 "methylation/profile",
                 "methylation/profile/family",
                 "methylation/profile/family/FAM",
@@ -715,6 +723,12 @@
                 "HG002_Revio_chromograph_coverage_chrM.png:md5,a9ce5c045a03bf2184166b7d68248b13",
                 "HG002_Revio_chromograph_coverage_chrX.png:md5,b54edc12651367708bd01d1b443888e7",
                 "HG002_Revio_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_Revio_pbcpgtools.combined.bed.gz:md5,465b33d4b8c58b1fc7ccc4df0530a6e3",
+                "HG002_Revio_pbcpgtools.combined.bed.gz.tbi:md5,77fee80a8607c57d6482bbaf16499d71",
+                "HG002_Revio_pbcpgtools.hap1.bed.gz:md5,2628bd497f659ac065291e0f1cfc3d8e",
+                "HG002_Revio_pbcpgtools.hap1.bed.gz.tbi:md5,4c8504789965631a7bc71ab3340b380d",
+                "HG002_Revio_pbcpgtools.hap2.bed.gz:md5,53788582860e6a862b9f05eb97efed3c",
+                "HG002_Revio_pbcpgtools.hap2.bed.gz.tbi:md5,a064d84b676735ab970674776757f766",
                 "bcftools-stats-subtypes.txt:md5,f48ddaf68a99e600f12a9219f454205b",
                 "bcftools_stats_indel-lengths.txt:md5,5f27446203ad5779a7e769aca9255604",
                 "fastqc-status-check-heatmap.txt:md5,6390176bf8f90f53283bdacf2186137d",
@@ -775,7 +789,7 @@
                 "HG002_Revio_pbcpgtools.hap2.bw:md5,f712cbadf2757e85641be0171b21b54d"
             ],
             [
-                
+
             ],
             [
                 [
@@ -830,7 +844,7 @@
                 ]
             ],
             [
-                
+
             ]
         ],
         "timestamp": "2026-05-07T07:49:21.065543817",
