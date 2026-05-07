@@ -81,7 +81,10 @@ workflow CHROMOGRAPH {
             autozyg_meta.id == coverage_meta.id
         }
         .multiMap { autozyg_meta, autozyg, coverage_meta, coverage ->
-            autozyg: [autozyg_meta, autozyg]
+            // The module emits metadata from its first input, so coverage-only runs
+            // need the coverage metadata there for workflow output publishing.
+            def plot_meta = autozyg_meta ?: coverage_meta
+            autozyg: [plot_meta, autozyg]
             coverage: [coverage_meta, coverage]
         }
         .set { ch_chromograph_input }

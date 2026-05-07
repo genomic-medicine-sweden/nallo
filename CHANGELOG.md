@@ -18,8 +18,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1041](https://github.com/genomic-medicine-sweden/nallo/pull/1041) - Changed `annotate_repeat_expansions` to workflow outputs
 - [#1047](https://github.com/genomic-medicine-sweden/nallo/pull/1047) - Changed `genome_assembly` to workflow outputs
 - [#1050](https://github.com/genomic-medicine-sweden/nallo/pull/1050) - Changed version to 0.13.0dev
+<<<<<<< wf-outputs-wf-whatshap
 - [#1053](https://github.com/genomic-medicine-sweden/nallo/pull/1053) - Changed `phasing` to workflow outputs
+=======
+- [#1051](https://github.com/genomic-medicine-sweden/nallo/pull/1051) - Split `samplesheet_stub` test into six separate test files
+- [#1054](https://github.com/genomic-medicine-sweden/nallo/pull/1054) - Changed `qc_aligned_reads` to workflow outputs
+>>>>>>> dev
 - [#1058](https://github.com/genomic-medicine-sweden/nallo/pull/1058) - Update nf-test in CI to 0.9.5
+- [#1059](https://github.com/genomic-medicine-sweden/nallo/pull/1059) - Changed `qc_phasing` to workflow outputs
+- [#1061](https://github.com/genomic-medicine-sweden/nallo/pull/1061) - Changed `annotated_repeats` workflow outputs to not include params.outdir, added by mistake in [#1041](https://github.com/genomic-medicine-sweden/nallo/pull/1041)
+- [#1065](https://github.com/genomic-medicine-sweden/nallo/pull/1065) - Changed `qc_snvs` to workflow outputs
+- [#1062](https://github.com/genomic-medicine-sweden/nallo/pull/1062) - Updated contribution guidelines regarding `.set` which might soon be restricted
+- [#1063](https://github.com/genomic-medicine-sweden/nallo/pull/1063) - Updated contribution guidelines regarding sorting include statements alphabetically
+- [#1064](https://github.com/genomic-medicine-sweden/nallo/pull/1064) - Changed `prepare_gens_inputs` to workflow outputs
+- [#1067](https://github.com/genomic-medicine-sweden/nallo/pull/1067) - Changed `chromograph` to workflow outputs
+- [#1069](https://github.com/genomic-medicine-sweden/nallo/pull/1069) - Changed `vcf_concat_norm_variants` to workflow outputs
+- [#1070](https://github.com/genomic-medicine-sweden/nallo/pull/1070) - Changed `call_methylation_modkit` to workflow outputs
+- [#1071](https://github.com/genomic-medicine-sweden/nallo/pull/1071) - Changed `call_repeat_expansions_trgt` to workflow outputs
+- [#1077](https://github.com/genomic-medicine-sweden/nallo/pull/1077) - Moved testing of CRAM output from `samplehsheet_target_regions_null` to `samplesheet` so it not only runs on PRs to the master branch
 
 ### Removed
 
@@ -27,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- [#1045](https://github.com/genomic-medicine-sweden/nallo/pull/1045) - Fixed `--skip_sex_check` should depend on `--skip_alignment` in workflow checks on pipeline start.
 - [#1056](https://github.com/genomic-medicine-sweden/nallo/pull/1056) - Fixed nf-test CI not passing the matrix Nextflow version to the setup action.
 
 ### Parameters

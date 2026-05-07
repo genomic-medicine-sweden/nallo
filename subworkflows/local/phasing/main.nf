@@ -105,5 +105,6 @@ workflow PHASING {
     stats                  = QC_PHASING.out.phasing_stats // channel: [ val(meta), path("*.stats.tsv") ]
     blocks                 = QC_PHASING.out.phasing_blocks // channel: [ val(meta), path("*.blocks.gtf.gz") ]
     blocks_index           = QC_PHASING.out.phasing_blocks_index // channel: [ val(meta), path("*.blocks.gtf.gz.tbi") ]
-    haplotagging_stats     = QC_PHASING.out.haplotagging_stats // channel: [ val(meta), path("*.stats.tsv") ]
+    haplotagging_stats     = QC_PHASING.out.haplotagging_stats   // channel: [ val(meta), path("*.txt") ]
+    haplotagging_arrow     = QC_PHASING.out.haplotagging_arrow   // channel: [ val(meta), path("*.arrow") ]
 }

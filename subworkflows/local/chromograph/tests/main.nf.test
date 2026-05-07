@@ -108,6 +108,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
+                { assert workflow.out.chromograph_plots.every { meta, _plots -> meta.id == 'HG003' } },
                 { assert snapshot(workflow.out).match() }
             )
         }
@@ -228,6 +229,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
+                { assert workflow.out.chromograph_plots.every { meta, _plots -> meta.id == 'HG003' } },
                 { assert snapshot(workflow.out).match() }
             )
         }
