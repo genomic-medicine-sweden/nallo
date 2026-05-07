@@ -243,13 +243,10 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     annotated_paralogs = NALLO.out.annotated_paralogs // channel: [ val(meta), path(tsv/json) ]
     annotated_repeats = NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary = NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
-<<<<<<< wf-outputs-wf-whatshap
-    haplotagged_reads = NALLO.out.haplotagged_reads // channel: [ val(meta), path(bam), path(bai) ]
-=======
     chromograph_plots = NALLO.out.chromograph_plots // channel: [ val(meta), path(png) ]
     gens_baf = NALLO.out.gens_baf // channel: [ val(meta), path(baf.bed.gz), path(baf.bed.gz.tbi) ]
     gens_cov = NALLO.out.gens_cov // channel: [ val(meta), path(cov.bed.gz), path(cov.bed.gz.tbi) ]
->>>>>>> dev
+    haplotagged_reads = NALLO.out.haplotagged_reads // channel: [ val(meta), path(bam), path(bai) ]
     methylation_annotation = NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     methylation_modkit_bed = NALLO.out.methylation_modkit_bed // channel: [ val(meta), path(bed.gz) ]
     methylation_modkit_tbi = NALLO.out.methylation_modkit_tbi // channel: [ val(meta), path(bed.gz.tbi) ]
@@ -518,12 +515,9 @@ workflow {
     annotated_paralogs = GENOMICMEDICINESWEDEN_NALLO.out.annotated_paralogs // channel: [ val(meta), path(tsv/json) ]
     annotated_repeats = GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
-<<<<<<< wf-outputs-wf-whatshap
-    haplotagged_reads = GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
-=======
     chromograph_plots = GENOMICMEDICINESWEDEN_NALLO.out.chromograph_plots // channel: [ val(meta), path(png) ]
     gens = ch_gens // channel: [ val(meta), path(baf/cov.bed.gz), path(baf/cov.bed.gz.tbi) ]
->>>>>>> dev
+    haplotagged_reads = GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
     methylation_annotation = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     methylation_modkit_pileup = ch_methylation_modkit_pileup // channel: [ val(meta), path(bed.gz/bed.gz.tbi) ]
     visualization_tracks_modkit = GENOMICMEDICINESWEDEN_NALLO.out.methylation_modkit_bigwig // channel: [ val(meta), path(bw) ]
@@ -555,16 +549,14 @@ output {
     assembly_summary {
         path { meta, _assembly_summary -> "assembly/stats/${meta.id}/" }
     }
-<<<<<<< wf-outputs-wf-whatshap
-    haplotagged_reads {
-        path { meta, _bam, _bai -> "aligned_reads/${meta.id}/" }
-=======
     chromograph_plots {
         path { meta, _plot -> "images/chromograph/sample/${meta.id}/" }
     }
     gens {
         path { meta, _bed, _tbi -> "gens/${meta.id}/" }
->>>>>>> dev
+    }
+    haplotagged_reads {
+        path { meta, _bam, _bai -> "aligned_reads/${meta.id}/" }
     }
     methylation_annotation {
         path { meta, _methylated_regions -> "methylation/profile/family/${meta.id}/" }
