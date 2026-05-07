@@ -565,7 +565,7 @@ output {
         path { meta, _file -> "paraphase/sample/${meta.id}/" }
     }
     paraphase_sample_vcfs {
-        path { meta, _file -> "paraphase/sample/${meta.id}/${meta.id}_paraphase_vcfs/" }
+        path { meta, _file -> "paraphase/sample/${meta.id}/" }
     }
     paraphase_family {
         path { meta, _file -> "paraphase/family/${meta.id}/" }
