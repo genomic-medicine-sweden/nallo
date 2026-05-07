@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            230,
+            234,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -212,6 +212,9 @@
                     "create_pedigree_file": 1.0,
                     "python": "3.8.3"
                 },
+                "SAMTOOLS_CONVERT": {
+                    "samtools": "1.23.1"
+                },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
                 },
@@ -321,13 +324,13 @@
             [
                 "aligned_reads",
                 "aligned_reads/HG002_Revio",
-                "aligned_reads/HG002_Revio/HG002_Revio_haplotagged.bam",
-                "aligned_reads/HG002_Revio/HG002_Revio_haplotagged.bam.bai",
+                "aligned_reads/HG002_Revio/HG002_Revio_haplotagged.cram",
+                "aligned_reads/HG002_Revio/HG002_Revio_haplotagged.cram.crai",
                 "assembly",
                 "assembly/sample",
                 "assembly/sample/HG002_Revio",
-                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam",
-                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam.bai",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.cram",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.cram.crai",
                 "assembly/stats",
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
@@ -547,8 +550,8 @@
                 "paraphase/family/FAM/FAM_paraphase_merged.vcf.gz.tbi",
                 "paraphase/sample",
                 "paraphase/sample/HG002_Revio",
-                "paraphase/sample/HG002_Revio/HG002_Revio.paraphase.bam",
-                "paraphase/sample/HG002_Revio/HG002_Revio.paraphase.bam.bai",
+                "paraphase/sample/HG002_Revio/HG002_Revio.paraphase.cram",
+                "paraphase/sample/HG002_Revio/HG002_Revio.paraphase.cram.crai",
                 "paraphase/sample/HG002_Revio/HG002_Revio.paraphase.json",
                 "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs",
                 "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_OR1D5.vcf.gz",
@@ -620,8 +623,8 @@
                 "repeats/family/FAM/FAM_repeats_annotated.vcf.gz.tbi",
                 "repeats/sample",
                 "repeats/sample/HG002_Revio",
-                "repeats/sample/HG002_Revio/HG002_Revio_spanning_trgt.bam",
-                "repeats/sample/HG002_Revio/HG002_Revio_spanning_trgt.bam.bai",
+                "repeats/sample/HG002_Revio/HG002_Revio_spanning_trgt.cram",
+                "repeats/sample/HG002_Revio/HG002_Revio_spanning_trgt.cram.crai",
                 "repeats/sample/HG002_Revio/HG002_Revio_trgt.vcf.gz",
                 "repeats/sample/HG002_Revio/HG002_Revio_trgt.vcf.gz.tbi",
                 "snvs",
@@ -772,21 +775,21 @@
                 "HG002_Revio_pbcpgtools.hap2.bw:md5,f712cbadf2757e85641be0171b21b54d"
             ],
             [
+                
+            ],
+            [
                 [
-                    "HG002_Revio_haplotagged.bam",
+                    "HG002_Revio_haplotagged.cram",
                     "4914da895c558bc7a096ad9969bebf3f"
                 ],
                 [
-                    "HG002_Revio_aligned_assembly.bam",
+                    "HG002_Revio_aligned_assembly.cram",
                     "cecfa99c1c666ab3aa441b7c3c4ac05f"
                 ],
                 [
-                    "HG002_Revio_spanning_trgt.bam",
+                    "HG002_Revio_spanning_trgt.cram",
                     "f69e07c85d0f734408af24471f35792c"
                 ]
-            ],
-            [
-                
             ],
             [
                 [
@@ -830,10 +833,10 @@
                 
             ]
         ],
-        "timestamp": "2026-04-30T14:04:42.447060119",
+        "timestamp": "2026-05-07T07:49:21.065543817",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.04.0"
         }
     }
 }
