@@ -1,5 +1,5 @@
 project,sample,file,family_id,paternal_id,maternal_id,sex,phenotype
-test,HG003,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/3e37322f6bd21be88c08166f95607e30581eb874/testdata/HG003_PacBio_Revio.bam,FAM,0,0,1,1
-test,HG002,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/3e37322f6bd21be88c08166f95607e30581eb874/testdata/HG002_PacBio_Revio.bam,FAM,HG003,HG004,1,2
-test,HG002,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/3e37322f6bd21be88c08166f95607e30581eb874/testdata/HG002_PacBio_Revio_copy.bam,FAM,HG003,HG004,1,2
-test,HG004,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/3e37322f6bd21be88c08166f95607e30581eb874/testdata/HG004_PacBio_Revio.bam,FAM,0,0,2,1
+test,HG003,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/c9c3f440353c9015e9ffba111ed255ea73843413/testdata/HG003_PacBio_Revio.bam,FAM,0,0,1,1
+test,HG002,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/c9c3f440353c9015e9ffba111ed255ea73843413/testdata/HG002_PacBio_Revio.bam,FAM,HG003,HG004,1,2
+test,HG002,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/c9c3f440353c9015e9ffba111ed255ea73843413/testdata/HG002_PacBio_Revio_copy.bam,FAM,HG003,HG004,1,2
+test,HG004,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/c9c3f440353c9015e9ffba111ed255ea73843413/testdata/HG004_PacBio_Revio.bam,FAM,0,0,2,1
