@@ -1154,6 +1154,7 @@ def addChildWithTwoParentsToMeta(ch_input, ch_samplesheet) {
         .groupTuple()
         .map { family_id, child_with_two_parents -> [family_id, child_with_two_parents.any()] }
 
+    // Need to use combine and filter here instead of join, since we only have one entry per family in ch_families but potentially multiple entries per family in ch_input
     ch_families
         .combine(ch_input)
         .filter { samplesheet_family_id, _child_with_two_parents, file_meta, _file ->
@@ -1175,7 +1176,9 @@ def addChildWithTwoParentsToMeta(ch_input, ch_samplesheet) {
  * @return                Channel of [meta, vcf, ped, score_config]
  */
 def buildRankVariantsInputChannel(ch_vcf, ch_ped, variant_type, ch_score_config, ch_samplesheet) {
-    // This is used to determine compound ranking thresholds and penalties in genmod
+    // This is used to determine compound ranking thresholds and penalties in genmod.
+    // Need to use combine and filter instead of join, since we only have one entry per family in ch_ped but potentially multiple entries per family in vcf_with_meta.
+     // The meta.id of the PED channel is the family_id.
     addChildWithTwoParentsToMeta(ch_vcf, ch_samplesheet)
         .map { meta, vcf ->
             [meta + [variant_type: variant_type], vcf]
