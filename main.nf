@@ -556,7 +556,10 @@ output {
         path { meta, _bed, _tbi -> "gens/${meta.id}/" }
     }
     haplotagged_reads {
-        path { meta, _bam, _bai -> "aligned_reads/${meta.id}/" }
+        path { meta, bam, bai ->
+            bam >> "aligned_reads/${meta.id}/${bam.name.replaceFirst("_aligned", "")}"
+            bai >> "aligned_reads/${meta.id}/${bai.name.replaceFirst("_aligned", "")}"
+            }
     }
     methylation_annotation {
         path { meta, _methylated_regions -> "methylation/profile/family/${meta.id}/" }
