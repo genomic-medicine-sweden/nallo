@@ -117,8 +117,9 @@
                 "paraphase/sample/HG002_Revio/HG002_Revio.paraphase.bam.bai",
                 "paraphase/sample/HG002_Revio/HG002_Revio.paraphase.json",
                 "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs",
-                "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_stub.vcf.gz",
-                "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_stub.vcf.gz.tbi",
+                "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_paraphase_vcfs",
+                "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_paraphase_vcfs/HG002_Revio_stub.vcf.gz",
+                "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_paraphase_vcfs/HG002_Revio_stub.vcf.gz.tbi",
                 "pipeline_info",
                 "pipeline_info/nallo_software_mqc_versions.yml",
                 "qc",
@@ -144,7 +145,7 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
-        "timestamp": "2026-05-06T08:35:05.684565419",
+        "timestamp": "2026-05-07T10:16:42.843105911",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"

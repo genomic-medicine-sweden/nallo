@@ -417,8 +417,9 @@
                 "paraphase/sample/HG002_Revio/HG002_Revio.paraphase.bam.bai",
                 "paraphase/sample/HG002_Revio/HG002_Revio.paraphase.json",
                 "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs",
-                "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_stub.vcf.gz",
-                "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_stub.vcf.gz.tbi",
+                "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_paraphase_vcfs",
+                "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_paraphase_vcfs/HG002_Revio_stub.vcf.gz",
+                "paraphase/sample/HG002_Revio/HG002_Revio_paraphase_vcfs/HG002_Revio_paraphase_vcfs/HG002_Revio_stub.vcf.gz.tbi",
                 "pedigree",
                 "pedigree/family",
                 "pedigree/family/HG002_Revio.ped",
@@ -517,7 +518,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-05-06T08:34:39.272283755",
+        "timestamp": "2026-05-07T10:14:22.352870584",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"
