@@ -240,8 +240,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     emit:
     multiqc_report = NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
     aligned_assemblies = NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
-    annotated_repeats = NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
     annotated_paralogs = NALLO.out.annotated_paralogs // channel: [ val(meta), path(tsv/json) ]
+    annotated_repeats = NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary = NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
     chromograph_plots = NALLO.out.chromograph_plots // channel: [ val(meta), path(png) ]
     gens_baf = NALLO.out.gens_baf // channel: [ val(meta), path(baf.bed.gz), path(baf.bed.gz.tbi) ]
