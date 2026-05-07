@@ -270,6 +270,14 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     hificnv_visualization         = NALLO.out.hificnv_visualization // channel: [ val(meta), path(bw/bedgraph) ]
     sawfish_visualization         = NALLO.out.sawfish_visualization // channel: [ val(meta), path(bw/bedgraph) ]
     svs_per_family_and_caller     = NALLO.out.svs_per_family_and_caller // channel: [ val(meta), path(vcf), path(tbi) ]
+    repeat_trgt_sample_vcf        = NALLO.out.repeat_trgt_sample_vcf // channel: [ val(meta), path(vcf) ]
+    repeat_trgt_sample_tbi        = NALLO.out.repeat_trgt_sample_tbi // channel: [ val(meta), path(tbi) ]
+    repeat_trgt_sample_bam        = NALLO.out.repeat_trgt_sample_bam // channel: [ val(meta), path(bam) ]
+    repeat_trgt_sample_bai        = NALLO.out.repeat_trgt_sample_bai // channel: [ val(meta), path(bai) ]
+    repeat_trgt_sample_cram       = NALLO.out.repeat_trgt_sample_cram // channel: [ val(meta), path(cram) ]
+    repeat_trgt_sample_crai       = NALLO.out.repeat_trgt_sample_crai // channel: [ val(meta), path(crai) ]
+    repeat_trgt_family_vcf        = NALLO.out.repeat_trgt_family_vcf // channel: [ val(meta), path(vcf) ]
+    repeat_trgt_family_tbi        = NALLO.out.repeat_trgt_family_tbi // channel: [ val(meta), path(tbi) ]
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
