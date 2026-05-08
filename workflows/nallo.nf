@@ -1124,6 +1124,14 @@ workflow NALLO {
     methylation_modkit_bed = (val_skip_methylation_calling || !val_run_modkit) ? channel.empty() : CALL_METHYLATION_MODKIT.out.bed // channel: [ val(meta), path(bed.gz) ]
     methylation_modkit_tbi = (val_skip_methylation_calling || !val_run_modkit) ? channel.empty() : CALL_METHYLATION_MODKIT.out.tbi // channel: [ val(meta), path(bed.gz.tbi) ]
     methylation_modkit_bigwig = (val_skip_methylation_calling || !val_run_modkit) ? channel.empty() : CALL_METHYLATION_MODKIT.out.bigwig // channel: [ val(meta), path(bw) ]
+
+
+    repeat_strdust_sample_vcf = (val_skip_repeat_calling || val_str_caller != "strdust") ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.sample_vcf // channel: [ val(meta), path(vcf) ]
+    repeat_strdust_sample_tbi = (val_skip_repeat_calling || val_str_caller != "strdust") ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.sample_tbi // channel: [ val(meta), path(tbi) ]
+    repeat_strdust_family_vcf = (val_skip_repeat_calling || val_str_caller != "strdust") ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.family_vcf // channel: [ val(meta), path(vcf) ]
+    repeat_strdust_family_tbi = (val_skip_repeat_calling || val_str_caller != "strdust") ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.family_tbi // channel: [ val(meta), path(tbi) ]
+
+
     repeat_trgt_sample_vcf = (val_skip_repeat_calling || val_str_caller != "trgt") ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_vcf // channel: [ val(meta), path(vcf) ]
     repeat_trgt_sample_tbi = (val_skip_repeat_calling || val_str_caller != "trgt") ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_tbi // channel: [ val(meta), path(tbi) ]
     repeat_trgt_sample_bam = (val_skip_repeat_calling || val_str_caller != "trgt") ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_bam // channel: [ val(meta), path(bam) ]
