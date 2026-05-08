@@ -71,11 +71,13 @@ workflow CALL_PARALOGS {
     }
 
     emit:
-    bam      = PARAPHASE.out.bam                                         // channel: [ val(meta), path(bam) ]
-    bai      = PARAPHASE.out.bai                                         // channel: [ val(meta), path(bai) ]
-    cram     = cram_output ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
-    crai     = cram_output ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
-    json     = PARAPHASE.out.json                                        // channel: [ val(meta), path(json) ]
-    vcf      = BCFTOOLS_MERGE.out.vcf                                    // channel: [ val(meta), path(vcfs) ]
-    tbi      = BCFTOOLS_MERGE.out.index                                  // channel: [ val(meta), path(tbis) ]
+    bam        = PARAPHASE.out.bam                                         // channel: [ val(meta), path(bam)  ]
+    bai        = PARAPHASE.out.bai                                         // channel: [ val(meta), path(bai)  ]
+    cram       = cram_output ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
+    crai       = cram_output ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
+    json       = PARAPHASE.out.json                                        // channel: [ val(meta), path(json) ]
+    sample_vcf = PARAPHASE.out.vcf.transpose()                             // channel: [ val(meta), path(vcf)  ]
+    sample_tbi = PARAPHASE.out.vcf_index.transpose()                       // channel: [ val(meta), path(tbi)  ]
+    family_vcf = BCFTOOLS_MERGE.out.vcf                                    // channel: [ val(meta), path(vcf)  ]
+    family_tbi = BCFTOOLS_MERGE.out.index                                  // channel: [ val(meta), path(tbi)  ]
 }
