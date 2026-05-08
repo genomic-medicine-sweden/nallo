@@ -520,6 +520,7 @@ workflow {
     ch_paraphase_family = GENOMICMEDICINESWEDEN_NALLO.out.annotated_paralogs
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_family_vcf)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_family_tbi)
+
     ch_repeats_sample_trgt = GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_vcf
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_tbi)
 
