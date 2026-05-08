@@ -526,6 +526,7 @@ workflow {
     ch_repeats_sample = GENOMICMEDICINESWEDEN_NALLO.out.repeat_strdust_sample_vcf
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_strdust_sample_tbi)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_vcf)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_tbi)
 
     ch_paraphase_sample = GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_json
 
