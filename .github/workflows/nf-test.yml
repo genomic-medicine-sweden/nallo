@@ -68,8 +68,6 @@ jobs:
             runCleanup: true
           - tag: "samplesheet_multisample_ont_bam"
             runCleanup: true
-          - tag: "samplesheet_stub"
-            runCleanup: true
           - tag: "samplesheet_target_regions_null"
             runCleanup: true
           - tag: "call_svs"

@@ -56,10 +56,18 @@
                         {
                             "id": "test"
                         },
-                        "test.samples.tsv:md5,377fda27ea9666c6445157aec761f0ff"
+                        "test.html:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.samples.tsv:md5,377fda27ea9666c6445157aec761f0ff"
+                    ]
+                ],
+                "5": [
                     [
                         {
                             "id": "test"
@@ -116,6 +124,14 @@
                         "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG003_PacBio_Revio.bam.bai"
                     ]
                 ],
+                "somalier_html": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.html:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
                 "somalier_pairs": [
                     [
                         {
@@ -134,7 +150,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-30T09:16:43.306208536",
+        "timestamp": "2026-04-27T09:19:23.557538679",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.1"
@@ -283,10 +299,18 @@
                         {
                             "id": "test"
                         },
-                        "test.samples.tsv:md5,377fda27ea9666c6445157aec761f0ff"
+                        "test.html:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.samples.tsv:md5,377fda27ea9666c6445157aec761f0ff"
+                    ]
+                ],
+                "5": [
                     [
                         {
                             "id": "test"
@@ -429,6 +453,14 @@
                         "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG004_PacBio_Revio.bam.bai"
                     ]
                 ],
+                "somalier_html": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.html:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
                 "somalier_pairs": [
                     [
                         {
@@ -447,7 +479,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-30T09:17:08.939452195",
+        "timestamp": "2026-04-27T09:19:50.512040788",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.1"
@@ -510,10 +542,18 @@
                         {
                             "id": "test"
                         },
-                        "test.samples.tsv:md5,d4a4cd472f78dd2fb4b0780cdea56ce7"
+                        "test.html:md5,c79bd98fe24580fb1db9531610969dcc"
                     ]
                 ],
                 "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.samples.tsv:md5,d4a4cd472f78dd2fb4b0780cdea56ce7"
+                    ]
+                ],
+                "5": [
                     [
                         {
                             "id": "test"
@@ -570,6 +610,14 @@
                         "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam.bai"
                     ]
                 ],
+                "somalier_html": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.html:md5,c79bd98fe24580fb1db9531610969dcc"
+                    ]
+                ],
                 "somalier_pairs": [
                     [
                         {
@@ -588,7 +636,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-30T09:16:17.710345033",
+        "timestamp": "2026-04-27T09:18:56.423187597",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.1"
@@ -737,10 +785,18 @@
                         {
                             "id": "test"
                         },
-                        "test.samples.tsv:md5,377fda27ea9666c6445157aec761f0ff"
+                        "test.html:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.samples.tsv:md5,377fda27ea9666c6445157aec761f0ff"
+                    ]
+                ],
+                "5": [
                     [
                         {
                             "id": "test"
@@ -883,6 +939,14 @@
                         "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG004_PacBio_Revio.bam.bai"
                     ]
                 ],
+                "somalier_html": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.html:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
                 "somalier_pairs": [
                     [
                         {
@@ -901,7 +965,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-30T09:17:00.102043646",
+        "timestamp": "2026-04-27T09:19:41.242175899",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.1"
@@ -964,10 +1028,18 @@
                         {
                             "id": "test"
                         },
-                        "test.samples.tsv:md5,377fda27ea9666c6445157aec761f0ff"
+                        "test.html:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.samples.tsv:md5,377fda27ea9666c6445157aec761f0ff"
+                    ]
+                ],
+                "5": [
                     [
                         {
                             "id": "test"
@@ -1024,6 +1096,14 @@
                         "/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_PacBio_Revio.bam.bai"
                     ]
                 ],
+                "somalier_html": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.html:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
                 "somalier_pairs": [
                     [
                         {
@@ -1042,7 +1122,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-30T09:16:51.331356403",
+        "timestamp": "2026-04-27T09:19:32.137483868",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.1"
