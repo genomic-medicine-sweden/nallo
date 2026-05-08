@@ -555,7 +555,7 @@ output {
     gens {
         path { meta, _bed, _tbi -> "gens/${meta.id}/" }
     }
-    haplotagged_reads {
+    haplotagged_reads { // HiPhase uses the input file (aligned reads) as template for naming output, so we need to remove the "_aligned" suffix here
         path { meta, bam, bai ->
             bam >> "aligned_reads/${meta.id}/${bam.name.replaceFirst("_aligned", "")}"
             bai >> "aligned_reads/${meta.id}/${bai.name.replaceFirst("_aligned", "")}"
