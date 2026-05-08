@@ -36,7 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1069](https://github.com/genomic-medicine-sweden/nallo/pull/1069) - Changed `vcf_concat_norm_variants` to workflow outputs
 - [#1070](https://github.com/genomic-medicine-sweden/nallo/pull/1070) - Changed `call_methylation_modkit` to workflow outputs
 - [#1071](https://github.com/genomic-medicine-sweden/nallo/pull/1071) - Changed `call_repeat_expansions_trgt` to workflow outputs
-- [#1077](https://github.com/genomic-medicine-sweden/nallo/pull/1077) - Moved testing of CRAM output from `samplesheet_target_regions_null` to `samplesheet` so it not only runs on PRs to the master branch
+- [#1077](https://github.com/genomic-medicine-sweden/nallo/pull/1077) - Moved testing of CRAM output from `samplesheet_target_regions_null` to `samplesheet` so it does not only run on PRs to the master branch
 
 ### Removed
 
