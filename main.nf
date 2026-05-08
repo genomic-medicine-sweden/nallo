@@ -506,11 +506,13 @@ workflow {
     ch_methylation_modkit_pileup = GENOMICMEDICINESWEDEN_NALLO.out.methylation_modkit_bed
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_modkit_tbi)
 
-    ch_paraphase_sample = GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_bam
+    ch_paraphase_sample = GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_json
+
+    ch_paraphase_sample_bam = GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_bam
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_bai)
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_cram)
+
+    ch_paraphase_sample_cram = GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_cram
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_crai)
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_json)
 
     ch_paraphase_sample_vcfs = GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_vcf
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_tbi)
@@ -532,7 +534,9 @@ workflow {
 
     publish:
     aligned_assemblies = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
-    paraphase_sample = ch_paraphase_sample // channel: [ val(meta), path(bam/bai/cram/crai/json) ]
+    paraphase_sample = ch_paraphase_sample // channel: [ val(meta), path(json) ]
+    paraphase_sample_bam = ch_paraphase_sample_bam // channel: [ val(meta), path(bam/bai) ]
+    paraphase_sample_cram = ch_paraphase_sample_cram // channel: [ val(meta), path(cram/crai) ]
     paraphase_sample_vcfs = ch_paraphase_sample_vcfs // channel: [ val(meta), path(vcf/tbi) ]
     paraphase_family = ch_paraphase_family // channel: [ val(meta), path(vcf/tbi/tsv/json) ]
     annotated_repeats = GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
@@ -563,6 +567,14 @@ output {
     }
     paraphase_sample {
         path { meta, _file -> "paraphase/sample/${meta.id}/" }
+    }
+    paraphase_sample_bam {
+        path { meta, _file -> "paraphase/sample/${meta.id}/" }
+        enabled params.alignment_output_format == 'bam'
+    }
+    paraphase_sample_cram {
+        path { meta, _file -> "paraphase/sample/${meta.id}/" }
+        enabled params.alignment_output_format == 'cram'
     }
     paraphase_sample_vcfs {
         path { meta, _file -> "paraphase/sample/${meta.id}/" }
