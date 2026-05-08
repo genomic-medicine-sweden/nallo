@@ -585,10 +585,10 @@ output {
         path { meta, _bw -> "visualization_tracks/${meta.id}/" }
     }
     repeats_sample_strdust {
-        path { meta, _vcf, _tbi -> "repeats/sample/${meta.id}/" }
+        path { meta, _file -> "repeats/sample/${meta.id}/" }
     }
     repeats_family_strdust {
-        path { meta, _vcf, _tbi -> "repeats/family/${meta.id}/" }
+        path { meta, _file -> "repeats/family/${meta.id}/" }
     }
     repeats_sample_trgt {
         path { meta, _file -> "repeats/sample/${meta.id}/" }
