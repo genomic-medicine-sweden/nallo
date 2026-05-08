@@ -246,6 +246,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     chromograph_plots = NALLO.out.chromograph_plots // channel: [ val(meta), path(png) ]
     gens_baf = NALLO.out.gens_baf // channel: [ val(meta), path(baf.bed.gz), path(baf.bed.gz.tbi) ]
     gens_cov = NALLO.out.gens_cov // channel: [ val(meta), path(cov.bed.gz), path(cov.bed.gz.tbi) ]
+    haplotagged_reads = NALLO.out.haplotagged_reads // channel: [ val(meta), path(bam), path(bai) ]
     methylation_annotation = NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     methylation_methbat_biwgig_combined = NALLO.out.methylation_methbat_biwgig_combined // channel: [ val(meta), path(combined.bw) ]
     methylation_methbat_biwgig_hap1 = NALLO.out.methylation_methbat_biwgig_hap1     // channel: [ val(meta), path(hap1.bw) ]
@@ -281,6 +282,9 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     qc_bcftools_stats = NALLO.out.qc_bcftools_stats // channel: [ val(meta), path(txt) ]
     qc_deepvariant_vcfstatsreport = NALLO.out.qc_deepvariant_vcfstatsreport // channel: [ val(meta), path(html) ]
     sample_snvs = NALLO.out.sample_snvs // channel: [ val(meta), path(vcf), path(tbi) ]
+    somalier_relate_html    = NALLO.out.somalier_relate_html    // channel: [ val(meta), path(html) ]
+    somalier_relate_pairs   = NALLO.out.somalier_relate_pairs   // channel: [ val(meta), path(pairs.tsv) ]
+    somalier_relate_samples = NALLO.out.somalier_relate_samples // channel: [ val(meta), path(samples.tsv) ]
     phasing_stats = NALLO.out.phasing_stats // channel: [ val(meta), path("*.stats.tsv") ]
     phasing_blocks = NALLO.out.phasing_blocks // channel: [ val(meta), path("*.blocks.gtf.gz"), path("*.blocks.gtf.gz.tbi") ]
     haplotagging_stats = NALLO.out.haplotagging_stats // channel: [ val(meta), path("*.txt") ]
@@ -481,8 +485,21 @@ workflow {
     //
     // WORKFLOW OUTPUTS: Group files by publish directory
     //
+    ch_gens = GENOMICMEDICINESWEDEN_NALLO.out.gens_baf
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov)
+
+    ch_methylation_modkit_pileup = GENOMICMEDICINESWEDEN_NALLO.out.methylation_modkit_bed
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_modkit_tbi)
+
     ch_qc_cramino_unphased = GENOMICMEDICINESWEDEN_NALLO.out.cramino_unphased_stats
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.cramino_unphased_arrow)
+
+    ch_qc_cramino_phased = GENOMICMEDICINESWEDEN_NALLO.out.haplotagging_stats
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.haplotagging_arrow)
+
+    ch_qc_phasing_stats = GENOMICMEDICINESWEDEN_NALLO.out.phasing_stats
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks.map { meta, gtf, _tbi -> [meta, gtf] })
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks.map { meta, _gtf, tbi -> [meta, tbi] })
 
     ch_qc_fastqc = GENOMICMEDICINESWEDEN_NALLO.out.fastqc_html
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.fastqc_zip)
@@ -494,15 +511,9 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_regions.map { meta, bed, _csi -> [meta, bed] })
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_regions.map { meta, _bed, csi -> [meta, csi] })
 
-    ch_qc_cramino_phased = GENOMICMEDICINESWEDEN_NALLO.out.haplotagging_stats
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.haplotagging_arrow)
-
-    ch_qc_phasing_stats = GENOMICMEDICINESWEDEN_NALLO.out.phasing_stats
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks.map { meta, gtf, _tbi -> [meta, gtf] })
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks.map { meta, _gtf, tbi -> [meta, tbi] })
-
-    ch_gens = GENOMICMEDICINESWEDEN_NALLO.out.gens_baf
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov)
+    ch_somalier_relate = GENOMICMEDICINESWEDEN_NALLO.out.somalier_relate_html
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.somalier_relate_samples)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.somalier_relate_pairs)
 
     ch_methylation_methbat_pileup = GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_combined_bed
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_combined_bed_index)
@@ -537,6 +548,7 @@ workflow {
     assembly_summary = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
     chromograph_plots = GENOMICMEDICINESWEDEN_NALLO.out.chromograph_plots // channel: [ val(meta), path(png) ]
     gens = ch_gens // channel: [ val(meta), path(baf/cov.bed.gz), path(baf/cov.bed.gz.tbi) ]
+    haplotagged_reads = GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
     methylation_annotation = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     methylation_methbat_pileup = ch_methylation_methbat_pileup // channel: [ val(meta), path(combined.bed.gz/combined.bed.gz.tbi/hap1.bed.gz/hap1.bed.gz.tbi/hap2.bed.gz/hap2.bed.gz.tbi) ]
     methylation_modkit_pileup = ch_methylation_modkit_pileup // channel: [ val(meta), path(bed.gz/bed.gz.tbi) ]
@@ -554,6 +566,7 @@ workflow {
     qc_bcftools_stats = GENOMICMEDICINESWEDEN_NALLO.out.qc_bcftools_stats // channel: [ val(meta), path(txt) ]
     qc_deepvariant_vcfstatsreport = GENOMICMEDICINESWEDEN_NALLO.out.qc_deepvariant_vcfstatsreport // channel: [ val(meta), path(html) ]
     sample_snvs = GENOMICMEDICINESWEDEN_NALLO.out.sample_snvs // channel: [ val(meta), path(vcf), path(tbi) ]
+    somalier_relate = ch_somalier_relate // channel: [ val(meta), path(html/pairs/samples) ]
     qc_cramino_phased = ch_qc_cramino_phased // channel: [ val(meta), path(txt/arrow) ]
     qc_phasing_stats = ch_qc_phasing_stats // channel: [ val(meta), path(tsv/gtf.gz/gtf.gz.tbi) ]
 }
@@ -576,6 +589,12 @@ output {
     }
     gens {
         path { meta, _bed, _tbi -> "gens/${meta.id}/" }
+    }
+    haplotagged_reads { // HiPhase uses the input file (aligned reads) as template for naming output, so we need to remove the "_aligned" suffix here
+        path { meta, bam, bai ->
+            bam >> "aligned_reads/${meta.id}/${bam.name.replaceFirst("_aligned", "")}"
+            bai >> "aligned_reads/${meta.id}/${bai.name.replaceFirst("_aligned", "")}"
+            }
     }
     methylation_annotation {
         path { meta, _methylated_regions -> "methylation/profile/family/${meta.id}/" }
@@ -627,13 +646,16 @@ output {
     qc_deepvariant_vcfstatsreport {
             path { meta, _report -> "qc/deepvariant_vcfstatsreport/${meta.id}/" }
     }
-    sample_snvs {
-        path { meta, _vcf, _tbi -> "snvs/sample/${meta.id}/" }
-    }
     qc_cramino_phased {
         path { meta, _file -> "qc/cramino/phased/${meta.id}/" }
     }
     qc_phasing_stats {
         path { meta, _file -> "qc/phasing_stats/${meta.id}/" }
+    }
+    sample_snvs {
+        path { meta, _vcf, _tbi -> "snvs/sample/${meta.id}/" }
+    }
+    somalier_relate {
+        path { meta, _file -> "qc/somalier/relate/${meta.id}/" }
     }
 }

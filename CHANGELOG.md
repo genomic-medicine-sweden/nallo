@@ -7,8 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- [#1042](https://github.com/genomic-medicine-sweden/nallo/pull/1042) - Added `somalier_html` output to `bam_infer_sex`
 - [#1047](https://github.com/genomic-medicine-sweden/nallo/pull/1047) - Added `assembly_summary` output to `genome_assembly` so that it can be used as a workflow output
 - [#1052](https://github.com/genomic-medicine-sweden/nallo/pull/1052) - Added new credit to README.md and new contributor to nextflow.config
+- [#1053](https://github.com/genomic-medicine-sweden/nallo/pull/1053) - Added `haplotagged_cram_crai` output to `phasing` subworkflow if `cram_output` is true
 - [#1060](https://github.com/genomic-medicine-sweden/nallo/pull/1060) - Added pileup outputs to `call_methylation_methbat` to use them as workflow outputs
 
 ### Changed
@@ -16,9 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1029](https://github.com/genomic-medicine-sweden/nallo/pull/1029) - Updated contribution guidelines
 - [#1040](https://github.com/genomic-medicine-sweden/nallo/pull/1040) - Changed `annotate_paralogs` to workflow outputs
 - [#1041](https://github.com/genomic-medicine-sweden/nallo/pull/1041) - Changed `annotate_repeat_expansions` to workflow outputs
+- [#1042](https://github.com/genomic-medicine-sweden/nallo/pull/1042) - Changed `bam_infer_sex` to workflow outputs
 - [#1047](https://github.com/genomic-medicine-sweden/nallo/pull/1047) - Changed `genome_assembly` to workflow outputs
 - [#1050](https://github.com/genomic-medicine-sweden/nallo/pull/1050) - Changed version to 0.13.0dev
 - [#1051](https://github.com/genomic-medicine-sweden/nallo/pull/1051), [#1078](https://github.com/genomic-medicine-sweden/nallo/pull/1078) - Split `samplesheet_stub` test into six separate test files
+- [#1053](https://github.com/genomic-medicine-sweden/nallo/pull/1053) - Changed `phasing`, `hiphase`, `longphase` and `whatshap` to workflow outputs
 - [#1054](https://github.com/genomic-medicine-sweden/nallo/pull/1054) - Changed `qc_aligned_reads` to workflow outputs
 - [#1058](https://github.com/genomic-medicine-sweden/nallo/pull/1058) - Update nf-test in CI to 0.9.5
 - [#1059](https://github.com/genomic-medicine-sweden/nallo/pull/1059) - Changed `qc_phasing` to workflow outputs
