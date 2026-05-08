@@ -510,13 +510,14 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.somalier_relate_samples)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.somalier_relate_pairs)
 
-    ch_repeats_sample_strdust = GENOMICMEDICINESWEDEN_NALLO.out.repeat_strdust_sample_vcf
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_strdust_sample_tbi)
-
-    ch_repeats_family_strdust = GENOMICMEDICINESWEDEN_NALLO.out.repeat_strdust_family_vcf
+    ch_repeats_family = GENOMICMEDICINESWEDEN_NALLO.out.repeat_strdust_family_vcf
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_strdust_family_tbi)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_family_vcf)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_family_tbi)
 
-    ch_repeats_sample_trgt = GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_vcf
+    ch_repeats_sample = GENOMICMEDICINESWEDEN_NALLO.out.repeat_strdust_sample_vcf
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_strdust_sample_tbi)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_vcf)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_tbi)
 
     ch_repeats_sample_trgt_bam = GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_bam
@@ -525,8 +526,6 @@ workflow {
     ch_repeats_sample_trgt_cram = GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_cram
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_crai)
 
-    ch_repeats_family_trgt = GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_family_vcf
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_family_tbi)
 
     publish:
     aligned_assemblies = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
@@ -538,12 +537,10 @@ workflow {
     methylation_annotation = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     methylation_modkit_pileup = ch_methylation_modkit_pileup // channel: [ val(meta), path(bed.gz/bed.gz.tbi) ]
     visualization_tracks_modkit = GENOMICMEDICINESWEDEN_NALLO.out.methylation_modkit_bigwig // channel: [ val(meta), path(bw) ]
-    repeats_sample_strdust = ch_repeats_sample_strdust // channel: [ val(meta), path(vcf/tbi) ]
-    repeats_family_strdust = ch_repeats_family_strdust // channel: [ val(meta), path(vcf/tbi) ]
-    repeats_sample_trgt = ch_repeats_sample_trgt // channel: [ val(meta), path(vcf/tbi/bam/bai) ]
+    repeats_family = ch_repeats_family // channel: [ val(meta), path(vcf/tbi) ]
+    repeats_sample = ch_repeats_sample // channel: [ val(meta), path(vcf/tbi) ]
     repeats_sample_trgt_bam = ch_repeats_sample_trgt_bam  // channel: [ val(meta), path(bam/bai) ]
     repeats_sample_trgt_cram = ch_repeats_sample_trgt_cram // channel: [ val(meta), path(cram/crai) ]
-    repeats_family_trgt = ch_repeats_family_trgt // channel: [ val(meta), path(vcf/tbi) ]
     qc_cramino_unphased = ch_qc_cramino_unphased // channel: [ val(meta), path(txt/arrow) ]
     qc_fastqc = ch_qc_fastqc // channel: [ val(meta), path(html/zip) ]
     qc_mosdepth = ch_qc_mosdepth // channel: [ val(meta), path(txt/d4/bed.gz/bed.gz.csi) ]
@@ -584,13 +581,10 @@ output {
     visualization_tracks_modkit {
         path { meta, _bw -> "visualization_tracks/${meta.id}/" }
     }
-    repeats_sample_strdust {
-        path { meta, _file -> "repeats/sample/${meta.id}/" }
-    }
-    repeats_family_strdust {
+    repeats_family {
         path { meta, _file -> "repeats/family/${meta.id}/" }
     }
-    repeats_sample_trgt {
+    repeats_sample {
         path { meta, _file -> "repeats/sample/${meta.id}/" }
     }
     repeats_sample_trgt_cram {
@@ -600,9 +594,6 @@ output {
     repeats_sample_trgt_bam {
         path { meta, _file -> "repeats/sample/${meta.id}/" }
         enabled params.alignment_output_format == 'bam'
-    }
-    repeats_family_trgt {
-        path { meta, _file -> "repeats/family/${meta.id}/" }
     }
     qc_cramino_unphased {
         path { meta, _file -> "qc/cramino/unphased/${meta.id}/" }
