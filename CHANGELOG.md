@@ -28,10 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1067](https://github.com/genomic-medicine-sweden/nallo/pull/1067) - Changed `chromograph` to workflow outputs
 - [#1069](https://github.com/genomic-medicine-sweden/nallo/pull/1069) - Changed `vcf_concat_norm_variants` to workflow outputs
 - [#1070](https://github.com/genomic-medicine-sweden/nallo/pull/1070) - Changed `call_methylation_modkit` to workflow outputs
+- [#1072](https://github.com/genomic-medicine-sweden/nallo/pull/1072) - Update local module sentieon/dnascope-longread
 
 ### Removed
 
-- [#1072]((https://github.com/genomic-medicine-sweden/nallo/pull/1072) - Remove sentieon/dnascope-longread Dockerfile
+- [#1072](https://github.com/genomic-medicine-sweden/nallo/pull/1072) - Remove sentieon/dnascope-longread Dockerfile
 
 ### Fixed
 
