@@ -36,8 +36,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
-- [#1053](https://github.com/genomic-medicine-sweden/nallo/pull/1053) - Removed publishDir from config for `whatshap`, `longphase` and `hiphase`
-
 ### Fixed
 
 - [#1045](https://github.com/genomic-medicine-sweden/nallo/pull/1045) - Fixed `--skip_sex_check` should depend on `--skip_alignment` in workflow checks on pipeline start.
