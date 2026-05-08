@@ -250,12 +250,12 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     methylation_methbat_biwgig_combined = NALLO.out.methylation_methbat_biwgig_combined // channel: [ val(meta), path(combined.bw) ]
     methylation_methbat_biwgig_hap1 = NALLO.out.methylation_methbat_biwgig_hap1     // channel: [ val(meta), path(hap1.bw) ]
     methylation_methbat_biwgig_hap2 = NALLO.out.methylation_methbat_biwgig_hap2     // channel: [ val(meta), path(hap2.bw) ]
-    methylation_methbat_combined_bed = NALLO.out.methylation_methbat_combined_bed // channel: [ val(meta), path(bed) ]
-    methylation_methbat_combined_bed_index = NALLO.out.methylation_methbat_combined_bed_index // channel: [ val(meta), path(bed.index) ]
-    methylation_methbat_hap1_bed = NALLO.out.methylation_methbat_hap1_bed // channel: [ val(meta), path(bed) ]
-    methylation_methbat_hap1_bed_index = NALLO.out.methylation_methbat_hap1_bed_index // channel: [ val(meta), path(bed.index) ]
-    methylation_methbat_hap2_bed = NALLO.out.methylation_methbat_hap2_bed // channel: [ val(meta), path(bed) ]
-    methylation_methbat_hap2_bed_index = NALLO.out.methylation_methbat_hap2_bed_index // channel: [ val(meta), path(bed.index) ]
+    methylation_methbat_combined_bed = NALLO.out.methylation_methbat_combined_bed // channel: [ val(meta), path(bed.gz) ]
+    methylation_methbat_combined_index = NALLO.out.methylation_methbat_combined_index // channel: [ val(meta), path(bed.gz.tbi) ]
+    methylation_methbat_bed_hap1 = NALLO.out.methylation_methbat_bed_hap1 // channel: [ val(meta), path(bed.gz) ]
+    methylation_methbat_index_hap1 = NALLO.out.methylation_methbat_index_hap1 // channel: [ val(meta), path(bed.gz.tbi) ]
+    methylation_methbat_bed_hap2 = NALLO.out.methylation_methbat_bed_hap2 // channel: [ val(meta), path(bed.gz) ]
+    methylation_methbat_index_hap2 = NALLO.out.methylation_methbat_index_hap2 // channel: [ val(meta), path(bed.gz.tbi) ]
     methylation_methbat_profiles = NALLO.out.methylation_methbat_profiles // channel: [ val(meta), path(region_profile) ]
     methylation_modkit_bed = NALLO.out.methylation_modkit_bed // channel: [ val(meta), path(bed.gz) ]
     methylation_modkit_tbi = NALLO.out.methylation_modkit_tbi // channel: [ val(meta), path(bed.gz.tbi) ]
@@ -504,14 +504,13 @@ workflow {
     ch_gens = GENOMICMEDICINESWEDEN_NALLO.out.gens_baf
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov)
 
-    ch_methylation_methbat_pileup = GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_combined_bed
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_combined_bed_index)
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_hap1_bed)
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_hap1_bed_index)
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_hap2_bed)
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_hap2_bed_index)
-
-    ch_methylation_modkit_pileup = GENOMICMEDICINESWEDEN_NALLO.out.methylation_modkit_bed
+    ch_methylation_pileup = GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_combined_bed
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_combined_index)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_bed_hap1)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_index_hap1)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_bed_hap2)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_index_hap2)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_modkit_bed)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_modkit_tbi)
 
     ch_repeats_sample_trgt = GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_vcf
@@ -526,9 +525,10 @@ workflow {
     ch_repeats_family_trgt = GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_family_vcf
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_family_tbi)
 
-    ch_visualization_tracks_methbat = GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_biwgig_combined
+    ch_visualization_tracks = GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_biwgig_combined
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_biwgig_hap1)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_biwgig_hap2)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_modkit_bigwig)
 
     publish:
     aligned_assemblies = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
@@ -538,11 +538,8 @@ workflow {
     chromograph_plots = GENOMICMEDICINESWEDEN_NALLO.out.chromograph_plots // channel: [ val(meta), path(png) ]
     gens = ch_gens // channel: [ val(meta), path(baf/cov.bed.gz), path(baf/cov.bed.gz.tbi) ]
     methylation_annotation = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
-    methylation_methbat_pileup = ch_methylation_methbat_pileup // channel: [ val(meta), path(combined.bed.gz/combined.bed.gz.tbi/hap1.bed.gz/hap1.bed.gz.tbi/hap2.bed.gz/hap2.bed.gz.tbi) ]
-    methylation_modkit_pileup = ch_methylation_modkit_pileup // channel: [ val(meta), path(bed.gz/bed.gz.tbi) ]
     methylation_methbat_profiles = GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_profiles // channel: [ val(meta), path(region_profile) ]
-    visualization_tracks_methbat = ch_visualization_tracks_methbat // channel: [ val(meta), path(combined.bw/hap1.bw/hap2.bw) ]
-    visualization_tracks_modkit = GENOMICMEDICINESWEDEN_NALLO.out.methylation_modkit_bigwig // channel: [ val(meta), path(bw) ]
+    methylation_pileup = ch_methylation_pileup // channel: [ val(meta), path(combined.bed.gz/combined.bed.gz.tbi/hap1.bed.gz/hap1.bed.gz.tbi/hap2.bed.gz/hap2.bed.gz.tbi/bed.gz/bed.gz.tbi) ]
     repeats_sample_trgt = ch_repeats_sample_trgt // channel: [ val(meta), path(vcf/tbi/bam/bai) ]
     repeats_sample_trgt_bam = ch_repeats_sample_trgt_bam  // channel: [ val(meta), path(bam/bai) ]
     repeats_sample_trgt_cram = ch_repeats_sample_trgt_cram // channel: [ val(meta), path(cram/crai) ]
@@ -556,6 +553,7 @@ workflow {
     sample_snvs = GENOMICMEDICINESWEDEN_NALLO.out.sample_snvs // channel: [ val(meta), path(vcf), path(tbi) ]
     qc_cramino_phased = ch_qc_cramino_phased // channel: [ val(meta), path(txt/arrow) ]
     qc_phasing_stats = ch_qc_phasing_stats // channel: [ val(meta), path(tsv/gtf.gz/gtf.gz.tbi) ]
+    visualization_tracks = ch_visualization_tracks // channel: [ val(meta), path(bw,combined.bw/hap1.bw/hap2.bw) ]
 }
 
 output {
@@ -580,20 +578,11 @@ output {
     methylation_annotation {
         path { meta, _methylated_regions -> "methylation/profile/family/${meta.id}/" }
     }
-    methylation_methbat_pileup {
-        path { meta, _file -> "methylation/pileup/${meta.id}/" }
-    }
     methylation_methbat_profiles {
         path { meta, _region_profile -> "methylation/profile/sample/${meta.id}/" }
     }
-    methylation_modkit_pileup {
+    methylation_pileup {
         path { meta, _file -> "methylation/pileup/${meta.id}/" }
-    }
-    visualization_tracks_methbat {
-        path { meta, _file -> "visualization_tracks/${meta.id}/" }
-    }
-    visualization_tracks_modkit {
-        path { meta, _bw -> "visualization_tracks/${meta.id}/" }
     }
     repeats_sample_trgt {
         path { meta, _file -> "repeats/sample/${meta.id}/" }
@@ -635,5 +624,8 @@ output {
     }
     qc_phasing_stats {
         path { meta, _file -> "qc/phasing_stats/${meta.id}/" }
+    }
+    visualization_tracks {
+        path { meta, _bw -> "visualization_tracks/${meta.id}/" }
     }
 }
