@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- [#1042](https://github.com/genomic-medicine-sweden/nallo/pull/1042) - Added `somalier_html` output to `bam_infer_sex`
 - [#1047](https://github.com/genomic-medicine-sweden/nallo/pull/1047) - Added `assembly_summary` output to `genome_assembly` so that it can be used as a workflow output
 - [#1052](https://github.com/genomic-medicine-sweden/nallo/pull/1052) - Added new credit to README.md and new contributor to nextflow.config
 
@@ -15,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1029](https://github.com/genomic-medicine-sweden/nallo/pull/1029) - Updated contribution guidelines
 - [#1040](https://github.com/genomic-medicine-sweden/nallo/pull/1040) - Changed `annotate_paralogs` to workflow outputs
 - [#1041](https://github.com/genomic-medicine-sweden/nallo/pull/1041) - Changed `annotate_repeat_expansions` to workflow outputs
+- [#1042](https://github.com/genomic-medicine-sweden/nallo/pull/1042) - Changed `bam_infer_sex` to workflow outputs
 - [#1047](https://github.com/genomic-medicine-sweden/nallo/pull/1047) - Changed `genome_assembly` to workflow outputs
 - [#1050](https://github.com/genomic-medicine-sweden/nallo/pull/1050) - Changed version to 0.13.0dev
 - [#1051](https://github.com/genomic-medicine-sweden/nallo/pull/1051), [#1078](https://github.com/genomic-medicine-sweden/nallo/pull/1078) - Split `samplesheet_stub` test into six separate test files
