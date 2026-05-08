@@ -611,9 +611,9 @@ output {
         path { meta, _file -> "qc/phasing_stats/${meta.id}/" }
     }
     sawfish_visualization {
-        path { _meta, file ->
-            //
-            file >> "visualization_tracks/${file.parent.name.replaceFirst("/^.*?_/", "")}/${file.parent.name.replaceFirst("/^.*?_/", "")}_${file.baseName}_sawfish.${file.extension}"
+        path { meta, file ->
+            // Sawfish doesn't include sample IDs in the output filenames of these files, so we reconstruct the filename here.
+            file >> "visualization_tracks/${meta.id}/${meta.id}_${file.baseName}_sawfish.${file.extension}"
         }
     }
     svs_per_family_and_caller {

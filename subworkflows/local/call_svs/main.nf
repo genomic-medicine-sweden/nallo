@@ -314,6 +314,13 @@ workflow CALL_SVS {
         true,
     )
 
+    SAWFISH_JOINTCALL.out.depth_bw
+        .map { meta, file ->
+            def sample_id = file.parent.name.replaceFirst(/[^_]*_/, "")
+            [meta + ['id': sample_id], file]
+        }
+        .view()
+
     emit:
     family_caller_vcf                  = SVDB_MERGE_BY_CALLER.out.vcf // channel: [ val(meta), path(vcf) ]
     family_caller_tbi                  = SVDB_MERGE_BY_CALLER.out.tbi // channel: [ val(meta), path(tbi) ]
@@ -322,14 +329,21 @@ workflow CALL_SVS {
     hificnv_depth                      = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.depth : channel.empty() // channel: [ val(meta), path(bw) ]
     hificnv_copynum                    = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.copynum : channel.empty() // channel: [ val(meta), path(bedgraph) ]
     hificnv_maf                        = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.maf : channel.empty() // channel: [ val(meta), path(bw) ]
-    sawfish_depth_bw                   = sv_callers_to_run.contains('sawfish') ? SAWFISH_JOINTCALL.out.depth_bw : channel.empty() // channel: [ val(meta), path(bw) ]
-    sawfish_copynum_bedgraph           = sv_callers_to_run.contains('sawfish') ? SAWFISH_JOINTCALL.out.copynum_bedgraph : channel.empty() // channel: [ val(meta), path(bedgraph) ]
-    sawfish_gc_bias_corrected_depth_bw = sv_callers_to_run.contains('sawfish') ? SAWFISH_JOINTCALL.out.gc_bias_corrected_depth_bw : channel.empty() // channel: [ val(meta), path(bw) ]
-    sawfish_maf_bw                     = sv_callers_to_run.contains('sawfish') ? SAWFISH_JOINTCALL.out.maf_bw : channel.empty() // channel: [ val(meta), path(bw) ]
+    sawfish_depth_bw                   = sv_callers_to_run.contains('sawfish') ? addSampleIdToMetaFromSawfishFileName(SAWFISH_JOINTCALL.out.depth_bw) : channel.empty() // channel: [ val(meta), path(bw) ]
+    sawfish_copynum_bedgraph           = sv_callers_to_run.contains('sawfish') ? addSampleIdToMetaFromSawfishFileName(SAWFISH_JOINTCALL.out.copynum_bedgraph) : channel.empty() // channel: [ val(meta), path(bedgraph) ]
+    sawfish_gc_bias_corrected_depth_bw = sv_callers_to_run.contains('sawfish') ? addSampleIdToMetaFromSawfishFileName(SAWFISH_JOINTCALL.out.gc_bias_corrected_depth_bw) : channel.empty() // channel: [ val(meta), path(bw) ]
+    sawfish_maf_bw                     = sv_callers_to_run.contains('sawfish') ? addSampleIdToMetaFromSawfishFileName(SAWFISH_JOINTCALL.out.maf_bw) : channel.empty() // channel: [ val(meta), path(bw) ]
 }
 
 def addCallerToMeta(ch_caller_calls, sv_caller) {
     ch_caller_calls.map { meta, vcf, tbi ->
         [meta + [sv_caller: sv_caller], vcf, tbi]
+    }
+}
+
+def addSampleIdToMetaFromSawfishFileName(ch_sawfish_bw_or_bedgraph) {
+    ch_sawfish_bw_or_bedgraph.map { meta, file ->
+        def sample_id = file.parent.name.replaceFirst(/[^_]*_/, "")
+        [meta + ['id': sample_id], file]
     }
 }
