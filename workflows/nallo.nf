@@ -1120,6 +1120,7 @@ workflow NALLO {
     chromograph_plots = val_skip_chromograph ? channel.empty() : CHROMOGRAPH.out.chromograph_plots // channel: [ val(meta), path(png) ]
     gens_baf = val_skip_prepare_gens_input ? channel.empty() : PREPARE_GENS_INPUTS.out.baf_bed_tbi // channel: [ val(meta), path(baf.bed.gz), path(baf.bed.gz.tbi) ]
     gens_cov = val_skip_prepare_gens_input ? channel.empty() : PREPARE_GENS_INPUTS.out.cov_bed_tbi // channel: [ val(meta), path(cov.bed.gz), path(cov.bed.gz.tbi) ]
+    haplotagged_reads = val_skip_phasing ? channel.empty() : cram_output ? PHASING.out.haplotagged_cram_crai : PHASING.out.haplotagged_bam_bai // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
     methylation_annotation = val_skip_methylation_annotation ? channel.empty() : ANNOTATE_METHYLATION.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     methylation_modkit_bed = (val_skip_methylation_calling || !val_run_modkit) ? channel.empty() : CALL_METHYLATION_MODKIT.out.bed // channel: [ val(meta), path(bed.gz) ]
     methylation_modkit_tbi = (val_skip_methylation_calling || !val_run_modkit) ? channel.empty() : CALL_METHYLATION_MODKIT.out.tbi // channel: [ val(meta), path(bed.gz.tbi) ]

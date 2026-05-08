@@ -246,6 +246,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     chromograph_plots = NALLO.out.chromograph_plots // channel: [ val(meta), path(png) ]
     gens_baf = NALLO.out.gens_baf // channel: [ val(meta), path(baf.bed.gz), path(baf.bed.gz.tbi) ]
     gens_cov = NALLO.out.gens_cov // channel: [ val(meta), path(cov.bed.gz), path(cov.bed.gz.tbi) ]
+    haplotagged_reads = NALLO.out.haplotagged_reads // channel: [ val(meta), path(bam), path(bai) ]
     methylation_annotation = NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     methylation_modkit_bed = NALLO.out.methylation_modkit_bed // channel: [ val(meta), path(bed.gz) ]
     methylation_modkit_tbi = NALLO.out.methylation_modkit_tbi // channel: [ val(meta), path(bed.gz.tbi) ]
@@ -524,6 +525,7 @@ workflow {
     assembly_summary = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
     chromograph_plots = GENOMICMEDICINESWEDEN_NALLO.out.chromograph_plots // channel: [ val(meta), path(png) ]
     gens = ch_gens // channel: [ val(meta), path(baf/cov.bed.gz), path(baf/cov.bed.gz.tbi) ]
+    haplotagged_reads = GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
     methylation_annotation = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     methylation_modkit_pileup = ch_methylation_modkit_pileup // channel: [ val(meta), path(bed.gz/bed.gz.tbi) ]
     visualization_tracks_modkit = GENOMICMEDICINESWEDEN_NALLO.out.methylation_modkit_bigwig // channel: [ val(meta), path(bw) ]
@@ -561,6 +563,12 @@ output {
     }
     gens {
         path { meta, _bed, _tbi -> "gens/${meta.id}/" }
+    }
+    haplotagged_reads { // HiPhase uses the input file (aligned reads) as template for naming output, so we need to remove the "_aligned" suffix here
+        path { meta, bam, bai ->
+            bam >> "aligned_reads/${meta.id}/${bam.name.replaceFirst("_aligned", "")}"
+            bai >> "aligned_reads/${meta.id}/${bai.name.replaceFirst("_aligned", "")}"
+            }
     }
     methylation_annotation {
         path { meta, _methylated_regions -> "methylation/profile/family/${meta.id}/" }
