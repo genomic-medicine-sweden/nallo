@@ -31,15 +31,16 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
 
     } else if (mitochondrial_caller == "deepvariant") {
 
-        // Broadcast the single mito BED to every sample
+        // Broadcast the single mito BED to every sample, skip if BED is empty
         ch_bam_bai
             .combine(ch_mitochondrial_bed)
-            .map { bam_meta, bam, bai, mito_meta, bed ->
-                [bam_meta + [genome: mito_meta.genome, num_intervals: 1], bam, bai, bed, 1] }
-            .set { call_snvs_input }
+            .filter { _bam_meta, _bam, _bai, _mitochondrial_meta, bed -> bed.size() > 0 }
+            .map { bam_meta, bam, bai, mitochondrial_meta, bed ->
+                [bam_meta + [genome: mitochondrial_meta.genome, num_intervals: mitochondrial_meta.num_intervals], bam, bai, bed] }
+            .set { deepvariant_in }
 
         DEEPVARIANT_RUNDEEPVARIANT(
-            call_snvs_input,
+            deepvariant_in,
             ch_fasta,
             ch_fai,
             [[], []],
