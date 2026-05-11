@@ -4,7 +4,7 @@ process DNASCOPE_LONGREAD_CALL_SNVS {
    label 'process_high'
    label 'sentieon'
 
-   container "docker.io/clinicalgenomicslund/dnascope-longread:1.5.2"
+   container "docker.io/sentieon/sentieon-cli:1.6.2-0"
 
    input:
    tuple val(meta),  path(bam), path(bai), path(diploid_intervals_bed), path(haploid_intervals_bed)
@@ -49,9 +49,9 @@ process DNASCOPE_LONGREAD_CALL_SNVS {
    stub:
    prefix = task.ext.prefix ?: "${meta.id}"
    """
-   echo "" | bgzip > ${prefix}.vcf.gz
+   echo "" | gzip > ${prefix}.vcf.gz
    touch ${prefix}.vcf.gz.tbi
-   echo "" | bgzip > ${prefix}.g.vcf.gz
+   echo "" | gzip > ${prefix}.g.vcf.gz
    touch ${prefix}.g.vcf.gz.tbi
    """
 
