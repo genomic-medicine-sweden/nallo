@@ -72,9 +72,9 @@ nextflow_workflow {
                 { assert workflow.success },
                 // Note: the region profile contains a header, so we need to ignore the first 3 lines to get to the actual data for the snapshot test
                 { assert snapshot(
-                    workflow.out.pbcpg_biwgig_combined,
-                    workflow.out.pbcpg_biwgig_hap1,
-                    workflow.out.pbcpg_biwgig_hap2,
+                    workflow.out.pbcpg_combined_bigwig,
+                    workflow.out.pbcpg_hap1_bigwig,
+                    workflow.out.pbcpg_hap2_bigwig,
                     workflow.out.pbcpg_combined_bed,
                     workflow.out.pbcpg_combined_bed_index,
                     workflow.out.pbcpg_hap1_bed,
@@ -111,9 +111,9 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.pbcpg_biwgig_combined,
-                    workflow.out.pbcpg_biwgig_hap1,
-                    workflow.out.pbcpg_biwgig_hap2,
+                    workflow.out.pbcpg_combined_bigwig,
+                    workflow.out.pbcpg_hap1_bigwig,
+                    workflow.out.pbcpg_hap2_bigwig,
                     workflow.out.pbcpg_combined_bed,
                     workflow.out.pbcpg_combined_bed_index,
                     workflow.out.pbcpg_hap1_bed,
@@ -146,9 +146,9 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.pbcpg_biwgig_combined,
-                    workflow.out.pbcpg_biwgig_hap1,
-                    workflow.out.pbcpg_biwgig_hap2,
+                    workflow.out.pbcpg_combined_bigwig,
+                    workflow.out.pbcpg_hap1_bigwig,
+                    workflow.out.pbcpg_hap2_bigwig,
                     workflow.out.pbcpg_combined_bed,
                     workflow.out.pbcpg_combined_bed_index,
                     workflow.out.pbcpg_hap1_bed,
@@ -183,9 +183,9 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     file(workflow.out.asm_bed[0][1]).readLines()[3..15],
-                    workflow.out.pbcpg_biwgig_combined,
-                    workflow.out.pbcpg_biwgig_hap1,
-                    workflow.out.pbcpg_biwgig_hap2,
+                    workflow.out.pbcpg_combined_bigwig,
+                    workflow.out.pbcpg_hap1_bigwig,
+                    workflow.out.pbcpg_hap2_bigwig,
                     workflow.out.pbcpg_combined_bed,
                     workflow.out.pbcpg_combined_bed_index,
                     workflow.out.pbcpg_hap1_bed,
@@ -223,9 +223,9 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     file(workflow.out.asm_bed[0][1]).name,
-                    workflow.out.pbcpg_biwgig_combined,
-                    workflow.out.pbcpg_biwgig_hap1,
-                    workflow.out.pbcpg_biwgig_hap2,
+                    workflow.out.pbcpg_combined_bigwig,
+                    workflow.out.pbcpg_hap1_bigwig,
+                    workflow.out.pbcpg_hap2_bigwig,
                     workflow.out.pbcpg_combined_bed,
                     workflow.out.pbcpg_combined_bed_index,
                     workflow.out.pbcpg_hap1_bed,

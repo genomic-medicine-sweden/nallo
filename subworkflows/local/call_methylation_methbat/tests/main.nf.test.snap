@@ -1,9 +1,33 @@
 {
     "1 sample - phased": {
         "content": [
-            null,
-            null,
-            null,
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.combined.bw:md5,95d13ef38c1a8248e2312365638b5a83"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap1.bw:md5,973c241ce53bb703c64a0a7873e6057a"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap2.bw:md5,927e0bd1ec4afe1e6d421c02025c40e2"
+                ]
+            ],
             [
                 [
                     {
@@ -40,7 +64,7 @@
                 "chr20\t2652400\t2653100\t\tUnmethylated\tUncategorized\tALL\t75\t1.0\t1.0\t\t\t\t\t0.0019157088122605363\t-0.14543154918773948\t-10.64016167106334\t0\t0\t87\t18\t0\t0"
             ]
         ],
-        "timestamp": "2026-05-11T09:55:44.860029246",
+        "timestamp": "2026-05-11T11:37:24.362520769",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -48,9 +72,21 @@
     },
     "1 sample - unphased": {
         "content": [
-            null,
-            null,
-            null,
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.combined.bw:md5,4627e64ea6447ce5503f4dbccd2a198a"
+                ]
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
             [
                 [
                     {
@@ -75,7 +111,7 @@
                 "chr20\t2652400\t2653100\t\tUnmethylated\tUncategorized\tALL\t75\t1.0\t1.0\t\t\t\t\t0.001937984496124031\t-0.14540927350387597\t-10.638531922367372\t0\t0\t86\t18\t0\t0"
             ]
         ],
-        "timestamp": "2026-05-11T09:55:55.003891052",
+        "timestamp": "2026-05-11T11:37:37.122148036",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -83,9 +119,33 @@
     },
     "1 sample - phased - withlabels": {
         "content": [
-            null,
-            null,
-            null,
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.combined.bw:md5,95d13ef38c1a8248e2312365638b5a83"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap1.bw:md5,973c241ce53bb703c64a0a7873e6057a"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap2.bw:md5,927e0bd1ec4afe1e6d421c02025c40e2"
+                ]
+            ],
             [
                 [
                     {
@@ -122,7 +182,7 @@
                 "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tMALE\t0\t0.0\t1.0\t\t\t\t\t0.19423076923076923\t-0.7393047827692308\t-26.382321681004818\t0\t65\t0\t8\t0\t0"
             ]
         ],
-        "timestamp": "2026-05-11T09:56:05.972637298",
+        "timestamp": "2026-05-11T11:37:49.05124265",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -342,9 +402,33 @@
                 "chr16\t163543\t163544\t0\t4\t4\t0\t0.028571428571428484",
                 "chr16\t163862\t163863\t4\t0\t0\t4\t0.028571428571428484"
             ],
-            null,
-            null,
-            null,
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.combined.bw:md5,95d13ef38c1a8248e2312365638b5a83"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap1.bw:md5,973c241ce53bb703c64a0a7873e6057a"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.hap2.bw:md5,927e0bd1ec4afe1e6d421c02025c40e2"
+                ]
+            ],
             [
                 [
                     {
@@ -381,7 +465,7 @@
                 "chr20\t2652400\t2653100\t\tUnmethylated\tUncategorized\tALL\t75\t1.0\t1.0\t\t\t\t\t0.0019157088122605363\t-0.14543154918773948\t-10.64016167106334\t0\t0\t87\t18\t0\t0"
             ]
         ],
-        "timestamp": "2026-05-11T09:56:16.854729094",
+        "timestamp": "2026-05-11T11:38:00.370589445",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -599,9 +683,21 @@
     "1 sample - bed unphased": {
         "content": [
             "test.bed",
-            null,
-            null,
-            null,
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "HG002"
+                    },
+                    "HG002_pbcpgtools.combined.bw:md5,4627e64ea6447ce5503f4dbccd2a198a"
+                ]
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
             [
                 [
                     {
@@ -626,7 +722,7 @@
                 "chr20\t2652400\t2653100\t\tUnmethylated\tUncategorized\tALL\t75\t1.0\t1.0\t\t\t\t\t0.001937984496124031\t-0.14540927350387597\t-10.638531922367372\t0\t0\t86\t18\t0\t0"
             ]
         ],
-        "timestamp": "2026-05-11T09:56:26.995636485",
+        "timestamp": "2026-05-11T11:38:10.589129063",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
