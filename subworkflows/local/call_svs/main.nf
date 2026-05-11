@@ -338,7 +338,7 @@ def addSampleIdFromSawfishPath(ch_sawfish_bw_or_bedgraph) {
     ch_sawfish_bw_or_bedgraph
         .transpose()
         .map { meta, file ->
-        def sample_id = file.parent.name.replaceFirst(/[^_]*_/, "")
-        [meta + ['id': sample_id], file]
-    }
+            def sample_id = file.parent.name.replaceFirst(/[^_]*_/, "")
+            [meta + ['id': sample_id], file]
+        }
 }
