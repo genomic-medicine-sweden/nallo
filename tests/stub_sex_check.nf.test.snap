@@ -144,7 +144,7 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
-        "timestamp": "2026-05-06T08:35:05.684565419",
+        "timestamp": "2026-05-07T13:39:00.08050419",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"

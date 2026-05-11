@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1052](https://github.com/genomic-medicine-sweden/nallo/pull/1052) - Added new credit to README.md and new contributor to nextflow.config
 - [#1053](https://github.com/genomic-medicine-sweden/nallo/pull/1053) - Added `haplotagged_cram_crai` output to `phasing` subworkflow if `cram_output` is true
 - [#1060](https://github.com/genomic-medicine-sweden/nallo/pull/1060) - Added pileup outputs to `call_methylation_methbat` to use them as workflow outputs
+- [#1073](https://github.com/genomic-medicine-sweden/nallo/pull/1073) - Added sample vcf outputs to `call_paralogs` workflow
 
 ### Changed
 
@@ -35,10 +36,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1067](https://github.com/genomic-medicine-sweden/nallo/pull/1067) - Changed `chromograph` to workflow outputs
 - [#1069](https://github.com/genomic-medicine-sweden/nallo/pull/1069) - Changed `vcf_concat_norm_variants` to workflow outputs
 - [#1070](https://github.com/genomic-medicine-sweden/nallo/pull/1070) - Changed `call_methylation_modkit` to workflow outputs
+- [#1073](https://github.com/genomic-medicine-sweden/nallo/pull/1073) - Changed `call_paralogs` to workflow outputs
 - [#1071](https://github.com/genomic-medicine-sweden/nallo/pull/1071) - Changed `call_repeat_expansions_trgt` to workflow outputs
 - [#1077](https://github.com/genomic-medicine-sweden/nallo/pull/1077) - Moved testing of CRAM output from `samplesheet_target_regions_null` to `samplesheet` so it does not only run on PRs to the master branch
+- [#1072](https://github.com/genomic-medicine-sweden/nallo/pull/1072) - Update local module sentieon/dnascope-longread
 
 ### Removed
+
+- [#1072](https://github.com/genomic-medicine-sweden/nallo/pull/1072) - Remove sentieon/dnascope-longread Dockerfile
 
 ### Fixed
 
@@ -57,8 +62,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool | Old version | New version |
-| ---- | ----------- | ----------- |
+| Tool                           | Old version | New version |
+| ------------------------------ | ----------- | ----------- |
+| sentieon-cli/dnascope-longread | 1.5.2       | 1.6.2       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

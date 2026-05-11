@@ -261,6 +261,15 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     methylation_modkit_bed = NALLO.out.methylation_modkit_bed // channel: [ val(meta), path(bed.gz) ]
     methylation_modkit_tbi = NALLO.out.methylation_modkit_tbi // channel: [ val(meta), path(bed.gz.tbi) ]
     methylation_modkit_bigwig = NALLO.out.methylation_modkit_bigwig // channel: [ val(meta), path(bw) ]
+    paralogs_family_vcf = NALLO.out.paralogs_family_vcf // channel: [ val(meta), path(vcf) ]
+    paralogs_family_tbi = NALLO.out.paralogs_family_tbi // channel: [ val(meta), path(tbi) ]
+    paralogs_sample_bam = NALLO.out.paralogs_sample_bam // channel: [ val(meta), path(bam) ]
+    paralogs_sample_bai = NALLO.out.paralogs_sample_bai // channel: [ val(meta), path(bai) ]
+    paralogs_sample_cram = NALLO.out.paralogs_sample_cram // channel: [ val(meta), path(cram) ]
+    paralogs_sample_crai = NALLO.out.paralogs_sample_crai // channel: [ val(meta), path(crai) ]
+    paralogs_sample_json = NALLO.out.paralogs_sample_json // channel: [ val(meta), path(json) ]
+    paralogs_sample_vcf = NALLO.out.paralogs_sample_vcf // channel: [ val(meta), path(vcf) ]
+    paralogs_sample_tbi = NALLO.out.paralogs_sample_tbi // channel: [ val(meta), path(tbi) ]
     repeat_trgt_sample_vcf = NALLO.out.repeat_trgt_sample_vcf // channel: [ val(meta), path(vcf) ]
     repeat_trgt_sample_tbi = NALLO.out.repeat_trgt_sample_tbi // channel: [ val(meta), path(tbi) ]
     repeat_trgt_sample_bam = NALLO.out.repeat_trgt_sample_bam // channel: [ val(meta), path(bam) ]
@@ -521,6 +530,21 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_modkit_bed)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_modkit_tbi)
 
+    ch_paraphase_sample = GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_json
+
+    ch_paraphase_sample_bam = GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_bam
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_bai)
+
+    ch_paraphase_sample_cram = GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_cram
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_crai)
+
+    ch_paraphase_sample_vcfs = GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_vcf
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_tbi)
+
+    ch_paraphase_family = GENOMICMEDICINESWEDEN_NALLO.out.annotated_paralogs
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_family_vcf)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_family_tbi)
+
     ch_repeats_sample_trgt = GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_vcf
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_tbi)
 
@@ -540,7 +564,11 @@ workflow {
 
     publish:
     aligned_assemblies = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
-    annotated_paralogs = GENOMICMEDICINESWEDEN_NALLO.out.annotated_paralogs // channel: [ val(meta), path(tsv/json) ]
+    paraphase_sample = ch_paraphase_sample // channel: [ val(meta), path(json) ]
+    paraphase_sample_bam = ch_paraphase_sample_bam // channel: [ val(meta), path(bam/bai) ]
+    paraphase_sample_cram = ch_paraphase_sample_cram // channel: [ val(meta), path(cram/crai) ]
+    paraphase_sample_vcfs = ch_paraphase_sample_vcfs // channel: [ val(meta), path(vcf/tbi) ]
+    paraphase_family = ch_paraphase_family // channel: [ val(meta), path(vcf/tbi/tsv/json) ]
     annotated_repeats = GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
     chromograph_plots = GENOMICMEDICINESWEDEN_NALLO.out.chromograph_plots // channel: [ val(meta), path(png) ]
@@ -570,7 +598,21 @@ output {
     aligned_assemblies {
         path { meta, _bam, _bai -> "assembly/sample/${meta.id}/" }
     }
-    annotated_paralogs {
+    paraphase_sample {
+        path { meta, _file -> "paraphase/sample/${meta.id}/" }
+    }
+    paraphase_sample_bam {
+        path { meta, _file -> "paraphase/sample/${meta.id}/" }
+        enabled params.alignment_output_format == 'bam'
+    }
+    paraphase_sample_cram {
+        path { meta, _file -> "paraphase/sample/${meta.id}/" }
+        enabled params.alignment_output_format == 'cram'
+    }
+    paraphase_sample_vcfs {
+        path { meta, _file -> "paraphase/sample/${meta.id}/" }
+    }
+    paraphase_family {
         path { meta, _file -> "paraphase/family/${meta.id}/" }
     }
     annotated_repeats {
