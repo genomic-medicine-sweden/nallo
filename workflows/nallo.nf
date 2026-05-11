@@ -1121,6 +1121,8 @@ workflow NALLO {
     gens_baf                            = val_skip_prepare_gens_input ? channel.empty() : PREPARE_GENS_INPUTS.out.baf_bed_tbi // channel: [ val(meta), path(baf.bed.gz), path(baf.bed.gz.tbi) ]
     gens_cov                            = val_skip_prepare_gens_input ? channel.empty() : PREPARE_GENS_INPUTS.out.cov_bed_tbi // channel: [ val(meta), path(cov.bed.gz), path(cov.bed.gz.tbi) ]
     haplotagged_reads                   = val_skip_phasing ? channel.empty() : cram_output ? PHASING.out.haplotagged_cram_crai : PHASING.out.haplotagged_bam_bai // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
+    haplotagging_stats                  = val_skip_phasing ? channel.empty() : PHASING.out.haplotagging_stats // channel: [ val(meta), path("*.txt") ]
+    haplotagging_arrow                  = val_skip_phasing ? channel.empty() : PHASING.out.haplotagging_arrow // channel: [ val(meta), path("*.arrow") ]
     hificnv_visualization               = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.hificnv_depth.mix(CALL_SVS.out.hificnv_copynum).mix(CALL_SVS.out.hificnv_maf) // channel: [ val(meta), path(bw/bedgraph) ]
     methylation_annotation              = val_skip_methylation_annotation ? channel.empty() : ANNOTATE_METHYLATION.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     methylation_methbat_combined_bigwig = (val_skip_methylation_calling || !val_run_methbat) ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_combined_bigwig // channel: [ val(meta), path(combined.bw) ]
