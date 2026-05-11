@@ -153,6 +153,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `methbat_female_label` | Label used for female samples in methbat profile. | `string` | FEMALE |  |  |
 | `modkit_modified_bases` | Modkit modified bases, separated by space. E.g. '5mC 5hmC' | `string` | 5mC |  |  |
 | `mitochondrial_caller` | Which mitochondrial caller to use for mitochondrial variant calling (`deepvariant`) | `string` | deepvariant |  |  |
+| `mitorsaw_minimum_maf` | Minimum minor allele frequency (MAF) for mitorsaw variant calling. | `number` | 0.1 |  |  |
 | `alignment_processes` | If alignment_processes is bigger than 1, input files will be split and aligned in parallel to reduce processing time. | `integer` | 8 |  |  |
 | `snv_calling_processes` | If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time. Must be `1` when `--snv_caller sentieon` is used. | `integer` | 13 |  |  |
 | `vep_cache_version` | VEP cache version | `integer` | 110 |  |  |

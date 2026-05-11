@@ -733,6 +733,13 @@
                     "default": "deepvariant",
                     "description": "Which mitochondrial caller to use for mitochondrial variant calling (`deepvariant`)"
                 },
+                "mitorsaw_minimum_maf": {
+                    "type": "number",
+                    "default": 0.1,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Minimum minor allele frequency (MAF) for mitorsaw variant calling."
+                },
                 "alignment_processes": {
                     "type": "integer",
                     "minimum": 1,
