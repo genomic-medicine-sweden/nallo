@@ -43,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1077](https://github.com/genomic-medicine-sweden/nallo/pull/1077) - Moved testing of CRAM output from `samplehsheet_target_regions_null` to `samplesheet` so it not only runs on PRs to the master branch
 - [#1079](https://github.com/genomic-medicine-sweden/nallo/pull/1079) - Changed sample outputs for `call_repeat_expansions_strdust` to `vcfexpress` output (with `FOUND_IN` tag) instead of `strdust` output
 - [#1079](https://github.com/genomic-medicine-sweden/nallo/pull/1079) - Changed `call_repeat_expansions_strdust` to workflow outputs
+- [#1080](https://github.com/genomic-medicine-sweden/nallo/pull/1080) - Changed `vcf_concat_sort_variants` to workflow outputs
 - [#1082](https://github.com/genomic-medicine-sweden/nallo/pull/1082) - Changed `nallo` to workflow outputs
 
 ### Removed
