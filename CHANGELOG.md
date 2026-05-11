@@ -38,15 +38,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1070](https://github.com/genomic-medicine-sweden/nallo/pull/1070) - Changed `call_methylation_modkit` to workflow outputs
 - [#1073](https://github.com/genomic-medicine-sweden/nallo/pull/1073) - Changed `call_paralogs` to workflow outputs
 - [#1071](https://github.com/genomic-medicine-sweden/nallo/pull/1071) - Changed `call_repeat_expansions_trgt` to workflow outputs
-<<<<<<< wf-outputs-call-strdust
-=======
 - [#1077](https://github.com/genomic-medicine-sweden/nallo/pull/1077) - Moved testing of CRAM output from `samplesheet_target_regions_null` to `samplesheet` so it does not only run on PRs to the master branch
->>>>>>> dev
 - [#1072](https://github.com/genomic-medicine-sweden/nallo/pull/1072) - Update local module sentieon/dnascope-longread
 - [#1077](https://github.com/genomic-medicine-sweden/nallo/pull/1077) - Moved testing of CRAM output from `samplehsheet_target_regions_null` to `samplesheet` so it not only runs on PRs to the master branch
 - [#1079](https://github.com/genomic-medicine-sweden/nallo/pull/1079) - Changed sample outputs for `call_repeat_expansions_strdust` to `vcfexpress` output (with `FOUND_IN` tag) instead of `strdust` output
 - [#1079](https://github.com/genomic-medicine-sweden/nallo/pull/1079) - Changed `call_repeat_expansions_strdust` to workflow outputs
-
 
 ### Removed
 
@@ -56,6 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [#1045](https://github.com/genomic-medicine-sweden/nallo/pull/1045) - Fixed `--skip_sex_check` should depend on `--skip_alignment` in workflow checks on pipeline start.
 - [#1056](https://github.com/genomic-medicine-sweden/nallo/pull/1056) - Fixed nf-test CI not passing the matrix Nextflow version to the setup action.
+- [#1079](https://github.com/genomic-medicine-sweden/nallo/pull/1079) - Fixed typo in tests for `call_methylation_methbat`
 
 ### Parameters
 
