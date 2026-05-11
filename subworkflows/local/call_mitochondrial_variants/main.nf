@@ -47,8 +47,8 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
             ch_par_bed,
         )
 
-        ch_vcf = DEEPVARIANT_RUNDEEPVARIANT.out.gvcf
-        ch_tbi = DEEPVARIANT_RUNDEEPVARIANT.out.gvcf_tbi
+        ch_vcf = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
+        ch_tbi = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_tbi
 
     }
 
