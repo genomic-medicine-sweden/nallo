@@ -28,9 +28,15 @@ workflow CALL_METHYLATION_METHBAT {
     )
 
     emit:
-    region_profile        = METHBAT_PROFILE.out.region_profile                   // channel: [ val(meta), path(tsv) ]
-    asm_bed               = METHBAT_PROFILE.out.asm_bed                          // channel: [ val(meta), path(bed) ]
-    pbcpg_biwgig_combined = PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES.out.combined_bigwig // channel: [ val(meta), path(combined.bw) ]
-    pbcpg_biwgig_hap1     = PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES.out.hap1_bigwig     // channel: [ val(meta), path(hap1.bw) ]
-    pbcpg_biwgig_hap2     = PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES.out.hap2_bigwig     // channel: [ val(meta), path(hap2.bw) ]
+    region_profile        = METHBAT_PROFILE.out.region_profile                      // channel: [ val(meta), path(tsv) ]
+    asm_bed               = METHBAT_PROFILE.out.asm_bed                             // channel: [ val(meta), path(bed) ]
+    pbcpg_combined_bigwig = PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES.out.combined_bigwig    // channel: [ val(meta), path(combined.bw) ]
+    pbcpg_hap1_bigwig     = PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES.out.hap1_bigwig        // channel: [ val(meta), path(hap1.bw) ]
+    pbcpg_hap2_bigwig     = PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES.out.hap2_bigwig        // channel: [ val(meta), path(hap2.bw) ]
+    pbcpg_combined_bed    = PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES.out.combined_bed       // channel: [ val(meta), path(combined.bed.gz) ]
+    pbcpg_combined_index  = PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES.out.combined_bed_index // channel: [ val(meta), path(combined.bed.gz.tbi) ]
+    pbcpg_hap1_bed        = PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES.out.hap1_bed           // channel: [ val(meta), path(hap1.bed.gz) ]
+    pbcpg_hap1_index      = PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES.out.hap1_bed_index     // channel: [ val(meta), path(hap1.bed.gz.tbi) ]
+    pbcpg_hap2_bed        = PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES.out.hap2_bed           // channel: [ val(meta), path(hap2.bed.gz) ]
+    pbcpg_hap2_index      = PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES.out.hap2_bed_index     // channel: [ val(meta), path(hap2.bed.gz.tbi) ]
 }
