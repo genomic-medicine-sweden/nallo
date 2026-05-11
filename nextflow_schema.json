@@ -47,6 +47,12 @@
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
+                "skip_methylation_annotation": {
+                    "type": "boolean",
+                    "description": "Skip methylation annotation",
+                    "fa_icon": "fas fa-fast-forward",
+                    "default": false
+                },
                 "skip_repeat_calling": {
                     "type": "boolean",
                     "description": "Skip tandem repeat calling",
@@ -444,6 +450,13 @@
                     "pattern": "^.*\\.(fasta|fa|fna)(\\.gz)?$",
                     "format": "file-path",
                     "exists": true
+                },
+                "fai": {
+                    "type": "string",
+                    "description": "Reference genome index file",
+                    "pattern": "^.*\\.fai$",
+                    "format": "file-path",
+                    "exists": true
                 }
             }
         },
@@ -729,7 +742,7 @@
                 "snv_calling_processes": {
                     "type": "integer",
                     "default": 13,
-                    "description": "If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time.",
+                    "description": "If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time. Must be `1` when `--snv_caller sentieon` is used.",
                     "minimum": 1
                 },
                 "vep_cache_version": {
@@ -971,7 +984,7 @@
                 "sniffles_min_segment_length": {
                     "type": "number",
                     "default": 500,
-                    "description": "Discard a read if non of its segment is larger than this in Sniffles."
+                    "description": "Discard a read if none of its segment is larger than this in Sniffles."
                 },
                 "sniffles_min_heterozygous_allele_frequency": {
                     "type": "number",

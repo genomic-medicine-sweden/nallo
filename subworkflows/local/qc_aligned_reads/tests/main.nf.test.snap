@@ -1,6 +1,18 @@
 {
     "bam, bed": {
         "content": [
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.txt"
+                ]
+            ],
+            [
+                
+            ],
+            "test_fastqc.html",
             "test_fastqc.zip",
             [
                 [
@@ -40,13 +52,32 @@
                     },
                     "test.mosdepth.region.dist.txt:md5,f8b45b4a0f62f322542c4b4bea5f61e7"
                 ]
+            ],
+            [
+                
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.regions.bed.gz"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.regions.bed.gz.csi"
+                ]
             ]
         ],
+        "timestamp": "2026-04-30T09:11:47.049086704",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:03:24.997950374"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.0"
+        }
     },
     "bam, no bed -stub": {
         "content": [
@@ -56,23 +87,21 @@
                         {
                             "id": "test"
                         },
-                        "test.zip:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "1": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.summary.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
+                ],
+                "10": [
+                    
                 ],
                 "2": [
                     [
                         {
                             "id": "test"
                         },
-                        "test.global.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.html:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "3": [
@@ -80,11 +109,75 @@
                         {
                             "id": "test"
                         },
-                        "test.region.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.zip:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.summary.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.global.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.region.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.per-base.d4:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.regions.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "9": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.regions.bed.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "cramino_arrow": [
                     
+                ],
+                "cramino_stats": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "fastqc_html": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.html:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "fastqc_zip": [
                     [
@@ -102,7 +195,31 @@
                         "test.global.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "mosdepth_region_dist": [
+                "mosdepth_per_base_d4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.per-base.d4:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "mosdepth_regions_bed": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.regions.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "mosdepth_regions_csi": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.regions.bed.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "mosdepth_regions_dist": [
                     [
                         {
                             "id": "test"
@@ -123,11 +240,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-04-30T09:12:00.898971201",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:03:32.725478666"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.0"
+        }
     },
     "bam, bed -stub": {
         "content": [
@@ -137,15 +254,18 @@
                         {
                             "id": "test"
                         },
-                        "test.zip:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "1": [
+                    
+                ],
+                "10": [
                     [
                         {
                             "id": "test"
                         },
-                        "test.summary.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
@@ -153,7 +273,7 @@
                         {
                             "id": "test"
                         },
-                        "test.global.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.html:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "3": [
@@ -161,7 +281,7 @@
                         {
                             "id": "test"
                         },
-                        "test.region.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.zip:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "4": [
@@ -169,7 +289,66 @@
                         {
                             "id": "test"
                         },
-                        "test.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.summary.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.global.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.region.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.per-base.d4:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.regions.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "9": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.regions.bed.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "cramino_arrow": [
+                    
+                ],
+                "cramino_stats": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "fastqc_html": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.html:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "fastqc_zip": [
@@ -188,7 +367,31 @@
                         "test.global.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "mosdepth_region_dist": [
+                "mosdepth_per_base_d4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.per-base.d4:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "mosdepth_regions_bed": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.regions.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "mosdepth_regions_csi": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.regions.bed.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "mosdepth_regions_dist": [
                     [
                         {
                             "id": "test"
@@ -214,14 +417,26 @@
                 ]
             }
         ],
+        "timestamp": "2026-04-30T09:12:15.116374097",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:03:41.044057728"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.0"
+        }
     },
     "bam, no bed": {
         "content": [
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.txt"
+                ]
+            ],
+            [
+                
+            ],
+            "test_fastqc.html",
             "test_fastqc.zip",
             [
                 [
@@ -250,12 +465,21 @@
             ],
             [
                 
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                
             ]
         ],
+        "timestamp": "2026-04-30T09:11:26.903772372",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:03:13.927301115"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.0"
+        }
     }
 }

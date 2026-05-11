@@ -31,8 +31,7 @@ include { PREPARE_GENS_INPUTS                                    } from '../subw
 include { PREPARE_REFERENCES                                     } from '../subworkflows/local/prepare_references'
 include { QC_ALIGNED_READS                                       } from '../subworkflows/local/qc_aligned_reads'
 include { QC_SNVS                                                } from '../subworkflows/local/qc_snvs'
-include { RANK_VARIANTS as RANK_VARIANTS_SNV                     } from '../subworkflows/local/rank_variants'
-include { RANK_VARIANTS as RANK_VARIANTS_SVS                     } from '../subworkflows/local/rank_variants'
+include { RANK_VARIANTS                                          } from '../subworkflows/local/rank_variants'
 include { SCATTER_GENOME                                         } from '../subworkflows/local/scatter_genome'
 include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SNVS } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
 include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SVS  } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
@@ -40,6 +39,8 @@ include { VCF_CONCAT_NORM_VARIANTS                               } from '../subw
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_ANNOTATED_SNVS } from '../subworkflows/local/vcf_concat_sort_variants/main'
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_RANKED_SNVS    } from '../subworkflows/local/vcf_concat_sort_variants/main'
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_GENS           } from '../subworkflows/local/vcf_concat_sort_variants/main'
+include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_PEDDY          } from '../subworkflows/local/vcf_concat_sort_variants/main'
+include { ANNOTATE_METHYLATION                                   } from '../subworkflows/local/annotate_methylation'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT LOCAL/NF-CORE MODULES
@@ -84,6 +85,7 @@ workflow NALLO {
     ch_expected_xx_bed
     ch_expected_xy_bed
     ch_fasta
+    ch_fai
     ch_genmod_reduced_penetrance
     ch_genmod_score_config_snvs
     ch_genmod_score_config_svs
@@ -149,6 +151,7 @@ workflow NALLO {
     val_skip_chromograph
     val_skip_genome_assembly
     val_skip_methylation_calling
+    val_skip_methylation_annotation
     val_skip_peddy
     val_skip_phasing
     val_skip_prepare_gens_input
@@ -177,7 +180,6 @@ workflow NALLO {
     main:
     ch_multiqc_files = channel.empty()
 
-
     //
     // Prepare references
     //
@@ -188,6 +190,7 @@ workflow NALLO {
         // Perhaps PREPARE_REFERENCES could be modified to handle this case?
         PREPARE_REFERENCES(
             ch_fasta,
+            ch_fai,
             ch_vep_cache_unprocessed,
             val_fasta.endsWith('.gz'),
             val_vep_cache && val_vep_cache.endsWith("tar.gz"),
@@ -399,7 +402,7 @@ workflow NALLO {
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.fastqc_zip.collect { _meta, metrics -> metrics }.ifEmpty([]))
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_summary.collect { _meta, metrics -> metrics })
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_global_dist.collect { _meta, metrics -> metrics })
-        ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_region_dist.collect { _meta, metrics -> metrics }.ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_regions_dist.collect { _meta, metrics -> metrics }.ifEmpty([]))
     }
 
     /*
@@ -800,7 +803,7 @@ workflow NALLO {
     //
     def split_family_vcf_for_chromograph = !val_skip_chromograph && val_plot_chromograph_autozygosity && !val_skip_snv_annotation
 
-    if (split_family_vcf_for_chromograph) {
+    if(split_family_vcf_for_chromograph || (!params.skip_peddy && !params.skip_snv_annotation)) {
 
         ANNOTATE_SNVS.out.vcf
             .join(ANNOTATE_SNVS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
@@ -814,7 +817,9 @@ workflow NALLO {
         CONCAT_SORT_ANNOTATED_SNVS(
             ch_concat_sort_annotated_snvs_input
         )
+    }
 
+    if (split_family_vcf_for_chromograph) {
         // Transpose family-level VCFs and add sample IDs by combining with samplesheet meta
         ch_samplesheet
             .map { meta, _files -> [id: meta.id, family_id: meta.family_id] }
@@ -838,6 +843,46 @@ workflow NALLO {
         )
     }
 
+    //
+    // Run Peddy
+    //
+    if (!val_skip_snv_calling && !val_skip_peddy) {
+
+        if (!val_skip_snv_annotation) {
+            // Use already concatenated VCFs
+            CONCAT_SORT_ANNOTATED_SNVS.out.vcf
+                .join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch:true, failOnDuplicate:true)
+                .set { ch_peddy_in }
+        } else {
+            // If we did not annotate, we did not concatenate the VCFs before, so we need to do that here.
+            ch_vcf_tbi_per_region
+                .map { meta, vcf, tbi -> [ groupKey([ id: meta.family_id ], meta.num_intervals), vcf, tbi ] }
+                .groupTuple()
+                .map { key, vcfs, tbis -> [key.getGroupTarget(), vcfs, tbis] }
+                .set { ch_concat_sort_peddy_in }
+
+             CONCAT_SORT_PEDDY (
+                ch_concat_sort_peddy_in
+            )
+
+            CONCAT_SORT_PEDDY.out.vcf
+                .join(CONCAT_SORT_PEDDY.out.index, failOnMismatch:true, failOnDuplicate:true)
+                .set { ch_peddy_in }
+        }
+
+        PEDDY (
+            ch_peddy_in,
+            ch_samplesheet_pedfile,
+            ch_peddy_sites
+        )
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+    }
+
     if (!val_skip_chromograph) {
         CHROMOGRAPH(
             ch_bam_bai,
@@ -848,79 +893,7 @@ workflow NALLO {
         )
     }
 
-    //
-    // Ranks family VCFs per variant call region
-    // Can only run if samplesheet has affected samples
-    //
-    if (!val_skip_rank_variants) {
 
-        // Create PED with updated sex - per family
-        SOMALIER_PED_FAMILY(
-            ch_bam.map { meta, _files -> [[id: meta.family_id], meta] }.groupTuple()
-        )
-
-        // Give PED file SNV meta so they can be joined later in the subworkflow.
-        // Since we don't always have matching number of ped files and call regions
-        // we need to combine and filter instead of join
-        ANN_CSQ_PLI_SNV.out.vcf
-            .map { meta, _vcf -> [[id: meta.family_id], meta] }
-            .combine(SOMALIER_PED_FAMILY.out.ped)
-            .filter { family_id_snv, _meta, family_id_ped, _ped -> family_id_snv == family_id_ped }
-            .map { _family_id_snv, meta, _family_id_ped, ped -> [meta, ped] }
-            .set { ch_snv_ranking_ped_file }
-
-        // Only run if we have affected individuals
-        RANK_VARIANTS_SNV(
-            addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SNV.out.vcf, ch_samplesheet, 'family_id'),
-            addChildWithTwoParentsToMeta(ch_snv_ranking_ped_file, ch_samplesheet, 'family_id'),
-            ch_genmod_reduced_penetrance,
-            ch_genmod_score_config_snvs,
-        )
-
-        RANK_VARIANTS_SNV.out.vcf
-            .join(RANK_VARIANTS_SNV.out.tbi, failOnMismatch: true, failOnDuplicate: true)
-            .set { ch_vcf_tbi_per_region }
-    }
-
-    //
-    // Concatenate and sort ranked SNVs, sort and publish
-    //
-    if (!val_skip_snv_calling) {
-        ch_vcf_tbi_per_region
-            .map { meta, vcf, tbi ->
-                def new_meta = [id: meta.family_id, set: meta.set, sample_ids: meta.sample_ids, num_intervals: meta.num_intervals]
-                [groupKey(new_meta, new_meta.num_intervals), vcf, tbi]
-            }
-            .groupTuple()
-            .set { ch_concat_sort_input }
-
-        CONCAT_SORT_RANKED_SNVS(
-            ch_concat_sort_input
-        )
-    }
-
-    //
-    // Run Peddy
-    //
-    if (!val_skip_snv_calling && !val_skip_peddy) {
-
-        CONCAT_SORT_RANKED_SNVS.out.vcf
-            .join(CONCAT_SORT_RANKED_SNVS.out.index, failOnMismatch: true, failOnDuplicate: true)
-            .filter { meta, _vcf, _tbi -> meta.set == "research" }
-            .set { ch_peddy_in }
-
-        PEDDY(
-            ch_peddy_in,
-            ch_samplesheet_pedfile,
-            ch_peddy_sites,
-        )
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
-    }
 
     //
     // Annotate SVs
@@ -966,25 +939,78 @@ workflow NALLO {
         )
     }
 
-    //
-    // Rank SVs
-    //
+    /*
+     * Ranks family VCFs per variant call region for SNVs,
+     * and per family for SVs, based on provided ranking config.
+     * Can only run if samplesheet has affected samples.
+     */
     if (!val_skip_rank_variants) {
 
-        // Give PED file SVs meta so they can be joined later in the subworkflow.
-        ANN_CSQ_PLI_SVS.out.vcf
-            .combine(SOMALIER_PED_FAMILY.out.ped)
-            .filter { vcf_meta, _vcf, ped_meta, _ped -> vcf_meta.id == ped_meta.id }
-            .map { vcf_meta, _vcf, _ped_meta, ped -> [vcf_meta, ped] }
-            .set { ch_sv_ranking_ped_file }
+        // Create PED files with updated (infered sex) per family
+        SOMALIER_PED_FAMILY(
+            ch_bam.map { meta, _files -> [[id: meta.family_id], meta] }.groupTuple()
+        )
 
-        RANK_VARIANTS_SVS(
-            addChildWithTwoParentsToMeta(ANN_CSQ_PLI_SVS.out.vcf, ch_samplesheet, 'id'),
-            addChildWithTwoParentsToMeta(ch_sv_ranking_ped_file, ch_samplesheet, 'id'),
-            ch_genmod_reduced_penetrance,
+        ch_snvs_to_rank = buildRankVariantsInputChannel(
+            ANN_CSQ_PLI_SNV.out.vcf,
+            SOMALIER_PED_FAMILY.out.ped,
+            'snv',
+            ch_genmod_score_config_snvs,
+            ch_samplesheet,
+        )
+
+        ch_svs_to_rank = buildRankVariantsInputChannel(
+            ANN_CSQ_PLI_SVS.out.vcf.map { meta, vcf -> [meta + [family_id: meta.id], vcf] },
+            SOMALIER_PED_FAMILY.out.ped,
+            'sv',
             ch_genmod_score_config_svs,
+            ch_samplesheet,
+        )
+
+        ch_snvs_to_rank
+            .mix(ch_svs_to_rank)
+            .multiMap { meta, vcf, ped, score_config ->
+                vcf: [meta, vcf]
+                ped: [meta, ped]
+                score_config: [meta, score_config]
+            }
+            .set { ch_rank_variants_input }
+
+        RANK_VARIANTS(
+            ch_rank_variants_input.vcf,
+            ch_rank_variants_input.ped,
+            ch_genmod_reduced_penetrance,
+            ch_rank_variants_input.score_config,
+        )
+
+        RANK_VARIANTS.out.vcf
+            .join(RANK_VARIANTS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+            .branch { meta, _vcf, _tbi ->
+                snvs: meta.variant_type == "snv"
+                sv: meta.variant_type == "sv"
+            }
+            .set { ch_ranked_variants }
+
+        ch_ranked_variants.snvs.set { ch_vcf_tbi_per_region }
+    }
+
+    //
+    // Concatenate and sort ranked SNVs, sort and publish
+    //
+    if (!val_skip_snv_calling) {
+        ch_vcf_tbi_per_region
+            .map { meta, vcf, tbi ->
+                def new_meta = [id: meta.family_id, set: meta.set, sample_ids: meta.sample_ids, num_intervals: meta.num_intervals]
+                [groupKey(new_meta, meta.num_intervals), vcf, tbi]
+            }
+            .groupTuple()
+            .set { ch_concat_sort_input }
+
+        CONCAT_SORT_RANKED_SNVS(
+            ch_concat_sort_input
         )
     }
+
 
     //
     // Collect and publish SVs
@@ -995,8 +1021,8 @@ workflow NALLO {
             ? ch_sv_vcf_for_annotation
             : val_skip_rank_variants
                 ? ANN_CSQ_PLI_SVS.out.vcf
-                : RANK_VARIANTS_SVS.out.vcf
-    // TODO: concat with bcftools the mito SV and the nuclear SVs
+                : ch_ranked_variants.sv.map { meta, vcf, _tbi -> [meta, vcf] }
+
         BCFTOOLS_VIEW_SV(
             ch_collect_svs.map { meta, vcf -> [meta, vcf, []] },
             [],
@@ -1022,6 +1048,15 @@ workflow NALLO {
         CALL_METHYLATION_METHBAT(
             !val_skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
             ch_methbat_regions,
+        )
+
+        CALL_METHYLATION_METHBAT.out.region_profile
+            .set { ch_methylation_profiles }
+    }
+
+    if (!val_skip_methylation_annotation) {
+        ANNOTATE_METHYLATION(
+            ch_methylation_profiles,
         )
     }
 
@@ -1135,7 +1170,7 @@ workflow NALLO {
     MULTIQC(
         ch_multiqc_files.flatten().collect().map { files ->
             [
-                [id: ''],
+                [id: 'multiqc'],
                 files,
                 val_multiqc_config
                     ? file(val_multiqc_config, checkIfExists: true)
@@ -1149,24 +1184,106 @@ workflow NALLO {
 
     emit:
     multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
+    aligned_assemblies = val_skip_genome_assembly ? channel.empty() : cram_output ? ALIGN_ASSEMBLIES.out.cram.join(ALIGN_ASSEMBLIES.out.crai) : ALIGN_ASSEMBLIES.out.bam.join(ALIGN_ASSEMBLIES.out.bai) // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
+    annotated_paralogs = val_skip_annotate_paralogs ? channel.empty () : ANNOTATE_PARALOGS.out.tsv.mix(ANNOTATE_PARALOGS.out.json) // channel: [ val(meta), path(tsv/json) ]
+    annotated_repeats = val_skip_repeat_annotation ? channel.empty() : ANNOTATE_REPEAT_EXPANSIONS.out.vcf.join(ANNOTATE_REPEAT_EXPANSIONS.out.tbi) // channel: [ val(meta), path(vcf), path(tbi) ]
+    assembly_summary = val_skip_genome_assembly ? channel.empty() : GENOME_ASSEMBLY.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
+    chromograph_plots = val_skip_chromograph ? channel.empty() : CHROMOGRAPH.out.chromograph_plots // channel: [ val(meta), path(png) ]
+    gens_baf = val_skip_prepare_gens_input ? channel.empty() : PREPARE_GENS_INPUTS.out.baf_bed_tbi // channel: [ val(meta), path(baf.bed.gz), path(baf.bed.gz.tbi) ]
+    gens_cov = val_skip_prepare_gens_input ? channel.empty() : PREPARE_GENS_INPUTS.out.cov_bed_tbi // channel: [ val(meta), path(cov.bed.gz), path(cov.bed.gz.tbi) ]
+    haplotagged_reads = val_skip_phasing ? channel.empty() : cram_output ? PHASING.out.haplotagged_cram_crai : PHASING.out.haplotagged_bam_bai // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
+    methylation_annotation = val_skip_methylation_annotation ? channel.empty() : ANNOTATE_METHYLATION.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
+    methylation_modkit_bed = (val_skip_methylation_calling || !val_run_modkit) ? channel.empty() : CALL_METHYLATION_MODKIT.out.bed // channel: [ val(meta), path(bed.gz) ]
+    methylation_modkit_tbi = (val_skip_methylation_calling || !val_run_modkit) ? channel.empty() : CALL_METHYLATION_MODKIT.out.tbi // channel: [ val(meta), path(bed.gz.tbi) ]
+    methylation_modkit_bigwig = (val_skip_methylation_calling || !val_run_modkit) ? channel.empty() : CALL_METHYLATION_MODKIT.out.bigwig // channel: [ val(meta), path(bw) ]
+    repeat_trgt_sample_vcf = (val_skip_repeat_calling || val_str_caller != "trgt") ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_vcf // channel: [ val(meta), path(vcf) ]
+    repeat_trgt_sample_tbi = (val_skip_repeat_calling || val_str_caller != "trgt") ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_tbi // channel: [ val(meta), path(tbi) ]
+    repeat_trgt_sample_bam = (val_skip_repeat_calling || val_str_caller != "trgt") ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_bam // channel: [ val(meta), path(bam) ]
+    repeat_trgt_sample_bai = (val_skip_repeat_calling || val_str_caller != "trgt") ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_bai // channel: [ val(meta), path(bai) ]
+    repeat_trgt_sample_cram = (val_skip_repeat_calling || val_str_caller != "trgt") ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_cram // channel: [ val(meta), path(cram) ]
+    repeat_trgt_sample_crai = (val_skip_repeat_calling || val_str_caller != "trgt") ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_crai // channel: [ val(meta), path(crai) ]
+    repeat_trgt_family_vcf = (val_skip_repeat_calling || val_str_caller != "trgt" || !val_skip_repeat_annotation) ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.family_vcf // channel: [ val(meta), path(vcf) ]
+    repeat_trgt_family_tbi = (val_skip_repeat_calling || val_str_caller != "trgt" || !val_skip_repeat_annotation) ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.family_tbi // channel: [ val(meta), path(tbi) ]
+    cramino_unphased_stats = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.cramino_stats // channel: [ val(meta), path(txt) ]
+    cramino_unphased_arrow = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.cramino_arrow // channel: [ val(meta), path(arrow) ]
+    fastqc_html = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.fastqc_html // channel: [ val(meta), path(html) ]
+    fastqc_zip = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.fastqc_zip // channel: [ val(meta), path(zip) ]
+    mosdepth_summary = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_summary // channel: [ val(meta), path(txt) ]
+    mosdepth_global_dist = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_global_dist // channel: [ val(meta), path(txt) ]
+    mosdepth_regions_dist = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_regions_dist // channel: [ val(meta), path(txt) ]
+    mosdepth_per_base_d4 = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_per_base_d4 // channel: [ val(meta), path(d4) ]
+    paralogs_family_vcf = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.family_vcf // channel: [ val(meta), path(vcf) ]
+    paralogs_family_tbi = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.family_tbi // channel: [ val(meta), path(tbi) ]
+    paralogs_sample_bam = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.bam // channel: [ val(meta), path(bam) ]
+    paralogs_sample_bai = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.bai // channel: [ val(meta), path(bai) ]
+    paralogs_sample_cram = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.cram // channel: [ val(meta), path(cram) ]
+    paralogs_sample_crai = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.crai // channel: [ val(meta), path(crai) ]
+    paralogs_sample_json = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.json // channel: [ val(meta), path(json) ]
+    paralogs_sample_vcf = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.sample_vcf // channel: [ val(meta), path(vcf) ]
+    paralogs_sample_tbi = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.sample_tbi // channel: [ val(meta), path(tbi) ]
+    mosdepth_regions = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_regions_bed.join(QC_ALIGNED_READS.out.mosdepth_regions_csi) // channel: [ val(meta), path(bed.gz), path(bed.gz.csi) ]
+    sambamba_depth_bed = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.sambamba_depth_bed // channel: [ val(meta), path(bed) ]
+    qc_bcftools_stats = val_skip_snv_calling ? channel.empty() : QC_SNVS.out.stats // channel: [ val(meta), path(txt) ]
+    qc_deepvariant_vcfstatsreport = val_skip_snv_calling ? channel.empty() : QC_SNVS.out.vcfstatsreport // channel: [ val(meta), path(html) ]
+    sample_snvs = val_skip_snv_calling ? channel.empty() : VCF_CONCAT_NORM_VARIANTS.out.vcf.join(VCF_CONCAT_NORM_VARIANTS.out.index) // channel: [ val(meta), path(vcf), path(tbi) ]
+    somalier_relate_html    = val_skip_sex_check ? channel.empty() : BAM_INFER_SEX.out.somalier_html    // channel: [ val(meta), path(html) ]
+    somalier_relate_pairs   = val_skip_sex_check ? channel.empty() : BAM_INFER_SEX.out.somalier_pairs   // channel: [ val(meta), path(pairs.tsv) ]
+    somalier_relate_samples = val_skip_sex_check ? channel.empty() : BAM_INFER_SEX.out.somalier_samples // channel: [ val(meta), path(samples.tsv) ]
+    phasing_stats = val_skip_phasing ? channel.empty() : PHASING.out.stats // channel: [ val(meta), path("*.stats.tsv") ]
+    phasing_blocks = val_skip_phasing ? channel.empty() : PHASING.out.blocks.join(PHASING.out.blocks_index) // channel: [ val(meta), path("*.blocks.gtf.gz"), path("*.blocks.gtf.gz.tbi") ]
+    haplotagging_stats = val_skip_phasing ? channel.empty() : PHASING.out.haplotagging_stats // channel: [ val(meta), path("*.txt") ]
+    haplotagging_arrow = val_skip_phasing ? channel.empty() : PHASING.out.haplotagging_arrow // channel: [ val(meta), path("*.arrow") ]
 }
 
-// Check if a family has a child with two parents,
-// and add this information to the input variant channel meta as 'child_with_two_parents_in_family'.
-// This is used to determine compound ranking thresholds and penalties in genmod.
-def addChildWithTwoParentsToMeta(input, samplesheet, family_id_key) {
-    samplesheet
-        .map { meta, _files ->
-            [meta.family_id, meta]
-        }
+/**
+ * Adds `child_with_two_parents_in_family` to the meta of `ch_input`, based on whether the family has a child with two parents according to the samplesheet.
+ *
+ * @param ch_input       Channel of [meta, file] where meta contains `family_id`
+ * @param ch_samplesheet Channel of [meta, files] where meta contains `family_id` and `two_parents`
+ * @return               Channel of [meta, file] with updated meta
+ */
+def addChildWithTwoParentsToMeta(ch_input, ch_samplesheet) {
+
+    def ch_families = ch_samplesheet
+        .map { meta, _files -> [meta.family_id, meta.two_parents] }
         .groupTuple()
-        .map { family_id, metas ->
-            [id: family_id, child_with_two_parents_in_family: metas.any { meta -> meta.two_parents }]
+        .map { family_id, child_with_two_parents -> [family_id, child_with_two_parents.any()] }
+
+    ch_families
+        // Need to use combine and filter here instead of join, since we only have one entry per family in ch_families but potentially multiple entries per family in ch_input
+        .combine(ch_input)
+        .filter { samplesheet_family_id, _child_with_two_parents, file_meta, _file ->
+            samplesheet_family_id == file_meta.family_id
         }
-        .combine(input)
-        .filter { family_meta, vcf_meta, _file -> vcf_meta[family_id_key] == family_meta.id }
-        .map { family_meta, vcf_meta, file ->
-            def new_meta = vcf_meta + [child_with_two_parents_in_family: family_meta.child_with_two_parents_in_family]
-            [new_meta, file]
+        .map { _family_id, child_with_two_parents, meta, file ->
+            [meta + [child_with_two_parents_in_family: child_with_two_parents], file]
+        }
+}
+
+/**
+ * Build input channel for ranking variants, by combining VCFs with PED files and ranking config, and adding variant type to the meta for downstream use.
+ *
+ * @param ch_vcf          Channel of [meta, vcf]
+ * @param ch_ped          Channel of [meta, ped] (one per family)
+ * @param variant_type    String (e.g. 'snv' or 'sv')
+ * @param ch_score_config Channel of [meta, score_config]
+ * @param ch_samplesheet  Channel used to derive family-level metadata
+ * @return                Channel of [meta, vcf, ped, score_config]
+ */
+def buildRankVariantsInputChannel(ch_vcf, ch_ped, variant_type, ch_score_config, ch_samplesheet) {
+    // This is used to determine compound ranking thresholds and penalties in genmod
+    addChildWithTwoParentsToMeta(ch_vcf, ch_samplesheet)
+        .map { meta, vcf ->
+            [meta + [variant_type: variant_type], vcf]
+        }
+        // Need to use combine and filter here instead of join, since we only have one entry per family in ch_ped but potentially multiple entries per family in vcf_with_meta.
+        .combine(ch_ped)
+        // The meta.id of the PED channel is the family_id
+        .filter { vcf_meta, _vcf, ped_meta, _ped ->
+            vcf_meta.family_id == ped_meta.id
+        }
+        .combine(ch_score_config)
+        .map { vcf_meta, vcf, _ped_meta, ped, _score_config_meta, score_config ->
+            [vcf_meta, vcf, ped, score_config]
         }
 }
