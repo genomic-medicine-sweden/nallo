@@ -314,13 +314,6 @@ workflow CALL_SVS {
         true,
     )
 
-    SAWFISH_JOINTCALL.out.depth_bw
-        .map { meta, file ->
-            def sample_id = file.parent.name.replaceFirst(/[^_]*_/, "")
-            [meta + ['id': sample_id], file]
-        }
-        .view()
-
     emit:
     family_caller_vcf                  = SVDB_MERGE_BY_CALLER.out.vcf // channel: [ val(meta), path(vcf) ]
     family_caller_tbi                  = SVDB_MERGE_BY_CALLER.out.tbi // channel: [ val(meta), path(tbi) ]
