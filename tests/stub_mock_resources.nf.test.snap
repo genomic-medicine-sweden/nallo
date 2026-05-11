@@ -307,10 +307,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-05-11T09:35:53.720895568",
+        "timestamp": "2026-05-11T09:19:17.525003112",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.0"
+            "nextflow": "26.03.4"
         }
     },
     "Test CADD with mock resources": {
