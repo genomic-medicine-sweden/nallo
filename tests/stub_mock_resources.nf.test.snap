@@ -194,11 +194,11 @@
                     "bgzip": 1.21
                 },
                 "DNASCOPE_LONGREAD": {
-                    "bcftools": 1.22,
-                    "bedtools": "2.31.1",
-                    "samtools": "1.22.1",
-                    "sentieon-cli": "1.5.2",
-                    "sentieon": 202503.02
+                    "bcftools": "1.23.1",
+                    "bedtools": "2.30.0",
+                    "samtools": "1.23.1",
+                    "sentieon-cli": "1.6.2",
+                    "sentieon": 202503.03
                 },
                 "ECHTVAR_ANNO": {
                     "echtvar": "0.2.2"
@@ -307,10 +307,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-04-28T15:41:31.037817614",
+        "timestamp": "2026-05-11T09:35:53.720895568",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.04.0"
         }
     },
     "Test CADD with mock resources": {
