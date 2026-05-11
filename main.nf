@@ -238,8 +238,11 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     )
 
     emit:
-    multiqc_report = NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
-    aligned_assemblies = NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
+    multiqc_report               = NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
+    multiqc                      = NALLO.out.multiqc // channel: [ val(meta), path(html/*_data) ]
+    aligned_assemblies           = NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
+    aligned_reads_bam            = NALLO.out.aligned_reads_bam // channel: [ val(meta), path(bam), path(bai) ]
+    aligned_reads_cram           = NALLO.out.aligned_reads_cram // channel: [ val(meta), path(cram), path(crai) ]
     annotated_paralogs = NALLO.out.annotated_paralogs // channel: [ val(meta), path(tsv/json) ]
     annotated_repeats = NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary = NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
@@ -278,16 +281,19 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     mosdepth_per_base_d4 = NALLO.out.mosdepth_per_base_d4 // channel: [ val(meta), path(d4) ]
     mosdepth_regions = NALLO.out.mosdepth_regions // channel: [ val(meta), path(bed.gz), path(bed.gz.csi) ]
     sambamba_depth_bed = NALLO.out.sambamba_depth_bed // channel: [ val(meta), path(bed) ]
-    qc_bcftools_stats = NALLO.out.qc_bcftools_stats // channel: [ val(meta), path(txt) ]
+    qc_bcftools_stats            = NALLO.out.qc_bcftools_stats // channel: [ val(meta), path(txt) ]
     qc_deepvariant_vcfstatsreport = NALLO.out.qc_deepvariant_vcfstatsreport // channel: [ val(meta), path(html) ]
-    sample_snvs = NALLO.out.sample_snvs // channel: [ val(meta), path(vcf), path(tbi) ]
+    peddy                        = NALLO.out.peddy // channel: [ val(meta), path(html/png/csv/ped) ]
+    sample_snvs                  = NALLO.out.sample_snvs // channel: [ val(meta), path(vcf), path(tbi) ]
+    svs_family                   = NALLO.out.svs_family // channel: [ val(meta), path(vcf.gz), path(tbi) ]
     somalier_relate_html    = NALLO.out.somalier_relate_html    // channel: [ val(meta), path(html) ]
     somalier_relate_pairs   = NALLO.out.somalier_relate_pairs   // channel: [ val(meta), path(pairs.tsv) ]
     somalier_relate_samples = NALLO.out.somalier_relate_samples // channel: [ val(meta), path(samples.tsv) ]
     phasing_stats = NALLO.out.phasing_stats // channel: [ val(meta), path("*.stats.tsv") ]
     phasing_blocks = NALLO.out.phasing_blocks // channel: [ val(meta), path("*.blocks.gtf.gz"), path("*.blocks.gtf.gz.tbi") ]
-    haplotagging_stats = NALLO.out.haplotagging_stats // channel: [ val(meta), path("*.txt") ]
-    haplotagging_arrow = NALLO.out.haplotagging_arrow // channel: [ val(meta), path("*.arrow") ]
+    haplotagging_stats           = NALLO.out.haplotagging_stats // channel: [ val(meta), path("*.txt") ]
+    haplotagging_arrow           = NALLO.out.haplotagging_arrow // channel: [ val(meta), path("*.arrow") ]
+    pedigree_family              = NALLO.out.pedigree_family // channel: [ val(meta), path(ped) ]
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -543,7 +549,10 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_family_tbi)
 
     publish:
+    multiqc            = GENOMICMEDICINESWEDEN_NALLO.out.multiqc // channel: [ val(meta), path(html/*_data) ]
     aligned_assemblies = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
+    aligned_reads_bam  = GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_bam // channel: [ val(meta), path(bam), path(bai) ]
+    aligned_reads_cram = GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_cram // channel: [ val(meta), path(cram), path(crai) ]
     paraphase_sample = ch_paraphase_sample // channel: [ val(meta), path(json) ]
     paraphase_sample_bam = ch_paraphase_sample_bam // channel: [ val(meta), path(bam/bai) ]
     paraphase_sample_cram = ch_paraphase_sample_cram // channel: [ val(meta), path(cram/crai) ]
@@ -567,15 +576,27 @@ workflow {
     qc_sambamba_depth = GENOMICMEDICINESWEDEN_NALLO.out.sambamba_depth_bed // channel: [ val(meta), path(bed) ]
     qc_bcftools_stats = GENOMICMEDICINESWEDEN_NALLO.out.qc_bcftools_stats // channel: [ val(meta), path(txt) ]
     qc_deepvariant_vcfstatsreport = GENOMICMEDICINESWEDEN_NALLO.out.qc_deepvariant_vcfstatsreport // channel: [ val(meta), path(html) ]
+    peddy         = GENOMICMEDICINESWEDEN_NALLO.out.peddy // channel: [ val(meta), path(html/png/csv/ped) ]
     sample_snvs = GENOMICMEDICINESWEDEN_NALLO.out.sample_snvs // channel: [ val(meta), path(vcf), path(tbi) ]
+    svs_family    = GENOMICMEDICINESWEDEN_NALLO.out.svs_family // channel: [ val(meta), path(vcf.gz), path(tbi) ]
     somalier_relate = ch_somalier_relate // channel: [ val(meta), path(html/pairs/samples) ]
     qc_cramino_phased = ch_qc_cramino_phased // channel: [ val(meta), path(txt/arrow) ]
     qc_phasing_stats = ch_qc_phasing_stats // channel: [ val(meta), path(tsv/gtf.gz/gtf.gz.tbi) ]
+    pedigree_family  = GENOMICMEDICINESWEDEN_NALLO.out.pedigree_family // channel: [ val(meta), path(ped) ]
 }
 
 output {
+    multiqc {
+        path { _meta, _file -> "multiqc/" }
+    }
     aligned_assemblies {
         path { meta, _bam, _bai -> "assembly/sample/${meta.id}/" }
+    }
+    aligned_reads_bam {
+        path { meta, _bam, _bai -> "aligned_reads/${meta.id}/" }
+    }
+    aligned_reads_cram {
+        path { meta, _cram, _crai -> "aligned_reads/${meta.id}/" }
     }
     paraphase_sample {
         path { meta, _file -> "paraphase/sample/${meta.id}/" }
@@ -651,7 +672,10 @@ output {
         path { meta, _stats -> "qc/bcftools_stats/${meta.id}/" }
     }
     qc_deepvariant_vcfstatsreport {
-            path { meta, _report -> "qc/deepvariant_vcfstatsreport/${meta.id}/" }
+        path { meta, _report -> "qc/deepvariant_vcfstatsreport/${meta.id}/" }
+    }
+    peddy {
+        path { meta, _file -> "qc/peddy/${meta.id}/" }
     }
     qc_cramino_phased {
         path { meta, _file -> "qc/cramino/phased/${meta.id}/" }
@@ -662,7 +686,13 @@ output {
     sample_snvs {
         path { meta, _vcf, _tbi -> "snvs/sample/${meta.id}/" }
     }
+    svs_family {
+        path { meta, _vcf, _tbi -> "svs/family/${meta.id}/" }
+    }
     somalier_relate {
         path { meta, _file -> "qc/somalier/relate/${meta.id}/" }
+    }
+    pedigree_family {
+        path { _meta, _ped -> "pedigree/family/" }
     }
 }
