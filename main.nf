@@ -238,8 +238,6 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     )
 
     emit:
-    multiqc_report                      = NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
-    multiqc                             = NALLO.out.multiqc // channel: [ val(meta), path(html/*_data) ]
     aligned_assemblies                  = NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
     aligned_reads_bam                   = NALLO.out.aligned_reads_bam // channel: [ val(meta), path(bam), path(bai) ]
     aligned_reads_cram                  = NALLO.out.aligned_reads_cram // channel: [ val(meta), path(cram), path(crai) ]
@@ -264,6 +262,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     methylation_modkit_bed              = NALLO.out.methylation_modkit_bed // channel: [ val(meta), path(bed.gz) ]
     methylation_modkit_tbi              = NALLO.out.methylation_modkit_tbi // channel: [ val(meta), path(bed.gz.tbi) ]
     methylation_modkit_bigwig           = NALLO.out.methylation_modkit_bigwig // channel: [ val(meta), path(bw) ]
+    multiqc_data                        = NALLO.out.multiqc_data // channel: [ val(meta), path(multiqc_data) ]
+    multiqc_report                      = NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
     paralogs_family_vcf                 = NALLO.out.paralogs_family_vcf // channel: [ val(meta), path(vcf) ]
     paralogs_family_tbi                 = NALLO.out.paralogs_family_tbi // channel: [ val(meta), path(tbi) ]
     paralogs_sample_bam                 = NALLO.out.paralogs_sample_bam // channel: [ val(meta), path(bam) ]
@@ -307,7 +307,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     phasing_blocks                      = NALLO.out.phasing_blocks // channel: [ val(meta), path("*.blocks.gtf.gz"), path("*.blocks.gtf.gz.tbi") ]
     haplotagging_stats                  = NALLO.out.haplotagging_stats // channel: [ val(meta), path("*.txt") ]
     haplotagging_arrow                  = NALLO.out.haplotagging_arrow // channel: [ val(meta), path("*.arrow") ]
-    pedigree_family                     = NALLO.out.pedigree_family // channel: [ val(meta), path(ped) ]
+    pedigree                            = NALLO.out.pedigree // channel: [ val(meta), path(ped) ]
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -568,8 +568,10 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_hap2_bigwig)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_modkit_bigwig)
 
+    ch_multiqc = GENOMICMEDICINESWEDEN_NALLO.out.multiqc_report
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.multiqc_data)
+
     publish:
-    multiqc                       = GENOMICMEDICINESWEDEN_NALLO.out.multiqc // channel: [ val(meta), path(html/*_data) ]
     aligned_assemblies            = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
     aligned_reads_bam             = GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_bam // channel: [ val(meta), path(bam), path(bai) ]
     aligned_reads_cram            = GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_cram // channel: [ val(meta), path(cram), path(crai) ]
@@ -584,6 +586,7 @@ workflow {
     gens                          = ch_gens // channel: [ val(meta), path(baf/cov.bed.gz), path(baf/cov.bed.gz.tbi) ]
     haplotagged_reads             = GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
     methylation_annotation        = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
+    multiqc                       = ch_multiqc // channel: [ val(meta), path(html/multiqc_data) ]
     repeats_family                = ch_repeats_family // channel: [ val(meta), path(vcf/tbi) ]
     repeats_sample                = ch_repeats_sample // channel: [ val(meta), path(vcf/tbi) ]
     methylation_methbat_profiles  = GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_profiles // channel: [ val(meta), path(region_profile) ]
@@ -597,7 +600,7 @@ workflow {
     qc_bcftools_stats             = GENOMICMEDICINESWEDEN_NALLO.out.qc_bcftools_stats // channel: [ val(meta), path(txt) ]
     qc_deepvariant_vcfstatsreport = GENOMICMEDICINESWEDEN_NALLO.out.qc_deepvariant_vcfstatsreport // channel: [ val(meta), path(html) ]
     peddy                         = GENOMICMEDICINESWEDEN_NALLO.out.peddy // channel: [ val(meta), path(html/png/csv/ped) ]
-    pedigree_family               = GENOMICMEDICINESWEDEN_NALLO.out.pedigree_family // channel: [ val(meta), path(ped) ]
+    pedigree                      = GENOMICMEDICINESWEDEN_NALLO.out.pedigree // channel: [ val(meta), path(ped) ]
     sample_snvs                   = GENOMICMEDICINESWEDEN_NALLO.out.sample_snvs // channel: [ val(meta), path(vcf), path(tbi) ]
     svs_family                    = GENOMICMEDICINESWEDEN_NALLO.out.svs_family // channel: [ val(meta), path(vcf.gz), path(tbi) ]
     somalier_relate               = ch_somalier_relate // channel: [ val(meta), path(html/pairs/samples) ]
@@ -714,7 +717,7 @@ output {
     somalier_relate {
         path { meta, _file -> "qc/somalier/relate/${meta.id}/" }
     }
-    pedigree_family {
+    pedigree {
         path { _meta, _ped -> "pedigree/family/" }
     }
     visualization_tracks {

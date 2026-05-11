@@ -732,7 +732,7 @@ workflow NALLO {
     //
     def split_family_vcf_for_chromograph = !val_skip_chromograph && val_plot_chromograph_autozygosity && !val_skip_snv_annotation
 
-    if (split_family_vcf_for_chromograph || (!params.skip_peddy && !params.skip_snv_annotation)) {
+    if (split_family_vcf_for_chromograph || (!val_skip_peddy && !val_skip_snv_annotation)) {
 
         ANNOTATE_SNVS.out.vcf
             .join(ANNOTATE_SNVS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
@@ -1112,8 +1112,6 @@ workflow NALLO {
     )
 
     emit:
-    multiqc_report                      = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
-    multiqc                             = MULTIQC.out.report.mix(MULTIQC.out.data) // channel: [ val(meta), path(html/*_data) ]
     aligned_assemblies                  = val_skip_genome_assembly ? channel.empty() : cram_output ? ALIGN_ASSEMBLIES.out.cram.join(ALIGN_ASSEMBLIES.out.crai) : ALIGN_ASSEMBLIES.out.bam.join(ALIGN_ASSEMBLIES.out.bai) // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
     aligned_reads_bam                   = (!val_skip_alignment && val_skip_phasing && !cram_output) ? ch_aligned_bam : channel.empty() // channel: [ val(meta), path(bam), path(bai) ]
     aligned_reads_cram                  = (!val_skip_alignment && val_skip_phasing && cram_output) ? SAMTOOLS_CONVERT.out.cram.join(SAMTOOLS_CONVERT.out.crai) : channel.empty() // channel: [ val(meta), path(cram), path(crai) ]
@@ -1138,6 +1136,8 @@ workflow NALLO {
     methylation_modkit_bed              = (val_skip_methylation_calling || !val_run_modkit) ? channel.empty() : CALL_METHYLATION_MODKIT.out.bed // channel: [ val(meta), path(bed.gz) ]
     methylation_modkit_tbi              = (val_skip_methylation_calling || !val_run_modkit) ? channel.empty() : CALL_METHYLATION_MODKIT.out.tbi // channel: [ val(meta), path(bed.gz.tbi) ]
     methylation_modkit_bigwig           = (val_skip_methylation_calling || !val_run_modkit) ? channel.empty() : CALL_METHYLATION_MODKIT.out.bigwig // channel: [ val(meta), path(bw) ]
+    multiqc_data                        = MULTIQC.out.data // channel: [ val(meta), path(multiqc_data) ]
+    multiqc_report                      = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
     repeat_strdust_sample_vcf           = (val_skip_repeat_calling || val_str_caller != "strdust") ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.sample_vcf // channel: [ val(meta), path(vcf) ]
     repeat_strdust_sample_tbi           = (val_skip_repeat_calling || val_str_caller != "strdust") ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.sample_tbi // channel: [ val(meta), path(tbi) ]
     repeat_strdust_family_vcf           = (val_skip_repeat_calling || val_str_caller != "strdust") ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.family_vcf // channel: [ val(meta), path(vcf) ]
@@ -1181,7 +1181,7 @@ workflow NALLO {
     phasing_blocks                      = val_skip_phasing ? channel.empty() : PHASING.out.blocks.join(PHASING.out.blocks_index) // channel: [ val(meta), path("*.blocks.gtf.gz"), path("*.blocks.gtf.gz.tbi") ]
     haplotagging_stats                  = val_skip_phasing ? channel.empty() : PHASING.out.haplotagging_stats // channel: [ val(meta), path("*.txt") ]
     haplotagging_arrow                  = val_skip_phasing ? channel.empty() : PHASING.out.haplotagging_arrow // channel: [ val(meta), path("*.arrow") ]
-    pedigree_family                     = val_skip_rank_variants ? channel.empty() : SOMALIER_PED_FAMILY.out.ped // channel: [ val(meta), path(ped) ]
+    pedigree                            = val_skip_rank_variants ? channel.empty() : SOMALIER_PED_FAMILY.out.ped // channel: [ val(meta), path(ped) ]
 }
 
 /**
@@ -1192,6 +1192,8 @@ workflow NALLO {
  * @return               Channel of [meta, file] with updated meta
  */
 def addChildWithTwoParentsToMeta(ch_input, ch_samplesheet) {
+
+    // Need to use combine and filter here instead of join, since we only have one entry per family in ch_families but potentially multiple entries per family in ch_input
 
     def ch_families = ch_samplesheet
         .map { meta, _files -> [meta.family_id, meta.two_parents] }
@@ -1220,6 +1222,8 @@ def addChildWithTwoParentsToMeta(ch_input, ch_samplesheet) {
  */
 def buildRankVariantsInputChannel(ch_vcf, ch_ped, variant_type, ch_score_config, ch_samplesheet) {
     // This is used to determine compound ranking thresholds and penalties in genmod
+    // Need to use combine and filter here instead of join, since we only have one entry per family in ch_ped but potentially multiple entries per family in vcf_with_meta.
+     // The meta.id of the PED channel is the family_id
     addChildWithTwoParentsToMeta(ch_vcf, ch_samplesheet)
         .map { meta, vcf ->
             [meta + [variant_type: variant_type], vcf]
