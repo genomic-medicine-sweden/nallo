@@ -324,6 +324,7 @@ workflow {
         params.gens_panel_of_normals_male,
         params.input,
         params.methbat_regions,
+        params.mitochondrial_caller,
         params.par_regions,
         params.phaser,
         params.run_methbat,

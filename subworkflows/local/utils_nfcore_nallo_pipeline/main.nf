@@ -47,6 +47,7 @@ workflow PIPELINE_INITIALISATION {
     val_gens_panel_of_normals_male
     val_input
     val_methbat_regions
+    val_mitochondrial_caller
     val_par_regions
     val_phaser
     val_run_methbat
@@ -263,7 +264,7 @@ workflow PIPELINE_INITIALISATION {
     // Custom validation for pipeline parameters
     //
     validateInputParameters(parameterStatus, workflowSkips, workflowDependencies, fileDependencies, val_skip_methylation_calling, val_run_methbat, val_methbat_regions)
-    validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs)
+    validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs, val_mitochondrial_caller)
     validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge)
 
     //
@@ -629,14 +630,15 @@ def createReferenceChannelFromSamplesheet(param, schema, defaultValue = '') {
     return param ? channel.fromList(samplesheetToList(param, schema)) : defaultValue
 }
 
-def validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs) {
+def validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs, val_mitochondrial_caller) {
      def pacbioTools = [
-        (val_phaser)             : 'HiPhase',
-        (val_str_caller)         : 'TRGT',
-        (val_sv_callers)         : 'Sawfish',
-        (val_sv_callers_to_run)  : 'Sawfish',
-        (val_sv_callers_to_merge): 'Sawfish',
-        (!val_skip_call_paralogs): 'Paraphase',
+        (val_phaser)              : 'HiPhase',
+        (val_str_caller)          : 'TRGT',
+        (val_sv_callers)          : 'Sawfish',
+        (val_sv_callers_to_run)   : 'Sawfish',
+        (val_sv_callers_to_merge) : 'Sawfish',
+        (!val_skip_call_paralogs) : 'Paraphase',
+        (val_mitochondrial_caller): 'mitorsaw',
     ].findAll { k, v -> (k instanceof Boolean) ? k : k.toString().contains(v.toLowerCase())  }
      .values() as List
 
