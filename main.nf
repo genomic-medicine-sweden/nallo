@@ -244,6 +244,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     annotated_repeats                   = NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary                    = NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
     chromograph_plots                   = NALLO.out.chromograph_plots // channel: [ val(meta), path(png) ]
+    family_snvs                         = NALLO.out.family_snvs // channel: [ val(meta), path(vcf), path(tbi) ]
     gens_baf                            = NALLO.out.gens_baf // channel: [ val(meta), path(baf.bed.gz), path(baf.bed.gz.tbi) ]
     gens_cov                            = NALLO.out.gens_cov // channel: [ val(meta), path(cov.bed.gz), path(cov.bed.gz.tbi) ]
     haplotagged_reads                   = NALLO.out.haplotagged_reads // channel: [ val(meta), path(bam), path(bai) ]
@@ -577,6 +578,7 @@ workflow {
     annotated_repeats             = GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary              = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
     chromograph_plots             = GENOMICMEDICINESWEDEN_NALLO.out.chromograph_plots // channel: [ val(meta), path(png) ]
+    family_snvs                   = GENOMICMEDICINESWEDEN_NALLO.out.family_snvs // channel: [ val(meta), path(vcf), path(tbi) ]
     gens                          = ch_gens // channel: [ val(meta), path(baf/cov.bed.gz), path(baf/cov.bed.gz.tbi) ]
     haplotagged_reads             = GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
     methylation_annotation        = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
@@ -631,6 +633,9 @@ output {
     }
     chromograph_plots {
         path { meta, _plot -> "images/chromograph/sample/${meta.id}/" }
+    }
+    family_snvs {
+        path { meta, _vcf, _tbi -> "snvs/family/${meta.id}/" }
     }
     gens {
         path { meta, _bed, _tbi -> "gens/${meta.id}/" }
