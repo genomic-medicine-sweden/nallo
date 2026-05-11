@@ -248,9 +248,9 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     gens_cov = NALLO.out.gens_cov // channel: [ val(meta), path(cov.bed.gz), path(cov.bed.gz.tbi) ]
     haplotagged_reads = NALLO.out.haplotagged_reads // channel: [ val(meta), path(bam), path(bai) ]
     methylation_annotation = NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
-    methylation_methbat_combined_biwgig = NALLO.out.methylation_methbat_combined_biwgig // channel: [ val(meta), path(combined.bw) ]
-    methylation_methbat_hap1_biwgig = NALLO.out.methylation_methbat_hap1_biwgig     // channel: [ val(meta), path(hap1.bw) ]
-    methylation_methbat_hap2_biwgig = NALLO.out.methylation_methbat_hap2_biwgig     // channel: [ val(meta), path(hap2.bw) ]
+    methylation_methbat_combined_bigwig = NALLO.out.methylation_methbat_combined_bigwig // channel: [ val(meta), path(combined.bw) ]
+    methylation_methbat_hap1_bigwig = NALLO.out.methylation_methbat_hap1_bigwig     // channel: [ val(meta), path(hap1.bw) ]
+    methylation_methbat_hap2_bigwig = NALLO.out.methylation_methbat_hap2_bigwig     // channel: [ val(meta), path(hap2.bw) ]
     methylation_methbat_combined_bed = NALLO.out.methylation_methbat_combined_bed // channel: [ val(meta), path(bed.gz) ]
     methylation_methbat_combined_index = NALLO.out.methylation_methbat_combined_index // channel: [ val(meta), path(bed.gz.tbi) ]
     methylation_methbat_hap1_bed = NALLO.out.methylation_methbat_hap1_bed // channel: [ val(meta), path(bed.gz) ]
@@ -557,9 +557,9 @@ workflow {
     ch_repeats_family_trgt = GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_family_vcf
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_family_tbi)
 
-    ch_visualization_tracks = GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_combined_biwgig
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_hap1_biwgig)
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_hap2_biwgig)
+    ch_visualization_tracks = GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_combined_bigwig
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_hap1_bigwig)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_hap2_bigwig)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_modkit_bigwig)
 
     publish:
