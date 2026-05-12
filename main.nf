@@ -263,8 +263,9 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     methylation_modkit_bed              = NALLO.out.methylation_modkit_bed // channel: [ val(meta), path(bed.gz) ]
     methylation_modkit_tbi              = NALLO.out.methylation_modkit_tbi // channel: [ val(meta), path(bed.gz.tbi) ]
     methylation_modkit_bigwig           = NALLO.out.methylation_modkit_bigwig // channel: [ val(meta), path(bw) ]
-    multiqc_data                        = NALLO.out.multiqc_data // channel: [ val(meta), path(multiqc_data) ]
+    multiqc_data                        = NALLO.out.multiqc_data // channel: [ val(meta), path(*_data) ]
     multiqc_report                      = NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
+    multiqc_plots                       = NALLO.out.multiqc_plots // channel: [ val(meta), path(*_plots) ]
     paralogs_family_vcf                 = NALLO.out.paralogs_family_vcf // channel: [ val(meta), path(vcf) ]
     paralogs_family_tbi                 = NALLO.out.paralogs_family_tbi // channel: [ val(meta), path(tbi) ]
     paralogs_sample_bam                 = NALLO.out.paralogs_sample_bam // channel: [ val(meta), path(bam) ]
@@ -571,6 +572,7 @@ workflow {
 
     ch_multiqc = GENOMICMEDICINESWEDEN_NALLO.out.multiqc_report
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.multiqc_data)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.multiqc_plots)
 
     publish:
     aligned_assemblies            = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
