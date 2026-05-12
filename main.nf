@@ -248,9 +248,9 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     gens_baf                            = NALLO.out.gens_baf // channel: [ val(meta), path(baf.bed.gz), path(baf.bed.gz.tbi) ]
     gens_cov                            = NALLO.out.gens_cov // channel: [ val(meta), path(cov.bed.gz), path(cov.bed.gz.tbi) ]
     haplotagged_reads                   = NALLO.out.haplotagged_reads // channel: [ val(meta), path(bam), path(bai) ]
-    hificnv_depth                       = NALLO.out.hificnv_depth // channel: [ val(meta), path(bw) ]
-    hificnv_copynum                     = NALLO.out.hificnv_copynum // channel: [ val(meta), path(bedgraph) ]
-    hificnv_maf                         = NALLO.out.hificnv_maf // channel: [ val(meta), path(bw) ]
+    hificnv_depth_bw                    = NALLO.out.hificnv_depth_bw // channel: [ val(meta), path(bw) ]
+    hificnv_copynum_bedgraph            = NALLO.out.hificnv_copynum_bedgraph // channel: [ val(meta), path(bedgraph) ]
+    hificnv_maf_bw                      = NALLO.out.hificnv_maf_bw // channel: [ val(meta), path(bw) ]
     methylation_annotation              = NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     methylation_methbat_combined_bigwig = NALLO.out.methylation_methbat_combined_bigwig // channel: [ val(meta), path(combined.bw) ]
     methylation_methbat_hap1_bigwig     = NALLO.out.methylation_methbat_hap1_bigwig // channel: [ val(meta), path(hap1.bw) ]
@@ -572,9 +572,9 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_hap2_bigwig)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_modkit_bigwig)
 
-    ch_visualization_tracks_hificnv = GENOMICMEDICINESWEDEN_NALLO.out.hificnv_depth
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.hificnv_copynum)
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.hificnv_maf)
+    ch_visualization_tracks_hificnv = GENOMICMEDICINESWEDEN_NALLO.out.hificnv_depth_bw
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.hificnv_copynum_bedgraph)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.hificnv_maf_bw)
 
     ch_visualization_tracks_sawfish = GENOMICMEDICINESWEDEN_NALLO.out.sawfish_depth_bw
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.sawfish_copynum_bedgraph)
