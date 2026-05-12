@@ -248,7 +248,9 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     gens_baf                            = NALLO.out.gens_baf // channel: [ val(meta), path(baf.bed.gz), path(baf.bed.gz.tbi) ]
     gens_cov                            = NALLO.out.gens_cov // channel: [ val(meta), path(cov.bed.gz), path(cov.bed.gz.tbi) ]
     haplotagged_reads                   = NALLO.out.haplotagged_reads // channel: [ val(meta), path(bam), path(bai) ]
-    hificnv_visualization               = NALLO.out.hificnv_visualization // channel: [ val(meta), path(bw/bedgraph) ]
+    hificnv_depth                       = NALLO.out.hificnv_depth // channel: [ val(meta), path(bw) ]
+    hificnv_copynum                     = NALLO.out.hificnv_copynum // channel: [ val(meta), path(bedgraph) ]
+    hificnv_maf                         = NALLO.out.hificnv_maf // channel: [ val(meta), path(bw) ]
     methylation_annotation              = NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     methylation_methbat_combined_bigwig = NALLO.out.methylation_methbat_combined_bigwig // channel: [ val(meta), path(combined.bw) ]
     methylation_methbat_hap1_bigwig     = NALLO.out.methylation_methbat_hap1_bigwig // channel: [ val(meta), path(hap1.bw) ]
@@ -297,7 +299,10 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     qc_bcftools_stats                   = NALLO.out.qc_bcftools_stats // channel: [ val(meta), path(txt) ]
     qc_deepvariant_vcfstatsreport       = NALLO.out.qc_deepvariant_vcfstatsreport // channel: [ val(meta), path(html) ]
     sample_snvs                         = NALLO.out.sample_snvs // channel: [ val(meta), path(vcf), path(tbi) ]
-    sawfish_visualization               = NALLO.out.sawfish_visualization // channel: [ val(meta), path(bw/bedgraph) ]
+    sawfish_depth_bw                    = NALLO.out.sawfish_depth_bw // channel: [ val(meta), path(bw) ]
+    sawfish_copynum_bedgraph            = NALLO.out.sawfish_copynum_bedgraph // channel: [ val(meta), path(bedgraph) ]
+    sawfish_gc_bias_corrected_depth_bw  = NALLO.out.sawfish_gc_bias_corrected_depth_bw // channel: [ val(meta), path(bw) ]
+    sawfish_maf_bw                      = NALLO.out.sawfish_maf_bw // channel: [ val(meta), path(bw) ]
     somalier_relate_html                = NALLO.out.somalier_relate_html // channel: [ val(meta), path(html) ]
     somalier_relate_pairs               = NALLO.out.somalier_relate_pairs // channel: [ val(meta), path(pairs.tsv) ]
     somalier_relate_samples             = NALLO.out.somalier_relate_samples // channel: [ val(meta), path(samples.tsv) ]
@@ -567,6 +572,15 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_hap2_bigwig)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_modkit_bigwig)
 
+    ch_visualization_tracks_hificnv = GENOMICMEDICINESWEDEN_NALLO.out.hificnv_depth
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.hificnv_copynum)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.hificnv_maf)
+
+    ch_visualization_tracks_sawfish = GENOMICMEDICINESWEDEN_NALLO.out.sawfish_depth_bw
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.sawfish_copynum_bedgraph)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.sawfish_gc_bias_corrected_depth_bw)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.sawfish_maf_bw)
+
     publish:
     aligned_assemblies            = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
     paraphase_sample              = ch_paraphase_sample // channel: [ val(meta), path(json) ]
@@ -599,8 +613,8 @@ workflow {
     qc_cramino_phased             = ch_qc_cramino_phased // channel: [ val(meta), path(txt/arrow) ]
     qc_phasing_stats              = ch_qc_phasing_stats // channel: [ val(meta), path(tsv/gtf.gz/gtf.gz.tbi) ]
     visualization_tracks          = ch_visualization_tracks // channel: [ val(meta), path(bw,combined.bw/hap1.bw/hap2.bw) ]
-    visualization_tracks_hificnv  = GENOMICMEDICINESWEDEN_NALLO.out.hificnv_visualization // channel: [ val(meta), path(bw/bedgraph) ]
-    visualization_tracks_sawfish  = GENOMICMEDICINESWEDEN_NALLO.out.sawfish_visualization // channel: [ val(meta), path(bw/bedgraph) ]
+    visualization_tracks_hificnv  = ch_visualization_tracks_hificnv // channel: [ val(meta), path(bw/bedgraph) ]
+    visualization_tracks_sawfish  = ch_visualization_tracks_sawfish // channel: [ val(meta), path(bw/bedgraph) ]
 }
 
 output {
