@@ -740,6 +740,12 @@
                     "maximum": 0.5,
                     "description": "Minimum minor allele frequency (MAF) for mitorsaw variant calling."
                 },
+                "mitorsaw_minimum_read_count": {
+                    "type": "integer",
+                    "default": 3,
+                    "minimum": 1,
+                    "description": "Minimum read count to consider a heteroplasmic variant."
+                },
                 "mitochondrial_sv_min_size": {
                     "type": "integer",
                     "default": 50,
