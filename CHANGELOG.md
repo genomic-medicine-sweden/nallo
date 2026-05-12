@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- [#968](https://github.com/genomic-medicine-sweden/nallo/pull/968) - `whatshap` now use pedigree information to phase by default. Disable with `--whatshap_pedigree_phasing false`
 - [#1029](https://github.com/genomic-medicine-sweden/nallo/pull/1029) - Updated contribution guidelines
 - [#1040](https://github.com/genomic-medicine-sweden/nallo/pull/1040) - Changed `annotate_paralogs` to workflow outputs
 - [#1041](https://github.com/genomic-medicine-sweden/nallo/pull/1041) - Changed `annotate_repeat_expansions` to workflow outputs
