@@ -53,7 +53,7 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
 
     }
 
-    // Split VCF into SNVs/small indels and SVs for callers that produce both.
+    // Split VCF into SNVs/small indels and SVs for callers that produce both. The logic is in the config.
     // deepvariant is SNV-only so no split is needed.
     if (mitochondrial_caller != "deepvariant") {
 
@@ -65,16 +65,16 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
         BCFTOOLS_VIEW_MITO(ch_mito_split_input, [], [], [])
 
         BCFTOOLS_VIEW_MITO.out.vcf
-            .branch {
-                snv: it[0].variant_type == "snv"
-                sv:  it[0].variant_type == "sv"
+            .branch { meta, _vcf ->
+                snv: meta.variant_type == "snv"
+                sv:  meta.variant_type == "sv"
             }
             .set { ch_mito_vcf_split }
 
         BCFTOOLS_VIEW_MITO.out.tbi
-            .branch {
-                snv: it[0].variant_type == "snv"
-                sv:  it[0].variant_type == "sv"
+            .branch { meta, _tbi ->
+                snv: meta.variant_type == "snv"
+                sv:  meta.variant_type == "sv"
             }
             .set { ch_mito_tbi_split }
 
@@ -86,8 +86,8 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
     } else {
         ch_snv_vcf = ch_vcf
         ch_snv_tbi = ch_tbi
-        ch_sv_vcf  = Channel.empty()
-        ch_sv_tbi  = Channel.empty()
+        ch_sv_vcf  = channel.empty()
+        ch_sv_tbi  = channel.empty()
     }
 
     emit:
