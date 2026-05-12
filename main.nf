@@ -303,7 +303,16 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     qc_bcftools_stats                   = NALLO.out.qc_bcftools_stats // channel: [ val(meta), path(txt) ]
     qc_deepvariant_vcfstatsreport       = NALLO.out.qc_deepvariant_vcfstatsreport // channel: [ val(meta), path(html) ]
     pedigree                            = NALLO.out.pedigree // channel: [ val(meta), path(ped) ]
-    peddy                               = NALLO.out.peddy // channel: [ val(meta), path(html/png/csv/ped) ]
+    peddy_html                          = NALLO.out.peddy_html // channel: [ val(meta), path(html) ]
+    peddy_vs_html                       = NALLO.out.peddy_vs_html // channel: [ val(meta), path(html) ]
+    peddy_ped                           = NALLO.out.peddy_ped // channel: [ val(meta), path(ped) ]
+    peddy_het_check_png                 = NALLO.out.peddy_het_check_png // channel: [ val(meta), path(png) ]
+    peddy_ped_check_png                 = NALLO.out.peddy_ped_check_png // channel: [ val(meta), path(png) ]
+    peddy_sex_check_png                 = NALLO.out.peddy_sex_check_png // channel: [ val(meta), path(png) ]
+    peddy_het_check_csv                 = NALLO.out.peddy_het_check_csv // channel: [ val(meta), path(csv) ]
+    peddy_ped_check_csv                 = NALLO.out.peddy_ped_check_csv // channel: [ val(meta), path(csv) ]
+    peddy_sex_check_csv                 = NALLO.out.peddy_sex_check_csv // channel: [ val(meta), path(csv) ]
+    peddy_ped_check_rel_difference_csv  = NALLO.out.peddy_ped_check_rel_difference_csv // channel: [ val(meta), path(csv) ]
     sample_snvs                         = NALLO.out.sample_snvs // channel: [ val(meta), path(vcf), path(tbi) ]
     sawfish_depth_bw                    = NALLO.out.sawfish_depth_bw // channel: [ val(meta), path(bw) ]
     sawfish_copynum_bedgraph            = NALLO.out.sawfish_copynum_bedgraph // channel: [ val(meta), path(bedgraph) ]
@@ -592,6 +601,17 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.sawfish_gc_bias_corrected_depth_bw)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.sawfish_maf_bw)
 
+    ch_peddy = GENOMICMEDICINESWEDEN_NALLO.out.peddy_html
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.peddy_vs_html)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.peddy_ped)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.peddy_het_check_png)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.peddy_ped_check_png)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.peddy_sex_check_png)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.peddy_het_check_csv)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.peddy_ped_check_csv)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.peddy_sex_check_csv)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.peddy_ped_check_rel_difference_csv)
+
     publish:
     aligned_assemblies            = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
     aligned_reads_bam             = GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_bam // channel: [ val(meta), path(bam), path(bai) ]
@@ -615,7 +635,7 @@ workflow {
     methylation_pileup            = ch_methylation_pileup // channel: [ val(meta), path(combined.bed.gz/combined.bed.gz.tbi/hap1.bed.gz/hap1.bed.gz.tbi/hap2.bed.gz/hap2.bed.gz.tbi/bed.gz/bed.gz.tbi) ]
     repeats_sample_trgt_bam       = ch_repeats_sample_trgt_bam // channel: [ val(meta), path(bam/bai) ]
     repeats_sample_trgt_cram      = ch_repeats_sample_trgt_cram // channel: [ val(meta), path(cram/crai) ]
-    peddy                         = GENOMICMEDICINESWEDEN_NALLO.out.peddy // channel: [ val(meta), path(html/png/csv/ped) ]
+    peddy                         = ch_peddy // channel: [ val(meta), path(html/png/csv/ped) ]
     pedigree                      = GENOMICMEDICINESWEDEN_NALLO.out.pedigree // channel: [ val(meta), path(ped) ]
     qc_cramino_unphased           = ch_qc_cramino_unphased // channel: [ val(meta), path(txt/arrow) ]
     qc_fastqc                     = ch_qc_fastqc // channel: [ val(meta), path(html/zip) ]
@@ -624,7 +644,7 @@ workflow {
     qc_bcftools_stats             = GENOMICMEDICINESWEDEN_NALLO.out.qc_bcftools_stats // channel: [ val(meta), path(txt) ]
     qc_deepvariant_vcfstatsreport = GENOMICMEDICINESWEDEN_NALLO.out.qc_deepvariant_vcfstatsreport // channel: [ val(meta), path(html) ]
     sample_snvs                   = GENOMICMEDICINESWEDEN_NALLO.out.sample_snvs // channel: [ val(meta), path(vcf), path(tbi) ]
-    svs_family                    = GENOMICMEDICINESWEDEN_NALLO.out.svs_family // channel: [ val(meta), path(vcf.gz), path(tbi) ]
+    svs_per_family                = GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family // channel: [ val(meta), path(vcf.gz), path(tbi) ]
     somalier_relate               = ch_somalier_relate // channel: [ val(meta), path(html/pairs/samples) ]
     svs_per_family_and_caller     = GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_and_caller // channel: [ val(meta), path(vcf), path(tbi) ]
     qc_cramino_phased             = ch_qc_cramino_phased // channel: [ val(meta), path(txt/arrow) ]
@@ -736,15 +756,15 @@ output {
     qc_phasing_stats {
         path { meta, _file -> "qc/phasing_stats/${meta.id}/" }
     }
-    svs_per_family_and_caller {
-        path { meta, _vcf, _tbi -> "svs/family/${meta.id}/" }
-        enabled params.publish_unannotated_family_svs
-    }
     sample_snvs {
         path { meta, _vcf, _tbi -> "snvs/sample/${meta.id}/" }
     }
-    svs_family {
+    svs_per_family {
         path { meta, _vcf, _tbi -> "svs/family/${meta.id}/" }
+    }
+    svs_per_family_and_caller {
+        path { meta, _vcf, _tbi -> "svs/family/${meta.id}/" }
+        enabled params.publish_unannotated_family_svs
     }
     somalier_relate {
         path { meta, _file -> "qc/somalier/relate/${meta.id}/" }
