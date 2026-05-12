@@ -560,7 +560,6 @@ workflow {
 
     ch_repeats_sample_trgt_cram = GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_cram.mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_crai)
 
-    ch_repeats_family_trgt = GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_family_vcf.mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_family_tbi)
 
 
     ch_visualization_tracks = GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_combined_bigwig
