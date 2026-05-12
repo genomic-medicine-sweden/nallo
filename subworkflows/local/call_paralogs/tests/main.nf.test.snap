@@ -101,6 +101,66 @@
                 "5": [
                     [
                         {
+                            "id": "HG002",
+                            "family_id": "NIST"
+                        },
+                        "HG002_stub.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "NIST"
+                        },
+                        "HG003_stub.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "NIST"
+                        },
+                        "HG004_stub.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "second_sample",
+                            "family_id": "second_family"
+                        },
+                        "second_sample_stub.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "NIST"
+                        },
+                        "HG002_stub.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "NIST"
+                        },
+                        "HG003_stub.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "NIST"
+                        },
+                        "HG004_stub.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "second_sample",
+                            "family_id": "second_family"
+                        },
+                        "second_sample_stub.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "7": [
+                    [
+                        {
                             "id": "NIST"
                         },
                         "NIST_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
@@ -112,7 +172,7 @@
                         "second_family_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
-                "6": [
+                "8": [
                     [
                         {
                             "id": "NIST"
@@ -192,6 +252,34 @@
                 "cram": [
                     
                 ],
+                "family_tbi": [
+                    [
+                        {
+                            "id": "NIST"
+                        },
+                        "NIST_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "second_family"
+                        },
+                        "second_family_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "family_vcf": [
+                    [
+                        {
+                            "id": "NIST"
+                        },
+                        "NIST_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "second_family"
+                        },
+                        "second_family_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
                 "json": [
                     [
                         {
@@ -222,40 +310,72 @@
                         "second_sample.paraphase.json:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "tbi": [
+                "sample_tbi": [
                     [
                         {
-                            "id": "NIST"
+                            "id": "HG002",
+                            "family_id": "NIST"
                         },
-                        "NIST_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_stub.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
-                            "id": "second_family"
+                            "id": "HG003",
+                            "family_id": "NIST"
                         },
-                        "second_family_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG003_stub.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "NIST"
+                        },
+                        "HG004_stub.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "second_sample",
+                            "family_id": "second_family"
+                        },
+                        "second_sample_stub.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "vcf": [
+                "sample_vcf": [
                     [
                         {
-                            "id": "NIST"
+                            "id": "HG002",
+                            "family_id": "NIST"
                         },
-                        "NIST_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_stub.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ],
                     [
                         {
-                            "id": "second_family"
+                            "id": "HG003",
+                            "family_id": "NIST"
                         },
-                        "second_family_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG003_stub.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "NIST"
+                        },
+                        "HG004_stub.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "second_sample",
+                            "family_id": "second_family"
+                        },
+                        "second_sample_stub.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-03-24T17:49:23.868113333",
+        "timestamp": "2026-05-07T09:22:11.438250284",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.0"
         }
     },
     "one sample, one family - bam output": {
@@ -599,6 +719,66 @@
                 "5": [
                     [
                         {
+                            "id": "HG002",
+                            "family_id": "NIST"
+                        },
+                        "HG002_stub.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "NIST"
+                        },
+                        "HG003_stub.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "NIST"
+                        },
+                        "HG004_stub.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "second_sample",
+                            "family_id": "second_family"
+                        },
+                        "second_sample_stub.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "NIST"
+                        },
+                        "HG002_stub.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "NIST"
+                        },
+                        "HG003_stub.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "NIST"
+                        },
+                        "HG004_stub.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "second_sample",
+                            "family_id": "second_family"
+                        },
+                        "second_sample_stub.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "7": [
+                    [
+                        {
                             "id": "NIST"
                         },
                         "NIST_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
@@ -610,7 +790,7 @@
                         "second_family_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
-                "6": [
+                "8": [
                     [
                         {
                             "id": "NIST"
@@ -744,6 +924,34 @@
                         "second_sample_paraphase.cram:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
+                "family_tbi": [
+                    [
+                        {
+                            "id": "NIST"
+                        },
+                        "NIST_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "second_family"
+                        },
+                        "second_family_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "family_vcf": [
+                    [
+                        {
+                            "id": "NIST"
+                        },
+                        "NIST_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "second_family"
+                        },
+                        "second_family_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
                 "json": [
                     [
                         {
@@ -774,40 +982,72 @@
                         "second_sample.paraphase.json:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "tbi": [
+                "sample_tbi": [
                     [
                         {
-                            "id": "NIST"
+                            "id": "HG002",
+                            "family_id": "NIST"
                         },
-                        "NIST_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_stub.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
-                            "id": "second_family"
+                            "id": "HG003",
+                            "family_id": "NIST"
                         },
-                        "second_family_paraphase_merged.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG003_stub.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "NIST"
+                        },
+                        "HG004_stub.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "second_sample",
+                            "family_id": "second_family"
+                        },
+                        "second_sample_stub.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "vcf": [
+                "sample_vcf": [
                     [
                         {
-                            "id": "NIST"
+                            "id": "HG002",
+                            "family_id": "NIST"
                         },
-                        "NIST_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_stub.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ],
                     [
                         {
-                            "id": "second_family"
+                            "id": "HG003",
+                            "family_id": "NIST"
                         },
-                        "second_family_paraphase_merged.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG003_stub.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "HG004",
+                            "family_id": "NIST"
+                        },
+                        "HG004_stub.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "second_sample",
+                            "family_id": "second_family"
+                        },
+                        "second_sample_stub.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-03-24T17:49:37.08118199",
+        "timestamp": "2026-05-07T09:22:34.252610619",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.0"
         }
     },
     "one sample, one family - cram output": {

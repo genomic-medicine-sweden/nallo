@@ -111,6 +111,21 @@
                         "git_sha": "a8c26e293e72d224e367cc7af8cce589ce008480",
                         "installed_by": ["modules"]
                     },
+                    "csvtk/concat": {
+                        "branch": "master",
+                        "git_sha": "cf6e217453911be4096c8921b1de63a72229b5c2",
+                        "installed_by": ["modules"]
+                    },
+                    "csvtk/mutate2": {
+                        "branch": "master",
+                        "git_sha": "cf6e217453911be4096c8921b1de63a72229b5c2",
+                        "installed_by": ["modules"]
+                    },
+                    "csvtk/sort": {
+                        "branch": "master",
+                        "git_sha": "cf6e217453911be4096c8921b1de63a72229b5c2",
+                        "installed_by": ["modules"]
+                    },
                     "custom/addmostsevereconsequence": {
                         "branch": "master",
                         "git_sha": "0e225fbda197093af4d54a88b9a2908c14ce660b",
@@ -203,7 +218,7 @@
                     },
                     "hifiasm": {
                         "branch": "master",
-                        "git_sha": "b00cfb8947da7842e8f249cc0c5bb8544cfac18e",
+                        "git_sha": "a20dba808c5ce99afe6d40d7fc072c74ca317c8d",
                         "installed_by": ["modules"]
                     },
                     "hificnv": {
@@ -374,7 +389,7 @@
                     },
                     "stranger": {
                         "branch": "master",
-                        "git_sha": "f2b138ee1d91f67d31c187317d7e83e429bf0309",
+                        "git_sha": "90e0aedba7e6b6cd6a0a7edc612c3f54f0caa663",
                         "installed_by": ["modules"]
                     },
                     "strdrop/call": {
