@@ -254,7 +254,7 @@
                     },
                     "mitorsaw/haplotype": {
                         "branch": "master",
-                        "git_sha": "ae0ea82513abe5818d3c0b1026e78ca15c3bbf4f",
+                        "git_sha": "5576986983f7fcc592e0df1f9b2d2b87c313b05e",
                         "installed_by": ["modules"]
                     },
                     "modkit/bedmethyltobigwig": {
