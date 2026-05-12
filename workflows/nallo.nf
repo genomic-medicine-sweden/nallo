@@ -53,6 +53,8 @@ include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modu
 
 // nf-core
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_PHASING             } from '../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_MITO_NUCLEAR_SVS   } from '../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_SORT   as BCFTOOLS_SORT_MITO_SVS             } from '../modules/nf-core/bcftools/sort/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CHROMOGRAPH             } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SV                      } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING                 } from '../modules/nf-core/bcftools/view/main'
@@ -463,16 +465,17 @@ workflow NALLO {
         )
 
         // Add the caller meta and the nuclear interval count to the mitochondrial num_intervals.
-        CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_vcf
+        CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_vcf
             .map { meta, vcf -> [meta + [caller: val_mitochondrial_caller], vcf] }
             .combine(ch_bed_intervals.map { _meta, _bed, num_intervals -> num_intervals }.first())
             .map {meta, vcf, num_intervals -> [meta + [num_intervals: num_intervals + 1], vcf] }
             .set { ch_mitochondrial_vcf }
-        CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_tbi
+        CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_tbi
             .map { meta, tbi -> [meta + [caller: val_mitochondrial_caller], tbi] }
             .combine(ch_bed_intervals.map { _meta, _bed, num_intervals -> num_intervals }.first())
             .map {meta, tbi, num_intervals -> [meta + [num_intervals: num_intervals + 1], tbi] }
             .set { ch_mitochondrial_tbi }
+        ch_mitochondrial_sv_vcf = CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_sv_vcf
 
         // Combine the BED intervals with BAM/BAI files to create a region-bam-bai for each sample.
         // This uses the whole BAM files for each region instead of splitting them.
@@ -1023,8 +1026,32 @@ workflow NALLO {
                 ? ANN_CSQ_PLI_SVS.out.vcf
                 : ch_ranked_variants.sv.map { meta, vcf, _tbi -> [meta, vcf] }
 
+        // Merge mitochondrial SVs with nuclear family SVs for callers that produce SVs (not deepvariant)
+        if (!val_skip_snv_calling && val_mitochondrial_caller != "deepvariant") {
+
+            ch_mitochondrial_sv_vcf
+                .map { meta, vcf -> [[id: meta.family_id], vcf] }
+                .groupTuple()
+                .set { ch_mito_sv_by_family }
+
+            BCFTOOLS_SORT_MITO_SVS(ch_mito_sv_by_family)
+
+            ch_collect_svs
+                .map { meta, vcf -> [meta.id, meta, vcf] }
+                .join(BCFTOOLS_SORT_MITO_SVS.out.vcf.map { meta, vcf -> [meta.id, vcf] })
+                .map { _id, nuclear_meta, nuclear_vcf, mito_vcf ->
+                    [nuclear_meta, [nuclear_vcf, mito_vcf], []] }
+                .set { ch_sv_concat_input }
+
+            BCFTOOLS_CONCAT_MITO_NUCLEAR_SVS(ch_sv_concat_input)
+
+            ch_svs_for_publish = BCFTOOLS_CONCAT_MITO_NUCLEAR_SVS.out.vcf
+        } else {
+            ch_svs_for_publish = ch_collect_svs
+        }
+
         BCFTOOLS_VIEW_SV(
-            ch_collect_svs.map { meta, vcf -> [meta, vcf, []] },
+            ch_svs_for_publish.map { meta, vcf -> [meta, vcf, []] },
             [],
             [],
             [],

@@ -2,8 +2,9 @@
  * Workflow to call mitochondrial variants
  */
 
-include { DEEPVARIANT_RUNDEEPVARIANT } from '../../../modules/nf-core/deepvariant/rundeepvariant/main'
-include { MITORSAW_HAPLOTYPE          } from '../../../modules/nf-core/mitorsaw/haplotype/main'
+include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_MITO } from '../../../modules/nf-core/bcftools/view/main'
+include { DEEPVARIANT_RUNDEEPVARIANT          } from '../../../modules/nf-core/deepvariant/rundeepvariant/main'
+include { MITORSAW_HAPLOTYPE                  } from '../../../modules/nf-core/mitorsaw/haplotype/main'
 
 workflow CALL_MITOCHONDRIAL_VARIANTS {
     take:
@@ -52,7 +53,46 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
 
     }
 
+    // Split VCF into SNVs/small indels and SVs for callers that produce both.
+    // deepvariant is SNV-only so no split is needed.
+    if (mitochondrial_caller != "deepvariant") {
+
+        ch_vcf
+            .map { meta, vcf -> [meta + [variant_type: "snv"], vcf, []] }
+            .mix(ch_vcf.map { meta, vcf -> [meta + [variant_type: "sv"], vcf, []] })
+            .set { ch_mito_split_input }
+
+        BCFTOOLS_VIEW_MITO(ch_mito_split_input, [], [], [])
+
+        BCFTOOLS_VIEW_MITO.out.vcf
+            .branch {
+                snv: it[0].variant_type == "snv"
+                sv:  it[0].variant_type == "sv"
+            }
+            .set { ch_mito_vcf_split }
+
+        BCFTOOLS_VIEW_MITO.out.tbi
+            .branch {
+                snv: it[0].variant_type == "snv"
+                sv:  it[0].variant_type == "sv"
+            }
+            .set { ch_mito_tbi_split }
+
+        ch_snv_vcf = ch_mito_vcf_split.snv.map { meta, vcf -> [meta - meta.subMap('variant_type'), vcf] }
+        ch_snv_tbi = ch_mito_tbi_split.snv.map { meta, tbi -> [meta - meta.subMap('variant_type'), tbi] }
+        ch_sv_vcf  = ch_mito_vcf_split.sv.map  { meta, vcf -> [meta - meta.subMap('variant_type'), vcf] }
+        ch_sv_tbi  = ch_mito_tbi_split.sv.map  { meta, tbi -> [meta - meta.subMap('variant_type'), tbi] }
+
+    } else {
+        ch_snv_vcf = ch_vcf
+        ch_snv_tbi = ch_tbi
+        ch_sv_vcf  = Channel.empty()
+        ch_sv_tbi  = Channel.empty()
+    }
+
     emit:
-    mitochondrial_vcf = ch_vcf  // channel: [val(meta), path(vcf/gvcf)]
-    mitochondrial_tbi = ch_tbi  // channel: [val(meta), path(tbi)]
+    mitochondrial_snv_vcf = ch_snv_vcf  // channel: [val(meta), path(vcf)]
+    mitochondrial_snv_tbi = ch_snv_tbi  // channel: [val(meta), path(tbi)]
+    mitochondrial_sv_vcf  = ch_sv_vcf   // channel: [val(meta), path(vcf)]
+    mitochondrial_sv_tbi  = ch_sv_tbi   // channel: [val(meta), path(tbi)]
 }
