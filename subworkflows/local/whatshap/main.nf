@@ -9,6 +9,7 @@ workflow WHATSHAP {
     ch_bam_bai       // channel: [ val(meta), path(bam), path(bai) ]
     fasta            // channel: [ val(meta), path(fasta) ]
     fai              // channel: [ val(meta), path(fai) ]
+    ch_pedigree      // channel: [ val(meta), path(pedigree) ]
 
     main:
     // Fix metadata to group by family
@@ -23,10 +24,7 @@ workflow WHATSHAP {
         .map { meta, vcf -> [[id: meta.id], vcf] }
         .join(ch_snv_index, failOnMismatch: true, failOnDuplicate: true)
         .join(ch_bam_bai_grouped, failOnMismatch: true, failOnDuplicate: true)
-        .multiMap { meta, snv, tbi, bam, bai ->
-            vcf: [meta, snv, tbi]
-            bam: [meta, bam, bai]
-        }
+        .join(ch_pedigree, failOnMismatch: true, failOnDuplicate: true)
         .set { ch_whatshap_phase_in }
 
     fasta
@@ -35,8 +33,7 @@ workflow WHATSHAP {
         .set { ch_fasta_fai }
 
     WHATSHAP_PHASE(
-        ch_whatshap_phase_in.vcf,
-        ch_whatshap_phase_in.bam,
+        ch_whatshap_phase_in,
         ch_fasta_fai
     )
 
