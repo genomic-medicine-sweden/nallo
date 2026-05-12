@@ -736,7 +736,7 @@
                 "mitorsaw_minimum_maf": {
                     "type": "number",
                     "default": 0.1,
-                    "minimum": 0.01,
+                    "minimum": 0.0,
                     "maximum": 0.5,
                     "description": "Minimum minor allele frequency (MAF) for mitorsaw variant calling."
                 },
