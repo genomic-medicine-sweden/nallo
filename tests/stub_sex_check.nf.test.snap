@@ -375,9 +375,6 @@
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_plots/.stub",
                 "multiqc/multiqc_report.html",
-                "pedigree",
-                "pedigree/family",
-                "pedigree/family/FAM.ped",
                 "pipeline_info",
                 "pipeline_info/nallo_software_mqc_versions.yml",
                 "qc",
@@ -482,10 +479,10 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-05-12T12:48:01.956312074",
+        "timestamp": "2026-05-13T09:24:42.021163819",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.2"
+            "nextflow": "26.04.0"
         }
     }
 }
