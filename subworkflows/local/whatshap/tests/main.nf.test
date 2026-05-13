@@ -35,16 +35,34 @@ nextflow_workflow {
                     [ id: 'FAM'],
                     [
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG004_deepvariant_norm.vcf.gz', checkIfExists: true)
                     ],
                     [
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true),
-                        file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz.tbi', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG004_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
                     ]
                     ,
                     []
                 ]
                 input[1] = [[],[],[]]
+                """
+            }
+        }
+        run("CREATE_PEDIGREE_FILE") {
+            script "../../../../modules/local/create_pedigree_file/main.nf"
+            process {
+                """
+                input[0] = channel.of(
+                    [ [ 'id': 'FAM' ],
+                      [
+                        [id:'HG002', family_id:'FAM', paternal_id:'HG003', maternal_id:'HG004', sex:1, phenotype:2, project:'test', n_files:2, single_end:true],
+                        [id:'HG003', family_id:'FAM', paternal_id:0, maternal_id:0, sex:1, phenotype:1, project:'test', n_files:1, single_end:true],
+                        [id:'HG004', family_id:'FAM', paternal_id:0, maternal_id:0, sex:2, phenotype:1, project:'test', n_files:2, single_end:true]
+                      ]
+                    ]
+                )
                 """
             }
         }
@@ -70,6 +88,10 @@ nextflow_workflow {
                 ])
                 input[3] = GUNZIP.out.gunzip
                 input[4] = SAMTOOLS_FAIDX.out.fai
+                input[5] = channel.of([
+                    [ id:'FAM' ], // Empty ch_pedigree
+                    []
+                ])
                 """
             }
         }
@@ -81,7 +103,7 @@ nextflow_workflow {
         }
     }
 
-    test ("2 samples") {
+    test ("3 samples - With corresponding pedigree file") {
         when {
 
             workflow {
@@ -98,10 +120,17 @@ nextflow_workflow {
                         [ id : 'HG003', family_id: 'FAM' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id : 'HG004', family_id: 'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG004_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG004_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
+
                 )
                 input[3] = GUNZIP.out.gunzip
                 input[4] = SAMTOOLS_FAIDX.out.fai
+                input[5] = CREATE_PEDIGREE_FILE.out.ped
                 """
             }
         }
@@ -113,7 +142,7 @@ nextflow_workflow {
         }
     }
 
-    test ("2 samples - family ID equal to sample ID") {
+    test ("3 samples - family ID equal to sample ID") {
         when {
 
             workflow {
@@ -130,10 +159,20 @@ nextflow_workflow {
                         [ id : 'HG003', family_id: 'HG002' ],
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id : 'HG004', family_id: 'HG002' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG004_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG004_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
+
                 )
                 input[3] = GUNZIP.out.gunzip
                 input[4] = SAMTOOLS_FAIDX.out.fai
+                input[5] = channel.of([
+                    [ id:'HG002' ], // Empty ch_pedigree
+                    []
+                ])
                 """
             }
         }

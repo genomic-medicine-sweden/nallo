@@ -144,7 +144,7 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
-        "timestamp": "2026-05-06T08:35:05.684565419",
+        "timestamp": "2026-05-07T13:39:00.08050419",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"
@@ -152,7 +152,7 @@
     },
     "Test skip sex check - multisample": {
         "content": [
-            140,
+            141,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -277,6 +277,10 @@
                 },
                 "SAMTOOLS_VIEW": {
                     "samtools": "1.23.1"
+                },
+                "SOMALIER_PED_FAMILY": {
+                    "create_pedigree_file": 1.0,
+                    "python": "3.8.3"
                 },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
@@ -475,10 +479,10 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-04-28T15:46:36.003296303",
+        "timestamp": "2026-05-13T09:24:42.021163819",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.04.0"
         }
     }
 }

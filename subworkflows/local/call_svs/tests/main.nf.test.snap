@@ -55,11 +55,11 @@
                 ]
             ]
         ],
+        "timestamp": "2026-03-27T16:53:11.76971036",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:53:11.76971036"
+        }
     },
     "1 sample, 1 family - sniffles": {
         "content": [
@@ -87,11 +87,11 @@
                 ]
             ]
         ],
+        "timestamp": "2026-03-27T16:47:56.075780509",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:47:56.075780509"
+        }
     },
     "1 sample, 1 family - sawfish": {
         "content": [
@@ -119,11 +119,11 @@
                 ]
             ]
         ],
+        "timestamp": "2026-03-27T16:49:05.430709013",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:49:05.430709013"
+        }
     },
     "2 samples, 1 family - hificnv,sawfish with trf bed, no MAF track": {
         "content": [
@@ -161,11 +161,11 @@
                 ]
             ]
         ],
+        "timestamp": "2026-05-11T09:31:41.445341906",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:51:24.515369045"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.0"
+        }
     },
     "2 samples, 1 family - sniffes,severus,hificnv,sawfish with trf bed": {
         "content": [
@@ -223,11 +223,11 @@
                 ]
             ]
         ],
+        "timestamp": "2026-05-11T09:30:59.597960088",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:50:40.610293082"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.0"
+        }
     },
     "2 samples, 1 family - sniffes,severus with trf bed, run all callers - stub": {
         "content": [
@@ -278,6 +278,9 @@
                         "sniffles_svdb_merge_by_caller.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
+                "10": [
+                    
+                ],
                 "2": [
                     [
                         {
@@ -293,6 +296,75 @@
                         },
                         "family_svdb_merge_by_family.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test_1",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_1_hificnv.depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "test_2",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_2_hificnv.depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "test_1",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_1_hificnv.copynum.bedgraph:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "test_2",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_2_hificnv.copynum.bedgraph:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "test_1",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_1_hificnv.maf.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "test_2",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_2_hificnv.maf.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "7": [
+                    
+                ],
+                "8": [
+                    
+                ],
+                "9": [
+                    
                 ],
                 "family_caller_tbi": [
                     [
@@ -355,14 +427,86 @@
                         },
                         "family_svdb_merge_by_family.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
+                ],
+                "hificnv_copynum": [
+                    [
+                        {
+                            "id": "test_1",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_1_hificnv.copynum.bedgraph:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "test_2",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_2_hificnv.copynum.bedgraph:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "hificnv_depth": [
+                    [
+                        {
+                            "id": "test_1",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_1_hificnv.depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "test_2",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_2_hificnv.depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "hificnv_maf": [
+                    [
+                        {
+                            "id": "test_1",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_1_hificnv.maf.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "test_2",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_2_hificnv.maf.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "sawfish_copynum_bedgraph": [
+                    
+                ],
+                "sawfish_depth_bw": [
+                    
+                ],
+                "sawfish_gc_bias_corrected_depth_bw": [
+                    
+                ],
+                "sawfish_maf_bw": [
+                    
                 ]
             }
         ],
+        "timestamp": "2026-05-05T09:37:52.790935365",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:53:33.284355744"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.0"
+        }
     },
     "2 samples, 1 family - merge sniffes,hificnv,severus,sawfish with trf bed, run all callers and filter": {
         "content": [
@@ -420,11 +564,11 @@
                 ]
             ]
         ],
+        "timestamp": "2026-05-11T09:32:32.28493747",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:52:17.663306204"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.0"
+        }
     },
     "1 sample, 1 family - sawfish, force_sawfish_joint_call_single_samples true": {
         "content": [
@@ -452,11 +596,11 @@
                 ]
             ]
         ],
+        "timestamp": "2026-03-27T16:49:50.741069794",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:49:50.741069794"
+        }
     },
     "1 sample, 1 family - sawfish, force_sawfish_joint_call_single_samples true -stub": {
         "content": [
@@ -479,6 +623,15 @@
                         "sawfish_svdb_merge_by_caller.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
+                "10": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "family"
+                        },
+                        "maf.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
                 "2": [
                     [
                         {
@@ -493,6 +646,42 @@
                             "id": "family"
                         },
                         "family_svdb_merge_by_family.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "4": [
+                    
+                ],
+                "5": [
+                    
+                ],
+                "6": [
+                    
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "family"
+                        },
+                        "depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "family"
+                        },
+                        "copynum.bedgraph:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "9": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "family"
+                        },
+                        "gc_bias_corrected_depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "family_caller_tbi": [
@@ -528,13 +717,58 @@
                         },
                         "family_svdb_merge_by_family.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
+                ],
+                "hificnv_copynum": [
+                    
+                ],
+                "hificnv_depth": [
+                    
+                ],
+                "hificnv_maf": [
+                    
+                ],
+                "sawfish_copynum_bedgraph": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "family"
+                        },
+                        "copynum.bedgraph:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "sawfish_depth_bw": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "family"
+                        },
+                        "depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "sawfish_gc_bias_corrected_depth_bw": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "family"
+                        },
+                        "gc_bias_corrected_depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "sawfish_maf_bw": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "family"
+                        },
+                        "maf.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ]
             }
         ],
+        "timestamp": "2026-05-07T12:50:18.634268883",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:53:49.846987023"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.0"
+        }
     }
 }

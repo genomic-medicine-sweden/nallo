@@ -289,7 +289,7 @@
                     },
                     "peddy": {
                         "branch": "master",
-                        "git_sha": "f6cba554dee5a4e180a40f5b1d5df651848d95b9",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"]
                     },
                     "rhocall/viz": {
@@ -460,7 +460,7 @@
                     },
                     "whatshap/phase": {
                         "branch": "master",
-                        "git_sha": "b2e78932ef01165fd85829513eaca29eff8e640a",
+                        "git_sha": "a7735076dd500fe17c7a87297e52f98e83b21a38",
                         "installed_by": ["modules"]
                     },
                     "whatshap/stats": {

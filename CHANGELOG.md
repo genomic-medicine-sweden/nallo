@@ -7,37 +7,61 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- [#1042](https://github.com/genomic-medicine-sweden/nallo/pull/1042) - Added `somalier_html` output to `bam_infer_sex`
 - [#1047](https://github.com/genomic-medicine-sweden/nallo/pull/1047) - Added `assembly_summary` output to `genome_assembly` so that it can be used as a workflow output
 - [#1052](https://github.com/genomic-medicine-sweden/nallo/pull/1052) - Added new credit to README.md and new contributor to nextflow.config
+- [#1053](https://github.com/genomic-medicine-sweden/nallo/pull/1053) - Added `haplotagged_cram_crai` output to `phasing` subworkflow if `cram_output` is true
+- [#1060](https://github.com/genomic-medicine-sweden/nallo/pull/1060) - Added pileup outputs to `call_methylation_methbat` to use them as workflow outputs
+- [#1068](https://github.com/genomic-medicine-sweden/nallo/pull/1068) - Added HiFiCNV and Sawfish visualization track outputs to `call_svs`
+- [#1073](https://github.com/genomic-medicine-sweden/nallo/pull/1073) - Added sample vcf outputs to `call_paralogs` workflow
+- [#1084](https://github.com/genomic-medicine-sweden/nallo/pull/1084) - Added new auto-generated container config files (new with nf-core/tools update)
 
 ### Changed
 
+- [#968](https://github.com/genomic-medicine-sweden/nallo/pull/968) - `whatshap` now use pedigree information to phase by default. Disable with `--whatshap_pedigree_phasing false`
 - [#1029](https://github.com/genomic-medicine-sweden/nallo/pull/1029) - Updated contribution guidelines
 - [#1040](https://github.com/genomic-medicine-sweden/nallo/pull/1040) - Changed `annotate_paralogs` to workflow outputs
 - [#1041](https://github.com/genomic-medicine-sweden/nallo/pull/1041) - Changed `annotate_repeat_expansions` to workflow outputs
+- [#1042](https://github.com/genomic-medicine-sweden/nallo/pull/1042) - Changed `bam_infer_sex` to workflow outputs
 - [#1047](https://github.com/genomic-medicine-sweden/nallo/pull/1047) - Changed `genome_assembly` to workflow outputs
 - [#1050](https://github.com/genomic-medicine-sweden/nallo/pull/1050) - Changed version to 0.13.0dev
-- [#1051](https://github.com/genomic-medicine-sweden/nallo/pull/1051) - Split `samplesheet_stub` test into six separate test files
+- [#1051](https://github.com/genomic-medicine-sweden/nallo/pull/1051), [#1078](https://github.com/genomic-medicine-sweden/nallo/pull/1078) - Split `samplesheet_stub` test into six separate test files
+- [#1053](https://github.com/genomic-medicine-sweden/nallo/pull/1053) - Changed `phasing`, `hiphase`, `longphase` and `whatshap` to workflow outputs
 - [#1054](https://github.com/genomic-medicine-sweden/nallo/pull/1054) - Changed `qc_aligned_reads` to workflow outputs
 - [#1058](https://github.com/genomic-medicine-sweden/nallo/pull/1058) - Update nf-test in CI to 0.9.5
 - [#1059](https://github.com/genomic-medicine-sweden/nallo/pull/1059) - Changed `qc_phasing` to workflow outputs
+- [#1060](https://github.com/genomic-medicine-sweden/nallo/pull/1060) - Changed `call_methylation_methbat` to workflow outputs
 - [#1061](https://github.com/genomic-medicine-sweden/nallo/pull/1061) - Changed `annotated_repeats` workflow outputs to not include params.outdir, added by mistake in [#1041](https://github.com/genomic-medicine-sweden/nallo/pull/1041)
 - [#1065](https://github.com/genomic-medicine-sweden/nallo/pull/1065) - Changed `qc_snvs` to workflow outputs
 - [#1062](https://github.com/genomic-medicine-sweden/nallo/pull/1062) - Updated contribution guidelines regarding `.set` which might soon be restricted
 - [#1063](https://github.com/genomic-medicine-sweden/nallo/pull/1063) - Updated contribution guidelines regarding sorting include statements alphabetically
 - [#1064](https://github.com/genomic-medicine-sweden/nallo/pull/1064) - Changed `prepare_gens_inputs` to workflow outputs
 - [#1067](https://github.com/genomic-medicine-sweden/nallo/pull/1067) - Changed `chromograph` to workflow outputs
+- [#1068](https://github.com/genomic-medicine-sweden/nallo/pull/1068) - Changed `call_svs` to workflow outputs
 - [#1069](https://github.com/genomic-medicine-sweden/nallo/pull/1069) - Changed `vcf_concat_norm_variants` to workflow outputs
 - [#1070](https://github.com/genomic-medicine-sweden/nallo/pull/1070) - Changed `call_methylation_modkit` to workflow outputs
+- [#1073](https://github.com/genomic-medicine-sweden/nallo/pull/1073) - Changed `call_paralogs` to workflow outputs
+- [#1071](https://github.com/genomic-medicine-sweden/nallo/pull/1071) - Changed `call_repeat_expansions_trgt` to workflow outputs
+- [#1077](https://github.com/genomic-medicine-sweden/nallo/pull/1077) - Moved testing of CRAM output from `samplesheet_target_regions_null` to `samplesheet` so it does not only run on PRs to the master branch
+- [#1072](https://github.com/genomic-medicine-sweden/nallo/pull/1072) - Update local module sentieon/dnascope-longread
 - [#1075](https://github.com/genomic-medicine-sweden/nallo/pull/1075) - Template update for nf-core tools 4.0.2
 - [#1075](https://github.com/genomic-medicine-sweden/nallo/pull/1075) - Changed minimum nextflow version to 25.10.4
+- [#1077](https://github.com/genomic-medicine-sweden/nallo/pull/1077) - Moved testing of CRAM output from `samplehsheet_target_regions_null` to `samplesheet` so it not only runs on PRs to the master branch
+- [#1079](https://github.com/genomic-medicine-sweden/nallo/pull/1079) - Changed sample outputs for `call_repeat_expansions_strdust` to `vcfexpress` output (with `FOUND_IN` tag) instead of `strdust` output
+- [#1079](https://github.com/genomic-medicine-sweden/nallo/pull/1079) - Changed `call_repeat_expansions_strdust` to workflow outputs
+- [#1080](https://github.com/genomic-medicine-sweden/nallo/pull/1080) - Changed `vcf_concat_sort_variants` to workflow outputs
+- [#1082](https://github.com/genomic-medicine-sweden/nallo/pull/1082) - Changed `nallo` to workflow outputs
+- [#1084](https://github.com/genomic-medicine-sweden/nallo/pull/1084) - Updated nf-core module for `peddy`
 
 ### Removed
+
+- [#1072](https://github.com/genomic-medicine-sweden/nallo/pull/1072) - Remove sentieon/dnascope-longread Dockerfile
 
 ### Fixed
 
 - [#1045](https://github.com/genomic-medicine-sweden/nallo/pull/1045) - Fixed `--skip_sex_check` should depend on `--skip_alignment` in workflow checks on pipeline start.
 - [#1056](https://github.com/genomic-medicine-sweden/nallo/pull/1056) - Fixed nf-test CI not passing the matrix Nextflow version to the setup action.
+- [#1079](https://github.com/genomic-medicine-sweden/nallo/pull/1079) - Fixed typo in tests for `call_methylation_methbat`
 
 ### Parameters
 
@@ -51,8 +75,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool | Old version | New version |
-| ---- | ----------- | ----------- |
+| Tool                           | Old version | New version |
+| ------------------------------ | ----------- | ----------- |
+| sentieon-cli/dnascope-longread | 1.5.2       | 1.6.2       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
