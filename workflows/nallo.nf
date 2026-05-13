@@ -642,7 +642,7 @@ workflow NALLO {
     }
 
     //
-    // Phase SNVs and INDELs
+    // Phase SNVs, SVs and INDELs
     //
     if (!val_skip_phasing) {
 
@@ -676,11 +676,13 @@ workflow NALLO {
         BCFTOOLS_CONCAT_PHASING(
             ch_bcftools_concat_phasing_in
         )
+        BCFTOOLS_CONCAT_PHASING.out.vcf.set { ch_snvs_vcf_phasing_in}
+        BCFTOOLS_CONCAT_PHASING.out.tbi.set { ch_snvs_tbi_phasing_in }
 
         // Input is one VCF per family with all the regions (except chrM) and all the samples in the family
         PHASING(
-            BCFTOOLS_CONCAT_PHASING.out.vcf,
-            BCFTOOLS_CONCAT_PHASING.out.tbi,
+            ch_snvs_vcf_phasing_in,
+            ch_snvs_tbi_phasing_in,
             val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_vcf,
             val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_tbi,
             ch_bam_bai,
@@ -703,6 +705,7 @@ workflow NALLO {
                 bed: bed
             }
             .set { ch_phased_scatter_in }
+
         // Split the vcf
         BCFTOOLS_VIEW_PHASING(
             ch_phased_scatter_in.vcf,
@@ -732,8 +735,13 @@ workflow NALLO {
             )
             .set { ch_snv_index_nuclear_mitochondrial_for_annotation  }
 
-        ch_sv_vcf_for_annotation = PHASING.out.phased_family_svs
-        ch_sv_index_for_annotation = PHASING.out.phased_family_svs_tbi
+        // Set phased SVs for annotation if SV calling is not skipped
+        PHASING.out.phased_family_svs
+            .set { ch_sv_vcf_for_annotation }
+
+        PHASING.out.phased_family_svs_tbi
+            .set { ch_sv_index_for_annotation }
+
 
     }
     else {
@@ -1026,32 +1034,8 @@ workflow NALLO {
                 ? ANN_CSQ_PLI_SVS.out.vcf
                 : ch_ranked_variants.sv.map { meta, vcf, _tbi -> [meta, vcf] }
 
-        // Merge mitochondrial SVs with nuclear family SVs for callers that produce SVs (not deepvariant)
-        if (!val_skip_snv_calling && val_mitochondrial_caller != "deepvariant") {
-
-            ch_mitochondrial_sv_vcf
-                .map { meta, vcf -> [[id: meta.family_id], vcf] }
-                .groupTuple()
-                .set { ch_mito_sv_by_family }
-
-            BCFTOOLS_SORT_MITO_SVS(ch_mito_sv_by_family)
-
-            ch_collect_svs
-                .map { meta, vcf -> [meta.id, meta, vcf] }
-                .join(BCFTOOLS_SORT_MITO_SVS.out.vcf.map { meta, vcf -> [meta.id, vcf] })
-                .map { _id, nuclear_meta, nuclear_vcf, mito_vcf ->
-                    [nuclear_meta, [nuclear_vcf, mito_vcf], []] }
-                .set { ch_sv_concat_input }
-
-            BCFTOOLS_CONCAT_MITO_NUCLEAR_SVS(ch_sv_concat_input)
-
-            ch_svs_for_publish = BCFTOOLS_CONCAT_MITO_NUCLEAR_SVS.out.vcf
-        } else {
-            ch_svs_for_publish = ch_collect_svs
-        }
-
         BCFTOOLS_VIEW_SV(
-            ch_svs_for_publish.map { meta, vcf -> [meta, vcf, []] },
+            ch_collect_svs.map { meta, vcf -> [meta, vcf, []] },
             [],
             [],
             [],
