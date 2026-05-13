@@ -327,8 +327,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     svs_per_family_tbi                  = NALLO.out.svs_per_family_tbi // channel: [ val(meta), path(tbi) ]
     svs_per_family_and_caller           = NALLO.out.svs_per_family_and_caller // channel: [ val(meta), path(vcf), path(tbi) ]
     phasing_stats                       = NALLO.out.phasing_stats // channel: [ val(meta), path("*.stats.tsv") ]
-    phasing_blocks_gtf                  = NALLO.out.phasing_blocks_gtf // channel: [ val(meta), path("*.blocks.gtf.gz") ]
-    phasing_blocks_tbi                  = NALLO.out.phasing_blocks_tbi // channel: [ val(meta), path("*.blocks.gtf.gz.tbi") ]
+    phasing_blocks                      = NALLO.out.phasing_blocks // channel: [ val(meta), path("*.blocks.gtf.gz"), path("*.blocks.gtf.gz.tbi") ]
     haplotagging_stats                  = NALLO.out.haplotagging_stats // channel: [ val(meta), path("*.txt") ]
     haplotagging_arrow                  = NALLO.out.haplotagging_arrow // channel: [ val(meta), path("*.arrow") ]
 }
@@ -534,8 +533,8 @@ workflow {
     ch_qc_cramino_phased = GENOMICMEDICINESWEDEN_NALLO.out.haplotagging_stats.mix(GENOMICMEDICINESWEDEN_NALLO.out.haplotagging_arrow)
 
     ch_qc_phasing_stats = GENOMICMEDICINESWEDEN_NALLO.out.phasing_stats
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks_gtf)
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks_tbi)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks.map { meta, gtf, _tbi -> [meta, gtf] })
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks.map { meta, _gtf, tbi -> [meta, tbi] })
 
     ch_qc_fastqc = GENOMICMEDICINESWEDEN_NALLO.out.fastqc_html.mix(GENOMICMEDICINESWEDEN_NALLO.out.fastqc_zip)
 
