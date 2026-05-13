@@ -760,6 +760,9 @@ output {
     qc_deepvariant_vcfstatsreport {
         path { meta, _report -> "qc/deepvariant_vcfstatsreport/${meta.id}/" }
     }
+    pedigree {
+        path { _meta, _ped -> "pedigree/family/" }
+    }
     peddy {
         path { meta, _file -> "qc/peddy/${meta.id}/" }
     }
@@ -781,9 +784,6 @@ output {
     }
     somalier_relate {
         path { meta, _file -> "qc/somalier/relate/${meta.id}/" }
-    }
-    pedigree {
-        path { _meta, _ped -> "pedigree/family/" }
     }
     visualization_tracks {
         path { meta, _bw -> "visualization_tracks/${meta.id}/" }
