@@ -1,0 +1,103 @@
+nextflow_workflow {
+
+    name "Test Workflow CALL_MITOCHONDRIAL_VARIANTS"
+    script "../main.nf"
+    workflow "CALL_MITOCHONDRIAL_VARIANTS"
+    config "./nextflow.config"
+
+    setup {
+        run("GUNZIP") {
+            script "../../../../modules/nf-core/gunzip/main.nf"
+            process {
+                """
+                input[0] = [
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                ]
+                """
+            }
+
+        }
+        run("SAMTOOLS_FAIDX") {
+            script "../../../../modules/nf-core/samtools/faidx/main.nf"
+            process {
+                """
+                input[0] = GUNZIP.out.gunzip.map { meta, fasta -> [meta, fasta, []] }
+                input[1] = false
+                """
+            }
+        }
+        run("SCATTER_GENOME") {
+            script "../../../../subworkflows/local/scatter_genome/main.nf"
+            workflow {
+                """
+                input[0] = [[],[]]
+                input[1] = channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000\nchrM\t0\t16304''')
+                    .collectFile(name: 'chr22_chrM.bed', newLine: true)
+                    .map { file -> [ [ id:'chr22_chrM' ], file ] }
+                input[2] = false
+                input[3] = 1
+                """
+            }
+        }
+    }
+
+    test("1 sample - mitorsaw (Deepvariant/mitorsaw)") {
+
+        tag "test_mitorsaw"
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true),
+                ])
+                input[1] = GUNZIP.out.gunzip.map { meta, fasta -> [meta, fasta] }
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = [[],[]]
+                input[4] = [[],[]]
+                input[5] = "mitorsaw"
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+
+    }
+
+    test("1 sample - deepvariant (Deepvariant/Deepvariant)") {
+        tag "test_to_test"
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true),
+                ])
+                input[1] = GUNZIP.out.gunzip.map { meta, fasta -> [meta, fasta] }
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = [[],[]]
+                input[4] = SCATTER_GENOME.out.bed_mitochondrial_intervals
+                    .map { meta, bed, _num_intervals -> [meta, bed] }
+                input[5] = "deepvariant"
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+
+    }
+
+}
