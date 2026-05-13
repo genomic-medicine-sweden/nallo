@@ -137,6 +137,7 @@ workflow NALLO {
     val_outdir
     val_paraphrase_output_format
     val_phaser
+    val_whatshap_pedigree_phasing
     val_plot_chromograph_autozygosity
     val_plot_chromograph_coverage
     val_pre_vep_snv_filter_expression
@@ -383,6 +384,13 @@ workflow NALLO {
             ch_bam = ch_aligned_bam.map { meta, bam, _bai -> [meta, bam] }
             ch_bam_bai = ch_aligned_bam
         }
+
+        if (!val_skip_rank_variants || !val_skip_phasing) {
+            // Create PED files with updated (infered sex) per family
+            SOMALIER_PED_FAMILY(
+                ch_bam.map { meta, _files -> [[id: meta.family_id], meta] }.groupTuple()
+            )
+        }
     }
 
     //
@@ -624,7 +632,13 @@ workflow NALLO {
             ch_bcftools_concat_phasing_in
         )
 
-        PHASING(
+        // Provide a PED file to let whatshap activate pedigree phasing
+        // Or pass 'empty_PED' if 'whatshap_pedigree_phasing==false'
+        SOMALIER_PED_FAMILY.out.ped
+            .map { meta, ped -> [ [id: meta.id], val_whatshap_pedigree_phasing ? ped : [] ] }
+            .set { ch_ped_family }
+
+        PHASING (
             BCFTOOLS_CONCAT_PHASING.out.vcf,
             BCFTOOLS_CONCAT_PHASING.out.tbi,
             val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_vcf,
@@ -636,6 +650,7 @@ workflow NALLO {
             val_phaser,
             !val_skip_sv_calling,
             cram_output,
+            ch_ped_family
         )
 
         ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect { _meta, txt -> txt }.ifEmpty([]))
@@ -875,11 +890,6 @@ workflow NALLO {
      * Can only run if samplesheet has affected samples.
      */
     if (!val_skip_rank_variants) {
-
-        // Create PED files with updated (infered sex) per family
-        SOMALIER_PED_FAMILY(
-            ch_bam.map { meta, _files -> [[id: meta.family_id], meta] }.groupTuple()
-        )
 
         ch_snvs_to_rank = buildRankVariantsInputChannel(
             ANN_CSQ_PLI_SNV.out.vcf,

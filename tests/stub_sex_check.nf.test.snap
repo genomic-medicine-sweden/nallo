@@ -152,7 +152,7 @@
     },
     "Test skip sex check - multisample": {
         "content": [
-            140,
+            141,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -278,6 +278,10 @@
                 "SAMTOOLS_VIEW": {
                     "samtools": "1.23.1"
                 },
+                "SOMALIER_PED_FAMILY": {
+                    "create_pedigree_file": 1.0,
+                    "python": "3.8.3"
+                },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
                 },
@@ -371,6 +375,9 @@
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_plots/.stub",
                 "multiqc/multiqc_report.html",
+                "pedigree",
+                "pedigree/family",
+                "pedigree/family/FAM.ped",
                 "pipeline_info",
                 "pipeline_info/nallo_software_mqc_versions.yml",
                 "qc",
@@ -475,10 +482,10 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-04-28T15:46:36.003296303",
+        "timestamp": "2026-05-12T12:48:01.956312074",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.03.2"
         }
     }
 }
