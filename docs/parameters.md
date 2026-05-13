@@ -116,7 +116,6 @@ Less common options for the pipeline, typically set in a config file.
 | `plaintext_email` | Send plain-text email instead of HTML. | `boolean` |  |  | True |
 | `max_multiqc_email_size` | File size limit when attaching MultiQC reports to summary emails. | `string` | 25.MB |  | True |
 | `monochrome_logs` | Do not use coloured log outputs. | `boolean` |  |  | True |
-| `hook_url` | Incoming hook URL for messaging service <details><summary>Help</summary><small>Incoming hook URL for messaging service. Currently, MS Teams and Slack are supported.</small></details>| `string` |  |  | True |
 | `multiqc_config` | Custom config file to supply to MultiQC. | `string` |  |  | True |
 | `multiqc_logo` | Custom logo file to supply to MultiQC. File name must also be set in the MultiQC config file | `string` |  |  | True |
 | `multiqc_methods_description` | Custom MultiQC yaml file containing HTML including a methods description. | `string` |  |  |  |
