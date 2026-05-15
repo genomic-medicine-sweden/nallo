@@ -560,9 +560,6 @@ workflow {
     ch_annotated_repeats_publish = GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats_vcf
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats_tbi)
 
-    ch_family_snvs_publish = GENOMICMEDICINESWEDEN_NALLO.out.family_snvs_vcf
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.family_snvs_tbi)
-
     ch_gens_publish = GENOMICMEDICINESWEDEN_NALLO.out.gens_baf_bed
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_baf_tbi)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov_bed)
@@ -641,8 +638,11 @@ workflow {
 
     ch_repeats_sample_trgt_cram_publish = GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_cram.mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_crai)
 
-    ch_sample_snvs_publish = GENOMICMEDICINESWEDEN_NALLO.out.sample_snvs_vcf
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.sample_snvs_tbi)
+    ch_snvs_family_publish = GENOMICMEDICINESWEDEN_NALLO.out.snvs_family_vcf
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.snvs_family_tbi)
+
+    ch_snvs_sample_publish = GENOMICMEDICINESWEDEN_NALLO.out.snvs_family_vcf
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.snvs_family_tbi)
 
     ch_somalier_relate_publish = GENOMICMEDICINESWEDEN_NALLO.out.somalier_relate_html
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.somalier_relate_samples)
@@ -677,7 +677,6 @@ workflow {
     annotated_repeats             = ch_annotated_repeats_publish // channel: [ val(meta), path(vcf/tbi) ]
     assembly_summary              = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
     chromograph_plots             = GENOMICMEDICINESWEDEN_NALLO.out.chromograph_plots // channel: [ val(meta), path(png) ]
-    family_snvs                   = ch_family_snvs_publish // channel: [ val(meta), path(vcf/tbi) ]
     gens                          = ch_gens_publish // channel: [ val(meta), path(baf/cov.bed.gz), path(baf/cov.bed.gz.tbi) ]
     haplotagged_reads             = ch_haplotagged_reads_publish // channel: [ val(meta), path(bam/cram/bai/crai) ]
     methylation_annotation        = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
@@ -703,7 +702,8 @@ workflow {
     repeats_sample                = ch_repeats_sample_publish // channel: [ val(meta), path(vcf/tbi) ]
     repeats_sample_trgt_bam       = ch_repeats_sample_trgt_bam_publish // channel: [ val(meta), path(bam/bai) ]
     repeats_sample_trgt_cram      = ch_repeats_sample_trgt_cram_publish // channel: [ val(meta), path(cram/crai) ]
-    sample_snvs                   = ch_sample_snvs_publish // channel: [ val(meta), path(vcf/tbi) ]
+    snvs_sample                   = ch_snvs_sample_publish // channel: [ val(meta), path(vcf/tbi) ]
+    snvs_family                   = ch_snvs_family_publish // channel: [ val(meta), path(vcf/tbi) ]
     somalier_relate               = ch_somalier_relate_publish // channel: [ val(meta), path(html/pairs/samples) ]
     svs_per_family                = ch_svs_per_family_publish // channel: [ val(meta), path(vcf.gz/tbi) ]
     svs_per_family_and_caller     = ch_svs_per_family_and_caller_publish // channel: [ val(meta), path(vcf/tbi) ]
@@ -729,7 +729,7 @@ output {
         path { meta, _file -> "aligned_reads/${meta.id}/" }
         enabled params.alignment_output_format == 'cram'
     }
-     annotated_repeats {
+    annotated_repeats {
         path { meta, _file -> "repeats/family/${meta.id}/" }
     }
     assembly_summary {
@@ -737,9 +737,6 @@ output {
     }
     chromograph_plots {
         path { meta, _plot -> "images/chromograph/sample/${meta.id}/" }
-    }
-    family_snvs {
-        path { meta, _file -> "snvs/family/${meta.id}/" }
     }
     gens {
         path { meta, _file -> "gens/${meta.id}/" }
@@ -823,7 +820,10 @@ output {
         path { meta, _file -> "repeats/sample/${meta.id}/" }
         enabled params.alignment_output_format == 'cram'
     }
-    sample_snvs {
+    snvs_family {
+        path { meta, _file -> "snvs/family/${meta.id}/" }
+    }
+    snvs_sample {
         path { meta, _file -> "snvs/sample/${meta.id}/" }
     }
     somalier_relate {
