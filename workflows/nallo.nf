@@ -61,12 +61,12 @@ include { SAMTOOLS_CONVERT                                       } from '../modu
 include { MULTIQC                                                } from '../modules/nf-core/multiqc/main'
 include { PEDDY                                                  } from '../modules/nf-core/peddy/main'
 include { SPLITUBAM                                              } from '../modules/nf-core/splitubam/main'
+include { SVDB_MERGE as SVDB_MERGE_SVS_CNVS                      } from '../modules/nf-core/svdb/merge/main'
 include { paramsSummaryMap                                       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc                                   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML                                 } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText                                 } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
 include { citationBibliographyText                               } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
-include { validateAllFamiliesHasAffectedSamples } from '../subworkflows/local/utils_nfcore_nallo_pipeline/main.nf'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
