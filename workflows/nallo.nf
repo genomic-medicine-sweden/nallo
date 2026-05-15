@@ -1119,62 +1119,34 @@ workflow NALLO {
     )
 
     emit:
-<<<<<<< HEAD
-    aligned_assemblies_bam              = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.bam // channel: [ val(meta), path(bam) ]
-    aligned_assemblies_bai              = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.bai // channel: [ val(meta), path(bai) ]
-    aligned_assemblies_cram             = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.cram // channel: [ val(meta), path(cram) ]
-=======
     aligned_assemblies_bai              = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.bai  // channel: [ val(meta), path(bai) ]
     aligned_assemblies_bam              = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.bam  // channel: [ val(meta), path(bam) ]
->>>>>>> 0d2071c2 (Sort channels)
     aligned_assemblies_crai             = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.crai // channel: [ val(meta), path(crai) ]
     aligned_assemblies_cram             = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.cram // channel: [ val(meta), path(cram) ]
     aligned_reads_bai                   = (!val_skip_alignment && val_skip_phasing && !cram_output) ? ch_aligned_bam.map { meta, _bam, bai -> [meta, bai] } : channel.empty() // channel: [ val(meta), path(bai) ]
     aligned_reads_bam                   = (!val_skip_alignment && val_skip_phasing && !cram_output) ? ch_aligned_bam.map { meta, bam, _bai -> [meta, bam] } : channel.empty() // channel: [ val(meta), path(bam) ]
     aligned_reads_crai                  = (!val_skip_alignment && val_skip_phasing && cram_output) ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
-<<<<<<< HEAD
-    annotated_paralogs_tsv              = val_skip_annotate_paralogs ? channel.empty() : ANNOTATE_PARALOGS.out.tsv // channel: [ val(meta), path(tsv) ]
-=======
     aligned_reads_cram                  = (!val_skip_alignment && val_skip_phasing && cram_output) ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
->>>>>>> 0d2071c2 (Sort channels)
     annotated_paralogs_json             = val_skip_annotate_paralogs ? channel.empty() : ANNOTATE_PARALOGS.out.json // channel: [ val(meta), path(json) ]
     annotated_paralogs_tsv              = val_skip_annotate_paralogs ? channel.empty() : ANNOTATE_PARALOGS.out.tsv  // channel: [ val(meta), path(tsv) ]
     annotated_repeats_tbi               = val_skip_repeat_annotation ? channel.empty() : ANNOTATE_REPEAT_EXPANSIONS.out.tbi // channel: [ val(meta), path(tbi) ]
     annotated_repeats_vcf               = val_skip_repeat_annotation ? channel.empty() : ANNOTATE_REPEAT_EXPANSIONS.out.vcf // channel: [ val(meta), path(vcf) ]
     assembly_summary                    = val_skip_genome_assembly ? channel.empty() : GENOME_ASSEMBLY.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
     chromograph_plots                   = val_skip_chromograph ? channel.empty() : CHROMOGRAPH.out.chromograph_plots // channel: [ val(meta), path(png) ]
-<<<<<<< HEAD
-    family_snvs_vcf                     = val_skip_snv_calling ? channel.empty() : CONCAT_SORT_RANKED_SNVS.out.vcf // channel: [ val(meta), path(vcf) ]
-    family_snvs_tbi                     = val_skip_snv_calling ? channel.empty() : CONCAT_SORT_RANKED_SNVS.out.index // channel: [ val(meta), path(tbi) ]
-=======
     cramino_unphased_arrow              = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.cramino_arrow // channel: [ val(meta), path(arrow) ]
     cramino_unphased_stats              = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.cramino_stats // channel: [ val(meta), path(txt) ]
-    family_snvs_tbi                     = val_skip_snv_calling ? channel.empty() : CONCAT_SORT_RANKED_SNVS.out.index  // channel: [ val(meta), path(tbi) ]
-    family_snvs_vcf                     = val_skip_snv_calling ? channel.empty() : CONCAT_SORT_RANKED_SNVS.out.vcf   // channel: [ val(meta), path(vcf) ]
     fastqc_html                         = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.fastqc_html // channel: [ val(meta), path(html) ]
     fastqc_zip                          = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.fastqc_zip // channel: [ val(meta), path(zip) ]
->>>>>>> 0d2071c2 (Sort channels)
     gens_baf_bed                        = val_skip_prepare_gens_input ? channel.empty() : PREPARE_GENS_INPUTS.out.baf_bed_tbi.map { meta, bed, _tbi -> [meta, bed] } // channel: [ val(meta), path(baf.bed.gz) ]
     gens_baf_tbi                        = val_skip_prepare_gens_input ? channel.empty() : PREPARE_GENS_INPUTS.out.baf_bed_tbi.map { meta, _bed, tbi -> [meta, tbi] } // channel: [ val(meta), path(baf.bed.gz.tbi) ]
     gens_cov_bed                        = val_skip_prepare_gens_input ? channel.empty() : PREPARE_GENS_INPUTS.out.cov_bed_tbi.map { meta, bed, _tbi -> [meta, bed] } // channel: [ val(meta), path(cov.bed.gz) ]
-<<<<<<< HEAD
-    gens_cov_tbi                        = val_skip_prepare_gens_input ? channel.empty() : PREPARE_GENS_INPUTS.out.cov_bed_tbi.map { meta, _bed, tbi -> [meta, tbi] } // channel: [ val(meta), path(cov.bed.gz.tbi) ]
-    haplotagged_reads_bam               = (val_skip_phasing || cram_output) ? channel.empty() : PHASING.out.haplotagged_bam_bai.map { meta, bam, _bai -> [meta, bam] } // channel: [ val(meta), path(bam) ]
-    haplotagged_reads_bai               = (val_skip_phasing || cram_output) ? channel.empty() : PHASING.out.haplotagged_bam_bai.map { meta, _bam, bai -> [meta, bai] } // channel: [ val(meta), path(bai) ]
-    haplotagged_reads_cram              = (val_skip_phasing || !cram_output) ? channel.empty() : PHASING.out.haplotagged_cram_crai.map { meta, cram, _crai -> [meta, cram] } // channel: [ val(meta), path(cram) ]
-=======
     gens_cov_tbi                        = val_skip_prepare_gens_input ? channel.empty() : PREPARE_GENS_INPUTS.out.cov_bed_tbi.map { meta, _bed, tbi -> [meta, tbi] }  // channel: [ val(meta), path(cov.bed.gz.tbi) ]
     haplotagged_reads_bai               = (val_skip_phasing || cram_output)  ? channel.empty() : PHASING.out.haplotagged_bam_bai.map { meta, _bam, bai -> [meta, bai] }    // channel: [ val(meta), path(bai) ]
     haplotagged_reads_bam               = (val_skip_phasing || cram_output)  ? channel.empty() : PHASING.out.haplotagged_bam_bai.map { meta, bam, _bai -> [meta, bam] }    // channel: [ val(meta), path(bam) ]
->>>>>>> 0d2071c2 (Sort channels)
     haplotagged_reads_crai              = (val_skip_phasing || !cram_output) ? channel.empty() : PHASING.out.haplotagged_cram_crai.map { meta, _cram, crai -> [meta, crai] } // channel: [ val(meta), path(crai) ]
     haplotagged_reads_cram              = (val_skip_phasing || !cram_output) ? channel.empty() : PHASING.out.haplotagged_cram_crai.map { meta, cram, _crai -> [meta, cram] } // channel: [ val(meta), path(cram) ]
     haplotagging_arrow                  = val_skip_phasing ? channel.empty() : PHASING.out.haplotagging_arrow // channel: [ val(meta), path(arrow) ]
-<<<<<<< HEAD
-    hificnv_depth_bw                    = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.hificnv_depth // channel: [ val(meta), path(bw) ]
-=======
     haplotagging_stats                  = val_skip_phasing ? channel.empty() : PHASING.out.haplotagging_stats // channel: [ val(meta), path(txt) ]
->>>>>>> 0d2071c2 (Sort channels)
     hificnv_copynum_bedgraph            = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.hificnv_copynum // channel: [ val(meta), path(bedgraph) ]
     hificnv_depth_bw                    = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.hificnv_depth// channel: [ val(meta), path(bw) ]
     hificnv_maf_bw                      = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.hificnv_maf // channel: [ val(meta), path(bw) ]
