@@ -563,9 +563,6 @@ workflow {
     ch_aligned_reads_cram_publish = GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_cram
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_crai)
 
-    ch_annotated_repeats_publish = GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats_vcf
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats_tbi)
-
     ch_gens_publish = GENOMICMEDICINESWEDEN_NALLO.out.gens_baf_bed
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_baf_tbi)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov_bed)
@@ -590,12 +587,12 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_family_tbi)
 
     ch_paraphase_sample_publish = GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_json
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_vcf)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_tbi)
 
     ch_paraphase_sample_bam_publish = GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_bai)
 
     ch_paraphase_sample_cram_publish = GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_cram.mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_crai)
-
-    ch_paraphase_sample_vcfs_publish = GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_vcf.mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_tbi)
 
     ch_peddy_publish = GENOMICMEDICINESWEDEN_NALLO.out.peddy_html
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.peddy_vs_html)
@@ -625,19 +622,21 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks_gtf)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks_tbi)
 
-    ch_repeats_family_publish = GENOMICMEDICINESWEDEN_NALLO.out.repeat_strdust_family_vcf
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_strdust_family_tbi)
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_family_vcf)
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_family_tbi)
+    ch_repeats_family_publish = GENOMICMEDICINESWEDEN_NALLO.out.repeats_annotated_vcf
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeats_annotated_tbi)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeats_strdust_family_vcf)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeats_strdust_family_tbi)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeats_trgt_family_vcf)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeats_trgt_family_tbi)
 
-    ch_repeats_sample_publish = GENOMICMEDICINESWEDEN_NALLO.out.repeat_strdust_sample_vcf
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_strdust_sample_tbi)
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_vcf)
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_tbi)
+    ch_repeats_sample_publish = GENOMICMEDICINESWEDEN_NALLO.out.repeats_strdust_sample_vcf
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeats_strdust_sample_tbi)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeats_trgt_sample_vcf)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeats_trgt_sample_tbi)
 
-    ch_repeats_sample_trgt_bam_publish = GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_bai)
+    ch_repeats_sample_trgt_bam_publish = GENOMICMEDICINESWEDEN_NALLO.out.repeats_trgt_sample_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.repeats_trgt_sample_bai)
 
-    ch_repeats_sample_trgt_cram_publish = GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_cram.mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_crai)
+    ch_repeats_sample_trgt_cram_publish = GENOMICMEDICINESWEDEN_NALLO.out.repeats_trgt_sample_cram.mix(GENOMICMEDICINESWEDEN_NALLO.out.repeats_trgt_sample_crai)
 
     ch_snvs_family_publish = GENOMICMEDICINESWEDEN_NALLO.out.snvs_family_vcf
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.snvs_family_tbi)
@@ -677,7 +676,6 @@ workflow {
     aligned_haplotagged_reads_cram = ch_aligned_haplotagged_reads_cram_publish // channel: [ val(meta), path(cram/crai) ]
     aligned_reads_bam             = ch_aligned_reads_bam_publish // channel: [ val(meta), path(bam/bai) ]
     aligned_reads_cram            = ch_aligned_reads_cram_publish // channel: [ val(meta), path(cram/crai) ]
-    annotated_repeats             = ch_annotated_repeats_publish // channel: [ val(meta), path(vcf/tbi) ]
     assembly_summary              = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
     chromograph_plots             = GENOMICMEDICINESWEDEN_NALLO.out.chromograph_plots // channel: [ val(meta), path(png) ]
     gens                          = ch_gens_publish // channel: [ val(meta), path(baf/cov.bed.gz), path(baf/cov.bed.gz.tbi) ]
@@ -686,10 +684,9 @@ workflow {
     methylation_pileup            = ch_methylation_pileup_publish // channel: [ val(meta), path(combined.bed.gz/combined.bed.gz.tbi/hap1.bed.gz/hap1.bed.gz.tbi/hap2.bed.gz/hap2.bed.gz.tbi/bed.gz/bed.gz.tbi) ]
     multiqc                       = ch_multiqc_publish // channel: [ val(meta), path(html/multiqc_data) ]
     paraphase_family              = ch_paraphase_family_publish // channel: [ val(meta), path(vcf/tbi/tsv/json) ]
-    paraphase_sample              = ch_paraphase_sample_publish // channel: [ val(meta), path(json) ]
+    paraphase_sample              = ch_paraphase_sample_publish // channel: [ val(meta), path(vcf/json) ]
     paraphase_sample_bam          = ch_paraphase_sample_bam_publish // channel: [ val(meta), path(bam/bai) ]
     paraphase_sample_cram         = ch_paraphase_sample_cram_publish // channel: [ val(meta), path(cram/crai) ]
-    paraphase_sample_vcfs         = ch_paraphase_sample_vcfs_publish // channel: [ val(meta), path(vcf/tbi) ]
     peddy                         = ch_peddy_publish // channel: [ val(meta), path(html/png/csv/ped) ]
     pedigree                      = GENOMICMEDICINESWEDEN_NALLO.out.pedigree // channel: [ val(meta), path(ped) ]
     qc_bcftools_stats             = GENOMICMEDICINESWEDEN_NALLO.out.qc_bcftools_stats // channel: [ val(meta), path(txt) ]
@@ -745,9 +742,6 @@ output {
         path { meta, _file -> "aligned_reads/${meta.id}/" }
         enabled params.alignment_output_format == 'cram'
     }
-    annotated_repeats {
-        path { meta, _file -> "repeats/family/${meta.id}/" }
-    }
     assembly_summary {
         path { meta, _assembly_summary -> "assembly/stats/${meta.id}/" }
     }
@@ -782,9 +776,6 @@ output {
     paraphase_sample_cram {
         path { meta, _file -> "paraphase/sample/${meta.id}/" }
         enabled params.alignment_output_format == 'cram'
-    }
-    paraphase_sample_vcfs {
-        path { meta, _file -> "paraphase/sample/${meta.id}/" }
     }
     peddy {
         path { meta, _file -> "qc/peddy/${meta.id}/" }
