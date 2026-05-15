@@ -761,7 +761,7 @@ output {
         path { meta, _file -> "methylation/pileup/${meta.id}/" }
     }
     multiqc {
-        path { _meta, _file -> "multiqc/" }
+        path "multiqc/"
     }
     paraphase_sample {
         path { meta, _file -> "paraphase/sample/${meta.id}/" }
