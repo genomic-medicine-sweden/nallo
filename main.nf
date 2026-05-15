@@ -13,9 +13,9 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { NALLO                   } from './workflows/nallo'
-include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_nallo_pipeline'
-include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_nallo_pipeline'
+include { NALLO                                 } from './workflows/nallo'
+include { PIPELINE_INITIALISATION               } from './subworkflows/local/utils_nfcore_nallo_pipeline'
+include { PIPELINE_COMPLETION                   } from './subworkflows/local/utils_nfcore_nallo_pipeline'
 include {
     createReferenceChannelFromPath ;
     createReferenceChannelFromSamplesheet
@@ -240,15 +240,15 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     )
 
     emit:
-    aligned_assemblies_bam              = NALLO.out.aligned_assemblies_bam  // channel: [ val(meta), path(bam) ]
-    aligned_assemblies_bai              = NALLO.out.aligned_assemblies_bai  // channel: [ val(meta), path(bai) ]
+    aligned_assemblies_bam              = NALLO.out.aligned_assemblies_bam // channel: [ val(meta), path(bam) ]
+    aligned_assemblies_bai              = NALLO.out.aligned_assemblies_bai // channel: [ val(meta), path(bai) ]
     aligned_assemblies_cram             = NALLO.out.aligned_assemblies_cram // channel: [ val(meta), path(cram) ]
     aligned_assemblies_crai             = NALLO.out.aligned_assemblies_crai // channel: [ val(meta), path(crai) ]
     aligned_reads_bam                   = NALLO.out.aligned_reads_bam // channel: [ val(meta), path(bam) ]
     aligned_reads_bai                   = NALLO.out.aligned_reads_bai // channel: [ val(meta), path(bai) ]
     aligned_reads_cram                  = NALLO.out.aligned_reads_cram // channel: [ val(meta), path(cram) ]
     aligned_reads_crai                  = NALLO.out.aligned_reads_crai // channel: [ val(meta), path(crai) ]
-    annotated_paralogs_tsv              = NALLO.out.annotated_paralogs_tsv  // channel: [ val(meta), path(tsv) ]
+    annotated_paralogs_tsv              = NALLO.out.annotated_paralogs_tsv // channel: [ val(meta), path(tsv) ]
     annotated_paralogs_json             = NALLO.out.annotated_paralogs_json // channel: [ val(meta), path(json) ]
     annotated_repeats_vcf               = NALLO.out.annotated_repeats_vcf // channel: [ val(meta), path(vcf) ]
     annotated_repeats_tbi               = NALLO.out.annotated_repeats_tbi // channel: [ val(meta), path(tbi) ]
@@ -260,8 +260,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     gens_baf_tbi                        = NALLO.out.gens_baf_tbi // channel: [ val(meta), path(baf.bed.gz.tbi) ]
     gens_cov_bed                        = NALLO.out.gens_cov_bed // channel: [ val(meta), path(cov.bed.gz) ]
     gens_cov_tbi                        = NALLO.out.gens_cov_tbi // channel: [ val(meta), path(cov.bed.gz.tbi) ]
-    haplotagged_reads_bam               = NALLO.out.haplotagged_reads_bam  // channel: [ val(meta), path(bam) ]
-    haplotagged_reads_bai               = NALLO.out.haplotagged_reads_bai  // channel: [ val(meta), path(bai) ]
+    haplotagged_reads_bam               = NALLO.out.haplotagged_reads_bam // channel: [ val(meta), path(bam) ]
+    haplotagged_reads_bai               = NALLO.out.haplotagged_reads_bai // channel: [ val(meta), path(bai) ]
     haplotagged_reads_cram              = NALLO.out.haplotagged_reads_cram // channel: [ val(meta), path(cram) ]
     haplotagged_reads_crai              = NALLO.out.haplotagged_reads_crai // channel: [ val(meta), path(crai) ]
     hificnv_depth_bw                    = NALLO.out.hificnv_depth_bw // channel: [ val(meta), path(bw) ]
@@ -532,13 +532,13 @@ workflow {
     //
     // SUBWORKFLOW: Run completion tasks
     //
-    PIPELINE_COMPLETION (
+    PIPELINE_COMPLETION(
         params.email,
         params.email_on_fail,
         params.plaintext_email,
         params.outdir,
         params.monochrome_logs,
-        GENOMICMEDICINESWEDEN_NALLO.out.multiqc_report
+        GENOMICMEDICINESWEDEN_NALLO.out.multiqc_report,
     )
 
 
@@ -630,32 +630,23 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.sawfish_gc_bias_corrected_depth_bw)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.sawfish_maf_bw)
 
-    ch_aligned_reads_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_bam
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_bai)
+    ch_aligned_reads_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_bai)
 
-    ch_aligned_reads_cram = GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_cram
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_crai)
+    ch_aligned_reads_cram = GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_cram.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_crai)
 
-    ch_aligned_assemblies_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_bam
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_bai)
+    ch_aligned_assemblies_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_bai)
 
-    ch_aligned_assemblies_cram = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_cram
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_crai)
+    ch_aligned_assemblies_cram = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_cram.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_crai)
 
-    ch_annotated_repeats = GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats_vcf
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats_tbi)
+    ch_annotated_repeats = GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats_vcf.mix(GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats_tbi)
 
-    ch_family_snvs = GENOMICMEDICINESWEDEN_NALLO.out.family_snvs_vcf
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.family_snvs_tbi)
+    ch_family_snvs = GENOMICMEDICINESWEDEN_NALLO.out.family_snvs_vcf.mix(GENOMICMEDICINESWEDEN_NALLO.out.family_snvs_tbi)
 
-    ch_sample_snvs = GENOMICMEDICINESWEDEN_NALLO.out.sample_snvs_vcf
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.sample_snvs_tbi)
+    ch_sample_snvs = GENOMICMEDICINESWEDEN_NALLO.out.sample_snvs_vcf.mix(GENOMICMEDICINESWEDEN_NALLO.out.sample_snvs_tbi)
 
-    ch_svs_per_family_and_caller = GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_and_caller_vcf
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_and_caller_tbi)
+    ch_svs_per_family_and_caller = GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_and_caller_vcf.mix(GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_and_caller_tbi)
 
-    ch_svs_per_family = GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_vcf
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_tbi)
+    ch_svs_per_family = GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_vcf.mix(GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_tbi)
 
     ch_peddy = GENOMICMEDICINESWEDEN_NALLO.out.peddy_html
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.peddy_vs_html)
