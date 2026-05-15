@@ -7,7 +7,7 @@
                         {
                             "id": "test"
                         },
-                        "test_mitochondrial_snv.vcf.gz:md5,14e118a8a4cf1660353457403ad51cdf"
+                        "test_mitochondrial_snv.vcf.gz:md5,4ec209b029767633f67c1a11f336945f"
                     ]
                 ],
                 "1": [
@@ -15,7 +15,7 @@
                         {
                             "id": "test"
                         },
-                        "test_mitochondrial_snv.vcf.gz.tbi:md5,30c04f939a9b984f6a9d30e0ef708d1b"
+                        "test_mitochondrial_snv.vcf.gz.tbi:md5,da79297b340ba84915fa7ce4f77a248a"
                     ]
                 ],
                 "2": [
@@ -23,7 +23,7 @@
                         {
                             "id": "test"
                         },
-                        "test_mitochondrial_sv.vcf.gz:md5,a3e307e142ce9f98489f0e5fbed6aefe"
+                        "test_mitochondrial_sv.vcf.gz:md5,69954786f31db9c93e0367cbfad6e806"
                     ]
                 ],
                 "3": [
@@ -31,7 +31,7 @@
                         {
                             "id": "test"
                         },
-                        "test_mitochondrial_sv.vcf.gz.tbi:md5,bfebefb5cbe3d5e9d6ad8789db55a23a"
+                        "test_mitochondrial_sv.vcf.gz.tbi:md5,036769f4b86bd1f7cef9220a6b1b92f7"
                     ]
                 ],
                 "mitochondrial_snv_tbi": [
@@ -39,7 +39,7 @@
                         {
                             "id": "test"
                         },
-                        "test_mitochondrial_snv.vcf.gz.tbi:md5,30c04f939a9b984f6a9d30e0ef708d1b"
+                        "test_mitochondrial_snv.vcf.gz.tbi:md5,da79297b340ba84915fa7ce4f77a248a"
                     ]
                 ],
                 "mitochondrial_snv_vcf": [
@@ -47,7 +47,7 @@
                         {
                             "id": "test"
                         },
-                        "test_mitochondrial_snv.vcf.gz:md5,14e118a8a4cf1660353457403ad51cdf"
+                        "test_mitochondrial_snv.vcf.gz:md5,4ec209b029767633f67c1a11f336945f"
                     ]
                 ],
                 "mitochondrial_sv_tbi": [
@@ -55,7 +55,7 @@
                         {
                             "id": "test"
                         },
-                        "test_mitochondrial_sv.vcf.gz.tbi:md5,bfebefb5cbe3d5e9d6ad8789db55a23a"
+                        "test_mitochondrial_sv.vcf.gz.tbi:md5,036769f4b86bd1f7cef9220a6b1b92f7"
                     ]
                 ],
                 "mitochondrial_sv_vcf": [
@@ -63,12 +63,12 @@
                         {
                             "id": "test"
                         },
-                        "test_mitochondrial_sv.vcf.gz:md5,a3e307e142ce9f98489f0e5fbed6aefe"
+                        "test_mitochondrial_sv.vcf.gz:md5,69954786f31db9c93e0367cbfad6e806"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-05-13T16:18:21.362295623",
+        "timestamp": "2026-05-15T08:59:46.532935366",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"
