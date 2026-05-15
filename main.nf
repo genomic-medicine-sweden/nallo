@@ -717,16 +717,19 @@ output {
     }
     aligned_assemblies_bam {
         path { meta, _file -> "assembly/sample/${meta.id}/" }
-        enabled !params.cram_output
+        enabled params.alignment_output_format == 'cram'
     }
     aligned_assemblies_cram {
         path { meta, _file -> "assembly/sample/${meta.id}/" }
+        enabled params.alignment_output_format == 'cram'
     }
     aligned_reads_bam {
         path { meta, _file -> "aligned_reads/${meta.id}/" }
+        enabled params.alignment_output_format == 'bam'
     }
     aligned_reads_cram {
         path { meta, _file -> "aligned_reads/${meta.id}/" }
+        enabled params.alignment_output_format == 'cram'
     }
     paraphase_sample {
         path { meta, _file -> "paraphase/sample/${meta.id}/" }
