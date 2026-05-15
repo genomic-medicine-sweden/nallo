@@ -256,9 +256,14 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     chromograph_plots                   = NALLO.out.chromograph_plots // channel: [ val(meta), path(png) ]
     family_snvs_vcf                     = NALLO.out.family_snvs_vcf // channel: [ val(meta), path(vcf) ]
     family_snvs_tbi                     = NALLO.out.family_snvs_tbi // channel: [ val(meta), path(tbi) ]
-    gens_baf                            = NALLO.out.gens_baf // channel: [ val(meta), path(baf.bed.gz), path(baf.bed.gz.tbi) ]
-    gens_cov                            = NALLO.out.gens_cov // channel: [ val(meta), path(cov.bed.gz), path(cov.bed.gz.tbi) ]
-    haplotagged_reads                   = NALLO.out.haplotagged_reads // channel: [ val(meta), path(bam), path(bai) ]
+    gens_baf_bed                        = NALLO.out.gens_baf_bed // channel: [ val(meta), path(baf.bed.gz) ]
+    gens_baf_tbi                        = NALLO.out.gens_baf_tbi // channel: [ val(meta), path(baf.bed.gz.tbi) ]
+    gens_cov_bed                        = NALLO.out.gens_cov_bed // channel: [ val(meta), path(cov.bed.gz) ]
+    gens_cov_tbi                        = NALLO.out.gens_cov_tbi // channel: [ val(meta), path(cov.bed.gz.tbi) ]
+    haplotagged_reads_bam               = NALLO.out.haplotagged_reads_bam  // channel: [ val(meta), path(bam) ]
+    haplotagged_reads_bai               = NALLO.out.haplotagged_reads_bai  // channel: [ val(meta), path(bai) ]
+    haplotagged_reads_cram              = NALLO.out.haplotagged_reads_cram // channel: [ val(meta), path(cram) ]
+    haplotagged_reads_crai              = NALLO.out.haplotagged_reads_crai // channel: [ val(meta), path(crai) ]
     hificnv_depth_bw                    = NALLO.out.hificnv_depth_bw // channel: [ val(meta), path(bw) ]
     hificnv_copynum_bedgraph            = NALLO.out.hificnv_copynum_bedgraph // channel: [ val(meta), path(bedgraph) ]
     hificnv_maf_bw                      = NALLO.out.hificnv_maf_bw // channel: [ val(meta), path(bw) ]
@@ -540,7 +545,15 @@ workflow {
     //
     // WORKFLOW OUTPUTS: Group files by publish directory
     //
-    ch_gens = GENOMICMEDICINESWEDEN_NALLO.out.gens_baf.mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov)
+    ch_gens = GENOMICMEDICINESWEDEN_NALLO.out.gens_baf_bed
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_baf_tbi)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov_bed)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov_tbi)
+
+    ch_haplotagged_reads = GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads_bam
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads_bai)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads_cram)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads_crai)
 
     ch_qc_cramino_unphased = GENOMICMEDICINESWEDEN_NALLO.out.cramino_unphased_stats.mix(GENOMICMEDICINESWEDEN_NALLO.out.cramino_unphased_arrow)
 
@@ -668,7 +681,7 @@ workflow {
     chromograph_plots             = GENOMICMEDICINESWEDEN_NALLO.out.chromograph_plots // channel: [ val(meta), path(png) ]
     family_snvs                   = ch_family_snvs // channel: [ val(meta), path(vcf/tbi) ]
     gens                          = ch_gens // channel: [ val(meta), path(baf/cov.bed.gz), path(baf/cov.bed.gz.tbi) ]
-    haplotagged_reads             = GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
+    haplotagged_reads             = ch_haplotagged_reads // channel: [ val(meta), path(bam/cram/bai/crai) ]
     methylation_annotation        = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     multiqc                       = ch_multiqc // channel: [ val(meta), path(html/multiqc_data) ]
     repeats_family                = ch_repeats_family // channel: [ val(meta), path(vcf/tbi) ]
@@ -739,13 +752,12 @@ output {
         path { meta, _file -> "snvs/family/${meta.id}/" }
     }
     gens {
-        path { meta, _bed, _tbi -> "gens/${meta.id}/" }
+        path { meta, _file -> "gens/${meta.id}/" }
     }
     haplotagged_reads {
         // HiPhase uses the input file (aligned reads) as template for naming output, so we need to remove the "_aligned" suffix here
-        path { meta, bam, bai ->
-            bam >> "aligned_reads/${meta.id}/${bam.name.replaceFirst("_aligned", "")}"
-            bai >> "aligned_reads/${meta.id}/${bai.name.replaceFirst("_aligned", "")}"
+        path { meta, file ->
+            file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_aligned", "")}"
         }
     }
     methylation_annotation {
