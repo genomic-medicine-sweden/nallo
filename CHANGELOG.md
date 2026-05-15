@@ -53,6 +53,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1082](https://github.com/genomic-medicine-sweden/nallo/pull/1082) - Changed `nallo` to workflow outputs
 - [#1084](https://github.com/genomic-medicine-sweden/nallo/pull/1084) - Updated nf-core module for `peddy`
 - [#1088](https://github.com/genomic-medicine-sweden/nallo/pull/1088) - Changed to emit and all files and indexes separately from `nallo.nf`
+- [#1089](https://github.com/genomic-medicine-sweden/nallo/pull/1089) - Version sorted workflow output related items
+- [#1089](https://github.com/genomic-medicine-sweden/nallo/pull/1089) - Changed names to add `_publish` to channels that are to be published
 
 ### Removed
 
