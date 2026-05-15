@@ -671,21 +671,16 @@ workflow NALLO {
             [],
             [],
         )
-        ch_snv_vcf_for_annotation = BCFTOOLS_VIEW_PHASING.out.vcf
+        ch_snv_vcf_for_annotation   = BCFTOOLS_VIEW_PHASING.out.vcf
         ch_snv_index_for_annotation = BCFTOOLS_VIEW_PHASING.out.tbi
-        ch_sv_vcf_for_annotation = PHASING.out.phased_family_svs
-        ch_sv_index_for_annotation = PHASING.out.phased_family_svs_tbi
+        ch_sv_vcf_for_annotation    = PHASING.out.phased_family_svs
+        ch_sv_index_for_annotation  = PHASING.out.phased_family_svs_tbi
     }
     else {
-        // Guarding against Nexflow trying to bind uninitialized channels even though we don't run annotation without SNVs
-        if (!val_skip_snv_calling) {
-            ch_snv_vcf_for_annotation = family_snv_vcf
-            ch_snv_index_for_annotation = family_snv_index
-        }
-        if (!val_skip_sv_calling) {
-            ch_sv_vcf_for_annotation = CALL_SVS.out.family_vcf
-            ch_sv_index_for_annotation = CALL_SVS.out.family_tbi
-        }
+        ch_snv_vcf_for_annotation   = val_skip_snv_calling ? channel.empty() : family_snv_vcf
+        ch_snv_index_for_annotation = val_skip_snv_calling ? channel.empty() : family_snv_index
+        ch_sv_vcf_for_annotation    = val_skip_sv_calling  ? channel.empty() : CALL_SVS.out.family_vcf
+        ch_sv_index_for_annotation  = val_skip_sv_calling  ? channel.empty() : CALL_SVS.out.family_tbi
     }
 
     //
