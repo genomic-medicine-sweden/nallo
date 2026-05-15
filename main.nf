@@ -211,7 +211,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_skip_genome_assembly,
         (val_skip_methylation_calling || !val_run_methbat),
         val_skip_methylation_annotation,
-        (val_skip_methylation_annotation || !val_run_modkit),
+        (val_skip_methylation_calling || !val_run_modkit),
         val_skip_peddy,
         val_skip_phasing,
         val_skip_prepare_gens_input,
