@@ -731,6 +731,7 @@ output {
     }
     repeats_family {
         path { meta, _file -> "repeats/family/${meta.id}/" }
+        enabled params.skip_repeat_annotation
     }
     repeats_sample {
         path { meta, _file -> "repeats/sample/${meta.id}/" }
