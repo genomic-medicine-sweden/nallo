@@ -717,7 +717,7 @@ output {
     }
     aligned_assemblies_bam {
         path { meta, _file -> "assembly/sample/${meta.id}/" }
-        enabled params.alignment_output_format == 'cram'
+        enabled params.alignment_output_format == 'bam'
     }
     aligned_assemblies_cram {
         path { meta, _file -> "assembly/sample/${meta.id}/" }
