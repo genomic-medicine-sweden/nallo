@@ -32,7 +32,7 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
 
     } else if (mitochondrial_caller == "deepvariant") {
 
-        // Broadcast the single mito BED to every sample, skip if BED is empty
+        // Add the mitochondrial BED to every sample, skip if BED is empty
         ch_bam_bai
             .combine(ch_mitochondrial_bed)
             .filter { _bam_meta, _bam, _bai, _mitochondrial_meta, bed -> bed.size() > 0 }
@@ -54,7 +54,7 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
     }
 
     // Split VCF into SNVs/small indels and SVs for callers that produce both. The logic is in the config.
-    // deepvariant is SNV-only so no split is needed.
+    // Deepvariant is SNV-only, so no split is needed.
     if (mitochondrial_caller != "deepvariant") {
 
         ch_vcf
