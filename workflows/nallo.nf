@@ -168,7 +168,6 @@ workflow NALLO {
     val_snv_caller
     val_snv_calling_processes
     val_snv_call_regions
-    val_str_caller
     val_strdrop_training_set_json
     val_sv_callers_merge_priority
     val_sv_callers_to_merge
@@ -1001,7 +1000,7 @@ workflow NALLO {
     }
 
     //
-    // Call repeat expansions with TRGT
+    // Call repeat expansions with TRGT or strdust
     //
     if (!val_skip_trgt) {
             CALL_REPEAT_EXPANSIONS_TRGT(
@@ -1014,6 +1013,7 @@ workflow NALLO {
             )
 
             ch_repeat_expansions = CALL_REPEAT_EXPANSIONS_TRGT.out.family_vcf
+    }
     if (!val_skip_strdust) {
             CALL_REPEAT_EXPANSIONS_STRDUST(
                 PHASING.out.haplotagged_bam_bai,
@@ -1022,7 +1022,6 @@ workflow NALLO {
                 ch_str_bed,
                 ch_vcfexpress_prelude,
             )
-        }
     }
 
     //
