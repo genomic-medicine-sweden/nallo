@@ -636,9 +636,10 @@ workflow {
     ch_aligned_reads_cram = GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_cram
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_crai)
 
-    ch_aligned_assemblies = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_bam
+    ch_aligned_assemblies_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_bam
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_bai)
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_cram)
+
+    ch_aligned_assemblies_cram = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_cram
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_crai)
 
     ch_annotated_repeats = GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats_vcf
@@ -668,7 +669,8 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.peddy_ped_check_rel_difference_csv)
 
     publish:
-    aligned_assemblies            = ch_aligned_assemblies // channel: [ val(meta), path(bam/cram/bai/crai) ]
+    aligned_assemblies_bam        = ch_aligned_assemblies_bam // channel: [ val(meta), path(bam/bai) ]
+    aligned_assemblies_cram       = ch_aligned_assemblies_cram // channel: [ val(meta), path(cram/crai) ]
     aligned_reads_bam             = ch_aligned_reads_bam // channel: [ val(meta), path(bam/bai) ]
     aligned_reads_cram            = ch_aligned_reads_cram // channel: [ val(meta), path(cram/crai) ]
     paraphase_sample              = ch_paraphase_sample // channel: [ val(meta), path(json) ]
@@ -713,7 +715,11 @@ output {
     multiqc {
         path { _meta, _file -> "multiqc/" }
     }
-    aligned_assemblies {
+    aligned_assemblies_bam {
+        path { meta, _file -> "assembly/sample/${meta.id}/" }
+        enabled !params.cram_output
+    }
+    aligned_assemblies_cram {
         path { meta, _file -> "assembly/sample/${meta.id}/" }
     }
     aligned_reads_bam {
