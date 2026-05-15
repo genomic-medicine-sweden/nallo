@@ -551,6 +551,12 @@ workflow {
     ch_aligned_assemblies_cram_publish = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_cram
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_crai)
 
+    ch_aligned_haplotagged_reads_bam_publish = GENOMICMEDICINESWEDEN_NALLO.out.aligned_haplotagged_reads_bam
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_haplotagged_reads_bai)
+
+    ch_aligned_haplotagged_reads_cram_publish = GENOMICMEDICINESWEDEN_NALLO.out.aligned_haplotagged_reads_cram
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_haplotagged_reads_crai)
+
     ch_aligned_reads_bam_publish = GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_bam
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_bai)
 
@@ -564,11 +570,6 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_baf_tbi)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov_bed)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov_tbi)
-
-    ch_haplotagged_reads_publish = GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads_bam
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads_bai)
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads_cram)
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads_crai)
 
     ch_methylation_pileup_publish = GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_combined_bed
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_combined_index)
@@ -607,9 +608,9 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.peddy_sex_check_csv)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.peddy_ped_check_rel_difference_csv)
 
-    ch_qc_cramino_phased_publish = GENOMICMEDICINESWEDEN_NALLO.out.haplotagging_stats.mix(GENOMICMEDICINESWEDEN_NALLO.out.haplotagging_arrow)
+    ch_qc_cramino_phased_publish = GENOMICMEDICINESWEDEN_NALLO.out.qc_cramino_phased_stats.mix(GENOMICMEDICINESWEDEN_NALLO.out.qc_cramino_phased_arrow)
 
-    ch_qc_cramino_unphased_publish = GENOMICMEDICINESWEDEN_NALLO.out.cramino_unphased_stats.mix(GENOMICMEDICINESWEDEN_NALLO.out.cramino_unphased_arrow)
+    ch_qc_cramino_unphased_publish = GENOMICMEDICINESWEDEN_NALLO.out.qc_cramino_unphased_stats.mix(GENOMICMEDICINESWEDEN_NALLO.out.qc_cramino_unphased_arrow)
 
     ch_qc_fastqc_publish = GENOMICMEDICINESWEDEN_NALLO.out.fastqc_html.mix(GENOMICMEDICINESWEDEN_NALLO.out.fastqc_zip)
 
@@ -672,13 +673,14 @@ workflow {
     publish:
     aligned_assemblies_bam        = ch_aligned_assemblies_bam_publish // channel: [ val(meta), path(bam/bai) ]
     aligned_assemblies_cram       = ch_aligned_assemblies_cram_publish // channel: [ val(meta), path(cram/crai) ]
+    aligned_haplotagged_reads_bam = ch_aligned_haplotagged_reads_bam_publish // channel: [ val(meta), path(bam/bai) ]
+    aligned_haplotagged_reads_cram = ch_aligned_haplotagged_reads_cram_publish // channel: [ val(meta), path(cram/crai) ]
     aligned_reads_bam             = ch_aligned_reads_bam_publish // channel: [ val(meta), path(bam/bai) ]
     aligned_reads_cram            = ch_aligned_reads_cram_publish // channel: [ val(meta), path(cram/crai) ]
     annotated_repeats             = ch_annotated_repeats_publish // channel: [ val(meta), path(vcf/tbi) ]
     assembly_summary              = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
     chromograph_plots             = GENOMICMEDICINESWEDEN_NALLO.out.chromograph_plots // channel: [ val(meta), path(png) ]
     gens                          = ch_gens_publish // channel: [ val(meta), path(baf/cov.bed.gz), path(baf/cov.bed.gz.tbi) ]
-    haplotagged_reads             = ch_haplotagged_reads_publish // channel: [ val(meta), path(bam/cram/bai/crai) ]
     methylation_annotation        = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     methylation_methbat_profiles  = GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_profiles // channel: [ val(meta), path(region_profile) ]
     methylation_pileup            = ch_methylation_pileup_publish // channel: [ val(meta), path(combined.bed.gz/combined.bed.gz.tbi/hap1.bed.gz/hap1.bed.gz.tbi/hap2.bed.gz/hap2.bed.gz.tbi/bed.gz/bed.gz.tbi) ]
@@ -721,6 +723,20 @@ output {
         path { meta, _file -> "assembly/sample/${meta.id}/" }
         enabled params.alignment_output_format == 'cram'
     }
+    aligned_haplotagged_reads_bam {
+        // HiPhase uses the input file (aligned reads) as template for naming output, so we need to remove the "_aligned" suffix here
+        path { meta, file ->
+            file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_aligned", "")}"
+        }
+        enabled params.alignment_output_format == 'bam'
+    }
+    aligned_haplotagged_reads_cram {
+        // HiPhase uses the input file (aligned reads) as template for naming output, so we need to remove the "_aligned" suffix here
+        path { meta, file ->
+            file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_aligned", "")}"
+        }
+        enabled params.alignment_output_format == 'cram'
+    }
     aligned_reads_bam {
         path { meta, _file -> "aligned_reads/${meta.id}/" }
         enabled params.alignment_output_format == 'bam'
@@ -740,12 +756,6 @@ output {
     }
     gens {
         path { meta, _file -> "gens/${meta.id}/" }
-    }
-    haplotagged_reads {
-        // HiPhase uses the input file (aligned reads) as template for naming output, so we need to remove the "_aligned" suffix here
-        path { meta, file ->
-            file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_aligned", "")}"
-        }
     }
     methylation_annotation {
         path { meta, _methylated_regions -> "methylation/profile/family/${meta.id}/" }
