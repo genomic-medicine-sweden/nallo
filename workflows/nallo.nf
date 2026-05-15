@@ -67,6 +67,7 @@ include { paramsSummaryMultiqc                                   } from '../subw
 include { softwareVersionsToYAML                                 } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText                                 } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
 include { citationBibliographyText                               } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
+include { validateAllFamiliesHasAffectedSamples } from '../subworkflows/local/utils_nfcore_nallo_pipeline/main.nf'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -141,16 +142,15 @@ workflow NALLO {
     val_plot_chromograph_autozygosity
     val_plot_chromograph_coverage
     val_pre_vep_snv_filter_expression
-    val_run_methbat
-    val_run_modkit
     val_sentieon_tech
     val_skip_alignment
     val_skip_annotate_paralogs
     val_skip_call_paralogs
     val_skip_chromograph
     val_skip_genome_assembly
-    val_skip_methylation_calling
+    val_skip_methbat
     val_skip_methylation_annotation
+    val_skip_modkit
     val_skip_peddy
     val_skip_phasing
     val_skip_prepare_gens_input
@@ -974,7 +974,7 @@ workflow NALLO {
     //
     // Create methylation pileups with modkit or pbcpgtools, create methylation profile with methbat for pacbio
     //
-    if (!val_skip_methylation_calling && val_run_modkit) {
+    if (!val_skip_modkit) {
         CALL_METHYLATION_MODKIT(
             !val_skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
             ch_fasta,
@@ -984,7 +984,7 @@ workflow NALLO {
         )
     }
 
-    if (!val_skip_methylation_calling && val_run_methbat) {
+    if (!val_skip_methbat) {
         CALL_METHYLATION_METHBAT(
             !val_skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
             ch_methbat_regions,
@@ -1138,19 +1138,19 @@ workflow NALLO {
     hificnv_copynum_bedgraph            = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.hificnv_copynum // channel: [ val(meta), path(bedgraph) ]
     hificnv_maf_bw                      = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.hificnv_maf // channel: [ val(meta), path(bw) ]
     methylation_annotation              = val_skip_methylation_annotation ? channel.empty() : ANNOTATE_METHYLATION.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
-    methylation_methbat_combined_bigwig = (val_skip_methylation_calling || !val_run_methbat) ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_combined_bigwig // channel: [ val(meta), path(combined.bw) ]
-    methylation_methbat_hap1_bigwig     = (val_skip_methylation_calling || !val_run_methbat) ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_hap1_bigwig // channel: [ val(meta), path(hap1.bw) ]
-    methylation_methbat_hap2_bigwig     = (val_skip_methylation_calling || !val_run_methbat) ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_hap2_bigwig // channel: [ val(meta), path(hap2.bw) ]
-    methylation_methbat_combined_bed    = (val_skip_methylation_calling || !val_run_methbat) ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_combined_bed // channel: [ val(meta), path(bed.gz) ]
-    methylation_methbat_combined_index  = (val_skip_methylation_calling || !val_run_methbat) ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_combined_index // channel: [ val(meta), path(bed.gz.tbi) ]
-    methylation_methbat_hap1_bed        = (val_skip_methylation_calling || !val_run_methbat) ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_hap1_bed // channel: [ val(meta), path(bed.gz) ]
-    methylation_methbat_hap1_index      = (val_skip_methylation_calling || !val_run_methbat) ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_hap1_index // channel: [ val(meta), path(bed.gz.tbi) ]
-    methylation_methbat_hap2_bed        = (val_skip_methylation_calling || !val_run_methbat) ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_hap2_bed // channel: [ val(meta), path(bed.gz) ]
-    methylation_methbat_hap2_index      = (val_skip_methylation_calling || !val_run_methbat) ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_hap2_index // channel: [ val(meta), path(bed.gz.tbi) ]
-    methylation_methbat_profiles        = (val_skip_methylation_calling || !val_run_methbat) ? channel.empty() : ch_methylation_profiles // channel: [ val(meta), path(region_profile) ]
-    methylation_modkit_bed              = (val_skip_methylation_calling || !val_run_modkit) ? channel.empty() : CALL_METHYLATION_MODKIT.out.bed // channel: [ val(meta), path(bed.gz) ]
-    methylation_modkit_tbi              = (val_skip_methylation_calling || !val_run_modkit) ? channel.empty() : CALL_METHYLATION_MODKIT.out.tbi // channel: [ val(meta), path(bed.gz.tbi) ]
-    methylation_modkit_bigwig           = (val_skip_methylation_calling || !val_run_modkit) ? channel.empty() : CALL_METHYLATION_MODKIT.out.bigwig // channel: [ val(meta), path(bw) ]
+    methylation_methbat_combined_bigwig = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_combined_bigwig // channel: [ val(meta), path(combined.bw) ]
+    methylation_methbat_hap1_bigwig     = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_hap1_bigwig // channel: [ val(meta), path(hap1.bw) ]
+    methylation_methbat_hap2_bigwig     = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_hap2_bigwig // channel: [ val(meta), path(hap2.bw) ]
+    methylation_methbat_combined_bed    = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_combined_bed // channel: [ val(meta), path(bed.gz) ]
+    methylation_methbat_combined_index  = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_combined_index // channel: [ val(meta), path(bed.gz.tbi) ]
+    methylation_methbat_hap1_bed        = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_hap1_bed // channel: [ val(meta), path(bed.gz) ]
+    methylation_methbat_hap1_index      = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_hap1_index // channel: [ val(meta), path(bed.gz.tbi) ]
+    methylation_methbat_hap2_bed        = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_hap2_bed // channel: [ val(meta), path(bed.gz) ]
+    methylation_methbat_hap2_index      = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_hap2_index // channel: [ val(meta), path(bed.gz.tbi) ]
+    methylation_methbat_profiles        = val_skip_methbat ? channel.empty() : ch_methylation_profiles // channel: [ val(meta), path(region_profile) ]
+    methylation_modkit_bed              = val_skip_modkit ? channel.empty() : CALL_METHYLATION_MODKIT.out.bed // channel: [ val(meta), path(bed.gz) ]
+    methylation_modkit_tbi              = val_skip_modkit ? channel.empty() : CALL_METHYLATION_MODKIT.out.tbi // channel: [ val(meta), path(bed.gz.tbi) ]
+    methylation_modkit_bigwig           = val_skip_modkit ? channel.empty() : CALL_METHYLATION_MODKIT.out.bigwig // channel: [ val(meta), path(bw) ]
     repeat_strdust_sample_vcf           = (val_skip_repeat_calling || val_str_caller != "strdust") ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.sample_vcf // channel: [ val(meta), path(vcf) ]
     repeat_strdust_sample_tbi           = (val_skip_repeat_calling || val_str_caller != "strdust") ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.sample_tbi // channel: [ val(meta), path(tbi) ]
     repeat_strdust_family_vcf           = (val_skip_repeat_calling || val_str_caller != "strdust") ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.family_vcf // channel: [ val(meta), path(vcf) ]
