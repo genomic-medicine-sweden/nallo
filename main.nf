@@ -248,8 +248,6 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     aligned_reads_bai                   = NALLO.out.aligned_reads_bai // channel: [ val(meta), path(bai) ]
     aligned_reads_cram                  = NALLO.out.aligned_reads_cram // channel: [ val(meta), path(cram) ]
     aligned_reads_crai                  = NALLO.out.aligned_reads_crai // channel: [ val(meta), path(crai) ]
-    annotated_paralogs_tsv              = NALLO.out.annotated_paralogs_tsv  // channel: [ val(meta), path(tsv) ]
-    annotated_paralogs_json             = NALLO.out.annotated_paralogs_json // channel: [ val(meta), path(json) ]
     annotated_repeats_vcf               = NALLO.out.annotated_repeats_vcf // channel: [ val(meta), path(vcf) ]
     annotated_repeats_tbi               = NALLO.out.annotated_repeats_tbi // channel: [ val(meta), path(tbi) ]
     assembly_summary                    = NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
@@ -284,6 +282,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     multiqc_data                        = NALLO.out.multiqc_data // channel: [ val(meta), path(*_data) ]
     multiqc_report                      = NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
     multiqc_plots                       = NALLO.out.multiqc_plots // channel: [ val(meta), path(*_plots) ]
+    paralogs_annotated_tsv              = NALLO.out.paralogs_annotated_tsv  // channel: [ val(meta), path(tsv) ]
+    paralogs_annotated_json             = NALLO.out.paralogs_annotated_json // channel: [ val(meta), path(json) ]
     paralogs_family_vcf                 = NALLO.out.paralogs_family_vcf // channel: [ val(meta), path(vcf) ]
     paralogs_family_tbi                 = NALLO.out.paralogs_family_tbi // channel: [ val(meta), path(tbi) ]
     paralogs_sample_bam                 = NALLO.out.paralogs_sample_bam // channel: [ val(meta), path(bam) ]
@@ -581,8 +581,8 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.multiqc_data)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.multiqc_plots)
 
-    ch_paraphase_family_publish = GENOMICMEDICINESWEDEN_NALLO.out.annotated_paralogs_tsv
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.annotated_paralogs_json)
+    ch_paraphase_family_publish = GENOMICMEDICINESWEDEN_NALLO.out.paralogs_annotated_tsv
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_annotated_json)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_family_vcf)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_family_tbi)
 
