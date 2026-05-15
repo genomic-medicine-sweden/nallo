@@ -157,13 +157,14 @@ workflow NALLO {
     val_skip_qc
     val_skip_rank_variants
     val_skip_repeat_annotation
-    val_skip_repeat_calling
     val_skip_sambamba_depth
     val_skip_sex_check
     val_skip_snv_annotation
     val_skip_snv_calling
+    val_skip_trgt
     val_skip_sv_annotation
     val_skip_sv_calling
+    val_skip_strdust
     val_snv_caller
     val_snv_calling_processes
     val_snv_call_regions
@@ -1002,8 +1003,7 @@ workflow NALLO {
     //
     // Call repeat expansions with TRGT
     //
-    if (!val_skip_repeat_calling) {
-        if (val_str_caller == "trgt") {
+    if (!val_skip_trgt) {
             CALL_REPEAT_EXPANSIONS_TRGT(
                 PHASING.out.haplotagged_bam_bai,
                 ch_fasta,
@@ -1014,8 +1014,7 @@ workflow NALLO {
             )
 
             ch_repeat_expansions = CALL_REPEAT_EXPANSIONS_TRGT.out.family_vcf
-        }
-        else if (val_str_caller == "strdust") {
+    if (!val_skip_strdust) {
             CALL_REPEAT_EXPANSIONS_STRDUST(
                 PHASING.out.haplotagged_bam_bai,
                 ch_fasta,
@@ -1151,18 +1150,18 @@ workflow NALLO {
     methylation_modkit_bed              = (val_skip_methylation_calling || !val_run_modkit) ? channel.empty() : CALL_METHYLATION_MODKIT.out.bed // channel: [ val(meta), path(bed.gz) ]
     methylation_modkit_tbi              = (val_skip_methylation_calling || !val_run_modkit) ? channel.empty() : CALL_METHYLATION_MODKIT.out.tbi // channel: [ val(meta), path(bed.gz.tbi) ]
     methylation_modkit_bigwig           = (val_skip_methylation_calling || !val_run_modkit) ? channel.empty() : CALL_METHYLATION_MODKIT.out.bigwig // channel: [ val(meta), path(bw) ]
-    repeat_strdust_sample_vcf           = (val_skip_repeat_calling || val_str_caller != "strdust") ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.sample_vcf // channel: [ val(meta), path(vcf) ]
-    repeat_strdust_sample_tbi           = (val_skip_repeat_calling || val_str_caller != "strdust") ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.sample_tbi // channel: [ val(meta), path(tbi) ]
-    repeat_strdust_family_vcf           = (val_skip_repeat_calling || val_str_caller != "strdust") ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.family_vcf // channel: [ val(meta), path(vcf) ]
-    repeat_strdust_family_tbi           = (val_skip_repeat_calling || val_str_caller != "strdust") ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.family_tbi // channel: [ val(meta), path(tbi) ]
-    repeat_trgt_sample_vcf              = (val_skip_repeat_calling || val_str_caller != "trgt") ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_vcf // channel: [ val(meta), path(vcf) ]
-    repeat_trgt_sample_tbi              = (val_skip_repeat_calling || val_str_caller != "trgt") ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_tbi // channel: [ val(meta), path(tbi) ]
-    repeat_trgt_sample_bam              = (val_skip_repeat_calling || val_str_caller != "trgt") ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_bam // channel: [ val(meta), path(bam) ]
-    repeat_trgt_sample_bai              = (val_skip_repeat_calling || val_str_caller != "trgt") ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_bai // channel: [ val(meta), path(bai) ]
-    repeat_trgt_sample_cram             = (val_skip_repeat_calling || val_str_caller != "trgt") ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_cram // channel: [ val(meta), path(cram) ]
-    repeat_trgt_sample_crai             = (val_skip_repeat_calling || val_str_caller != "trgt") ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_crai // channel: [ val(meta), path(crai) ]
-    repeat_trgt_family_vcf              = (val_skip_repeat_calling || val_str_caller != "trgt" || !val_skip_repeat_annotation) ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.family_vcf // channel: [ val(meta), path(vcf) ]
-    repeat_trgt_family_tbi              = (val_skip_repeat_calling || val_str_caller != "trgt" || !val_skip_repeat_annotation) ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.family_tbi // channel: [ val(meta), path(tbi) ]
+    repeat_strdust_sample_vcf           = val_skip_strdust ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.sample_vcf // channel: [ val(meta), path(vcf) ]
+    repeat_strdust_sample_tbi           = val_skip_strdust ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.sample_tbi // channel: [ val(meta), path(tbi) ]
+    repeat_strdust_family_vcf           = val_skip_strdust ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.family_vcf // channel: [ val(meta), path(vcf) ]
+    repeat_strdust_family_tbi           = val_skip_strdust ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.family_tbi // channel: [ val(meta), path(tbi) ]
+    repeat_trgt_sample_vcf              = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_vcf // channel: [ val(meta), path(vcf) ]
+    repeat_trgt_sample_tbi              = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_tbi // channel: [ val(meta), path(tbi) ]
+    repeat_trgt_sample_bam              = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_bam // channel: [ val(meta), path(bam) ]
+    repeat_trgt_sample_bai              = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_bai // channel: [ val(meta), path(bai) ]
+    repeat_trgt_sample_cram             = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_cram // channel: [ val(meta), path(cram) ]
+    repeat_trgt_sample_crai             = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_crai // channel: [ val(meta), path(crai) ]
+    repeat_trgt_family_vcf              = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.family_vcf // channel: [ val(meta), path(vcf) ]
+    repeat_trgt_family_tbi              = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.family_tbi // channel: [ val(meta), path(tbi) ]
     cramino_unphased_stats              = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.cramino_stats // channel: [ val(meta), path(txt) ]
     cramino_unphased_arrow              = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.cramino_arrow // channel: [ val(meta), path(arrow) ]
     fastqc_html                         = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.fastqc_html // channel: [ val(meta), path(html) ]
