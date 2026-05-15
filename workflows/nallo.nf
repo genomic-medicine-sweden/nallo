@@ -543,7 +543,7 @@ workflow NALLO {
 
         family_snv_vcf
             .join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
-            .set { ch_vcf_tbi_per_region }
+            .set { ch_snvs_per_family_unannotated_vcf_tbi }
     }
     if (!val_skip_prepare_gens_input) {
         CALL_SNVS.out.gvcf
@@ -739,7 +739,7 @@ workflow NALLO {
 
         ANN_CSQ_PLI_SNV.out.vcf
             .join(ANN_CSQ_PLI_SNV.out.tbi, failOnMismatch: true, failOnDuplicate: true)
-            .set { ch_vcf_tbi_per_region }
+            .set { ch_snvs_per_family_annotated_vcf_tbi }
     }
 
     //
@@ -800,7 +800,7 @@ workflow NALLO {
         }
         else {
             // If we did not annotate, we did not concatenate the VCFs before, so we need to do that here.
-            ch_vcf_tbi_per_region
+            ch_snvs_per_family_unannotated_vcf_tbi
                 .map { meta, vcf, tbi -> [groupKey([id: meta.family_id], meta.num_intervals), vcf, tbi] }
                 .groupTuple()
                 .map { key, vcfs, tbis -> [key.getGroupTarget(), vcfs, tbis] }
@@ -931,14 +931,18 @@ workflow NALLO {
             }
             .set { ch_ranked_variants }
 
-        ch_ranked_variants.snvs.set { ch_vcf_tbi_per_region }
+        ch_ranked_variants.snvs.set { ch_snvs_per_family_ranked_vcf_tbi }
     }
 
     //
-    // Concatenate and sort ranked SNVs, sort and publish
+    // Concatenate and sort SNVs, sort and publish
     //
     if (!val_skip_snv_calling) {
-        ch_vcf_tbi_per_region
+        def ch_snvs_per_family_to_concatenate = val_skip_rank_variants
+            ? (val_skip_snv_annotation ? ch_snvs_per_family_unannotated_vcf_tbi : ch_snvs_per_family_annotated_vcf_tbi)
+            : ch_snvs_per_family_ranked_vcf_tbi
+
+        ch_snvs_per_family_to_concatenate
             .map { meta, vcf, tbi ->
                 def new_meta = [id: meta.family_id, set: meta.set, sample_ids: meta.sample_ids, num_intervals: meta.num_intervals]
                 [groupKey(new_meta, meta.num_intervals), vcf, tbi]
