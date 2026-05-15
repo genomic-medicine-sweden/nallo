@@ -6,8 +6,6 @@ include { samplesheetToList                                      } from 'plugin/
 */
 
 include { ALIGN_ASSEMBLIES                                       } from '../subworkflows/local/align_assemblies'
-include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV                    } from '../subworkflows/local/annotate_consequence_pli'
-include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SVS                    } from '../subworkflows/local/annotate_consequence_pli'
 include { ANNOTATE_PARALOGS                                      } from '../subworkflows/local/annotate_paralogs'
 include { ANNOTATE_REPEAT_EXPANSIONS                             } from '../subworkflows/local/annotate_repeat_expansions'
 include { ANNOTATE_SNVS                                          } from '../subworkflows/local/annotate_snvs'
@@ -715,9 +713,8 @@ workflow NALLO {
                 research: [meta + [set: "research"], vcf]
             }
             .set { ch_clin_research_snvs_vcf }
-        ch_clin_research_snvs_vcf.clinical
 
-        ch_clin_research_snvs_vcf.research.set { ch_ann_csq_pli_snv_in }
+        ch_clin_research_snvs_vcf.research.set { ch_snv_vcf_for_ranking }
 
         if (val_filter_variants_hgnc_ids || val_filter_snvs_expression != '') {
 
@@ -728,18 +725,8 @@ workflow NALLO {
                 val_filter_variants_hgnc_ids,
             )
 
-            ch_ann_csq_pli_snv_in = ch_ann_csq_pli_snv_in.mix(FILTER_VARIANTS_SNVS.out.vcf)
+            ch_snv_vcf_for_ranking = ch_snv_vcf_for_ranking.mix(FILTER_VARIANTS_SNVS.out.vcf)
         }
-
-        // This is really only required for ranking, could consider moving it there?
-        ANN_CSQ_PLI_SNV(
-            ch_ann_csq_pli_snv_in,
-            ch_variant_consequences_snvs,
-        )
-
-        ANN_CSQ_PLI_SNV.out.vcf
-            .join(ANN_CSQ_PLI_SNV.out.tbi, failOnMismatch: true, failOnDuplicate: true)
-            .set { ch_vcf_tbi_per_region }
     }
 
     //
@@ -861,7 +848,7 @@ workflow NALLO {
             }
             .set { ch_clin_research_svs_vcf }
 
-        ch_clin_research_svs_vcf.research.set { ch_ann_csq_svs_in }
+        ch_clin_research_svs_vcf.research.set { ch_sv_vcf_for_ranking }
 
         //
         // Filter SVs
@@ -875,13 +862,8 @@ workflow NALLO {
                 val_filter_variants_hgnc_ids,
             )
 
-            ch_ann_csq_svs_in = ch_ann_csq_svs_in.mix(FILTER_VARIANTS_SVS.out.vcf)
+            ch_sv_vcf_for_ranking = ch_sv_vcf_for_ranking.mix(FILTER_VARIANTS_SVS.out.vcf)
         }
-
-        ANN_CSQ_PLI_SVS(
-            ch_ann_csq_svs_in,
-            ch_variant_consequences_svs,
-        )
     }
 
     /*
@@ -891,24 +873,24 @@ workflow NALLO {
      */
     if (!val_skip_rank_variants) {
 
-        ch_snvs_to_rank = buildRankVariantsInputChannel(
-            ANN_CSQ_PLI_SNV.out.vcf,
+        ch_snv_vcf_for_ranking = buildRankVariantsInputChannel(
+            ch_snv_vcf_for_ranking,
             SOMALIER_PED_FAMILY.out.ped,
             'snv',
             ch_genmod_score_config_snvs,
             ch_samplesheet,
         )
 
-        ch_svs_to_rank = buildRankVariantsInputChannel(
-            ANN_CSQ_PLI_SVS.out.vcf.map { meta, vcf -> [meta + [family_id: meta.id], vcf] },
+        ch_sv_vcf_for_ranking = buildRankVariantsInputChannel(
+            ch_sv_vcf_for_ranking.map { meta, vcf -> [meta + [family_id: meta.id], vcf] },
             SOMALIER_PED_FAMILY.out.ped,
             'sv',
             ch_genmod_score_config_svs,
             ch_samplesheet,
         )
 
-        ch_snvs_to_rank
-            .mix(ch_svs_to_rank)
+        ch_snv_vcf_for_ranking
+            .mix(ch_sv_vcf_for_ranking)
             .multiMap { meta, vcf, ped, score_config ->
                 vcf: [meta, vcf]
                 ped: [meta, ped]
@@ -960,7 +942,7 @@ workflow NALLO {
         ch_collect_svs = val_skip_sv_annotation
             ? ch_sv_vcf_for_annotation
             : val_skip_rank_variants
-                ? ANN_CSQ_PLI_SVS.out.vcf
+                ? ch_sv_vcf_for_ranking
                 : ch_ranked_variants.sv.map { meta, vcf, _tbi -> [meta, vcf] }
 
         BCFTOOLS_VIEW_SV(
