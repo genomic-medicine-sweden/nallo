@@ -250,9 +250,9 @@ workflow NALLO {
                 unmapped: !index
                 mapped: index
             }
-            .set { ch_align_in_separated }
+            .set { ch_align_in }
 
-        ch_align_in_separated
+        ch_align_in
             .map { meta, reads, _index -> [ meta, reads ]}
             .set { ch_convert_fq_in }
 
@@ -262,13 +262,9 @@ workflow NALLO {
             true,
         )
 
-        CONVERT_INPUT_FASTQS.out.bam
-            .map { meta, bam -> [ meta, bam, [] ] }
-            .mix ( ch_align_in_separated.mapped )
-            .set { ch_align_in }
-
         ALIGN(
-            ch_align_in,
+            CONVERT_INPUT_FASTQS.out.bam,
+            ch_align_in.mapped,
             PREPARE_REFERENCES.out.mmi,
             val_alignment_processes > 1
         )
