@@ -1,50 +1,46 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
 name: "align"
-## TODO nf-core: Add a description of the subworkflow and list keywords
-description: Sort SAM/BAM/CRAM file
+description: Map reads to a reference genome using minimap2. Allows for input splitting and mixing in of mapped BAMs
 keywords:
-  - sort
+  - alignment
   - bam
-  - sam
   - cram
-## TODO nf-core: Add a list of the modules and/or subworkflows used in the subworkflow
+  - minimap2
 components:
-  - samtools/sort
-  - samtools/index
-## TODO nf-core: List all of the channels used as input with a description and their structure
+  - minimap2/align
+  - samtools/merge
+  - splitubam
 input:
-  - ch_bam:
+  - ch_ubam:
       type: file
       description: |
-        The input channel containing the BAM/CRAM/SAM files
+        The input channel containing unmapped BAM files.
         Structure: [ val(meta), path(bam) ]
       pattern: "*.{bam/cram/sam}"
-## TODO nf-core: List all of the channels used as output with a descriptions and their structure
+  - ch_mapped_bam:
+      type: file
+      description: |
+        Optional input channel containing mapped BAM files to be merged with the newly mapped BAMs.
+        Structure: [ val(meta), path(bam), path(bai) ]
+      pattern: "*.{bam/cram}{,.bai,.crai}"
+  - ch_mmi:
+      type: file
+      description: |
+        Channel containing minimap2 index files.
+        Structure: [ val(meta), path(mmi) ]
+      pattern: "*.mmi"
+  - val_split_alignment:
+      type: bool
+      description: |
+        Whether to split the input BAM files and align them in parallel.
+        The number of splits is determined by the pipeline configuration.
 output:
-  - bam:
+  - bam_bai:
       type: file
       description: |
-        Channel containing BAM files
-        Structure: [ val(meta), path(bam) ]
+        Channel containing mapped BAM and index files.
+        Structure: [ val(meta), path(bam), path(bai) ]
       pattern: "*.bam"
-  - bai:
-      type: file
-      description: |
-        Channel containing indexed BAM (BAI) files
-        Structure: [ val(meta), path(bai) ]
-      pattern: "*.bai"
-  - csi:
-      type: file
-      description: |
-        Channel containing CSI files
-        Structure: [ val(meta), path(csi) ]
-      pattern: "*.csi"
-  - versions:
-      type: file
-      description: |
-        File containing software versions
-        Structure: [ path(versions.yml) ]
-      pattern: "versions.yml"
 authors:
   - "@Schmytzi"
 maintainers:
