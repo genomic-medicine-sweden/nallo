@@ -263,9 +263,7 @@ workflow NALLO {
 
         ALIGN_ASSEMBLIES(
             GENOME_ASSEMBLY.out.assembled_haplotypes,
-            ch_fasta,
-            ch_fai,
-            cram_output,
+            PREPARE_REFERENCES.out.mmi
         )
     }
 
