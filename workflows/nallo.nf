@@ -30,8 +30,8 @@ include { PREPARE_GENS_INPUTS                                    } from '../subw
 include { PREPARE_REFERENCES                                     } from '../subworkflows/local/prepare_references'
 include { QC_ALIGNED_READS                                       } from '../subworkflows/local/qc_aligned_reads'
 include { QC_SNVS                                                } from '../subworkflows/local/qc_snvs'
-include { RANK_VARIANTS                                          } from '../subworkflows/local/rank_variants'
 include { SCATTER_GENOME                                         } from '../subworkflows/local/scatter_genome'
+include { VCF_ANNOTATE_SCORE_GENMOD as RANK_VARIANTS             } from '../subworkflows/genomic-medicine-sweden/vcf_annotate_score_genmod/main'
 include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SNVS } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
 include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SVS  } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
 include { VCF_CONCAT_NORM_VARIANTS                               } from '../subworkflows/local/vcf_concat_norm_variants'
@@ -921,11 +921,12 @@ workflow NALLO {
             ch_rank_variants_input.ped,
             ch_genmod_reduced_penetrance,
             ch_rank_variants_input.score_config,
+            false
         )
 
         RANK_VARIANTS.out.vcf
-            .join(RANK_VARIANTS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
-            .branch { meta, _vcf, _tbi ->
+            .join(RANK_VARIANTS.out.index, failOnMismatch: true, failOnDuplicate: true)
+            .branch { meta, _vcf, _index ->
                 snvs: meta.variant_type == "snv"
                 sv: meta.variant_type == "sv"
             }

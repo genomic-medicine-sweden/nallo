@@ -1,0 +1,189 @@
+nextflow_workflow {
+
+    name "Test Workflow VCF_ANNOTATE_SCORE_GENMOD"
+    script "../main.nf"
+    config "./nextflow.config"
+    workflow "VCF_ANNOTATE_SCORE_GENMOD"
+    tag "subworkflows"
+    tag "subworkflows_genomicmedicinesweden"
+    tag "subworkflows/vcf_annotate_score_genmod"
+    tag "genmod"
+    tag "subworkflows/../../modules/nf-core/genmod/annotate"
+    tag "subworkflows/../../modules/nf-core/genmod/models"
+    tag "subworkflows/../../modules/nf-core/genmod/score"
+    tag "subworkflows/../../modules/nf-core/genmod/compound"
+    tag "subworkflows/../../modules/nf-core/bcftools"
+    tag "subworkflows/../../modules/nf-core/bcftools/view"
+
+    setup {
+        nfcoreInitialise("${launchDir}/library/")
+        nfcoreInstall(
+            "${launchDir}/library/",
+            [
+                "genmod/annotate",
+                "genmod/models",
+                "genmod/score",
+                "genmod/compound",
+                "bcftools/view",
+            ]
+        )
+        nfcoreLink("${launchDir}/library/", "${baseDir}/modules/")
+    }
+
+    test("All genmod modules") {
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test'],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/illumina/vcf/genmod.vcf.gz', checkIfExists: true)
+                ])
+                input[1] = channel.of([
+                    [ id:'test'],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/vcf/ped/justhusky.ped', checkIfExists: true)
+                ])
+                input[2] = channel.of([
+                    [ id: 'genmod_reduced_penetrance' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/illumina/genmod/genmod_reduced_penetrance.tsv', checkIfExists: true)
+                ])
+                input[3] = channel.of([
+                    [ id: 'test' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/illumina/genmod/svrank_model_-v1.8-.ini', checkIfExists: true)
+                ])
+                input[4] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.trace.succeeded().size() == 5 },
+                { assert snapshot(
+                    // Index file doesn't have stable content, so only the name is snapshot
+                    workflow.out.index.collect { meta, index -> [meta, file(index).name] },
+                    workflow.out.vcf.collect { meta, vcf -> [meta, file(vcf).name, path(vcf).vcf.variantsMD5] }
+                ).match() }
+            )
+        }
+
+        cleanup {
+            nfcoreUnlink("${launchDir}/library/", "${baseDir}/modules/nf-core")
+        }
+    }
+
+    test("Genmod score only - without ped and reduced penetrance files") {
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test'],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/illumina/vcf/genmod.vcf.gz', checkIfExists: true)
+                ])
+                input[1] = channel.empty()
+                input[2] = channel.empty()
+                input[3] = channel.of([
+                    [ id: 'test' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/illumina/genmod/svrank_model_-v1.8-.ini', checkIfExists: true)
+                ])
+                input[4] = true
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.trace.succeeded().size() == 2 },
+                { assert snapshot(
+                    // Index file doesn't have stable content, so only the name is snapshot
+                    workflow.out.index.collect { meta, index -> [meta, file(index).name] },
+                    workflow.out.vcf.collect { meta, vcf -> [meta, file(vcf).name, path(vcf).vcf.variantsMD5] }
+                ).match() }
+            )
+        }
+
+        cleanup {
+            nfcoreUnlink("${launchDir}/library/", "${baseDir}/modules/nf-core")
+        }
+    }
+
+    test("All genmod modules - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test'],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/illumina/vcf/genmod.vcf.gz', checkIfExists: true)
+                ])
+                input[1] = channel.of([
+                    [ id:'test'],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/vcf/ped/justhusky.ped', checkIfExists: true)
+                ])
+                input[2] = channel.of([
+                    [ id: 'genmod_reduced_penetrance' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/illumina/genmod/genmod_reduced_penetrance.tsv', checkIfExists: true)
+                ])
+                input[3] = channel.of([
+                    [ id: 'test' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/illumina/genmod/svrank_model_-v1.8-.ini', checkIfExists: true)
+                ])
+                input[4] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.trace.succeeded().size() == 5 },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+
+        cleanup {
+            nfcoreUnlink("${launchDir}/library/", "${baseDir}/modules/nf-core")
+        }
+    }
+
+    test("Genmod score only - without ped and reduced penetrance files - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test'],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/illumina/vcf/genmod.vcf.gz', checkIfExists: true)
+                ])
+                input[1] = channel.empty()
+                input[2] = channel.empty()
+                input[3] = channel.of([
+                    [ id: 'test' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/illumina/genmod/svrank_model_-v1.8-.ini', checkIfExists: true)
+                ])
+                input[4] = true
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.trace.succeeded().size() == 2 },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+
+        cleanup {
+            nfcoreUnlink("${launchDir}/library/", "${baseDir}/modules/nf-core")
+        }
+    }
+
+}
