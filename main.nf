@@ -69,8 +69,6 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     ch_sv_call_regions
     ch_svdb_sv_databases
     ch_tandem_repeats
-    ch_variant_consequences_snvs
-    ch_variant_consequences_svs
     ch_vcfexpress_prelude
     ch_vep_cache_unprocessed
     ch_vep_plugin_files
@@ -175,8 +173,6 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         ch_sv_call_regions,
         ch_svdb_sv_databases,
         ch_tandem_repeats,
-        ch_variant_consequences_snvs,
-        ch_variant_consequences_svs,
         ch_vcfexpress_prelude,
         ch_vep_cache_unprocessed,
         ch_vep_plugin_files,
@@ -402,8 +398,6 @@ workflow {
         params.sv_callers_merge_priority,
         params.sv_callers_to_merge,
         params.sv_callers_to_run,
-        params.variant_consequences_snvs,
-        params.variant_consequences_svs,
         params.vep_cache,
         params.vep_plugin_files,
         params.version,
@@ -450,8 +444,6 @@ workflow {
         createReferenceChannelFromPath(params.sv_call_regions),
         createReferenceChannelFromSamplesheet(params.svdb_sv_databases, 'assets/svdb_query_vcf_schema.json', channel.value([])),
         createReferenceChannelFromPath(params.tandem_repeats, channel.value([[], []])),
-        createReferenceChannelFromPath(params.variant_consequences_snvs),
-        createReferenceChannelFromPath(params.variant_consequences_svs),
         file("${projectDir}/assets/vcf_express_found_in_prelude.lua"),
         createReferenceChannelFromPath(params.vep_cache, channel.value([[], []])),
         createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', channel.value([])),

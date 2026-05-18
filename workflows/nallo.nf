@@ -111,8 +111,6 @@ workflow NALLO {
     ch_sv_call_regions
     ch_svdb_sv_databases
     ch_tandem_repeats
-    ch_variant_consequences_snvs
-    ch_variant_consequences_svs
     ch_vcfexpress_prelude
     ch_vep_cache_unprocessed
     ch_vep_plugin_files

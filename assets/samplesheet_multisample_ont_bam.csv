@@ -1,5 +1,5 @@
 project,sample,file,family_id,paternal_id,maternal_id,sex,phenotype
-test,HG002_ONT_A,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_ONT.bam,FAM,0,0,1,2
-test,HG002_ONT_B,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_ONT.bam,FAM,0,0,1,1
-test,HG002_ONT_B,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_ONT_copy.bam,FAM,0,0,1,1
-test,HG002_ONT_C,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/testdata/HG002_ONT.bam,FAM2,0,0,1,2
+test,HG002_ONT_A,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8fff73a86ec5c9360ed8da35aac5b108b9c9ef78/testdata/HG002_ONT.bam,FAM,0,0,1,2
+test,HG002_ONT_B,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8fff73a86ec5c9360ed8da35aac5b108b9c9ef78/testdata/HG002_ONT.bam,FAM,0,0,1,1
+test,HG002_ONT_B,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8fff73a86ec5c9360ed8da35aac5b108b9c9ef78/testdata/HG002_ONT_copy.bam,FAM,0,0,1,1
+test,HG002_ONT_C,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8fff73a86ec5c9360ed8da35aac5b108b9c9ef78/testdata/HG002_ONT.bam,FAM2,0,0,1,2

@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            399,
+            375,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -80,14 +80,6 @@
                 },
                 "CSVTK_SORT": {
                     "csvtk": "0.31.0"
-                },
-                "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
-                    "addmostsevereconsequence": "1.2.0",
-                    "bgzip": 1.21
-                },
-                "CUSTOM_ADDMOSTSEVEREPLI": {
-                    "addmostseverepli": "1.2.0",
-                    "bgzip": 1.21
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
                     "deepvariant": "1.10.0"
@@ -279,9 +271,6 @@
                 },
                 "TABIX_SEVERUS": {
                     "bgzip": 1.21,
-                    "tabix": 1.21
-                },
-                "TABIX_TABIX": {
                     "tabix": 1.21
                 },
                 "TAGBAM": {
@@ -1320,7 +1309,7 @@
                 
             ]
         ],
-        "timestamp": "2026-05-07T13:36:32.615866027",
+        "timestamp": "2026-05-18T07:36:46.141708591",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"

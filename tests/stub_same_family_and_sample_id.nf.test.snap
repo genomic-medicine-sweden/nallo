@@ -1,7 +1,7 @@
 {
     "Test family id same as sample id": {
         "content": [
-            195,
+            177,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -80,14 +80,6 @@
                 },
                 "CSVTK_SORT": {
                     "csvtk": "0.31.0"
-                },
-                "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
-                    "addmostsevereconsequence": "1.2.0",
-                    "bgzip": 1.21
-                },
-                "CUSTOM_ADDMOSTSEVEREPLI": {
-                    "addmostseverepli": "1.2.0",
-                    "bgzip": 1.21
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
                     "deepvariant": "1.10.0"
@@ -279,9 +271,6 @@
                 },
                 "TABIX_SEVERUS": {
                     "bgzip": 1.21,
-                    "tabix": 1.21
-                },
-                "TABIX_TABIX": {
                     "tabix": 1.21
                 },
                 "TAGBAM": {
@@ -517,7 +506,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-05-07T13:38:04.967947486",
+        "timestamp": "2026-05-18T07:43:38.134943426",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"
