@@ -52,10 +52,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1080](https://github.com/genomic-medicine-sweden/nallo/pull/1080) - Changed `vcf_concat_sort_variants` to workflow outputs
 - [#1082](https://github.com/genomic-medicine-sweden/nallo/pull/1082) - Changed `nallo` to workflow outputs
 - [#1084](https://github.com/genomic-medicine-sweden/nallo/pull/1084) - Updated nf-core module for `peddy`
+- [#1098](https://github.com/genomic-medicine-sweden/nallo/pull/1098) - Updated testdata commit with new genmod score config
 
 ### Removed
 
-- [#1072](https://github.com/genomic-medicine-sweden/nallo/pull/1072) - Remove sentieon/dnascope-longread Dockerfile
+- [#1072](https://github.com/genomic-medicine-sweden/nallo/pull/1072) - Removed sentieon/dnascope-longread Dockerfile
+- [#1098](https://github.com/genomic-medicine-sweden/nallo/pull/1098) - Removed `annotate_consequence_pli` subworkflow and modules
 
 ### Fixed
 
