@@ -384,7 +384,7 @@
                     },
                     "splitubam": {
                         "branch": "master",
-                        "git_sha": "9f8e03645cadda3a2a92e820069c4a38474e51cf",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"]
                     },
                     "stranger": {
