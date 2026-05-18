@@ -56,7 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - [#1072](https://github.com/genomic-medicine-sweden/nallo/pull/1072) - Remove sentieon/dnascope-longread Dockerfile
-- [#1072](https://github.com/genomic-medicine-sweden/nallo/pull/1072) - Removed tabix from SNV and SV annotation subworkflows
+- [#1100](https://github.com/genomic-medicine-sweden/nallo/pull/1100) - Removed tabix from SNV and SV annotation subworkflows
 
 ### Fixed
 
