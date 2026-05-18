@@ -5,6 +5,7 @@ include { samplesheetToList                                      } from 'plugin/
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+include { ALIGN                                                  } from '../subworkflows/local/align'
 include { ALIGN_ASSEMBLIES                                       } from '../subworkflows/local/align_assemblies'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV                    } from '../subworkflows/local/annotate_consequence_pli'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SVS                    } from '../subworkflows/local/annotate_consequence_pli'
@@ -199,34 +200,6 @@ workflow NALLO {
         ch_fai = PREPARE_REFERENCES.out.fai
     }
 
-    // Convert FASTQ to BAM only if alignment or should be done.
-    // Since we assume that the majority of pipeline runs will use BAM files as input,
-    // we start all files as BAMs for simplicity except for the assembly, which requires FASTQs.
-    if (!val_skip_alignment) {
-
-        CONVERT_INPUT_FASTQS(
-            ch_samplesheet,
-            false,
-            true,
-        )
-    }
-
-    // To speed up the alignement, we can split the BAM files into smaller chunks.
-    // We can also use the split BAM files for FASTQ conversion to the assembly workflow,
-    // instead of the original BAM files which should allow the assembly to start sooner.
-    //
-    // We could change the name of alignment processes to something more generic, like `--split_input_files`?
-    // If we start running more trios we also need to consider that the parents at the moment needs to be merged
-    // before YAK. So, we could consider adding some logic to handle that case,
-    // to avoid unneccessary splitting and merging just for a minor speedup in the conversion.
-    if (!val_skip_alignment && val_alignment_processes > 1) {
-
-        // contains all BAM files, including those not converted.
-        SPLITUBAM(
-            CONVERT_INPUT_FASTQS.out.bam
-        )
-    }
-
     //
     // Hifiasm assembly and alignment to reference genome
     //
@@ -246,7 +219,7 @@ workflow NALLO {
         // Since starting with FASTQs is a rare case, no splitting of FASTQs alone just for the assembly is implmenented
 
         CONVERT_INPUT_BAMS(
-            !val_skip_alignment && val_alignment_processes > 1 ? SPLITUBAM.out.bam.transpose() : ch_samplesheet,
+            ch_samplesheet,
             true,
             false,
         )
@@ -272,71 +245,37 @@ workflow NALLO {
      */
     if (!val_skip_alignment) {
 
-        /*
-         * Ensure each BAM has a unique identify,
-         * enabling correct grouping and downstream merging.
-         */
-        ch_reads_for_alignment = (val_alignment_processes > 1
-            ? SPLITUBAM.out.bam.transpose()
-            : CONVERT_INPUT_FASTQS.out.bam).map { meta, bam -> [meta + [file: bam.name], bam] }
+        ch_samplesheet
+            .branch { _meta, _reads, index ->
+                unmapped: !index
+                mapped: index
+            }
+            .set { ch_align_in_separated }
 
-        /*
-         * Create a grouping key per sample that records the number of split files,
-         * allowing downstream merging to trigger as soon as all alignments of a sample are ready.
-         */
-        ch_reads_grouping_key = ch_reads_for_alignment
-            .map { meta, bam -> [meta - meta.subMap('file'), bam] }
-            .groupTuple()
-            .map { meta, files -> [meta + [n_files: files.size()]] }
+        ch_align_in_separated
+            .map { meta, reads, _index -> [ meta, reads ]}
+            .set { ch_convert_fq_in }
 
-        /*
-         * Align reads independently per split (could be a split-align-merge subworkflow)
-         */
-        MINIMAP2_ALIGN(
-            ch_reads_for_alignment,
-            PREPARE_REFERENCES.out.mmi,
+        CONVERT_INPUT_FASTQS(
+            ch_convert_fq_in,
+            false,
             true,
-            'bai',
-            false,
-            false,
         )
 
-        /*
-         * Re-attach grouping key so BAMs can be merged per group as soon as all alignments for one sample are ready
-         */
-        ch_bam_to_merge = MINIMAP2_ALIGN.out.bam
-            .join(MINIMAP2_ALIGN.out.index, failOnDuplicate: true, failOnMismatch: true)
-            .combine(ch_reads_grouping_key)
-            .filter { bam_meta, _bam, _bai, grouping_key_meta ->
-                bam_meta.id == grouping_key_meta.id
-            }
-            .map { bam_meta, bam, bai, grouping_key_meta ->
-                [bam_meta - bam_meta.subMap('file') + [n_files: grouping_key_meta.n_files], bam, bai]
-            }
-            .map { meta, bam, bai ->
-                [groupKey(meta, meta.n_files), bam, bai]
-            }
-            .groupTuple()
+        CONVERT_INPUT_FASTQS.out.bam
+            .map { meta, bam -> [ meta, bam, [] ] }
+            .mix ( ch_align_in_separated.mapped )
+            .set { ch_align_in }
 
-        /*
-         * Always merge here even if there's only one file,
-         * because alignment runs without knowledge of group completeness (n_files),
-         * and we can't therefore output from the alignment step with correct naming.
-         */
-        SAMTOOLS_MERGE(
-            ch_bam_to_merge,
-            [[], [], [], []],
+        ALIGN(
+            ch_align_in,
+            PREPARE_REFERENCES.out.mmi,
+            val_alignment_processes > 1
         )
-
-        // Combine merged with unmerged bam files
-        ch_aligned_bam = SAMTOOLS_MERGE.out.bam
-            .join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true)
-            .map { meta, bam, bai -> [meta - meta.subMap('n_files'), bam, bai] }
-
-        // Convert alignments as CRAM if requested
-        if (val_convert_unphased_aligned_reads_to_cram) {
+        // Publish alignments as CRAM if requested
+        if (cram_output && val_skip_phasing) {
             SAMTOOLS_CONVERT(
-                ch_aligned_bam,
+                ALIGN.out.bam_bai,
                 ch_fasta.join(ch_fai).collect(),
             )
         }
@@ -358,7 +297,7 @@ workflow NALLO {
             // Check sex and relatedness, and update with inferred sex if the sex for a sample is unknown
             //
             BAM_INFER_SEX(
-                ch_aligned_bam,
+                ALIGN.out.bam_bai,
                 ch_fasta,
                 ch_fai,
                 ch_somalier_sites,
@@ -372,8 +311,8 @@ workflow NALLO {
             ch_bam_bai = BAM_INFER_SEX.out.bam_bai
         }
         else {
-            ch_bam = ch_aligned_bam.map { meta, bam, _bai -> [meta, bam] }
-            ch_bam_bai = ch_aligned_bam
+            ch_bam = ALIGN.out.bam_bai.map { meta, bam, _bai -> [meta, bam] }
+            ch_bam_bai = ALIGN.out.bam_bai
         }
 
         if (!val_skip_rank_variants || !val_skip_phasing) {
@@ -1083,18 +1022,13 @@ workflow NALLO {
     )
 
     emit:
-    aligned_assemblies_bai              = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.bai // channel: [ val(meta), path(bai) ]
-    aligned_assemblies_bam              = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.bam // channel: [ val(meta), path(bam) ]
-    aligned_assemblies_crai             = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.crai // channel: [ val(meta), path(crai) ]
-    aligned_assemblies_cram             = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.cram // channel: [ val(meta), path(cram) ]
-    aligned_haplotagged_reads_bai       = val_skip_phasing ? channel.empty() : PHASING.out.haplotagged_bam_bai.map { meta, _bam, bai -> [meta, bai] } // channel: [ val(meta), path(bai) ]
-    aligned_haplotagged_reads_bam       = val_skip_phasing ? channel.empty() : PHASING.out.haplotagged_bam_bai.map { meta, bam, _bai -> [meta, bam] } // channel: [ val(meta), path(bam) ]
-    aligned_haplotagged_reads_crai      = val_skip_phasing ? channel.empty() : PHASING.out.haplotagged_cram_crai.map { meta, _cram, crai -> [meta, crai] } // channel: [ val(meta), path(crai) ]
-    aligned_haplotagged_reads_cram      = val_skip_phasing ? channel.empty() : PHASING.out.haplotagged_cram_crai.map { meta, cram, _crai -> [meta, cram] } // channel: [ val(meta), path(cram) ]
-    aligned_reads_bai                   = val_skip_alignment ? channel.empty() : ch_aligned_bam.map { meta, _bam, bai -> [meta, bai] } // channel: [ val(meta), path(bai) ]
-    aligned_reads_bam                   = val_skip_alignment ? channel.empty() : ch_aligned_bam.map { meta, bam, _bai -> [meta, bam] } // channel: [ val(meta), path(bam) ]
-    aligned_reads_crai                  = !val_convert_unphased_aligned_reads_to_cram ? channel.empty() : SAMTOOLS_CONVERT.out.crai // channel: [ val(meta), path(crai) ]
-    aligned_reads_cram                  = !val_convert_unphased_aligned_reads_to_cram ? channel.empty() : SAMTOOLS_CONVERT.out.cram // channel: [ val(meta), path(cram) ]
+    aligned_assemblies                  = val_skip_genome_assembly ? channel.empty() : cram_output ? ALIGN_ASSEMBLIES.out.cram.join(ALIGN_ASSEMBLIES.out.crai) : ALIGN_ASSEMBLIES.out.bam.join(ALIGN_ASSEMBLIES.out.bai) // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
+    aligned_reads_bam                   = (!val_skip_alignment && val_skip_phasing && !cram_output) ? ALIGN.out.bam_bai.map { meta, bam, _bai -> [meta, bam] } : channel.empty() // channel: [ val(meta), path(bam) ]
+    aligned_reads_bai                   = (!val_skip_alignment && val_skip_phasing && !cram_output) ? ALIGN.out.bam_bai.map { meta, _bam, bai -> [meta, bai] } : channel.empty() // channel: [ val(meta), path(bai) ]
+    aligned_reads_cram                  = (!val_skip_alignment && val_skip_phasing && cram_output) ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
+    aligned_reads_crai                  = (!val_skip_alignment && val_skip_phasing && cram_output) ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
+    annotated_paralogs                  = val_skip_annotate_paralogs ? channel.empty() : ANNOTATE_PARALOGS.out.tsv.mix(ANNOTATE_PARALOGS.out.json) // channel: [ val(meta), path(tsv/json) ]
+    annotated_repeats                   = val_skip_repeat_annotation ? channel.empty() : ANNOTATE_REPEAT_EXPANSIONS.out.vcf.join(ANNOTATE_REPEAT_EXPANSIONS.out.tbi) // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary                    = val_skip_genome_assembly ? channel.empty() : GENOME_ASSEMBLY.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
     chromograph_plots                   = val_skip_chromograph ? channel.empty() : CHROMOGRAPH.out.chromograph_plots // channel: [ val(meta), path(png) ]
     cramino_phased_arrow                = val_skip_phasing ? channel.empty() : PHASING.out.haplotagging_arrow // channel: [ val(meta), path(arrow) ]
