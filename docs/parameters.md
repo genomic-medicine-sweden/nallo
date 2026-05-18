@@ -47,8 +47,6 @@ Define where the pipeline should find input data and save output data.
 | `echtvar_snv_databases` | Path to a CSV/TSV/JSON/YAML file with echtvar databases to annotate SNVs with. | `string` |  |  |  |
 | `svdb_sv_databases` | Databases used for structural variant annotation in vcf format. <details><summary>Help</summary><small>Path to a CSV/TSV/JSON/YAML file containing information about the databases used for structural variant annotation.</small></details>| `string` |  |  |  |
 | `stranger_repeat_catalog` | A variant catalog json-file for stranger | `string` |  |  |  |
-| `variant_consequences_snvs` | File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SNVs. For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html | `string` |  |  |  |
-| `variant_consequences_svs` | File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SVs. For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html | `string` |  |  |  |
 | `vep_cache` | A path to the VEP cache location | `string` |  |  |  |
 | `target_regions` | A BED file with regions of interest. | `string` |  |  |  |
 | `methbat_regions` | A tsv file with only regions of interest (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv) or with both regions and background cohort values (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv), made with methbat build | `string` |  |  |  |
