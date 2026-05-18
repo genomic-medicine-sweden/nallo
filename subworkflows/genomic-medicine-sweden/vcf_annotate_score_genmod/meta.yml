@@ -1,0 +1,100 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/genomic-medicine-sweden/nf-core-modules/main/subworkflows/yaml-schema.json
+name: "VCF_ANNOTATE_SCORE_GENMOD"
+description: Annotate and score variants using Genmod
+keywords:
+  - vcf
+  - variant prioritization
+  - genmod
+  - scoring
+  - inheritance models
+components:
+  - genmod/annotate:
+      git_remote: https://github.com/nf-core/modules.git
+  - genmod/models:
+      git_remote: https://github.com/nf-core/modules.git
+  - genmod/score:
+      git_remote: https://github.com/nf-core/modules.git
+  - genmod/compound:
+      git_remote: https://github.com/nf-core/modules.git
+  - bcftools/view:
+      git_remote: https://github.com/nf-core/modules.git
+input:
+  - ch_vcf:
+      description: |
+        Channel with input VCF file
+      structure:
+        - meta:
+            type: map
+            description: Metadata map
+        - vcf:
+            type: file
+            description: Input VCF file (must be uncompressed)
+            pattern: "*.vcf"
+  - ch_ped:
+      description: |
+        Channel with input PED file
+        Mandatory for genmod models and optional for genmod score
+        Provide channel.empty() if not used
+      structure:
+        - meta:
+            type: map
+            description: Metadata map matching the ch_vcf channel meta
+        - ped:
+            type: file
+            description: PED file
+            pattern: "*.ped"
+  - ch_reduced_penetrance:
+      description: |
+        Channel with (optional) reduced penetrance file for genmod models
+      structure:
+        - meta:
+            type: map
+            description: Metadata map
+        - reduced_penetrance:
+            type: file
+            description: Reduced penetrance file
+            pattern: "*.tsv"
+  - ch_score_config:
+      description: |
+        Channel with genmod score configuration file (rank model)
+      structure:
+        - meta:
+            type: map
+            description: Metadata map
+        - score_config:
+            type: file
+            description: Score configuration file
+            pattern: "*.ini"
+  - val_run_score_only:
+      type: boolean
+      description: |
+        If true, only run genmod score
+output:
+  - vcf:
+      description: |
+        Channel containing (compressed) VCF or BCF file
+      structure:
+        - meta:
+            type: map
+            description: Metadata map
+        - vcf:
+            type: file
+            description: VCF or BCF file
+            pattern: "*.{vcf,vcf.gz,bcf,bcf.gz}"
+  - index:
+      description: |
+        Channel containing corresponding index file
+      structure:
+        - meta:
+            type: map
+            description: Metadata map
+        - index:
+            type: file
+            description: Index file
+            pattern: "*.{tbi,csi}"
+authors:
+  - "@beatrizsavinhas"
+  - "@fellen31"
+maintainers:
+  - "@beatrizsavinhas"
+  - "@fellen31"
