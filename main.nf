@@ -183,6 +183,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         cram_output,
         val_alignment_processes,
         val_bigwig_modcodes,
+        val_skip_phasing && cram_output,
         val_create_hificnv_maf_track,
         val_create_sawfish_maf_track,
         val_echtvar_snv_databases,
@@ -677,9 +678,11 @@ output {
     }
     aligned_reads_bam {
         path { meta, _file -> "aligned_reads/${meta.id}/" }
+        enabled params.alignment_output_format == 'bam' && params.skip_phasing
     }
     aligned_reads_cram {
         path { meta, _file -> "aligned_reads/${meta.id}/" }
+        enabled params.alignment_output_format == 'cram' && params.skip_phasing
     }
     paraphase_sample {
         path { meta, _file -> "paraphase/sample/${meta.id}/" }
