@@ -785,7 +785,7 @@ workflow NALLO {
     //
     // Run Peddy
     //
-    if (!val_skip_snv_calling && !val_skip_peddy) {
+    if (!val_skip_peddy) {
 
         if (!val_skip_snv_annotation) {
             // Use already concatenated VCFs
@@ -1179,16 +1179,16 @@ workflow NALLO {
     paralogs_sample_vcf                 = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.sample_vcf // channel: [ val(meta), path(vcf) ]
     paralogs_sample_tbi                 = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.sample_tbi // channel: [ val(meta), path(tbi) ]
     pedigree                            = val_skip_rank_variants ? channel.empty() : SOMALIER_PED_FAMILY.out.ped // channel: [ val(meta), path(ped) ]
-    peddy_html                          = (val_skip_peddy || val_skip_snv_calling) ? channel.empty() : PEDDY.out.html // channel: [ val(meta), path(html) ]
-    peddy_vs_html                       = (val_skip_peddy || val_skip_snv_calling) ? channel.empty() : PEDDY.out.vs_html // channel: [ val(meta), path(html) ]
-    peddy_ped                           = (val_skip_peddy || val_skip_snv_calling) ? channel.empty() : PEDDY.out.ped // channel: [ val(meta), path(ped) ]
-    peddy_het_check_png                 = (val_skip_peddy || val_skip_snv_calling) ? channel.empty() : PEDDY.out.het_check_png // channel: [ val(meta), path(png) ]
-    peddy_ped_check_png                 = (val_skip_peddy || val_skip_snv_calling) ? channel.empty() : PEDDY.out.ped_check_png // channel: [ val(meta), path(png) ]
-    peddy_sex_check_png                 = (val_skip_peddy || val_skip_snv_calling) ? channel.empty() : PEDDY.out.sex_check_png // channel: [ val(meta), path(png) ]
-    peddy_het_check_csv                 = (val_skip_peddy || val_skip_snv_calling) ? channel.empty() : PEDDY.out.het_check_csv // channel: [ val(meta), path(csv) ]
-    peddy_ped_check_csv                 = (val_skip_peddy || val_skip_snv_calling) ? channel.empty() : PEDDY.out.ped_check_csv // channel: [ val(meta), path(csv) ]
-    peddy_sex_check_csv                 = (val_skip_peddy || val_skip_snv_calling) ? channel.empty() : PEDDY.out.sex_check_csv // channel: [ val(meta), path(csv) ]
-    peddy_ped_check_rel_difference_csv  = (val_skip_peddy || val_skip_snv_calling) ? channel.empty() : PEDDY.out.ped_check_rel_difference_csv // channel: [ val(meta), path(csv) ]
+    peddy_html                          = val_skip_peddy ? channel.empty() : PEDDY.out.html // channel: [ val(meta), path(html) ]
+    peddy_vs_html                       = val_skip_peddy ? channel.empty() : PEDDY.out.vs_html // channel: [ val(meta), path(html) ]
+    peddy_ped                           = val_skip_peddy ? channel.empty() : PEDDY.out.ped // channel: [ val(meta), path(ped) ]
+    peddy_het_check_png                 = val_skip_peddy ? channel.empty() : PEDDY.out.het_check_png // channel: [ val(meta), path(png) ]
+    peddy_ped_check_png                 = val_skip_peddy ? channel.empty() : PEDDY.out.ped_check_png // channel: [ val(meta), path(png) ]
+    peddy_sex_check_png                 = val_skip_peddy ? channel.empty() : PEDDY.out.sex_check_png // channel: [ val(meta), path(png) ]
+    peddy_het_check_csv                 = val_skip_peddy ? channel.empty() : PEDDY.out.het_check_csv // channel: [ val(meta), path(csv) ]
+    peddy_ped_check_csv                 = val_skip_peddy ? channel.empty() : PEDDY.out.ped_check_csv // channel: [ val(meta), path(csv) ]
+    peddy_sex_check_csv                 = val_skip_peddy ? channel.empty() : PEDDY.out.sex_check_csv // channel: [ val(meta), path(csv) ]
+    peddy_ped_check_rel_difference_csv  = val_skip_peddy ? channel.empty() : PEDDY.out.ped_check_rel_difference_csv // channel: [ val(meta), path(csv) ]
     mosdepth_regions                    = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_regions_bed.join(QC_ALIGNED_READS.out.mosdepth_regions_csi) // channel: [ val(meta), path(bed.gz), path(bed.gz.csi) ]
     sambamba_depth_bed                  = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.sambamba_depth_bed // channel: [ val(meta), path(bed) ]
     qc_bcftools_stats                   = val_skip_snv_calling ? channel.empty() : QC_SNVS.out.stats // channel: [ val(meta), path(txt) ]
