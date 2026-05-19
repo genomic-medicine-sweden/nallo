@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            399,
+            395,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -266,12 +266,6 @@
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
-                    "tabix": 1.21
-                },
-                "TABIX_ENSEMBLVEP_SNV": {
-                    "tabix": 1.21
-                },
-                "TABIX_ENSEMBLVEP_SV": {
                     "tabix": 1.21
                 },
                 "TABIX_HIFICNV": {
@@ -1320,7 +1314,7 @@
                 
             ]
         ],
-        "timestamp": "2026-05-07T13:36:32.615866027",
+        "timestamp": "2026-05-18T08:36:40.833997503",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"
