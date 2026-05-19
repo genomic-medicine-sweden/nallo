@@ -61,7 +61,6 @@ include { SAMTOOLS_CONVERT                                       } from '../modu
 include { MULTIQC                                                } from '../modules/nf-core/multiqc/main'
 include { PEDDY                                                  } from '../modules/nf-core/peddy/main'
 include { SPLITUBAM                                              } from '../modules/nf-core/splitubam/main'
-include { SVDB_MERGE as SVDB_MERGE_SVS_CNVS                      } from '../modules/nf-core/svdb/merge/main'
 include { paramsSummaryMap                                       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc                                   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML                                 } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -121,6 +120,7 @@ workflow NALLO {
     cram_output
     val_alignment_processes
     val_bigwig_modcodes
+    val_convert_unphased_aligned_reads_to_cram
     val_create_hificnv_maf_track
     val_create_sawfish_maf_track
     val_echtvar_snv_databases
@@ -340,8 +340,8 @@ workflow NALLO {
             .map { meta, bam, bai -> [meta - meta.subMap('n_files'), bam, bai] }
             .set { ch_aligned_bam }
 
-        // Publish alignments as CRAM if requested
-        if (cram_output && val_skip_phasing) {
+        // Convert alignments as CRAM if requested
+        if (val_convert_unphased_aligned_reads_to_cram) {
             SAMTOOLS_CONVERT(
                 ch_aligned_bam,
                 ch_fasta.join(ch_fai).collect(),
@@ -671,21 +671,16 @@ workflow NALLO {
             [],
             [],
         )
-        ch_snv_vcf_for_annotation = BCFTOOLS_VIEW_PHASING.out.vcf
+        ch_snv_vcf_for_annotation   = BCFTOOLS_VIEW_PHASING.out.vcf
         ch_snv_index_for_annotation = BCFTOOLS_VIEW_PHASING.out.tbi
-        ch_sv_vcf_for_annotation = PHASING.out.phased_family_svs
-        ch_sv_index_for_annotation = PHASING.out.phased_family_svs_tbi
+        ch_sv_vcf_for_annotation    = PHASING.out.phased_family_svs
+        ch_sv_index_for_annotation  = PHASING.out.phased_family_svs_tbi
     }
     else {
-        // Guarding against Nexflow trying to bind uninitialized channels even though we don't run annotation without SNVs
-        if (!val_skip_snv_calling) {
-            ch_snv_vcf_for_annotation = family_snv_vcf
-            ch_snv_index_for_annotation = family_snv_index
-        }
-        if (!val_skip_sv_calling) {
-            ch_sv_vcf_for_annotation = CALL_SVS.out.family_vcf
-            ch_sv_index_for_annotation = CALL_SVS.out.family_tbi
-        }
+        ch_snv_vcf_for_annotation   = val_skip_snv_calling ? channel.empty() : family_snv_vcf
+        ch_snv_index_for_annotation = val_skip_snv_calling ? channel.empty() : family_snv_index
+        ch_sv_vcf_for_annotation    = val_skip_sv_calling  ? channel.empty() : CALL_SVS.out.family_vcf
+        ch_sv_index_for_annotation  = val_skip_sv_calling  ? channel.empty() : CALL_SVS.out.family_tbi
     }
 
     //
@@ -1120,10 +1115,10 @@ workflow NALLO {
 
     emit:
     aligned_assemblies                  = val_skip_genome_assembly ? channel.empty() : cram_output ? ALIGN_ASSEMBLIES.out.cram.join(ALIGN_ASSEMBLIES.out.crai) : ALIGN_ASSEMBLIES.out.bam.join(ALIGN_ASSEMBLIES.out.bai) // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
-    aligned_reads_bam                   = (!val_skip_alignment && val_skip_phasing && !cram_output) ? ch_aligned_bam.map { meta, bam, _bai -> [meta, bam] } : channel.empty() // channel: [ val(meta), path(bam) ]
-    aligned_reads_bai                   = (!val_skip_alignment && val_skip_phasing && !cram_output) ? ch_aligned_bam.map { meta, _bam, bai -> [meta, bai] } : channel.empty() // channel: [ val(meta), path(bai) ]
-    aligned_reads_cram                  = (!val_skip_alignment && val_skip_phasing && cram_output) ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
-    aligned_reads_crai                  = (!val_skip_alignment && val_skip_phasing && cram_output) ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
+    aligned_reads_bam                   = val_skip_alignment ? channel.empty() : ch_aligned_bam.map { meta, bam, _bai -> [meta, bam] } // channel: [ val(meta), path(bam) ]
+    aligned_reads_bai                   = val_skip_alignment ? channel.empty() : ch_aligned_bam.map { meta, _bam, bai -> [meta, bai] } // channel: [ val(meta), path(bai) ]
+    aligned_reads_cram                  = !val_convert_unphased_aligned_reads_to_cram ? channel.empty() : SAMTOOLS_CONVERT.out.cram // channel: [ val(meta), path(cram) ]
+    aligned_reads_crai                  = !val_convert_unphased_aligned_reads_to_cram ? channel.empty() : SAMTOOLS_CONVERT.out.crai // channel: [ val(meta), path(crai) ]
     annotated_paralogs                  = val_skip_annotate_paralogs ? channel.empty() : ANNOTATE_PARALOGS.out.tsv.mix(ANNOTATE_PARALOGS.out.json) // channel: [ val(meta), path(tsv/json) ]
     annotated_repeats                   = val_skip_repeat_annotation ? channel.empty() : ANNOTATE_REPEAT_EXPANSIONS.out.vcf.join(ANNOTATE_REPEAT_EXPANSIONS.out.tbi) // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary                    = val_skip_genome_assembly ? channel.empty() : GENOME_ASSEMBLY.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
