@@ -1,7 +1,7 @@
 {
     "Test Chromograph works without SNV annotation": {
         "content": [
-            72,
+            71,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -134,9 +134,6 @@
                     "bgzip": 1.21,
                     "tabix": 1.21
                 },
-                "TABIX_ENSEMBLVEP_SV": {
-                    "tabix": 1.21
-                },
                 "TABIX_HIFICNV": {
                     "tabix": 1.21
                 },
@@ -238,7 +235,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-05-12T16:08:50.731522413",
+        "timestamp": "2026-05-18T08:48:17.242522588",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"
