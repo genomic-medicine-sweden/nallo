@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            232,
+            235,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -196,6 +196,9 @@
                 "PEDDY": {
                     "peddy": "0.4.8"
                 },
+                "PREPARECOVANDBAF": {
+                    "preparecovandbaf": "1.1.5"
+                },
                 "RELATE_INFER": {
                     "somalier": "0.2.18"
                 },
@@ -338,6 +341,12 @@
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
+                "gens",
+                "gens/HG002_Revio",
+                "gens/HG002_Revio/HG002_Revio.baf.bed.gz",
+                "gens/HG002_Revio/HG002_Revio.baf.bed.gz.tbi",
+                "gens/HG002_Revio/HG002_Revio.cov.bed.gz",
+                "gens/HG002_Revio/HG002_Revio.cov.bed.gz.tbi",
                 "images",
                 "images/chromograph",
                 "images/chromograph/sample",
@@ -666,6 +675,10 @@
             [
                 "HG002_Revio_haplotype_1.assembly_summary:md5,7b580367cc0806818f9597d84bd7e5d3",
                 "HG002_Revio_haplotype_2.assembly_summary:md5,53928ced28326a9fae5f2b8f7d25ea18",
+                "HG002_Revio.baf.bed.gz:md5,6665b135f673d204ec030883683605ea",
+                "HG002_Revio.baf.bed.gz.tbi:md5,3e21a7933ca52383f0b8ccf221b05fc7",
+                "HG002_Revio.cov.bed.gz:md5,04addec86adce344b4cf3df83ad632e5",
+                "HG002_Revio.cov.bed.gz.tbi:md5,d562f6f700997e84f33f212f781ca14b",
                 "HG002_Revio_chromograph_autozyg_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_Revio_chromograph_autozyg_chr10.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_Revio_chromograph_autozyg_chr11.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -821,7 +834,7 @@
                 ],
                 [
                     "FAM_snvs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=143, phased=false, phasedAutodetect=true]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=144, phased=false, phasedAutodetect=true]"
                 ],
                 [
                     "HG002_Revio_deepvariant_snvs.vcf.gz",
@@ -840,7 +853,7 @@
                 
             ]
         ],
-        "timestamp": "2026-05-13T11:40:39.530485633",
+        "timestamp": "2026-05-20T14:44:18.836765436",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"

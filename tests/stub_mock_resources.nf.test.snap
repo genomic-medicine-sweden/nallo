@@ -1,10 +1,13 @@
 {
     "Test VEP with mock uncompressed cache": {
         "content": [
-            57,
+            74,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
+                },
+                "BCFTOOLS_MERGE": {
+                    "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_MULTISAMPLE": {
                     "bcftools": 1.22
@@ -16,6 +19,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_STATS": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_MITO": {
                     "bcftools": 1.22
                 },
                 "BEDTOOLS_MERGE": {
@@ -66,6 +72,9 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
+                },
+                "MITORSAW_HAPLOTYPE": {
+                    "mitorsaw": "0.2.9-0dc8e58"
                 },
                 "RELATE_INFER": {
                     "somalier": "0.2.18"
@@ -148,18 +157,21 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-04-28T15:40:57.770634699",
+        "timestamp": "2026-05-15T09:09:46.707421174",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.02.0"
         }
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
-            44,
+            61,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
+                },
+                "BCFTOOLS_MERGE": {
+                    "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_MULTISAMPLE": {
                     "bcftools": 1.22
@@ -174,6 +186,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_STATS": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_MITO": {
                     "bcftools": 1.22
                 },
                 "BEDTOOLS_INTERSECT": {
@@ -194,11 +209,11 @@
                     "bgzip": 1.21
                 },
                 "DNASCOPE_LONGREAD": {
-                    "bcftools": 1.22,
-                    "bedtools": "2.31.1",
-                    "samtools": "1.22.1",
-                    "sentieon-cli": "1.5.2",
-                    "sentieon": 202503.02
+                    "bcftools": "1.23.1",
+                    "bedtools": "2.30.0",
+                    "samtools": "1.23.1",
+                    "sentieon-cli": "1.6.2",
+                    "sentieon": 202503.03
                 },
                 "ECHTVAR_ANNO": {
                     "echtvar": "0.2.2"
@@ -222,6 +237,9 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
+                },
+                "MITORSAW_HAPLOTYPE": {
+                    "mitorsaw": "0.2.9-0dc8e58"
                 },
                 "RELATE_INFER": {
                     "somalier": "0.2.18"
@@ -307,21 +325,24 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-04-28T15:41:31.037817614",
+        "timestamp": "2026-05-20T14:36:31.334330045",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.02.0"
         }
     },
     "Test CADD with mock resources": {
         "content": [
-            70,
+            92,
             {
                 "ANNOTATE_INDELS": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
+                },
+                "BCFTOOLS_MERGE": {
+                    "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_MULTISAMPLE": {
                     "bcftools": 1.22
@@ -336,6 +357,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_MITO": {
                     "bcftools": 1.22
                 },
                 "BEDTOOLS_MERGE": {
@@ -392,6 +416,9 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
+                },
+                "MITORSAW_HAPLOTYPE": {
+                    "mitorsaw": "0.2.9-0dc8e58"
                 },
                 "REFERENCE_TO_CADD_CHRNAMES": {
                     "gawk": "5.3.1"
@@ -486,10 +513,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-04-28T15:40:16.035986751",
+        "timestamp": "2026-05-15T09:09:17.049359838",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.02.0"
         }
     }
 }
