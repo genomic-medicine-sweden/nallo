@@ -550,9 +550,10 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov_bed)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov_tbi)
 
-    ch_haplotagged_reads = GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads_bam
+    ch_haplotagged_reads_bam = GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads_bam
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads_bai)
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads_cram)
+
+    ch_haplotagged_reads_cram = GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads_cram
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads_crai)
 
     ch_qc_cramino_unphased = GENOMICMEDICINESWEDEN_NALLO.out.cramino_unphased_stats.mix(GENOMICMEDICINESWEDEN_NALLO.out.cramino_unphased_arrow)
@@ -674,7 +675,8 @@ workflow {
     chromograph_plots             = GENOMICMEDICINESWEDEN_NALLO.out.chromograph_plots // channel: [ val(meta), path(png) ]
     family_snvs                   = ch_family_snvs // channel: [ val(meta), path(vcf/tbi) ]
     gens                          = ch_gens // channel: [ val(meta), path(baf/cov.bed.gz), path(baf/cov.bed.gz.tbi) ]
-    haplotagged_reads             = ch_haplotagged_reads // channel: [ val(meta), path(bam/cram/bai/crai) ]
+    haplotagged_reads_bam         = ch_haplotagged_reads_bam // channel: [ val(meta), path(bam/bai) ]
+    haplotagged_reads_cram        = ch_haplotagged_reads_cram // channel: [ val(meta), path(cram/crai) ]
     methylation_annotation        = GENOMICMEDICINESWEDEN_NALLO.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     multiqc                       = ch_multiqc // channel: [ val(meta), path(html/multiqc_data) ]
     repeats_family                = ch_repeats_family // channel: [ val(meta), path(vcf/tbi) ]
@@ -754,11 +756,19 @@ output {
     gens {
         path { meta, _file -> "gens/${meta.id}/" }
     }
-    haplotagged_reads {
+    haplotagged_reads_bam {
         // HiPhase uses the input file (aligned reads) as template for naming output, so we need to remove the "_aligned" suffix here
         path { meta, file ->
             file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_aligned", "")}"
         }
+        enabled params.alignment_output_format == 'bam'
+    }
+    haplotagged_reads_cram {
+        // HiPhase uses the input file (aligned reads) as template for naming output, so we need to remove the "_aligned" suffix here
+        path { meta, file ->
+            file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_aligned", "")}"
+        }
+        enabled params.alignment_output_format == 'cram'
     }
     methylation_annotation {
         path { meta, _methylated_regions -> "methylation/profile/family/${meta.id}/" }
