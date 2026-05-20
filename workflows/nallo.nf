@@ -508,6 +508,9 @@ workflow NALLO {
         call_snvs_gvcf
             .map {meta, gvcf -> [meta + [num_intervals: meta.num_intervals + 1], gvcf] }
             .set { call_snvs_gvcf }
+        call_snvs_gvcf_index
+            .map {meta, gvcf -> [meta + [num_intervals: meta.num_intervals + 1], gvcf] }
+            .set { call_snvs_gvcf_index }
 
         // Group GVCFs per region and family (one region with all samples)
         call_snvs_gvcf
@@ -521,7 +524,7 @@ workflow NALLO {
             .groupTuple()
             .set { variants_to_merge_per_family }
 
-        call_snvs_index
+        call_snvs_gvcf_index
             .map { meta, tbi ->
                 [[id: meta.region.name, family_id: meta.family_id, genome: meta.genome,  num_intervals: meta.num_intervals, caller: val_snv_caller], tbi]
             }
