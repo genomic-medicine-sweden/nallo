@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            331,
+            325,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -210,12 +210,6 @@
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
-                    "tabix": 1.21
-                },
-                "TABIX_ENSEMBLVEP_SNV": {
-                    "tabix": 1.21
-                },
-                "TABIX_ENSEMBLVEP_SV": {
                     "tabix": 1.21
                 },
                 "TABIX_HIFICNV": {
@@ -1224,7 +1218,7 @@
                 
             ]
         ],
-        "timestamp": "2026-05-18T07:40:31.761192882",
+        "timestamp": "2026-05-20T15:54:48.177978705",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"

@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            210,
+            206,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -270,12 +270,6 @@
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
-                    "tabix": 1.21
-                },
-                "TABIX_ENSEMBLVEP_SNV": {
-                    "tabix": 1.21
-                },
-                "TABIX_ENSEMBLVEP_SV": {
                     "tabix": 1.21
                 },
                 "TABIX_HIFICNV": {
@@ -836,7 +830,7 @@
                 
             ]
         ],
-        "timestamp": "2026-05-18T07:32:52.832416585",
+        "timestamp": "2026-05-20T15:44:09.394053085",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"

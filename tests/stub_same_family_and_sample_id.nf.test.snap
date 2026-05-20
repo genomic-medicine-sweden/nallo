@@ -1,7 +1,7 @@
 {
     "Test family id same as sample id": {
         "content": [
-            177,
+            174,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -260,12 +260,6 @@
                     "bgzip": 1.21,
                     "tabix": 1.21
                 },
-                "TABIX_ENSEMBLVEP_SNV": {
-                    "tabix": 1.21
-                },
-                "TABIX_ENSEMBLVEP_SV": {
-                    "tabix": 1.21
-                },
                 "TABIX_HIFICNV": {
                     "tabix": 1.21
                 },
@@ -506,7 +500,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-05-18T07:43:38.134943426",
+        "timestamp": "2026-05-20T15:57:30.78170899",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"
