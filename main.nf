@@ -219,17 +219,17 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_skip_qc,
         val_skip_rank_variants,
         val_skip_repeat_annotation,
-        val_skip_repeat_calling,
         val_skip_sambamba_depth,
         val_skip_sex_check,
         val_skip_snv_annotation,
         val_skip_snv_calling,
+        val_skip_repeat_calling || val_str_caller != "trgt",
         val_skip_sv_annotation,
         val_skip_sv_calling,
+        val_skip_repeat_calling || val_str_caller != "strdust",
         val_snv_caller,
         val_snv_calling_processes,
         val_snv_call_regions,
-        val_str_caller,
         val_strdrop_training_set_json,
         val_sv_callers_merge_priority,
         val_sv_callers_to_merge,
@@ -733,6 +733,7 @@ output {
     }
     repeats_family {
         path { meta, _file -> "repeats/family/${meta.id}/" }
+        enabled params.skip_repeat_annotation
     }
     repeats_sample {
         path { meta, _file -> "repeats/sample/${meta.id}/" }
