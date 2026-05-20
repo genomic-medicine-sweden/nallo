@@ -118,7 +118,7 @@ workflow NALLO {
     ch_vcfexpress_prelude
     ch_vep_cache_unprocessed
     ch_vep_plugin_files
-    cram_output
+    val_cram_output
     val_alignment_processes
     val_bigwig_modcodes
     val_convert_unphased_aligned_reads_to_cram
@@ -236,7 +236,10 @@ workflow NALLO {
 
         ALIGN_ASSEMBLIES(
             GENOME_ASSEMBLY.out.assembled_haplotypes,
-            PREPARE_REFERENCES.out.mmi
+            PREPARE_REFERENCES.out.mmi,
+            ch_fasta,
+            ch_fai,
+            val_cram_output
         )
     }
 
@@ -252,7 +255,7 @@ workflow NALLO {
             }
             .set { ch_align_in }
 
-        ch_align_in
+        ch_align_in.unmapped
             .map { meta, reads, _index -> [ meta, reads ]}
             .set { ch_convert_fq_in }
 
@@ -269,7 +272,7 @@ workflow NALLO {
             val_alignment_processes > 1
         )
         // Publish alignments as CRAM if requested
-        if (cram_output && val_skip_phasing) {
+        if (val_cram_output && val_skip_phasing) {
             SAMTOOLS_CONVERT(
                 ALIGN.out.bam_bai,
                 ch_fasta.join(ch_fai).collect(),
@@ -345,7 +348,7 @@ workflow NALLO {
             ch_bam_bai,
             ch_fasta,
             ch_fai,
-            cram_output,
+            val_cram_output,
         )
     }
 
@@ -564,8 +567,8 @@ workflow NALLO {
             ch_fai,
             val_phaser,
             !val_skip_sv_calling,
-            cram_output,
-            ch_ped_family,
+            val_cram_output,
+            ch_ped_family
         )
 
         ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect { _meta, txt -> txt }.ifEmpty([]))
@@ -910,7 +913,7 @@ workflow NALLO {
             ch_fasta,
             ch_fai,
             ch_str_bed,
-            cram_output,
+            val_cram_output,
             ch_vcfexpress_prelude,
         )
 
@@ -1018,11 +1021,11 @@ workflow NALLO {
     )
 
     emit:
-    aligned_assemblies                  = val_skip_genome_assembly ? channel.empty() : cram_output ? ALIGN_ASSEMBLIES.out.cram.join(ALIGN_ASSEMBLIES.out.crai) : ALIGN_ASSEMBLIES.out.bam.join(ALIGN_ASSEMBLIES.out.bai) // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
-    aligned_reads_bam                   = (!val_skip_alignment && val_skip_phasing && !cram_output) ? ALIGN.out.bam_bai.map { meta, bam, _bai -> [meta, bam] } : channel.empty() // channel: [ val(meta), path(bam) ]
-    aligned_reads_bai                   = (!val_skip_alignment && val_skip_phasing && !cram_output) ? ALIGN.out.bam_bai.map { meta, _bam, bai -> [meta, bai] } : channel.empty() // channel: [ val(meta), path(bai) ]
-    aligned_reads_cram                  = (!val_skip_alignment && val_skip_phasing && cram_output) ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
-    aligned_reads_crai                  = (!val_skip_alignment && val_skip_phasing && cram_output) ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
+    aligned_assemblies                  = val_skip_genome_assembly ? channel.empty() : val_cram_output ? ALIGN_ASSEMBLIES.out.cram.join(ALIGN_ASSEMBLIES.out.crai) : ALIGN_ASSEMBLIES.out.bam.join(ALIGN_ASSEMBLIES.out.bai) // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
+    aligned_reads_bam                   = (!val_skip_alignment && val_skip_phasing && !val_cram_output) ? ALIGN.out.bam_bai.map { meta, bam, _bai -> [meta, bam] } : channel.empty() // channel: [ val(meta), path(bam) ]
+    aligned_reads_bai                   = (!val_skip_alignment && val_skip_phasing && !val_cram_output) ? ALIGN.out.bam_bai.map { meta, _bam, bai -> [meta, bai] } : channel.empty() // channel: [ val(meta), path(bai) ]
+    aligned_reads_cram                  = (!val_skip_alignment && val_skip_phasing && val_cram_output) ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
+    aligned_reads_crai                  = (!val_skip_alignment && val_skip_phasing && val_cram_output) ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
     annotated_paralogs                  = val_skip_annotate_paralogs ? channel.empty() : ANNOTATE_PARALOGS.out.tsv.mix(ANNOTATE_PARALOGS.out.json) // channel: [ val(meta), path(tsv/json) ]
     annotated_repeats                   = val_skip_repeat_annotation ? channel.empty() : ANNOTATE_REPEAT_EXPANSIONS.out.vcf.join(ANNOTATE_REPEAT_EXPANSIONS.out.tbi) // channel: [ val(meta), path(vcf), path(tbi) ]
     assembly_summary                    = val_skip_genome_assembly ? channel.empty() : GENOME_ASSEMBLY.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
