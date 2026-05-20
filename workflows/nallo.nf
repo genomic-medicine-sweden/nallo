@@ -53,7 +53,7 @@ include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modu
 
 // nf-core
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_PHASING             } from '../modules/nf-core/bcftools/concat/main'
-include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_MITO_NUCLEAR_SVS   } from '../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_MITO_SNVS   } from '../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_SORT   as BCFTOOLS_SORT_MITO_SVS             } from '../modules/nf-core/bcftools/sort/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CHROMOGRAPH             } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SV                      } from '../modules/nf-core/bcftools/view/main'
@@ -468,13 +468,14 @@ workflow NALLO {
         CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_vcf
             .map { meta, vcf -> [meta + [caller: val_mitochondrial_caller], vcf] }
             .combine(ch_bed_intervals.map { _meta, _bed, num_intervals -> num_intervals }.first())
-            .map {meta, vcf, num_intervals -> [meta + [num_intervals: num_intervals + 1], vcf] }
+            .map {meta, vcf, num_intervals -> [meta + [genome: 'mitochondrial', num_intervals: num_intervals + 1], vcf] }
             .set { ch_mitochondrial_vcf }
         CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_tbi
             .map { meta, tbi -> [meta + [caller: val_mitochondrial_caller], tbi] }
             .combine(ch_bed_intervals.map { _meta, _bed, num_intervals -> num_intervals }.first())
-            .map {meta, tbi, num_intervals -> [meta + [num_intervals: num_intervals + 1], tbi] }
+            .map {meta, tbi, num_intervals -> [meta + [genome: 'mitochondrial', num_intervals: num_intervals + 1], tbi] }
             .set { ch_mitochondrial_tbi }
+
         ch_mitochondrial_sv_vcf = CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_sv_vcf
 
         // Combine the BED intervals with BAM/BAI files to create a region-bam-bai for each sample.
@@ -511,22 +512,22 @@ workflow NALLO {
         // Group GVCFs per region and family (one region with all samples)
         call_snvs_gvcf
             .map { meta, gvcf ->
-                [[genome: meta.genome, id: meta.region.name, family_id: meta.family_id, num_intervals: meta.num_intervals, caller: val_snv_caller], gvcf]
+                [[id: meta.region.name, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals, caller: val_snv_caller], gvcf]
             }
             .mix(ch_mitochondrial_vcf
                 .map { meta, vcf ->
-                [[id: "mitochondrial_region", family_id: meta.family_id, num_intervals: meta.num_intervals, caller: meta.caller], vcf]}
+                [[id: meta.genome, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals, caller: meta.caller], vcf]}
             )
             .groupTuple()
             .set { variants_to_merge_per_family }
 
         call_snvs_index
             .map { meta, tbi ->
-                [[genome: meta.genome, id: meta.region.name, family_id: meta.family_id, num_intervals: meta.num_intervals, caller: val_snv_caller], tbi]
+                [[id: meta.region.name, family_id: meta.family_id, genome: meta.genome,  num_intervals: meta.num_intervals, caller: val_snv_caller], tbi]
             }
             .mix(ch_mitochondrial_tbi
                 .map { meta, tbi ->
-                [[id: "mitochondrial_region", family_id: meta.family_id, num_intervals: meta.num_intervals, caller: meta.caller], tbi]}
+                [[id: meta.genome, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals, caller: meta.caller], tbi]}
             )
             .groupTuple()
             .set { gvcf_tbis_per_family }
@@ -719,9 +720,8 @@ workflow NALLO {
             .map { meta, vcf ->
                 [meta + [num_intervals: meta.num_intervals + 1], vcf]
             }
-            .mix(ch_mitochondrial_vcf
-            .map { meta, vcf ->
-                [[id: "mitochondrial_region", family_id: meta.family_id, num_intervals: meta.num_intervals], vcf]}
+            .mix(GVCF_GLNEXUS_NORM_VARIANTS.out.vcf
+            .filter { meta, _vcf -> meta.genome == "mitochondrial" }
             )
             .set { ch_snv_vcf_nuclear_mitochondrial_for_annotation }
 
@@ -729,9 +729,8 @@ workflow NALLO {
             .map { meta, tbi ->
                 [meta + [num_intervals: meta.num_intervals + 1], tbi]
             }
-            .mix(ch_mitochondrial_tbi
-            .map { meta, tbi ->
-                [[id: "mitochondrial_region", family_id: meta.family_id, num_intervals: meta.num_intervals], tbi]}
+            .mix(GVCF_GLNEXUS_NORM_VARIANTS.out.index
+            .filter { meta, _tbi -> meta.genome == "mitochondrial" }
             )
             .set { ch_snv_index_nuclear_mitochondrial_for_annotation  }
 
@@ -741,7 +740,6 @@ workflow NALLO {
 
         PHASING.out.phased_family_svs_tbi
             .set { ch_sv_index_for_annotation }
-
 
     }
     else {

@@ -16,10 +16,11 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
     mitochondrial_caller  // string
 
     main:
-    ch_fasta.join(ch_fai).set { ch_fasta_fai }
+    ch_fasta.join(ch_fai)
+        .collect()
+        .set { ch_fasta_fai }
 
     if (mitochondrial_caller == "mitorsaw") {
-
         MITORSAW_HAPLOTYPE(
             ch_bam_bai,
             ch_fasta_fai,
