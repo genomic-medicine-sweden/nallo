@@ -54,7 +54,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1084](https://github.com/genomic-medicine-sweden/nallo/pull/1084) - Updated nf-core module for `peddy`
 - [#1088](https://github.com/genomic-medicine-sweden/nallo/pull/1088) - Changed to emit all files and indexes separately from `nallo.nf`
 - [#1089](https://github.com/genomic-medicine-sweden/nallo/pull/1089) - Version sorted workflow output related items
-- [#1089](https://github.com/genomic-medicine-sweden/nallo/pull/1089) - Changed names to add `_publish` to channels that are to be published
 - [#1091](https://github.com/genomic-medicine-sweden/nallo/pull/1091) - Renamed `ch_vcf_tbi_per_region` channels in `nallo`
 - [#1093](https://github.com/genomic-medicine-sweden/nallo/pull/1093) - Simplified methylation-related conditionals in `nallo`
 - [#1094](https://github.com/genomic-medicine-sweden/nallo/pull/1094) - Simplified repeats-related conditionals in `nallo`
