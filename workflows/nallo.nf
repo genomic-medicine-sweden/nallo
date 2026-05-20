@@ -700,24 +700,25 @@ workflow NALLO {
         )
 
         ANNOTATE_SNVS.out.vcf
-            .multiMap { meta, vcf ->
-                clinical: [meta + [set: "clinical"], vcf]
-                research: [meta + [set: "research"], vcf]
+            .join(ANNOTATE_SNVS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+            .multiMap { meta, vcf, tbi ->
+                clinical: [meta + [set: "clinical"], vcf, tbi]
+                research: [meta + [set: "research"], vcf, tbi]
             }
-            .set { ch_clin_research_snvs_vcf }
+            .set { ch_clinical_research_snvs_vcf_tbi }
 
-        ch_clin_research_snvs_vcf.research.set { ch_snvs_per_family_annotated_vcf_tbi }
+        ch_clinical_research_snvs_vcf_tbi.research.set { ch_snvs_per_family_annotated_vcf_tbi }
 
         if (val_filter_variants_hgnc_ids || val_filter_snvs_expression != '') {
 
             FILTER_VARIANTS_SNVS(
-                ch_clin_research_snvs_vcf.clinical,
+                ch_clinical_research_snvs_vcf_tbi.clinical.map { meta, vcf, _tbi -> [meta, vcf] },
                 ch_hgnc_ids,
                 val_filter_snvs_expression,
                 val_filter_variants_hgnc_ids,
             )
 
-            ch_snvs_per_family_annotated_vcf_tbi = ch_snvs_per_family_annotated_vcf_tbi.mix(FILTER_VARIANTS_SNVS.out.vcf)
+            ch_snvs_per_family_annotated_vcf_tbi = ch_snvs_per_family_annotated_vcf_tbi.mix(FILTER_VARIANTS_SNVS.out.vcf.join(FILTER_VARIANTS_SNVS.out.tbi, failOnMismatch: true, failOnDuplicate: true))
         }
     }
 
@@ -834,13 +835,14 @@ workflow NALLO {
         )
 
         ANNOTATE_SVS.out.vcf
-            .multiMap { meta, vcf ->
-                clinical: [meta + [set: "clinical"], vcf]
-                research: [meta + [set: "research"], vcf]
+            .join(ANNOTATE_SVS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+            .multiMap { meta, vcf, tbi ->
+                clinical: [meta + [set: "clinical"], vcf, tbi]
+                research: [meta + [set: "research"], vcf, tbi]
             }
-            .set { ch_clin_research_svs_vcf }
+            .set { ch_clinical_research_svs_vcf_tbi }
 
-        ch_clin_research_svs_vcf.research.set { ch_svs_per_family_annotated_vcf_tbi }
+        ch_clinical_research_svs_vcf_tbi.research.set { ch_svs_per_family_annotated_vcf_tbi }
 
         //
         // Filter SVs
@@ -848,13 +850,13 @@ workflow NALLO {
         if (val_filter_variants_hgnc_ids || val_filter_svs_expression != '') {
 
             FILTER_VARIANTS_SVS(
-                ch_clin_research_svs_vcf.clinical,
+                ch_clinical_research_svs_vcf_tbi.clinical.map { meta, vcf, _tbi -> [meta, vcf] },
                 ch_hgnc_ids,
                 val_filter_svs_expression,
                 val_filter_variants_hgnc_ids,
             )
 
-            ch_svs_per_family_annotated_vcf_tbi = ch_svs_per_family_annotated_vcf_tbi.mix(FILTER_VARIANTS_SVS.out.vcf)
+            ch_svs_per_family_annotated_vcf_tbi = ch_svs_per_family_annotated_vcf_tbi.mix(FILTER_VARIANTS_SVS.out.vcf.join(FILTER_VARIANTS_SVS.out.tbi, failOnMismatch: true, failOnDuplicate: true))
         }
     }
 
@@ -866,7 +868,7 @@ workflow NALLO {
     if (!val_skip_rank_variants) {
 
         ch_snvs_per_family_for_ranking = buildRankVariantsInputChannel(
-            ch_snvs_per_family_annotated_vcf_tbi,
+            ch_snvs_per_family_annotated_vcf_tbi.map { meta, vcf, _tbi -> [meta + [family_id: meta.id], vcf] },
             SOMALIER_PED_FAMILY.out.ped,
             'snv',
             ch_genmod_score_config_snvs,
@@ -874,7 +876,7 @@ workflow NALLO {
         )
 
         ch_svs_per_family_for_ranking = buildRankVariantsInputChannel(
-            ch_svs_per_family_annotated_vcf_tbi.map { meta, vcf -> [meta + [family_id: meta.id], vcf] },
+            ch_svs_per_family_annotated_vcf_tbi.map { meta, vcf, _tbi -> [meta + [family_id: meta.id], vcf] },
             SOMALIER_PED_FAMILY.out.ped,
             'sv',
             ch_genmod_score_config_svs,
@@ -938,7 +940,7 @@ workflow NALLO {
         ch_collect_svs = val_skip_sv_annotation
             ? ch_sv_vcf_for_annotation
             : val_skip_rank_variants
-                ? ch_svs_per_family_annotated_vcf_tbi
+                ? ch_svs_per_family_annotated_vcf_tbi.map { meta, vcf, _tbi -> [meta, vcf] }
                 : ch_ranked_variants.sv.map { meta, vcf, _tbi -> [meta, vcf] }
 
         BCFTOOLS_VIEW_SV(
