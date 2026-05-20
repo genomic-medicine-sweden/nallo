@@ -867,7 +867,7 @@ workflow NALLO {
      */
     if (!val_skip_rank_variants) {
 
-        ch_snvs_per_family_for_ranking = buildRankVariantsInputChannel(
+        ch_snvs_to_rank = buildRankVariantsInputChannel(
             ch_snvs_per_family_annotated_vcf_tbi.map { meta, vcf, _tbi -> [meta + [family_id: meta.id], vcf] },
             SOMALIER_PED_FAMILY.out.ped,
             'snv',
@@ -875,7 +875,7 @@ workflow NALLO {
             ch_samplesheet,
         )
 
-        ch_svs_per_family_for_ranking = buildRankVariantsInputChannel(
+        ch_svs_to_rank = buildRankVariantsInputChannel(
             ch_svs_per_family_annotated_vcf_tbi.map { meta, vcf, _tbi -> [meta + [family_id: meta.id], vcf] },
             SOMALIER_PED_FAMILY.out.ped,
             'sv',
@@ -883,8 +883,8 @@ workflow NALLO {
             ch_samplesheet,
         )
 
-        ch_snvs_per_family_for_ranking
-            .mix(ch_svs_per_family_for_ranking)
+        ch_snvs_to_rank
+            .mix(ch_svs_to_rank)
             .multiMap { meta, vcf, ped, score_config ->
                 vcf: [meta, vcf]
                 ped: [meta, ped]
