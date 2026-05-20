@@ -20,6 +20,12 @@
                 "pattern": "^\\S+\\.(f(ast)?q\\.gz|bam)$",
                 "errorMessage": "FastQ or BAM file must be provided, cannot contain spaces and must have extension '.fq.gz', '.fastq.gz' or '.bam'"
             },
+            "index": {
+                "format": "file-path",
+                "type": "string",
+                "pattern": "^\\S+\\.bam\\.bai$",
+                "errorMessage": "Index for pre-aligned BAM files. Optional"
+            },
             "family_id": {
                 "type": "string",
                 "pattern": "^\\S+$",
