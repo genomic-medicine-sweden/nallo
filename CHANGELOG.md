@@ -53,10 +53,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1082](https://github.com/genomic-medicine-sweden/nallo/pull/1082) - Changed `nallo` to workflow outputs
 - [#1084](https://github.com/genomic-medicine-sweden/nallo/pull/1084) - Updated nf-core module for `peddy`
 - [#1088](https://github.com/genomic-medicine-sweden/nallo/pull/1088) - Changed to emit and all files and indexes separately from `nallo.nf`
+- [#1091](https://github.com/genomic-medicine-sweden/nallo/pull/1091) - Renamed `ch_vcf_tbi_per_region` channels in `nallo`
+- [#1093](https://github.com/genomic-medicine-sweden/nallo/pull/1093) - Simplified methylation-related conditionals in `nallo`
+- [#1094](https://github.com/genomic-medicine-sweden/nallo/pull/1094) - Simplified repeats-related conditionals in `nallo`
+- [#1095](https://github.com/genomic-medicine-sweden/nallo/pull/1095) - Simplified peddy-related conditionals in `nallo`
+- [#1096](https://github.com/genomic-medicine-sweden/nallo/pull/1096) - Simplified cram-related conditionals in `nallo`
+- [#1097](https://github.com/genomic-medicine-sweden/nallo/pull/1097) - Simplified phasing-related if statement in `nallo`
 
 ### Removed
 
 - [#1072](https://github.com/genomic-medicine-sweden/nallo/pull/1072) - Remove sentieon/dnascope-longread Dockerfile
+- [#1087](https://github.com/genomic-medicine-sweden/nallo/pull/1087) - Removed all publishDir directives from configs
+- [#1087](https://github.com/genomic-medicine-sweden/nallo/pull/1087) - Removed empty qc_snv.config
+- [#1092](https://github.com/genomic-medicine-sweden/nallo/pull/1092) - Removed unused SVDB import in `nallo`
+- [#1100](https://github.com/genomic-medicine-sweden/nallo/pull/1100) - Removed tabix from SNV and SV annotation subworkflows
 
 ### Fixed
 

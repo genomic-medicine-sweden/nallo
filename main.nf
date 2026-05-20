@@ -183,6 +183,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         cram_output,
         val_alignment_processes,
         val_bigwig_modcodes,
+        val_skip_phasing && cram_output,
         val_create_hificnv_maf_track,
         val_create_sawfish_maf_track,
         val_echtvar_snv_databases,
@@ -203,33 +204,32 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_plot_chromograph_autozygosity,
         val_plot_chromograph_coverage,
         val_pre_vep_snv_filter_expression,
-        val_run_methbat,
-        val_run_modkit,
         val_sentieon_tech,
         val_skip_alignment,
         val_skip_annotate_paralogs,
         val_skip_call_paralogs,
         val_skip_chromograph,
         val_skip_genome_assembly,
-        val_skip_methylation_calling,
+        (val_skip_methylation_calling || !val_run_methbat),
         val_skip_methylation_annotation,
+        (val_skip_methylation_calling || !val_run_modkit),
         val_skip_peddy,
         val_skip_phasing,
         val_skip_prepare_gens_input,
         val_skip_qc,
         val_skip_rank_variants,
         val_skip_repeat_annotation,
-        val_skip_repeat_calling,
         val_skip_sambamba_depth,
         val_skip_sex_check,
         val_skip_snv_annotation,
         val_skip_snv_calling,
+        val_skip_repeat_calling || val_str_caller != "trgt",
         val_skip_sv_annotation,
         val_skip_sv_calling,
+        val_skip_repeat_calling || val_str_caller != "strdust",
         val_snv_caller,
         val_snv_calling_processes,
         val_snv_call_regions,
-        val_str_caller,
         val_strdrop_training_set_json,
         val_sv_callers_merge_priority,
         val_sv_callers_to_merge,
@@ -716,11 +716,11 @@ output {
     }
     aligned_reads_bam {
         path { meta, _file -> "aligned_reads/${meta.id}/" }
-        enabled params.alignment_output_format == 'bam'
+        enabled params.alignment_output_format == 'bam' && params.skip_phasing
     }
     aligned_reads_cram {
         path { meta, _file -> "aligned_reads/${meta.id}/" }
-        enabled params.alignment_output_format == 'cram'
+        enabled params.alignment_output_format == 'cram' && params.skip_phasing
     }
     paraphase_sample {
         path { meta, _file -> "paraphase/sample/${meta.id}/" }
@@ -771,6 +771,7 @@ output {
     }
     repeats_family {
         path { meta, _file -> "repeats/family/${meta.id}/" }
+        enabled params.skip_repeat_annotation
     }
     repeats_sample {
         path { meta, _file -> "repeats/sample/${meta.id}/" }
