@@ -16,7 +16,8 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
     mitochondrial_caller  // string
 
     main:
-    ch_fasta.join(ch_fai)
+    ch_fasta
+        .join(ch_fai)
         .collect()
         .set { ch_fasta_fai }
 
@@ -30,15 +31,16 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
 
         ch_vcf = MITORSAW_HAPLOTYPE.out.vcf
         ch_tbi = MITORSAW_HAPLOTYPE.out.tbi
-
-    } else if (mitochondrial_caller == "deepvariant") {
+    }
+    else if (mitochondrial_caller == "deepvariant") {
 
         // Add the mitochondrial BED to every sample, skip if BED is empty
         ch_bam_bai
             .combine(ch_mitochondrial_bed)
             .filter { _bam_meta, _bam, _bai, _mitochondrial_meta, bed -> bed.size() > 0 }
             .map { bam_meta, bam, bai, mitochondrial_meta, bed ->
-                [bam_meta + [genome: mitochondrial_meta.genome, num_intervals: mitochondrial_meta.num_intervals], bam, bai, bed] }
+                [bam_meta + [genome: mitochondrial_meta.genome, num_intervals: mitochondrial_meta.num_intervals], bam, bai, bed]
+            }
             .set { deepvariant_in }
 
         DEEPVARIANT_RUNDEEPVARIANT(
@@ -51,7 +53,6 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
 
         ch_vcf = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
         ch_tbi = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_tbi
-
     }
 
     // Split VCF into SNVs/small indels and SVs for callers that produce both. The logic is in the config.
@@ -68,14 +69,14 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
         BCFTOOLS_VIEW_MITO.out.vcf
             .branch { meta, _vcf ->
                 snv: meta.variant_type == "snv"
-                sv:  meta.variant_type == "sv"
+                sv: meta.variant_type == "sv"
             }
             .set { ch_mito_vcf_split }
 
         BCFTOOLS_VIEW_MITO.out.tbi
             .branch { meta, _tbi ->
                 snv: meta.variant_type == "snv"
-                sv:  meta.variant_type == "sv"
+                sv: meta.variant_type == "sv"
             }
             .set { ch_mito_tbi_split }
 
