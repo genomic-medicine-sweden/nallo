@@ -32,6 +32,9 @@ jobs:
             --repo-root . \
             --output docs/CONTRIBUTING.md
 
+      - name: Format with prettier
+        run: npx --yes prettier --write docs/CONTRIBUTING.md
+
       - name: Create pull request
         uses: peter-evans/create-pull-request@v7
         with:
