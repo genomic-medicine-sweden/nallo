@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1068](https://github.com/genomic-medicine-sweden/nallo/pull/1068) - Added HiFiCNV and Sawfish visualization track outputs to `call_svs`
 - [#1073](https://github.com/genomic-medicine-sweden/nallo/pull/1073) - Added sample vcf outputs to `call_paralogs` workflow
 - [#1084](https://github.com/genomic-medicine-sweden/nallo/pull/1084) - Added new auto-generated container config files (new with nf-core/tools update)
+- [#1104](https://github.com/genomic-medicine-sweden/nallo/pull/1104) - Added `.github/nf-dev-guidelines.yaml` which the contribution guidelines are now auto-generated from via a GutHub action using the base template in https://github.com/genomic-medicine-sweden/nf-dev-guidelines and pipeline-specific sections stored in in `docs/contribution`
 
 ### Changed
 
@@ -60,6 +61,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1096](https://github.com/genomic-medicine-sweden/nallo/pull/1096) - Simplified cram-related conditionals in `nallo`
 - [#1097](https://github.com/genomic-medicine-sweden/nallo/pull/1097) - Simplified phasing-related if statement in `nallo`
 - [#1102](https://github.com/genomic-medicine-sweden/nallo/pull/1102) - Updated testdata commit with new genmod score config
+- [#1104](https://github.com/genomic-medicine-sweden/nallo/pull/1104) - Updated .nf-core.yml to allow for template_strings in new github/nf-dev-guidelines.yaml
 
 ### Removed
 
