@@ -18,6 +18,15 @@ nextflow_workflow {
             }
 
         }
+        run("SAMTOOLS_FAIDX") {
+            script "../../../../modules/nf-core/samtools/faidx/main.nf"
+            process {
+                """
+                input[0] = GUNZIP.out.gunzip.map { meta, fasta -> [meta, fasta, []] }
+                input[1] = false
+                """
+            }
+        }
     }
 
     test("1 gVCF, without bed") {
@@ -26,15 +35,17 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = channel.of([
-                    [ id: 'test' ],
+                    [ id: 'test', caller: 'deepvariant' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
                 ])
-                input[1] = [[],[]]
+                input[1] = channel.of([
+                [id: 'test', caller: 'deepvariant'],
+                file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true),
+                ])
                 input[2] = [[],[]]
                 input[3] = GUNZIP.out.gunzip
-                input[4] = [[],[]]
-                input[5] = 'deepvariant'
-                input[6] = file('../../../assets/vcf_express_found_in_prelude.lua')
+                input[4] = SAMTOOLS_FAIDX.out.fai
+                input[5] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -56,18 +67,20 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = channel.of([
-                    [ id: 'test' ],
+                    [ id: 'test', caller: 'deepvariant' ],
                     [
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant.g.vcf.gz', checkIfExists: true),
                     ]
                 ])
-                input[1] = [[],[]]
+                input[1] = channel.of([
+                [id: 'test', caller: 'deepvariant'],
+                file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true),
+                ])
                 input[2] = [[],[]]
                 input[3] = GUNZIP.out.gunzip
-                input[4] = [[],[]]
-                input[5] = 'deepvariant'
-                input[6] = file('../../../assets/vcf_express_found_in_prelude.lua')
+                input[4] = SAMTOOLS_FAIDX.out.fai
+                input[5] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -89,21 +102,23 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = channel.of([
-                    [ id: 'test' ],
+                    [ id: 'test', caller: 'deepvariant' ],
                     [
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant.g.vcf.gz', checkIfExists: true),
                     ]
                 ])
-                input[1] = [[],[]]
+                input[1] = channel.of([
+                [id: 'test', caller: 'deepvariant'],
+                file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true),
+                ])
                 input[2] = [
-                    [ id: 'test' ],
+                    [ id: 'test', caller: 'deepvariant' ],
                     file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true),
                 ]
                 input[3] = GUNZIP.out.gunzip
-                input[4] = [[],[]]
-                input[5] = 'deepvariant'
-                input[6] = file('../../../assets/vcf_express_found_in_prelude.lua')
+                input[4] = SAMTOOLS_FAIDX.out.fai
+                input[5] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -127,15 +142,17 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = channel.of([
-                    [ id: 'test' ],
+                    [ id: 'test', caller: 'deepvariant' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
                 ])
-                input[1] = [[],[]]
+                input[1] = channel.of([
+                [id: 'test', caller: 'deepvariant'],
+                file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true),
+                ])
                 input[2] = [[],[]]
                 input[3] = GUNZIP.out.gunzip
-                input[4] = [[],[]]
-                input[5] = 'deepvariant'
-                input[6] = file('../../../assets/vcf_express_found_in_prelude.lua')
+                input[4] = SAMTOOLS_FAIDX.out.fai
+                input[5] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -159,18 +176,20 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = channel.of([
-                    [ id: 'test' ],
+                    [ id: 'test', caller: 'deepvariant' ],
                     [
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant.g.vcf.gz', checkIfExists: true),
                     ]
                 ])
-                input[1] = [[],[]]
+                input[1] = channel.of([
+                [id: 'test', caller: 'deepvariant'],
+                file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true),
+                ])
                 input[2] = [[],[]]
                 input[3] = GUNZIP.out.gunzip
-                input[4] = [[],[]]
-                input[5] = 'deepvariant'
-                input[6] = file('../../../assets/vcf_express_found_in_prelude.lua')
+                input[4] = SAMTOOLS_FAIDX.out.fai
+                input[5] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -194,21 +213,23 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = channel.of([
-                    [ id: 'test' ],
+                    [ id: 'test', caller: 'deepvariant' ],
                     [
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant.g.vcf.gz', checkIfExists: true),
                     ]
                 ])
-                input[1] = [[],[]]
+                input[1] = channel.of([
+                [id: 'test', caller: 'deepvariant'],
+                file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true),
+                ])
                 input[2] = [
-                    [ id: 'test' ],
+                    [ id: 'test', caller: 'deepvariant' ],
                     file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true),
                 ]
                 input[3] = GUNZIP.out.gunzip
-                input[4] = [[],[]]
-                input[5] = 'deepvariant'
-                input[6] = file('../../../assets/vcf_express_found_in_prelude.lua')
+                input[4] = SAMTOOLS_FAIDX.out.fai
+                input[5] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -233,24 +254,23 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = channel.of([
-                    [ id: 'test' ],
+                    [ id: 'test', caller: 'sentieon' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
                 ])
                 input[1] = channel.of([
-                    [ id: 'test' ],
+                    [ id: 'test', caller: 'sentieon' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true),
                 ])
                 input[2] = [[],[]]
-                input[3] = [
+                input[3] = channel.of([
                     [ id:'genome'],
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)
-                ]
-                input[4] = [
+                ])
+                input[4] = channel.of([
                     [ id:'genome'],
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
-                ]
-                input[5] = 'sentieon'
-                input[6] = file('../../../assets/vcf_express_found_in_prelude.lua')
+                ])
+                input[5] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -274,30 +294,29 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = channel.of([
-                    [ id: 'test' ],
+                    [ id: 'test', caller: 'sentieon' ],
                     [
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant.g.vcf.gz', checkIfExists: true),
                     ]
                 ])
                 input[1] = channel.of([
-                    [ id: 'test' ],
+                    [ id: 'test', caller: 'sentieon' ],
                     [
                         file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true),
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz.tbi', checkIfExists: true),
                     ]
                 ])
                 input[2] = [[],[]]
-                input[3] = [
+                input[3] = channel.of([
                     [ id:'genome'],
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)
-                ]
-                input[4] = [
+                ])
+                input[4] = channel.of([
                     [ id:'genome'],
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
-                ]
-                input[5] = 'sentieon'
-                input[6] = file('../../../assets/vcf_express_found_in_prelude.lua')
+                ])
+                input[5] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }

@@ -90,18 +90,13 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
         ch_fasta_fai.collect(),
     )
     ch_merged_family_gvcf_bcftools = BCFTOOLS_MERGE.out.vcf
-    // Annotate with FOUND_IN tag - not sure what would happen if we do this before glnexus instead?
-    // Add caller information to meta so vcfexpress can add the FOUND_IN tag based on sv_caller
-    // ch_merged_family_gvcf
-    //     .map { meta, vcf ->
-    //         [meta + [sv_caller: meta.], vcf]
-    //     }
-    //     .set { ch_vcfexpress_input }
+
     ch_merged_family_gvcf_glnexus
         .mix(ch_merged_family_gvcf_sentieon)
         .mix(ch_merged_family_gvcf_bcftools)
         .set { ch_merged_family_gvcf }
 
+    // Add FOUND_IN tag with VCFEXPRESS using the meta.caller information
     VCFEXPRESS(
         ch_merged_family_gvcf,
         ch_vcfexpress_prelude,
