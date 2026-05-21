@@ -53,8 +53,8 @@ include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modu
 
 // nf-core
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_PHASING             } from '../modules/nf-core/bcftools/concat/main'
-include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_MITO_SNVS   } from '../modules/nf-core/bcftools/concat/main'
-include { BCFTOOLS_SORT   as BCFTOOLS_SORT_MITO_SVS             } from '../modules/nf-core/bcftools/sort/main'
+include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_MITO_SNVS           } from '../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_SORT as BCFTOOLS_SORT_MITO_SVS                } from '../modules/nf-core/bcftools/sort/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CHROMOGRAPH             } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SV                      } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING                 } from '../modules/nf-core/bcftools/view/main'
@@ -449,11 +449,11 @@ workflow NALLO {
         }
 
         SCATTER_GENOME.out.bed_nuclear_intervals
-            .map { meta, bed, num_intervals -> [ meta + [caller: val_snv_caller], bed, num_intervals] }
+            .map { meta, bed, num_intervals -> [meta + [caller: val_snv_caller], bed, num_intervals] }
             .set { ch_bed_intervals }
         SCATTER_GENOME.out.bed_mitochondrial_intervals
             .map { meta, bed, _num_intervals -> [meta, bed] }
-            .set { ch_mitochondrial_bed}
+            .set { ch_mitochondrial_bed }
 
         CALL_MITOCHONDRIAL_VARIANTS(
             ch_bam_bai,
@@ -468,12 +468,12 @@ workflow NALLO {
         CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_vcf
             .map { meta, vcf -> [meta + [caller: val_mitochondrial_caller], vcf] }
             .combine(ch_bed_intervals.map { _meta, _bed, num_intervals -> num_intervals }.first())
-            .map {meta, vcf, num_intervals -> [meta + [genome: 'mitochondrial', num_intervals: num_intervals + 1], vcf] }
+            .map { meta, vcf, num_intervals -> [meta + [genome: 'mitochondrial', num_intervals: num_intervals + 1], vcf] }
             .set { ch_mitochondrial_vcf }
         CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_tbi
             .map { meta, tbi -> [meta + [caller: val_mitochondrial_caller], tbi] }
             .combine(ch_bed_intervals.map { _meta, _bed, num_intervals -> num_intervals }.first())
-            .map {meta, tbi, num_intervals -> [meta + [genome: 'mitochondrial', num_intervals: num_intervals + 1], tbi] }
+            .map { meta, tbi, num_intervals -> [meta + [genome: 'mitochondrial', num_intervals: num_intervals + 1], tbi] }
             .set { ch_mitochondrial_tbi }
 
         ch_mitochondrial_sv_vcf = CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_sv_vcf
@@ -483,7 +483,8 @@ workflow NALLO {
         ch_bam_bai
             .combine(ch_bed_intervals)
             .map { meta, bam, bai, bed_meta, bed, num_intervals ->
-                [meta + [genome: bed_meta.genome, num_intervals: num_intervals, region: bed], bam, bai, bed] }
+                [meta + [genome: bed_meta.genome, num_intervals: num_intervals, region: bed], bam, bai, bed]
+            }
             .set { call_snvs_input }
 
         CALL_SNVS(
@@ -506,31 +507,34 @@ workflow NALLO {
         // Calculate the total number of intervals for grouping later
         // Need to handle when the mitochondrial bed is empty (no chrM) and deepvariant is not run
         call_snvs_gvcf
-            .map {meta, gvcf -> [meta + [num_intervals: meta.num_intervals + 1], gvcf] }
+            .map { meta, gvcf -> [meta + [num_intervals: meta.num_intervals + 1], gvcf] }
             .set { call_snvs_gvcf }
         call_snvs_gvcf_index
-            .map {meta, gvcf -> [meta + [num_intervals: meta.num_intervals + 1], gvcf] }
+            .map { meta, gvcf -> [meta + [num_intervals: meta.num_intervals + 1], gvcf] }
             .set { call_snvs_gvcf_index }
 
         // Group GVCFs per region and family (one region with all samples)
         call_snvs_gvcf
+            .dump(tag: "call_snvs_gvcf_before_grouping")
             .map { meta, gvcf ->
                 [[id: meta.region.name, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals, caller: val_snv_caller], gvcf]
             }
-            .mix(ch_mitochondrial_vcf
-                .map { meta, vcf ->
-                [[id: meta.genome, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals, caller: meta.caller], vcf]}
+            .mix(
+                ch_mitochondrial_vcf.dump(tag: "mitochondrial_vcf_before_grouping").map { meta, vcf ->
+                    [[id: meta.genome, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals, caller: meta.caller], vcf]
+                }
             )
             .groupTuple()
             .set { variants_to_merge_per_family }
 
         call_snvs_gvcf_index
             .map { meta, tbi ->
-                [[id: meta.region.name, family_id: meta.family_id, genome: meta.genome,  num_intervals: meta.num_intervals, caller: val_snv_caller], tbi]
+                [[id: meta.region.name, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals, caller: val_snv_caller], tbi]
             }
-            .mix(ch_mitochondrial_tbi
-                .map { meta, tbi ->
-                [[id: meta.genome, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals, caller: meta.caller], tbi]}
+            .mix(
+                ch_mitochondrial_tbi.map { meta, tbi ->
+                    [[id: meta.genome, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals, caller: meta.caller], tbi]
+                }
             )
             .groupTuple()
             .set { gvcf_tbis_per_family }
@@ -549,7 +553,8 @@ workflow NALLO {
         // Grouping VCF, containing one sample with all regions (except chrM)
         call_snvs_vcf
             .map { meta, vcf ->
-                def new_meta = meta - meta.subMap('region', 'genome') // Do we want chrM here? I think so, so num_intervals should be nuclear+mito
+                def new_meta = meta - meta.subMap('region', 'genome')
+                // Do we want chrM here? I think so, so num_intervals should be nuclear+mito
                 [groupKey(new_meta, new_meta.num_intervals), vcf]
             }
             .groupTuple()
@@ -582,10 +587,8 @@ workflow NALLO {
         ch_multiqc_files = ch_multiqc_files.mix(QC_SNVS.out.stats.collect { _meta, metrics -> metrics }.ifEmpty([]))
 
         // Set family_snv_vcf and family_snv_index for clarity
-        GVCF_GLNEXUS_NORM_VARIANTS.out.vcf
-            .set { family_snv_vcf }
-        GVCF_GLNEXUS_NORM_VARIANTS.out.index
-            .set { family_snv_index }
+        GVCF_GLNEXUS_NORM_VARIANTS.out.vcf.set { family_snv_vcf }
+        GVCF_GLNEXUS_NORM_VARIANTS.out.index.set { family_snv_index }
 
         family_snv_vcf
             .join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
@@ -663,7 +666,6 @@ workflow NALLO {
         family_snv_vcf
             .filter { meta, _vcf -> meta.genome == "nuclear" }
             .join(family_snv_index.filter { meta, _tbi -> meta.genome == "nuclear" }, failOnMismatch: true, failOnDuplicate: true)
-            // num_interval should be without the mitochondrial region as we do not want to phase the mitochondrial variants
             .map { meta, vcf, tbi ->
                 def new_meta = [id: meta.family_id, num_intervals: meta.num_intervals - 1]
                 [groupKey(new_meta, new_meta.num_intervals), vcf, tbi]
@@ -680,7 +682,7 @@ workflow NALLO {
         BCFTOOLS_CONCAT_PHASING(
             ch_bcftools_concat_phasing_in
         )
-        BCFTOOLS_CONCAT_PHASING.out.vcf.set { ch_snvs_vcf_phasing_in}
+        BCFTOOLS_CONCAT_PHASING.out.vcf.set { ch_snvs_vcf_phasing_in }
         BCFTOOLS_CONCAT_PHASING.out.tbi.set { ch_snvs_tbi_phasing_in }
 
         // Input is one VCF per family with all the regions (except chrM) and all the samples in the family
@@ -723,8 +725,8 @@ workflow NALLO {
             .map { meta, vcf ->
                 [meta + [num_intervals: meta.num_intervals + 1], vcf]
             }
-            .mix(GVCF_GLNEXUS_NORM_VARIANTS.out.vcf
-            .filter { meta, _vcf -> meta.genome == "mitochondrial" }
+            .mix(
+                GVCF_GLNEXUS_NORM_VARIANTS.out.vcf.filter { meta, _vcf -> meta.genome == "mitochondrial" }
             )
             .set { ch_snv_vcf_nuclear_mitochondrial_for_annotation }
 
@@ -732,18 +734,15 @@ workflow NALLO {
             .map { meta, tbi ->
                 [meta + [num_intervals: meta.num_intervals + 1], tbi]
             }
-            .mix(GVCF_GLNEXUS_NORM_VARIANTS.out.index
-            .filter { meta, _tbi -> meta.genome == "mitochondrial" }
+            .mix(
+                GVCF_GLNEXUS_NORM_VARIANTS.out.index.filter { meta, _tbi -> meta.genome == "mitochondrial" }
             )
-            .set { ch_snv_index_nuclear_mitochondrial_for_annotation  }
+            .set { ch_snv_index_nuclear_mitochondrial_for_annotation }
 
         // Set phased SVs for annotation if SV calling is not skipped
-        PHASING.out.phased_family_svs
-            .set { ch_sv_vcf_for_annotation }
+        PHASING.out.phased_family_svs.set { ch_sv_vcf_for_annotation }
 
-        PHASING.out.phased_family_svs_tbi
-            .set { ch_sv_index_for_annotation }
-
+        PHASING.out.phased_family_svs_tbi.set { ch_sv_index_for_annotation }
     }
     else {
         // Guarding against Nexflow trying to bind uninitialized channels even though we don't run annotation without SNVs
@@ -815,7 +814,7 @@ workflow NALLO {
     //
     def split_family_vcf_for_chromograph = !val_skip_chromograph && val_plot_chromograph_autozygosity && !val_skip_snv_annotation
 
-    if(split_family_vcf_for_chromograph || (!params.skip_peddy && !params.skip_snv_annotation)) {
+    if (split_family_vcf_for_chromograph || (!params.skip_peddy && !params.skip_snv_annotation)) {
 
         ANNOTATE_SNVS.out.vcf
             .join(ANNOTATE_SNVS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
@@ -863,36 +862,37 @@ workflow NALLO {
         if (!val_skip_snv_annotation) {
             // Use already concatenated VCFs
             CONCAT_SORT_ANNOTATED_SNVS.out.vcf
-                .join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch:true, failOnDuplicate:true)
+                .join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch: true, failOnDuplicate: true)
                 .set { ch_peddy_in }
-        } else {
+        }
+        else {
             // If we did not annotate, we did not concatenate the VCFs before, so we need to do that here.
             ch_vcf_tbi_per_region
-                .map { meta, vcf, tbi -> [ groupKey([ id: meta.family_id ], meta.num_intervals), vcf, tbi ] }
+                .map { meta, vcf, tbi -> [groupKey([id: meta.family_id], meta.num_intervals), vcf, tbi] }
                 .groupTuple()
                 .map { key, vcfs, tbis -> [key.getGroupTarget(), vcfs, tbis] }
                 .set { ch_concat_sort_peddy_in }
 
-             CONCAT_SORT_PEDDY (
+            CONCAT_SORT_PEDDY(
                 ch_concat_sort_peddy_in
             )
 
             CONCAT_SORT_PEDDY.out.vcf
-                .join(CONCAT_SORT_PEDDY.out.index, failOnMismatch:true, failOnDuplicate:true)
+                .join(CONCAT_SORT_PEDDY.out.index, failOnMismatch: true, failOnDuplicate: true)
                 .set { ch_peddy_in }
         }
 
-        PEDDY (
+        PEDDY(
             ch_peddy_in,
             ch_samplesheet_pedfile,
-            ch_peddy_sites
+            ch_peddy_sites,
         )
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
-        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map{ _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_csv.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_csv.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_rel_difference_csv.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.het_check_png.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(PEDDY.out.ped_check_png.map { _meta, metrics -> metrics }.collect().ifEmpty([]))
     }
 
     if (!val_skip_chromograph) {
@@ -1062,13 +1062,12 @@ workflow NALLO {
             ch_methbat_regions,
         )
 
-        CALL_METHYLATION_METHBAT.out.region_profile
-            .set { ch_methylation_profiles }
+        CALL_METHYLATION_METHBAT.out.region_profile.set { ch_methylation_profiles }
     }
 
     if (!val_skip_methylation_annotation) {
         ANNOTATE_METHYLATION(
-            ch_methylation_profiles,
+            ch_methylation_profiles
         )
     }
 
@@ -1195,56 +1194,56 @@ workflow NALLO {
     )
 
     emit:
-    multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
-    aligned_assemblies = val_skip_genome_assembly ? channel.empty() : cram_output ? ALIGN_ASSEMBLIES.out.cram.join(ALIGN_ASSEMBLIES.out.crai) : ALIGN_ASSEMBLIES.out.bam.join(ALIGN_ASSEMBLIES.out.bai) // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
-    annotated_paralogs = val_skip_annotate_paralogs ? channel.empty () : ANNOTATE_PARALOGS.out.tsv.mix(ANNOTATE_PARALOGS.out.json) // channel: [ val(meta), path(tsv/json) ]
-    annotated_repeats = val_skip_repeat_annotation ? channel.empty() : ANNOTATE_REPEAT_EXPANSIONS.out.vcf.join(ANNOTATE_REPEAT_EXPANSIONS.out.tbi) // channel: [ val(meta), path(vcf), path(tbi) ]
-    assembly_summary = val_skip_genome_assembly ? channel.empty() : GENOME_ASSEMBLY.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
-    chromograph_plots = val_skip_chromograph ? channel.empty() : CHROMOGRAPH.out.chromograph_plots // channel: [ val(meta), path(png) ]
-    gens_baf = val_skip_prepare_gens_input ? channel.empty() : PREPARE_GENS_INPUTS.out.baf_bed_tbi // channel: [ val(meta), path(baf.bed.gz), path(baf.bed.gz.tbi) ]
-    gens_cov = val_skip_prepare_gens_input ? channel.empty() : PREPARE_GENS_INPUTS.out.cov_bed_tbi // channel: [ val(meta), path(cov.bed.gz), path(cov.bed.gz.tbi) ]
-    haplotagged_reads = val_skip_phasing ? channel.empty() : cram_output ? PHASING.out.haplotagged_cram_crai : PHASING.out.haplotagged_bam_bai // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
-    methylation_annotation = val_skip_methylation_annotation ? channel.empty() : ANNOTATE_METHYLATION.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
-    methylation_modkit_bed = (val_skip_methylation_calling || !val_run_modkit) ? channel.empty() : CALL_METHYLATION_MODKIT.out.bed // channel: [ val(meta), path(bed.gz) ]
-    methylation_modkit_tbi = (val_skip_methylation_calling || !val_run_modkit) ? channel.empty() : CALL_METHYLATION_MODKIT.out.tbi // channel: [ val(meta), path(bed.gz.tbi) ]
-    methylation_modkit_bigwig = (val_skip_methylation_calling || !val_run_modkit) ? channel.empty() : CALL_METHYLATION_MODKIT.out.bigwig // channel: [ val(meta), path(bw) ]
-    repeat_trgt_sample_vcf = (val_skip_repeat_calling || val_str_caller != "trgt") ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_vcf // channel: [ val(meta), path(vcf) ]
-    repeat_trgt_sample_tbi = (val_skip_repeat_calling || val_str_caller != "trgt") ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_tbi // channel: [ val(meta), path(tbi) ]
-    repeat_trgt_sample_bam = (val_skip_repeat_calling || val_str_caller != "trgt") ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_bam // channel: [ val(meta), path(bam) ]
-    repeat_trgt_sample_bai = (val_skip_repeat_calling || val_str_caller != "trgt") ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_bai // channel: [ val(meta), path(bai) ]
-    repeat_trgt_sample_cram = (val_skip_repeat_calling || val_str_caller != "trgt") ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_cram // channel: [ val(meta), path(cram) ]
-    repeat_trgt_sample_crai = (val_skip_repeat_calling || val_str_caller != "trgt") ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_crai // channel: [ val(meta), path(crai) ]
-    repeat_trgt_family_vcf = (val_skip_repeat_calling || val_str_caller != "trgt" || !val_skip_repeat_annotation) ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.family_vcf // channel: [ val(meta), path(vcf) ]
-    repeat_trgt_family_tbi = (val_skip_repeat_calling || val_str_caller != "trgt" || !val_skip_repeat_annotation) ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.family_tbi // channel: [ val(meta), path(tbi) ]
-    cramino_unphased_stats = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.cramino_stats // channel: [ val(meta), path(txt) ]
-    cramino_unphased_arrow = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.cramino_arrow // channel: [ val(meta), path(arrow) ]
-    fastqc_html = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.fastqc_html // channel: [ val(meta), path(html) ]
-    fastqc_zip = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.fastqc_zip // channel: [ val(meta), path(zip) ]
-    mosdepth_summary = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_summary // channel: [ val(meta), path(txt) ]
-    mosdepth_global_dist = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_global_dist // channel: [ val(meta), path(txt) ]
-    mosdepth_regions_dist = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_regions_dist // channel: [ val(meta), path(txt) ]
-    mosdepth_per_base_d4 = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_per_base_d4 // channel: [ val(meta), path(d4) ]
-    paralogs_family_vcf = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.family_vcf // channel: [ val(meta), path(vcf) ]
-    paralogs_family_tbi = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.family_tbi // channel: [ val(meta), path(tbi) ]
-    paralogs_sample_bam = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.bam // channel: [ val(meta), path(bam) ]
-    paralogs_sample_bai = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.bai // channel: [ val(meta), path(bai) ]
-    paralogs_sample_cram = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.cram // channel: [ val(meta), path(cram) ]
-    paralogs_sample_crai = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.crai // channel: [ val(meta), path(crai) ]
-    paralogs_sample_json = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.json // channel: [ val(meta), path(json) ]
-    paralogs_sample_vcf = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.sample_vcf // channel: [ val(meta), path(vcf) ]
-    paralogs_sample_tbi = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.sample_tbi // channel: [ val(meta), path(tbi) ]
-    mosdepth_regions = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_regions_bed.join(QC_ALIGNED_READS.out.mosdepth_regions_csi) // channel: [ val(meta), path(bed.gz), path(bed.gz.csi) ]
-    sambamba_depth_bed = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.sambamba_depth_bed // channel: [ val(meta), path(bed) ]
-    qc_bcftools_stats = val_skip_snv_calling ? channel.empty() : QC_SNVS.out.stats // channel: [ val(meta), path(txt) ]
+    multiqc_report                = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
+    aligned_assemblies            = val_skip_genome_assembly ? channel.empty() : cram_output ? ALIGN_ASSEMBLIES.out.cram.join(ALIGN_ASSEMBLIES.out.crai) : ALIGN_ASSEMBLIES.out.bam.join(ALIGN_ASSEMBLIES.out.bai) // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
+    annotated_paralogs            = val_skip_annotate_paralogs ? channel.empty() : ANNOTATE_PARALOGS.out.tsv.mix(ANNOTATE_PARALOGS.out.json) // channel: [ val(meta), path(tsv/json) ]
+    annotated_repeats             = val_skip_repeat_annotation ? channel.empty() : ANNOTATE_REPEAT_EXPANSIONS.out.vcf.join(ANNOTATE_REPEAT_EXPANSIONS.out.tbi) // channel: [ val(meta), path(vcf), path(tbi) ]
+    assembly_summary              = val_skip_genome_assembly ? channel.empty() : GENOME_ASSEMBLY.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
+    chromograph_plots             = val_skip_chromograph ? channel.empty() : CHROMOGRAPH.out.chromograph_plots // channel: [ val(meta), path(png) ]
+    gens_baf                      = val_skip_prepare_gens_input ? channel.empty() : PREPARE_GENS_INPUTS.out.baf_bed_tbi // channel: [ val(meta), path(baf.bed.gz), path(baf.bed.gz.tbi) ]
+    gens_cov                      = val_skip_prepare_gens_input ? channel.empty() : PREPARE_GENS_INPUTS.out.cov_bed_tbi // channel: [ val(meta), path(cov.bed.gz), path(cov.bed.gz.tbi) ]
+    haplotagged_reads             = val_skip_phasing ? channel.empty() : cram_output ? PHASING.out.haplotagged_cram_crai : PHASING.out.haplotagged_bam_bai // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
+    methylation_annotation        = val_skip_methylation_annotation ? channel.empty() : ANNOTATE_METHYLATION.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
+    methylation_modkit_bed        = val_skip_methylation_calling || !val_run_modkit ? channel.empty() : CALL_METHYLATION_MODKIT.out.bed // channel: [ val(meta), path(bed.gz) ]
+    methylation_modkit_tbi        = val_skip_methylation_calling || !val_run_modkit ? channel.empty() : CALL_METHYLATION_MODKIT.out.tbi // channel: [ val(meta), path(bed.gz.tbi) ]
+    methylation_modkit_bigwig     = val_skip_methylation_calling || !val_run_modkit ? channel.empty() : CALL_METHYLATION_MODKIT.out.bigwig // channel: [ val(meta), path(bw) ]
+    repeat_trgt_sample_vcf        = val_skip_repeat_calling || val_str_caller != "trgt" ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_vcf // channel: [ val(meta), path(vcf) ]
+    repeat_trgt_sample_tbi        = val_skip_repeat_calling || val_str_caller != "trgt" ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_tbi // channel: [ val(meta), path(tbi) ]
+    repeat_trgt_sample_bam        = val_skip_repeat_calling || val_str_caller != "trgt" ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_bam // channel: [ val(meta), path(bam) ]
+    repeat_trgt_sample_bai        = val_skip_repeat_calling || val_str_caller != "trgt" ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_bai // channel: [ val(meta), path(bai) ]
+    repeat_trgt_sample_cram       = val_skip_repeat_calling || val_str_caller != "trgt" ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_cram // channel: [ val(meta), path(cram) ]
+    repeat_trgt_sample_crai       = val_skip_repeat_calling || val_str_caller != "trgt" ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_crai // channel: [ val(meta), path(crai) ]
+    repeat_trgt_family_vcf        = val_skip_repeat_calling || val_str_caller != "trgt" || !val_skip_repeat_annotation ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.family_vcf // channel: [ val(meta), path(vcf) ]
+    repeat_trgt_family_tbi        = val_skip_repeat_calling || val_str_caller != "trgt" || !val_skip_repeat_annotation ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.family_tbi // channel: [ val(meta), path(tbi) ]
+    cramino_unphased_stats        = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.cramino_stats // channel: [ val(meta), path(txt) ]
+    cramino_unphased_arrow        = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.cramino_arrow // channel: [ val(meta), path(arrow) ]
+    fastqc_html                   = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.fastqc_html // channel: [ val(meta), path(html) ]
+    fastqc_zip                    = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.fastqc_zip // channel: [ val(meta), path(zip) ]
+    mosdepth_summary              = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_summary // channel: [ val(meta), path(txt) ]
+    mosdepth_global_dist          = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_global_dist // channel: [ val(meta), path(txt) ]
+    mosdepth_regions_dist         = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_regions_dist // channel: [ val(meta), path(txt) ]
+    mosdepth_per_base_d4          = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_per_base_d4 // channel: [ val(meta), path(d4) ]
+    paralogs_family_vcf           = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.family_vcf // channel: [ val(meta), path(vcf) ]
+    paralogs_family_tbi           = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.family_tbi // channel: [ val(meta), path(tbi) ]
+    paralogs_sample_bam           = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.bam // channel: [ val(meta), path(bam) ]
+    paralogs_sample_bai           = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.bai // channel: [ val(meta), path(bai) ]
+    paralogs_sample_cram          = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.cram // channel: [ val(meta), path(cram) ]
+    paralogs_sample_crai          = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.crai // channel: [ val(meta), path(crai) ]
+    paralogs_sample_json          = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.json // channel: [ val(meta), path(json) ]
+    paralogs_sample_vcf           = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.sample_vcf // channel: [ val(meta), path(vcf) ]
+    paralogs_sample_tbi           = val_skip_call_paralogs ? channel.empty() : CALL_PARALOGS.out.sample_tbi // channel: [ val(meta), path(tbi) ]
+    mosdepth_regions              = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_regions_bed.join(QC_ALIGNED_READS.out.mosdepth_regions_csi) // channel: [ val(meta), path(bed.gz), path(bed.gz.csi) ]
+    sambamba_depth_bed            = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.sambamba_depth_bed // channel: [ val(meta), path(bed) ]
+    qc_bcftools_stats             = val_skip_snv_calling ? channel.empty() : QC_SNVS.out.stats // channel: [ val(meta), path(txt) ]
     qc_deepvariant_vcfstatsreport = val_skip_snv_calling ? channel.empty() : QC_SNVS.out.vcfstatsreport // channel: [ val(meta), path(html) ]
-    sample_snvs = val_skip_snv_calling ? channel.empty() : VCF_CONCAT_NORM_VARIANTS.out.vcf.join(VCF_CONCAT_NORM_VARIANTS.out.index) // channel: [ val(meta), path(vcf), path(tbi) ]
-    somalier_relate_html    = val_skip_sex_check ? channel.empty() : BAM_INFER_SEX.out.somalier_html    // channel: [ val(meta), path(html) ]
-    somalier_relate_pairs   = val_skip_sex_check ? channel.empty() : BAM_INFER_SEX.out.somalier_pairs   // channel: [ val(meta), path(pairs.tsv) ]
-    somalier_relate_samples = val_skip_sex_check ? channel.empty() : BAM_INFER_SEX.out.somalier_samples // channel: [ val(meta), path(samples.tsv) ]
-    phasing_stats = val_skip_phasing ? channel.empty() : PHASING.out.stats // channel: [ val(meta), path("*.stats.tsv") ]
-    phasing_blocks = val_skip_phasing ? channel.empty() : PHASING.out.blocks.join(PHASING.out.blocks_index) // channel: [ val(meta), path("*.blocks.gtf.gz"), path("*.blocks.gtf.gz.tbi") ]
-    haplotagging_stats = val_skip_phasing ? channel.empty() : PHASING.out.haplotagging_stats // channel: [ val(meta), path("*.txt") ]
-    haplotagging_arrow = val_skip_phasing ? channel.empty() : PHASING.out.haplotagging_arrow // channel: [ val(meta), path("*.arrow") ]
+    sample_snvs                   = val_skip_snv_calling ? channel.empty() : VCF_CONCAT_NORM_VARIANTS.out.vcf.join(VCF_CONCAT_NORM_VARIANTS.out.index) // channel: [ val(meta), path(vcf), path(tbi) ]
+    somalier_relate_html          = val_skip_sex_check ? channel.empty() : BAM_INFER_SEX.out.somalier_html // channel: [ val(meta), path(html) ]
+    somalier_relate_pairs         = val_skip_sex_check ? channel.empty() : BAM_INFER_SEX.out.somalier_pairs // channel: [ val(meta), path(pairs.tsv) ]
+    somalier_relate_samples       = val_skip_sex_check ? channel.empty() : BAM_INFER_SEX.out.somalier_samples // channel: [ val(meta), path(samples.tsv) ]
+    phasing_stats                 = val_skip_phasing ? channel.empty() : PHASING.out.stats // channel: [ val(meta), path("*.stats.tsv") ]
+    phasing_blocks                = val_skip_phasing ? channel.empty() : PHASING.out.blocks.join(PHASING.out.blocks_index) // channel: [ val(meta), path("*.blocks.gtf.gz"), path("*.blocks.gtf.gz.tbi") ]
+    haplotagging_stats            = val_skip_phasing ? channel.empty() : PHASING.out.haplotagging_stats // channel: [ val(meta), path("*.txt") ]
+    haplotagging_arrow            = val_skip_phasing ? channel.empty() : PHASING.out.haplotagging_arrow // channel: [ val(meta), path("*.arrow") ]
 }
 
 /**
@@ -1262,7 +1261,6 @@ def addChildWithTwoParentsToMeta(ch_input, ch_samplesheet) {
         .map { family_id, child_with_two_parents -> [family_id, child_with_two_parents.any()] }
 
     ch_families
-        // Need to use combine and filter here instead of join, since we only have one entry per family in ch_families but potentially multiple entries per family in ch_input
         .combine(ch_input)
         .filter { samplesheet_family_id, _child_with_two_parents, file_meta, _file ->
             samplesheet_family_id == file_meta.family_id
@@ -1288,9 +1286,7 @@ def buildRankVariantsInputChannel(ch_vcf, ch_ped, variant_type, ch_score_config,
         .map { meta, vcf ->
             [meta + [variant_type: variant_type], vcf]
         }
-        // Need to use combine and filter here instead of join, since we only have one entry per family in ch_ped but potentially multiple entries per family in vcf_with_meta.
         .combine(ch_ped)
-        // The meta.id of the PED channel is the family_id
         .filter { vcf_meta, _vcf, ped_meta, _ped ->
             vcf_meta.family_id == ped_meta.id
         }
