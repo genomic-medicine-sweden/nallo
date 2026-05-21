@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            235,
+            231,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -789,7 +789,7 @@
                 "HG002_Revio_pbcpgtools.hap2.bw:md5,e452d2986e38ba275033e8e613183b8d"
             ],
             [
-
+                
             ],
             [
                 [
@@ -844,10 +844,10 @@
                 ]
             ],
             [
-
+                
             ]
         ],
-        "timestamp": "2026-05-20T14:44:18.836765436",
+        "timestamp": "2026-05-21T15:03:47.282860239",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"

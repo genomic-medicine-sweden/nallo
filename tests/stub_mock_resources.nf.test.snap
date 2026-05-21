@@ -1,7 +1,7 @@
 {
     "Test VEP with mock uncompressed cache": {
         "content": [
-            74,
+            71,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -154,7 +154,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-05-15T09:09:46.707421174",
+        "timestamp": "2026-05-21T15:28:18.119798586",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"
@@ -162,7 +162,7 @@
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
-            61,
+            59,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -206,11 +206,6 @@
                     "bgzip": 1.21
                 },
                 "DNASCOPE_LONGREAD": {
-                    "bcftools": "1.23.1",
-                    "bedtools": "2.30.0",
-                    "samtools": "1.23.1",
-                    "sentieon-cli": "1.6.2",
-                    "sentieon": 202503.03
                     "bcftools": "1.23.1",
                     "bedtools": "2.30.0",
                     "samtools": "1.23.1",
@@ -324,7 +319,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-05-20T14:36:31.334330045",
+        "timestamp": "2026-05-21T15:28:45.565687413",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"
@@ -332,7 +327,7 @@
     },
     "Test CADD with mock resources": {
         "content": [
-            92,
+            89,
             {
                 "ANNOTATE_INDELS": {
                     "bcftools": 1.22
@@ -509,7 +504,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-05-15T09:09:17.049359838",
+        "timestamp": "2026-05-21T15:27:48.418114308",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"
