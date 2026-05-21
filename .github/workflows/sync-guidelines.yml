@@ -17,7 +17,7 @@ jobs:
 
       - name: Clone nf-dev-guidelines
         run: |
-          git clone --depth 1 --branch initial-concept \
+          git clone --depth 1 --branch main \
             https://github.com/genomic-medicine-sweden/nf-dev-guidelines.git \
             /tmp/nf-dev-guidelines
 
@@ -31,6 +31,9 @@ jobs:
             --guidelines /tmp/nf-dev-guidelines \
             --repo-root . \
             --output docs/CONTRIBUTING.md
+
+      - name: Generate table of contents
+        run: npx --yes doctoc --github docs/CONTRIBUTING.md
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v7
