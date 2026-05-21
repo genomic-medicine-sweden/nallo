@@ -1,4 +1,4 @@
-## Publishing
+### Publishing
 
 We are currently migrating from using `publishDir` to workflow outputs.
 
