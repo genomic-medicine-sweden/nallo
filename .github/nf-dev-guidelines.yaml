@@ -1,0 +1,80 @@
+title: Nallo Contributing Guide
+
+intro: |
+  Hi there!
+  Many thanks for taking an interest in improving {{ repo_name }}.
+
+  We try to manage the required tasks for {{ repo_name }} using GitHub issues, you probably came to this page when creating one.
+  Please use the pre-filled template to save time.
+
+  However, don't be put off by this template - other more general issues and suggestions are welcome!
+  Contributions to the code are even more welcome ;)
+
+sections:
+  - contribution_workflow
+  - pull_requests
+  - review
+  - versioning
+  - developer_setup
+  - running_tests
+  - coding_conventions_header
+  - architecture
+  - adding_a_step
+  - channels
+  - parameters
+  - configuration
+  - writing_tests
+  - style
+
+vars:
+  repo_name: genomic-medicine-sweden/nallo
+  repo_url: https://github.com/genomic-medicine-sweden/nallo
+  codespaces_url: https://github.com/genomic-medicine-sweden/nallo/codespaces
+  workflow_file: workflows/nallo.nf
+  pre_commit_note: >-
+    Besides the default nf-core hooks, this repository includes the
+    [nf-core pipelines schema docs](https://github.com/genomic-medicine-sweden/nf-core-schema-docs)
+    hook. It automatically updates parameter documentation whenever your commit
+    includes changes to `nextflow_schema.json`.
+  reuse_note: "Follow the DRY (Don't Repeat Yourself) principle."
+  modules_note: >-
+    Always prefer a module from nf-core or genomic-medicine-sweden over writing
+    a local one. Only add to modules/local/ as a last resort when the use case
+    is too pipeline-specific.
+
+  nf_test_examples: |
+    You can also run `nf-test test <path>` for a single given test,
+    `nf-test test --tag PIPELINE` to run all pipeline tests, or
+    `nf-test test --tag call_snvs,annotate_snvs` to run multiple subworkflow tests.
+
+  extra_test_notes: |
+    - Every subworkflow should also have `-stub` tests.
+    - When modules in tests require different parameters, use `params { <module>_args = ... }` (see [nf-core docs](https://nf-co.re/docs/specifications/components/modules/testing#configuration-of-extargs-in-tests)) instead of having multiple configs.
+
+  extra_style_notes: |
+    - Sort `include` statements alphabetically by the name inside the braces. Right-pad each name with spaces so all closing `}` align to the same column (the longest name in the block sets the width):
+
+      ```groovy
+      include { BCFTOOLS_VIEW as FILTER_VCF } from '../../../modules/nf-core/bcftools/view/main'
+      include { TIDDIT_COV                  } from '../../../modules/nf-core/tiddit/cov/main'
+      include { VCF2CYTOSURE                } from '../../../modules/nf-core/vcf2cytosure/main'
+      ```
+
+    - Use nextflow code formatting (`nextflow lint -harshil-alignment -format file.nf`) after making changes, but beware that it currently removes some inline comments.
+    - Use comment-blocks for multi-line comments:
+
+      ```groovy
+      /*
+       * This is
+       * a multi-line comment.
+       */
+      ```
+
+    - Use `[...]` instead of `tuple(...)`.
+    - Avoid nested if-else statements, prefer single-level statements when possible.
+
+custom_sections:
+  - title: Publishing
+    file: docs/contributing/publishing.md
+  - title: Adding new tools
+    file: docs/contributing/adding_new_tools.md

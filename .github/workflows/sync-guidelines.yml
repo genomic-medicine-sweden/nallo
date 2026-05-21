@@ -1,0 +1,43 @@
+name: Sync guidelines
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 8 * * 1" # weekly on Monday
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Clone nf-dev-guidelines
+        run: |
+          git clone --depth 1 --branch main \
+            https://github.com/genomic-medicine-sweden/nf-dev-guidelines.git \
+            /tmp/nf-dev-guidelines
+
+      - name: Install dependencies
+        run: pip install -r /tmp/nf-dev-guidelines/requirements.txt
+
+      - name: Generate CONTRIBUTING.md
+        run: |
+          python /tmp/nf-dev-guidelines/generator/generate.py \
+            --config .github/nf-dev-guidelines.yaml \
+            --guidelines /tmp/nf-dev-guidelines \
+            --repo-root . \
+            --output CONTRIBUTING.md
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "docs: update CONTRIBUTING.md from nf-dev-guidelines"
+          title: "Update CONTRIBUTING.md from nf-dev-guidelines"
+          body: |
+            Auto-generated from [nf-dev-guidelines](https://github.com/genomic-medicine-sweden/nf-dev-guidelines).
+          branch: update-contributing-guidelines
+          delete-branch: true
