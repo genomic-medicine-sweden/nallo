@@ -881,7 +881,6 @@ workflow NALLO {
                 .set { ch_concat_sort_peddy_in }
 
             CONCAT_SORT_PEDDY(
-            CONCAT_SORT_PEDDY(
                 ch_concat_sort_peddy_in
             )
 
