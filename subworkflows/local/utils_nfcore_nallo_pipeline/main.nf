@@ -702,7 +702,7 @@ def validateRequiresSexCheck(ch_samplesheet, val_skip_sex_check, val_skip_snv_ca
 
 def validateSingleProjectPerRun(ch_samplesheet) {
     ch_samplesheet
-        .map { meta, _reads -> meta.project }
+        .map { meta, _reads, _index -> meta.project }
         .unique()
         .count()
         .map { n ->

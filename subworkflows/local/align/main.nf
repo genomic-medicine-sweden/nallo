@@ -6,7 +6,7 @@ workflow ALIGN {
 
     take:
     ch_ubam             // channel: [mandatory] [ val(meta), path(reads)]
-    ch_mapped_bam       // channel: [mandatory] [ val(meta), path(bam), path(index) ]
+    ch_mapped_bam       // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
     ch_mmi              // channel: [mandatory] [ val(meta), path(fasta) ]
     val_split_alignment // bool
 
@@ -28,7 +28,8 @@ workflow ALIGN {
      */
     ch_unmapped
         .mix(ch_mapped_bam)
-        .map { meta, bam -> [meta - meta.subMap('file'), bam] }
+        // Unmapped BAMs have no index but mapped ones do. To avoid an extra processing step, we can just assign a default value to the index.
+        .map { meta, bam, _index=null -> [meta - meta.subMap('file'), bam] }
         .groupTuple()
         .map { meta, files -> [meta.id, files.size() ] }
         .set { ch_reads_grouping_key }

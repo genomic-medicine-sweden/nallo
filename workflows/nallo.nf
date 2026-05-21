@@ -218,8 +218,12 @@ workflow NALLO {
         //
         // Since starting with FASTQs is a rare case, no splitting of FASTQs alone just for the assembly is implmenented
 
+        ch_samplesheet
+            .map { meta, reads, _index -> [meta, reads] }
+            .set { ch_convert_bam_in }
+
         CONVERT_INPUT_BAMS(
-            ch_samplesheet,
+            ch_convert_bam_in,
             true,
             false,
         )
@@ -253,9 +257,9 @@ workflow NALLO {
                 unmapped: !index
                 mapped: index
             }
-            .set { ch_align_in }
+            .set { ch_input_bams }
 
-        ch_align_in.unmapped
+        ch_input_bams.unmapped
             .map { meta, reads, _index -> [ meta, reads ]}
             .set { ch_convert_fq_in }
 
@@ -267,7 +271,7 @@ workflow NALLO {
 
         ALIGN(
             CONVERT_INPUT_FASTQS.out.bam,
-            ch_align_in.mapped,
+            ch_input_bams.mapped,
             PREPARE_REFERENCES.out.mmi,
             val_alignment_processes > 1
         )
@@ -1135,7 +1139,7 @@ workflow NALLO {
 def addChildWithTwoParentsToMeta(ch_input, ch_samplesheet) {
 
     def ch_families = ch_samplesheet
-        .map { meta, _files -> [meta.family_id, meta.two_parents] }
+        .map { meta, _files, _index -> [meta.family_id, meta.two_parents] }
         .groupTuple()
         .map { family_id, child_with_two_parents -> [family_id, child_with_two_parents.any()] }
 
