@@ -545,23 +545,17 @@ workflow {
     //
     // WORKFLOW OUTPUTS: Group files by publish directory
     //
-    ch_aligned_assemblies_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_bam
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_bai)
+    ch_aligned_assemblies_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_bai)
 
-    ch_aligned_assemblies_cram = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_cram
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_crai)
+    ch_aligned_assemblies_cram = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_cram.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_crai)
 
-    ch_aligned_reads_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_bam
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_bai)
+    ch_aligned_reads_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_bai)
 
-    ch_aligned_reads_cram = GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_cram
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_crai)
+    ch_aligned_reads_cram = GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_cram.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_crai)
 
-    ch_annotated_repeats = GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats_vcf
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats_tbi)
+    ch_annotated_repeats = GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats_vcf.mix(GENOMICMEDICINESWEDEN_NALLO.out.annotated_repeats_tbi)
 
-    ch_family_snvs = GENOMICMEDICINESWEDEN_NALLO.out.family_snvs_vcf
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.family_snvs_tbi)
+    ch_family_snvs = GENOMICMEDICINESWEDEN_NALLO.out.family_snvs_vcf.mix(GENOMICMEDICINESWEDEN_NALLO.out.family_snvs_tbi)
 
     ch_gens = GENOMICMEDICINESWEDEN_NALLO.out.gens_baf_bed
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_baf_tbi)
@@ -628,6 +622,7 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks_gtf)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks_tbi)
 
+
     ch_repeats_family = GENOMICMEDICINESWEDEN_NALLO.out.repeat_strdust_family_vcf
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_strdust_family_tbi)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_family_vcf)
@@ -642,18 +637,15 @@ workflow {
 
     ch_repeats_sample_trgt_cram = GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_cram.mix(GENOMICMEDICINESWEDEN_NALLO.out.repeat_trgt_sample_crai)
 
-    ch_sample_snvs = GENOMICMEDICINESWEDEN_NALLO.out.sample_snvs_vcf
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.sample_snvs_tbi)
+    ch_sample_snvs = GENOMICMEDICINESWEDEN_NALLO.out.sample_snvs_vcf.mix(GENOMICMEDICINESWEDEN_NALLO.out.sample_snvs_tbi)
 
     ch_somalier_relate = GENOMICMEDICINESWEDEN_NALLO.out.somalier_relate_html
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.somalier_relate_samples)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.somalier_relate_pairs)
 
-    ch_svs_per_family = GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_vcf
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_tbi)
+    ch_svs_per_family = GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_vcf.mix(GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_tbi)
 
-    ch_svs_per_family_and_caller = GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_and_caller_vcf
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_and_caller_tbi)
+    ch_svs_per_family_and_caller = GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_and_caller_vcf.mix(GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_and_caller_tbi)
 
     ch_visualization_tracks = GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_combined_bigwig
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_hap1_bigwig)
@@ -668,7 +660,6 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.sawfish_copynum_bedgraph)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.sawfish_gc_bias_corrected_depth_bw)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.sawfish_maf_bw)
-
 
     publish:
     aligned_assemblies_bam        = ch_aligned_assemblies_bam // channel: [ val(meta), path(bam/bai) ]
@@ -715,6 +706,9 @@ workflow {
 }
 
 output {
+    multiqc {
+        path { _meta, _file -> "multiqc/" }
+    }
     aligned_assemblies_bam {
         path { meta, _file -> "assembly/sample/${meta.id}/" }
         enabled params.alignment_output_format == 'bam'
@@ -725,13 +719,30 @@ output {
     }
     aligned_reads_bam {
         path { meta, _file -> "aligned_reads/${meta.id}/" }
-        enabled params.alignment_output_format == 'bam'
+        enabled params.alignment_output_format == 'bam' && params.skip_phasing
     }
     aligned_reads_cram {
         path { meta, _file -> "aligned_reads/${meta.id}/" }
+        enabled params.alignment_output_format == 'cram' && params.skip_phasing
+    }
+    paraphase_sample {
+        path { meta, _file -> "paraphase/sample/${meta.id}/" }
+    }
+    paraphase_sample_bam {
+        path { meta, _file -> "paraphase/sample/${meta.id}/" }
+        enabled params.alignment_output_format == 'bam'
+    }
+    paraphase_sample_cram {
+        path { meta, _file -> "paraphase/sample/${meta.id}/" }
         enabled params.alignment_output_format == 'cram'
     }
-     annotated_repeats {
+    paraphase_sample_vcfs {
+        path { meta, _file -> "paraphase/sample/${meta.id}/" }
+    }
+    paraphase_family {
+        path { meta, _file -> "paraphase/family/${meta.id}/" }
+    }
+    annotated_repeats {
         path { meta, _file -> "repeats/family/${meta.id}/" }
     }
     assembly_summary {
@@ -769,43 +780,23 @@ output {
     methylation_pileup {
         path { meta, _file -> "methylation/pileup/${meta.id}/" }
     }
-    multiqc {
-        path { _meta, _file -> "multiqc/" }
+    repeats_family {
+        path { meta, _file -> "repeats/family/${meta.id}/" }
+        enabled params.skip_repeat_annotation
     }
-    paraphase_sample {
-        path { meta, _file -> "paraphase/sample/${meta.id}/" }
+    repeats_sample {
+        path { meta, _file -> "repeats/sample/${meta.id}/" }
     }
-    paraphase_family {
-        path { meta, _file -> "paraphase/family/${meta.id}/" }
-    }
-    paraphase_sample_bam {
-        path { meta, _file -> "paraphase/sample/${meta.id}/" }
-        enabled params.alignment_output_format == 'bam'
-    }
-    paraphase_sample_cram {
-        path { meta, _file -> "paraphase/sample/${meta.id}/" }
+    repeats_sample_trgt_cram {
+        path { meta, _file -> "repeats/sample/${meta.id}/" }
         enabled params.alignment_output_format == 'cram'
     }
-    paraphase_sample_vcfs {
-        path { meta, _file -> "paraphase/sample/${meta.id}/" }
-    }
-    peddy {
-        path { meta, _file -> "qc/peddy/${meta.id}/" }
-    }
-    pedigree {
-        path { _meta, _ped -> "pedigree/family/" }
-    }
-    qc_bcftools_stats {
-        path { meta, _stats -> "qc/bcftools_stats/${meta.id}/" }
-    }
-    qc_cramino_phased {
-        path { meta, _file -> "qc/cramino/phased/${meta.id}/" }
+    repeats_sample_trgt_bam {
+        path { meta, _file -> "repeats/sample/${meta.id}/" }
+        enabled params.alignment_output_format == 'bam'
     }
     qc_cramino_unphased {
         path { meta, _file -> "qc/cramino/unphased/${meta.id}/" }
-    }
-    qc_deepvariant_vcfstatsreport {
-        path { meta, _report -> "qc/deepvariant_vcfstatsreport/${meta.id}/" }
     }
     qc_fastqc {
         path { meta, _file -> "qc/fastqc/${meta.id}/" }
@@ -813,31 +804,29 @@ output {
     qc_mosdepth {
         path { meta, _file -> "qc/mosdepth/${meta.id}/" }
     }
-    qc_phasing_stats {
-        path { meta, _file -> "qc/phasing_stats/${meta.id}/" }
-    }
     qc_sambamba_depth {
         path { meta, _file -> "qc/sambamba_depth/${meta.id}/" }
     }
-    repeats_family {
-        path { meta, _file -> "repeats/family/${meta.id}/" }
+    qc_bcftools_stats {
+        path { meta, _stats -> "qc/bcftools_stats/${meta.id}/" }
     }
-    repeats_sample {
-        path { meta, _file -> "repeats/sample/${meta.id}/" }
+    qc_deepvariant_vcfstatsreport {
+        path { meta, _report -> "qc/deepvariant_vcfstatsreport/${meta.id}/" }
     }
-    repeats_sample_trgt_bam {
-        path { meta, _file -> "repeats/sample/${meta.id}/" }
-        enabled params.alignment_output_format == 'bam'
+    pedigree {
+        path { _meta, _ped -> "pedigree/family/" }
     }
-    repeats_sample_trgt_cram {
-        path { meta, _file -> "repeats/sample/${meta.id}/" }
-        enabled params.alignment_output_format == 'cram'
+    peddy {
+        path { meta, _file -> "qc/peddy/${meta.id}/" }
+    }
+    qc_cramino_phased {
+        path { meta, _file -> "qc/cramino/phased/${meta.id}/" }
+    }
+    qc_phasing_stats {
+        path { meta, _file -> "qc/phasing_stats/${meta.id}/" }
     }
     sample_snvs {
         path { meta, _file -> "snvs/sample/${meta.id}/" }
-    }
-    somalier_relate {
-        path { meta, _file -> "qc/somalier/relate/${meta.id}/" }
     }
     svs_per_family {
         path { meta, _file -> "svs/family/${meta.id}/" }
@@ -845,6 +834,9 @@ output {
     svs_per_family_and_caller {
         path { meta, _file -> "svs/family/${meta.id}/" }
         enabled params.publish_unannotated_family_svs
+    }
+    somalier_relate {
+        path { meta, _file -> "qc/somalier/relate/${meta.id}/" }
     }
     visualization_tracks {
         path { meta, _bw -> "visualization_tracks/${meta.id}/" }
