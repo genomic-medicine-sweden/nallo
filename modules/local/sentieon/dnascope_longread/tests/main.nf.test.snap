@@ -38,7 +38,7 @@
                     [
                         "DNASCOPE_LONGREAD_CALL_SNVS",
                         "sentieon-cli",
-                        "1.5.1"
+                        "1.5.2"
                     ]
                 ],
                 "5": [
@@ -133,15 +133,15 @@
                     [
                         "DNASCOPE_LONGREAD_CALL_SNVS",
                         "sentieon-cli",
-                        "1.5.1"
+                        "1.5.2"
                     ]
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2026-01-30T13:23:49.771817792"
+        "timestamp": "2026-03-20T09:53:09.063335813"
     }
 }

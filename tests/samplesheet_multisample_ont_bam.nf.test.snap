@@ -220,12 +220,6 @@
                     "bgzip": 1.21,
                     "tabix": 1.21
                 },
-                "TABIX_ENSEMBLVEP_SNV": {
-                    "tabix": 1.21
-                },
-                "TABIX_ENSEMBLVEP_SV": {
-                    "tabix": 1.21
-                },
                 "TABIX_HIFICNV": {
                     "tabix": 1.21
                 },
@@ -1152,7 +1146,8 @@
                 ]
             ],
             [
-                
+
+
             ],
             [
                 [
@@ -1229,7 +1224,8 @@
                 ]
             ],
             [
-                
+
+
             ]
         ],
         "timestamp": "2026-05-20T14:51:52.520538222",

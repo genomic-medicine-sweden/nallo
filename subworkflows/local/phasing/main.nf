@@ -18,6 +18,7 @@ workflow PHASING {
     phaser // string:  Phasing tool to use
     phase_with_svs // bool:    Whether to include SVs in phasing (true) or not (false)
     cram_output // bool:    Publish alignments as CRAM (true) or BAM (false)
+    ch_pedigree // channel: [ val(meta), path(pedigree) ]
 
     main:
     // Phase variants and haplotag reads with Longphase
@@ -47,6 +48,7 @@ workflow PHASING {
             ch_bam_bai,
             fasta,
             fai,
+            ch_pedigree,
         )
 
         ch_phased_family_snvs = WHATSHAP.out.phased_family_snvs

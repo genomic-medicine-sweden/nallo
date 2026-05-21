@@ -19,10 +19,10 @@
                     ]
                 ],
                 "2": [
-                    
+
                 ],
                 "haplotagged_bam_bai": [
-                    
+
                 ],
                 "phased_family_snvs": [
                     [
@@ -48,13 +48,13 @@
             "nextflow": "26.02.0"
         }
     },
-    "2 samples": {
+    "3 samples - family ID equal to sample ID": {
         "content": [
             {
                 "0": [
                     [
                         {
-                            "id": "FAM"
+                            "id": "HG002"
                         },
                         "FAM_phased.vcf.gz:md5,51e4c24e2ec9d083482e182306ff517d"
                     ]
@@ -62,21 +62,21 @@
                 "1": [
                     [
                         {
-                            "id": "FAM"
+                            "id": "HG002"
                         },
                         "FAM_phased.vcf.gz.tbi:md5,b9559256caa667507167ce10d0a4a14a"
                     ]
                 ],
                 "2": [
-                    
+
                 ],
                 "haplotagged_bam_bai": [
-                    
+
                 ],
                 "phased_family_snvs": [
                     [
                         {
-                            "id": "FAM"
+                            "id": "HG002"
                         },
                         "FAM_phased.vcf.gz:md5,51e4c24e2ec9d083482e182306ff517d"
                     ]
@@ -84,7 +84,7 @@
                 "phased_family_snvs_tbi": [
                     [
                         {
-                            "id": "FAM"
+                            "id": "HG002"
                         },
                         "FAM_phased.vcf.gz.tbi:md5,b9559256caa667507167ce10d0a4a14a"
                     ]
@@ -97,13 +97,13 @@
             "nextflow": "26.02.0"
         }
     },
-    "2 samples - family ID equal to sample ID": {
+    "3 samples - With corresponding pedigree file": {
         "content": [
             {
                 "0": [
                     [
                         {
-                            "id": "HG002"
+                            "id": "FAM"
                         },
                         "HG002_phased.vcf.gz:md5,35a014a59bc20b07a0ccc5e5d52898cb"
                     ]
@@ -111,21 +111,21 @@
                 "1": [
                     [
                         {
-                            "id": "HG002"
+                            "id": "FAM"
                         },
                         "HG002_phased.vcf.gz.tbi:md5,d6f55569f0b5b8aceaeac5097345e7cc"
                     ]
                 ],
                 "2": [
-                    
+
                 ],
                 "haplotagged_bam_bai": [
-                    
+
                 ],
                 "phased_family_snvs": [
                     [
                         {
-                            "id": "HG002"
+                            "id": "FAM"
                         },
                         "HG002_phased.vcf.gz:md5,35a014a59bc20b07a0ccc5e5d52898cb"
                     ]
@@ -133,7 +133,7 @@
                 "phased_family_snvs_tbi": [
                     [
                         {
-                            "id": "HG002"
+                            "id": "FAM"
                         },
                         "HG002_phased.vcf.gz.tbi:md5,d6f55569f0b5b8aceaeac5097345e7cc"
                     ]

@@ -105,9 +105,6 @@
                     "bgzip": 1.21,
                     "tabix": 1.21
                 },
-                "TABIX_ENSEMBLVEP_SNV": {
-                    "tabix": 1.21
-                },
                 "TABIX_TABIX": {
                     "tabix": 1.21
                 },
@@ -214,6 +211,11 @@
                     "samtools": "1.23.1",
                     "sentieon-cli": "1.6.2",
                     "sentieon": 202503.03
+                    "bcftools": "1.23.1",
+                    "bedtools": "2.30.0",
+                    "samtools": "1.23.1",
+                    "sentieon-cli": "1.6.2",
+                    "sentieon": 202503.03
                 },
                 "ECHTVAR_ANNO": {
                     "echtvar": "0.2.2"
@@ -271,9 +273,6 @@
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
-                    "tabix": 1.21
-                },
-                "TABIX_ENSEMBLVEP_SNV": {
                     "tabix": 1.21
                 },
                 "TABIX_TABIX": {
@@ -456,9 +455,6 @@
                     "tabix": 1.21
                 },
                 "TABIX_CADD": {
-                    "tabix": 1.21
-                },
-                "TABIX_ENSEMBLVEP_SNV": {
                     "tabix": 1.21
                 },
                 "TABIX_TABIX": {

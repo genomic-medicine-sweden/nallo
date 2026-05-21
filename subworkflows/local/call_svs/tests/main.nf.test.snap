@@ -278,6 +278,9 @@
                         "sniffles_svdb_merge_by_caller.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
+                "10": [
+
+                ],
                 "2": [
                     [
                         {
@@ -293,6 +296,75 @@
                         },
                         "family_svdb_merge_by_family.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test_1",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_1_hificnv.depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "test_2",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_2_hificnv.depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "test_1",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_1_hificnv.copynum.bedgraph:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "test_2",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_2_hificnv.copynum.bedgraph:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "test_1",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_1_hificnv.maf.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "test_2",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_2_hificnv.maf.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "7": [
+
+                ],
+                "8": [
+
+                ],
+                "9": [
+
                 ],
                 "family_caller_tbi": [
                     [
@@ -479,6 +551,15 @@
                         "sawfish_svdb_merge_by_caller.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
+                "10": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "family"
+                        },
+                        "maf.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
                 "2": [
                     [
                         {
@@ -493,6 +574,42 @@
                             "id": "family"
                         },
                         "family_svdb_merge_by_family.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "4": [
+
+                ],
+                "5": [
+
+                ],
+                "6": [
+
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "family"
+                        },
+                        "depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "family"
+                        },
+                        "copynum.bedgraph:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "9": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "family"
+                        },
+                        "gc_bias_corrected_depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "family_caller_tbi": [

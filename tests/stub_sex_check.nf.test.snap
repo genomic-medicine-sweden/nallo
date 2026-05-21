@@ -284,6 +284,10 @@
                 "SAMTOOLS_VIEW": {
                     "samtools": "1.23.1"
                 },
+                "SOMALIER_PED_FAMILY": {
+                    "create_pedigree_file": 1.0,
+                    "python": "3.8.3"
+                },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
                 },

@@ -8,7 +8,7 @@ repos:
     hooks:
       - id: prettier
         additional_dependencies:
-          - prettier@3.6.2
+          - prettier@3.8.3
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
@@ -27,7 +27,13 @@ repos:
           (?x)^(
               .*ro-crate-metadata.json$|
               docs/parameters.md|
-              modules/nf-core/.*|
-              subworkflows/nf-core/.*|
+              modules/(?!local/).*|
+              subworkflows/(?!local/).*|
               .*\.snap$
           )$
+  - repo: https://github.com/seqeralabs/nf-lint-pre-commit
+    rev: v0.3.0
+    hooks:
+      - id: nextflow-lint
+        files: '\.nf$|nextflow\.config$'
+        args: ["-output", "json"]

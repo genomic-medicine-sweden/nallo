@@ -286,12 +286,6 @@
                     "bgzip": 1.21,
                     "tabix": 1.21
                 },
-                "TABIX_ENSEMBLVEP_SNV": {
-                    "tabix": 1.21
-                },
-                "TABIX_ENSEMBLVEP_SV": {
-                    "tabix": 1.21
-                },
                 "TABIX_HIFICNV": {
                     "tabix": 1.21
                 },
@@ -795,7 +789,7 @@
                 "HG002_Revio_pbcpgtools.hap2.bw:md5,e452d2986e38ba275033e8e613183b8d"
             ],
             [
-                
+
             ],
             [
                 [
@@ -850,7 +844,7 @@
                 ]
             ],
             [
-                
+
             ]
         ],
         "timestamp": "2026-05-20T14:44:18.836765436",
