@@ -35,7 +35,7 @@ lint:
     - manifest.name
     - manifest.homePage
   template_strings:
-    - .github/nf-dev-guidelines.yaml
+    - assets/nf-dev-guidelines.yaml
 nf_core_version: 4.0.2
 repository_type: pipeline
 template:

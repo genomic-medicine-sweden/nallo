@@ -18,11 +18,13 @@ sections:
   - versioning
   - developer_setup
   - running_tests
+  - file: docs/contributing/adding_new_tools.md
   - coding_conventions_header
   - architecture
   - adding_a_step
   - channels
   - parameters
+  - file: docs/contributing/publishing.md
   - configuration
   - writing_tests
   - style
@@ -73,9 +75,3 @@ vars:
 
     - Use `[...]` instead of `tuple(...)`.
     - Avoid nested if-else statements, prefer single-level statements when possible.
-
-custom_sections:
-  - title: Publishing
-    file: docs/contributing/publishing.md
-  - title: Adding new tools
-    file: docs/contributing/adding_new_tools.md
