@@ -1,3 +1,5 @@
+## Publishing
+
 We are currently migrating from using `publishDir` to workflow outputs.
 
 - Workflows and subworkflows need to emit all result files that need to be published.

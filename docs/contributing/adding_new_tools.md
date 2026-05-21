@@ -1,3 +1,5 @@
+## Adding new tools
+
 #### 1. Update citations
 
 When adding a new tool to the pipeline, update `assets/software_references.yml` with the citation and bibliography.
