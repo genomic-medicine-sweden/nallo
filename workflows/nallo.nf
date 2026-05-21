@@ -515,12 +515,11 @@ workflow NALLO {
 
         // Group GVCFs per region and family (one region with all samples)
         call_snvs_gvcf
-            .dump(tag: "call_snvs_gvcf_before_grouping")
             .map { meta, gvcf ->
                 [[id: meta.region.name, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals, caller: val_snv_caller], gvcf]
             }
             .mix(
-                ch_mitochondrial_vcf.dump(tag: "mitochondrial_vcf_before_grouping").map { meta, vcf ->
+                ch_mitochondrial_vcf.map { meta, vcf ->
                     [[id: meta.genome, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals, caller: meta.caller], vcf]
                 }
             )
