@@ -279,7 +279,7 @@
                     ]
                 ],
                 "10": [
-
+                    
                 ],
                 "2": [
                     [
@@ -358,13 +358,13 @@
                     ]
                 ],
                 "7": [
-
+                    
                 ],
                 "8": [
-
+                    
                 ],
                 "9": [
-
+                    
                 ],
                 "family_caller_tbi": [
                     [
@@ -427,13 +427,85 @@
                         },
                         "family_svdb_merge_by_family.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
+                ],
+                "hificnv_copynum": [
+                    [
+                        {
+                            "id": "test_1",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_1_hificnv.copynum.bedgraph:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "test_2",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_2_hificnv.copynum.bedgraph:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "hificnv_depth": [
+                    [
+                        {
+                            "id": "test_1",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_1_hificnv.depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "test_2",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_2_hificnv.depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "hificnv_maf": [
+                    [
+                        {
+                            "id": "test_1",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_1_hificnv.maf.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "test_2",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_2_hificnv.maf.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "sawfish_copynum_bedgraph": [
+                    
+                ],
+                "sawfish_depth_bw": [
+                    
+                ],
+                "sawfish_gc_bias_corrected_depth_bw": [
+                    
+                ],
+                "sawfish_maf_bw": [
+                    
                 ]
             }
         ],
-        "timestamp": "2026-03-27T16:53:33.284355744",
+        "timestamp": "2026-05-21T15:48:41.7735975",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
         }
     },
     "2 samples, 1 family - merge sniffes,hificnv,severus,sawfish with trf bed, run all callers and filter": {
@@ -577,13 +649,13 @@
                     ]
                 ],
                 "4": [
-
+                    
                 ],
                 "5": [
-
+                    
                 ],
                 "6": [
-
+                    
                 ],
                 "7": [
                     [
@@ -645,13 +717,58 @@
                         },
                         "family_svdb_merge_by_family.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
+                ],
+                "hificnv_copynum": [
+                    
+                ],
+                "hificnv_depth": [
+                    
+                ],
+                "hificnv_maf": [
+                    
+                ],
+                "sawfish_copynum_bedgraph": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "family"
+                        },
+                        "copynum.bedgraph:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "sawfish_depth_bw": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "family"
+                        },
+                        "depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "sawfish_gc_bias_corrected_depth_bw": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "family"
+                        },
+                        "gc_bias_corrected_depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "sawfish_maf_bw": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "family"
+                        },
+                        "maf.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ]
             }
         ],
-        "timestamp": "2026-03-27T16:53:49.846987023",
+        "timestamp": "2026-05-21T15:48:55.706631797",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
         }
     }
 }

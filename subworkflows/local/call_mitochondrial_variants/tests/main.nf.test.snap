@@ -7,7 +7,7 @@
                         {
                             "id": "test"
                         },
-                        "test_mitochondrial_snv.vcf.gz:md5,ad762ad4b7016694197da97500671be5"
+                        "test_mitochondrial_snv.vcf.gz:md5,932ff16a6bde7a1301bde7c6b2f59f21"
                     ]
                 ],
                 "1": [
@@ -23,7 +23,7 @@
                         {
                             "id": "test"
                         },
-                        "test_mitochondrial_sv.vcf.gz:md5,512d0e4b7de3876efb8d2c8aa364fc3e"
+                        "test_mitochondrial_sv.vcf.gz:md5,7e657bfb54f22ba1205d5f12a36aa315"
                     ]
                 ],
                 "3": [
@@ -47,7 +47,7 @@
                         {
                             "id": "test"
                         },
-                        "test_mitochondrial_snv.vcf.gz:md5,ad762ad4b7016694197da97500671be5"
+                        "test_mitochondrial_snv.vcf.gz:md5,932ff16a6bde7a1301bde7c6b2f59f21"
                     ]
                 ],
                 "mitochondrial_sv_tbi": [
@@ -63,12 +63,12 @@
                         {
                             "id": "test"
                         },
-                        "test_mitochondrial_sv.vcf.gz:md5,512d0e4b7de3876efb8d2c8aa364fc3e"
+                        "test_mitochondrial_sv.vcf.gz:md5,7e657bfb54f22ba1205d5f12a36aa315"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-05-20T15:25:41.801688525",
+        "timestamp": "2026-05-21T15:37:23.430849505",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"
