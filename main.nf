@@ -562,11 +562,9 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov_bed)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov_tbi)
 
-    ch_haplotagged_reads_bam = GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads_bam
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads_bai)
+    ch_haplotagged_reads_bam = GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads_bai)
 
-    ch_haplotagged_reads_cram = GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads_cram
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads_crai)
+    ch_haplotagged_reads_cram = GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads_cram.mix(GENOMICMEDICINESWEDEN_NALLO.out.haplotagged_reads_crai)
 
     ch_methylation_pileup = GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_combined_bed
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_combined_index)

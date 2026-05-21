@@ -670,16 +670,16 @@ workflow NALLO {
             [],
             [],
         )
-        ch_snv_vcf_for_annotation   = BCFTOOLS_VIEW_PHASING.out.vcf
+        ch_snv_vcf_for_annotation = BCFTOOLS_VIEW_PHASING.out.vcf
         ch_snv_index_for_annotation = BCFTOOLS_VIEW_PHASING.out.tbi
-        ch_sv_vcf_for_annotation    = PHASING.out.phased_family_svs
-        ch_sv_index_for_annotation  = PHASING.out.phased_family_svs_tbi
+        ch_sv_vcf_for_annotation = PHASING.out.phased_family_svs
+        ch_sv_index_for_annotation = PHASING.out.phased_family_svs_tbi
     }
     else {
-        ch_snv_vcf_for_annotation   = val_skip_snv_calling ? channel.empty() : family_snv_vcf
+        ch_snv_vcf_for_annotation = val_skip_snv_calling ? channel.empty() : family_snv_vcf
         ch_snv_index_for_annotation = val_skip_snv_calling ? channel.empty() : family_snv_index
-        ch_sv_vcf_for_annotation    = val_skip_sv_calling  ? channel.empty() : CALL_SVS.out.family_vcf
-        ch_sv_index_for_annotation  = val_skip_sv_calling  ? channel.empty() : CALL_SVS.out.family_tbi
+        ch_sv_vcf_for_annotation = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_vcf
+        ch_sv_index_for_annotation = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_tbi
     }
 
     //
@@ -1001,25 +1001,25 @@ workflow NALLO {
     // Call repeat expansions with TRGT or strdust
     //
     if (!val_skip_trgt) {
-            CALL_REPEAT_EXPANSIONS_TRGT(
-                PHASING.out.haplotagged_bam_bai,
-                ch_fasta,
-                ch_fai,
-                ch_str_bed,
-                cram_output,
-                ch_vcfexpress_prelude,
-            )
+        CALL_REPEAT_EXPANSIONS_TRGT(
+            PHASING.out.haplotagged_bam_bai,
+            ch_fasta,
+            ch_fai,
+            ch_str_bed,
+            cram_output,
+            ch_vcfexpress_prelude,
+        )
 
-            ch_repeat_expansions = CALL_REPEAT_EXPANSIONS_TRGT.out.family_vcf
+        ch_repeat_expansions = CALL_REPEAT_EXPANSIONS_TRGT.out.family_vcf
     }
     if (!val_skip_strdust) {
-            CALL_REPEAT_EXPANSIONS_STRDUST(
-                PHASING.out.haplotagged_bam_bai,
-                ch_fasta,
-                ch_fai,
-                ch_str_bed,
-                ch_vcfexpress_prelude,
-            )
+        CALL_REPEAT_EXPANSIONS_STRDUST(
+            PHASING.out.haplotagged_bam_bai,
+            ch_fasta,
+            ch_fai,
+            ch_str_bed,
+            ch_vcfexpress_prelude,
+        )
     }
 
     //
@@ -1115,11 +1115,11 @@ workflow NALLO {
     )
 
     emit:
-        aligned_assemblies_bai              = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.bai // channel: [ val(meta), path(bai) ]
+    aligned_assemblies_bai              = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.bai // channel: [ val(meta), path(bai) ]
     aligned_assemblies_bam              = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.bam // channel: [ val(meta), path(bam) ]
     aligned_assemblies_crai             = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.crai // channel: [ val(meta), path(crai) ]
     aligned_assemblies_cram             = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.cram // channel: [ val(meta), path(cram) ]
-    aligned_reads_bai                   = val_skip_alignment? channel.empty() : ch_aligned_bam.map { meta, _bam, bai -> [meta, bai] } // channel: [ val(meta), path(bai) ]
+    aligned_reads_bai                   = val_skip_alignment ? channel.empty() : ch_aligned_bam.map { meta, _bam, bai -> [meta, bai] } // channel: [ val(meta), path(bai) ]
     aligned_reads_bam                   = val_skip_alignment ? channel.empty() : ch_aligned_bam.map { meta, bam, _bai -> [meta, bam] } // channel: [ val(meta), path(bam) ]
     aligned_reads_crai                  = !val_convert_unphased_aligned_reads_to_cram ? channel.empty() : SAMTOOLS_CONVERT.out.crai // channel: [ val(meta), path(crai) ]
     aligned_reads_cram                  = !val_convert_unphased_aligned_reads_to_cram ? channel.empty() : SAMTOOLS_CONVERT.out.cram // channel: [ val(meta), path(cram) ]
