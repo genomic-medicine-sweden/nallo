@@ -3,7 +3,7 @@ name: Sync guidelines
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 8 * * 1" # weekly on Monday
+    - cron: "0 8 * * *" # daily
 
 jobs:
   sync:
@@ -17,7 +17,7 @@ jobs:
 
       - name: Clone nf-dev-guidelines
         run: |
-          git clone --depth 1 --branch initial-concept \
+          git clone --depth 1 --branch main \
             https://github.com/genomic-medicine-sweden/nf-dev-guidelines.git \
             /tmp/nf-dev-guidelines
 
