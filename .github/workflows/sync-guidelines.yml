@@ -2,6 +2,7 @@ name: Sync guidelines
 
 on:
   workflow_dispatch:
+  push:
   schedule:
     - cron: "0 8 * * 1" # weekly on Monday
 
@@ -30,7 +31,7 @@ jobs:
             --config .github/nf-dev-guidelines.yaml \
             --guidelines /tmp/nf-dev-guidelines \
             --repo-root . \
-            --output CONTRIBUTING.md
+            --output docs/CONTRIBUTING.md
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v7
