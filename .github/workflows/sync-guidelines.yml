@@ -38,7 +38,6 @@ jobs:
       - name: Create pull request
         uses: peter-evans/create-pull-request@v7
         with:
-          base: master
           commit-message: "docs: update CONTRIBUTING.md from nf-dev-guidelines"
           title: "Update CONTRIBUTING.md from nf-dev-guidelines"
           body: |
