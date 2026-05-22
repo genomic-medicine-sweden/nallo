@@ -222,6 +222,7 @@ workflow NALLO {
             .map { meta, reads, _index -> [meta, reads] }
             .set { ch_convert_bam_in }
 
+
         CONVERT_INPUT_BAMS(
             ch_convert_bam_in,
             true,
@@ -258,6 +259,7 @@ workflow NALLO {
                 mapped: index
             }
             .set { ch_input_bams }
+
 
         ch_input_bams.unmapped
             .map { meta, reads, _index -> [ meta, reads ]}

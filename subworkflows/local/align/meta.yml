@@ -20,7 +20,7 @@ input:
   - ch_mapped_bam:
       type: file
       description: |
-        Optional input channel containing mapped BAM files to be merged with the newly mapped BAMs.
+        Optional input channel containing mapped BAM files and indexes to be merged with the newly mapped BAMs.
         Structure: [ val(meta), path(bam), path(bai) ]
       pattern: "*.{bam/cram}{,.bai,.crai}"
   - ch_mmi:

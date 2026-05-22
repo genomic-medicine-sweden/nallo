@@ -13,11 +13,12 @@ workflow ALIGN {
     main:
 
     if (val_split_alignment) {
-        ch_ubam
-             .map { meta, bam, _bai -> [meta, bam] }
-             .set { ch_splitubam_in }
-        SPLITUBAM(ch_splitubam_in)
-        ch_unmapped = SPLITUBAM.out.bam
+        SPLITUBAM(ch_ubam)
+        SPLITUBAM.out.bam
+            .transpose()
+            // Adding file key to meta for proper joining of minimap output
+            .map { meta, bam -> tuple(meta + [file: bam.name], bam) }
+            .set { ch_unmapped }
     } else {
         ch_unmapped = ch_ubam
     }
@@ -27,11 +28,11 @@ workflow ALIGN {
      * allowing downstream merging to trigger as soon as all alignments of a sample are ready.
      */
     ch_unmapped
+        // add dummy index for unmapped BAMs to allow mixing with mapped BAMs
+        .map { meta, bam -> tuple(meta - meta.subMap('file'), bam, [])}
         .mix(ch_mapped_bam)
-        // Unmapped BAMs have no index but mapped ones do. To avoid an extra processing step, we can just assign a default value to the index.
-        .map { meta, bam, _index=null -> [meta - meta.subMap('file'), bam] }
         .groupTuple()
-        .map { meta, files -> [meta.id, files.size() ] }
+        .map { meta, files, _indexes -> tuple(meta.id, files.size()) }
         .set { ch_reads_grouping_key }
 
     MINIMAP2_ALIGN(
@@ -51,13 +52,13 @@ workflow ALIGN {
             bam_meta.id == group_id
         }
         .map { bam_meta, bam, bai, _group_id, group_size ->
-            [bam_meta - bam_meta.subMap('file') + [n_files: group_size], bam, bai]
+            tuple(bam_meta - bam_meta.subMap('file') + [n_files: group_size], bam, bai)
         }
         .map { meta, bam, bai ->
-            [groupKey(meta, meta.n_files), bam, bai]
+            tuple(groupKey(meta, meta.n_files), bam, bai)
         }
         .groupTuple()
-        .map { key, bams, bais -> [key.getGroupTarget(), bams, bais ]}
+        .map { key, bams, bais -> tuple(key.getGroupTarget(), bams, bais) }
         .set { ch_mapped }
 
     SAMTOOLS_MERGE(
@@ -67,7 +68,7 @@ workflow ALIGN {
 
     SAMTOOLS_MERGE.out.bam
         .join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true)
-        .map { meta, bam, bai -> [meta - meta.subMap('n_files'), bam, bai] }
+        .map { meta, bam, bai -> tuple(meta - meta.subMap('n_files'), bam, bai) }
         .set { ch_aligned_bam }
 
 
