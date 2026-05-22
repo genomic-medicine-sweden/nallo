@@ -65,7 +65,14 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert workflow.out.mitochondrial_snv_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.mitochondrial_sv_tbi.get(0).get(1).endsWith("tbi") },
+                { assert snapshot(
+                    workflow.out.mitochondrial_snv_vcf
+                    .collect { meta, vcf -> [ 'mitochondrial_snv_vcf', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    workflow.out.mitochondrial_sv_vcf
+                    .collect { meta, vcf -> [ 'mitochondrial_sv_vcf', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    ).match() }
             )
         }
 
@@ -94,7 +101,11 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert workflow.out.mitochondrial_snv_tbi.get(0).get(1).endsWith("tbi") },
+                { assert snapshot(
+                    workflow.out.mitochondrial_snv_vcf
+                    .collect { meta, vcf -> [ 'mitochondrial_snv_vcf', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    ).match() }
             )
         }
 

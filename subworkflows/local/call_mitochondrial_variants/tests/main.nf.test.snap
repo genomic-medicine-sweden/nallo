@@ -1,74 +1,30 @@
 {
     "1 sample - mitorsaw (Deepvariant/mitorsaw)": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_mitochondrial_snv.vcf.gz:md5,932ff16a6bde7a1301bde7c6b2f59f21"
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_mitochondrial_snv.vcf.gz.tbi:md5,30c04f939a9b984f6a9d30e0ef708d1b"
-                    ]
-                ],
-                "2": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_mitochondrial_sv.vcf.gz:md5,7e657bfb54f22ba1205d5f12a36aa315"
-                    ]
-                ],
-                "3": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_mitochondrial_sv.vcf.gz.tbi:md5,bfebefb5cbe3d5e9d6ad8789db55a23a"
-                    ]
-                ],
-                "mitochondrial_snv_tbi": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_mitochondrial_snv.vcf.gz.tbi:md5,30c04f939a9b984f6a9d30e0ef708d1b"
-                    ]
-                ],
-                "mitochondrial_snv_vcf": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_mitochondrial_snv.vcf.gz:md5,932ff16a6bde7a1301bde7c6b2f59f21"
-                    ]
-                ],
-                "mitochondrial_sv_tbi": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_mitochondrial_sv.vcf.gz.tbi:md5,bfebefb5cbe3d5e9d6ad8789db55a23a"
-                    ]
-                ],
-                "mitochondrial_sv_vcf": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_mitochondrial_sv.vcf.gz:md5,7e657bfb54f22ba1205d5f12a36aa315"
-                    ]
+            [
+                [
+                    "mitochondrial_snv_vcf",
+                    {
+                        "id": "test"
+                    },
+                    "test_mitochondrial_snv.vcf.gz",
+                    "VcfFile [chromosomes=[chrM], sampleCount=1, variantCount=18, phased=true, phasedAutodetect=true]",
+                    "a94e33d65e5f349ac825fbaeba434ee4"
                 ]
-            }
+            ],
+            [
+                [
+                    "mitochondrial_sv_vcf",
+                    {
+                        "id": "test"
+                    },
+                    "test_mitochondrial_sv.vcf.gz",
+                    "VcfFile [chromosomes=[chrM], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=false]",
+                    "3564d26b4d771126a7aa64eacb4ed8b8"
+                ]
+            ]
         ],
-        "timestamp": "2026-05-21T15:37:23.430849505",
+        "timestamp": "2026-05-22T16:55:52.344617149",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"
@@ -76,62 +32,21 @@
     },
     "1 sample - deepvariant (Deepvariant/Deepvariant)": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test",
-                            "genome": "mitochondrial",
-                            "num_intervals": 1
-                        },
-                        "test_chr22_chrM_mitochondrial_deepvariant.vcf.gz:md5,8bd48c89c6b610789f9491dac5c3be55"
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "test",
-                            "genome": "mitochondrial",
-                            "num_intervals": 1
-                        },
-                        "test_chr22_chrM_mitochondrial_deepvariant.vcf.gz.tbi:md5,2d29856aa4b720cfaf21fc7b64e3ae9d"
-                    ]
-                ],
-                "2": [
-                    
-                ],
-                "3": [
-                    
-                ],
-                "mitochondrial_snv_tbi": [
-                    [
-                        {
-                            "id": "test",
-                            "genome": "mitochondrial",
-                            "num_intervals": 1
-                        },
-                        "test_chr22_chrM_mitochondrial_deepvariant.vcf.gz.tbi:md5,2d29856aa4b720cfaf21fc7b64e3ae9d"
-                    ]
-                ],
-                "mitochondrial_snv_vcf": [
-                    [
-                        {
-                            "id": "test",
-                            "genome": "mitochondrial",
-                            "num_intervals": 1
-                        },
-                        "test_chr22_chrM_mitochondrial_deepvariant.vcf.gz:md5,8bd48c89c6b610789f9491dac5c3be55"
-                    ]
-                ],
-                "mitochondrial_sv_tbi": [
-                    
-                ],
-                "mitochondrial_sv_vcf": [
-                    
+            [
+                [
+                    "mitochondrial_snv_vcf",
+                    {
+                        "id": "test",
+                        "genome": "mitochondrial",
+                        "num_intervals": 1
+                    },
+                    "test_chr22_chrM_mitochondrial_deepvariant.vcf.gz",
+                    "VcfFile [chromosomes=[chrM], sampleCount=1, variantCount=15, phased=false, phasedAutodetect=false]",
+                    "535405b8aac4ae533ba4029d0582814d"
                 ]
-            }
+            ]
         ],
-        "timestamp": "2026-05-13T16:18:50.028824695",
+        "timestamp": "2026-05-22T17:09:27.165068355",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"
