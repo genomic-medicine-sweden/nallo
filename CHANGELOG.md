@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1084](https://github.com/genomic-medicine-sweden/nallo/pull/1084) - Added new auto-generated container config files (new with nf-core/tools update)
 - [#1120](https://github.com/genomic-medicine-sweden/nallo/pull/1120) - Added baseName to avoid `.bed` in deepvariant output name
 - [#1128](https://github.com/genomic-medicine-sweden/nallo/pull/1128) - Added nf-tests for `phasing` subworkflow
+- [#1107](https://github.com/genomic-medicine-sweden/nallo/pull/1107) - Added support for using mapped BAM files as input
+- [#1107](https://github.com/genomic-medicine-sweden/nallo/pull/1107) - Added optional field `index` to samplesheet
 
 ### Changed
 
@@ -70,6 +72,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1118](https://github.com/genomic-medicine-sweden/nallo/pull/1118) - Changed testdata commit
 - [#1126](https://github.com/genomic-medicine-sweden/nallo/pull/1126) - Changed `ch_* = <...>` instead of `.set { }` in the pipeline
 - [#1127](https://github.com/genomic-medicine-sweden/nallo/pull/1127), [#1130](https://github.com/genomic-medicine-sweden/nallo/pull/1130) - Run `nextflow lint -format -harshil-alignment` on configuration files, local modules and subworkflows, nallo.nf
+- [#1107](https://github.com/genomic-medicine-sweden/nallo/pull/1107) - Moved alignment into subworkflow `ALIGN`
+- [#1107](https://github.com/genomic-medicine-sweden/nallo/pull/1107) - Changed alignment to use minmap2 index from `PREPARE_REFERENCES`
 
 ### Removed
 
