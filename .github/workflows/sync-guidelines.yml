@@ -39,6 +39,18 @@ jobs:
       - name: Generate table of contents
         run: npx --yes doctoc --github docs/CONTRIBUTING.md
 
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+
       - name: Create pull request
         uses: peter-evans/create-pull-request@v7
         with:
