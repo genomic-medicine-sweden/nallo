@@ -260,10 +260,6 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     cramino_unphased_stats              = NALLO.out.cramino_unphased_stats // channel: [ val(meta), path(txt) ]
     fastqc_html                         = NALLO.out.fastqc_html // channel: [ val(meta), path(html) ]
     fastqc_zip                          = NALLO.out.fastqc_zip // channel: [ val(meta), path(zip) ]
-    gens_baf_bed                        = NALLO.out.gens_baf_bed // channel: [ val(meta), path(baf.bed.gz) ]
-    gens_baf_tbi                        = NALLO.out.gens_baf_tbi // channel: [ val(meta), path(baf.bed.gz.tbi) ]
-    gens_cov_bed                        = NALLO.out.gens_cov_bed // channel: [ val(meta), path(cov.bed.gz) ]
-    gens_cov_tbi                        = NALLO.out.gens_cov_tbi // channel: [ val(meta), path(cov.bed.gz.tbi) ]
     hificnv_copynum_bedgraph            = NALLO.out.hificnv_copynum_bedgraph // channel: [ val(meta), path(bedgraph) ]
     hificnv_depth_bw                    = NALLO.out.hificnv_depth_bw // channel: [ val(meta), path(bw) ]
     hificnv_maf_bw                      = NALLO.out.hificnv_maf_bw // channel: [ val(meta), path(bw) ]
@@ -588,9 +584,7 @@ workflow {
     ch_paraphase_sample = GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_json
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_tbi)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_vcf)
-
     ch_paraphase_sample_bam = GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_bai)
-
     ch_paraphase_sample_cram = GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_cram.mix(GENOMICMEDICINESWEDEN_NALLO.out.paralogs_sample_crai)
 
     ch_peddy = GENOMICMEDICINESWEDEN_NALLO.out.peddy_html
@@ -605,9 +599,7 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.peddy_ped_check_rel_difference_csv)
 
     ch_qc_cramino_phased = GENOMICMEDICINESWEDEN_NALLO.out.cramino_phased_stats.mix(GENOMICMEDICINESWEDEN_NALLO.out.cramino_phased_arrow)
-
     ch_qc_cramino_unphased = GENOMICMEDICINESWEDEN_NALLO.out.cramino_unphased_stats.mix(GENOMICMEDICINESWEDEN_NALLO.out.cramino_unphased_arrow)
-
     ch_qc_fastqc = GENOMICMEDICINESWEDEN_NALLO.out.fastqc_html.mix(GENOMICMEDICINESWEDEN_NALLO.out.fastqc_zip)
 
     ch_qc_mosdepth = GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_summary
@@ -765,7 +757,6 @@ output {
         enabled params.alignment_output_format == 'bam'
     }
     paraphase_sample_cram {
-        path { meta, _file -> "paraphase/sample/${meta.id}/" }
         enabled params.alignment_output_format == 'cram'
     }
     repeats_annotated {
