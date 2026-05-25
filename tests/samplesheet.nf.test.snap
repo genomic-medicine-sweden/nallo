@@ -735,10 +735,10 @@
                 "fastqc_adapter_content_plot.txt:md5,ed3e653952241b92856ca19871b94e21",
                 "fastqc_overrepresented_sequences_plot.txt:md5,b1f103b147c507ccc5ed778e2e0d5ef7",
                 "fastqc_per_base_n_content_plot.txt:md5,aea1accb7954b05f711acefb3d10dee7",
-                "fastqc_per_base_sequence_quality_plot.txt:md5,84f10d85e07595c9eb7543359acd6c7b",
+                "fastqc_per_base_sequence_quality_plot.txt:md5,72f258b9fa10e35e0895add5093a935a",
                 "fastqc_per_sequence_gc_content_plot_Counts.txt:md5,016874c48fe7815106d6d0788c9fec7c",
                 "fastqc_per_sequence_gc_content_plot_Percentages.txt:md5,46f48d9ae978fbe153d01cb84a3ea550",
-                "fastqc_per_sequence_quality_scores_plot.txt:md5,e722ceb78f18ac69362d9a22942252fb",
+                "fastqc_per_sequence_quality_scores_plot.txt:md5,8c2bd0ce0b55ea3dd165a3d5a5c4e92d",
                 "fastqc_sequence_counts_plot.txt:md5,1912da3a28cd70f958955dd4a42415ea",
                 "fastqc_sequence_duplication_levels_plot.txt:md5,c070fff4c7aa059d94c9ed77dcd9bfd6",
                 "fastqc_sequence_length_distribution_plot.txt:md5,f09ef92b4628b0f3a389a49332f4daa4",
@@ -776,7 +776,7 @@
                 "HG002_Revio_whatshap_stats.gtf.gz:md5,bf0cad1ea2534b19efbf14f80e9606d0",
                 "HG002_Revio_whatshap_stats.gtf.gz.tbi:md5,bdea257624c090d9563cc20f835b5b92",
                 "HG002_Revio_whatshap_stats.tsv:md5,57c634e51a2cd07aa29a7b6f673508bc",
-                "HG002_Revio_sambamba_depth.bed:md5,b027762fdd12c7a82f31d2248bebc10a",
+                "HG002_Revio_sambamba_depth.bed:md5,b3d30778daacc696fc15159dd86d1211",
                 "HG002_Revio_copynum_sawfish.bedgraph:md5,035508c2ed50050144632a54b60453eb",
                 "HG002_Revio_depth_sawfish.bw:md5,0f2388d565456986f628932e6a1e1778",
                 "HG002_Revio_gc_bias_corrected_depth_sawfish.bw:md5,0f2388d565456986f628932e6a1e1778",
@@ -847,7 +847,7 @@
                 
             ]
         ],
-        "timestamp": "2026-05-21T15:03:47.282860239",
+        "timestamp": "2026-05-25T14:19:19.137881788",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"

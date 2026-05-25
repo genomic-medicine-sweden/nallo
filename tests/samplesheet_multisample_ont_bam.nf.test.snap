@@ -1025,10 +1025,10 @@
                 "fastqc_adapter_content_plot.txt:md5,68a9946cf1472eb1b02108c6f2d95ea5",
                 "fastqc_overrepresented_sequences_plot.txt:md5,efc1254d2b1dd306ea0f2ceaa78654d8",
                 "fastqc_per_base_n_content_plot.txt:md5,2813e4810a2dfd9adfb9c63ab9a76aed",
-                "fastqc_per_base_sequence_quality_plot.txt:md5,9fb191b543b6f1ef502173dbc5127196",
+                "fastqc_per_base_sequence_quality_plot.txt:md5,271b7dc2f0de9780f6fa928dacd9ec6e",
                 "fastqc_per_sequence_gc_content_plot_Counts.txt:md5,cc46382c68d88a620b32b319ddbeabeb",
                 "fastqc_per_sequence_gc_content_plot_Percentages.txt:md5,8766e683f1564123d22e11cf26f49476",
-                "fastqc_per_sequence_quality_scores_plot.txt:md5,2452908cb05f08fd1f1827fcc0a6628b",
+                "fastqc_per_sequence_quality_scores_plot.txt:md5,a004a5abe4686047fd51140d08871c9c",
                 "fastqc_sequence_counts_plot.txt:md5,b3436d120378e296eb228580d7e3c1c2",
                 "fastqc_sequence_duplication_levels_plot.txt:md5,416a0eaa23d5888fa6c4bac4f925449d",
                 "fastqc_sequence_length_distribution_plot.txt:md5,5cfec4af740c91125537fb324383796b",
@@ -1097,9 +1097,9 @@
                 "HG002_ONT_C_whatshap_stats.gtf.gz:md5,141cbfd04221ab9df0de84a2df6546b8",
                 "HG002_ONT_C_whatshap_stats.gtf.gz.tbi:md5,cdb4d0b6ece69c137fd9f363f7ff2445",
                 "HG002_ONT_C_whatshap_stats.tsv:md5,f70e499377fbf3fe2da1bb0204a05583",
-                "HG002_ONT_A_sambamba_depth.bed:md5,4aba6906595b9fb8c7cdc92f89da3c1d",
-                "HG002_ONT_B_sambamba_depth.bed:md5,1efdc9b06c7db75e0b65067fdb19fd7f",
-                "HG002_ONT_C_sambamba_depth.bed:md5,2a8e1720afcf7b342d4c577e24d9423b",
+                "HG002_ONT_A_sambamba_depth.bed:md5,a817cd9e04821fc49b4232b588a2f32e",
+                "HG002_ONT_B_sambamba_depth.bed:md5,06428307a658f1f0a493d755d1860870",
+                "HG002_ONT_C_sambamba_depth.bed:md5,cd16093b7effee92fb16c011a42c51d3",
                 "HG002_ONT_A_hificnv.copynum.bedgraph:md5,d9b8a7b2b4791a31d40e99ed2134977f",
                 "HG002_ONT_A_hificnv.depth.bw:md5,bede5432be2d1bf0669e5c62d826404f",
                 "HG002_ONT_A_hificnv.maf.bw:md5,f89d9e06487666f5c1c4a226b69e4d4c",
@@ -1171,11 +1171,11 @@
                 ],
                 [
                     "FAM_snvs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=2, variantCount=129, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=2, variantCount=127, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM2_snvs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=127, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=126, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_ONT_A_deepvariant_snvs.vcf.gz",
@@ -1226,7 +1226,7 @@
                 
             ]
         ],
-        "timestamp": "2026-05-21T15:13:23.265861459",
+        "timestamp": "2026-05-25T14:27:00.048805858",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"

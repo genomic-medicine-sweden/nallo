@@ -1113,10 +1113,10 @@
                 "fastqc_adapter_content_plot.txt:md5,709e06e13a9558042eb7284fb93d62aa",
                 "fastqc_overrepresented_sequences_plot.txt:md5,8eb5fcca98a226336511cbe53ef1a658",
                 "fastqc_per_base_n_content_plot.txt:md5,a1b9be680733df6b9dda4c1f43ce0460",
-                "fastqc_per_base_sequence_quality_plot.txt:md5,a7748e115287305289765d414bb370eb",
+                "fastqc_per_base_sequence_quality_plot.txt:md5,3f35f30ce767d59ea1e53366a5978d81",
                 "fastqc_per_sequence_gc_content_plot_Counts.txt:md5,6db51e27fa75ca91ba3f4e71674fae86",
                 "fastqc_per_sequence_gc_content_plot_Percentages.txt:md5,988d2bbf16a602f82b812c52d7528258",
-                "fastqc_per_sequence_quality_scores_plot.txt:md5,4fa2f46a181dd26fdbb520ecdffbc507",
+                "fastqc_per_sequence_quality_scores_plot.txt:md5,e8babc896830e873c05831169c3bf234",
                 "fastqc_sequence_counts_plot.txt:md5,f8bc43854467033647669182562f968e",
                 "fastqc_sequence_duplication_levels_plot.txt:md5,b324e0503dedd9db279693045166a405",
                 "fastqc_sequence_length_distribution_plot.txt:md5,f1a2f4955e9af1a3761f1ac8d3132536",
@@ -1174,9 +1174,9 @@
                 "HG004_whatshap_stats.gtf.gz:md5,8423d0eac1ac62981574eec60a9c96d9",
                 "HG004_whatshap_stats.gtf.gz.tbi:md5,7d946efbc8e804ce3029a52cb90324fd",
                 "HG004_whatshap_stats.tsv:md5,8103a14ba1a61fa9bc855d2156ef17c3",
-                "HG002_sambamba_depth.bed:md5,50ba432d54b9f32531ad3e66eb9f10c0",
-                "HG003_sambamba_depth.bed:md5,10946b6471f7aa91f59b7febe98fe485",
-                "HG004_sambamba_depth.bed:md5,ab256d67031421e9e4222cc2ded76df6",
+                "HG002_sambamba_depth.bed:md5,16da8e64f24ef0ec31b2ce5c0b18586c",
+                "HG003_sambamba_depth.bed:md5,6b87e82e7624db10f2d15a890bcfe6cf",
+                "HG004_sambamba_depth.bed:md5,ad9af0d845359cfd0ee86e478e5960d7",
                 "HG002_copynum_sawfish.bedgraph:md5,a291a5c70cfd5f068a400628fb9b826a",
                 "HG002_depth_sawfish.bw:md5,9cf3b2b152943843093a9f3e3c8ca5af",
                 "HG002_gc_bias_corrected_depth_sawfish.bw:md5,9cf3b2b152943843093a9f3e3c8ca5af",
@@ -1320,7 +1320,7 @@
                 
             ]
         ],
-        "timestamp": "2026-05-21T15:07:12.8748084",
+        "timestamp": "2026-05-25T14:22:41.72946927",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"
