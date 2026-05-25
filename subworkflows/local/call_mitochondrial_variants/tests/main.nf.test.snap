@@ -42,11 +42,11 @@
                     },
                     "test_chr22_chrM_mitochondrial_deepvariant.vcf.gz",
                     "VcfFile [chromosomes=[chrM], sampleCount=1, variantCount=15, phased=false, phasedAutodetect=false]",
-                    "535405b8aac4ae533ba4029d0582814d"
+                    "f2f3dc995906636c0fba2f9a2d71cbb5"
                 ]
             ]
         ],
-        "timestamp": "2026-05-22T17:09:27.165068355",
+        "timestamp": "2026-05-25T14:44:34.267071571",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"
