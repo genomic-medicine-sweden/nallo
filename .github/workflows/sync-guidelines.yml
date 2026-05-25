@@ -38,7 +38,7 @@ jobs:
       - name: Create pull request
         uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.NF_DEV_GUIDELINES_PAT }}
           commit-message: "docs: update CONTRIBUTING.md from nf-dev-guidelines"
           title: "Update CONTRIBUTING.md from nf-dev-guidelines"
           body: |
