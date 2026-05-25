@@ -1,8 +1,96 @@
 {
     "Test VEP with mock uncompressed cache": {
         "content": [
-            32,
+            43,
             {
+                "BCFTOOLS_CONCAT": {
+                    "bcftools": 1.21
+                },
+                "BCFTOOLS_NORM_MULTISAMPLE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_NORM_SINGLESAMPLE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_SORT": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_STATS": {
+                    "bcftools": 1.22
+                },
+                "BEDTOOLS_MERGE": {
+                    "bedtools": "2.31.1"
+                },
+                "BEDTOOLS_SORT": {
+                    "bedtools": "2.31.1"
+                },
+                "BEDTOOLS_SPLIT": {
+                    "bedtools": "2.31.1"
+                },
+                "DEEPVARIANT_RUNDEEPVARIANT": {
+                    "deepvariant": "1.10.0"
+                },
+                "DEEPVARIANT_VCFSTATSREPORT": {
+                    "deepvariant": "1.10.0"
+                },
+                "ECHTVAR_ANNO": {
+                    "echtvar": "0.2.2"
+                },
+                "ENSEMBLVEP_FILTERVEP": {
+                    "ensemblvep": 115.2,
+                    "perl-math-cdf": 0.1
+                },
+                "ENSEMBLVEP_SNV": {
+                    "ensemblvep": 110.0,
+                    "tabix": 1.17
+                },
+                "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GLNEXUS": {
+                    "glnexus": "1.4.3"
+                },
+                "GUNZIP_FASTA": {
+                    "gunzip": 1.13
+                },
+                "MINIMAP2_ALIGN": {
+                    "minimap2": "2.29-r1283"
+                },
+                "MINIMAP2_INDEX": {
+                    "minimap2": "2.29-r1283"
+                },
+                "RELATE_INFER": {
+                    "somalier": "0.2.18"
+                },
+                "RELATE_RELATE": {
+                    "somalier": "0.2.18"
+                },
+                "SAMPLESHEET_PED": {
+                    "create_pedigree_file": 1.0,
+                    "python": "3.8.3"
+                },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_IMPORT": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_MERGE": {
+                    "samtools": "1.23.1"
+                },
+                "SOMALIER_EXTRACT": {
+                    "somalier": "0.2.18"
+                },
+                "SPLITUBAM": {
+                    "splitubam": "0.1.1"
+                },
+                "TABIX_BGZIPTABIX": {
+                    "bgzip": 1.21,
+                    "tabix": 1.21
+                },
+                "VCFEXPRESS": {
+                    "vcfexpress": "0.3.4"
+                },
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.13.0dev"
                 }
@@ -12,6 +100,12 @@
                 "aligned_reads/HG002_Revio",
                 "aligned_reads/HG002_Revio/HG002_Revio.bai",
                 "aligned_reads/HG002_Revio/HG002_Revio.bam",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_data/.stub",
+                "multiqc/multiqc_plots",
+                "multiqc/multiqc_plots/.stub",
+                "multiqc/multiqc_report.html",
                 "pipeline_info",
                 "pipeline_info/nallo_software_mqc_versions.yml",
                 "qc",
@@ -28,13 +122,19 @@
                 "qc/somalier/relate/test/test.pairs.tsv",
                 "qc/somalier/relate/test/test.samples.tsv",
                 "snvs",
+                "snvs/family",
+                "snvs/family/FAM",
+                "snvs/family/FAM/FAM_snvs_annotated_clinical.vcf.gz",
+                "snvs/family/FAM/FAM_snvs_annotated_clinical.vcf.gz.tbi",
+                "snvs/family/FAM/FAM_snvs_annotated_research.vcf.gz",
+                "snvs/family/FAM/FAM_snvs_annotated_research.vcf.gz.tbi",
                 "snvs/sample",
                 "snvs/sample/HG002_Revio",
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz",
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-05-21T14:00:18.966585622",
+        "timestamp": "2026-05-25T14:56:59.610973751",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"
