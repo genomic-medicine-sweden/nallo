@@ -39,15 +39,6 @@ jobs:
       - name: Generate table of contents
         run: npx --yes doctoc --github docs/CONTRIBUTING.md
 
-      - name: Debug PAT
-        run: |
-          if [ -z "${{ secrets.NF_DEV_GUIDELINES_PAT }}" ]; then
-            echo "PAT is EMPTY"
-            exit 1
-          else
-            echo "PAT exists"
-          fi
-
       - name: Create pull request
         uses: peter-evans/create-pull-request@v7
         with:
