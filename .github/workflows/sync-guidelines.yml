@@ -56,3 +56,4 @@ jobs:
             Auto-generated from [nf-dev-guidelines](https://github.com/genomic-medicine-sweden/nf-dev-guidelines).
           branch: update-contributing-guidelines
           delete-branch: true
+          labels: Skip-Changelog
