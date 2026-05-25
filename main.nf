@@ -260,6 +260,10 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     cramino_unphased_stats              = NALLO.out.cramino_unphased_stats // channel: [ val(meta), path(txt) ]
     fastqc_html                         = NALLO.out.fastqc_html // channel: [ val(meta), path(html) ]
     fastqc_zip                          = NALLO.out.fastqc_zip // channel: [ val(meta), path(zip) ]
+    gens_baf_bed                        = NALLO.out.gens_baf_bed // channel: [ val(meta), path(baf.bed.gz) ]
+    gens_baf_tbi                        = NALLO.out.gens_baf_tbi // channel: [ val(meta), path(baf.bed.gz.tbi) ]
+    gens_cov_bed                        = NALLO.out.gens_cov_bed // channel: [ val(meta), path(cov.bed.gz) ]
+    gens_cov_tbi                        = NALLO.out.gens_cov_tbi // channel: [ val(meta), path(cov.bed.gz.tbi) ]
     hificnv_copynum_bedgraph            = NALLO.out.hificnv_copynum_bedgraph // channel: [ val(meta), path(bedgraph) ]
     hificnv_depth_bw                    = NALLO.out.hificnv_depth_bw // channel: [ val(meta), path(bw) ]
     hificnv_maf_bw                      = NALLO.out.hificnv_maf_bw // channel: [ val(meta), path(bw) ]
@@ -759,7 +763,7 @@ output {
     paraphase_sample_cram {
         enabled params.alignment_output_format == 'cram'
     }
-    repeats_annotated {
+    repeats_annotated_family_vcf {
         path { meta, _file -> "repeats/family/${meta.id}/" }
     }
     repeats_family {
