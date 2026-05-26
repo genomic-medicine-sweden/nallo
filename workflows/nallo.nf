@@ -821,6 +821,7 @@ workflow NALLO {
         ANNOTATE_SNVS.out.vcf,
         ANNOTATE_SNVS.out.tbi,
         val_filter_snvs_expression,
+        'snv',
     )
 
     ch_clinical_research_svs_vcf_tbi = buildClinicalResearchChannel(
@@ -828,6 +829,7 @@ workflow NALLO {
         ANNOTATE_SVS.out.vcf,
         ANNOTATE_SVS.out.tbi,
         val_filter_svs_expression,
+        'sv',
     )
 
     // ch_clinical_research_*_vcf_tbi is empty if annotation is skipped
@@ -1262,12 +1264,12 @@ def buildRankVariantsInputChannel(ch_vcf, ch_ped, variant_type, ch_score_config,
  * @param variant_type       String (e.g. 'snv' or 'sv') to add to meta for downstream use
  * @return                   Channel of [meta, vcf, tbi, filter_expression] for clinical/research variants
  */
-def buildClinicalResearchChannel(skip_annotation, annotate_out, filter_expression, variant_type) {
+def buildClinicalResearchChannel(skip_annotation, ch_vcf, ch_tbi, filter_expression, variant_type) {
     skip_annotation
         ? channel.empty()
-        : annotate_out.vcf
-            .join(annotate_out.tbi, failOnMismatch: true, failOnDuplicate: true)
-            .combine(filter_expression)
+        : ch_vcf
+            .join(ch_tbi, failOnMismatch: true, failOnDuplicate: true)
+            .combine(channel.of(filter_expression))
             .map { meta, vcf, tbi, expression ->
                 [meta + [variant_type: variant_type], vcf, tbi, expression]
             }
