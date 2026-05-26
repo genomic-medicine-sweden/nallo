@@ -728,8 +728,8 @@
                 },
                 "mitochondrial_caller": {
                     "type": "string",
-                    "default": "deepvariant",
-                    "description": "Which mitochondrial caller to use for mitochondrial variant calling (`deepvariant`)"
+                    "default": "mitorsaw",
+                    "description": "Which mitochondrial caller to use for mitochondrial variant calling"
                 },
                 "mitorsaw_minimum_maf": {
                     "type": "number",
