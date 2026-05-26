@@ -479,13 +479,13 @@ workflow NALLO {
         // Group GVCFs per region and family (one region with all samples)
         CALL_SNVS.out.gvcf
             .join(CALL_SNVS.out.gvcf_index, failOnMismatch: true, failOnDuplicate: true)
-            .map { meta, gvcf, tbi ->
-                [[id: meta.region.name, family_id: meta.family_id, num_intervals: meta.num_intervals], gvcf, tbi]
+            .map { meta, gvcf, index ->
+                [[id: meta.region.name, family_id: meta.family_id, num_intervals: meta.num_intervals], gvcf, index]
             }
             .groupTuple()
-            .multiMap { meta, gvcfs, tbis ->
+            .multiMap { meta, gvcfs, indexes ->
                 gvcf: [meta, gvcfs]
-                tbi: [meta, tbis]
+                index: [meta, indexes]
             }
             .set { variants_to_merge_per_family }
 
@@ -493,7 +493,7 @@ workflow NALLO {
         // SCATTER_GENOME.out.bed contains all regions, but we could probably pass the region BED that actually matches the variants instead...
         GVCF_GLNEXUS_NORM_VARIANTS(
             variants_to_merge_per_family.gvcf,
-            variants_to_merge_per_family.tbi,
+            variants_to_merge_per_family.index,
             SCATTER_GENOME.out.bed,
             ch_fasta,
             ch_fai,
