@@ -761,6 +761,7 @@ output {
         enabled params.alignment_output_format == 'bam'
     }
     paraphase_sample_cram {
+        path { meta, _file -> "paraphase/sample/${meta.id}/" }
         enabled params.alignment_output_format == 'cram'
     }
     repeats_annotated_family_vcf {
@@ -809,7 +810,7 @@ output {
         path { meta, _file -> "qc/peddy/${meta.id}/" }
     }
     qc_whatshap_stats {
-        path { meta, _file -> "qc/qc_whatshap_stats/${meta.id}/" }
+        path { meta, _file -> "qc/phasing_stats/${meta.id}/" }
     }
     snvs_family {
         path { meta, _file -> "snvs/family/${meta.id}/" }
