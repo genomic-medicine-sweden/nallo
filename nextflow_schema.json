@@ -222,6 +222,16 @@
                     "format": "file-path",
                     "exists": true
                 },
+                "variant_consequences_snvs": {
+                    "type": "string",
+                    "description": "File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SNVs. For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html",
+                    "fa_icon": "fas fa-file-csv"
+                },
+                "variant_consequences_svs": {
+                    "type": "string",
+                    "description": "File containing list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic SVs. For more information check https://ensembl.org/info/genome/variation/prediction/predicted_data.html",
+                    "fa_icon": "fas fa-file-csv"
+                },
                 "vep_cache": {
                     "type": "string",
                     "description": "A path to the VEP cache location",

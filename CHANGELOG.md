@@ -68,7 +68,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1087](https://github.com/genomic-medicine-sweden/nallo/pull/1087) - Removed all publishDir directives from configs
 - [#1087](https://github.com/genomic-medicine-sweden/nallo/pull/1087) - Removed empty qc_snv.config
 - [#1092](https://github.com/genomic-medicine-sweden/nallo/pull/1092) - Removed unused SVDB import in `nallo`
-- [#1098](https://github.com/genomic-medicine-sweden/nallo/pull/1098) - Removed `annotate_consequence_pli` subworkflow and modules
 - [#1100](https://github.com/genomic-medicine-sweden/nallo/pull/1100) - Removed tabix from SNV and SV annotation subworkflows
 
 ### Fixed

@@ -1,7 +1,7 @@
 {
     "Test VEP with mock uncompressed cache": {
         "content": [
-            43,
+            55,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -26,6 +26,14 @@
                 },
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
+                },
+                "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
+                    "addmostsevereconsequence": "1.2.0",
+                    "bgzip": 1.21
+                },
+                "CUSTOM_ADDMOSTSEVEREPLI": {
+                    "addmostseverepli": "1.2.0",
+                    "bgzip": 1.21
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
                     "deepvariant": "1.10.0"
@@ -88,6 +96,9 @@
                     "bgzip": 1.21,
                     "tabix": 1.21
                 },
+                "TABIX_TABIX": {
+                    "tabix": 1.21
+                },
                 "VCFEXPRESS": {
                     "vcfexpress": "0.3.4"
                 },
@@ -134,7 +145,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-05-25T14:56:59.610973751",
+        "timestamp": "2026-05-18T08:44:48.577820264",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"
@@ -142,7 +153,7 @@
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
-            37,
+            43,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -170,6 +181,14 @@
                 },
                 "BEDTOOLS_SORT": {
                     "bedtools": "2.31.1"
+                },
+                "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
+                    "addmostsevereconsequence": "1.2.0",
+                    "bgzip": 1.21
+                },
+                "CUSTOM_ADDMOSTSEVEREPLI": {
+                    "addmostseverepli": "1.2.0",
+                    "bgzip": 1.21
                 },
                 "DNASCOPE_LONGREAD": {
                     "bcftools": "1.23.1",
@@ -233,6 +252,9 @@
                     "bgzip": 1.21,
                     "tabix": 1.21
                 },
+                "TABIX_TABIX": {
+                    "tabix": 1.21
+                },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
                 },
@@ -279,7 +301,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-05-21T14:00:43.36844943",
+        "timestamp": "2026-05-18T08:45:14.209994664",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"
@@ -287,7 +309,7 @@
     },
     "Test CADD with mock resources": {
         "content": [
-            56,
+            68,
             {
                 "ANNOTATE_INDELS": {
                     "bcftools": 1.22
@@ -324,6 +346,14 @@
                 },
                 "CADD_TO_REFERENCE_CHRNAMES": {
                     "gawk": "5.3.1"
+                },
+                "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
+                    "addmostsevereconsequence": "1.2.0",
+                    "bgzip": 1.21
+                },
+                "CUSTOM_ADDMOSTSEVEREPLI": {
+                    "addmostseverepli": "1.2.0",
+                    "bgzip": 1.21
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
                     "deepvariant": "1.10.0"
@@ -395,6 +425,9 @@
                 "TABIX_CADD": {
                     "tabix": 1.21
                 },
+                "TABIX_TABIX": {
+                    "tabix": 1.21
+                },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
                 },
@@ -444,7 +477,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-05-21T13:57:40.53999965",
+        "timestamp": "2026-05-18T08:44:19.946418411",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.0"
