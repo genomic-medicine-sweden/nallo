@@ -890,7 +890,7 @@ workflow NALLO {
     }
 
     //
-    // Concatenate and sort SNVs
+    // Concatenate and sort SNVs, sort and publish
     //
     if (!val_skip_snv_calling) {
         def ch_snvs_per_family_to_concatenate = val_skip_rank_variants
