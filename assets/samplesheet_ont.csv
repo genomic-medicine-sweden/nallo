@@ -1,2 +1,2 @@
 sample,file,family_id,paternal_id,maternal_id,sex,phenotype
-HG002_ONT,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8fff73a86ec5c9360ed8da35aac5b108b9c9ef78/testdata/HG002_ONT.bam,FAM,0,0,1,2
+HG002_ONT,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/18b1ccc26292fa502be235a918bdc4e61c1ecb8a/testdata/HG002_ONT.bam,FAM,0,0,1,2
