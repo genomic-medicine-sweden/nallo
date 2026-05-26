@@ -1,14 +1,14 @@
 {
     "[bam, bai], fasta, fai, bed": {
         "content": [
-            "a010c1d4ebcd1fb63c53ad7e559af66c",
-            "5773f7c3ca12e64a652d3609c0086199",
-            "f69e07c85d0f734408af24471f35792c"
+            "5c3fc288ebd04e65c9b1e88a712b4d46",
+            "c72f00b749b4ef8192165571815e5f3a",
+            "30ba267e3b89ce97d0df96640b22d265"
         ],
-        "timestamp": "2026-03-27T16:46:55.824084342",
+        "timestamp": "2026-05-26T13:41:47.131910513",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
         }
     },
     "[bam, bai], fasta, fai, bed - cram stub": {

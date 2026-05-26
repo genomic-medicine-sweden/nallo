@@ -542,7 +542,7 @@
                         {
                             "id": "test"
                         },
-                        "test.html:md5,c79bd98fe24580fb1db9531610969dcc"
+                        "test.html:md5,10da413fa6b6ac6bac507f767729bb32"
                     ]
                 ],
                 "4": [
@@ -550,7 +550,7 @@
                         {
                             "id": "test"
                         },
-                        "test.samples.tsv:md5,d4a4cd472f78dd2fb4b0780cdea56ce7"
+                        "test.samples.tsv:md5,dfd455613489323015e7810dbe5fc975"
                     ]
                 ],
                 "5": [
@@ -615,7 +615,7 @@
                         {
                             "id": "test"
                         },
-                        "test.html:md5,c79bd98fe24580fb1db9531610969dcc"
+                        "test.html:md5,10da413fa6b6ac6bac507f767729bb32"
                     ]
                 ],
                 "somalier_pairs": [
@@ -631,15 +631,15 @@
                         {
                             "id": "test"
                         },
-                        "test.samples.tsv:md5,d4a4cd472f78dd2fb4b0780cdea56ce7"
+                        "test.samples.tsv:md5,dfd455613489323015e7810dbe5fc975"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-04-27T09:18:56.423187597",
+        "timestamp": "2026-05-26T13:36:06.034012681",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.02.0"
         }
     },
     "[bam, bai], fasta, fai, somalier_sites, ped - stub multiple samples": {
