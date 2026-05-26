@@ -700,12 +700,6 @@ workflow NALLO {
             ch_cadd_prescored_indels,
             val_pre_vep_snv_filter_expression != '',
         )
-
-        ch_snvs_annotated_vcf = ANNOTATE_SNVS.out.vcf
-        ch_snvs_annotated_index = ANNOTATE_SNVS.out.tbi
-    } else {
-        ch_snvs_annotated_vcf = channel.empty()
-        ch_snvs_annotated_index = channel.empty()
     }
 
     //
@@ -715,8 +709,8 @@ workflow NALLO {
 
     if (split_family_vcf_for_chromograph || (!val_skip_peddy && !val_skip_snv_annotation)) {
 
-        ch_snvs_annotated_vcf
-            .join(ch_snvs_annotated_index, failOnMismatch: true, failOnDuplicate: true)
+        ANNOTATE_SNVS.out.vcf
+            .join(ANNOTATE_SNVS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
             .map { meta, vcf, tbi ->
                 def new_meta = [id: meta.family_id, num_intervals: meta.num_intervals]
                 [groupKey(new_meta, new_meta.num_intervals), vcf, tbi]
@@ -817,29 +811,21 @@ workflow NALLO {
             val_vep_cache_version,
             ch_vep_plugin_files.collect(),
         )
-
-        ch_svs_annotated_vcf = ANNOTATE_SVS.out.vcf
-        ch_svs_annotated_index = ANNOTATE_SVS.out.tbi
-    } else {
-        ch_svs_annotated_vcf = channel.empty()
-        ch_svs_annotated_index = channel.empty()
     }
 
     /*
      *  Filter SNVs
      */
     ch_clinical_research_snvs_vcf_tbi = buildClinicalResearchChannel(
-        val_skip_snv_annotation,
-        ch_snvs_annotated_vcf,
-        ch_snvs_annotated_index,
+        val_skip_snv_annotation ? channel.empty() : ANNOTATE_SNVS.out.vcf,
+        val_skip_snv_annotation ? channel.empty() : ANNOTATE_SNVS.out.tbi,
         val_filter_snvs_expression,
         'snv',
     )
 
     ch_clinical_research_svs_vcf_tbi = buildClinicalResearchChannel(
-        val_skip_sv_annotation,
-        ch_svs_annotated_vcf,
-        ch_svs_annotated_index,
+        val_skip_sv_annotation ? channel.empty() : ANNOTATE_SVS.out.vcf,
+        val_skip_sv_annotation ? channel.empty() : ANNOTATE_SVS.out.tbi,
         val_filter_svs_expression,
         'sv',
     )
@@ -1236,12 +1222,12 @@ def buildRankVariantsInputChannel(ch_vcf, ch_ped, ch_snv_score_config, ch_sv_sco
     // The meta.id of the PED channel is the family_id
     addChildWithTwoParentsToMeta(ch_vcf, ch_samplesheet)
         .combine(ch_ped)
-        .filter { vcf_meta, _vcf, ped_meta, _ped ->
+        .filter { vcf_meta, _vcf, _tbi, ped_meta, _ped ->
             vcf_meta.family_id == ped_meta.id
         }
         .combine(ch_snv_score_config)
         .combine(ch_sv_score_config)
-        .multiMap { vcf_meta, vcf, _ped_meta, ped, _snv_score_config_meta, snv_score_config, _sv_score_config_meta, sv_score_config ->
+        .multiMap { vcf_meta, vcf, _tbi, _ped_meta, ped, _snv_score_config_meta, snv_score_config, _sv_score_config_meta, sv_score_config ->
             def score_config = vcf_meta.variant_type == 'snv' ? snv_score_config : sv_score_config
             vcf: [vcf_meta, vcf]
             ped: [vcf_meta, ped]
@@ -1259,9 +1245,7 @@ def buildRankVariantsInputChannel(ch_vcf, ch_ped, ch_snv_score_config, ch_sv_sco
  * @return                   Channel of [meta, vcf, tbi, filter_expression] for clinical/research variants
  */
 def buildClinicalResearchChannel(skip_annotation, ch_vcf, ch_tbi, filter_expression, variant_type) {
-    skip_annotation
-        ? channel.empty()
-        : ch_vcf
+        ch_vcf
             .join(ch_tbi, failOnMismatch: true, failOnDuplicate: true)
             .combine(channel.of(filter_expression))
             .map { meta, vcf, tbi, expression ->
