@@ -30,8 +30,7 @@ include { QC_ALIGNED_READS                                       } from '../subw
 include { QC_SNVS                                                } from '../subworkflows/local/qc_snvs'
 include { RANK_VARIANTS                                          } from '../subworkflows/local/rank_variants'
 include { SCATTER_GENOME                                         } from '../subworkflows/local/scatter_genome'
-include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SNVS } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
-include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SVS  } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
+include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS      } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
 include { VCF_CONCAT_NORM_VARIANTS                               } from '../subworkflows/local/vcf_concat_norm_variants'
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_ANNOTATED_SNVS } from '../subworkflows/local/vcf_concat_sort_variants/main'
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_RANKED_SNVS    } from '../subworkflows/local/vcf_concat_sort_variants/main'
@@ -138,6 +137,8 @@ workflow NALLO {
     val_plot_chromograph_coverage
     val_pre_vep_snv_filter_expression
     val_sentieon_tech
+    val_should_filter_snvs
+    val_should_filter_svs
     val_skip_alignment
     val_skip_annotate_paralogs
     val_skip_call_paralogs
@@ -680,6 +681,7 @@ workflow NALLO {
 
     //
     // Annotate SNVs
+    //
     if (!val_skip_snv_annotation) {
 
         // Annotates family VCFs per variant call region
@@ -698,28 +700,6 @@ workflow NALLO {
             ch_cadd_prescored_indels,
             val_pre_vep_snv_filter_expression != '',
         )
-
-        ANNOTATE_SNVS.out.vcf
-            .join(ANNOTATE_SNVS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
-            .multiMap { meta, vcf, tbi ->
-                clinical: [meta + [set: "clinical"], vcf, tbi]
-                research: [meta + [set: "research"], vcf, tbi]
-            }
-            .set { ch_clinical_research_snvs_vcf_tbi }
-
-        ch_clinical_research_snvs_vcf_tbi.research.set { ch_snvs_per_family_annotated_vcf_tbi }
-
-        if (val_filter_variants_hgnc_ids || val_filter_snvs_expression != '') {
-
-            FILTER_VARIANTS_SNVS(
-                ch_clinical_research_snvs_vcf_tbi.clinical.map { meta, vcf, _tbi -> [meta, vcf] },
-                ch_hgnc_ids,
-                val_filter_snvs_expression,
-                val_filter_variants_hgnc_ids,
-            )
-
-            ch_snvs_per_family_annotated_vcf_tbi = ch_snvs_per_family_annotated_vcf_tbi.mix(FILTER_VARIANTS_SNVS.out.vcf.join(FILTER_VARIANTS_SNVS.out.tbi, failOnMismatch: true, failOnDuplicate: true))
-        }
     }
 
     //
@@ -818,8 +798,6 @@ workflow NALLO {
         )
     }
 
-
-
     //
     // Annotate SVs
     //
@@ -833,30 +811,47 @@ workflow NALLO {
             val_vep_cache_version,
             ch_vep_plugin_files.collect(),
         )
+    }
 
-        ANNOTATE_SVS.out.vcf
-            .multiMap { meta, vcf ->
-                clinical: [meta + [set: "clinical"], vcf]
-                research: [meta + [set: "research"], vcf]
-            }
-            .set { ch_clinical_research_svs_vcf }
+    /*
+     *  Filter SNVs
+     */
+    ch_clinical_research_snvs_vcf_tbi = buildClinicalResearchChannel(
+        val_skip_snv_annotation,
+        ANNOTATE_SNVS.out.vcf,
+        ANNOTATE_SNVS.out.tbi,
+        val_filter_snvs_expression,
+    )
 
-        ch_clinical_research_svs_vcf.research.set { ch_svs_per_family_annotated_vcf }
+    ch_clinical_research_svs_vcf_tbi = buildClinicalResearchChannel(
+        val_skip_sv_annotation,
+        ANNOTATE_SVS.out.vcf,
+        ANNOTATE_SVS.out.tbi,
+        val_filter_svs_expression,
+    )
 
-        //
-        // Filter SVs
-        //
-        if (val_filter_variants_hgnc_ids || val_filter_svs_expression != '') {
+    // ch_clinical_research_*_vcf_tbi is empty if annotation is skipped
+    ch_clinical_research_variants = channel.empty()
+        .mix(ch_clinical_research_snvs_vcf_tbi)
+        .mix(ch_clinical_research_svs_vcf_tbi)
+        .multiMap { meta, vcf, tbi, expression ->
+            clinical: [meta + [set: "clinical"], vcf, tbi]
+            research: [meta + [set: "research"], vcf, tbi]
+            expression: expression
+    }
 
-            FILTER_VARIANTS_SVS(
-                ch_clinical_research_svs_vcf.clinical,
-                ch_hgnc_ids,
-                val_filter_svs_expression,
-                val_filter_variants_hgnc_ids,
-            )
+    if (val_should_filter_snvs || val_should_filter_svs) {
 
-            ch_svs_per_family_annotated_vcf = ch_svs_per_family_annotated_vcf.mix(FILTER_VARIANTS_SVS.out.vcf)
-        }
+        FILTER_VARIANTS(
+            ch_clinical_research_variants.clinical.map { meta, vcf, _tbi -> [meta, vcf] },
+            ch_hgnc_ids,
+            ch_clinical_research_variants.expression,
+            val_filter_variants_hgnc_ids,
+        )
+
+        ch_variants_per_family_annotated_vcf_tbi = ch_clinical_research_variants.research.mix(FILTER_VARIANTS.out.vcf.join(FILTER_VARIANTS.out.tbi, failOnMismatch: true, failOnDuplicate: true))
+    } else {
+        ch_variants_per_family_annotated_vcf_tbi = ch_clinical_research_variants.research
     }
 
     /*
@@ -867,7 +862,7 @@ workflow NALLO {
     if (!val_skip_rank_variants) {
 
         ch_snvs_to_rank = buildRankVariantsInputChannel(
-            ch_snvs_per_family_annotated_vcf_tbi.map { meta, vcf, _tbi -> [meta + [family_id: meta.id], vcf] },
+            ch_variants_per_family_annotated_vcf_tbi.filter { meta, _vcf, _tbi -> meta.variant_type == 'snv' }.map { meta, vcf, _tbi -> [meta + [family_id: meta.id], vcf] },
             SOMALIER_PED_FAMILY.out.ped,
             'snv',
             ch_genmod_score_config_snvs,
@@ -875,7 +870,7 @@ workflow NALLO {
         )
 
         ch_svs_to_rank = buildRankVariantsInputChannel(
-            ch_svs_per_family_annotated_vcf,
+            ch_variants_per_family_annotated_vcf_tbi.filter { meta, _vcf, _tbi -> meta.variant_type == 'sv' }.map { meta, vcf, _tbi -> [meta + [family_id: meta.id], vcf] },
             SOMALIER_PED_FAMILY.out.ped,
             'sv',
             ch_genmod_score_config_svs,
@@ -914,7 +909,7 @@ workflow NALLO {
     //
     if (!val_skip_snv_calling) {
         def ch_snvs_per_family_to_concatenate = val_skip_rank_variants
-            ? (val_skip_snv_annotation ? ch_snvs_per_family_unannotated_vcf_tbi : ch_snvs_per_family_annotated_vcf_tbi)
+            ? (val_skip_snv_annotation ? ch_snvs_per_family_unannotated_vcf_tbi : ch_variants_per_family_annotated_vcf_tbi.filter { meta, _vcf, _tbi -> meta.variant_type == 'snv' })
             : ch_snvs_per_family_ranked_vcf_tbi
 
         ch_snvs_per_family_to_concatenate
@@ -939,7 +934,7 @@ workflow NALLO {
         ch_collect_svs = val_skip_sv_annotation
             ? ch_sv_vcf_for_annotation
             : val_skip_rank_variants
-                ? ch_svs_per_family_annotated_vcf
+                ? ch_variants_per_family_annotated_vcf_tbi.filter { meta, _vcf, _tbi -> meta.variant_type == 'sv' }.map { meta, vcf, tbi -> [meta, vcf] }
                 : ch_ranked_variants.sv.map { meta, vcf, _tbi -> [meta, vcf] }
 
         BCFTOOLS_VIEW_SV(
@@ -1256,4 +1251,24 @@ def buildRankVariantsInputChannel(ch_vcf, ch_ped, variant_type, ch_score_config,
         .map { vcf_meta, vcf, _ped_meta, ped, _score_config_meta, score_config ->
             [vcf_meta, vcf, ped, score_config]
         }
+}
+
+/**
+ * Build input channel for clinical and research variant VCFs, by optionally skipping annotation, combining VCFs with filter expressions, and adding variant type to the meta for downstream use.
+ *
+ * @param skip_annotation    Boolean indicating whether to skip annotation (if true, returns empty channel)
+ * @param annotate_out       Output channel from annotation process containing VCF and TBI
+ * @param filter_expression  Channel of filter expressions to apply to annotated VCFs
+ * @param variant_type       String (e.g. 'snv' or 'sv') to add to meta for downstream use
+ * @return                   Channel of [meta, vcf, tbi, filter_expression] for clinical/research variants
+ */
+def buildClinicalResearchChannel(skip_annotation, annotate_out, filter_expression, variant_type) {
+    skip_annotation
+        ? channel.empty()
+        : annotate_out.vcf
+            .join(annotate_out.tbi, failOnMismatch: true, failOnDuplicate: true)
+            .combine(filter_expression)
+            .map { meta, vcf, tbi, expression ->
+                [meta + [variant_type: variant_type], vcf, tbi, expression]
+            }
 }

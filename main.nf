@@ -201,6 +201,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_plot_chromograph_coverage,
         val_pre_vep_snv_filter_expression,
         val_sentieon_tech,
+        !val_skip_snv_annotation && (val_filter_variants_hgnc_ids || val_filter_snvs_expression),
+        !val_skip_sv_annotation && (val_filter_variants_hgnc_ids || val_filter_svs_expression),
         val_skip_alignment,
         val_skip_annotate_paralogs,
         val_skip_call_paralogs,
