@@ -559,7 +559,6 @@ workflow NALLO {
         call_snvs_vcf
             .map { meta, vcf ->
                 def new_meta = meta - meta.subMap('region', 'genome')
-                // Do we want chrM here? I think so, so num_intervals should be nuclear+mito
                 [groupKey(new_meta, new_meta.num_intervals), vcf]
             }
             .groupTuple()
