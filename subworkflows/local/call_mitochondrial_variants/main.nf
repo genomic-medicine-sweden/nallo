@@ -60,8 +60,9 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
     if (mitochondrial_caller != "deepvariant") {
 
         ch_vcf
-            .map { meta, vcf -> [meta + [variant_type: "snv"], vcf, []] }
-            .mix(ch_vcf.map { meta, vcf -> [meta + [variant_type: "sv"], vcf, []] })
+            .flatMap { meta, vcf ->
+                [[meta + [variant_type: "snv"], vcf, []], [meta + [variant_type: "sv"], vcf, []]]
+            }
             .set { ch_mito_split_input }
 
         BCFTOOLS_VIEW_MITO(ch_mito_split_input, [], [], [])
