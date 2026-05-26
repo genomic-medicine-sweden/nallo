@@ -1209,7 +1209,7 @@ def addChildWithTwoParentsToMeta(ch_input, ch_samplesheet) {
 }
 
 /**
- * Build input channel for ranking variants.
+ * Build input channel for ranking variants, by combining VCFs with PED files and ranking config.
  *
  * @param ch_vcf              Channel of [meta, vcf]
  * @param ch_ped              Channel of [meta, ped] (one per family)
