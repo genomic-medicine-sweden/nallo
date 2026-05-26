@@ -840,7 +840,7 @@ workflow NALLO {
                 clinical: [meta + [set: "clinical"], vcf, tbi]
                 research: [meta + [set: "research"], vcf, tbi]
                 expression: expression
-        }
+            }
 
         FILTER_VARIANTS(
             ch_clinical_research_variants.clinical.map { meta, vcf, _tbi -> [meta, vcf] },
@@ -849,12 +849,11 @@ workflow NALLO {
             val_filter_variants_hgnc_ids,
         )
 
-        ch_variants_per_family_annotated_vcf_tbi = ch_clinical_research_variants.research
-            .mix(
-                FILTER_VARIANTS.out.vcf
-                    .join(FILTER_VARIANTS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
-            )
-    } else if (!val_skip_snv_annotation || !val_skip_sv_annotation) {
+        ch_variants_per_family_annotated_vcf_tbi = ch_clinical_research_variants.research.mix(
+            FILTER_VARIANTS.out.vcf.join(FILTER_VARIANTS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+        )
+    }
+    else if (!val_skip_snv_annotation || !val_skip_sv_annotation) {
         ch_variants_per_family_annotated_vcf_tbi = ch_clinical_research_variants.research
     }
 
@@ -886,7 +885,6 @@ workflow NALLO {
                 snvs: meta.variant_type == "snv"
                 svs: meta.variant_type == "sv"
             }
-
     }
 
     //
@@ -1240,6 +1238,19 @@ def buildRankVariantsInputChannel(ch_vcf, ch_ped, ch_snv_score_config, ch_sv_sco
 }
 
 /**
+ * Adds `variant_type` to the meta of `ch_input`.
+ *
+ * @param ch_input     Channel of [meta, vcf, tbi]
+ * @param variant_type String (e.g. 'snv' or 'sv') to add to meta for downstream use
+ * @return             Channel of [meta, vcf, tbi] with updated meta
+ */
+def addVariantTypeToMeta(ch_input, variant_type) {
+    ch_input.map { meta, vcf, tbi ->
+        [meta + [variant_type: variant_type], vcf, tbi]
+    }
+}
+
+/**
  * Build input channel for clinical and research variant VCFs, combining VCFs with filter expressions, and adding variant type to the meta for downstream use.
  *
  * @param annotate_out       Output channel from annotation process containing VCF and TBI
@@ -1248,10 +1259,8 @@ def buildRankVariantsInputChannel(ch_vcf, ch_ped, ch_snv_score_config, ch_sv_sco
  * @return                   Channel of [meta, vcf, tbi, filter_expression] for clinical/research variants
  */
 def buildClinicalResearchChannel(ch_vcf, ch_tbi, filter_expression, variant_type) {
-        ch_vcf
-            .join(ch_tbi, failOnMismatch: true, failOnDuplicate: true)
-            .combine(channel.of(filter_expression))
-            .map { meta, vcf, tbi, expression ->
-                [meta + [variant_type: variant_type], vcf, tbi, expression]
-            }
+    addVariantTypeToMeta(
+        ch_vcf.join(ch_tbi, failOnMismatch: true, failOnDuplicate: true),
+        variant_type,
+    ).combine(channel.of(filter_expression))
 }
