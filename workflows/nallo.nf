@@ -700,6 +700,12 @@ workflow NALLO {
             ch_cadd_prescored_indels,
             val_pre_vep_snv_filter_expression != '',
         )
+
+        ch_snvs_annotated_vcf = ANNOTATE_SNVS.out.vcf
+        ch_snvs_annotated_index = ANNOTATE_SNVS.out.tbi
+    } else {
+        ch_snvs_annotated_vcf = channel.empty()
+        ch_snvs_annotated_index = channel.empty()
     }
 
     //
@@ -709,8 +715,8 @@ workflow NALLO {
 
     if (split_family_vcf_for_chromograph || (!val_skip_peddy && !val_skip_snv_annotation)) {
 
-        ANNOTATE_SNVS.out.vcf
-            .join(ANNOTATE_SNVS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+        ch_snvs_annotated_vcf
+            .join(ch_snvs_annotated_index, failOnMismatch: true, failOnDuplicate: true)
             .map { meta, vcf, tbi ->
                 def new_meta = [id: meta.family_id, num_intervals: meta.num_intervals]
                 [groupKey(new_meta, new_meta.num_intervals), vcf, tbi]
@@ -811,6 +817,12 @@ workflow NALLO {
             val_vep_cache_version,
             ch_vep_plugin_files.collect(),
         )
+
+        ch_svs_annotated_vcf = ANNOTATE_SVS.out.vcf
+        ch_svs_annotated_index = ANNOTATE_SVS.out.tbi
+    } else {
+        ch_svs_annotated_vcf = channel.empty()
+        ch_svs_annotated_index = channel.empty()
     }
 
     /*
@@ -818,16 +830,16 @@ workflow NALLO {
      */
     ch_clinical_research_snvs_vcf_tbi = buildClinicalResearchChannel(
         val_skip_snv_annotation,
-        ANNOTATE_SNVS.out.vcf,
-        ANNOTATE_SNVS.out.tbi,
+        ch_snvs_annotated_vcf,
+        ch_snvs_annotated_index,
         val_filter_snvs_expression,
         'snv',
     )
 
     ch_clinical_research_svs_vcf_tbi = buildClinicalResearchChannel(
         val_skip_sv_annotation,
-        ANNOTATE_SVS.out.vcf,
-        ANNOTATE_SVS.out.tbi,
+        ch_svs_annotated_vcf,
+        ch_svs_annotated_index,
         val_filter_svs_expression,
         'sv',
     )
