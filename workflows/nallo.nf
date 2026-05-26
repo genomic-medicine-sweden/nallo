@@ -875,30 +875,13 @@ workflow NALLO {
      */
     if (!val_skip_rank_variants) {
 
-        ch_snvs_to_rank = buildRankVariantsInputChannel(
-            ch_variants_per_family_annotated_vcf_tbi.filter { meta, _vcf, _tbi -> meta.variant_type == 'snv' }.map { meta, vcf, _tbi -> [meta + [family_id: meta.id], vcf] },
+        def ch_rank_variants_input = buildRankVariantsInputChannel(
+            ch_variants_per_family_annotated_vcf_tbi,
             SOMALIER_PED_FAMILY.out.ped,
-            'snv',
             ch_genmod_score_config_snvs,
-            ch_samplesheet,
-        )
-
-        ch_svs_to_rank = buildRankVariantsInputChannel(
-            ch_variants_per_family_annotated_vcf_tbi.filter { meta, _vcf, _tbi -> meta.variant_type == 'sv' }.map { meta, vcf, _tbi -> [meta + [family_id: meta.id], vcf] },
-            SOMALIER_PED_FAMILY.out.ped,
-            'sv',
             ch_genmod_score_config_svs,
             ch_samplesheet,
         )
-
-        ch_snvs_to_rank
-            .mix(ch_svs_to_rank)
-            .multiMap { meta, vcf, ped, score_config ->
-                vcf: [meta, vcf]
-                ped: [meta, ped]
-                score_config: [meta, score_config]
-            }
-            .set { ch_rank_variants_input }
 
         RANK_VARIANTS(
             ch_rank_variants_input.vcf,
@@ -907,24 +890,22 @@ workflow NALLO {
             ch_rank_variants_input.score_config,
         )
 
-        RANK_VARIANTS.out.vcf
+        ch_variants_per_family_ranked_vcf_tbi = RANK_VARIANTS.out.vcf
             .join(RANK_VARIANTS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
             .branch { meta, _vcf, _tbi ->
                 snvs: meta.variant_type == "snv"
-                sv: meta.variant_type == "sv"
+                svs: meta.variant_type == "sv"
             }
-            .set { ch_ranked_variants }
 
-        ch_ranked_variants.snvs.set { ch_snvs_per_family_ranked_vcf_tbi }
     }
 
     //
-    // Concatenate and sort SNVs, sort and publish
+    // Concatenate and sort SNVs
     //
     if (!val_skip_snv_calling) {
         def ch_snvs_per_family_to_concatenate = val_skip_rank_variants
             ? (val_skip_snv_annotation ? ch_snvs_per_family_unannotated_vcf_tbi : ch_variants_per_family_annotated_vcf_tbi.filter { meta, _vcf, _tbi -> meta.variant_type == 'snv' })
-            : ch_snvs_per_family_ranked_vcf_tbi
+            : ch_variants_per_family_ranked_vcf_tbi.snvs
 
         ch_snvs_per_family_to_concatenate
             .map { meta, vcf, tbi ->
@@ -948,8 +929,8 @@ workflow NALLO {
         ch_collect_svs = val_skip_sv_annotation
             ? ch_sv_vcf_for_annotation
             : val_skip_rank_variants
-                ? ch_variants_per_family_annotated_vcf_tbi.filter { meta, _vcf, _tbi -> meta.variant_type == 'sv' }.map { meta, vcf, tbi -> [meta, vcf] }
-                : ch_ranked_variants.sv.map { meta, vcf, _tbi -> [meta, vcf] }
+                ? ch_variants_per_family_annotated_vcf_tbi.filter { meta, _vcf, _tbi -> meta.variant_type == 'sv' }.map { meta, vcf, _tbi -> [meta, vcf] }
+                : ch_variants_per_family_ranked_vcf_tbi.svs.map { meta, vcf, _tbi -> [meta, vcf] }
 
         BCFTOOLS_VIEW_SV(
             ch_collect_svs.map { meta, vcf -> [meta, vcf, []] },
@@ -1217,9 +1198,9 @@ workflow NALLO {
 /**
  * Adds `child_with_two_parents_in_family` to the meta of `ch_input`, based on whether the family has a child with two parents according to the samplesheet.
  *
- * @param ch_input       Channel of [meta, file] where meta contains `family_id`
+ * @param ch_input       Channel of [meta, vcf, tbi] where meta contains `family_id`
  * @param ch_samplesheet Channel of [meta, files] where meta contains `family_id` and `two_parents`
- * @return               Channel of [meta, file] with updated meta
+ * @return               Channel of [meta, vcf, tbi] with updated meta
  */
 def addChildWithTwoParentsToMeta(ch_input, ch_samplesheet) {
 
@@ -1231,39 +1212,40 @@ def addChildWithTwoParentsToMeta(ch_input, ch_samplesheet) {
     // Need to use combine and filter here instead of join, since we only have one entry per family in ch_families but potentially multiple entries per family in ch_input
     ch_families
         .combine(ch_input)
-        .filter { samplesheet_family_id, _child_with_two_parents, file_meta, _file ->
+        .filter { samplesheet_family_id, _child_with_two_parents, file_meta, _vcf, _tbi ->
             samplesheet_family_id == file_meta.family_id
         }
-        .map { _family_id, child_with_two_parents, meta, file ->
-            [meta + [child_with_two_parents_in_family: child_with_two_parents], file]
+        .map { _family_id, child_with_two_parents, meta, vcf, tbi ->
+            [meta + [child_with_two_parents_in_family: child_with_two_parents], vcf, tbi]
         }
 }
 
 /**
- * Build input channel for ranking variants, by combining VCFs with PED files and ranking config, and adding variant type to the meta for downstream use.
+ * Build input channel for ranking variants.
  *
- * @param ch_vcf          Channel of [meta, vcf]
- * @param ch_ped          Channel of [meta, ped] (one per family)
- * @param variant_type    String (e.g. 'snv' or 'sv')
- * @param ch_score_config Channel of [meta, score_config]
- * @param ch_samplesheet  Channel used to derive family-level metadata
- * @return                Channel of [meta, vcf, ped, score_config]
+ * @param ch_vcf              Channel of [meta, vcf]
+ * @param ch_ped              Channel of [meta, ped] (one per family)
+ * @param ch_snv_score_config Channel of [meta, score_config]
+ * @param ch_sv_score_config  Channel of [meta, score_config]
+ * @param ch_samplesheet      Channel used to derive family-level metadata
+ * @return                    Channel of [meta, vcf, ped, score_config]
  */
-def buildRankVariantsInputChannel(ch_vcf, ch_ped, variant_type, ch_score_config, ch_samplesheet) {
+def buildRankVariantsInputChannel(ch_vcf, ch_ped, ch_snv_score_config, ch_sv_score_config, ch_samplesheet) {
     // This is used to determine compound ranking thresholds and penalties in genmod
     // Need to use combine and filter here instead of join, since we only have one entry per family in ch_ped but potentially multiple entries per family in vcf_with_meta.
     // The meta.id of the PED channel is the family_id
     addChildWithTwoParentsToMeta(ch_vcf, ch_samplesheet)
-        .map { meta, vcf ->
-            [meta + [variant_type: variant_type], vcf]
-        }
         .combine(ch_ped)
         .filter { vcf_meta, _vcf, ped_meta, _ped ->
             vcf_meta.family_id == ped_meta.id
         }
-        .combine(ch_score_config)
-        .map { vcf_meta, vcf, _ped_meta, ped, _score_config_meta, score_config ->
-            [vcf_meta, vcf, ped, score_config]
+        .combine(ch_snv_score_config)
+        .combine(ch_sv_score_config)
+        .multiMap { vcf_meta, vcf, _ped_meta, ped, _snv_score_config_meta, snv_score_config, _sv_score_config_meta, sv_score_config ->
+            def score_config = vcf_meta.variant_type == 'snv' ? snv_score_config : sv_score_config
+            vcf: [vcf_meta, vcf]
+            ped: [vcf_meta, ped]
+            score_config: [vcf_meta, score_config]
         }
 }
 
