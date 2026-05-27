@@ -1986,6 +1986,10 @@ The phaser can be chosen using the <code>--phaser</code> argument. See the follo
 <td><code>echtvar_snv_databases</code> <sup>2</sup></td>
 <td><strong>Optional</strong>: A CSV/TSV/JSON/YAML file with annotation databases from <a href="https://github.com/brentp/echtvar">echtvar encode</a> (e.g. <a href="https://surfdrive.surf.nl/files/index.php/s/LddbAYQAYPqtYu6/download"><code>gnomad.v3.1.2.echtvar.popmax.v2.zip</code></a>)</td>
 </tr>
+<tr>
+<td><code>variant_consequences_snvs</code></td>
+<td>A list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic and mitochondrial SNVs. Sample file <a href="https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt">here</a>. You can learn more about these terms <a href="https://ensembl.org/info/genome/variation/prediction/predicted_data.html">here</a></td>
+</tr>
 </tbody>
 </table>
 <p><sup>1</sup> Example file for input with <code>--vep_plugin_files</code></p>
@@ -2053,6 +2057,10 @@ The phaser can be chosen using the <code>--phaser</code> argument. See the follo
 <tr>
 <td><code>vep_plugin_files</code> <sup>2</sup></td>
 <td>A CSV/TSV/JSON/YAML file with VEP plugin files, pLI and LoFtool are required. Example provided below.</td>
+</tr>
+<tr>
+<td><code>variant_consequences_svs</code></td>
+<td>A list of SO terms listed in the order of severity from most severe to lease severe for annotating SVs. Sample file <a href="https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt">here</a>. You can learn more about these terms <a href="https://ensembl.org/info/genome/variation/prediction/predicted_data.html">here</a></td>
 </tr>
 </tbody>
 </table>
