@@ -4,9 +4,14 @@
             "5c3fc288ebd04e65c9b1e88a712b4d46",
             "c72f00b749b4ef8192165571815e5f3a",
             "30ba267e3b89ce97d0df96640b22d265"
+            "5c3fc288ebd04e65c9b1e88a712b4d46",
+            "c72f00b749b4ef8192165571815e5f3a",
+            "30ba267e3b89ce97d0df96640b22d265"
         ],
         "timestamp": "2026-05-20T15:28:05.718018118",
         "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"
         }
@@ -268,10 +273,10 @@
                     ]
                 ],
                 "6": [
-                    
+
                 ],
                 "7": [
-                    
+
                 ],
                 "family_tbi": [
                     [
@@ -318,10 +323,10 @@
                     ]
                 ],
                 "sample_crai": [
-                    
+
                 ],
                 "sample_cram": [
-                    
+
                 ],
                 "sample_tbi": [
                     [

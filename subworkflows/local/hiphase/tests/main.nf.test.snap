@@ -7,6 +7,7 @@
                         "id": "FAM"
                     },
                     "FAM_snv_phased.vcf.gz:md5,4517b63635ceb21248363884685fef89"
+                    "FAM_snv_phased.vcf.gz:md5,4517b63635ceb21248363884685fef89"
                 ]
             ],
             [
@@ -15,8 +16,10 @@
                         "id": "FAM"
                     },
                     "FAM_snv_phased.vcf.gz.tbi:md5,162104851e5ff3d8018d8d14cb8e929e"
+                    "FAM_snv_phased.vcf.gz.tbi:md5,162104851e5ff3d8018d8d14cb8e929e"
                 ]
             ],
+            "16c13b731169bfa9ef73d1fb721b40be",
             "16c13b731169bfa9ef73d1fb721b40be",
             "FAM_sv_phased.vcf.gz.tbi",
             [
@@ -27,11 +30,16 @@
                     },
                     "HG002_PacBio_Revio_haplotagged.bam:md5,f80f119fa1a7ec05528b1982184bf3f0",
                     "HG002_PacBio_Revio_haplotagged.bam.bai:md5,9c0028995e97549e66d6562a7b1aa9f2"
+                    "HG002_PacBio_Revio_haplotagged.bam:md5,f80f119fa1a7ec05528b1982184bf3f0",
+                    "HG002_PacBio_Revio_haplotagged.bam.bai:md5,9c0028995e97549e66d6562a7b1aa9f2"
                 ]
             ]
         ],
         "timestamp": "2026-05-25T15:05:57.735081545",
         "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"
         }
@@ -72,10 +80,10 @@
                     ]
                 ],
                 "4": [
-                    
+
                 ],
                 "haplotagged_bam_bai": [
-                    
+
                 ],
                 "phased_snvs": [
                     [
@@ -112,9 +120,11 @@
             }
         ],
         "timestamp": "2026-03-27T16:59:53.9517965",
+        "timestamp": "2026-03-27T16:59:53.9517965",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
+        }
         }
     },
     "1 sample - SNVs + SVs - stub": {
@@ -153,10 +163,10 @@
                     ]
                 ],
                 "4": [
-                    
+
                 ],
                 "haplotagged_bam_bai": [
-                    
+
                 ],
                 "phased_snvs": [
                     [
@@ -193,9 +203,11 @@
             }
         ],
         "timestamp": "2026-03-27T16:59:43.044443661",
+        "timestamp": "2026-03-27T16:59:43.044443661",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
+        }
         }
     },
     "2 samples - SNVs + SVs": {
@@ -206,6 +218,7 @@
                         "id": "FAM"
                     },
                     "FAM_snv_phased.vcf.gz:md5,19e70b38d9a44ec9375a9ae5e6dda822"
+                    "FAM_snv_phased.vcf.gz:md5,19e70b38d9a44ec9375a9ae5e6dda822"
                 ]
             ],
             [
@@ -214,8 +227,10 @@
                         "id": "FAM"
                     },
                     "FAM_snv_phased.vcf.gz.tbi:md5,1e22ba93c10985c2d3d81bfbefdcdddf"
+                    "FAM_snv_phased.vcf.gz.tbi:md5,1e22ba93c10985c2d3d81bfbefdcdddf"
                 ]
             ],
+            "8219f89851c0e67e7e611c2cf8a5910c",
             "8219f89851c0e67e7e611c2cf8a5910c",
             "FAM_sv_phased.vcf.gz.tbi",
             [
@@ -226,6 +241,8 @@
                     },
                     "HG002_PacBio_Revio_haplotagged.bam:md5,ec68615346f11452b12833e04d5555df",
                     "HG002_PacBio_Revio_haplotagged.bam.bai:md5,d62bf8f0a6501388e08975b90aab25b9"
+                    "HG002_PacBio_Revio_haplotagged.bam:md5,ec68615346f11452b12833e04d5555df",
+                    "HG002_PacBio_Revio_haplotagged.bam.bai:md5,d62bf8f0a6501388e08975b90aab25b9"
                 ],
                 [
                     {
@@ -234,11 +251,16 @@
                     },
                     "HG003_PacBio_Revio_haplotagged.bam:md5,6104c00555869652e4342105ac6b73ed",
                     "HG003_PacBio_Revio_haplotagged.bam.bai:md5,b75515456da746e3452a18d45368d810"
+                    "HG003_PacBio_Revio_haplotagged.bam:md5,6104c00555869652e4342105ac6b73ed",
+                    "HG003_PacBio_Revio_haplotagged.bam.bai:md5,b75515456da746e3452a18d45368d810"
                 ]
             ]
         ],
         "timestamp": "2026-05-25T15:06:12.866462164",
         "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"
         }
@@ -252,6 +274,7 @@
                             "id": "FAM"
                         },
                         "FAM_snv_phased.vcf.gz:md5,3e064ce4321026a4c0bb452aa8148027"
+                        "FAM_snv_phased.vcf.gz:md5,3e064ce4321026a4c0bb452aa8148027"
                     ]
                 ],
                 "1": [
@@ -260,13 +283,14 @@
                             "id": "FAM"
                         },
                         "FAM_snv_phased.vcf.gz.tbi:md5,774661bff78127a5ffbd23f91ebe9435"
+                        "FAM_snv_phased.vcf.gz.tbi:md5,774661bff78127a5ffbd23f91ebe9435"
                     ]
                 ],
                 "2": [
-                    
+
                 ],
                 "3": [
-                    
+
                 ],
                 "4": [
                     [
@@ -276,12 +300,16 @@
                         },
                         "HG002_PacBio_Revio_haplotagged.bam:md5,5fed9bf72be8f80990e3de466585103f",
                         "HG002_PacBio_Revio_haplotagged.bam.bai:md5,3b5abbcbec95cf91288f49540182c769"
+                        "HG002_PacBio_Revio_haplotagged.bam:md5,5fed9bf72be8f80990e3de466585103f",
+                        "HG002_PacBio_Revio_haplotagged.bam.bai:md5,3b5abbcbec95cf91288f49540182c769"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
+                        "HG003_PacBio_Revio_haplotagged.bam:md5,b2473fa2cad4fca40731c9ab4d8d96a4",
+                        "HG003_PacBio_Revio_haplotagged.bam.bai:md5,a570be3ea936180d62c3ea513e7ecfc5"
                         "HG003_PacBio_Revio_haplotagged.bam:md5,b2473fa2cad4fca40731c9ab4d8d96a4",
                         "HG003_PacBio_Revio_haplotagged.bam.bai:md5,a570be3ea936180d62c3ea513e7ecfc5"
                     ]
@@ -294,12 +322,16 @@
                         },
                         "HG002_PacBio_Revio_haplotagged.bam:md5,5fed9bf72be8f80990e3de466585103f",
                         "HG002_PacBio_Revio_haplotagged.bam.bai:md5,3b5abbcbec95cf91288f49540182c769"
+                        "HG002_PacBio_Revio_haplotagged.bam:md5,5fed9bf72be8f80990e3de466585103f",
+                        "HG002_PacBio_Revio_haplotagged.bam.bai:md5,3b5abbcbec95cf91288f49540182c769"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
+                        "HG003_PacBio_Revio_haplotagged.bam:md5,b2473fa2cad4fca40731c9ab4d8d96a4",
+                        "HG003_PacBio_Revio_haplotagged.bam.bai:md5,a570be3ea936180d62c3ea513e7ecfc5"
                         "HG003_PacBio_Revio_haplotagged.bam:md5,b2473fa2cad4fca40731c9ab4d8d96a4",
                         "HG003_PacBio_Revio_haplotagged.bam.bai:md5,a570be3ea936180d62c3ea513e7ecfc5"
                     ]
@@ -310,6 +342,7 @@
                             "id": "FAM"
                         },
                         "FAM_snv_phased.vcf.gz:md5,3e064ce4321026a4c0bb452aa8148027"
+                        "FAM_snv_phased.vcf.gz:md5,3e064ce4321026a4c0bb452aa8148027"
                     ]
                 ],
                 "phased_snvs_tbi": [
@@ -318,18 +351,22 @@
                             "id": "FAM"
                         },
                         "FAM_snv_phased.vcf.gz.tbi:md5,774661bff78127a5ffbd23f91ebe9435"
+                        "FAM_snv_phased.vcf.gz.tbi:md5,774661bff78127a5ffbd23f91ebe9435"
                     ]
                 ],
                 "phased_svs": [
-                    
+
                 ],
                 "phased_svs_tbi": [
-                    
+
                 ]
             }
         ],
         "timestamp": "2026-05-25T15:05:43.693628651",
         "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"
         }
@@ -354,16 +391,16 @@
                     ]
                 ],
                 "2": [
-                    
+
                 ],
                 "3": [
-                    
+
                 ],
                 "4": [
-                    
+
                 ],
                 "haplotagged_bam_bai": [
-                    
+
                 ],
                 "phased_snvs": [
                     [
@@ -382,17 +419,19 @@
                     ]
                 ],
                 "phased_svs": [
-                    
+
                 ],
                 "phased_svs_tbi": [
-                    
+
                 ]
             }
         ],
         "timestamp": "2026-03-27T16:59:22.458447427",
+        "timestamp": "2026-03-27T16:59:22.458447427",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
+        }
         }
     },
     "1 sample - SNVs only": {
@@ -404,6 +443,7 @@
                             "id": "FAM"
                         },
                         "FAM_snv_phased.vcf.gz:md5,70940b6d2eea751896d9f9f73041618f"
+                        "FAM_snv_phased.vcf.gz:md5,70940b6d2eea751896d9f9f73041618f"
                     ]
                 ],
                 "1": [
@@ -412,13 +452,14 @@
                             "id": "FAM"
                         },
                         "FAM_snv_phased.vcf.gz.tbi:md5,473af55305ac77b1ad5331fa17f3823a"
+                        "FAM_snv_phased.vcf.gz.tbi:md5,473af55305ac77b1ad5331fa17f3823a"
                     ]
                 ],
                 "2": [
-                    
+
                 ],
                 "3": [
-                    
+
                 ],
                 "4": [
                     [
@@ -426,6 +467,8 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
+                        "HG002_PacBio_Revio_haplotagged.bam:md5,23b7f99f0f0962dbb574188856d81b28",
+                        "HG002_PacBio_Revio_haplotagged.bam.bai:md5,4bef94e827ec92a0b4c97dc7950aa02d"
                         "HG002_PacBio_Revio_haplotagged.bam:md5,23b7f99f0f0962dbb574188856d81b28",
                         "HG002_PacBio_Revio_haplotagged.bam.bai:md5,4bef94e827ec92a0b4c97dc7950aa02d"
                     ]
@@ -438,6 +481,8 @@
                         },
                         "HG002_PacBio_Revio_haplotagged.bam:md5,23b7f99f0f0962dbb574188856d81b28",
                         "HG002_PacBio_Revio_haplotagged.bam.bai:md5,4bef94e827ec92a0b4c97dc7950aa02d"
+                        "HG002_PacBio_Revio_haplotagged.bam:md5,23b7f99f0f0962dbb574188856d81b28",
+                        "HG002_PacBio_Revio_haplotagged.bam.bai:md5,4bef94e827ec92a0b4c97dc7950aa02d"
                     ]
                 ],
                 "phased_snvs": [
@@ -445,6 +490,7 @@
                         {
                             "id": "FAM"
                         },
+                        "FAM_snv_phased.vcf.gz:md5,70940b6d2eea751896d9f9f73041618f"
                         "FAM_snv_phased.vcf.gz:md5,70940b6d2eea751896d9f9f73041618f"
                     ]
                 ],
@@ -454,18 +500,22 @@
                             "id": "FAM"
                         },
                         "FAM_snv_phased.vcf.gz.tbi:md5,473af55305ac77b1ad5331fa17f3823a"
+                        "FAM_snv_phased.vcf.gz.tbi:md5,473af55305ac77b1ad5331fa17f3823a"
                     ]
                 ],
                 "phased_svs": [
-                    
+
                 ],
                 "phased_svs_tbi": [
-                    
+
                 ]
             }
         ],
         "timestamp": "2026-05-25T15:05:34.477130284",
         "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"
         }
@@ -490,16 +540,16 @@
                     ]
                 ],
                 "2": [
-                    
+
                 ],
                 "3": [
-                    
+
                 ],
                 "4": [
-                    
+
                 ],
                 "haplotagged_bam_bai": [
-                    
+
                 ],
                 "phased_snvs": [
                     [
@@ -518,17 +568,19 @@
                     ]
                 ],
                 "phased_svs": [
-                    
+
                 ],
                 "phased_svs_tbi": [
-                    
+
                 ]
             }
         ],
         "timestamp": "2026-03-27T16:59:32.11838907",
+        "timestamp": "2026-03-27T16:59:32.11838907",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
+        }
         }
     }
 }

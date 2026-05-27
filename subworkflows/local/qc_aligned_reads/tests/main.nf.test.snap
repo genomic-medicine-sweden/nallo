@@ -10,7 +10,7 @@
                 ]
             ],
             [
-                
+
             ],
             "test_fastqc.html",
             "test_fastqc.zip",
@@ -20,10 +20,23 @@
                         "id": "test"
                     },
                     "test.mosdepth.summary.txt:md5,460fde6e0939e639895c4d63246ac097"
+                    "test.mosdepth.summary.txt:md5,460fde6e0939e639895c4d63246ac097"
                 ]
             ],
             [
                 "chrom\tlength\tbases\tmean\tmin\tmax",
+                "chr16\t1343020\t7950330\t5.92\t0\t22",
+                "chr16_region\t16298\t292975\t17.98\t2\t22",
+                "chr17\t3073138\t825229\t0.27\t0\t36",
+                "chr17_region\t20000\t604892\t30.24\t2\t36",
+                "chr20\t2653100\t237373\t0.09\t0\t22",
+                "chr20_region\t700\t14945\t21.35\t9\t22",
+                "chrX\t16691504\t8292566\t0.50\t0\t20",
+                "chrX_region\t70\t972\t13.89\t7\t20",
+                "chrM\t16569\t640897\t38.68\t0\t56",
+                "chrM_region\t16568\t640873\t38.68\t0\t56",
+                "total\t23777331\t17946395\t0.75\t0\t56",
+                "total_region\t53636\t1554657\t28.99\t0\t56"
                 "chr16\t1343020\t7950330\t5.92\t0\t22",
                 "chr16_region\t16298\t292975\t17.98\t2\t22",
                 "chr17\t3073138\t825229\t0.27\t0\t36",
@@ -43,6 +56,7 @@
                         "id": "test"
                     },
                     "test.mosdepth.global.dist.txt:md5,edbdcc0f9344473665dbac4e9a539d87"
+                    "test.mosdepth.global.dist.txt:md5,edbdcc0f9344473665dbac4e9a539d87"
                 ]
             ],
             [
@@ -51,10 +65,11 @@
                         "id": "test"
                     },
                     "test.mosdepth.region.dist.txt:md5,4d7346e63fe7c7978f458f12cc5d58c5"
+                    "test.mosdepth.region.dist.txt:md5,4d7346e63fe7c7978f458f12cc5d58c5"
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -77,6 +92,7 @@
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"
+            "nextflow": "26.02.0"
         }
     },
     "bam, no bed -stub": {
@@ -91,10 +107,10 @@
                     ]
                 ],
                 "1": [
-                    
+
                 ],
                 "10": [
-                    
+
                 ],
                 "2": [
                     [
@@ -161,7 +177,7 @@
                     ]
                 ],
                 "cramino_arrow": [
-                    
+
                 ],
                 "cramino_stats": [
                     [
@@ -236,7 +252,7 @@
                     ]
                 ],
                 "sambamba_depth_bed": [
-                    
+
                 ]
             }
         ],
@@ -258,7 +274,7 @@
                     ]
                 ],
                 "1": [
-                    
+
                 ],
                 "10": [
                     [
@@ -333,7 +349,7 @@
                     ]
                 ],
                 "cramino_arrow": [
-                    
+
                 ],
                 "cramino_stats": [
                     [
@@ -434,7 +450,7 @@
                 ]
             ],
             [
-                
+
             ],
             "test_fastqc.html",
             "test_fastqc.zip",
@@ -444,10 +460,17 @@
                         "id": "test"
                     },
                     "test.mosdepth.summary.txt:md5,daa9353bc52dbc9087f66da3b8529a10"
+                    "test.mosdepth.summary.txt:md5,daa9353bc52dbc9087f66da3b8529a10"
                 ]
             ],
             [
                 "chrom\tlength\tbases\tmean\tmin\tmax",
+                "chr16\t1343020\t7950330\t5.92\t0\t22",
+                "chr17\t3073138\t825229\t0.27\t0\t36",
+                "chr20\t2653100\t237373\t0.09\t0\t22",
+                "chrX\t16691504\t8292566\t0.50\t0\t20",
+                "chrM\t16569\t640897\t38.68\t0\t56",
+                "total\t23777331\t17946395\t0.75\t0\t56"
                 "chr16\t1343020\t7950330\t5.92\t0\t22",
                 "chr17\t3073138\t825229\t0.27\t0\t36",
                 "chr20\t2653100\t237373\t0.09\t0\t22",
@@ -461,24 +484,26 @@
                         "id": "test"
                     },
                     "test.mosdepth.global.dist.txt:md5,edbdcc0f9344473665dbac4e9a539d87"
+                    "test.mosdepth.global.dist.txt:md5,edbdcc0f9344473665dbac4e9a539d87"
                 ]
             ],
             [
-                
+
             ],
             [
-                
+
             ],
             [
-                
+
             ],
             [
-                
+
             ]
         ],
         "timestamp": "2026-05-20T15:50:07.50422365",
         "meta": {
             "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
             "nextflow": "26.02.0"
         }
     }

@@ -10,6 +10,8 @@
                         },
                         "HG002.cov.bed.gz:md5,04addec86adce344b4cf3df83ad632e5",
                         "HG002.cov.bed.gz.tbi:md5,d562f6f700997e84f33f212f781ca14b"
+                        "HG002.cov.bed.gz:md5,04addec86adce344b4cf3df83ad632e5",
+                        "HG002.cov.bed.gz.tbi:md5,d562f6f700997e84f33f212f781ca14b"
                     ]
                 ],
                 "1": [
@@ -40,12 +42,17 @@
                         },
                         "HG002.cov.bed.gz:md5,04addec86adce344b4cf3df83ad632e5",
                         "HG002.cov.bed.gz.tbi:md5,d562f6f700997e84f33f212f781ca14b"
+                        "HG002.cov.bed.gz:md5,04addec86adce344b4cf3df83ad632e5",
+                        "HG002.cov.bed.gz.tbi:md5,d562f6f700997e84f33f212f781ca14b"
                     ]
                 ]
             }
         ],
         "timestamp": "2026-05-20T15:48:15.875201832",
         "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"
         }
@@ -96,9 +103,11 @@
             }
         ],
         "timestamp": "2026-03-27T17:02:11.022294736",
+        "timestamp": "2026-03-27T17:02:11.022294736",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
+        }
         }
     }
 }
