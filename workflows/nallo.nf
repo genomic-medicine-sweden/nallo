@@ -6,6 +6,8 @@ include { samplesheetToList                                      } from 'plugin/
 */
 
 include { ALIGN_ASSEMBLIES                                       } from '../subworkflows/local/align_assemblies'
+include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV                    } from '../subworkflows/local/annotate_consequence_pli'
+include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SVS                    } from '../subworkflows/local/annotate_consequence_pli'
 include { ANNOTATE_PARALOGS                                      } from '../subworkflows/local/annotate_paralogs'
 include { ANNOTATE_REPEAT_EXPANSIONS                             } from '../subworkflows/local/annotate_repeat_expansions'
 include { ANNOTATE_SNVS                                          } from '../subworkflows/local/annotate_snvs'
@@ -110,6 +112,8 @@ workflow NALLO {
     ch_sv_call_regions
     ch_svdb_sv_databases
     ch_tandem_repeats
+    ch_variant_consequences_snvs
+    ch_variant_consequences_svs
     ch_vcfexpress_prelude
     ch_vep_cache_unprocessed
     ch_vep_plugin_files
@@ -700,26 +704,36 @@ workflow NALLO {
         )
 
         ANNOTATE_SNVS.out.vcf
-            .join(ANNOTATE_SNVS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
-            .multiMap { meta, vcf, tbi ->
-                clinical: [meta + [set: "clinical"], vcf, tbi]
-                research: [meta + [set: "research"], vcf, tbi]
+            .multiMap { meta, vcf ->
+                clinical: [meta + [set: "clinical"], vcf]
+                research: [meta + [set: "research"], vcf]
             }
-            .set { ch_clinical_research_snvs_vcf_tbi }
+            .set { ch_clin_research_snvs_vcf }
+        ch_clin_research_snvs_vcf.clinical
 
-        ch_clinical_research_snvs_vcf_tbi.research.set { ch_snvs_per_family_annotated_vcf_tbi }
+        ch_clin_research_snvs_vcf.research.set { ch_ann_csq_pli_snv_in }
 
         if (val_filter_variants_hgnc_ids || val_filter_snvs_expression != '') {
 
             FILTER_VARIANTS_SNVS(
-                ch_clinical_research_snvs_vcf_tbi.clinical.map { meta, vcf, _tbi -> [meta, vcf] },
+                ch_clin_research_snvs_vcf.clinical,
                 ch_hgnc_ids,
                 val_filter_snvs_expression,
                 val_filter_variants_hgnc_ids,
             )
 
-            ch_snvs_per_family_annotated_vcf_tbi = ch_snvs_per_family_annotated_vcf_tbi.mix(FILTER_VARIANTS_SNVS.out.vcf.join(FILTER_VARIANTS_SNVS.out.tbi, failOnMismatch: true, failOnDuplicate: true))
+            ch_ann_csq_pli_snv_in = ch_ann_csq_pli_snv_in.mix(FILTER_VARIANTS_SNVS.out.vcf)
         }
+
+        // This is really only required for ranking, could consider moving it there?
+        ANN_CSQ_PLI_SNV(
+            ch_ann_csq_pli_snv_in,
+            ch_variant_consequences_snvs,
+        )
+
+        ANN_CSQ_PLI_SNV.out.vcf
+            .join(ANN_CSQ_PLI_SNV.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+            .set { ch_snvs_per_family_annotated_vcf_tbi }
     }
 
     //
@@ -839,9 +853,9 @@ workflow NALLO {
                 clinical: [meta + [set: "clinical"], vcf]
                 research: [meta + [set: "research"], vcf]
             }
-            .set { ch_clinical_research_svs_vcf }
+            .set { ch_clin_research_svs_vcf }
 
-        ch_clinical_research_svs_vcf.research.set { ch_svs_per_family_annotated_vcf }
+        ch_clin_research_svs_vcf.research.set { ch_ann_csq_svs_in }
 
         //
         // Filter SVs
@@ -849,14 +863,19 @@ workflow NALLO {
         if (val_filter_variants_hgnc_ids || val_filter_svs_expression != '') {
 
             FILTER_VARIANTS_SVS(
-                ch_clinical_research_svs_vcf.clinical,
+                ch_clin_research_svs_vcf.clinical,
                 ch_hgnc_ids,
                 val_filter_svs_expression,
                 val_filter_variants_hgnc_ids,
             )
 
-            ch_svs_per_family_annotated_vcf = ch_svs_per_family_annotated_vcf.mix(FILTER_VARIANTS_SVS.out.vcf)
+            ch_ann_csq_svs_in = ch_ann_csq_svs_in.mix(FILTER_VARIANTS_SVS.out.vcf)
         }
+
+        ANN_CSQ_PLI_SVS(
+            ch_ann_csq_svs_in,
+            ch_variant_consequences_svs,
+        )
     }
 
     /*
@@ -867,7 +886,7 @@ workflow NALLO {
     if (!val_skip_rank_variants) {
 
         ch_snvs_to_rank = buildRankVariantsInputChannel(
-            ch_snvs_per_family_annotated_vcf_tbi.map { meta, vcf, _tbi -> [meta + [family_id: meta.id], vcf] },
+            ANN_CSQ_PLI_SNV.out.vcf,
             SOMALIER_PED_FAMILY.out.ped,
             'snv',
             ch_genmod_score_config_snvs,
@@ -875,7 +894,7 @@ workflow NALLO {
         )
 
         ch_svs_to_rank = buildRankVariantsInputChannel(
-            ch_svs_per_family_annotated_vcf,
+            ANN_CSQ_PLI_SVS.out.vcf.map { meta, vcf -> [meta + [family_id: meta.id], vcf] },
             SOMALIER_PED_FAMILY.out.ped,
             'sv',
             ch_genmod_score_config_svs,
@@ -939,7 +958,7 @@ workflow NALLO {
         ch_collect_svs = val_skip_sv_annotation
             ? ch_sv_vcf_for_annotation
             : val_skip_rank_variants
-                ? ch_svs_per_family_annotated_vcf
+                ? ANN_CSQ_PLI_SVS.out.vcf
                 : ch_ranked_variants.sv.map { meta, vcf, _tbi -> [meta, vcf] }
 
         BCFTOOLS_VIEW_SV(

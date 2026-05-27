@@ -82,6 +82,8 @@ workflow PIPELINE_INITIALISATION {
     val_sv_callers_merge_priority
     val_sv_callers_to_merge
     val_sv_callers_to_run
+    val_variant_consequences_snvs
+    val_variant_consequences_svs
     val_vep_cache
     val_vep_plugin_files
     version // boolean: Display version and exit
@@ -204,9 +206,9 @@ workflow PIPELINE_INITIALISATION {
         assembly         : ["fasta"], // The assembly workflow should perhaps be split into two - assembly and alignment (requires ref)
         sambamba_depth   : ["sambamba_regions"],
         snv_calling      : ["fasta", "par_regions"],
-        snv_annotation   : ["vep_cache", "vep_plugin_files"],
+        snv_annotation   : ["vep_cache", "vep_plugin_files", "variant_consequences_snvs"],
         sv_calling       : ["fasta"],
-        sv_annotation    : ["svdb_sv_databases", "vep_cache", "vep_plugin_files"],
+        sv_annotation    : ["svdb_sv_databases", "vep_cache", "vep_plugin_files", "variant_consequences_svs"],
         rank_variants    : ["genmod_reduced_penetrance", "genmod_score_config_snvs", "genmod_score_config_svs"],
         repeat_calling   : ["str_bed"],
         repeat_annotation: ["stranger_repeat_catalog"],
@@ -253,6 +255,8 @@ workflow PIPELINE_INITIALISATION {
             genmod_reduced_penetrance   : val_genmod_reduced_penetrance,
             genmod_score_config_snvs    : val_genmod_score_config_snvs,
             genmod_score_config_svs     : val_genmod_score_config_svs,
+            variant_consequences_snvs   : val_variant_consequences_snvs,
+            variant_consequences_svs    : val_variant_consequences_svs,
             vep_plugin_files            : val_vep_plugin_files,
             gens_baf_positions          : val_gens_baf_positions,
             gens_panel_of_normals_female: val_gens_panel_of_normals_female,

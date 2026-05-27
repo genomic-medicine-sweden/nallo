@@ -52,6 +52,18 @@ nextflow_workflow {
                 """
             }
         }
+        run("ANNOTATE_CSQ_PLI") {
+            script "../../annotate_consequence_pli/main.nf"
+            process {
+                """
+                input[0] = ANNOTATE_SNVS.out.vcf
+                input[1] = [
+                    [ id: 'variant_consequences' ],
+                    [ file(params.pipelines_testdata_base_path + 'reference/variant_consequences_v2.txt', checkIfExists: true) ]
+                ]
+                """
+            }
+        }
         run("CREATE_PEDIGREE_FILE") {
             script "../../../../modules/local/create_pedigree_file/main.nf"
             process {
@@ -74,7 +86,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = ANNOTATE_SNVS.out.vcf.map { meta, vcf -> [ [ id: 'test' ], vcf ] }
+                input[0] = ANNOTATE_CSQ_PLI.out.vcf.map { meta, vcf -> [ [ id: 'test' ], vcf ] }
                 input[1] = CREATE_PEDIGREE_FILE.out.ped.map { meta, ped -> [ [ id: 'test' ], ped ] }
                 input[2] = channel.of([
                     [ id: 'genmod_reduced_penetrance' ],
@@ -106,7 +118,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = ANNOTATE_SNVS.out.vcf.map { meta, vcf -> [ [ id: 'test' ], vcf ] }
+                input[0] = ANNOTATE_CSQ_PLI.out.vcf.map { meta, vcf -> [ [ id: 'test' ], vcf ] }
                 input[1] = CREATE_PEDIGREE_FILE.out.ped.map { meta, ped -> [ [ id: 'test' ], ped ] }
                 input[2] = channel.of([
                     [ id: 'genmod_reduced_penetrance' ],
