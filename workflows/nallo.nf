@@ -477,25 +477,22 @@ workflow NALLO {
         )
 
         // Group GVCFs per region and family (one region with all samples)
-        CALL_SNVS.out.gvcf
-            .map { meta, gvcf ->
-                [[id: meta.region.name, family_id: meta.family_id, num_intervals: meta.num_intervals], gvcf]
+        def variants_to_merge_per_family = CALL_SNVS.out.gvcf
+            .join(CALL_SNVS.out.gvcf_index, failOnMismatch: true, failOnDuplicate: true)
+            .map { meta, gvcf, index ->
+                [[id: meta.region.name, family_id: meta.family_id, num_intervals: meta.num_intervals], gvcf, index]
             }
             .groupTuple()
-            .set { variants_to_merge_per_family }
-
-        CALL_SNVS.out.gvcf_index
-            .map { meta, tbi ->
-                [[id: meta.region.name, family_id: meta.family_id, num_intervals: meta.num_intervals], tbi]
+            .multiMap { meta, gvcfs, indexes ->
+                gvcf: [meta, gvcfs]
+                index: [meta, indexes]
             }
-            .groupTuple()
-            .set { gvcf_tbis_per_family }
 
         // Create a merged and normalized VCF, containing one region with all samples, to be used in annotation and ranking.
         // SCATTER_GENOME.out.bed contains all regions, but we could probably pass the region BED that actually matches the variants instead...
         GVCF_GLNEXUS_NORM_VARIANTS(
-            variants_to_merge_per_family,
-            gvcf_tbis_per_family,
+            variants_to_merge_per_family.gvcf,
+            variants_to_merge_per_family.index,
             SCATTER_GENOME.out.bed,
             ch_fasta,
             ch_fai,
