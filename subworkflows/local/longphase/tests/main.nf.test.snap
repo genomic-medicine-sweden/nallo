@@ -6,7 +6,7 @@
                     {
                         "id": "FAM"
                     },
-                    "FAM_phased_snv.vcf.gz:md5,eafa74e27927dd04d274e9c612bbc90f"
+                    "FAM_phased_snv.vcf.gz:md5,df26e4c6f8d1f2a3235c03977284a494"
                 ]
             ],
             [
@@ -14,10 +14,10 @@
                     {
                         "id": "FAM"
                     },
-                    "FAM_phased_snv.vcf.gz.tbi:md5,51c3247f2c7a11796b52960ab9c87186"
+                    "FAM_phased_snv.vcf.gz.tbi:md5,9fd08cad9ef0876c278bf963d99d1b18"
                 ]
             ],
-            "db57d3632c13aa4d3e826e4427a69cae",
+            "f6d4ab6bd45b7ec7f7f8d01d4cf855a6",
             "FAM_phased_sv.vcf.gz.tbi",
             [
                 [
@@ -25,16 +25,16 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_haplotagged.bam:md5,a67c6f45033eb62fba473600e2279608",
-                    "HG002_haplotagged.bam.bai:md5,1c1c70d2838e4d8c10a908792d3294bc"
+                    "HG002_haplotagged.bam:md5,7fe96c976410f3edc4102522346f90ae",
+                    "HG002_haplotagged.bam.bai:md5,7464aefd3e24613a818ed36b12550876"
                 ]
             ]
         ],
+        "timestamp": "2026-05-26T13:57:33.927357198",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:00:33.622641379"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "2 samples - SNVs + SVs - stub": {
         "content": [
@@ -141,11 +141,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-03-27T17:01:41.123621568",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:01:41.123621568"
+        }
     },
     "1 sample - SNVs + SVs - stub": {
         "content": [
@@ -236,11 +236,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-03-27T17:01:27.914985693",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:01:27.914985693"
+        }
     },
     "2 samples - SNVs + SVs": {
         "content": [
@@ -249,7 +249,7 @@
                     {
                         "id": "FAM"
                     },
-                    "FAM_phased_snv.vcf.gz:md5,12adac5864c5c70537f7090cadffea44"
+                    "FAM_phased_snv.vcf.gz:md5,70f7c5f8ee184b154a186d8f8d577a0d"
                 ]
             ],
             [
@@ -257,7 +257,7 @@
                     {
                         "id": "FAM"
                     },
-                    "FAM_phased_snv.vcf.gz.tbi:md5,334b84bd7468ad77db50202191cc9720"
+                    "FAM_phased_snv.vcf.gz.tbi:md5,41bb09973eb1cc42fb90f56e5dc6ac74"
                 ]
             ],
             "FAM_phased_sv.vcf.gz",
@@ -267,24 +267,24 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_haplotagged.bam:md5,85bd3e5ea92691ad6cc5eeb92be1a99e",
-                    "HG002_haplotagged.bam.bai:md5,d96000fe9aa5479e486a6d52e6b1511a"
+                    "HG002_haplotagged.bam:md5,bb803caf0bcdcd29e4ac01bcaf1b33d5",
+                    "HG002_haplotagged.bam.bai:md5,bd6edd181a0bedd063402ee0786d713c"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_haplotagged.bam:md5,0e5b5bba4ede6465c42d60a69e9fd56a",
-                    "HG003_haplotagged.bam.bai:md5,7c4625b0031ee472e9efdc643ca60e33"
+                    "HG003_haplotagged.bam:md5,36a0aa5f4edc69f7c485ca8fcdf65a0b",
+                    "HG003_haplotagged.bam.bai:md5,80b1966880f2de438df3f279f68b53fc"
                 ]
             ]
         ],
+        "timestamp": "2026-05-26T13:57:51.08949717",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:00:51.441416435"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "2 samples - SNVs only": {
         "content": [
@@ -294,7 +294,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz:md5,45930d15305aaf5a131a082dc327a150"
+                        "FAM_phased_snv.vcf.gz:md5,a79b0bc5710e50441d0c48ae45b02434"
                     ]
                 ],
                 "1": [
@@ -302,7 +302,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz.tbi:md5,c59e3059a51b9a26cb0a4fd530f456d4"
+                        "FAM_phased_snv.vcf.gz.tbi:md5,5ff97457838ac37282748bc4c7310381"
                     ]
                 ],
                 "2": [
@@ -317,16 +317,16 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_haplotagged.bam:md5,c35cca8b8bc36cb813f262750e89ef72",
-                        "HG002_haplotagged.bam.bai:md5,a19d32eefdea85dd56bfa02d50a11701"
+                        "HG002_haplotagged.bam:md5,c3a6b0740eecfb80b332ef3a1f727cb8",
+                        "HG002_haplotagged.bam.bai:md5,5a65a63d11fe02b2dfc0812a152fb8c1"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003_haplotagged.bam:md5,0f0f83ee1de4a0201999164e79eb321a",
-                        "HG003_haplotagged.bam.bai:md5,3b4ed31cbb0b3b950e3487c10d0706a0"
+                        "HG003_haplotagged.bam:md5,64f9df2ada5db754c932cd57708b1a6c",
+                        "HG003_haplotagged.bam.bai:md5,993ff850dcc7ba8ab05c4209cd7eb295"
                     ]
                 ],
                 "haplotagged_bam_bai": [
@@ -335,16 +335,16 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_haplotagged.bam:md5,c35cca8b8bc36cb813f262750e89ef72",
-                        "HG002_haplotagged.bam.bai:md5,a19d32eefdea85dd56bfa02d50a11701"
+                        "HG002_haplotagged.bam:md5,c3a6b0740eecfb80b332ef3a1f727cb8",
+                        "HG002_haplotagged.bam.bai:md5,5a65a63d11fe02b2dfc0812a152fb8c1"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003_haplotagged.bam:md5,0f0f83ee1de4a0201999164e79eb321a",
-                        "HG003_haplotagged.bam.bai:md5,3b4ed31cbb0b3b950e3487c10d0706a0"
+                        "HG003_haplotagged.bam:md5,64f9df2ada5db754c932cd57708b1a6c",
+                        "HG003_haplotagged.bam.bai:md5,993ff850dcc7ba8ab05c4209cd7eb295"
                     ]
                 ],
                 "phased_family_snvs": [
@@ -352,7 +352,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz:md5,45930d15305aaf5a131a082dc327a150"
+                        "FAM_phased_snv.vcf.gz:md5,a79b0bc5710e50441d0c48ae45b02434"
                     ]
                 ],
                 "phased_family_snvs_tbi": [
@@ -360,7 +360,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz.tbi:md5,c59e3059a51b9a26cb0a4fd530f456d4"
+                        "FAM_phased_snv.vcf.gz.tbi:md5,5ff97457838ac37282748bc4c7310381"
                     ]
                 ],
                 "phased_family_svs": [
@@ -371,11 +371,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-05-26T13:57:18.524904919",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:00:17.534377202"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "1 sample - SNVs only - stub": {
         "content": [
@@ -446,11 +446,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-03-27T17:01:02.408493265",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:01:02.408493265"
+        }
     },
     "1 sample - SNVs only": {
         "content": [
@@ -460,7 +460,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz:md5,a0b0f363267aa082fbfcae7f266164a4"
+                        "FAM_phased_snv.vcf.gz:md5,fbeb22612374b0b0c971bfa4e1d8db20"
                     ]
                 ],
                 "1": [
@@ -468,7 +468,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz.tbi:md5,c32a55e13fd42192600e43c7d46356d5"
+                        "FAM_phased_snv.vcf.gz.tbi:md5,2189fa96c3e158be0792d2dbb151596f"
                     ]
                 ],
                 "2": [
@@ -483,8 +483,8 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_haplotagged.bam:md5,686ccb23845d62fabce22842481010a2",
-                        "HG002_haplotagged.bam.bai:md5,a237b177d1b2a2c0a70f58e77c91a481"
+                        "HG002_haplotagged.bam:md5,8899c18bb8bf53401fb12861048f38d2",
+                        "HG002_haplotagged.bam.bai:md5,31b17d6315a610310281cf9a161c7665"
                     ]
                 ],
                 "haplotagged_bam_bai": [
@@ -493,8 +493,8 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_haplotagged.bam:md5,686ccb23845d62fabce22842481010a2",
-                        "HG002_haplotagged.bam.bai:md5,a237b177d1b2a2c0a70f58e77c91a481"
+                        "HG002_haplotagged.bam:md5,8899c18bb8bf53401fb12861048f38d2",
+                        "HG002_haplotagged.bam.bai:md5,31b17d6315a610310281cf9a161c7665"
                     ]
                 ],
                 "phased_family_snvs": [
@@ -502,7 +502,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz:md5,a0b0f363267aa082fbfcae7f266164a4"
+                        "FAM_phased_snv.vcf.gz:md5,fbeb22612374b0b0c971bfa4e1d8db20"
                     ]
                 ],
                 "phased_family_snvs_tbi": [
@@ -510,7 +510,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_phased_snv.vcf.gz.tbi:md5,c32a55e13fd42192600e43c7d46356d5"
+                        "FAM_phased_snv.vcf.gz.tbi:md5,2189fa96c3e158be0792d2dbb151596f"
                     ]
                 ],
                 "phased_family_svs": [
@@ -521,11 +521,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-05-26T13:57:08.212578687",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:00:05.488256206"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "2 samples - SNVs only - stub": {
         "content": [
@@ -612,10 +612,10 @@
                 ]
             }
         ],
+        "timestamp": "2026-03-27T17:01:14.452452109",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:01:14.452452109"
+        }
     }
 }
