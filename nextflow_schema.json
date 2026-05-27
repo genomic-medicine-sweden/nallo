@@ -746,7 +746,7 @@
                 },
                 "mitochondrial_sv_min_size": {
                     "type": "integer",
-                    "default": 17000,
+                    "default": 50,
                     "minimum": 1,
                     "description": "Minimum allele length difference (abs(strlen(REF)-strlen(ALT))) to classify a mitochondrial variant as an SV rather than a SNV/small indel."
                 },
