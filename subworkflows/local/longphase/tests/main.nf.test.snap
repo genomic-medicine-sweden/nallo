@@ -242,6 +242,50 @@
             "nextflow": "26.02.0"
         }
     },
+    "2 samples - SNVs + SVs": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "FAM"
+                    },
+                    "FAM_phased_snv.vcf.gz:md5,70f7c5f8ee184b154a186d8f8d577a0d"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "FAM"
+                    },
+                    "FAM_phased_snv.vcf.gz.tbi:md5,41bb09973eb1cc42fb90f56e5dc6ac74"
+                ]
+            ],
+            "FAM_phased_sv.vcf.gz",
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_haplotagged.bam:md5,bb803caf0bcdcd29e4ac01bcaf1b33d5",
+                    "HG002_haplotagged.bam.bai:md5,bd6edd181a0bedd063402ee0786d713c"
+                ],
+                [
+                    {
+                        "id": "HG003",
+                        "family_id": "FAM"
+                    },
+                    "HG003_haplotagged.bam:md5,36a0aa5f4edc69f7c485ca8fcdf65a0b",
+                    "HG003_haplotagged.bam.bai:md5,80b1966880f2de438df3f279f68b53fc"
+                ]
+            ]
+        ],
+        "timestamp": "2026-05-27T13:39:59.580824743",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
+    },
     "2 samples - SNVs only": {
         "content": [
             {
