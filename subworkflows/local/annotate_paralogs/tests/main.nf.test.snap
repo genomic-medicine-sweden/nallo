@@ -7,13 +7,13 @@
                         {
                             "id": "NIST2"
                         },
-                        "NIST2.json:md5,3c15e2944863501a87b378820af276ec"
+                        "NIST2.json:md5,064f1d41f47d4cac0c5de330dbe662b3"
                     ],
                     [
                         {
                             "id": "NIST"
                         },
-                        "NIST.json:md5,833ce6fae66f15e411af0757b1f68608"
+                        "NIST.json:md5,1b80767f6671417609aa16e0cacc0480"
                     ]
                 ],
                 "1": [
@@ -24,13 +24,13 @@
                         {
                             "id": "NIST2"
                         },
-                        "NIST2.json:md5,3c15e2944863501a87b378820af276ec"
+                        "NIST2.json:md5,064f1d41f47d4cac0c5de330dbe662b3"
                     ],
                     [
                         {
                             "id": "NIST"
                         },
-                        "NIST.json:md5,833ce6fae66f15e411af0757b1f68608"
+                        "NIST.json:md5,1b80767f6671417609aa16e0cacc0480"
                     ]
                 ],
                 "tsv": [
@@ -38,9 +38,9 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-16T13:41:38.798531311",
+        "timestamp": "2026-05-26T13:33:09.80058677",
         "meta": {
-            "nf-test": "0.9.4",
+            "nf-test": "0.9.5",
             "nextflow": "26.02.0"
         }
     },
@@ -55,13 +55,13 @@
                         {
                             "id": "NIST2"
                         },
-                        "NIST2.tsv:md5,08b8f9f04c701843f5b01611b29cbeb7"
+                        "NIST2.tsv:md5,788e1a441fcf311ab662a97ddcf12073"
                     ],
                     [
                         {
                             "id": "NIST"
                         },
-                        "NIST.tsv:md5,4d80ad2f051ad0aba767425689e52f53"
+                        "NIST.tsv:md5,f48c1507728b340e56d103fd18f829bb"
                     ]
                 ],
                 "json": [
@@ -72,20 +72,20 @@
                         {
                             "id": "NIST2"
                         },
-                        "NIST2.tsv:md5,08b8f9f04c701843f5b01611b29cbeb7"
+                        "NIST2.tsv:md5,788e1a441fcf311ab662a97ddcf12073"
                     ],
                     [
                         {
                             "id": "NIST"
                         },
-                        "NIST.tsv:md5,4d80ad2f051ad0aba767425689e52f53"
+                        "NIST.tsv:md5,f48c1507728b340e56d103fd18f829bb"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-03-16T13:41:52.928107415",
+        "timestamp": "2026-05-26T13:33:28.021833574",
         "meta": {
-            "nf-test": "0.9.4",
+            "nf-test": "0.9.5",
             "nextflow": "26.02.0"
         }
     },
