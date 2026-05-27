@@ -738,9 +738,6 @@ output {
     gens {
         path { meta, _file -> "gens/${meta.id}/" }
     }
-    multiqc {
-        path { _meta, _file -> "multiqc/" }
-    }
     methylation_family_annotated {
         path { meta, _methylated_regions -> "methylation/profile/family/${meta.id}/" }
     }
@@ -749,6 +746,9 @@ output {
     }
     methylation_pileup {
         path { meta, _file -> "methylation/pileup/${meta.id}/" }
+    }
+    multiqc {
+        path { _meta, _file -> "multiqc/" }
     }
     paraphase_family {
         path { meta, _file -> "paraphase/family/${meta.id}/" }
@@ -763,6 +763,36 @@ output {
     paraphase_sample_cram {
         path { meta, _file -> "paraphase/sample/${meta.id}/" }
         enabled params.alignment_output_format == 'cram'
+    }
+    peddy {
+        path { meta, _file -> "qc/peddy/${meta.id}/" }
+    }
+    pedigree {
+        path { _meta, _ped -> "pedigree/family/" }
+    }
+    qc_bcftools_stats {
+        path { meta, _stats -> "qc/bcftools_stats/${meta.id}/" }
+    }
+    qc_cramino_unphased {
+        path { meta, _file -> "qc/cramino/unphased/${meta.id}/" }
+    }
+    qc_cramino_phased {
+        path { meta, _file -> "qc/cramino/phased/${meta.id}/" }
+    }
+    qc_deepvariant_vcfstatsreport {
+        path { meta, _report -> "qc/deepvariant_vcfstatsreport/${meta.id}/" }
+    }
+    qc_fastqc {
+        path { meta, _file -> "qc/fastqc/${meta.id}/" }
+    }
+    qc_mosdepth {
+        path { meta, _file -> "qc/mosdepth/${meta.id}/" }
+    }
+    qc_sambamba_depth {
+        path { meta, _file -> "qc/sambamba_depth/${meta.id}/" }
+    }
+    qc_whatshap_stats {
+        path { meta, _file -> "qc/phasing_stats/${meta.id}/" }
     }
     repeats_annotated_family_vcf {
         path { meta, _file -> "repeats/family/${meta.id}/" }
@@ -782,44 +812,14 @@ output {
         path { meta, _file -> "repeats/sample/${meta.id}/" }
         enabled params.alignment_output_format == 'bam'
     }
-    qc_bcftools_stats {
-        path { meta, _stats -> "qc/bcftools_stats/${meta.id}/" }
-    }
-    qc_cramino_phased {
-        path { meta, _file -> "qc/cramino/phased/${meta.id}/" }
-    }
-    qc_cramino_unphased {
-        path { meta, _file -> "qc/cramino/unphased/${meta.id}/" }
-    }
-    qc_fastqc {
-        path { meta, _file -> "qc/fastqc/${meta.id}/" }
-    }
-    qc_mosdepth {
-        path { meta, _file -> "qc/mosdepth/${meta.id}/" }
-    }
-    qc_sambamba_depth {
-        path { meta, _file -> "qc/sambamba_depth/${meta.id}/" }
-    }
-    qc_deepvariant_vcfstatsreport {
-        path { meta, _report -> "qc/deepvariant_vcfstatsreport/${meta.id}/" }
-    }
-    pedigree {
-        path { _meta, _ped -> "pedigree/family/" }
-    }
-    peddy {
-        path { meta, _file -> "qc/peddy/${meta.id}/" }
-    }
-    qc_whatshap_stats {
-        path { meta, _file -> "qc/phasing_stats/${meta.id}/" }
-    }
     snvs_family {
         path { meta, _file -> "snvs/family/${meta.id}/" }
     }
-    somalier_relate {
-        path { meta, _file -> "qc/somalier/relate/${meta.id}/" }
-    }
     snvs_sample {
         path { meta, _file -> "snvs/sample/${meta.id}/" }
+    }
+    somalier_relate {
+        path { meta, _file -> "qc/somalier/relate/${meta.id}/" }
     }
     svs_per_family {
         path { meta, _file -> "svs/family/${meta.id}/" }
