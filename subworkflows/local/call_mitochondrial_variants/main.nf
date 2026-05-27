@@ -16,10 +16,9 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
     mitochondrial_caller  // string
 
     main:
-    ch_fasta
+    ch_fasta_fai = ch_fasta
         .join(ch_fai)
         .collect()
-        .set { ch_fasta_fai }
 
     if (mitochondrial_caller == "mitorsaw") {
         MITORSAW_HAPLOTYPE(
@@ -59,27 +58,24 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
     // Deepvariant is SNV-only, so no split is needed.
     if (mitochondrial_caller != "deepvariant") {
 
-        ch_vcf
+        ch_mito_split_input = ch_vcf
             .flatMap { meta, vcf ->
                 [[meta + [variant_type: "snv"], vcf, []], [meta + [variant_type: "sv"], vcf, []]]
             }
-            .set { ch_mito_split_input }
 
         BCFTOOLS_VIEW_MITO(ch_mito_split_input, [], [], [])
 
-        BCFTOOLS_VIEW_MITO.out.vcf
+        ch_mito_vcf_split = BCFTOOLS_VIEW_MITO.out.vcf
             .branch { meta, _vcf ->
                 snv: meta.variant_type == "snv"
                 sv: meta.variant_type == "sv"
             }
-            .set { ch_mito_vcf_split }
 
-        BCFTOOLS_VIEW_MITO.out.tbi
+        ch_mito_tbi_split = BCFTOOLS_VIEW_MITO.out.tbi
             .branch { meta, _tbi ->
                 snv: meta.variant_type == "snv"
                 sv: meta.variant_type == "sv"
             }
-            .set { ch_mito_tbi_split }
 
         ch_snv_vcf = ch_mito_vcf_split.snv.map { meta, vcf -> [meta - meta.subMap('variant_type'), vcf] }
         ch_snv_tbi = ch_mito_tbi_split.snv.map { meta, tbi -> [meta - meta.subMap('variant_type'), tbi] }
