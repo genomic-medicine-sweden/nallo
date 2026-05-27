@@ -8,8 +8,8 @@
                             "id": "HG002",
                             "sex": 1
                         },
-                        "HG002.cov.bed.gz:md5,d4dc907cb6497905ec9208867ae90741",
-                        "HG002.cov.bed.gz.tbi:md5,cacc20b1f6bab7b61583d936c2770cb5"
+                        "HG002.cov.bed.gz:md5,04addec86adce344b4cf3df83ad632e5",
+                        "HG002.cov.bed.gz.tbi:md5,d562f6f700997e84f33f212f781ca14b"
                     ]
                 ],
                 "1": [
@@ -38,17 +38,17 @@
                             "id": "HG002",
                             "sex": 1
                         },
-                        "HG002.cov.bed.gz:md5,d4dc907cb6497905ec9208867ae90741",
-                        "HG002.cov.bed.gz.tbi:md5,cacc20b1f6bab7b61583d936c2770cb5"
+                        "HG002.cov.bed.gz:md5,04addec86adce344b4cf3df83ad632e5",
+                        "HG002.cov.bed.gz.tbi:md5,d562f6f700997e84f33f212f781ca14b"
                     ]
                 ]
             }
         ],
+        "timestamp": "2026-05-26T13:58:44.216871435",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:01:58.81600199"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "prepare_gens_inputs - stub": {
         "content": [
@@ -95,10 +95,10 @@
                 ]
             }
         ],
+        "timestamp": "2026-03-27T17:02:11.022294736",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:02:11.022294736"
+        }
     }
 }
