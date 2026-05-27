@@ -867,7 +867,7 @@ workflow NALLO {
     if (!val_skip_rank_variants) {
 
         ch_snvs_to_rank = buildRankVariantsInputChannel(
-            ch_snvs_per_family_annotated_vcf_tbi.map { meta, vcf, _tbi -> [meta + [family_id: meta.id], vcf] },
+            ch_snvs_per_family_annotated_vcf_tbi.map { meta, vcf, _tbi -> [meta, vcf] },
             SOMALIER_PED_FAMILY.out.ped,
             'snv',
             ch_genmod_score_config_snvs,
@@ -875,7 +875,7 @@ workflow NALLO {
         )
 
         ch_svs_to_rank = buildRankVariantsInputChannel(
-            ch_svs_per_family_annotated_vcf,
+            ch_svs_per_family_annotated_vcf.map { meta, vcf -> [meta + [family_id: meta.id], vcf] },
             SOMALIER_PED_FAMILY.out.ped,
             'sv',
             ch_genmod_score_config_svs,
