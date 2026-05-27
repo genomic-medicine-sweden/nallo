@@ -3,17 +3,17 @@
         "content": [
             {
                 "0": [
-
+                    
                 ],
                 "chromograph_plots": [
-
+                    
                 ]
             }
         ],
-        "timestamp": "2026-03-27T16:54:52.939186031",
+        "timestamp": "2026-05-27T10:58:58.799734674",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
         }
     },
     "plot coverage -stub": {
@@ -89,27 +89,27 @@
                 ]
             }
         ],
-        "timestamp": "2026-05-05T10:02:35.292441318",
+        "timestamp": "2026-05-27T10:59:20.286384862",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.0"
+            "nextflow": "26.02.0"
         }
     },
     "plot nothing -stub": {
         "content": [
             {
                 "0": [
-
+                    
                 ],
                 "chromograph_plots": [
-
+                    
                 ]
             }
         ],
-        "timestamp": "2026-03-27T16:55:45.040740805",
+        "timestamp": "2026-05-27T10:59:41.389023327",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
         }
     },
     "plot all": {
@@ -156,12 +156,9 @@
                             "HG003_tiddit_cov_chr15.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr16.png:md5,6b6cfb72d4988bbc9e06b16f34058402",
                             "HG003_tiddit_cov_chr17.png:md5,782667e96c9bcfcf43f89329580c307d",
-                            "HG003_tiddit_cov_chr16.png:md5,6b6cfb72d4988bbc9e06b16f34058402",
-                            "HG003_tiddit_cov_chr17.png:md5,782667e96c9bcfcf43f89329580c307d",
                             "HG003_tiddit_cov_chr18.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr19.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr2.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr20.png:md5,19532c6f5ae654832e75e8be3b45a8b8",
                             "HG003_tiddit_cov_chr20.png:md5,19532c6f5ae654832e75e8be3b45a8b8",
                             "HG003_tiddit_cov_chr21.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr22.png:md5,954482b960865332f37d386da5c9fb75",
@@ -172,8 +169,6 @@
                             "HG003_tiddit_cov_chr7.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr8.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr9.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chrM.png:md5,f565c56957371c250bcfb6b843f08d4a",
-                            "HG003_tiddit_cov_chrX.png:md5,9b58f19759959df04d761bf94ddd5b72",
                             "HG003_tiddit_cov_chrM.png:md5,f565c56957371c250bcfb6b843f08d4a",
                             "HG003_tiddit_cov_chrX.png:md5,9b58f19759959df04d761bf94ddd5b72",
                             "HG003_tiddit_cov_chrY.png:md5,954482b960865332f37d386da5c9fb75"
@@ -221,12 +216,9 @@
                             "HG003_tiddit_cov_chr15.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr16.png:md5,6b6cfb72d4988bbc9e06b16f34058402",
                             "HG003_tiddit_cov_chr17.png:md5,782667e96c9bcfcf43f89329580c307d",
-                            "HG003_tiddit_cov_chr16.png:md5,6b6cfb72d4988bbc9e06b16f34058402",
-                            "HG003_tiddit_cov_chr17.png:md5,782667e96c9bcfcf43f89329580c307d",
                             "HG003_tiddit_cov_chr18.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr19.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr2.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr20.png:md5,19532c6f5ae654832e75e8be3b45a8b8",
                             "HG003_tiddit_cov_chr20.png:md5,19532c6f5ae654832e75e8be3b45a8b8",
                             "HG003_tiddit_cov_chr21.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr22.png:md5,954482b960865332f37d386da5c9fb75",
@@ -239,18 +231,14 @@
                             "HG003_tiddit_cov_chr9.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chrM.png:md5,f565c56957371c250bcfb6b843f08d4a",
                             "HG003_tiddit_cov_chrX.png:md5,9b58f19759959df04d761bf94ddd5b72",
-                            "HG003_tiddit_cov_chrM.png:md5,f565c56957371c250bcfb6b843f08d4a",
-                            "HG003_tiddit_cov_chrX.png:md5,9b58f19759959df04d761bf94ddd5b72",
                             "HG003_tiddit_cov_chrY.png:md5,954482b960865332f37d386da5c9fb75"
                         ]
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-05-20T15:38:20.427540365",
+        "timestamp": "2026-05-27T10:58:21.80474333",
         "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"
         }
@@ -380,10 +368,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-27T16:55:07.684265465",
+        "timestamp": "2026-05-27T10:59:10.665833834",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
         }
     },
     "plot autozygosity -stub": {
@@ -461,10 +449,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-27T16:55:33.722175984",
+        "timestamp": "2026-05-27T10:59:31.794228078",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
         }
     },
     "plot coverage": {
@@ -485,12 +473,9 @@
                             "HG003_tiddit_cov_chr15.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr16.png:md5,6b6cfb72d4988bbc9e06b16f34058402",
                             "HG003_tiddit_cov_chr17.png:md5,782667e96c9bcfcf43f89329580c307d",
-                            "HG003_tiddit_cov_chr16.png:md5,6b6cfb72d4988bbc9e06b16f34058402",
-                            "HG003_tiddit_cov_chr17.png:md5,782667e96c9bcfcf43f89329580c307d",
                             "HG003_tiddit_cov_chr18.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr19.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr2.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr20.png:md5,19532c6f5ae654832e75e8be3b45a8b8",
                             "HG003_tiddit_cov_chr20.png:md5,19532c6f5ae654832e75e8be3b45a8b8",
                             "HG003_tiddit_cov_chr21.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr22.png:md5,954482b960865332f37d386da5c9fb75",
@@ -501,8 +486,6 @@
                             "HG003_tiddit_cov_chr7.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr8.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr9.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chrM.png:md5,f565c56957371c250bcfb6b843f08d4a",
-                            "HG003_tiddit_cov_chrX.png:md5,9b58f19759959df04d761bf94ddd5b72",
                             "HG003_tiddit_cov_chrM.png:md5,f565c56957371c250bcfb6b843f08d4a",
                             "HG003_tiddit_cov_chrX.png:md5,9b58f19759959df04d761bf94ddd5b72",
                             "HG003_tiddit_cov_chrY.png:md5,954482b960865332f37d386da5c9fb75"
@@ -524,12 +507,9 @@
                             "HG003_tiddit_cov_chr15.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr16.png:md5,6b6cfb72d4988bbc9e06b16f34058402",
                             "HG003_tiddit_cov_chr17.png:md5,782667e96c9bcfcf43f89329580c307d",
-                            "HG003_tiddit_cov_chr16.png:md5,6b6cfb72d4988bbc9e06b16f34058402",
-                            "HG003_tiddit_cov_chr17.png:md5,782667e96c9bcfcf43f89329580c307d",
                             "HG003_tiddit_cov_chr18.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr19.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr2.png:md5,954482b960865332f37d386da5c9fb75",
-                            "HG003_tiddit_cov_chr20.png:md5,19532c6f5ae654832e75e8be3b45a8b8",
                             "HG003_tiddit_cov_chr20.png:md5,19532c6f5ae654832e75e8be3b45a8b8",
                             "HG003_tiddit_cov_chr21.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chr22.png:md5,954482b960865332f37d386da5c9fb75",
@@ -542,18 +522,15 @@
                             "HG003_tiddit_cov_chr9.png:md5,954482b960865332f37d386da5c9fb75",
                             "HG003_tiddit_cov_chrM.png:md5,f565c56957371c250bcfb6b843f08d4a",
                             "HG003_tiddit_cov_chrX.png:md5,9b58f19759959df04d761bf94ddd5b72",
-                            "HG003_tiddit_cov_chrM.png:md5,f565c56957371c250bcfb6b843f08d4a",
-                            "HG003_tiddit_cov_chrX.png:md5,9b58f19759959df04d761bf94ddd5b72",
                             "HG003_tiddit_cov_chrY.png:md5,954482b960865332f37d386da5c9fb75"
                         ]
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-05-20T15:38:36.081097566",
+        "timestamp": "2026-05-27T10:58:33.699249758",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
             "nextflow": "26.02.0"
         }
     },
@@ -632,10 +609,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-27T16:54:40.428751555",
+        "timestamp": "2026-05-27T10:58:48.14699035",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
         }
     }
 }

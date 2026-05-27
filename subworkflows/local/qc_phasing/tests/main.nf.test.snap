@@ -164,10 +164,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-04-30T11:36:53.645861431",
+        "timestamp": "2026-05-27T11:11:43.722392596",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.0"
+            "nextflow": "26.02.0"
         }
     },
     "2 samples - SNVs + SVs": {
@@ -179,14 +179,12 @@
                         "family_id": "FAM"
                     },
                     "HG002_stats.tsv:md5,c5fcae8ecb4e0872e8f91157d0b1a368"
-                    "HG002_stats.tsv:md5,c5fcae8ecb4e0872e8f91157d0b1a368"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.tsv:md5,3c0021436ec278a5872cae4566f5dda1"
                     "HG003_stats.tsv:md5,3c0021436ec278a5872cae4566f5dda1"
                 ]
             ],
@@ -197,14 +195,12 @@
                         "family_id": "FAM"
                     },
                     "HG002_stats.gtf.gz:md5,595c4020cfb952b0c8e4b6c8685220ab"
-                    "HG002_stats.gtf.gz:md5,595c4020cfb952b0c8e4b6c8685220ab"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.gtf.gz:md5,6a77ee63383acffe72b0bd2e3a2a81b9"
                     "HG003_stats.gtf.gz:md5,6a77ee63383acffe72b0bd2e3a2a81b9"
                 ]
             ],
@@ -215,14 +211,12 @@
                         "family_id": "FAM"
                     },
                     "HG002_stats.gtf.gz.tbi:md5,20daa809d5ddbcb59a03735feb6f0762"
-                    "HG002_stats.gtf.gz.tbi:md5,20daa809d5ddbcb59a03735feb6f0762"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.gtf.gz.tbi:md5,ffa10b38ec47d325925ca88de68549f1"
                     "HG003_stats.gtf.gz.tbi:md5,ffa10b38ec47d325925ca88de68549f1"
                 ]
             ],
@@ -250,35 +244,19 @@
                     "Number of reads\t1066",
                     "Yield [Gb]\t0.02",
                     "Mean coverage\t0.74",
-                    "Number of alignments\t1092",
-                    "% from total alignments\t97.62",
-                    "Number of reads\t1066",
-                    "Yield [Gb]\t0.02",
-                    "Mean coverage\t0.74",
                     "Yield [Gb] (>25kb)\t0.00",
                     "N50\t17958",
                     "N75\t14738",
                     "Median length\t16105.50",
                     "Mean length\t16099.79",
-                    "N50\t17958",
-                    "N75\t14738",
-                    "Median length\t16105.50",
-                    "Mean length\t16099.79",
                     "",
                     "Median identity\t99.74",
                     "Mean identity\t99.48",
                     "Modal identity\t99.9",
-                    "Median identity\t99.74",
-                    "Mean identity\t99.48",
-                    "Modal identity\t99.9",
                     "",
-                    "Fraction reads phased\t0.25",
-                    "Number of phaseblocks\t12",
                     "Fraction reads phased\t0.25",
                     "Number of phaseblocks\t12",
                     "Total bases phased [Gb]\t0.00",
-                    "Median phaseblock length\t153962.00",
-                    "N50 phaseblock length\t258152",
                     "Median phaseblock length\t153962.00",
                     "N50 phaseblock length\t258152",
                     "",
@@ -287,9 +265,6 @@
                     "# Normalized read count per chromosome",
                     "",
                     "chr16\t11.96",
-                    "chr17\t0.73",
-                    "chr20\t0.28",
-                    "chrM\t48.45",
                     "chr17\t0.73",
                     "chr20\t0.28",
                     "chrM\t48.45",
@@ -302,36 +277,21 @@
                     "Number of alignments\t697",
                     "% from total alignments\t98.85",
                     "Number of reads\t690",
-                    "Number of alignments\t697",
-                    "% from total alignments\t98.85",
-                    "Number of reads\t690",
                     "Yield [Gb]\t0.01",
-                    "Mean coverage\t0.43",
                     "Mean coverage\t0.43",
                     "Yield [Gb] (>25kb)\t0.00",
                     "N50\t16761",
                     "N75\t13505",
                     "Median length\t14910.00",
                     "Mean length\t14820.88",
-                    "N50\t16761",
-                    "N75\t13505",
-                    "Median length\t14910.00",
-                    "Mean length\t14820.88",
                     "",
                     "Median identity\t99.74",
                     "Mean identity\t99.55",
                     "Modal identity\t99.9",
-                    "Median identity\t99.74",
-                    "Mean identity\t99.55",
-                    "Modal identity\t99.9",
                     "",
-                    "Fraction reads phased\t0.22",
-                    "Number of phaseblocks\t6",
                     "Fraction reads phased\t0.22",
                     "Number of phaseblocks\t6",
                     "Total bases phased [Gb]\t0.00",
-                    "Median phaseblock length\t330390.50",
-                    "N50 phaseblock length\t432148",
                     "Median phaseblock length\t330390.50",
                     "N50 phaseblock length\t432148",
                     "",
@@ -343,20 +303,15 @@
                     "chr17\t0.73",
                     "chr20\t0.38",
                     "chrM\t6.34",
-                    "chr16\t12.31",
-                    "chr17\t0.73",
-                    "chr20\t0.38",
-                    "chrM\t6.34",
                     "chrX\t1.00",
                     "",
                     "Path\tHG003_haplotagged.bam"
                 ]
             ]
         ],
-        "timestamp": "2026-05-20T15:51:28.334622187",
+        "timestamp": "2026-05-27T11:11:20.997870409",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
             "nextflow": "26.02.0"
         }
     },
@@ -369,14 +324,12 @@
                         "family_id": "FAM"
                     },
                     "HG002_stats.tsv:md5,6792060ed9a0620ade38498cd4e4ccec"
-                    "HG002_stats.tsv:md5,6792060ed9a0620ade38498cd4e4ccec"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.tsv:md5,96e7f98846c5d87dcfe834f8477cfc20"
                     "HG003_stats.tsv:md5,96e7f98846c5d87dcfe834f8477cfc20"
                 ]
             ],
@@ -387,14 +340,12 @@
                         "family_id": "FAM"
                     },
                     "HG002_stats.gtf.gz:md5,3f4cf6d4493117801a988fdc593065c5"
-                    "HG002_stats.gtf.gz:md5,3f4cf6d4493117801a988fdc593065c5"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.gtf.gz:md5,9b8a10621547261c2df2829292810768"
                     "HG003_stats.gtf.gz:md5,9b8a10621547261c2df2829292810768"
                 ]
             ],
@@ -412,7 +363,6 @@
                         "family_id": "FAM"
                     },
                     "HG003_stats.gtf.gz.tbi:md5,53b95c424365d917749c385648b58279"
-                    "HG003_stats.gtf.gz.tbi:md5,53b95c424365d917749c385648b58279"
                 ]
             ],
             [
@@ -439,34 +389,19 @@
                     "Number of reads\t1066",
                     "Yield [Gb]\t0.02",
                     "Mean coverage\t0.74",
-                    "Number of alignments\t1092",
-                    "% from total alignments\t97.62",
-                    "Number of reads\t1066",
-                    "Yield [Gb]\t0.02",
-                    "Mean coverage\t0.74",
                     "Yield [Gb] (>25kb)\t0.00",
                     "N50\t17958",
                     "N75\t14738",
                     "Median length\t16105.50",
                     "Mean length\t16099.79",
-                    "N50\t17958",
-                    "N75\t14738",
-                    "Median length\t16105.50",
-                    "Mean length\t16099.79",
                     "",
                     "Median identity\t99.74",
                     "Mean identity\t99.48",
                     "Modal identity\t99.9",
-                    "Median identity\t99.74",
-                    "Mean identity\t99.48",
-                    "Modal identity\t99.9",
                     "",
-                    "Fraction reads phased\t0.05",
                     "Fraction reads phased\t0.05",
                     "Number of phaseblocks\t2",
                     "Total bases phased [Gb]\t0.00",
-                    "Median phaseblock length\t31399.00",
-                    "N50 phaseblock length\t39847",
                     "Median phaseblock length\t31399.00",
                     "N50 phaseblock length\t39847",
                     "",
@@ -475,9 +410,6 @@
                     "# Normalized read count per chromosome",
                     "",
                     "chr16\t11.96",
-                    "chr17\t0.73",
-                    "chr20\t0.28",
-                    "chrM\t48.45",
                     "chr17\t0.73",
                     "chr20\t0.28",
                     "chrM\t48.45",
@@ -490,35 +422,21 @@
                     "Number of alignments\t697",
                     "% from total alignments\t98.85",
                     "Number of reads\t690",
-                    "Number of alignments\t697",
-                    "% from total alignments\t98.85",
-                    "Number of reads\t690",
                     "Yield [Gb]\t0.01",
-                    "Mean coverage\t0.43",
                     "Mean coverage\t0.43",
                     "Yield [Gb] (>25kb)\t0.00",
                     "N50\t16761",
                     "N75\t13505",
                     "Median length\t14910.00",
                     "Mean length\t14820.88",
-                    "N50\t16761",
-                    "N75\t13505",
-                    "Median length\t14910.00",
-                    "Mean length\t14820.88",
                     "",
                     "Median identity\t99.74",
                     "Mean identity\t99.55",
                     "Modal identity\t99.9",
-                    "Median identity\t99.74",
-                    "Mean identity\t99.55",
-                    "Modal identity\t99.9",
                     "",
-                    "Fraction reads phased\t0.14",
                     "Fraction reads phased\t0.14",
                     "Number of phaseblocks\t4",
                     "Total bases phased [Gb]\t0.00",
-                    "Median phaseblock length\t37178.50",
-                    "N50 phaseblock length\t43394",
                     "Median phaseblock length\t37178.50",
                     "N50 phaseblock length\t43394",
                     "",
@@ -530,20 +448,15 @@
                     "chr17\t0.73",
                     "chr20\t0.38",
                     "chrM\t6.34",
-                    "chr16\t12.31",
-                    "chr17\t0.73",
-                    "chr20\t0.38",
-                    "chrM\t6.34",
                     "chrX\t1.00",
                     "",
                     "Path\tHG003_haplotagged.bam"
                 ]
             ]
         ],
-        "timestamp": "2026-05-20T15:51:01.811448143",
+        "timestamp": "2026-05-27T11:11:03.189935304",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
             "nextflow": "26.02.0"
         }
     },
@@ -712,10 +625,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-04-30T11:36:29.718139109",
+        "timestamp": "2026-05-27T11:11:31.841417446",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.0"
+            "nextflow": "26.02.0"
         }
     }
 }

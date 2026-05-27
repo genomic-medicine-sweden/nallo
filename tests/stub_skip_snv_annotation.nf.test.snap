@@ -244,7 +244,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-05-21T15:19:09.566769957",
+        "timestamp": "2026-05-27T11:33:17.574905723",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"
@@ -395,7 +395,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-05-15T09:13:37.736228305",
+        "timestamp": "2026-05-27T11:33:44.203776263",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"

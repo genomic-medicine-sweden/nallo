@@ -36,11 +36,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-05-27T11:11:55.488038388",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-20T15:54:23.912422314"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "DeepVariant VCF, Normalized VCF and index -stub": {
         "content": [
@@ -79,11 +79,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-05-27T11:12:03.835169685",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-20T15:54:33.461101623"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "DeepVariant vcfstatsreport disabled": {
         "content": [
@@ -112,11 +112,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-05-27T11:12:09.928440061",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-20T15:54:41.060461032"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "DeepVariant vcfstatsreport disabled -stub": {
         "content": [
@@ -145,10 +145,10 @@
                 ]
             }
         ],
+        "timestamp": "2026-05-27T11:12:16.254242589",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-20T15:54:48.245943237"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     }
 }
