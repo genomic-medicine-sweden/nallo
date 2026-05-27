@@ -515,32 +515,28 @@ workflow NALLO {
 
         // Group GVCFs per region and family (one region with all samples)
         variants_to_merge_per_family = call_snvs_gvcf
-            .map { meta, gvcf ->
-                [[id: meta.region.name, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals, caller: val_snv_caller], gvcf]
+            .join(call_snvs_gvcf_index, failOnMismatch: true, failOnDuplicate: true)
+            .map { meta, gvcf, tbi ->
+                [[id: meta.region.name, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals, caller: val_snv_caller], gvcf, tbi]
             }
             .mix(
-                ch_mitochondrial_vcf.map { meta, vcf ->
-                    [[id: meta.genome, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals, caller: meta.caller], vcf]
+                ch_mitochondrial_vcf
+                    .join(ch_mitochondrial_tbi, failOnMismatch: true, failOnDuplicate: true)
+                    .map { meta, vcf, tbi ->
+                    [[id: meta.genome, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals, caller: meta.caller], vcf, tbi]
                 }
             )
             .groupTuple()
-
-        gvcf_tbis_per_family = call_snvs_gvcf_index
-            .map { meta, tbi ->
-                [[id: meta.region.name, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals, caller: val_snv_caller], tbi]
+            .multiMap { meta, gvcf, tbi ->
+                gvcf: [meta, gvcf]
+                index: [meta, tbi]
             }
-            .mix(
-                ch_mitochondrial_tbi.map { meta, tbi ->
-                    [[id: meta.genome, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals, caller: meta.caller], tbi]
-                }
-            )
-            .groupTuple()
 
         // Create a merged and normalized VCF, containing one region with all samples, to be used in annotation and ranking.
         // SCATTER_GENOME.out.bed contains all regions, but we could probably pass the region BED that actually matches the variants instead...
         GVCF_GLNEXUS_NORM_VARIANTS(
-            variants_to_merge_per_family,
-            gvcf_tbis_per_family,
+            variants_to_merge_per_family.gvcf,
+            variants_to_merge_per_family.index,
             SCATTER_GENOME.out.bed,
             ch_fasta,
             ch_fai,
