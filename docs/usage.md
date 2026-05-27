@@ -245,7 +245,7 @@ Turned off with `--skip_sv_calling`.
 
 #### Call mitochondrial variants
 
-This subworkflow specifically calls mitochondrial variants. The resulting VCF file is then merged together with the VCF containing the nucelar variants.
+This subworkflow specifically calls mitochondrial variants. The resulting VCF file is then merged together with the VCF containing the nuclear variants.
 
 The mitochondrial caller can be selected with `--mitochondrial_caller`. Note that `mitorsaw` option is not compatible with preset `ONT_R10`.
 

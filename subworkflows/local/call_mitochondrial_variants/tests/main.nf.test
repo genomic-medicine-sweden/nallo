@@ -32,7 +32,7 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = [[],[]]
-                input[1] = channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000\nchrM\t0\t16304''')
+                input[1] = channel.of('chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000\nchrM\t0\t16304')
                     .collectFile(name: 'chr22_chrM.bed', newLine: true)
                     .map { file -> [ [ id:'chr22_chrM' ], file ] }
                 input[2] = false
@@ -44,7 +44,6 @@ nextflow_workflow {
 
     test("1 sample - mitorsaw (Deepvariant/mitorsaw)") {
 
-        tag "test_mitorsaw"
         when {
             workflow {
                 """
@@ -79,7 +78,7 @@ nextflow_workflow {
     }
 
     test("1 sample - deepvariant (Deepvariant/Deepvariant)") {
-        tag "test_to_test"
+
         when {
             workflow {
                 """

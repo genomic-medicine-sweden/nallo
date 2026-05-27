@@ -33,7 +33,10 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
     }
     else if (mitochondrial_caller == "deepvariant") {
 
-        // Add the mitochondrial BED to every sample, skip if BED is empty
+        /*
+         * Add the mitochondrial BED to every sample, skip if BED is empty. We do not want to run Deepvariant with an empty bed.
+         * The BED can be empty if there is no chrM region in the original BED processed in SCATTER_GENOME
+         */
         ch_bam_bai
             .combine(ch_mitochondrial_bed)
             .filter { _bam_meta, _bam, _bai, _mitochondrial_meta, bed -> bed.size() > 0 }
