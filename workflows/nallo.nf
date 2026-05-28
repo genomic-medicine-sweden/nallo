@@ -724,21 +724,19 @@ workflow NALLO {
         )
         // Add the mitochondrial VCF after phasing SNVs.
         // Add +1 to the num_intervals of nuclear channel to account for mitochondrial region
-        ch_snv_vcf_nuclear_mitochondrial_for_annotation = BCFTOOLS_VIEW_PHASING.out.vcf
-            .map { meta, vcf ->
-                [meta + [num_intervals: meta.num_intervals + 1], vcf]
-            }
-            .mix(
-                GVCF_GLNEXUS_NORM_VARIANTS.out.vcf.filter { meta, _vcf -> meta.genome == "mitochondrial" }
-            )
+        ch_snv_vcf_tbi_nuclear_for_annotation = BCFTOOLS_VIEW_PHASING.out.vcf
+            .join(BCFTOOLS_VIEW_PHASING.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+            .map { meta, vcf, tbi -> [meta + [num_intervals: meta.num_intervals + 1], vcf, tbi] }
 
-        ch_snv_index_nuclear_mitochondrial_for_annotation = BCFTOOLS_VIEW_PHASING.out.tbi
-            .map { meta, tbi ->
-                [meta + [num_intervals: meta.num_intervals + 1], tbi]
+        ch_snv_vcf_tbi_mitochondrial_for_annotation = ch_snvs_per_family_unannotated_vcf_tbi
+                .filter { meta, _vcf, _tbi -> meta.genome == "mitochondrial" }
+
+        ch_snv_vcf_tbi_nuclear_mitochondrial_for_annotation = ch_snv_vcf_tbi_nuclear_for_annotation
+            .mix(ch_snv_vcf_tbi_mitochondrial_for_annotation)
+            .multiMap { meta, vcf, tbi ->
+                vcf: [meta, vcf]
+                tbi: [meta, tbi]
             }
-            .mix(
-                GVCF_GLNEXUS_NORM_VARIANTS.out.index.filter { meta, _tbi -> meta.genome == "mitochondrial" }
-            )
 
         // Set phased SVs for annotation if SV calling is not skipped
         ch_sv_vcf_for_annotation = PHASING.out.phased_family_svs
@@ -746,8 +744,12 @@ workflow NALLO {
         ch_sv_index_for_annotation = PHASING.out.phased_family_svs_tbi
     }
     else {
-        ch_snv_vcf_nuclear_mitochondrial_for_annotation   = val_skip_snv_calling ? channel.empty() : family_snv_vcf
-        ch_snv_index_nuclear_mitochondrial_for_annotation = val_skip_snv_calling ? channel.empty() : family_snv_index
+        ch_snv_vcf_tbi_nuclear_mitochondrial_for_annotation   = val_skip_snv_calling ? channel.empty() : family_snv_vcf
+            .join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
+            .multiMap { meta, vcf, tbi ->
+                vcf: [meta, vcf]
+                index: [meta, tbi]
+            }
         ch_sv_vcf_for_annotation    = val_skip_sv_calling  ? channel.empty() : CALL_SVS.out.family_vcf
         ch_sv_index_for_annotation  = val_skip_sv_calling  ? channel.empty() : CALL_SVS.out.family_tbi
     }
@@ -757,7 +759,7 @@ workflow NALLO {
 
         // Annotates family VCFs per variant call region
         ANNOTATE_SNVS(
-            ch_snv_vcf_nuclear_mitochondrial_for_annotation,
+            ch_snv_vcf_tbi_nuclear_mitochondrial_for_annotation.vcf,
             ch_echtvar_databases.map { _meta, databases -> databases }.collect(),
             ch_fasta,
             ch_fai,
@@ -779,7 +781,6 @@ workflow NALLO {
             }
             .set { ch_clin_research_snvs_vcf }
 
-        ch_clin_research_snvs_vcf.clinical
         ch_clin_research_snvs_vcf.research.set { ch_ann_csq_pli_snv_in }
 
         if (val_filter_variants_hgnc_ids || val_filter_snvs_expression != '') {
