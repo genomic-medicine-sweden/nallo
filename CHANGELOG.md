@@ -18,8 +18,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Added Mitorsaw module and Mitorsaw to validatePacBioLicense
 - [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Added `call_mitochondrial_variants` subworkflow
 - [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Added Error when `preset == ONT_R10` and `mitochondrial_caller == mitorsaw`
-- [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Added Parameters `mitorsaw_minimum_maf`, `mitorsaw_minimum_read_count` and `mitochondrial_sv_min_size`
-- [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Added `conf/modules/call_mitochondrial_variants.config` and its test
 
 ### Changed
 
@@ -88,8 +86,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter |
-| ------------- | ------------- |
+| Old parameter | New parameter                   |
+| ------------- | ------------------------------- |
+|               | `--mitochondrial_sv_min_size`   |
+|               | `--mitorsaw_minimum_read_count` |
+|               | `--mitorsaw_minimum_maf`        |
+
+|
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
