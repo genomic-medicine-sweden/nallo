@@ -512,17 +512,16 @@ workflow NALLO {
             .map { meta, gvcf, index ->
                 [[id: meta.region.name, family_id: meta.family_id, num_intervals: meta.num_intervals], gvcf, index]
             }
-            .mix(
-                ch_mitochondrial.vcf
+            .mix(ch_mitochondrial.vcf
                     .join(ch_mitochondrial.index, failOnMismatch: true, failOnDuplicate: true)
                     .map { meta, vcf, tbi ->
                     [[id: meta.genome, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals, caller: meta.caller], vcf, tbi]
                 }
             )
             .groupTuple()
-            .multiMap { meta, gvcf, tbi ->
-                gvcf: [meta, gvcf]
-                index: [meta, tbi]
+            .multiMap { meta, gvcfs, indexes ->
+                gvcf: [meta, gvcfs]
+                index: [meta, indexes]
             }
 
         // Create a merged and normalized VCF, containing one region with all samples, to be used in annotation and ranking.
