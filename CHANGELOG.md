@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1068](https://github.com/genomic-medicine-sweden/nallo/pull/1068) - Added HiFiCNV and Sawfish visualization track outputs to `call_svs`
 - [#1073](https://github.com/genomic-medicine-sweden/nallo/pull/1073) - Added sample vcf outputs to `call_paralogs` workflow
 - [#1084](https://github.com/genomic-medicine-sweden/nallo/pull/1084) - Added new auto-generated container config files (new with nf-core/tools update)
+- [#1120](https://github.com/genomic-medicine-sweden/nallo/pull/1120) - Added basName to avoid `.bed` in deepvariant output name
 
 ### Changed
 
