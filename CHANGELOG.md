@@ -64,6 +64,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1102](https://github.com/genomic-medicine-sweden/nallo/pull/1102) - Updated testdata commit with new genmod score config
 - [#1111](https://github.com/genomic-medicine-sweden/nallo/pull/1111) - Refactored gVCF grouping to reduce code duplication in `nallo`
 - [#1112](https://github.com/genomic-medicine-sweden/nallo/pull/1112) - Changed testdata commit to include data with a deletion in the mitochondrial chromosome
+- [#1118](https://github.com/genomic-medicine-sweden/nallo/pull/1118) - Changed testdata commit
 
 ### Removed
 
