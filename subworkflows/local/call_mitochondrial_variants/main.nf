@@ -37,16 +37,15 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
          * Add the mitochondrial BED to every sample, skip if BED is empty. We do not want to run Deepvariant with an empty bed.
          * The BED can be empty if there is no chrM region in the original BED processed in SCATTER_GENOME
          */
-        ch_bam_bai
+        ch_deepvariant_in = ch_bam_bai
             .combine(ch_mitochondrial_bed)
             .filter { _bam_meta, _bam, _bai, _mitochondrial_meta, bed -> bed.size() > 0 }
             .map { bam_meta, bam, bai, mitochondrial_meta, bed ->
                 [bam_meta + [genome: mitochondrial_meta.genome, num_intervals: mitochondrial_meta.num_intervals], bam, bai, bed]
             }
-            .set { deepvariant_in }
 
         DEEPVARIANT_RUNDEEPVARIANT(
-            deepvariant_in,
+            ch_deepvariant_in,
             ch_fasta,
             ch_fai,
             [[], []],
@@ -80,10 +79,10 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
                 sv: meta.variant_type == "sv"
             }
 
-        ch_snv_vcf = ch_mito_vcf_split.snv.map { meta, vcf -> [meta - meta.subMap('variant_type'), vcf] }
-        ch_snv_tbi = ch_mito_tbi_split.snv.map { meta, tbi -> [meta - meta.subMap('variant_type'), tbi] }
-        ch_sv_vcf  = ch_mito_vcf_split.sv.map  { meta, vcf -> [meta - meta.subMap('variant_type'), vcf] }
-        ch_sv_tbi  = ch_mito_tbi_split.sv.map  { meta, tbi -> [meta - meta.subMap('variant_type'), tbi] }
+        ch_snv_vcf = submap_variant_type(ch_mito_vcf_split.snv)
+        ch_snv_tbi = submap_variant_type(ch_mito_tbi_split.snv)
+        ch_sv_vcf  = submap_variant_type(ch_mito_vcf_split.sv)
+        ch_sv_tbi  = submap_variant_type(ch_mito_tbi_split.sv)
 
     } else {
         ch_snv_vcf = ch_vcf
@@ -97,4 +96,7 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
     mitochondrial_snv_tbi = ch_snv_tbi  // channel: [val(meta), path(tbi)]
     mitochondrial_sv_vcf  = ch_sv_vcf   // channel: [val(meta), path(vcf)]
     mitochondrial_sv_tbi  = ch_sv_tbi   // channel: [val(meta), path(tbi)]
+}
+def submap_variant_type(channel) {
+    channel.map { meta, file -> [meta - meta.subMap('variant_type'), file] }
 }
