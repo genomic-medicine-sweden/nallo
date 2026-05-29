@@ -57,6 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1084](https://github.com/genomic-medicine-sweden/nallo/pull/1084) - Updated nf-core module for `peddy`
 - [#1088](https://github.com/genomic-medicine-sweden/nallo/pull/1088) - Changed to emit all files and indexes separately from `nallo.nf`
 - [#1089](https://github.com/genomic-medicine-sweden/nallo/pull/1089) - Version sorted workflow output related items
+- [#1090](https://github.com/genomic-medicine-sweden/nallo/pull/1090) - Renamed workflow output related items
 - [#1091](https://github.com/genomic-medicine-sweden/nallo/pull/1091) - Renamed `ch_vcf_tbi_per_region` channels in `nallo`
 - [#1093](https://github.com/genomic-medicine-sweden/nallo/pull/1093) - Simplified methylation-related conditionals in `nallo`
 - [#1094](https://github.com/genomic-medicine-sweden/nallo/pull/1094) - Simplified repeats-related conditionals in `nallo`
@@ -64,7 +65,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1096](https://github.com/genomic-medicine-sweden/nallo/pull/1096) - Simplified cram-related conditionals in `nallo`
 - [#1097](https://github.com/genomic-medicine-sweden/nallo/pull/1097) - Simplified phasing-related if statement in `nallo`
 - [#1102](https://github.com/genomic-medicine-sweden/nallo/pull/1102) - Updated testdata commit with new genmod score config
+- [#1111](https://github.com/genomic-medicine-sweden/nallo/pull/1111) - Refactored gVCF grouping to reduce code duplication in `nallo`
 - [#1112](https://github.com/genomic-medicine-sweden/nallo/pull/1112) - Changed testdata commit to include data with a deletion in the mitochondrial chromosome
+- [#1118](https://github.com/genomic-medicine-sweden/nallo/pull/1118) - Changed testdata commit
 - [#1119](https://github.com/genomic-medicine-sweden/nallo/pull/1119) - Changed Expression of `filter_snvs_expression`in test `tests/samplesheet_multisample_bam.nf.test` in order to be compatible with mitochondrial vcf fields
 - [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Changed logic in `subworkflows/local/gvcf_glnexus_norm_variants/main.nf` to handle caller from the meta including the mitochondrial caller
 - [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Mitochondrial variants do not go through the phasing
