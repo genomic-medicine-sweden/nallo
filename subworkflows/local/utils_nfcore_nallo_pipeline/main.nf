@@ -641,7 +641,7 @@ def validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_cal
         (val_sv_callers_to_run)   : 'Sawfish',
         (val_sv_callers_to_merge) : 'Sawfish',
         (!val_skip_call_paralogs) : 'Paraphase',
-        (val_mitochondrial_caller): 'mitorsaw',
+        (val_mitochondrial_caller): 'Mitorsaw',
     ].findAll { k, v -> (k instanceof Boolean) ? k : k.toString().contains(v.toLowerCase())  }
      .values() as List
 
