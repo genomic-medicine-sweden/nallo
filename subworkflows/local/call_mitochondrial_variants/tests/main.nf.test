@@ -27,7 +27,7 @@ nextflow_workflow {
                 """
             }
         }
-        run("SCATTER_GENOME") {
+        run("SCATTER_GENOME", alias: "SCATTER_GENOME_WITH_CHRM") {
             script "../../../../subworkflows/local/scatter_genome/main.nf"
             workflow {
                 """
@@ -35,6 +35,19 @@ nextflow_workflow {
                 input[1] = channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000\nchrM\t0\t16304''')
                     .collectFile(name: 'chr22_chrM.bed', newLine: false)
                     .map { file -> [ [ id:'chr22_chrM' ], file ] }
+                input[2] = false
+                input[3] = 1
+                """
+            }
+        }
+        run("SCATTER_GENOME", alias: "SCATTER_GENOME_WITHOUT_CHRM") {
+            script "../../../../subworkflows/local/scatter_genome/main.nf"
+            workflow {
+                """
+                input[0] = [[],[]]
+                input[1] = channel.of('''chr22\t0\t1000\nchr22\t500\t1500\nchr22\t2000\t3000''')
+                    .collectFile(name: 'chr22.bed', newLine: false)
+                    .map { file -> [ [ id:'chr22' ], file ] }
                 input[2] = false
                 input[3] = 1
                 """
@@ -76,8 +89,9 @@ nextflow_workflow {
         }
 
     }
-
-    test("1 sample - deepvariant (Deepvariant/Deepvariant)") {
+    test("1 sample - mitorsaw (Deepvariant/mitorsaw) - stub") {
+        tag "TEST_TO_TEST"
+        options "-stub"
 
         when {
             workflow {
@@ -90,7 +104,75 @@ nextflow_workflow {
                 input[1] = GUNZIP.out.gunzip.map { meta, fasta -> [meta, fasta] }
                 input[2] = SAMTOOLS_FAIDX.out.fai
                 input[3] = [[],[]]
-                input[4] = SCATTER_GENOME.out.bed_mitochondrial_intervals
+                input[4] = [[],[]]
+                input[5] = "mitorsaw"
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+
+    }
+    test("2 samples - mitorsaw (Deepvariant/mitorsaw)") {
+        when {
+            workflow {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id:'test_sample1' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true),
+                    ],
+                    [
+                        [ id:'test_sample2' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true),
+                    ]
+                )
+                input[1] = GUNZIP.out.gunzip.map { meta, fasta -> [meta, fasta] }
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = [[],[]]
+                input[4] = [[],[]]
+                input[5] = "mitorsaw"
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.mitochondrial_snv_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.mitochondrial_sv_tbi.get(0).get(1).endsWith("tbi") },
+                { assert snapshot(
+                    workflow.out.mitochondrial_snv_vcf
+                    .collect { meta, vcf -> [ 'mitochondrial_snv_vcf', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    workflow.out.mitochondrial_sv_vcf
+                    .collect { meta, vcf -> [ 'mitochondrial_sv_vcf', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    ).match() }
+            )
+        }
+
+    }
+
+    test("1 sample - deepvariant (Deepvariant/Deepvariant) - with mitochondrial intervals") {
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true),
+                ])
+                input[1] = GUNZIP.out.gunzip.map { meta, fasta -> [meta, fasta] }
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = [[],[]]
+                input[4] = SCATTER_GENOME_WITH_CHRM.out.bed_mitochondrial_intervals
                     .map { meta, bed, _num_intervals -> [meta, bed] }
                 input[5] = "deepvariant"
                 """
@@ -105,6 +187,38 @@ nextflow_workflow {
                     workflow.out.mitochondrial_snv_vcf
                     .collect { meta, vcf -> [ 'mitochondrial_snv_vcf', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
                     ).match() }
+            )
+        }
+
+    }
+    test("1 sample - deepvariant (Deepvariant/Deepvariant) - without chrM intervals") {
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true),
+                ])
+                input[1] = GUNZIP.out.gunzip.map { meta, fasta -> [meta, fasta] }
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = [[],[]]
+                input[4] = SCATTER_GENOME_WITHOUT_CHRM.out.bed_mitochondrial_intervals
+                    .map { meta, bed, _num_intervals -> [meta, bed] }
+                input[5] = "deepvariant"
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                // { assert workflow.out.mitochondrial_snv_tbi.get(0).get(1).endsWith("tbi") },
+                // { assert snapshot(
+                //     workflow.out.mitochondrial_snv_vcf
+                //     .collect { meta, vcf -> [ 'mitochondrial_snv_vcf', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                //     ).match() }
             )
         }
 
