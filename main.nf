@@ -493,7 +493,6 @@ workflow {
         params.whatshap_pedigree_phasing,
         params.plot_chromograph_autozygosity,
         params.plot_chromograph_coverage,
-        params.preset,
         params.pre_vep_snv_filter_expression,
         params.run_methbat,
         params.run_modkit,
