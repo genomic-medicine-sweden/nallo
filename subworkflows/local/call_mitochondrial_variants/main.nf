@@ -52,8 +52,8 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
             ch_par_bed,
         )
 
-        ch_vcf = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
-        ch_tbi = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_tbi
+        ch_vcf = DEEPVARIANT_RUNDEEPVARIANT.out.vcf ?: channel.empty()
+        ch_tbi = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_tbi ?: channel.empty()
     }
 
     // Split VCF into SNVs/small indels and SVs for callers that produce both. The logic is in the config.
