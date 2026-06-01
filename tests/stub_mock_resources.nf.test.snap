@@ -154,10 +154,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-05-27T11:29:40.727151186",
+        "timestamp": "2026-06-01T09:48:59.833818914",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.03.4"
         }
     },
     "Test Sentieon SNV calling with mock resources": {
@@ -319,10 +319,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-05-27T11:30:07.849047664",
+        "timestamp": "2026-06-01T09:49:28.342357718",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.03.4"
         }
     },
     "Test CADD with mock resources": {
@@ -504,10 +504,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-05-27T11:29:09.689297556",
+        "timestamp": "2026-06-01T09:48:30.342079848",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.03.4"
         }
     }
 }

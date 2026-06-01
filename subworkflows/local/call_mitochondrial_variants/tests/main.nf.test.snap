@@ -24,10 +24,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-05-27T10:46:34.267915862",
+        "timestamp": "2026-06-01T11:32:53.630028048",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.03.4"
         }
     },
     "1 sample - deepvariant (Deepvariant/Deepvariant)": {
@@ -46,10 +46,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-05-27T10:47:02.733830088",
+        "timestamp": "2026-06-01T11:33:21.37645692",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.03.4"
         }
     }
 }

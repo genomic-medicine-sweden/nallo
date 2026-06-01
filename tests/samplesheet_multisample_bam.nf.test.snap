@@ -1244,7 +1244,7 @@
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -1293,7 +1293,7 @@
                 ],
                 [
                     "FAM_snvs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=3, variantCount=252, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=3, variantCount=251, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_deepvariant_snvs.vcf.gz",
@@ -1317,13 +1317,13 @@
                 ]
             ],
             [
-
+                
             ]
         ],
-        "timestamp": "2026-05-28T13:06:41.811797659",
+        "timestamp": "2026-06-01T09:29:40.560570552",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.03.4"
         }
     }
 }

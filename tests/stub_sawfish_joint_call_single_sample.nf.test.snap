@@ -219,10 +219,10 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-05-27T11:31:27.67098152",
+        "timestamp": "2026-06-01T09:50:49.410375208",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.03.4"
         }
     }
 }
