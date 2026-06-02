@@ -118,10 +118,10 @@ workflow NALLO {
     ch_vcfexpress_prelude
     ch_vep_cache_unprocessed
     ch_vep_plugin_files
-    val_cram_output
     val_alignment_processes
     val_bigwig_modcodes
     val_convert_unphased_aligned_reads_to_cram
+    val_cram_output
     val_create_hificnv_maf_track
     val_create_sawfish_maf_track
     val_echtvar_snv_databases
@@ -142,6 +142,9 @@ workflow NALLO {
     val_plot_chromograph_autozygosity
     val_plot_chromograph_coverage
     val_pre_vep_snv_filter_expression
+    val_premapped
+    val_run_methbat
+    val_run_modkit
     val_sentieon_tech
     val_skip_alignment
     val_skip_annotate_paralogs
@@ -218,13 +221,8 @@ workflow NALLO {
         //
         // Since starting with FASTQs is a rare case, no splitting of FASTQs alone just for the assembly is implmenented
 
-        ch_samplesheet
-            .map { meta, reads, _index -> [meta, reads] }
-            .set { ch_convert_bam_in }
-
-
         CONVERT_INPUT_BAMS(
-            ch_convert_bam_in,
+            ch_samplesheet,
             true,
             false,
         )
@@ -253,34 +251,44 @@ workflow NALLO {
      */
     if (!val_skip_alignment) {
 
-        ch_samplesheet
-            .branch { _meta, _reads, index ->
-                unmapped: !index
-                mapped: index
-            }
-            .set { ch_input_bams }
+        if (!val_premapped) {
 
+            CONVERT_INPUT_FASTQS(
+                ch_samplesheet,
+                false,
+                true,
+            )
 
-        ch_input_bams.unmapped
-            .map { meta, reads, _index -> [ meta, reads ]}
-            .set { ch_convert_fq_in }
+            ALIGN(
+                CONVERT_INPUT_FASTQS.out.bam,
+                PREPARE_REFERENCES.out.mmi,
+                val_alignment_processes > 1
+            )
 
-        CONVERT_INPUT_FASTQS(
-            ch_convert_fq_in,
-            false,
-            true,
-        )
+            ch_bam = ALIGN.out.bam
+            ch_bam_bai = ALIGN.out.bam
+                .join(ALIGN.out.bai, failOnMismatch: true, failOnDuplicate: true)
+        } else {
 
-        ALIGN(
-            CONVERT_INPUT_FASTQS.out.bam,
-            ch_input_bams.mapped,
-            PREPARE_REFERENCES.out.mmi,
-            val_alignment_processes > 1
-        )
+            // If bams are premapped, just merge them (ONT machines output several BAMs per sample)
+            ch_samtools_merge_in = ch_samplesheet
+                .groupTuple()
+                .map { meta, reads -> [meta, reads, [] ] }
+
+            SAMTOOLS_MERGE(
+               ch_samtools_merge_in,
+               [ [], [], [], [] ]
+            )
+
+            ch_bam = SAMTOOLS_MERGE.out.bam
+            ch_bam_bai = SAMTOOLS_MERGE.out.bam
+                .join(SAMTOOLS_MERGE.out.bai, failOnMismatch: true, failOnDuplicate: true)
+        }
+
         // Publish alignments as CRAM if requested
         if (val_cram_output && val_skip_phasing) {
             SAMTOOLS_CONVERT(
-                ALIGN.out.bam_bai,
+                ch_bam_bai,
                 ch_fasta.join(ch_fai).collect(),
             )
         }
@@ -302,7 +310,7 @@ workflow NALLO {
             // Check sex and relatedness, and update with inferred sex if the sex for a sample is unknown
             //
             BAM_INFER_SEX(
-                ALIGN.out.bam_bai,
+                ch_bam_bai,
                 ch_fasta,
                 ch_fai,
                 ch_somalier_sites,
@@ -314,10 +322,6 @@ workflow NALLO {
             // Set files with updated meta for subsequent processes
             ch_bam = BAM_INFER_SEX.out.bam
             ch_bam_bai = BAM_INFER_SEX.out.bam_bai
-        }
-        else {
-            ch_bam = ALIGN.out.bam_bai.map { meta, bam, _bai -> [meta, bam] }
-            ch_bam_bai = ALIGN.out.bam_bai
         }
 
         if (!val_skip_rank_variants || !val_skip_phasing) {
@@ -1028,8 +1032,8 @@ workflow NALLO {
 
     emit:
     aligned_assemblies                  = val_skip_genome_assembly ? channel.empty() : val_cram_output ? ALIGN_ASSEMBLIES.out.cram.join(ALIGN_ASSEMBLIES.out.crai) : ALIGN_ASSEMBLIES.out.bam.join(ALIGN_ASSEMBLIES.out.bai) // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
-    aligned_reads_bam                   = (!val_skip_alignment && val_skip_phasing && !val_cram_output) ? ALIGN.out.bam_bai.map { meta, bam, _bai -> [meta, bam] } : channel.empty() // channel: [ val(meta), path(bam) ]
-    aligned_reads_bai                   = (!val_skip_alignment && val_skip_phasing && !val_cram_output) ? ALIGN.out.bam_bai.map { meta, _bam, bai -> [meta, bai] } : channel.empty() // channel: [ val(meta), path(bai) ]
+    aligned_reads_bam                   = (!val_skip_alignment && val_skip_phasing && !val_cram_output) ? ALIGN.out.bam : channel.empty() // channel: [ val(meta), path(bam) ]
+    aligned_reads_bai                   = (!val_skip_alignment && val_skip_phasing && !val_cram_output) ? ALIGN.out.bai : channel.empty() // channel: [ val(meta), path(bai) ]
     aligned_reads_cram                  = (!val_skip_alignment && val_skip_phasing && val_cram_output) ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
     aligned_reads_crai                  = (!val_skip_alignment && val_skip_phasing && val_cram_output) ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
     annotated_paralogs                  = val_skip_annotate_paralogs ? channel.empty() : ANNOTATE_PARALOGS.out.tsv.mix(ANNOTATE_PARALOGS.out.json) // channel: [ val(meta), path(tsv/json) ]
@@ -1141,7 +1145,7 @@ workflow NALLO {
 def addChildWithTwoParentsToMeta(ch_input, ch_samplesheet) {
 
     def ch_families = ch_samplesheet
-        .map { meta, _files, _index -> [meta.family_id, meta.two_parents] }
+        .map { meta, _files -> [meta.family_id, meta.two_parents] }
         .groupTuple()
         .map { family_id, child_with_two_parents -> [family_id, child_with_two_parents.any()] }
 

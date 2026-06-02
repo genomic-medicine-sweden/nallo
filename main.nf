@@ -74,9 +74,9 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     ch_vcfexpress_prelude
     ch_vep_cache_unprocessed
     ch_vep_plugin_files
-    cram_output
     val_alignment_processes
     val_bigwig_modcodes
+    val_cram_output
     val_create_hificnv_maf_track
     val_create_sawfish_maf_track
     val_echtvar_snv_databases
@@ -97,6 +97,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_plot_chromograph_autozygosity
     val_plot_chromograph_coverage
     val_pre_vep_snv_filter_expression
+    val_premapped
     val_run_methbat
     val_run_modkit
     val_sentieon_tech
@@ -180,10 +181,10 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         ch_vcfexpress_prelude,
         ch_vep_cache_unprocessed,
         ch_vep_plugin_files,
-        cram_output,
         val_alignment_processes,
         val_bigwig_modcodes,
         val_skip_phasing && cram_output,
+        val_cram_output,
         val_create_hificnv_maf_track,
         val_create_sawfish_maf_track,
         val_echtvar_snv_databases,
@@ -204,6 +205,9 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_plot_chromograph_autozygosity,
         val_plot_chromograph_coverage,
         val_pre_vep_snv_filter_expression,
+        val_premapped,
+        val_run_methbat,
+        val_run_modkit,
         val_sentieon_tech,
         val_skip_alignment,
         val_skip_annotate_paralogs,
@@ -470,9 +474,9 @@ workflow {
         file("${projectDir}/assets/vcf_express_found_in_prelude.lua"),
         createReferenceChannelFromPath(params.vep_cache, channel.value([[], []])),
         createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', channel.value([])),
-        params.alignment_output_format == 'cram',
         params.alignment_processes,
         params.bigwig_modcodes,
+        params.alignment_output_format == 'cram',
         params.create_hificnv_maf_track,
         params.create_sawfish_maf_track,
         params.echtvar_snv_databases,
@@ -493,6 +497,7 @@ workflow {
         params.plot_chromograph_autozygosity,
         params.plot_chromograph_coverage,
         params.pre_vep_snv_filter_expression,
+        params.premapped,
         params.run_methbat,
         params.run_modkit,
         params.sentieon_tech,

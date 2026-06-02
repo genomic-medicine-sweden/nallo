@@ -278,9 +278,8 @@ workflow PIPELINE_INITIALISATION {
         .fromList(
             samplesheetToList(val_input, "${projectDir}/assets/schema_input.json")
         )
-        // add sample as groupTuple key
         .map { meta, reads ->
-            [meta.id, meta, reads]
+            [ meta.id, meta, reads ] // add sample as groupTuple key
         }
         // group by sample
         .groupTuple()
@@ -288,18 +287,18 @@ workflow PIPELINE_INITIALISATION {
             validateUniqueFilenamesPerSample(id_meta_reads)
             validateUniqueSampleIDs(id_meta_reads)
         }
+        // Add single_end information to meta
         .map { sample, metas, reads ->
-            [sample, metas[0] + [single_end: true], reads]
+            [ sample, metas[0] + [ single_end:true ], reads ]
         }
-        .flatMap { _sample, meta, reads ->
-            reads.collect { read ->
-                return [meta, read]
-            }
-        }
-        .map { meta, reads -> [meta.family_id, meta, reads] }
+        // Convert back to [ meta, reads ]
+        .map{ _sample, meta, reads -> tuple(meta, reads) }
+        .transpose()
+        // Add relationships to meta
+        .map { meta, reads -> [ meta.family_id, meta, reads ] }
         .groupTuple()
         .map { _family, metas, reads ->
-            [addRelationshipsToMeta(metas), reads]
+            [ addRelationshipsToMeta(metas), reads]
         }
         .transpose()
 
@@ -663,7 +662,7 @@ def validateAllFamiliesHasAffectedSamples(ch_samplesheet, val_skip_rank_variants
     }
 
     def familiesWithPhenotypes = ch_samplesheet
-        .map { meta, _reads -> [meta.family_id, meta.phenotype] }
+        .map { meta, _reads -> [ meta.family_id, meta.phenotype ] }
         .groupTuple()
 
     def familiesWithoutAffected = familiesWithPhenotypes.filter { _family, phenotype -> !phenotype.contains(2) }
@@ -687,7 +686,7 @@ def validateRequiresSexCheck(ch_samplesheet, val_skip_sex_check, val_skip_snv_ca
     }
 
     def samplesWithUnknownSex = ch_samplesheet
-        .map { meta, _reads -> [meta.id, meta.sex] }
+        .map { meta, _reads -> [ meta.id, meta.sex ] }
         .filter { _id, sex -> sex == 0 }
 
     samplesWithUnknownSex
@@ -702,7 +701,7 @@ def validateRequiresSexCheck(ch_samplesheet, val_skip_sex_check, val_skip_snv_ca
 
 def validateSingleProjectPerRun(ch_samplesheet) {
     ch_samplesheet
-        .map { meta, _reads, _index -> meta.project }
+        .map { meta, _reads -> meta.project }
         .unique()
         .count()
         .map { n ->
@@ -752,7 +751,7 @@ def validateSVCallingParameters(val_sv_callers_to_merge, val_sv_callers_merge_pr
 def validateParentExistsInFamily(input) {
     input
         .map { meta, _reads ->
-            [meta.family_id, meta]
+            [ meta.family_id, meta ]
         }
         .groupTuple()
         .map { family_id, metas ->
@@ -781,8 +780,9 @@ def validateParentExistsInFamily(input) {
 }
 
 def validateParentalSex(input) {
-    input.map { meta, _reads ->
-        def sex_as_string = meta.sex == 1 ? 'male' : meta.sex == 2 ? 'female' : 'unknown'
+    input
+        .map { meta, _reads ->
+            def sex_as_string = meta.sex == 1 ? 'male' : meta.sex == 2 ? 'female' : 'unknown'
 
         if ((meta.relationship == 'mother' && !isFemale(meta)) || (meta.relationship == 'father' && !isMale(meta))) {
             error(
