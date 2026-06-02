@@ -75,6 +75,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1087](https://github.com/genomic-medicine-sweden/nallo/pull/1087) - Removed empty qc_snv.config
 - [#1092](https://github.com/genomic-medicine-sweden/nallo/pull/1092) - Removed unused SVDB import in `nallo`
 - [#1100](https://github.com/genomic-medicine-sweden/nallo/pull/1100) - Removed tabix from SNV and SV annotation subworkflows
+- [#1125](https://github.com/genomic-medicine-sweden/nallo/pull/1125) - Removed `samplesheet_ont.csv` because it is unused.
 
 ### Fixed
 
