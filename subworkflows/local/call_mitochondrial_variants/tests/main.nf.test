@@ -191,6 +191,79 @@ nextflow_workflow {
         }
 
     }
+
+    test("1 sample - deepvariant (Deepvariant/Deepvariant) - with mitochondrial intervals - ONT") {
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_ONT.bam.bai', checkIfExists: true),
+                ])
+                input[1] = GUNZIP.out.gunzip.map { meta, fasta -> [meta, fasta] }
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = [[],[]]
+                input[4] = SCATTER_GENOME_WITH_CHRM.out.bed_mitochondrial_intervals
+                    .map { meta, bed, _num_intervals -> [meta, bed] }
+                input[5] = "deepvariant"
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.mitochondrial_snv_tbi.get(0).get(1).endsWith("tbi") },
+                { assert snapshot(
+                    workflow.out.mitochondrial_snv_vcf
+                    .collect { meta, vcf -> [ 'mitochondrial_snv_vcf', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    ).match() }
+            )
+        }
+
+    }
+
+    test("2 sample - deepvariant (Deepvariant/Deepvariant) - with mitochondrial intervals") {
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id:'test_sample1' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true),
+                    ],
+                    [
+                        [ id:'test_sample2' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true),
+                    ]
+                )
+                input[1] = GUNZIP.out.gunzip.map { meta, fasta -> [meta, fasta] }
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = [[],[]]
+                input[4] = SCATTER_GENOME_WITH_CHRM.out.bed_mitochondrial_intervals
+                    .map { meta, bed, _num_intervals -> [meta, bed] }
+                input[5] = "deepvariant"
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.mitochondrial_snv_tbi.get(0).get(1).endsWith("tbi") },
+                { assert snapshot(
+                    workflow.out.mitochondrial_snv_vcf
+                    .collect { meta, vcf -> [ 'mitochondrial_snv_vcf', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    ).match() }
+            )
+        }
+
+    }
     test("1 sample - deepvariant (Deepvariant/Deepvariant) - without chrM intervals") {
         tag "test_to_test"
         when {
