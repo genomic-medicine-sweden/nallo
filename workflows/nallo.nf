@@ -662,7 +662,6 @@ workflow NALLO {
             ch_bcftools_concat_phasing_in
         )
         ch_snvs_vcf_phasing_in = BCFTOOLS_CONCAT_PHASING.out.vcf
-        ch_snvs_vcf_phasing_in.dump(tag: "snvs_vcf_phasing_in")
         ch_snvs_tbi_phasing_in = BCFTOOLS_CONCAT_PHASING.out.tbi
 
         // Provide a PED file to let whatshap activate pedigree phasing
