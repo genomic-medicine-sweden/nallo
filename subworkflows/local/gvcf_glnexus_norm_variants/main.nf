@@ -23,21 +23,19 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     ch_merged_family_gvcf = channel.empty()
 
     // Branching gVCFs and TBI channels by caller, as they need to be processed differently in the next steps
-    ch_gvcfs
+    branched_gvcfs = ch_gvcfs
         .branch { meta, _gvcfs ->
             mitorsaw: meta.caller == "mitorsaw"
             sentieon: meta.caller == "sentieon"
             deepvariant: meta.caller == "deepvariant"
         }
-        .set { branched_gvcfs }
 
-    ch_tbis
+    branched_tbis = ch_tbis
         .branch { meta, _tbi ->
             mitorsaw: meta.caller == "mitorsaw"
             sentieon: meta.caller == "sentieon"
             deepvariant: meta.caller == "deepvariant"
         }
-        .set { branched_tbis }
 
     // GLNEXUS processes deepvariant gVCFs
     GLNEXUS(
@@ -77,13 +75,12 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     ch_merged_family_gvcf_sentieon = BCFTOOLS_PLUGINFIXPLOIDY.out.vcf
 
     // BCFTOOLS_MERGE is used for the mitochondrial specific caller
-    branched_gvcfs.mitorsaw.join(branched_tbis.mitorsaw, failOnMismatch: true, failOnDuplicate: true)
+    ch_bcftools_merge_in = branched_gvcfs.mitorsaw.join(branched_tbis.mitorsaw, failOnMismatch: true, failOnDuplicate: true)
         .map { meta, gvcfs, tbis ->
             [meta, gvcfs, tbis, []]
         }
-        .set { ch_bcftools_merge_in }
 
-    ch_fasta.join(ch_fai).set { ch_fasta_fai }
+    ch_fasta_fai = ch_fasta.join(ch_fai)
 
     BCFTOOLS_MERGE(
         ch_bcftools_merge_in,
@@ -91,10 +88,9 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     )
     ch_merged_family_gvcf_bcftools = BCFTOOLS_MERGE.out.vcf
 
-    ch_merged_family_gvcf_glnexus
+    ch_merged_family_gvcf = ch_merged_family_gvcf_glnexus
         .mix(ch_merged_family_gvcf_sentieon)
         .mix(ch_merged_family_gvcf_bcftools)
-        .set { ch_merged_family_gvcf }
 
     // Add FOUND_IN tag with VCFEXPRESS using the meta.caller information
     VCFEXPRESS(

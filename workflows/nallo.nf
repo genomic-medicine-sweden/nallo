@@ -564,8 +564,8 @@ workflow NALLO {
         ch_multiqc_files = ch_multiqc_files.mix(QC_SNVS.out.stats.collect { _meta, metrics -> metrics }.ifEmpty([]))
 
         // Set family_snv_vcf and family_snv_index for clarity
-        GVCF_GLNEXUS_NORM_VARIANTS.out.vcf.set { family_snv_vcf }
-        GVCF_GLNEXUS_NORM_VARIANTS.out.index.set { family_snv_index }
+        family_snv_vcf = GVCF_GLNEXUS_NORM_VARIANTS.out.vcf
+        family_snv_index = GVCF_GLNEXUS_NORM_VARIANTS.out.index
 
         family_snv_vcf
             .join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
@@ -661,8 +661,6 @@ workflow NALLO {
         BCFTOOLS_CONCAT_PHASING(
             ch_bcftools_concat_phasing_in
         )
-        ch_snvs_vcf_phasing_in = BCFTOOLS_CONCAT_PHASING.out.vcf
-        ch_snvs_tbi_phasing_in = BCFTOOLS_CONCAT_PHASING.out.tbi
 
         // Provide a PED file to let whatshap activate pedigree phasing
         // Or pass 'empty_PED' if 'whatshap_pedigree_phasing==false'
@@ -672,8 +670,8 @@ workflow NALLO {
 
         // Input is one VCF per family with all the regions (except chrM) and all the samples in the family
         PHASING(
-            ch_snvs_vcf_phasing_in,
-            ch_snvs_tbi_phasing_in,
+            BCFTOOLS_CONCAT_PHASING.out.vcf,
+            BCFTOOLS_CONCAT_PHASING.out.tbi,
             val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_vcf,
             val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_tbi,
             ch_bam_bai,
@@ -712,7 +710,7 @@ workflow NALLO {
             .map { meta, vcf, tbi -> [meta + [num_intervals: meta.num_intervals + 1], vcf, tbi] }
 
         ch_snv_vcf_tbi_mitochondrial_for_annotation = ch_snvs_per_family_unannotated_vcf_tbi
-                .filter { meta, _vcf, _tbi -> meta.genome == "mitochondrial" }
+            .filter { meta, _vcf, _tbi -> meta.genome == "mitochondrial" }
 
         ch_snv_vcf_tbi_nuclear_mitochondrial_for_annotation = ch_snv_vcf_tbi_nuclear_for_annotation
             .mix(ch_snv_vcf_tbi_mitochondrial_for_annotation)
