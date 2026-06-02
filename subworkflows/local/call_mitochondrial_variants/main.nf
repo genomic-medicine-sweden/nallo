@@ -33,10 +33,10 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
     }
     else if (mitochondrial_caller == "deepvariant") {
 
-        /*
-         * Add the mitochondrial BED to every sample, skip if BED is empty. We do not want to run Deepvariant with an empty bed.
-         * The BED can be empty if there is no chrM region in the original BED processed in SCATTER_GENOME
-         */
+    /*
+     * Add the mitochondrial BED to every sample, skip if BED is empty. We do not want to run Deepvariant with an empty bed.
+     * The BED can be empty if there is no chrM region in the original BED processed in SCATTER_GENOME
+     */
         ch_deepvariant_in = ch_bam_bai
             .combine(ch_mitochondrial_bed)
             .filter { _bam_meta, _bam, _bai, _mitochondrial_meta, bed -> bed.size() > 0 }
@@ -56,8 +56,10 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
         ch_tbi = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_tbi ?: channel.empty()
     }
 
-    // Split VCF into SNVs/small indels and SVs for callers that produce both. The logic is in the config.
-    // Deepvariant is SNV-only, so no split is needed.
+    /*
+     * Split VCF into SNVs/small indels and SVs for callers that produce both. The logic is in the config.
+     * Deepvariant is SNV-only, so no split is needed.
+     */
     if (mitochondrial_caller != "deepvariant") {
 
         ch_mito_split_input = ch_vcf
