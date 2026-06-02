@@ -175,5 +175,40 @@
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
         }
+    },
+    "1 sample - deepvariant (Deepvariant/Deepvariant) - without chrM intervals": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "2": [
+                    
+                ],
+                "3": [
+                    
+                ],
+                "mitochondrial_snv_tbi": [
+                    
+                ],
+                "mitochondrial_snv_vcf": [
+                    
+                ],
+                "mitochondrial_sv_tbi": [
+                    
+                ],
+                "mitochondrial_sv_vcf": [
+                    
+                ]
+            }
+        ],
+        "timestamp": "2026-06-02T12:47:36.784240926",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.4"
+        }
     }
 }
