@@ -21,9 +21,8 @@ workflow QC_ALIGNED_READS {
         ch_bam_bai
     )
 
-    ch_bam_bai
+    mosdepth_in = ch_bam_bai
         .combine(ch_mosdepth_bed.map { _meta, bed -> bed }.toList()) // toList() enables passing [] if ch_bed is empty
-        .set { mosdepth_in }
 
     MOSDEPTH(
         mosdepth_in,
@@ -37,8 +36,7 @@ workflow QC_ALIGNED_READS {
             'region',
         )
 
-        SAMBAMBA_DEPTH.out.bed
-            .set { ch_sambamba_depth_bed }
+        ch_sambamba_depth_bed = SAMBAMBA_DEPTH.out.bed
     }
 
     emit:

@@ -30,12 +30,11 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
         VCFEXPRESS.out.vcf
     )
 
-    VCFEXPRESS.out.vcf
+    ch_bcftools_merge_in = VCFEXPRESS.out.vcf
         .join(TABIX_TABIX.out.index, failOnDuplicate: true, failOnMismatch: true)
         .map { meta, vcf, tbi -> [ [ id: meta.family_id ], vcf, tbi ] }
         .groupTuple()
         .map { meta, vcfs, tbis -> [ meta, vcfs, tbis, [] ] }
-        .set { ch_bcftools_merge_in }
 
     BCFTOOLS_MERGE (
         ch_bcftools_merge_in,

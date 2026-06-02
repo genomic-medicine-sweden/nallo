@@ -23,12 +23,11 @@ workflow CALL_METHYLATION_MODKIT {
         ch_bed,
     )
 
-    MODKIT_PILEUP.out.bedgz
+    ch_bedmethyl_to_bigwig_in = MODKIT_PILEUP.out.bedgz
         .transpose()
         .tap { ch_bedmethyl }
         // Only convert files with content
         .filter { _meta, bed -> gzNotEmptyBySize(bed) }
-        .set { ch_bedmethyl_to_bigwig_in }
 
     TABIX_TABIX(
         ch_bedmethyl,

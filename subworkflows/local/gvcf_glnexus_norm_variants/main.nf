@@ -32,12 +32,11 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
 
     } else if (variant_caller.equals("sentieon")) {
 
-        ch_gvcfs
+        ch_gvcftyper_in = ch_gvcfs
             .join(ch_tbis, failOnMismatch: true, failOnDuplicate: true)
             .map { meta, gvcfs, tbis ->
                 [meta, gvcfs, tbis, []]
             }
-            .set { ch_gvcftyper_in }
 
         SENTIEON_GVCFTYPER(
             ch_gvcftyper_in,
@@ -63,11 +62,10 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     }
     // Annotate with FOUND_IN tag - not sure what would happen if we do this before glnexus instead?
     // Add caller information to meta so vcfexpress can add the FOUND_IN tag based on sv_caller
-    ch_merged_family_gvcf
+    ch_vcfexpress_input = ch_merged_family_gvcf
         .map { meta, vcf ->
             [meta + [sv_caller: variant_caller], vcf]
         }
-        .set { ch_vcfexpress_input }
 
     VCFEXPRESS(
         ch_vcfexpress_input,
@@ -75,11 +73,10 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     )
 
     // Remove added caller information in meta
-    VCFEXPRESS.out.vcf
+    ch_bcftools_norm_input = VCFEXPRESS.out.vcf
         .map { meta, vcf ->
             [meta - meta.subMap('sv_caller'), vcf, []]
         }
-        .set { ch_bcftools_norm_input }
 
 
     // Decompose and normalize variants

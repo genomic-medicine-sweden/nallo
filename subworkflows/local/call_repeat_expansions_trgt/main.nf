@@ -16,9 +16,8 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     ch_vcfexpress_prelude   // path: [mandatory] lua file
 
     main:
-    ch_bam_bai
+    ch_trgt_input = ch_bam_bai
         .map { meta, bam, bai -> [meta, bam, bai, meta.sex == 1 ? 'XY' : 'XX'] }
-        .set { ch_trgt_input }
 
     // Run TRGT
     TRGT_GENOTYPE(
@@ -59,7 +58,7 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     )
 
     // Add sample IDs for all XY samples in family to meta for later repeat annotation with strdrop
-    BCFTOOLS_SORT.out.vcf
+    ch_trgt_merge_in = BCFTOOLS_SORT.out.vcf
         .join(BCFTOOLS_SORT.out.tbi, failOnMismatch: true, failOnDuplicate: true)
         .map { meta, vcf, tbi -> [[id: meta.family_id], meta, vcf, tbi] }
         .groupTuple()
@@ -71,7 +70,6 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
 
             [meta + [xy_samples: xy_ids], vcf, tbi]
         }
-        .set { ch_trgt_merge_in }
 
     TRGT_MERGE(
         ch_trgt_merge_in,

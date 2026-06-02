@@ -12,12 +12,11 @@ workflow CONVERT_INPUT_FILES {
     convert_fastq //    bool: Should FASTQ files be converted to BAM
 
     main:
-    ch_input
+    reads_to_convert = ch_input
         .branch { _meta, reads ->
             fastq: reads.extension == 'gz'
             bam: reads.extension == 'bam'
         }
-        .set { reads_to_convert }
 
     ch_bam   = reads_to_convert.bam
     ch_fastq = reads_to_convert.fastq
