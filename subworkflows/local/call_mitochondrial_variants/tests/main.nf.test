@@ -214,11 +214,6 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                // { assert workflow.out.mitochondrial_snv_tbi.get(0).get(1).endsWith("tbi") },
-                // { assert snapshot(
-                //     workflow.out.mitochondrial_snv_vcf
-                //     .collect { meta, vcf -> [ 'mitochondrial_snv_vcf', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
-                //     ).match() }
             )
         }
 
