@@ -246,7 +246,12 @@ Turned off with `--skip_sv_calling`.
 #### Call mitochondrial variants
 
 This subworkflow specifically calls mitochondrial variants. The resulting VCF file is then merged together with the VCF containing the nuclear variants.
-The mitochondrial caller can be selected with `--mitochondrial_caller`.
+The mitochondrial caller can be selected with `--mitochondrial_caller`. Note that the mitorsaw [license](https://github.com/PacificBiosciences/mitorsaw/blob/main/LICENSE.md) doesn't generally allow usage of ONT data.
+
+| Caller      | Parameter value | Compatible data |
+| ----------- | --------------- | --------------- |
+| Mitorsaw    | `mitorsaw`      | Pacbio          |
+| Deepvariant | `deepvariant`   | Pacbio, ONT     |
 
 The following parameters can be used:
 
