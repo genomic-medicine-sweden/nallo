@@ -584,7 +584,7 @@ def checkFileDependencies(String file, Map combinationsMap, Map statusMap, Map w
 //
 // Find the workflow skips that are not currently active
 //
-def findRequiredSkips(paramType, requiredWorkflows: Set<String>, statusMap: Map, workflowMap: Map) {
+def findRequiredSkips(paramType, Set<String> requiredWorkflows, Map statusMap, Map workflowMap) {
 
     def requiredSkips = []
 
