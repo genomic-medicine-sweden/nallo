@@ -30,8 +30,7 @@ workflow ANNOTATE_SNVS {
 
     // Allows for filtering before annotating with VEP
     if (pre_vep_filter) {
-        ch_bcftools_view_input = (annotate_echtvar ? ECHTVAR_ANNO.out.bcf : ch_vcf)
-            .map { meta, vcf -> [meta, vcf, []] }
+        ch_bcftools_view_input = (annotate_echtvar ? ECHTVAR_ANNO.out.bcf : ch_vcf).map { meta, vcf -> [meta, vcf, []] }
 
         BCFTOOLS_VIEW(
             ch_bcftools_view_input,
@@ -56,8 +55,7 @@ workflow ANNOTATE_SNVS {
         )
     }
 
-    ch_vep_in = (annotate_cadd ? ANNOTATE_CADD.out.vcf : pre_vep_filter ? BCFTOOLS_VIEW.out.vcf : annotate_echtvar ? ECHTVAR_ANNO.out.bcf : ch_vcf)
-        .map { meta, vcf -> [meta, vcf, []] }
+    ch_vep_in = (annotate_cadd ? ANNOTATE_CADD.out.vcf : pre_vep_filter ? BCFTOOLS_VIEW.out.vcf : annotate_echtvar ? ECHTVAR_ANNO.out.bcf : ch_vcf).map { meta, vcf -> [meta, vcf, []] }
 
     // Always annotate with VEP
     ENSEMBLVEP_SNV(

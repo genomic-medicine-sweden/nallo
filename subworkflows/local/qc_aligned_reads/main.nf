@@ -8,7 +8,7 @@ workflow QC_ALIGNED_READS {
     ch_fasta           // channel: [ val(meta), fasta ]
     ch_mosdepth_bed    // channel: [ val(meta), bed ]
     ch_sambamba_bed    // channel: [ val(meta), bed ]
-    run_sambamba_depth //    bool: Should sambamba depth be run?
+    run_sambamba_depth // bool: Should sambamba depth be run?
 
     main:
     ch_sambamba_depth_bed = channel.empty()
@@ -21,8 +21,8 @@ workflow QC_ALIGNED_READS {
         ch_bam_bai
     )
 
-    mosdepth_in = ch_bam_bai
-        .combine(ch_mosdepth_bed.map { _meta, bed -> bed }.toList()) // toList() enables passing [] if ch_bed is empty
+    mosdepth_in = ch_bam_bai.combine(ch_mosdepth_bed.map { _meta, bed -> bed }.toList())
+    // toList() enables passing [] if ch_bed is empty
 
     MOSDEPTH(
         mosdepth_in,

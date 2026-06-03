@@ -29,8 +29,8 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
         )
 
         ch_merged_family_gvcf = GLNEXUS.out.bcf
-
-    } else if (variant_caller.equals("sentieon")) {
+    }
+    else if (variant_caller.equals("sentieon")) {
 
         ch_gvcftyper_in = ch_gvcfs
             .join(ch_tbis, failOnMismatch: true, failOnDuplicate: true)
@@ -62,10 +62,9 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     }
     // Annotate with FOUND_IN tag - not sure what would happen if we do this before glnexus instead?
     // Add caller information to meta so vcfexpress can add the FOUND_IN tag based on sv_caller
-    ch_vcfexpress_input = ch_merged_family_gvcf
-        .map { meta, vcf ->
-            [meta + [sv_caller: variant_caller], vcf]
-        }
+    ch_vcfexpress_input = ch_merged_family_gvcf.map { meta, vcf ->
+        [meta + [sv_caller: variant_caller], vcf]
+    }
 
     VCFEXPRESS(
         ch_vcfexpress_input,
@@ -73,10 +72,9 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     )
 
     // Remove added caller information in meta
-    ch_bcftools_norm_input = VCFEXPRESS.out.vcf
-        .map { meta, vcf ->
-            [meta - meta.subMap('sv_caller'), vcf, []]
-        }
+    ch_bcftools_norm_input = VCFEXPRESS.out.vcf.map { meta, vcf ->
+        [meta - meta.subMap('sv_caller'), vcf, []]
+    }
 
 
     // Decompose and normalize variants
@@ -86,6 +84,6 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     )
 
     emit:
-    vcf      = BCFTOOLS_NORM_MULTISAMPLE.out.vcf // channel: [ val(meta), path(vcf) ]
-    index    = BCFTOOLS_NORM_MULTISAMPLE.out.tbi.mix(BCFTOOLS_NORM_MULTISAMPLE.out.csi) // channel: [ val(meta), path(tbi/csi) ]
+    vcf   = BCFTOOLS_NORM_MULTISAMPLE.out.vcf                                        // channel: [ val(meta), path(vcf) ]
+    index = BCFTOOLS_NORM_MULTISAMPLE.out.tbi.mix(BCFTOOLS_NORM_MULTISAMPLE.out.csi) // channel: [ val(meta), path(tbi/csi) ]
 }

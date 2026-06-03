@@ -21,10 +21,9 @@ workflow SPLIT_MULTISAMPLE_VCF {
         [],
     )
 
-    ch_split_vcf = BCFTOOLS_VIEW.out.vcf
-        .map { meta, vcf ->
-            [meta.subMap(['id', 'family_id']), vcf, meta.variant_type]
-        }
+    ch_split_vcf = BCFTOOLS_VIEW.out.vcf.map { meta, vcf ->
+        [meta.subMap(['id', 'family_id']), vcf, meta.variant_type]
+    }
 
     emit:
     split_vcf = ch_split_vcf // channel: [ val(meta), path(vcf), val(variant_type) ]

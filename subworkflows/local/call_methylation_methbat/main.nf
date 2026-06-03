@@ -23,7 +23,7 @@ workflow CALL_METHYLATION_METHBAT {
 
     METHBAT_PROFILE(
         ch_methbat_profile_in,
-        ch_regions
+        ch_regions,
     )
 
     emit:
