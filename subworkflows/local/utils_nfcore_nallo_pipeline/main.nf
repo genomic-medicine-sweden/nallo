@@ -529,7 +529,7 @@ def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, 
 //
 // Lookup all workflows that needs to be active for another workflow
 //
-def checkWorkflowDependencies(skip: String, combinationsMap: Map, statusMap: Map, workflowMap: Map, errors: List) {
+def checkWorkflowDependencies(String skip, Map combinationsMap, Map statusMap, Map workflowMap, List errors) {
 
     // Lookup the workflow associated with the --skip_xxx parameter
     def currentWorkflow = workflowMap.find { _key, mapValue -> mapValue == skip }?.key

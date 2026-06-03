@@ -43,7 +43,7 @@ workflow CALL_METHYLATION_MODKIT {
 }
 
 def gzNotEmptyBySize(file_path) {
-    def gzipFile: File = file_path.toFile()
+    File gzipFile = file_path.toFile()
     // When modkit produces an emty file, its size seems to be 168 bytes
     if (gzipFile.length() > 168) {
         return true
