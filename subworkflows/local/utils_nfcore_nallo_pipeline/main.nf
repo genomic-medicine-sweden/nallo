@@ -873,6 +873,6 @@ def isParent(sample) {
     isMother(sample) || isFather(sample)
 }
 
-def isNonZeroNonEmpty(value) -> boolean {
+def boolean isNonZeroNonEmpty(value) {
     (value instanceof String && value != "" && value != "0") || (value instanceof Number && value != 0)
 }
