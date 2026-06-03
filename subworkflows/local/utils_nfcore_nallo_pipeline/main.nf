@@ -603,7 +603,7 @@ def findRequiredSkips(paramType, Set<String> requiredWorkflows, Map statusMap, M
     return requiredSkips
 }
 
-def findKeysForValue(valueToFind, map: Map) {
+def findKeysForValue(def valueToFind, Map map) {
 
     def keys = []
 
