@@ -252,8 +252,7 @@ workflow NALLO {
         )
 
         // contains all FASTQ files, including those not converted
-        ch_genome_assembly_input = CONVERT_INPUT_BAMS.out.fastq
-            .groupTuple()
+        ch_genome_assembly_input = CONVERT_INPUT_BAMS.out.fastq.groupTuple()
 
         // Hifiasm assembly
         GENOME_ASSEMBLY(
@@ -352,8 +351,7 @@ workflow NALLO {
 
         SAMPLESHEET_PED(ch_samplesheet_ped_in)
 
-        ch_samplesheet_pedfile = SAMPLESHEET_PED.out.ped
-            .collect()
+        ch_samplesheet_pedfile = SAMPLESHEET_PED.out.ped.collect()
 
         if (!val_skip_sex_check) {
             //
@@ -529,8 +527,7 @@ workflow NALLO {
         )
         ch_multiqc_files = ch_multiqc_files.mix(QC_SNVS.out.stats.collect { _meta, metrics -> metrics }.ifEmpty([]))
 
-        ch_snvs_per_family_unannotated_vcf_tbi = family_snv_vcf
-            .join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
+        ch_snvs_per_family_unannotated_vcf_tbi = family_snv_vcf.join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
     }
     if (!val_skip_prepare_gens_input) {
         ch_gvcfs = CALL_SNVS.out.gvcf
@@ -545,8 +542,7 @@ workflow NALLO {
             ch_gvcfs
         )
 
-        ch_gvcf_tbi = CONCAT_SORT_GENS.out.vcf
-            .join(CONCAT_SORT_GENS.out.index)
+        ch_gvcf_tbi = CONCAT_SORT_GENS.out.vcf.join(CONCAT_SORT_GENS.out.index)
 
         PREPARE_GENS_INPUTS(
             ch_bam_bai,
@@ -617,8 +613,7 @@ workflow NALLO {
 
         // Provide a PED file to let whatshap activate pedigree phasing
         // Or pass 'empty_PED' if 'whatshap_pedigree_phasing==false'
-        ch_ped_family = SOMALIER_PED_FAMILY.out.ped
-            .map { meta, ped -> [[id: meta.id], val_whatshap_pedigree_phasing ? ped : []] }
+        ch_ped_family = SOMALIER_PED_FAMILY.out.ped.map { meta, ped -> [[id: meta.id], val_whatshap_pedigree_phasing ? ped : []] }
 
         PHASING(
             BCFTOOLS_CONCAT_PHASING.out.vcf,
@@ -685,11 +680,10 @@ workflow NALLO {
             val_pre_vep_snv_filter_expression != '',
         )
 
-        ch_clin_research_snvs_vcf = ANNOTATE_SNVS.out.vcf
-            .multiMap { meta, vcf ->
-                clinical: [meta + [set: "clinical"], vcf]
-                research: [meta + [set: "research"], vcf]
-            }
+        ch_clin_research_snvs_vcf = ANNOTATE_SNVS.out.vcf.multiMap { meta, vcf ->
+            clinical: [meta + [set: "clinical"], vcf]
+            research: [meta + [set: "research"], vcf]
+        }
         ch_clin_research_snvs_vcf.clinical
 
         ch_ann_csq_pli_snv_in = ch_clin_research_snvs_vcf.research
@@ -712,8 +706,7 @@ workflow NALLO {
             ch_variant_consequences_snvs,
         )
 
-        ch_snvs_per_family_annotated_vcf_tbi = ANN_CSQ_PLI_SNV.out.vcf
-            .join(ANN_CSQ_PLI_SNV.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+        ch_snvs_per_family_annotated_vcf_tbi = ANN_CSQ_PLI_SNV.out.vcf.join(ANN_CSQ_PLI_SNV.out.tbi, failOnMismatch: true, failOnDuplicate: true)
     }
 
     //
@@ -766,8 +759,7 @@ workflow NALLO {
 
         if (!val_skip_snv_annotation) {
             // Use already concatenated VCFs
-            ch_peddy_in = CONCAT_SORT_ANNOTATED_SNVS.out.vcf
-                .join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch: true, failOnDuplicate: true)
+            ch_peddy_in = CONCAT_SORT_ANNOTATED_SNVS.out.vcf.join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch: true, failOnDuplicate: true)
         }
         else {
             // If we did not annotate, we did not concatenate the VCFs before, so we need to do that here.
@@ -780,8 +772,7 @@ workflow NALLO {
                 ch_concat_sort_peddy_in
             )
 
-            ch_peddy_in = CONCAT_SORT_PEDDY.out.vcf
-                .join(CONCAT_SORT_PEDDY.out.index, failOnMismatch: true, failOnDuplicate: true)
+            ch_peddy_in = CONCAT_SORT_PEDDY.out.vcf.join(CONCAT_SORT_PEDDY.out.index, failOnMismatch: true, failOnDuplicate: true)
         }
 
         PEDDY(
@@ -823,11 +814,10 @@ workflow NALLO {
             ch_vep_plugin_files.collect(),
         )
 
-        ch_clin_research_svs_vcf = ANNOTATE_SVS.out.vcf
-            .multiMap { meta, vcf ->
-                clinical: [meta + [set: "clinical"], vcf]
-                research: [meta + [set: "research"], vcf]
-            }
+        ch_clin_research_svs_vcf = ANNOTATE_SVS.out.vcf.multiMap { meta, vcf ->
+            clinical: [meta + [set: "clinical"], vcf]
+            research: [meta + [set: "research"], vcf]
+        }
 
         ch_ann_csq_svs_in = ch_clin_research_svs_vcf.research
 
@@ -1165,18 +1155,18 @@ workflow NALLO {
     qc_whatshap_stats                   = val_skip_phasing ? channel.empty() : PHASING.out.stats // channel: [ val(meta), path(*.stats.tsv) ]
     repeats_annotated_family_tbi        = val_skip_repeat_annotation ? channel.empty() : ANNOTATE_REPEAT_EXPANSIONS.out.tbi // channel: [ val(meta), path(tbi) ]
     repeats_annotated_family_vcf        = val_skip_repeat_annotation ? channel.empty() : ANNOTATE_REPEAT_EXPANSIONS.out.vcf // channel: [ val(meta), path(vcf) ]
-    repeats_strdust_family_tbi           = val_skip_strdust ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.family_tbi // channel: [ val(meta), path(tbi) ]
-    repeats_strdust_family_vcf           = val_skip_strdust ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.family_vcf // channel: [ val(meta), path(vcf) ]
-    repeats_strdust_sample_tbi           = val_skip_strdust ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.sample_tbi // channel: [ val(meta), path(tbi) ]
-    repeats_strdust_sample_vcf           = val_skip_strdust ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.sample_vcf // channel: [ val(meta), path(vcf) ]
-    repeats_trgt_family_tbi              = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.family_tbi // channel: [ val(meta), path(tbi) ]
-    repeats_trgt_family_vcf              = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.family_vcf // channel: [ val(meta), path(vcf) ]
-    repeats_trgt_sample_bai              = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_bai // channel: [ val(meta), path(bai) ]
-    repeats_trgt_sample_bam              = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_bam // channel: [ val(meta), path(bam) ]
-    repeats_trgt_sample_crai             = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_crai // channel: [ val(meta), path(crai) ]
-    repeats_trgt_sample_cram             = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_cram // channel: [ val(meta), path(cram) ]
-    repeats_trgt_sample_tbi              = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_tbi // channel: [ val(meta), path(tbi) ]
-    repeats_trgt_sample_vcf              = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_vcf // channel: [ val(meta), path(vcf) ]
+    repeats_strdust_family_tbi          = val_skip_strdust ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.family_tbi // channel: [ val(meta), path(tbi) ]
+    repeats_strdust_family_vcf          = val_skip_strdust ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.family_vcf // channel: [ val(meta), path(vcf) ]
+    repeats_strdust_sample_tbi          = val_skip_strdust ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.sample_tbi // channel: [ val(meta), path(tbi) ]
+    repeats_strdust_sample_vcf          = val_skip_strdust ? channel.empty() : CALL_REPEAT_EXPANSIONS_STRDUST.out.sample_vcf // channel: [ val(meta), path(vcf) ]
+    repeats_trgt_family_tbi             = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.family_tbi // channel: [ val(meta), path(tbi) ]
+    repeats_trgt_family_vcf             = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.family_vcf // channel: [ val(meta), path(vcf) ]
+    repeats_trgt_sample_bai             = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_bai // channel: [ val(meta), path(bai) ]
+    repeats_trgt_sample_bam             = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_bam // channel: [ val(meta), path(bam) ]
+    repeats_trgt_sample_crai            = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_crai // channel: [ val(meta), path(crai) ]
+    repeats_trgt_sample_cram            = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_cram // channel: [ val(meta), path(cram) ]
+    repeats_trgt_sample_tbi             = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_tbi // channel: [ val(meta), path(tbi) ]
+    repeats_trgt_sample_vcf             = val_skip_trgt ? channel.empty() : CALL_REPEAT_EXPANSIONS_TRGT.out.sample_vcf // channel: [ val(meta), path(vcf) ]
     sawfish_copynum_bedgraph            = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.sawfish_copynum_bedgraph // channel: [ val(meta), path(bedgraph) ]
     sawfish_depth_bw                    = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.sawfish_depth_bw // channel: [ val(meta), path(bw) ]
     sawfish_gc_bias_corrected_depth_bw  = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.sawfish_gc_bias_corrected_depth_bw // channel: [ val(meta), path(bw) ]
