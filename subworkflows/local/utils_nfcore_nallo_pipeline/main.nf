@@ -561,7 +561,7 @@ def checkWorkflowDependencies(String skip, Map combinationsMap, Map statusMap, M
 //
 // Lookup if a file is required by any workflows, and add to errors
 //
-def checkFileDependencies(file: String, combinationsMap: Map, statusMap: Map, workflowMap: Map, errors: List) {
+def checkFileDependencies(String file, Map combinationsMap, Map statusMap, Map workflowMap, List errors) {
     // Get all workflows required by a file
     def workflowThatRequiresFile = findKeysForValue(file, combinationsMap)
 
