@@ -43,20 +43,32 @@ process HIPHASE {
 
     def snv_args = snvs
         .collectMany { file ->
-            ["--vcf", file, "--output-vcf", "${prefix}_snv_phased.vcf.gz"]
-        }
-        .join(" ")
+            [
+                "--vcf",
+                file,
+                "--output-vcf",
+                "${prefix}_snv_phased.vcf.gz"
+            ]
+        }.join(" ")
     def sv_args = svs
         .collectMany { file ->
-            ["--vcf", file, "--output-vcf", "${prefix}_sv_phased.vcf.gz"]
-        }
-        .join(" ")
+            [
+                "--vcf",
+                file,
+                "--output-vcf",
+                "${prefix}_sv_phased.vcf.gz"
+            ]
+        }.join(" ")
 
     def bam_args = bams
         .collectMany { file ->
-            ["--bam", file, output_bam ? '--output-bam' : '', output_bam ? "${file.baseName}_haplotagged.bam" : '']
-        }
-        .join(" ")
+            [
+                "--bam",
+                file,
+                output_bam ? '--output-bam' : '',
+                output_bam ? "${file.baseName}_haplotagged.bam" : ''
+            ]
+        }.join(" ")
 
     def sample_args = samples.collect { sample -> "--sample-name ${sample}" }.join(" ")
 
