@@ -626,16 +626,7 @@
                     "HG002_PacBio_Revio_haplotagged.bam.bai:md5,4bef94e827ec92a0b4c97dc7950aa02d"
                 ]
             ],
-            [
-                [
-                    {
-                        "id": "HG002",
-                        "family_id": "FAM"
-                    },
-                    "HG002.cram:md5,ba90203438fc316dc55660b107e2444e",
-                    "HG002.cram.crai:md5,d4974f502bf847a7720284ce6c579117"
-                ]
-            ],
+            "HG002.cram",
             [
                 [
                     {
@@ -683,7 +674,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-05T10:01:05.312961748",
+        "timestamp": "2026-06-05T14:54:28.620288373",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"

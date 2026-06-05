@@ -258,7 +258,7 @@ nextflow_workflow {
                     workflow.out.phased_family_svs,
                     workflow.out.phased_family_svs_tbi,
                     workflow.out.haplotagged_bam_bai,
-                    workflow.out.haplotagged_cram_crai,
+                    file(workflow.out.haplotagged_cram_crai.get(0).get(1)).name, // The cram contains the path to the ref fasta which differs between test runs
                     workflow.out.stats,
                     workflow.out.blocks,
                     workflow.out.blocks_index,
@@ -413,8 +413,6 @@ nextflow_workflow {
     }
 
     test("2 samples - SNVs only - Longphase - bam output") {
-
-        tag "testtotest"
 
         when {
             workflow {
