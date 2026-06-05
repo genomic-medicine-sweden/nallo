@@ -11,7 +11,7 @@ workflow CALL_METHYLATION_METHBAT {
         ch_bam_bai
     )
 
-    PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES.out.combined_bed
+    ch_methbat_profile_in = PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES.out.combined_bed
         .mix(
             PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES.out.combined_bed_index,
             PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES.out.hap1_bed,
@@ -20,7 +20,6 @@ workflow CALL_METHYLATION_METHBAT {
             PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES.out.hap2_bed_index,
         )
         .groupTuple()
-        .set { ch_methbat_profile_in }
 
     METHBAT_PROFILE(
         ch_methbat_profile_in,

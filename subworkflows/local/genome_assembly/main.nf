@@ -14,23 +14,21 @@ workflow GENOME_ASSEMBLY {
     main:
     if (trio_binning) {
         // First, we need to branch the samples based on their relationship
-        ch_reads
+        ch_branched_samples = ch_reads
             .branch { meta, _reads ->
                 def is_parent = meta.relationship in ['father', 'mother']
                 paired_parents: is_parent && meta.has_other_parent
                 children_with_both_parents: meta.relationship == 'child' && meta.two_parents
                 other: true
             }
-            .set { ch_branched_samples }
 
         // Then, the files from parents of children with both parents will need to be concatenated before yak
         // in case there are multiple files for the same parent.
-        ch_branched_samples.paired_parents
+        ch_paired_parents_for_yak = ch_branched_samples.paired_parents
             .branch { _meta, fastqs ->
                 cat: fastqs.size() > 1
                 no_cat: fastqs.size() == 1
             }
-            .set { ch_paired_parents_for_yak }
 
         CAT_FASTQ(
             ch_paired_parents_for_yak.cat
@@ -40,7 +38,7 @@ workflow GENOME_ASSEMBLY {
             CAT_FASTQ.out.reads.concat(ch_paired_parents_for_yak.no_cat)
         )
 
-        YAK_COUNT.out.yak
+        ch_yak_output = YAK_COUNT.out.yak
             .flatMap { meta, yak ->
                 (meta.children ?: []).collect { child_id ->
                     [child_id, meta, yak]
@@ -52,20 +50,18 @@ workflow GENOME_ASSEMBLY {
                 maternal: meta.relationship == 'mother'
                 return [child_id, yak]
             }
-            .set { ch_yak_output }
 
         // Creates the input for trio-binned assemblies (children with both parents)
-        ch_branched_samples.children_with_both_parents
+        ch_with_both_parents = ch_branched_samples.children_with_both_parents
             .map { meta, reads -> [meta.id, meta, reads] }
             .join(ch_yak_output.paternal)
             .join(ch_yak_output.maternal)
             .map { _id, meta, reads, yak_paternal, yak_maternal ->
                 [meta, reads, yak_paternal, yak_maternal]
             }
-            .set { ch_with_both_parents }
 
         // Create the input for hifiasm by combining the non-trio binned samples with the trio-binned samples.
-        ch_branched_samples.other
+        ch_hifiasm_in = ch_branched_samples.other
             .concat(ch_branched_samples.paired_parents)
             .map { meta, fastqs ->
                 [meta, fastqs, [], []]
@@ -75,15 +71,13 @@ workflow GENOME_ASSEMBLY {
                 reads: [meta, reads, []]
                 yak: [meta, yak_paternal, yak_maternal]
             }
-            .set { ch_hifiasm_in }
     }
     else {
-        ch_reads
+        ch_hifiasm_in = ch_reads
             .multiMap { meta, reads ->
                 reads: [meta, reads, []]
                 yak: [meta, [], []]
             }
-            .set { ch_hifiasm_in }
     }
 
     HIFIASM_BINS(
@@ -94,7 +88,7 @@ workflow GENOME_ASSEMBLY {
     )
 
     // Explicitly key bins/reads/yak by sample ID before assembly so each sample gets its own bins and yaks.
-    ch_hifiasm_in.reads
+    ch_hifiasm_assembly_in = ch_hifiasm_in.reads
         .join(ch_hifiasm_in.yak, failOnMismatch: true, failOnDuplicate: true)
         .join(HIFIASM_BINS.out.bin_files, failOnMismatch: true, failOnDuplicate: true)
         .multiMap { meta, reads, ul_reads, yak_paternal, yak_maternal, bin_files ->
@@ -102,7 +96,6 @@ workflow GENOME_ASSEMBLY {
             bins: [meta, bin_files]
             yak: [meta, yak_paternal, yak_maternal]
         }
-        .set { ch_hifiasm_assembly_in }
 
     HIFIASM_ASSEMBLY(
         ch_hifiasm_assembly_in.reads,
@@ -111,13 +104,11 @@ workflow GENOME_ASSEMBLY {
         ch_hifiasm_assembly_in.bins,
     )
 
-    HIFIASM_ASSEMBLY.out.hap1_contigs
+    ch_gfastats_paternal_in = HIFIASM_ASSEMBLY.out.hap1_contigs
         .map { meta, fasta -> [meta + ['haplotype': 1], fasta] }
-        .set { ch_gfastats_paternal_in }
 
-    HIFIASM_ASSEMBLY.out.hap2_contigs
+    ch_gfastats_maternal_in = HIFIASM_ASSEMBLY.out.hap2_contigs
         .map { meta, fasta -> [meta + ['haplotype': 2], fasta] }
-        .set { ch_gfastats_maternal_in }
 
     GFASTATS(
         ch_gfastats_paternal_in.mix(ch_gfastats_maternal_in),

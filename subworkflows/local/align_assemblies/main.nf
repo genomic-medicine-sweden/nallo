@@ -37,11 +37,10 @@ workflow ALIGN_ASSEMBLIES {
         SAMTOOLS_VIEW.out.bam
     )
 
-    TAGBAM.out.bam
+    ch_assemblies_per_sample = TAGBAM.out.bam
         .map { meta, bam -> [meta - meta.subMap('haplotype'), bam] }
         .groupTuple(size: 2)
         .map { meta, bams -> [meta, bams, []] }
-        .set { ch_assemblies_per_sample }
 
     SAMTOOLS_MERGE(
         ch_assemblies_per_sample,

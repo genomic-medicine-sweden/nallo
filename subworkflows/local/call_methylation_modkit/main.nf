@@ -11,10 +11,9 @@ workflow CALL_METHYLATION_MODKIT {
     modcodes   // String or List
 
     main:
-    ch_fasta
+    ch_fasta_fai = ch_fasta
         .combine(ch_fai.map { _meta, fai -> fai })
         .collect()
-        .set{ ch_fasta_fai }
 
     // Performs pileups per haplotype if the phasing workflow is on, set in config
     MODKIT_PILEUP(
@@ -23,12 +22,11 @@ workflow CALL_METHYLATION_MODKIT {
         ch_bed,
     )
 
-    MODKIT_PILEUP.out.bedgz
+    ch_bedmethyl_to_bigwig_in = MODKIT_PILEUP.out.bedgz
         .transpose()
         .tap { ch_bedmethyl }
         // Only convert files with content
         .filter { _meta, bed -> gzNotEmptyBySize(bed) }
-        .set { ch_bedmethyl_to_bigwig_in }
 
     TABIX_TABIX(
         ch_bedmethyl,
