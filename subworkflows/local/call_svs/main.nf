@@ -93,10 +93,12 @@ workflow CALL_SVS {
         // Join SNV VCFs into input channels only if we want MAF track
         // Otherwise, we can skip the join and just pass an empty list to the module, since the MAF track is the only thing that needs the SNV VCFs.
         if (create_hificnv_maf_track) {
-            ch_for_hificnv = ch_bam_bai.join(ch_snvs, failOnMismatch: true, failOnDuplicate: true)
+            ch_for_hificnv = ch_bam_bai
+                .join(ch_snvs, failOnMismatch: true, failOnDuplicate: true)
         }
         else {
-            ch_for_hificnv = ch_bam_bai.map { meta, bam, bai -> [meta, bam, bai, []] }
+            ch_for_hificnv = ch_bam_bai
+                .map { meta, bam, bai -> [meta, bam, bai, []] }
         }
 
         // Select expected copynumber BED based on sex before passing it to the module
@@ -137,10 +139,12 @@ workflow CALL_SVS {
         // Join SNV VCFs into input channels only if we want MAF track
         // Otherwise, we can skip the join and just pass an empty list to the module, since the MAF track is the only thing that needs the SNV VCFs.
         if (create_sawfish_maf_track) {
-            ch_bam_vcf_for_sawfish_discover = ch_bam_bai.join(ch_snvs, failOnMismatch: true, failOnDuplicate: true)
+            ch_bam_vcf_for_sawfish_discover = ch_bam_bai
+                .join(ch_snvs, failOnMismatch: true, failOnDuplicate: true)
         }
         else {
-            ch_bam_vcf_for_sawfish_discover = ch_bam_bai.map { meta, bam, bai -> [meta, bam, bai, []] }
+            ch_bam_vcf_for_sawfish_discover = ch_bam_bai
+                .map { meta, bam, bai -> [meta, bam, bai, []] }
         }
 
         ch_sawfish_discover_input = ch_bam_vcf_for_sawfish_discover
@@ -213,10 +217,11 @@ workflow CALL_SVS {
         ch_sv_calls_filtered = ch_sv_calls
     }
 
-    ch_vcfexpress_input = ch_sv_calls_filtered.multiMap { meta, vcf, _tbi ->
-        vcf: [meta, vcf]
-        sv_caller: meta.sv_caller
-    }
+    ch_vcfexpress_input = ch_sv_calls_filtered
+        .multiMap { meta, vcf, _tbi ->
+            vcf: [meta, vcf]
+            sv_caller: meta.sv_caller
+        }
 
     VCFEXPRESS(
         ch_vcfexpress_input.vcf,
@@ -228,11 +233,12 @@ workflow CALL_SVS {
     // HiFiCNV doesn't have this issue, so we filter it out here, and add it back later.
 
     // Starting with getting the sample name from the VCF
-    ch_found_in_tagged_vcf = VCFEXPRESS.out.vcf.branch { meta, _vcf ->
-        def callers_needing_reheader = ['severus', 'sniffles']
-        to_reheader: callers_needing_reheader.contains(meta.sv_caller)
-        no_reheader: !callers_needing_reheader.contains(meta.sv_caller)
-    }
+    ch_found_in_tagged_vcf = VCFEXPRESS.out.vcf
+        .branch { meta, _vcf ->
+            def callers_needing_reheader = ['severus', 'sniffles']
+            to_reheader: callers_needing_reheader.contains(meta.sv_caller)
+            no_reheader: !callers_needing_reheader.contains(meta.sv_caller)
+        }
 
     BCFTOOLS_QUERY(
         ch_found_in_tagged_vcf.to_reheader.map { meta, vcf -> [meta, vcf, []] },

@@ -18,9 +18,9 @@ workflow VCF_CONCAT_NORM_VARIANTS {
     )
 
     // Add caller information to meta so vcfexpress can add the FOUND_IN tag based on sv_caller
-    ch_vcfexpress_input = BCFTOOLS_CONCAT.out.vcf.map { meta, vcf ->
-        [meta + [sv_caller: variant_caller], vcf]
-    }
+    ch_vcfexpress_input = BCFTOOLS_CONCAT.out.vcf
+        .map { meta, vcf -> [ meta + [ sv_caller: variant_caller ] , vcf ]
+        }
 
     VCFEXPRESS(
         ch_vcfexpress_input,
@@ -28,9 +28,9 @@ workflow VCF_CONCAT_NORM_VARIANTS {
     )
 
     // Remove added caller information in meta
-    ch_bcftools_norm_input = VCFEXPRESS.out.vcf.map { meta, vcf ->
-        [meta - meta.subMap('sv_caller'), vcf, []]
-    }
+    ch_bcftools_norm_input = VCFEXPRESS.out.vcf
+        .map { meta, vcf -> [ meta - meta.subMap('sv_caller'), vcf, [] ]
+        }
 
     BCFTOOLS_NORM_SINGLESAMPLE(
         ch_bcftools_norm_input,

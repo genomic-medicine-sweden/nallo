@@ -56,7 +56,8 @@ workflow WHATSHAP {
         WHATSHAP_HAPLOTAG.out.bam
     )
 
-    ch_bam_bai_haplotagged = WHATSHAP_HAPLOTAG.out.bam.join(SAMTOOLS_INDEX.out.index, failOnMismatch: true, failOnDuplicate: true)
+    ch_bam_bai_haplotagged = WHATSHAP_HAPLOTAG.out.bam
+        .join(SAMTOOLS_INDEX.out.index, failOnMismatch: true, failOnDuplicate: true)
 
     emit:
     phased_family_snvs     = WHATSHAP_PHASE.out.vcf // channel: [ val(meta), path(vcf) ]

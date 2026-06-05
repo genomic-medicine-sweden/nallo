@@ -16,9 +16,10 @@ workflow PREPARE_REFERENCES {
 
     // Will not catch cases where fasta is bgzipped
     if (gunzip_fasta) {
-        ch_fasta = GUNZIP_FASTA(fasta_in).gunzip.collect()
-    }
-    else {
+        ch_fasta = GUNZIP_FASTA ( fasta_in )
+            .gunzip
+            .collect()
+    } else {
         ch_fasta = fasta_in
     }
 
@@ -28,9 +29,9 @@ workflow PREPARE_REFERENCES {
             false,
         )
 
-        ch_fai = SAMTOOLS_FAIDX.out.fai.collect()
-    }
-    else {
+        ch_fai = SAMTOOLS_FAIDX.out.fai
+            .collect()
+    } else {
         ch_fai = fai_in
     }
 

@@ -274,7 +274,8 @@ workflow PIPELINE_INITIALISATION {
     //
     // Create channel from input file provided through val_input
     //
-    ch_samplesheet = channel.fromList(
+    ch_samplesheet = channel
+        .fromList(
             samplesheetToList(val_input, "${projectDir}/assets/schema_input.json")
         )
         .map { meta, reads ->

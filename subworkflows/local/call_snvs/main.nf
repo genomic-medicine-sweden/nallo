@@ -39,9 +39,10 @@ workflow CALL_SNVS {
     }
     else if (variant_caller.equals("sentieon")) {
 
-        ch_bam_bai = ch_bam_bai_bed.map { meta, bam, bai, _bed ->
-            [meta, bam, bai]
-        }
+        ch_bam_bai = ch_bam_bai_bed
+            .map { meta, bam, bai, _bed ->
+                [ meta, bam, bai ]
+            }
 
         ch_bed = ch_bam_bai_bed
             .map { meta, _bam, _bai, bed ->
@@ -65,20 +66,22 @@ workflow CALL_SNVS {
             [[], []],
         )
 
-        ch_intersected_calling_intervals = BEDTOOLS_INTERSECT.out.intersect.branch { meta, intersected_bed ->
-            diploid: meta.ploidy == "diploid"
-            [meta - meta.subMap('ploidy'), intersected_bed]
-            haploid: meta.ploidy == "haploid"
-            [meta - meta.subMap('ploidy'), intersected_bed]
-        }
+        ch_intersected_calling_intervals = BEDTOOLS_INTERSECT.out.intersect
+            .branch {
+                meta, intersected_bed ->
+                diploid: meta.ploidy == "diploid"
+                    [ meta - meta.subMap('ploidy'), intersected_bed  ]
+                haploid: meta.ploidy == "haploid"
+                    [ meta - meta.subMap('ploidy'), intersected_bed  ]
+            }
 
         ch_haploid_regions_out = ch_intersected_calling_intervals.haploid
-            .map { meta, bed ->
-                if (bed && bed.size() > 0) {
-                    [meta, bed]
-                }
-                else {
-                    [meta, []]
+            .map {
+                meta, bed ->
+                if(bed && bed.size() > 0) {
+                    [ meta, bed ]
+                } else {
+                    [ meta, [] ]
                 }
             }
             .mix(

@@ -252,7 +252,8 @@ workflow NALLO {
         )
 
         // contains all FASTQ files, including those not converted
-        ch_genome_assembly_input = CONVERT_INPUT_BAMS.out.fastq.groupTuple()
+        ch_genome_assembly_input = CONVERT_INPUT_BAMS.out.fastq
+            .groupTuple()
 
         // Hifiasm assembly
         GENOME_ASSEMBLY(
@@ -277,7 +278,7 @@ workflow NALLO {
          * Ensure each BAM has a unique identify,
          * enabling correct grouping and downstream merging.
          */
-        reads_for_alignment = (val_alignment_processes > 1
+        ch_reads_for_alignment = (val_alignment_processes > 1
             ? SPLITUBAM.out.bam.transpose()
             : CONVERT_INPUT_FASTQS.out.bam).map { meta, bam -> [meta + [file: bam.name], bam] }
 
@@ -285,7 +286,7 @@ workflow NALLO {
          * Create a grouping key per sample that records the number of split files,
          * allowing downstream merging to trigger as soon as all alignments of a sample are ready.
          */
-        reads_grouping_key = reads_for_alignment
+        ch_reads_grouping_key = ch_reads_for_alignment
             .map { meta, bam -> [meta - meta.subMap('file'), bam] }
             .groupTuple()
             .map { meta, files -> [meta + [n_files: files.size()]] }
@@ -294,7 +295,7 @@ workflow NALLO {
          * Align reads independently per split (could be a split-align-merge subworkflow)
          */
         MINIMAP2_ALIGN(
-            reads_for_alignment,
+            ch_reads_for_alignment,
             PREPARE_REFERENCES.out.mmi,
             true,
             'bai',
@@ -305,9 +306,9 @@ workflow NALLO {
         /*
          * Re-attach grouping key so BAMs can be merged per group as soon as all alignments for one sample are ready
          */
-        bam_to_merge = MINIMAP2_ALIGN.out.bam
+        ch_bam_to_merge = MINIMAP2_ALIGN.out.bam
             .join(MINIMAP2_ALIGN.out.index, failOnDuplicate: true, failOnMismatch: true)
-            .combine(reads_grouping_key)
+            .combine(ch_reads_grouping_key)
             .filter { bam_meta, _bam, _bai, grouping_key_meta ->
                 bam_meta.id == grouping_key_meta.id
             }
@@ -325,7 +326,7 @@ workflow NALLO {
          * and we can't therefore output from the alignment step with correct naming.
          */
         SAMTOOLS_MERGE(
-            bam_to_merge,
+            ch_bam_to_merge,
             [[], [], [], []],
         )
 
@@ -351,7 +352,8 @@ workflow NALLO {
 
         SAMPLESHEET_PED(ch_samplesheet_ped_in)
 
-        ch_samplesheet_pedfile = SAMPLESHEET_PED.out.ped.collect()
+        ch_samplesheet_pedfile = SAMPLESHEET_PED.out.ped
+            .collect()
 
         if (!val_skip_sex_check) {
             //
@@ -448,14 +450,14 @@ workflow NALLO {
 
         // Combine the BED intervals with BAM/BAI files to create a region-bam-bai for each sample.
         // This uses the whole BAM files for each region instead of splitting them.
-        call_snvs_input = ch_bam_bai
+        ch_call_snvs_input = ch_bam_bai
             .combine(ch_bed_intervals)
             .map { meta, bam, bai, bed_meta, bed, num_intervals ->
                 [meta + [genome: bed_meta.genome, num_intervals: num_intervals, region: bed], bam, bai, bed]
             }
 
         CALL_SNVS(
-            call_snvs_input,
+            ch_call_snvs_input,
             ch_fasta,
             ch_fai,
             ch_par,
@@ -492,7 +494,7 @@ workflow NALLO {
         )
 
         // Grouping VCF, containing one sample with all regions
-        variants_to_concat_per_sample = CALL_SNVS.out.vcf
+        ch_variants_to_concat_per_sample = CALL_SNVS.out.vcf
             .map { meta, vcf ->
                 def new_meta = meta - meta.subMap('region', 'genome')
                 [groupKey(new_meta, new_meta.num_intervals), vcf]
@@ -504,7 +506,7 @@ workflow NALLO {
 
         // Create a concatenated and normalized VCF, containing one sample with all regions.
         VCF_CONCAT_NORM_VARIANTS(
-            variants_to_concat_per_sample,
+            ch_variants_to_concat_per_sample,
             ch_fasta,
             val_snv_caller,
             ch_vcfexpress_prelude,
@@ -527,7 +529,8 @@ workflow NALLO {
         )
         ch_multiqc_files = ch_multiqc_files.mix(QC_SNVS.out.stats.collect { _meta, metrics -> metrics }.ifEmpty([]))
 
-        ch_snvs_per_family_unannotated_vcf_tbi = family_snv_vcf.join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
+        ch_snvs_per_family_unannotated_vcf_tbi = family_snv_vcf
+            .join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
     }
     if (!val_skip_prepare_gens_input) {
         ch_gvcfs = CALL_SNVS.out.gvcf
@@ -542,7 +545,8 @@ workflow NALLO {
             ch_gvcfs
         )
 
-        ch_gvcf_tbi = CONCAT_SORT_GENS.out.vcf.join(CONCAT_SORT_GENS.out.index)
+        ch_gvcf_tbi = CONCAT_SORT_GENS.out.vcf
+            .join(CONCAT_SORT_GENS.out.index)
 
         PREPARE_GENS_INPUTS(
             ch_bam_bai,
@@ -613,7 +617,8 @@ workflow NALLO {
 
         // Provide a PED file to let whatshap activate pedigree phasing
         // Or pass 'empty_PED' if 'whatshap_pedigree_phasing==false'
-        ch_ped_family = SOMALIER_PED_FAMILY.out.ped.map { meta, ped -> [[id: meta.id], val_whatshap_pedigree_phasing ? ped : []] }
+        ch_ped_family = SOMALIER_PED_FAMILY.out.ped
+            .map { meta, ped -> [[id: meta.id], val_whatshap_pedigree_phasing ? ped : []] }
 
         PHASING(
             BCFTOOLS_CONCAT_PHASING.out.vcf,
@@ -680,10 +685,11 @@ workflow NALLO {
             val_pre_vep_snv_filter_expression != '',
         )
 
-        ch_clin_research_snvs_vcf = ANNOTATE_SNVS.out.vcf.multiMap { meta, vcf ->
-            clinical: [meta + [set: "clinical"], vcf]
-            research: [meta + [set: "research"], vcf]
-        }
+        ch_clin_research_snvs_vcf = ANNOTATE_SNVS.out.vcf
+            .multiMap { meta, vcf ->
+                clinical: [meta + [set: "clinical"], vcf]
+                research: [meta + [set: "research"], vcf]
+            }
         ch_clin_research_snvs_vcf.clinical
 
         ch_ann_csq_pli_snv_in = ch_clin_research_snvs_vcf.research
@@ -706,7 +712,8 @@ workflow NALLO {
             ch_variant_consequences_snvs,
         )
 
-        ch_snvs_per_family_annotated_vcf_tbi = ANN_CSQ_PLI_SNV.out.vcf.join(ANN_CSQ_PLI_SNV.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+        ch_snvs_per_family_annotated_vcf_tbi = ANN_CSQ_PLI_SNV.out.vcf
+            .join(ANN_CSQ_PLI_SNV.out.tbi, failOnMismatch: true, failOnDuplicate: true)
     }
 
     //
@@ -759,7 +766,8 @@ workflow NALLO {
 
         if (!val_skip_snv_annotation) {
             // Use already concatenated VCFs
-            ch_peddy_in = CONCAT_SORT_ANNOTATED_SNVS.out.vcf.join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch: true, failOnDuplicate: true)
+            ch_peddy_in = CONCAT_SORT_ANNOTATED_SNVS.out.vcf
+                .join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch: true, failOnDuplicate: true)
         }
         else {
             // If we did not annotate, we did not concatenate the VCFs before, so we need to do that here.
@@ -772,7 +780,8 @@ workflow NALLO {
                 ch_concat_sort_peddy_in
             )
 
-            ch_peddy_in = CONCAT_SORT_PEDDY.out.vcf.join(CONCAT_SORT_PEDDY.out.index, failOnMismatch: true, failOnDuplicate: true)
+            ch_peddy_in = CONCAT_SORT_PEDDY.out.vcf
+                .join(CONCAT_SORT_PEDDY.out.index, failOnMismatch: true, failOnDuplicate: true)
         }
 
         PEDDY(
@@ -814,10 +823,11 @@ workflow NALLO {
             ch_vep_plugin_files.collect(),
         )
 
-        ch_clin_research_svs_vcf = ANNOTATE_SVS.out.vcf.multiMap { meta, vcf ->
-            clinical: [meta + [set: "clinical"], vcf]
-            research: [meta + [set: "research"], vcf]
-        }
+        ch_clin_research_svs_vcf = ANNOTATE_SVS.out.vcf
+            .multiMap { meta, vcf ->
+                clinical: [meta + [set: "clinical"], vcf]
+                research: [meta + [set: "research"], vcf]
+            }
 
         ch_ann_csq_svs_in = ch_clin_research_svs_vcf.research
 

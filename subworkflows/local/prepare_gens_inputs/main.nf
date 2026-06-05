@@ -55,10 +55,11 @@ workflow PREPARE_GENS_INPUTS {
 
     CAT_CAT(ch_cat_input)
 
-    ch_branched = CAT_CAT.out.file_out.branch { meta, _file ->
-        male: meta.sex == 1
-        female: meta.sex == 2
-    }
+    ch_branched = CAT_CAT.out.file_out
+        .branch { meta, _file ->
+            male: meta.sex == 1
+            female: meta.sex == 2
+        }
 
     ch_readcounts_input = ch_branched.male
         .combine(ch_panel_of_normals_male)
@@ -75,10 +76,12 @@ workflow PREPARE_GENS_INPUTS {
         ch_readcounts_input.pon,
     )
 
-    ch_gens_input = GATK4_DENOISEREADCOUNTS.out.standardized.join(ch_gvcf)
+    ch_gens_input = GATK4_DENOISEREADCOUNTS.out.standardized
+        .join(ch_gvcf)
 
     // Generate final outputs
-    baf_positions = ch_baf_positions.map { _meta, pos -> pos }
+    baf_positions = ch_baf_positions
+        .map { _meta, pos -> pos }
 
     PREPARECOVANDBAF(
         ch_gens_input,

@@ -50,10 +50,11 @@ workflow QC_PHASING {
 
     TABIX_BGZIPTABIX(WHATSHAP_STATS.out.gtf)
 
-    ch_phasing_gtf = TABIX_BGZIPTABIX.out.gz_index.multiMap { meta, gtf, index ->
-        gz: [meta, gtf]
-        tbi: [meta, index]
-    }
+    ch_phasing_gtf = TABIX_BGZIPTABIX.out.gz_index
+        .multiMap { meta, gtf, index ->
+            gz: [meta, gtf]
+            tbi: [meta, index]
+        }
 
     CRAMINO(ch_bam_bai_haplotagged)
 

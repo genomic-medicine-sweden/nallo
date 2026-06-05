@@ -20,33 +20,35 @@ workflow BAM_INFER_SEX {
     )
 
     ch_relate_infer_in = SOMALIER_EXTRACT.out.extract
-        .combine(ch_ped.map { _meta, ped -> ped })
+        .combine( ch_ped.map { _meta, ped -> ped } )
         .filter { meta, _extract, _ped -> meta.sex == 0 }
 
     // 1. Run somalier relate on one sample at a time to infer sex
     RELATE_INFER(ch_relate_infer_in, [])
 
-    somalier_tsv = RELATE_INFER.out.samples_tsv
+    ch_somalier_tsv = RELATE_INFER.out.samples_tsv
         .map { _meta, tsv -> tsv }
         .splitCsv(header: true, sep: '\t')
 
-    ch_somalier_sex = somalier_tsv.map { it ->
-        // Hard error if sex could not be inferred for unknown sex samples
-        assert !(it.original_pedigree_sex == "unknown" && (it.sex.toInteger() != 1 && it.sex.toInteger() != 2)) : "ERROR: Sex could not be automatically inferred for ${it.sample_id}. Please inspect manually and set sex in the samplesheet."
+    ch_somalier_sex = ch_somalier_tsv
+        .map { it ->
+            // Hard error if sex could not be inferred for unknown sex samples
+            assert !(it.original_pedigree_sex == "unknown" && (it.sex.toInteger() != 1 && it.sex.toInteger() != 2)) : "ERROR: Sex could not be automatically inferred for ${it.sample_id}. Please inspect manually and set sex in the samplesheet."
 
-        [it.sample_id, it]
-    }
+            [ it.sample_id, it ]
+        }
 
     // Branch on samples with known/unknown sex
-    ch_samples = ch_bam_bai.branch { meta, _bam, _bai ->
-        unknown_sex: meta.sex == 0
-        known_sex: meta.sex != 0
-    }
+    ch_samples = ch_bam_bai
+        .branch { meta, _bam, _bai ->
+            unknown_sex: meta.sex == 0
+            known_sex: meta.sex != 0
+        }
 
     // Update sex with sex from somalier for samples with unknown sex
     ch_updated_sex = ch_samples.unknown_sex
-        .map { meta, bam, bai -> [meta.id, meta, bam, bai] }
-        .join(ch_somalier_sex, failOnMismatch: true, failOnDuplicate: true)
+        .map { meta, bam, bai -> [ meta.id, meta, bam, bai ] }
+        .join( ch_somalier_sex, failOnMismatch:true, failOnDuplicate:true )
         .map { _id, meta, bam, bai, somalier ->
             def updated_sex = (meta.sex == 0 ? somalier.sex.toInteger() : meta.sex)
             [meta + [sex: updated_sex], bam, bai]
@@ -57,9 +59,9 @@ workflow BAM_INFER_SEX {
 
     // 2. Run relate on all samples at once to check relatedness
     ch_relate_relate_in = SOMALIER_EXTRACT.out.extract
-        .map { meta, extract -> [[id: meta.project], extract] }
+        .map { meta, extract -> [ [ id: meta.project ], extract ] }
         .groupTuple()
-        .join(ch_ped, failOnMismatch: true, failOnDuplicate: true)
+        .join( ch_ped, failOnMismatch:true, failOnDuplicate:true )
 
     RELATE_RELATE(ch_relate_relate_in, [])
 

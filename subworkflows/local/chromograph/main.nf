@@ -26,15 +26,17 @@ workflow CHROMOGRAPH {
             [[], []],
         )
 
-        ch_coverage = TIDDIT_COV.out.wig.map { meta, wig ->
-            // To match the VCF meta, which only has ID due to being split by bcftools +split
-            def new_meta = [id: meta.id]
-            [new_meta, wig]
-        }
+        ch_coverage = TIDDIT_COV.out.wig
+            .map { meta, wig ->
+                // To match the VCF meta, which only has ID due to being split by bcftools +split
+                def new_meta = [id: meta.id]
+                [new_meta, wig]
+            }
     }
 
     if (plot_autozygosity) {
-        ch_vcf_tbi = ch_vcf.join(ch_tbi, failOnMismatch: true, failOnDuplicate: true)
+        ch_vcf_tbi = ch_vcf
+            .join(ch_tbi, failOnMismatch: true, failOnDuplicate: true)
 
         BCFTOOLS_ROH(
             ch_vcf_tbi,
@@ -68,9 +70,8 @@ workflow CHROMOGRAPH {
     }
 
     // Combine and filter only if there's data
-    ch_chromograph_input = ch_autozyg
-        .ifEmpty([[], []])
-        .combine(ch_coverage.ifEmpty([[], []]))
+    ch_chromograph_input = ch_autozyg.ifEmpty([[],[]])
+        .combine(ch_coverage.ifEmpty([[],[]]))
         .filter { autozyg_meta, _autozyg, coverage_meta, _coverage ->
             if (!autozyg_meta || !coverage_meta) {
                 return true

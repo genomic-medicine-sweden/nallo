@@ -14,7 +14,8 @@ workflow HIPHASE {
 
     main:
     // Prepare SNV VCF with index
-    ch_snv_vcf_tbi = ch_snv_vcf.join(ch_snv_vcf_index, failOnMismatch: true, failOnDuplicate: true)
+    ch_snv_vcf_tbi = ch_snv_vcf
+        .join(ch_snv_vcf_index, failOnMismatch: true, failOnDuplicate: true)
 
     // Group BAM files by family and join with SNV VCF
     ch_hiphase_bam_snv = ch_bam_bai
@@ -24,17 +25,21 @@ workflow HIPHASE {
 
     // Prepare input based on whether SVs are included
     if (phase_with_svs) {
-        ch_sv_vcf_tbi = ch_sv_vcf.join(ch_sv_vcf_index, failOnMismatch: true, failOnDuplicate: true)
+        ch_sv_vcf_tbi = ch_sv_vcf
+            .join(ch_sv_vcf_index, failOnMismatch: true, failOnDuplicate: true)
 
-        ch_bam_vcf = ch_hiphase_bam_snv.join(ch_sv_vcf_tbi, failOnMismatch: true, failOnDuplicate: true)
+        ch_bam_vcf = ch_hiphase_bam_snv
+            .join(ch_sv_vcf_tbi, failOnMismatch: true, failOnDuplicate: true)
         ch_bam_vcf
     }
     else {
-        ch_bam_vcf = ch_hiphase_bam_snv.map { meta, bams, bais, snv_vcf, snv_tbi -> [meta, bams, bais, snv_vcf, snv_tbi, [], []] }
+        ch_bam_vcf = ch_hiphase_bam_snv
+            .map { meta, bams, bais, snv_vcf, snv_tbi -> [meta, bams, bais, snv_vcf, snv_tbi, [], []] }
     }
 
     // Adding sample IDs to input tuples
-    ch_hiphase_in = ch_bam_vcf.join(ch_family_to_samples, failOnMismatch: true, failOnDuplicate: true)
+    ch_hiphase_in = ch_bam_vcf
+        .join(ch_family_to_samples, failOnMismatch: true, failOnDuplicate: true)
     // Run HiPhase
     RUN_HIPHASE(
         ch_hiphase_in,

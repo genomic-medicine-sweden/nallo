@@ -13,14 +13,14 @@ workflow ANNOTATE_METHYLATION {
         'tsv',
     )
 
-    region_profiles_with_sample_id_per_family = CSVTK_MUTATE2.out.output
+    ch_region_profiles_with_sample_id_per_family = CSVTK_MUTATE2.out.output
         .map { meta, region_profile_with_sample_id ->
             [[id: meta.family_id], region_profile_with_sample_id]
         }
         .groupTuple()
 
     CSVTK_CONCAT(
-        region_profiles_with_sample_id_per_family,
+        ch_region_profiles_with_sample_id_per_family,
         'tsv',
         'tsv',
     )

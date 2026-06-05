@@ -11,26 +11,27 @@ workflow CONVERT_INPUT_FILES {
     convert_fastq //    bool: Should FASTQ files be converted to BAM
 
     main:
-    reads_to_convert = ch_input.branch { _meta, reads ->
-        fastq: reads.extension == 'gz'
-        bam: reads.extension == 'bam'
-    }
+    ch_reads_to_convert = ch_input
+        .branch { _meta, reads ->
+            fastq: reads.extension == 'gz'
+            bam: reads.extension == 'bam'
+        }
 
-    ch_bam   = reads_to_convert.bam
-    ch_fastq = reads_to_convert.fastq
+    ch_bam   = ch_reads_to_convert.bam
+    ch_fastq = ch_reads_to_convert.fastq
 
-    if (convert_bam) {
-        SAMTOOLS_FASTQ(
-            reads_to_convert.bam,
-            false,
+    if(convert_bam) {
+        SAMTOOLS_FASTQ (
+            ch_reads_to_convert.bam,
+            false
         )
 
         // Mix converted files back in
         ch_fastq = ch_fastq.mix(SAMTOOLS_FASTQ.out.other)
     }
-    if (convert_fastq) {
-        SAMTOOLS_IMPORT(
-            reads_to_convert.fastq
+    if(convert_fastq) {
+        SAMTOOLS_IMPORT (
+            ch_reads_to_convert.fastq
         )
 
         // Mix converted files back in

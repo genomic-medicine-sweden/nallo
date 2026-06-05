@@ -33,7 +33,7 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
         .join(TABIX_TABIX.out.index, failOnDuplicate: true, failOnMismatch: true)
         .map { meta, vcf, tbi -> [[id: meta.family_id], vcf, tbi] }
         .groupTuple()
-        .map { meta, vcfs, tbis -> [meta, vcfs, tbis, []] }
+        .map { meta, vcfs, tbis -> [ meta, vcfs, tbis, [] ] }
 
     BCFTOOLS_MERGE(
         ch_bcftools_merge_in,

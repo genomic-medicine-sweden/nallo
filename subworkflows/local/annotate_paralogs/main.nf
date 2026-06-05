@@ -14,7 +14,7 @@ workflow ANNOTATE_PARALOGS {
      * The order of JSON files and sample names must remain aligned, since paraphrase assigns sample names to JSONs by positional order.
      */
     ch_paraphase_jsons_per_family = ch_json
-        .map { meta, json -> [['id': meta.family_id], json, meta.id] }
+        .map { meta, json -> [ [ 'id': meta.family_id ], json, meta.id ] }
         .groupTuple()
 
     PARAPHRASE(
