@@ -27,11 +27,11 @@ workflow BAM_INFER_SEX {
     // 1. Run somalier relate on one sample at a time to infer sex
     RELATE_INFER ( ch_relate_infer_in, [] )
 
-    somalier_tsv = RELATE_INFER.out.samples_tsv
+    ch_somalier_tsv = RELATE_INFER.out.samples_tsv
         .map { _meta, tsv -> tsv }
         .splitCsv(header: true, sep: '\t')
 
-    ch_somalier_sex = somalier_tsv
+    ch_somalier_sex = ch_somalier_tsv
         .map { it ->
             // Hard error if sex could not be inferred for unknown sex samples
             assert !(it.original_pedigree_sex == "unknown" && (it.sex.toInteger() != 1 && it.sex.toInteger() != 2)) : "ERROR: Sex could not be automatically inferred for ${it.sample_id}. Please inspect manually and set sex in the samplesheet."

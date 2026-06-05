@@ -19,7 +19,7 @@ workflow CALL_PARALOGS {
         [[], []],
     )
 
-   paraphase_vcf_tbis = PARAPHASE.out.vcf
+   ch_paraphase_vcf_tbis = PARAPHASE.out.vcf
         .transpose()
         .map { meta, vcf ->
             [['id': vcf.simpleName, 'family_id': meta.family_id], vcf, []]
@@ -27,7 +27,7 @@ workflow CALL_PARALOGS {
 
     // Extract the Paraphase locus identifier from the VCF (e.g. hba_hba2hap1). This is encoded in the VCF as the sample name.
     BCFTOOLS_QUERY(
-        paraphase_vcf_tbis,
+        ch_paraphase_vcf_tbis,
         [],
         [],
         [],
@@ -44,7 +44,7 @@ workflow CALL_PARALOGS {
         false,
     )
 
-    ch_bcftools_reheader_in = paraphase_vcf_tbis
+    ch_bcftools_reheader_in = ch_paraphase_vcf_tbis
         .join(GAWK.out.output, failOnMismatch: true, failOnDuplicate: true)
 
     BCFTOOLS_REHEADER(ch_bcftools_reheader_in, [[], []])

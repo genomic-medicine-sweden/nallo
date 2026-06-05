@@ -32,13 +32,13 @@ workflow ANNOTATE_CADD {
         false,
     )
 
-    rename_chrnames_in = ch_vcf
+    ch_rename_chrnames_in = ch_vcf
         .join(ch_index, failOnMismatch: true, failOnDuplicate: true)
         .map { meta, vcf, tbi -> [meta, vcf, tbi, [], [], [], []] }
         .combine(REFERENCE_TO_CADD_CHRNAMES.out.output.map { _meta, txt -> txt })
 
     RENAME_CHRNAMES(
-        rename_chrnames_in,
+        ch_rename_chrnames_in,
     )
 
     BCFTOOLS_VIEW(

@@ -278,7 +278,7 @@ workflow NALLO {
          * Ensure each BAM has a unique identify,
          * enabling correct grouping and downstream merging.
          */
-        reads_for_alignment = (val_alignment_processes > 1
+        ch_reads_for_alignment = (val_alignment_processes > 1
             ? SPLITUBAM.out.bam.transpose()
             : CONVERT_INPUT_FASTQS.out.bam).map { meta, bam -> [meta + [file: bam.name], bam] }
 
@@ -286,7 +286,7 @@ workflow NALLO {
          * Create a grouping key per sample that records the number of split files,
          * allowing downstream merging to trigger as soon as all alignments of a sample are ready.
          */
-        reads_grouping_key = reads_for_alignment
+        ch_reads_grouping_key = ch_reads_for_alignment
             .map { meta, bam -> [meta - meta.subMap('file'), bam] }
             .groupTuple()
             .map { meta, files -> [meta + [n_files: files.size()]] }
@@ -295,7 +295,7 @@ workflow NALLO {
          * Align reads independently per split (could be a split-align-merge subworkflow)
          */
         MINIMAP2_ALIGN(
-            reads_for_alignment,
+            ch_reads_for_alignment,
             PREPARE_REFERENCES.out.mmi,
             true,
             'bai',
@@ -306,9 +306,9 @@ workflow NALLO {
         /*
          * Re-attach grouping key so BAMs can be merged per group as soon as all alignments for one sample are ready
          */
-        bam_to_merge = MINIMAP2_ALIGN.out.bam
+        ch_bam_to_merge = MINIMAP2_ALIGN.out.bam
             .join(MINIMAP2_ALIGN.out.index, failOnDuplicate: true, failOnMismatch: true)
-            .combine(reads_grouping_key)
+            .combine(ch_reads_grouping_key)
             .filter { bam_meta, _bam, _bai, grouping_key_meta ->
                 bam_meta.id == grouping_key_meta.id
             }
@@ -326,7 +326,7 @@ workflow NALLO {
          * and we can't therefore output from the alignment step with correct naming.
          */
         SAMTOOLS_MERGE(
-            bam_to_merge,
+            ch_bam_to_merge,
             [[], [], [], []],
         )
 
@@ -450,14 +450,14 @@ workflow NALLO {
 
         // Combine the BED intervals with BAM/BAI files to create a region-bam-bai for each sample.
         // This uses the whole BAM files for each region instead of splitting them.
-        call_snvs_input = ch_bam_bai
+        ch_call_snvs_input = ch_bam_bai
             .combine(ch_bed_intervals)
             .map { meta, bam, bai, bed_meta, bed, num_intervals ->
                 [meta + [genome: bed_meta.genome, num_intervals: num_intervals, region: bed], bam, bai, bed]
             }
 
         CALL_SNVS(
-            call_snvs_input,
+            ch_call_snvs_input,
             ch_fasta,
             ch_fai,
             ch_par,
@@ -494,7 +494,7 @@ workflow NALLO {
         )
 
         // Grouping VCF, containing one sample with all regions
-        variants_to_concat_per_sample = CALL_SNVS.out.vcf
+        ch_variants_to_concat_per_sample = CALL_SNVS.out.vcf
             .map { meta, vcf ->
                 def new_meta = meta - meta.subMap('region', 'genome')
                 [groupKey(new_meta, new_meta.num_intervals), vcf]
@@ -506,7 +506,7 @@ workflow NALLO {
 
         // Create a concatenated and normalized VCF, containing one sample with all regions.
         VCF_CONCAT_NORM_VARIANTS(
-            variants_to_concat_per_sample,
+            ch_variants_to_concat_per_sample,
             ch_fasta,
             val_snv_caller,
             ch_vcfexpress_prelude,

@@ -20,20 +20,20 @@ workflow RANK_VARIANTS {
         ch_vcf
     )
 
-    genmod_models_in = GENMOD_ANNOTATE.out.vcf
+    ch_genmod_models_in = GENMOD_ANNOTATE.out.vcf
         .join(ch_ped, failOnMismatch: true, failOnDuplicate: true)
 
     GENMOD_MODELS(
-        genmod_models_in,
+        ch_genmod_models_in,
         ch_genmod_reduced_penetrance.map { _meta, file -> file },
     )
 
-    genmod_score_in = GENMOD_MODELS.out.vcf
+    ch_genmod_score_in = GENMOD_MODELS.out.vcf
         .join(ch_ped, failOnMismatch: true, failOnDuplicate: true)
         .join(ch_score_config, failOnMismatch: true, failOnDuplicate: true)
 
     GENMOD_SCORE(
-        genmod_score_in,
+        ch_genmod_score_in,
     )
 
     GENMOD_COMPOUND(
