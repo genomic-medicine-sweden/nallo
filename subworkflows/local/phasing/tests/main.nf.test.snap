@@ -164,7 +164,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-06-05T09:05:51.857339477",
+        "timestamp": "2026-06-05T10:03:08.416521349",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -177,17 +177,12 @@
                     {
                         "id": "FAM"
                     },
-                    "FAM_snv_phased.vcf.gz:md5,70940b6d2eea751896d9f9f73041618f"
+                    "FAM_snv_phased.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=169, phased=false, phasedAutodetect=false]",
+                    "cfea38dd33e9b9f1bbd69ac704d9408a"
                 ]
             ],
-            [
-                [
-                    {
-                        "id": "FAM"
-                    },
-                    "FAM_snv_phased.vcf.gz.tbi:md5,473af55305ac77b1ad5331fa17f3823a"
-                ]
-            ],
+            "FAM_snv_phased.vcf.gz.tbi",
             [
                 
             ],
@@ -254,7 +249,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-05T09:03:20.681925791",
+        "timestamp": "2026-06-05T10:00:38.776183431",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -267,17 +262,12 @@
                     {
                         "id": "FAM"
                     },
-                    "FAM_phased.vcf.gz:md5,fa48a6d9420ec86018e0acb42dbd4e8d"
+                    "FAM_phased.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=169, phased=false, phasedAutodetect=false]",
+                    "26a12e1137e18ee25afb458306773433"
                 ]
             ],
-            [
-                [
-                    {
-                        "id": "FAM"
-                    },
-                    "FAM_phased.vcf.gz.tbi:md5,9888e8ae2b76938b019debaf6ba40e0a"
-                ]
-            ],
+            "FAM_phased.vcf.gz.tbi",
             [
                 
             ],
@@ -344,7 +334,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-05T09:05:09.782669919",
+        "timestamp": "2026-06-05T10:02:26.450964569",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -601,7 +591,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-06-05T09:04:57.795310384",
+        "timestamp": "2026-06-05T10:02:14.709348548",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -614,17 +604,12 @@
                     {
                         "id": "FAM"
                     },
-                    "FAM_snv_phased.vcf.gz:md5,70940b6d2eea751896d9f9f73041618f"
+                    "FAM_snv_phased.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=169, phased=false, phasedAutodetect=false]",
+                    "cfea38dd33e9b9f1bbd69ac704d9408a"
                 ]
             ],
-            [
-                [
-                    {
-                        "id": "FAM"
-                    },
-                    "FAM_snv_phased.vcf.gz.tbi:md5,473af55305ac77b1ad5331fa17f3823a"
-                ]
-            ],
+            "FAM_snv_phased.vcf.gz.tbi",
             [
                 
             ],
@@ -647,8 +632,8 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002.cram:md5,96b394cee62f39c3ae248a44f137c383",
-                    "HG002.cram.crai:md5,1de8ff6b00981324b168d64fb6bfd390"
+                    "HG002.cram:md5,ba90203438fc316dc55660b107e2444e",
+                    "HG002.cram.crai:md5,d4974f502bf847a7720284ce6c579117"
                 ]
             ],
             [
@@ -698,7 +683,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-05T09:03:47.763476169",
+        "timestamp": "2026-06-05T10:01:05.312961748",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -783,7 +768,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-05T09:03:59.150652795",
+        "timestamp": "2026-06-05T10:01:16.275714648",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -912,7 +897,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-05T09:04:27.685378257",
+        "timestamp": "2026-06-05T10:01:45.035609869",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -1045,7 +1030,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-05T09:04:46.575546352",
+        "timestamp": "2026-06-05T10:02:03.442241572",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -1178,7 +1163,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-06-05T09:05:20.173479379",
+        "timestamp": "2026-06-05T10:02:36.677388071",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -1349,7 +1334,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-06-05T09:05:41.20517031",
+        "timestamp": "2026-06-05T10:02:57.788515041",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -1482,7 +1467,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-06-05T09:05:30.171890376",
+        "timestamp": "2026-06-05T10:02:46.576384109",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -1571,7 +1556,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-05T09:04:15.769660946",
+        "timestamp": "2026-06-05T10:01:33.045434855",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -1584,18 +1569,21 @@
                     {
                         "id": "FAM"
                     },
-                    "FAM_snv_phased.vcf.gz:md5,4517b63635ceb21248363884685fef89"
+                    "FAM_snv_phased.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=169, phased=false, phasedAutodetect=false]",
+                    "580ab46abab36cd020cd8fc2c2bb75be"
                 ]
             ],
+            "FAM_snv_phased.vcf.gz.tbi",
             [
                 [
                     {
                         "id": "FAM"
                     },
-                    "FAM_snv_phased.vcf.gz.tbi:md5,162104851e5ff3d8018d8d14cb8e929e"
+                    "FAM_sv_phased.vcf.gz",
+                    "16c13b731169bfa9ef73d1fb721b40be"
                 ]
             ],
-            "16c13b731169bfa9ef73d1fb721b40be",
             "FAM_sv_phased.vcf.gz.tbi",
             [
                 [
@@ -1657,7 +1645,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-05T09:03:37.150900589",
+        "timestamp": "2026-06-05T10:00:54.704833395",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"

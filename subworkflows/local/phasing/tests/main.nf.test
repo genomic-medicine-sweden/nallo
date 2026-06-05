@@ -108,8 +108,8 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.phased_family_snvs,
-                    workflow.out.phased_family_snvs_tbi,
+                    workflow.out.phased_family_snvs.collect { meta, vcf -> [ meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    file(workflow.out.phased_family_snvs_tbi.get(0).get(1)).name,
                     workflow.out.phased_family_svs,
                     workflow.out.phased_family_svs_tbi,
                     workflow.out.haplotagged_bam_bai,
@@ -198,9 +198,9 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.phased_family_snvs,
-                    workflow.out.phased_family_snvs_tbi,
-                    path(workflow.out.phased_family_svs.get(0).get(1)).linesGzip.drop(3).join('\n').md5(), // VCF4.4 header has unstable timestamp in third line
+                    workflow.out.phased_family_snvs.collect { meta, vcf -> [ meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    file(workflow.out.phased_family_snvs_tbi.get(0).get(1)).name,
+                    workflow.out.phased_family_svs.collect { meta, vcf -> [ meta, file(vcf).name, path(vcf).linesGzip.drop(3).join('\n').md5() ] },
                     file(workflow.out.phased_family_svs_tbi.get(0).get(1)).name,
                     workflow.out.haplotagged_bam_bai,
                     workflow.out.haplotagged_cram_crai,
@@ -253,8 +253,8 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.phased_family_snvs,
-                    workflow.out.phased_family_snvs_tbi,
+                    workflow.out.phased_family_snvs.collect { meta, vcf -> [ meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    file(workflow.out.phased_family_snvs_tbi.get(0).get(1)).name,
                     workflow.out.phased_family_svs,
                     workflow.out.phased_family_svs_tbi,
                     workflow.out.haplotagged_bam_bai,
@@ -307,8 +307,8 @@ nextflow_workflow {
                 { assert snapshot(
                     workflow.out.phased_family_snvs.collect { meta, vcf -> [ meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
                     file(workflow.out.phased_family_snvs_tbi.get(0).get(1)).name,
-                    workflow.out.phased_family_svs,//.collect { meta, vcf -> [ meta, file(vcf).name, path(vcf).linesGzip.drop(3).join('\n').md5() ] },
-                    workflow.out.phased_family_svs_tbi,//.get(0).get(1)).name,
+                    workflow.out.phased_family_svs,
+                    workflow.out.phased_family_svs_tbi,
                     workflow.out.haplotagged_bam_bai,
                     workflow.out.haplotagged_cram_crai,
                     workflow.out.stats,
@@ -648,8 +648,8 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.phased_family_snvs,
-                    workflow.out.phased_family_snvs_tbi,
+                    workflow.out.phased_family_snvs.collect { meta, vcf -> [ meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    file(workflow.out.phased_family_snvs_tbi.get(0).get(1)).name,
                     workflow.out.phased_family_svs,
                     workflow.out.phased_family_svs_tbi,
                     workflow.out.haplotagged_bam_bai,
