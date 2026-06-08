@@ -11,13 +11,13 @@ include { VCFEXPRESS                                 } from '../../../modules/nf
 
 workflow GVCF_GLNEXUS_NORM_VARIANTS {
     take:
-    ch_gvcfs                // channel: [mandatory] [ val(meta), path(gvcfs)     ]
-    ch_tbis                 // channel: [mandatory] [ val(meta), path(tbis)      ]
-    ch_bed                  // channel: [optional]  [ val(meta), path(input_bed) ]
-    ch_fasta                // channel: [mandatory] [ val(meta), path(fasta)     ]
-    ch_fai                  // channel: [mandatory] [ val(meta), path(fai)       ]
-    variant_caller          // string: variant caller to use
-    ch_vcfexpress_prelude   // path: [mandatory] lua file
+    ch_gvcfs              // channel: [mandatory] [ val(meta), path(gvcfs)     ]
+    ch_tbis               // channel: [mandatory] [ val(meta), path(tbis)      ]
+    ch_bed                // channel: [optional]  [ val(meta), path(input_bed) ]
+    ch_fasta              // channel: [mandatory] [ val(meta), path(fasta)     ]
+    ch_fai                // channel: [mandatory] [ val(meta), path(fai)       ]
+    variant_caller        // string: variant caller to use
+    ch_vcfexpress_prelude // path: [mandatory] lua file
 
     main:
     ch_merged_family_gvcf = channel.empty()
@@ -31,8 +31,6 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
         ch_merged_family_gvcf = GLNEXUS.out.bcf
     }
     else if (variant_caller.equals("sentieon")) {
-
-    } else if (variant_caller.equals("sentieon")) {
 
         ch_gvcftyper_in = ch_gvcfs
             .join(ch_tbis, failOnMismatch: true, failOnDuplicate: true)
@@ -64,10 +62,9 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     }
     // Annotate with FOUND_IN tag - not sure what would happen if we do this before glnexus instead?
     // Add caller information to meta so vcfexpress can add the FOUND_IN tag based on sv_caller
-    ch_vcfexpress_input = ch_merged_family_gvcf
-        .map { meta, vcf ->
-            [meta + [sv_caller: variant_caller], vcf]
-        }
+    ch_vcfexpress_input = ch_merged_family_gvcf.map { meta, vcf ->
+        [meta + [sv_caller: variant_caller], vcf]
+    }
 
     VCFEXPRESS(
         ch_vcfexpress_input,
@@ -75,10 +72,9 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     )
 
     // Remove added caller information in meta
-    ch_bcftools_norm_input = VCFEXPRESS.out.vcf
-        .map { meta, vcf ->
-            [meta - meta.subMap('sv_caller'), vcf, []]
-        }
+    ch_bcftools_norm_input = VCFEXPRESS.out.vcf.map { meta, vcf ->
+        [meta - meta.subMap('sv_caller'), vcf, []]
+    }
 
 
     // Decompose and normalize variants
