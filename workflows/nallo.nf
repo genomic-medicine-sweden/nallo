@@ -626,7 +626,6 @@ workflow NALLO {
             .map { family_id, sample_ids ->
                 [[id: family_id], sample_ids.unique()]
             }
-            .set { ch_family_to_samples }
 
         /*
          * The VCFs are split by calling regions but we need whole-genome VCFs for phasing, we first group by family and then concatenate the VCFs of the same family together.
