@@ -46,12 +46,11 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     ch_merged_family_gvcf_glnexus = GLNEXUS.out.bcf
 
     // SENTIEON_GVCFTYPER processes sentieon gVCFs
-    branched_gvcfs.sentieon
+    ch_gvcftyper_in = branched_gvcfs.sentieon
         .join(branched_tbis.sentieon, failOnMismatch: true, failOnDuplicate: true)
         .map { meta, gvcfs, tbis ->
             [meta, gvcfs, tbis, []]
         }
-        .set { ch_gvcftyper_in }
 
     SENTIEON_GVCFTYPER(
         ch_gvcftyper_in,
@@ -99,11 +98,10 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     )
 
     // Remove added caller information in meta
-    VCFEXPRESS.out.vcf
+    ch_bcftools_norm_input = VCFEXPRESS.out.vcf
         .map { meta, vcf ->
             [meta - meta.subMap('caller'), vcf, []]
         }
-        .set { ch_bcftools_norm_input }
 
 
     // Decompose and normalize variants

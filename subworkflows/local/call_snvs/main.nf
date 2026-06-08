@@ -39,13 +39,12 @@ workflow CALL_SNVS {
 
     } else if (variant_caller.equals("sentieon")) {
 
-        ch_bam_bai_bed
+        ch_bam_bai = ch_bam_bai_bed
             .map { meta, bam, bai, _bed ->
                 [ meta, bam, bai ]
             }
-            .set { ch_bam_bai }
 
-        ch_bam_bai_bed
+        ch_bed = ch_bam_bai_bed
             .map { meta, _bam, _bai, bed ->
                 [ meta, bed ]
             }
@@ -54,23 +53,21 @@ workflow CALL_SNVS {
                 male:   meta.sex == 1
                 female: meta.sex == 2
             }
-            .set { ch_bed }
 
         ch_male_diploid_intersect_in   = makeIntersectChannel(ch_sentieon_male_diploid_bed, ch_bed.male, "diploid")
         ch_female_diploid_intersect_in = makeIntersectChannel(ch_sentieon_female_diploid_bed, ch_bed.female, "diploid")
         ch_male_haploid_intersect_in   = makeIntersectChannel(ch_sentieon_male_haploid_bed, ch_bed.male, "haploid")
 
-        ch_male_diploid_intersect_in
+        ch_bedtools_intersect_in = ch_male_diploid_intersect_in
             .mix(ch_female_diploid_intersect_in)
             .mix(ch_male_haploid_intersect_in)
-            .set { ch_bedtools_intersect_in }
 
         BEDTOOLS_INTERSECT(
             ch_bedtools_intersect_in,
             [[], []],
         )
 
-        BEDTOOLS_INTERSECT.out.intersect
+        ch_intersected_calling_intervals = BEDTOOLS_INTERSECT.out.intersect
             .branch {
                 meta, intersected_bed ->
                 diploid: meta.ploidy == "diploid"
@@ -78,9 +75,8 @@ workflow CALL_SNVS {
                 haploid: meta.ploidy == "haploid"
                     [ meta - meta.subMap('ploidy'), intersected_bed  ]
             }
-            .set { ch_intersected_calling_intervals }
 
-        ch_intersected_calling_intervals.haploid
+        ch_haploid_regions_out = ch_intersected_calling_intervals.haploid
             .map {
                 meta, bed ->
                 if(bed && bed.size() > 0) {
@@ -92,17 +88,12 @@ workflow CALL_SNVS {
             .mix(
                 ch_bed.female.map { meta, _bed -> [ meta, [] ] }
             )
-            .set { ch_haploid_regions_out }
 
-        ch_intersected_calling_intervals.diploid
-            .set { ch_diploid_regions_out }
+        ch_diploid_regions_out = ch_intersected_calling_intervals.diploid
 
-        ch_bam_bai
+        ch_dnascope_in = ch_bam_bai
             .join(ch_diploid_regions_out)
             .join(ch_haploid_regions_out)
-            .set {
-                ch_dnascope_in
-            }
 
         DNASCOPE_LONGREAD(
             ch_dnascope_in,

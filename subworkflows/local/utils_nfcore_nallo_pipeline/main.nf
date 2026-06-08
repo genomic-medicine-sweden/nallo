@@ -276,7 +276,7 @@ workflow PIPELINE_INITIALISATION {
     //
     // Create channel from input file provided through val_input
     //
-    channel
+    ch_samplesheet = channel
         .fromList(
             samplesheetToList(val_input, "${projectDir}/assets/schema_input.json")
         )
@@ -303,7 +303,6 @@ workflow PIPELINE_INITIALISATION {
             [ addRelationshipsToMeta(metas), reads ]
         }
         .transpose()
-        .set { ch_samplesheet }
 
         // Check that all families has at least one sample with affected phenotype if ranking is active
         validateAllFamiliesHasAffectedSamples(ch_samplesheet, val_skip_rank_variants)

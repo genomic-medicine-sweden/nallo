@@ -69,6 +69,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1111](https://github.com/genomic-medicine-sweden/nallo/pull/1111) - Refactored gVCF grouping to reduce code duplication in `nallo`
 - [#1112](https://github.com/genomic-medicine-sweden/nallo/pull/1112) - Changed testdata commit to include data with a deletion in the mitochondrial chromosome
 - [#1118](https://github.com/genomic-medicine-sweden/nallo/pull/1118) - Changed testdata commit
+- [#1126](https://github.com/genomic-medicine-sweden/nallo/pull/1126) - Changed `ch_* = <...>` instead of `.set { }` in the pipeline
 - [#1119](https://github.com/genomic-medicine-sweden/nallo/pull/1119) - Changed Expression of `filter_snvs_expression`in test `tests/samplesheet_multisample_bam.nf.test` in order to be compatible with mitochondrial vcf fields
 - [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Changed logic in `subworkflows/local/gvcf_glnexus_norm_variants/main.nf` to handle caller from the meta including the mitochondrial caller
 - [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Mitochondrial variants do not go through the phasing
@@ -81,6 +82,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1087](https://github.com/genomic-medicine-sweden/nallo/pull/1087) - Removed empty qc_snv.config
 - [#1092](https://github.com/genomic-medicine-sweden/nallo/pull/1092) - Removed unused SVDB import in `nallo`
 - [#1100](https://github.com/genomic-medicine-sweden/nallo/pull/1100) - Removed tabix from SNV and SV annotation subworkflows
+- [#1125](https://github.com/genomic-medicine-sweden/nallo/pull/1125) - Removed `samplesheet_ont.csv` because it is unused.
 
 ### Fixed
 

@@ -254,9 +254,8 @@ workflow NALLO {
         )
 
         // contains all FASTQ files, including those not converted
-        CONVERT_INPUT_BAMS.out.fastq
+        ch_genome_assembly_input = CONVERT_INPUT_BAMS.out.fastq
             .groupTuple()
-            .set { ch_genome_assembly_input }
 
         // Hifiasm assembly
         GENOME_ASSEMBLY(
@@ -281,25 +280,24 @@ workflow NALLO {
          * Ensure each BAM has a unique identify,
          * enabling correct grouping and downstream merging.
          */
-        (val_alignment_processes > 1
+        ch_reads_for_alignment = (val_alignment_processes > 1
             ? SPLITUBAM.out.bam.transpose()
-            : CONVERT_INPUT_FASTQS.out.bam).map { meta, bam -> [meta + [file: bam.name], bam] }.set { reads_for_alignment }
+            : CONVERT_INPUT_FASTQS.out.bam).map { meta, bam -> [meta + [file: bam.name], bam] }
 
         /*
          * Create a grouping key per sample that records the number of split files,
          * allowing downstream merging to trigger as soon as all alignments of a sample are ready.
          */
-        reads_for_alignment
+        ch_reads_grouping_key = ch_reads_for_alignment
             .map { meta, bam -> [meta - meta.subMap('file'), bam] }
             .groupTuple()
             .map { meta, files -> [meta + [n_files: files.size()]] }
-            .set { reads_grouping_key }
 
         /*
          * Align reads independently per split (could be a split-align-merge subworkflow)
          */
         MINIMAP2_ALIGN(
-            reads_for_alignment,
+            ch_reads_for_alignment,
             PREPARE_REFERENCES.out.mmi,
             true,
             'bai',
@@ -310,9 +308,9 @@ workflow NALLO {
         /*
          * Re-attach grouping key so BAMs can be merged per group as soon as all alignments for one sample are ready
          */
-        MINIMAP2_ALIGN.out.bam
+        ch_bam_to_merge = MINIMAP2_ALIGN.out.bam
             .join(MINIMAP2_ALIGN.out.index, failOnDuplicate: true, failOnMismatch: true)
-            .combine(reads_grouping_key)
+            .combine(ch_reads_grouping_key)
             .filter { bam_meta, _bam, _bai, grouping_key_meta ->
                 bam_meta.id == grouping_key_meta.id
             }
@@ -323,7 +321,6 @@ workflow NALLO {
                 [groupKey(meta, meta.n_files), bam, bai]
             }
             .groupTuple()
-            .set { bam_to_merge }
 
         /*
          * Always merge here even if there's only one file,
@@ -331,15 +328,14 @@ workflow NALLO {
          * and we can't therefore output from the alignment step with correct naming.
          */
         SAMTOOLS_MERGE(
-            bam_to_merge,
+            ch_bam_to_merge,
             [[], [], [], []],
         )
 
         // Combine merged with unmerged bam files
-        SAMTOOLS_MERGE.out.bam
+        ch_aligned_bam = SAMTOOLS_MERGE.out.bam
             .join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true)
             .map { meta, bam, bai -> [meta - meta.subMap('n_files'), bam, bai] }
-            .set { ch_aligned_bam }
 
         // Convert alignments as CRAM if requested
         if (val_convert_unphased_aligned_reads_to_cram) {
@@ -352,16 +348,14 @@ workflow NALLO {
         //
         // Create PED from samplesheet
         //
-        ch_samplesheet
+        ch_samplesheet_ped_in = ch_samplesheet
             .map { meta, _files -> [[id: meta.project], meta] }
             .groupTuple()
-            .set { ch_samplesheet_ped_in }
 
         SAMPLESHEET_PED(ch_samplesheet_ped_in)
 
-        SAMPLESHEET_PED.out.ped
+        ch_samplesheet_pedfile = SAMPLESHEET_PED.out.ped
             .collect()
-            .set { ch_samplesheet_pedfile }
 
         if (!val_skip_sex_check) {
             //
@@ -476,15 +470,14 @@ workflow NALLO {
 
         // Combine the BED intervals with BAM/BAI files to create a region-bam-bai for each sample.
         // This uses the whole BAM files for each region instead of splitting them.
-        ch_bam_bai
+        ch_call_snvs_input = ch_bam_bai
             .combine(ch_bed_intervals)
             .map { meta, bam, bai, bed_meta, bed, num_intervals ->
                 [meta + [genome: bed_meta.genome, num_intervals: num_intervals, region: bed], bam, bai, bed]
             }
-            .set { call_snvs_input }
 
         CALL_SNVS(
-            call_snvs_input,
+            ch_call_snvs_input,
             ch_fasta,
             ch_fai,
             ch_par,
@@ -530,7 +523,7 @@ workflow NALLO {
         )
 
         // Grouping VCF, containing one sample with all regions except chrM, as we do not want mitochondrial variants in the deepvariant report for now.
-        variants_to_concat_per_sample = CALL_SNVS.out.vcf
+        ch_variants_to_concat_per_sample = CALL_SNVS.out.vcf
             .map { meta, vcf ->
                 def new_meta = meta - meta.subMap('region', 'genome')
                 [groupKey(new_meta, new_meta.num_intervals), vcf]
@@ -542,7 +535,7 @@ workflow NALLO {
 
         // Create a concatenated and normalized VCF, containing one sample with all regions.
         VCF_CONCAT_NORM_VARIANTS(
-            variants_to_concat_per_sample,
+            ch_variants_to_concat_per_sample,
             ch_fasta,
             val_snv_caller,
             ch_vcfexpress_prelude,
@@ -567,28 +560,25 @@ workflow NALLO {
         family_snv_vcf = GVCF_GLNEXUS_NORM_VARIANTS.out.vcf
         family_snv_index = GVCF_GLNEXUS_NORM_VARIANTS.out.index
 
-        family_snv_vcf
+        ch_snvs_per_family_unannotated_vcf_tbi = family_snv_vcf
             .join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
-            .set { ch_snvs_per_family_unannotated_vcf_tbi }
     }
 
     if (!val_skip_prepare_gens_input) {
-        CALL_SNVS.out.gvcf
+        ch_gvcfs = CALL_SNVS.out.gvcf
             .join(CALL_SNVS.out.gvcf_index)
             .map { meta, gvcf, gvcf_index ->
                 def sample_meta = meta - meta.subMap(['region', 'num_intervals', 'genome'])
                 [sample_meta, gvcf, gvcf_index]
             }
             .groupTuple()
-            .set { ch_gvcfs }
 
         CONCAT_SORT_GENS(
             ch_gvcfs
         )
 
-        CONCAT_SORT_GENS.out.vcf
+        ch_gvcf_tbi = CONCAT_SORT_GENS.out.vcf
             .join(CONCAT_SORT_GENS.out.index)
-            .set { ch_gvcf_tbi }
 
         PREPARE_GENS_INPUTS(
             ch_bam_bai,
@@ -630,7 +620,7 @@ workflow NALLO {
     //
     if (!val_skip_phasing) {
 
-        ch_samplesheet
+        ch_family_to_samples = ch_samplesheet
             .map { meta, _files -> [meta.family_id, meta.id] }
             .groupTuple()
             .map { family_id, sample_ids ->
@@ -642,7 +632,7 @@ workflow NALLO {
          * The VCFs are split by calling regions but we need whole-genome VCFs for phasing, we first group by family and then concatenate the VCFs of the same family together.
          * We group only nuclear vcf for phasing as phasing mitochondrial variants is not relevant."num_intervals - 1" happens because groupKey should not expect the mitochondrial interval.
          */
-        family_snv_vcf
+        ch_bcftools_concat_phasing_in = family_snv_vcf
             .join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
             .filter { meta, _vcf, _tbi -> meta.genome == "nuclear" }
             .map { meta, vcf, tbi ->
@@ -656,7 +646,6 @@ workflow NALLO {
             .map { meta, vcfs, tbis ->
                 [meta - meta.subMap('num_intervals'), vcfs, tbis]
             }
-            .set { ch_bcftools_concat_phasing_in }
 
         BCFTOOLS_CONCAT_PHASING(
             ch_bcftools_concat_phasing_in
@@ -664,9 +653,8 @@ workflow NALLO {
 
         // Provide a PED file to let whatshap activate pedigree phasing
         // Or pass 'empty_PED' if 'whatshap_pedigree_phasing==false'
-        SOMALIER_PED_FAMILY.out.ped
+        ch_ped_family = SOMALIER_PED_FAMILY.out.ped
             .map { meta, ped -> [[id: meta.id], val_whatshap_pedigree_phasing ? ped : []] }
-            .set { ch_ped_family }
 
         // Input is one VCF per family with all the regions (except chrM) and all the samples in the family
         PHASING(
@@ -687,14 +675,13 @@ workflow NALLO {
         ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect { _meta, txt -> txt }.ifEmpty([]))
 
         // Scatter nuclear whole-genome phased SNV VCFs back into regions for annotation.
-        PHASING.out.phased_family_snvs
+        ch_phased_scatter_in = PHASING.out.phased_family_snvs
             .join(PHASING.out.phased_family_snvs_tbi, failOnMismatch: true, failOnDuplicate: true)
             .combine(ch_bed_intervals)
             .multiMap { vcf_meta, vcf, tbi, bed_meta, bed, num_intervals ->
                 vcf: [vcf_meta + [id: bed.name, family_id: vcf_meta.id, genome: bed_meta.genome, num_intervals: num_intervals], vcf, tbi]
                 bed: bed
             }
-            .set { ch_phased_scatter_in }
 
         // Split the vcf into regions for annotation
         BCFTOOLS_VIEW_PHASING(
@@ -754,14 +741,13 @@ workflow NALLO {
             val_pre_vep_snv_filter_expression != '',
         )
 
-        ANNOTATE_SNVS.out.vcf
+        ch_clin_research_snvs_vcf = ANNOTATE_SNVS.out.vcf
             .multiMap { meta, vcf ->
                 clinical: [meta + [set: "clinical"], vcf]
                 research: [meta + [set: "research"], vcf]
             }
-            .set { ch_clin_research_snvs_vcf }
 
-        ch_clin_research_snvs_vcf.research.set { ch_ann_csq_pli_snv_in }
+        ch_ann_csq_pli_snv_in = ch_clin_research_snvs_vcf.research
 
         if (val_filter_variants_hgnc_ids || val_filter_snvs_expression != '') {
 
@@ -781,9 +767,8 @@ workflow NALLO {
             ch_variant_consequences_snvs,
         )
 
-        ANN_CSQ_PLI_SNV.out.vcf
+        ch_snvs_per_family_annotated_vcf_tbi = ANN_CSQ_PLI_SNV.out.vcf
             .join(ANN_CSQ_PLI_SNV.out.tbi, failOnMismatch: true, failOnDuplicate: true)
-            .set { ch_snvs_per_family_annotated_vcf_tbi }
     }
 
     //
@@ -793,14 +778,13 @@ workflow NALLO {
 
     if (split_family_vcf_for_chromograph || (!val_skip_peddy && !val_skip_snv_annotation)) {
 
-        ANNOTATE_SNVS.out.vcf
+        ch_concat_sort_annotated_snvs_input = ANNOTATE_SNVS.out.vcf
             .join(ANNOTATE_SNVS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
             .map { meta, vcf, tbi ->
                 def new_meta = [id: meta.family_id, num_intervals: meta.num_intervals]
                 [groupKey(new_meta, new_meta.num_intervals), vcf, tbi]
             }
             .groupTuple()
-            .set { ch_concat_sort_annotated_snvs_input }
 
         CONCAT_SORT_ANNOTATED_SNVS(
             ch_concat_sort_annotated_snvs_input
@@ -809,7 +793,7 @@ workflow NALLO {
 
     if (split_family_vcf_for_chromograph) {
         // Transpose family-level VCFs and add sample IDs by combining with samplesheet meta
-        ch_samplesheet
+        ch_bcftools_view_chromograph_input = ch_samplesheet
             .map { meta, _files -> [id: meta.id, family_id: meta.family_id] }
             .unique()
             .combine(
@@ -821,7 +805,6 @@ workflow NALLO {
             .map { sample_info, _vcf_meta, vcf, tbi ->
                 [sample_info, vcf, tbi]
             }
-            .set { ch_bcftools_view_chromograph_input }
 
         BCFTOOLS_VIEW_CHROMOGRAPH(
             ch_bcftools_view_chromograph_input,
@@ -838,25 +821,22 @@ workflow NALLO {
 
         if (!val_skip_snv_annotation) {
             // Use already concatenated VCFs
-            CONCAT_SORT_ANNOTATED_SNVS.out.vcf
+            ch_peddy_in = CONCAT_SORT_ANNOTATED_SNVS.out.vcf
                 .join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch: true, failOnDuplicate: true)
-                .set { ch_peddy_in }
         }
         else {
             // If we did not annotate, we did not concatenate the VCFs before, so we need to do that here.
-            ch_snvs_per_family_unannotated_vcf_tbi
+            ch_concat_sort_peddy_in = ch_snvs_per_family_unannotated_vcf_tbi
                 .map { meta, vcf, tbi -> [groupKey([id: meta.family_id], meta.num_intervals), vcf, tbi] }
                 .groupTuple()
                 .map { key, vcfs, tbis -> [key.getGroupTarget(), vcfs, tbis] }
-                .set { ch_concat_sort_peddy_in }
 
             CONCAT_SORT_PEDDY(
                 ch_concat_sort_peddy_in
             )
 
-            CONCAT_SORT_PEDDY.out.vcf
+            ch_peddy_in = CONCAT_SORT_PEDDY.out.vcf
                 .join(CONCAT_SORT_PEDDY.out.index, failOnMismatch: true, failOnDuplicate: true)
-                .set { ch_peddy_in }
         }
 
         PEDDY(
@@ -898,14 +878,13 @@ workflow NALLO {
             ch_vep_plugin_files.collect(),
         )
 
-        ANNOTATE_SVS.out.vcf
+        ch_clin_research_svs_vcf = ANNOTATE_SVS.out.vcf
             .multiMap { meta, vcf ->
                 clinical: [meta + [set: "clinical"], vcf]
                 research: [meta + [set: "research"], vcf]
             }
-            .set { ch_clin_research_svs_vcf }
 
-        ch_clin_research_svs_vcf.research.set { ch_ann_csq_svs_in }
+        ch_ann_csq_svs_in = ch_clin_research_svs_vcf.research
 
         //
         // Filter SVs
@@ -951,14 +930,13 @@ workflow NALLO {
             ch_samplesheet,
         )
 
-        ch_snvs_to_rank
+        ch_rank_variants_input = ch_snvs_to_rank
             .mix(ch_svs_to_rank)
             .multiMap { meta, vcf, ped, score_config ->
                 vcf: [meta, vcf]
                 ped: [meta, ped]
                 score_config: [meta, score_config]
             }
-            .set { ch_rank_variants_input }
 
         RANK_VARIANTS(
             ch_rank_variants_input.vcf,
@@ -967,15 +945,14 @@ workflow NALLO {
             ch_rank_variants_input.score_config,
         )
 
-        RANK_VARIANTS.out.vcf
+        ch_ranked_variants = RANK_VARIANTS.out.vcf
             .join(RANK_VARIANTS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
             .branch { meta, _vcf, _tbi ->
                 snvs: meta.variant_type == "snv"
                 sv: meta.variant_type == "sv"
             }
-            .set { ch_ranked_variants }
 
-        ch_ranked_variants.snvs.set { ch_snvs_per_family_ranked_vcf_tbi }
+        ch_snvs_per_family_ranked_vcf_tbi = ch_ranked_variants.snvs
     }
 
     //
@@ -986,13 +963,12 @@ workflow NALLO {
             ? (val_skip_snv_annotation ? ch_snvs_per_family_unannotated_vcf_tbi : ch_snvs_per_family_annotated_vcf_tbi)
             : ch_snvs_per_family_ranked_vcf_tbi
 
-        ch_snvs_per_family_to_concatenate
+        ch_concat_sort_input = ch_snvs_per_family_to_concatenate
             .map { meta, vcf, tbi ->
                 def new_meta = [id: meta.family_id, set: meta.set, sample_ids: meta.sample_ids, num_intervals: meta.num_intervals]
                 [groupKey(new_meta, meta.num_intervals), vcf, tbi]
             }
             .groupTuple()
-            .set { ch_concat_sort_input }
 
         CONCAT_SORT_RANKED_SNVS(
             ch_concat_sort_input
@@ -1038,7 +1014,7 @@ workflow NALLO {
             ch_methbat_regions,
         )
 
-        CALL_METHYLATION_METHBAT.out.region_profile.set { ch_methylation_profiles }
+        ch_methylation_profiles = CALL_METHYLATION_METHBAT.out.region_profile
     }
 
     if (!val_skip_methylation_annotation) {
@@ -1105,7 +1081,7 @@ workflow NALLO {
             "${process}:\n${tool_versions.join('\n')}"
         }
 
-    softwareVersionsToYAML(topic_versions.versions_file)
+    ch_collated_versions = softwareVersionsToYAML(topic_versions.versions_file)
         .mix(topic_versions_string)
         .collectFile(
             storeDir: "${val_outdir}/pipeline_info",
@@ -1113,7 +1089,6 @@ workflow NALLO {
             sort: true,
             newLine: true,
         )
-        .set { ch_collated_versions }
 
     //
     // MODULE: MultiQC

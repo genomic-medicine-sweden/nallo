@@ -17,13 +17,11 @@ workflow PREPARE_REFERENCES {
 
     // Will not catch cases where fasta is bgzipped
     if (gunzip_fasta) {
-        GUNZIP_FASTA ( fasta_in )
+        ch_fasta = GUNZIP_FASTA ( fasta_in )
             .gunzip
             .collect()
-            .set { ch_fasta }
     } else {
-        fasta_in
-            .set { ch_fasta }
+        ch_fasta = fasta_in
     }
 
     if (!fai_in) {
@@ -32,12 +30,10 @@ workflow PREPARE_REFERENCES {
             false
         )
 
-        SAMTOOLS_FAIDX.out.fai
+        ch_fai = SAMTOOLS_FAIDX.out.fai
             .collect()
-            .set { ch_fai }
     } else {
-        fai_in
-            .set { ch_fai }
+        ch_fai = fai_in
     }
 
     MINIMAP2_INDEX (
