@@ -278,9 +278,11 @@ workflow PIPELINE_INITIALISATION {
         .fromList(
             samplesheetToList(val_input, "${projectDir}/assets/schema_input.json")
         )
+        // add sample as groupTuple key
         .map { meta, reads ->
             [meta.id, meta, reads]
         }
+        // group by sample
         .groupTuple()
         .map { id_meta_reads ->
             validateUniqueFilenamesPerSample(id_meta_reads)
@@ -454,6 +456,7 @@ def extractSoftwareFromTopics(topics_channel) {
     topics_channel.map { toolBlockText ->
         toolBlockText
             .readLines()
+            // Drop process name
             .drop(1)
             .collect { line -> line.trim().split(':')[0] }
     }
@@ -462,9 +465,10 @@ def extractSoftwareFromTopics(topics_channel) {
 def generateReferenceHTML(tool_list, description) {
     def items = tool_list
         .collect { citation -> citation.trim() }
+        // e.g. samtools and bcftools share citation
         .unique()
+        // some tools does not have a citation, e.g. awk, gunzip
         .findAll { citation -> citation != "" }
-    // some tools does not have a citation, e.g. awk, gunzip
 
     if (description == 'citation') {
         return "  <p>Tools used in the workflow included: ${items.join(', ')}.</p>"
@@ -483,6 +487,7 @@ def citationBibliographyText(ch_topic_versions_string, references_yaml, descript
     def baseTools = channel.from(['nextflow', 'nf_core', 'bioconda', 'biocontainers', 'multiqc'])
 
     extractSoftwareFromTopics(ch_topic_versions_string)
+        // split multi-tool modules
         .flatten()
         .unique()
         .filter { tool -> !unwantedReferences.contains(tool) }
