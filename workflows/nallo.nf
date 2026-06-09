@@ -460,9 +460,11 @@ workflow NALLO {
          * The meta.caller is needed for GVCF_GLNEXUS_NORM_VARIANTS workflow to process the VCFs differently.
          * the number of intervals is used in groupKey downstream, num_intervals should be the same in the nuclear and mitochondrial channels.
          */
+        def ch_num_intervals = ch_bed_intervals.map { _meta, _bed, num_intervals -> num_intervals }.first()
+
         ch_mitochondrial = CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_vcf
             .join(CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_tbi, failOnMismatch: true, failOnDuplicate: true)
-            .combine(ch_bed_intervals.map { _meta, _bed, num_intervals -> num_intervals }.first())
+            .combine(ch_num_intervals)
             .multiMap { meta, vcf, tbi, num_intervals ->
                 vcf: [meta + [caller: val_mitochondrial_caller, genome: 'mitochondrial', num_intervals: num_intervals + 1], vcf]
                 index: [meta + [caller: val_mitochondrial_caller, genome: 'mitochondrial', num_intervals: num_intervals + 1], tbi]
