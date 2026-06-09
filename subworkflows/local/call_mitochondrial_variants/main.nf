@@ -81,10 +81,10 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
                 sv: meta.variant_type == "sv"
             }
 
-        ch_snv_vcf = submap_variant_type(ch_mito_vcf_split.snv)
-        ch_snv_tbi = submap_variant_type(ch_mito_tbi_split.snv)
-        ch_sv_vcf  = submap_variant_type(ch_mito_vcf_split.sv)
-        ch_sv_tbi  = submap_variant_type(ch_mito_tbi_split.sv)
+        ch_snv_vcf = remove_variant_type_from_meta(ch_mito_vcf_split.snv)
+        ch_snv_tbi = remove_variant_type_from_meta(ch_mito_tbi_split.snv)
+        ch_sv_vcf  = remove_variant_type_from_meta(ch_mito_vcf_split.sv)
+        ch_sv_tbi  = remove_variant_type_from_meta(ch_mito_tbi_split.sv)
 
     } else {
         ch_snv_vcf = ch_vcf
@@ -99,6 +99,6 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
     mitochondrial_sv_vcf  = ch_sv_vcf   // channel: [val(meta), path(vcf)]
     mitochondrial_sv_tbi  = ch_sv_tbi   // channel: [val(meta), path(tbi)]
 }
-def submap_variant_type(channel) {
+def remove_variant_type_from_meta(channel) {
     channel.map { meta, file -> [meta - meta.subMap('variant_type'), file] }
 }
