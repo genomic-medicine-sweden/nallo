@@ -30,7 +30,7 @@ process DNASCOPE_LONGREAD_CALL_SNVS {
     def haploid_bed_arg = haploid_intervals_bed ? "--haploid_bed ${haploid_intervals_bed}" : ""
 
     """
-   sentieon-cli dnascope-longread \\
+    sentieon-cli dnascope-longread \\
         -t ${task.cpus} \\
         --tech ${tech} \\
         -r ${fasta} \\
@@ -49,9 +49,9 @@ process DNASCOPE_LONGREAD_CALL_SNVS {
     stub:
     prefix = task.ext.prefix ?: "${meta.id}"
     """
-   echo "" | gzip > ${prefix}.vcf.gz
-   touch ${prefix}.vcf.gz.tbi
-   echo "" | gzip > ${prefix}.g.vcf.gz
-   touch ${prefix}.g.vcf.gz.tbi
+    echo "" | gzip > ${prefix}.vcf.gz
+    touch ${prefix}.vcf.gz.tbi
+    echo "" | gzip > ${prefix}.g.vcf.gz
+    touch ${prefix}.g.vcf.gz.tbi
    """
 }
