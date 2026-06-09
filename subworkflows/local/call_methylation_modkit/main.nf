@@ -1,8 +1,7 @@
 include { MODKIT_PILEUP            } from '../../../modules/nf-core/modkit/pileup/main'
 include { MODKIT_BEDMETHYLTOBIGWIG } from '../../../modules/nf-core/modkit/bedmethyltobigwig/main'
-include { TABIX_TABIX              }  from '../../../modules/nf-core/tabix/tabix/main'
+include { TABIX_TABIX              } from '../../../modules/nf-core/tabix/tabix/main'
 workflow CALL_METHYLATION_MODKIT {
-
     take:
     ch_bam_bai // channel: [ val(meta), bam, bai ]
     ch_fasta   // channel: [ val(meta), fasta ]
@@ -29,13 +28,13 @@ workflow CALL_METHYLATION_MODKIT {
         .filter { _meta, bed -> gzNotEmptyBySize(bed) }
 
     TABIX_TABIX(
-        ch_bedmethyl,
+        ch_bedmethyl
     )
 
     MODKIT_BEDMETHYLTOBIGWIG(
         ch_bedmethyl_to_bigwig_in,
         ch_fai,
-        modcodes
+        modcodes,
     )
 
     emit:

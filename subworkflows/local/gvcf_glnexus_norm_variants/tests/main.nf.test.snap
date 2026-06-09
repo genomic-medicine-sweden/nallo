@@ -36,11 +36,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-03-23T15:19:06.8746512",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-23T15:19:06.8746512"
+        }
     },
     "1 gVCF, without bed": {
         "content": [
@@ -79,11 +79,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-03-23T15:18:09.640000772",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-23T15:18:09.640000772"
+        }
     },
     "2 gVCFs, without bed": {
         "content": [
@@ -122,11 +122,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-03-23T15:18:22.366056259",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-23T15:18:22.366056259"
+        }
     },
     "2 gVCFs, without bed, sentieon -stub": {
         "content": [
@@ -165,11 +165,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-06-08T09:22:42.491106662",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-23T15:19:29.935474537"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.4"
+        }
     },
     "2 gVCFs, without bed -stub": {
         "content": [
@@ -208,11 +208,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-03-23T15:18:56.257695883",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-23T15:18:56.257695883"
+        }
     },
     "1 gVCF, without bed, sentieon -stub": {
         "content": [
@@ -251,11 +251,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-06-08T09:22:34.255314395",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-23T15:19:19.013856535"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.4"
+        }
     },
     "1 gVCF, without bed -stub": {
         "content": [
@@ -294,11 +294,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-03-23T15:18:46.497035507",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-23T15:18:46.497035507"
+        }
     },
     "2 gVCFs, with bed": {
         "content": [
@@ -337,10 +337,10 @@
                 ]
             }
         ],
+        "timestamp": "2026-03-23T15:18:34.95261691",
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-23T15:18:34.95261691"
+        }
     }
 }

@@ -60,10 +60,10 @@ workflow ANNOTATE_CADD {
         .combine(CADD_TO_REFERENCE_CHRNAMES.out.output.map { _meta, txt -> txt })
 
     ANNOTATE_INDELS(
-        ch_annotate_indels_in,
+        ch_annotate_indels_in
     )
 
     emit:
-    vcf      = ANNOTATE_INDELS.out.vcf // channel: [ val(meta), path(vcf) ]
-    tbi      = ANNOTATE_INDELS.out.tbi // channel: [ val(meta), path(tbi) ]
+    vcf = ANNOTATE_INDELS.out.vcf // channel: [ val(meta), path(vcf) ]
+    tbi = ANNOTATE_INDELS.out.tbi // channel: [ val(meta), path(tbi) ]
 }

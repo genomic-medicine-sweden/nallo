@@ -2,10 +2,10 @@
 // Workflow to call SNVs
 //
 
-include { BCFTOOLS_PLUGINFIXPLOIDY                          } from '../../../modules/nf-core/bcftools/pluginfixploidy/main'
-include { BEDTOOLS_INTERSECT                                } from '../../../modules/nf-core/bedtools/intersect/main'
-include { DEEPVARIANT_RUNDEEPVARIANT                        } from '../../../modules/nf-core/deepvariant/rundeepvariant/main'
-include { DNASCOPE_LONGREAD_CALL_SNVS as DNASCOPE_LONGREAD  } from '../../../modules/local/sentieon/dnascope_longread/main'
+include { BCFTOOLS_PLUGINFIXPLOIDY                         } from '../../../modules/nf-core/bcftools/pluginfixploidy/main'
+include { BEDTOOLS_INTERSECT                               } from '../../../modules/nf-core/bedtools/intersect/main'
+include { DEEPVARIANT_RUNDEEPVARIANT                       } from '../../../modules/nf-core/deepvariant/rundeepvariant/main'
+include { DNASCOPE_LONGREAD_CALL_SNVS as DNASCOPE_LONGREAD } from '../../../modules/local/sentieon/dnascope_longread/main'
 
 workflow CALL_SNVS {
     take:
@@ -36,8 +36,8 @@ workflow CALL_SNVS {
         ch_index      = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_tbi
         ch_gvcf       = DEEPVARIANT_RUNDEEPVARIANT.out.gvcf
         ch_gvcf_index = DEEPVARIANT_RUNDEEPVARIANT.out.gvcf_tbi
-
-    } else if (variant_caller.equals("sentieon")) {
+    }
+    else if (variant_caller.equals("sentieon")) {
 
         ch_bam_bai = ch_bam_bai_bed
             .map { meta, bam, bai, _bed ->
@@ -46,11 +46,10 @@ workflow CALL_SNVS {
 
         ch_bed = ch_bam_bai_bed
             .map { meta, _bam, _bai, bed ->
-                [ meta, bed ]
+                [meta, bed]
             }
-            .branch {
-                meta, _bed ->
-                male:   meta.sex == 1
+            .branch { meta, _bed ->
+                male: meta.sex == 1
                 female: meta.sex == 2
             }
 
@@ -86,7 +85,7 @@ workflow CALL_SNVS {
                 }
             }
             .mix(
-                ch_bed.female.map { meta, _bed -> [ meta, [] ] }
+                ch_bed.female.map { meta, _bed -> [meta, []] }
             )
 
         ch_diploid_regions_out = ch_intersected_calling_intervals.diploid
@@ -112,7 +111,7 @@ workflow CALL_SNVS {
             [],
             [],
             [],
-            []
+            [],
         )
 
         ch_vcf        = BCFTOOLS_PLUGINFIXPLOIDY.out.vcf
@@ -133,6 +132,6 @@ def makeIntersectChannel(ch_sentieon_bed, ch_bed, ploidy_label) {
         .map { _meta, sentieon_regions -> sentieon_regions }
         .combine(ch_bed)
         .map { sentieon_regions, meta, sample_call_regions ->
-            [ meta + [ ploidy: ploidy_label ], sample_call_regions, sentieon_regions ]
+            [meta + [ploidy: ploidy_label], sample_call_regions, sentieon_regions]
         }
 }

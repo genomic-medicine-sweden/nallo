@@ -1,6 +1,6 @@
 process HIPHASE {
 
-    tag "$meta.id"
+    tag "${meta.id}"
     label 'process_high'
 
     container "quay.io/biocontainers/hiphase:1.4.0--h9ee0642_0"
@@ -9,7 +9,7 @@ process HIPHASE {
     tuple val(meta), path(bams), path(bais), path(snvs), path(snv_idx), path(svs), path(sv_idx), val(samples)
     tuple val(meta2), path(fasta)
     tuple val(meta3), path(fai)
-    val(output_bam)
+    val output_bam
 
     output:
     tuple val(meta), path("*_snv_phased.vcf.gz")    , emit: vcfs
@@ -41,30 +41,36 @@ process HIPHASE {
     def bamNames = []
     def vcfNames = []
 
-    def snv_args = snvs.collectMany { file ->
-        [
-            "--vcf",
-            file,
-            "--output-vcf",
-            "${prefix}_snv_phased.vcf.gz"
-        ] }.join(" ")
-    def sv_args = svs.collectMany { file ->
-        [
-            "--vcf",
-            file,
-            "--output-vcf",
-            "${prefix}_sv_phased.vcf.gz"
-        ] }.join(" ")
+    def snv_args = snvs
+        .collectMany { file ->
+            [
+                "--vcf",
+                file,
+                "--output-vcf",
+                "${prefix}_snv_phased.vcf.gz"
+            ]
+        }.join(" ")
+    def sv_args = svs
+        .collectMany { file ->
+            [
+                "--vcf",
+                file,
+                "--output-vcf",
+                "${prefix}_sv_phased.vcf.gz"
+            ]
+        }.join(" ")
 
-    def bam_args = bams.collectMany { file ->
-        [
-            "--bam",
-            file,
-            output_bam ? '--output-bam' : '',
-            output_bam ? "${file.baseName}_haplotagged.bam" : ''
-        ] }.join(" ")
+    def bam_args = bams
+        .collectMany { file ->
+            [
+                "--bam",
+                file,
+                output_bam ? '--output-bam' : '',
+                output_bam ? "${file.baseName}_haplotagged.bam" : ''
+            ]
+        }.join(" ")
 
-    def sample_args = samples.collect { sample -> "--sample-name $sample" }.join(" ")
+    def sample_args = samples.collect { sample -> "--sample-name ${sample}" }.join(" ")
 
     snvs.each { vcf ->
         vcfNames.add(vcf.getName())
@@ -74,24 +80,24 @@ process HIPHASE {
         bamNames.add(bam.getName())
     }
 
-    def uniqueVcfNames = new HashSet(vcfNames);
+    def uniqueVcfNames = new HashSet(vcfNames)
     if (uniqueVcfNames.size() < vcfNames.size()) {
         println("Name collision in input VCFs")
-        exit 1
+        exit(1)
     }
 
-    def uniqueBamNames = new HashSet(bamNames);
+    def uniqueBamNames = new HashSet(bamNames)
     if (uniqueBamNames.size() < bamNames.size()) {
         println("Name collision in input BAMs")
-        exit 1
+        exit(1)
     }
 
     """
     hiphase \
-        $args \
+        ${args} \
         --threads ${task.cpus} \\
         --reference ${fasta} \\
-        $sample_args \\
+        ${sample_args} \\
         ${bam_args} \\
         ${snv_args} \\
         ${sv_args}
@@ -100,7 +106,7 @@ process HIPHASE {
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
     def sv_command = svs ? "echo '' | gzip > ${prefix}_sv_phased.vcf.gz" : ""
-    def sv_tbi_command = svs ? "touch ${prefix}_sv_phased.vcf.gz.tbi" :  ""
+    def sv_tbi_command = svs ? "touch ${prefix}_sv_phased.vcf.gz.tbi" : ""
 
     """
     echo '' | gzip > ${prefix}_snv_phased.vcf.gz

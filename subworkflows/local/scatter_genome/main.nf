@@ -116,8 +116,8 @@ workflow SCATTER_GENOME {
     }
 
     emit:
-    bed                                 = BEDTOOLS_MERGE.out.bed // channel: [ val(meta), path(bed) ]
-    bed_nuclear_intervals               = ch_bed_nuclear_intervals // channel: [ val(meta), path(bed), val(num_intervals) ]
+    bed                                 = BEDTOOLS_MERGE.out.bed                 // channel: [ val(meta), path(bed) ]
+    bed_nuclear_intervals               = ch_bed_nuclear_intervals               // channel: [ val(meta), path(bed), val(num_intervals) ]
     bed_nuclear_mitochondrial_intervals = ch_bed_nuclear_mitochondrial_intervals // channel: [ val(meta), path(bed), val(num_intervals) ]
 }
 

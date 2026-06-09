@@ -3,7 +3,6 @@ include { SOMALIER_RELATE as RELATE_INFER  } from '../../../modules/nf-core/soma
 include { SOMALIER_RELATE as RELATE_RELATE } from '../../../modules/nf-core/somalier/relate/main'
 
 workflow BAM_INFER_SEX {
-
     take:
     ch_bam_bai        // channel: [ val(meta), path(bam), path(bai) ]
     ch_fasta          // channel: [ val(meta), path(fasta) ]
@@ -13,11 +12,11 @@ workflow BAM_INFER_SEX {
 
     main:
     // Extract sites
-    SOMALIER_EXTRACT (
+    SOMALIER_EXTRACT(
         ch_bam_bai,
         ch_fasta,
         ch_fai,
-        ch_somalier_sites
+        ch_somalier_sites,
     )
 
     ch_relate_infer_in = SOMALIER_EXTRACT.out.extract
@@ -25,7 +24,7 @@ workflow BAM_INFER_SEX {
         .filter { meta, _extract, _ped -> meta.sex == 0 }
 
     // 1. Run somalier relate on one sample at a time to infer sex
-    RELATE_INFER ( ch_relate_infer_in, [] )
+    RELATE_INFER(ch_relate_infer_in, [])
 
     ch_somalier_tsv = RELATE_INFER.out.samples_tsv
         .map { _meta, tsv -> tsv }
@@ -52,7 +51,7 @@ workflow BAM_INFER_SEX {
         .join( ch_somalier_sex, failOnMismatch:true, failOnDuplicate:true )
         .map { _id, meta, bam, bai, somalier ->
             def updated_sex = (meta.sex == 0 ? somalier.sex.toInteger() : meta.sex)
-            [ meta + [sex: updated_sex], bam, bai ]
+            [meta + [sex: updated_sex], bam, bai]
         }
 
     // Add samples with known sex
@@ -64,7 +63,7 @@ workflow BAM_INFER_SEX {
         .groupTuple()
         .join( ch_ped, failOnMismatch:true, failOnDuplicate:true )
 
-    RELATE_RELATE ( ch_relate_relate_in, [] )
+    RELATE_RELATE(ch_relate_relate_in, [])
 
     emit:
     bam              = ch_updated_sex.map { meta, bam, _bai -> [ meta, bam ] } // channel: [ val(meta), path(bam) ]
