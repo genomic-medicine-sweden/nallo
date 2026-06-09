@@ -265,7 +265,7 @@ nextflow_workflow {
 
     }
     test("1 sample - deepvariant (Deepvariant/Deepvariant) - without chrM intervals") {
-        tag "test_to_test"
+
         when {
             workflow {
                 """
