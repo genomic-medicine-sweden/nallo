@@ -99,8 +99,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--mitorsaw_minimum_read_count` |
 |               | `--mitorsaw_minimum_maf`        |
 
-|
-
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
 > Parameter has been added if just the new parameter information is present.
