@@ -11,7 +11,7 @@ workflow QC_PHASING {
     ch_phased_family_svs_tbi  // channel: [ val(meta), path(tbi) ] Optional
     ch_bam_bai_haplotagged    // channel: [ val(meta), path(bam), path(bai) ]
     ch_family_to_samples      // channel: [ val(family_id), val(list_of_sample_ids) ]
-    phase_with_svs            //    bool: Whether SVs were included in phasing (true) or not (false)
+    phase_with_svs            // bool: Whether SVs were included in phasing (true) or not (false)
 
     main:
     // If we co-phased SVs, concatenate SNV and SV VCFs to get accurate stats from WhatsHap
@@ -46,7 +46,7 @@ workflow QC_PHASING {
         true,
         true,
         false,
-        )
+    )
 
     TABIX_BGZIPTABIX(WHATSHAP_STATS.out.gtf)
 

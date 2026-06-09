@@ -135,9 +135,9 @@ workflow LONGPHASE {
         .join(SAMTOOLS_INDEX.out.index, failOnMismatch: true, failOnDuplicate: true)
 
     emit:
-    phased_family_snvs = ch_phased_family_snvs         // channel: [ val(meta), path(vcf) ]
+    phased_family_snvs     = ch_phased_family_snvs     // channel: [ val(meta), path(vcf) ]
     phased_family_snvs_tbi = ch_phased_family_snvs_tbi // channel: [ val(meta), path(tbi) ]
-    phased_family_svs = ch_phased_family_svs           // channel: [ val(meta), path(vcf) ]
-    phased_family_svs_tbi = ch_phased_family_svs_tbi   // channel: [ val(meta), path(tbi) ]
-    haplotagged_bam_bai = ch_bam_bai_haplotagged       // channel: [ val(meta), path(bam), path(bai) ]
+    phased_family_svs      = ch_phased_family_svs      // channel: [ val(meta), path(vcf) ]
+    phased_family_svs_tbi  = ch_phased_family_svs_tbi  // channel: [ val(meta), path(tbi) ]
+    haplotagged_bam_bai    = ch_bam_bai_haplotagged    // channel: [ val(meta), path(bam), path(bai) ]
 }

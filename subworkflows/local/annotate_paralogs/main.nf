@@ -1,7 +1,6 @@
 include { PARAPHRASE } from '../../../modules/nf-core/paraphrase/main'
 
 workflow ANNOTATE_PARALOGS {
-
     take:
     ch_json                  // channel: [ val(meta), path(json) ]
     paraphrase_output_format // string: Output format for paraphrase (json or tsv)
@@ -18,7 +17,7 @@ workflow ANNOTATE_PARALOGS {
         .map { meta, json -> [ [ 'id': meta.family_id ], json, meta.id ] }
         .groupTuple()
 
-    PARAPHRASE (
+    PARAPHRASE(
         ch_paraphase_jsons_per_family,
         ch_paraphrase_rules_yaml,
         paraphrase_output_format == 'tsv',

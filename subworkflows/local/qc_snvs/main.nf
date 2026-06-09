@@ -14,7 +14,7 @@ workflow QC_SNVS {
     main:
     ch_vcfstatsreport = channel.empty()
 
-    if(run_deepvariant_vcfstatsreport) {
+    if (run_deepvariant_vcfstatsreport) {
         DEEPVARIANT_VCFSTATSREPORT(ch_vcf)
         ch_vcfstatsreport = DEEPVARIANT_VCFSTATSREPORT.out.report
     }
@@ -23,14 +23,14 @@ workflow QC_SNVS {
     BCFTOOLS_STATS(
         ch_normalized_vcf.join(
             ch_normalized_index,
-            failOnMismatch:true,
-            failOnDuplicate:true
+            failOnMismatch: true,
+            failOnDuplicate: true,
         ),
-        [[],[]],
-        [[],[]],
-        [[],[]],
-        [[],[]],
-        [[],[]]
+        [[], []],
+        [[], []],
+        [[], []],
+        [[], []],
+        [[], []],
     )
 
     emit:

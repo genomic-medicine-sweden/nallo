@@ -1,9 +1,9 @@
-include { BCFTOOLS_MERGE                 } from '../../../modules/nf-core/bcftools/merge/main'
-include { BCFTOOLS_QUERY                 } from '../../../modules/nf-core/bcftools/query/main'
-include { BCFTOOLS_REHEADER              } from '../../../modules/nf-core/bcftools/reheader/main'
-include { GAWK                           } from '../../../modules/nf-core/gawk/main'
-include { PARAPHASE                      } from '../../../modules/nf-core/paraphase/main'
-include { SAMTOOLS_CONVERT               } from '../../../modules/nf-core/samtools/convert/main'
+include { BCFTOOLS_MERGE    } from '../../../modules/nf-core/bcftools/merge/main'
+include { BCFTOOLS_QUERY    } from '../../../modules/nf-core/bcftools/query/main'
+include { BCFTOOLS_REHEADER } from '../../../modules/nf-core/bcftools/reheader/main'
+include { GAWK              } from '../../../modules/nf-core/gawk/main'
+include { PARAPHASE         } from '../../../modules/nf-core/paraphase/main'
+include { SAMTOOLS_CONVERT  } from '../../../modules/nf-core/samtools/convert/main'
 
 workflow CALL_PARALOGS {
     take:

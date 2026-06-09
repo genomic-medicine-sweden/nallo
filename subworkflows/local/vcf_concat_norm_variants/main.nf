@@ -7,14 +7,14 @@ include { VCFEXPRESS                                  } from '../../../modules/n
 //
 workflow VCF_CONCAT_NORM_VARIANTS {
     take:
-    ch_vcfs                 // channel: [mandatory] [ val(meta), path(vcf) ]
-    ch_fasta                // channel: [mandatory] [ val(meta), path(fasta) ]
-    variant_caller          // string: variant caller to tag the variants with, e.g. "deepvariant"
-    ch_vcfexpress_prelude   // path: [mandatory] lua file
+    ch_vcfs               // channel: [mandatory] [ val(meta), path(vcf) ]
+    ch_fasta              // channel: [mandatory] [ val(meta), path(fasta) ]
+    variant_caller        // string: variant caller to tag the variants with, e.g. "deepvariant"
+    ch_vcfexpress_prelude // path: [mandatory] lua file
 
     main:
     BCFTOOLS_CONCAT(
-        ch_vcfs.map { meta, vcfs -> [ meta, vcfs, [] ] },
+        ch_vcfs.map { meta, vcfs -> [meta, vcfs, []] }
     )
 
     // Add caller information to meta so vcfexpress can add the FOUND_IN tag based on sv_caller
@@ -22,9 +22,9 @@ workflow VCF_CONCAT_NORM_VARIANTS {
         .map { meta, vcf -> [ meta + [ sv_caller: variant_caller ] , vcf ]
         }
 
-    VCFEXPRESS (
+    VCFEXPRESS(
         ch_vcfexpress_input,
-        ch_vcfexpress_prelude
+        ch_vcfexpress_prelude,
     )
 
     // Remove added caller information in meta

@@ -73,8 +73,9 @@ workflow CHROMOGRAPH {
     ch_chromograph_input = ch_autozyg.ifEmpty([[],[]])
         .combine(ch_coverage.ifEmpty([[],[]]))
         .filter { autozyg_meta, _autozyg, coverage_meta, _coverage ->
-            if(!autozyg_meta || !coverage_meta)
+            if (!autozyg_meta || !coverage_meta) {
                 return true
+            }
             autozyg_meta.id == coverage_meta.id
         }
         .multiMap { autozyg_meta, autozyg, coverage_meta, coverage ->
