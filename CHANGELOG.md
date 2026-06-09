@@ -69,7 +69,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1119](https://github.com/genomic-medicine-sweden/nallo/pull/1119) - Changed Expression of `filter_snvs_expression`in test `tests/samplesheet_multisample_bam.nf.test` in order to be compatible with mitochondrial vcf fields
 - [#1118](https://github.com/genomic-medicine-sweden/nallo/pull/1118) - Changed testdata commit
 - [#1126](https://github.com/genomic-medicine-sweden/nallo/pull/1126) - Changed `ch_* = <...>` instead of `.set { }` in the pipeline
-- [#1127](https://github.com/genomic-medicine-sweden/nallo/pull/1127) - Run `nextflow lint -format -harshil-alignment` on configuration files, local modules and subworkflows, nallo.nf
+- [#1127](https://github.com/genomic-medicine-sweden/nallo/pull/1127) [#1130](https://github.com/genomic-medicine-sweden/nallo/pull/1130) - Run `nextflow lint -format -harshil-alignment` on configuration files, local modules and subworkflows, nallo.nf
 
 ### Removed
 
