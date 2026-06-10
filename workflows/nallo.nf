@@ -271,6 +271,7 @@ workflow NALLO {
         } else {
 
             // If bams are premapped, just merge them (ONT machines output several BAMs per sample)
+            // SAMTOOLS_MERGE expects indexes in the input but is happy to merge them if the indexes are missing
             ch_samtools_merge_in = ch_samplesheet
                 .groupTuple()
                 .map { meta, reads -> [meta, reads, [] ] }
@@ -282,7 +283,7 @@ workflow NALLO {
 
             ch_bam = SAMTOOLS_MERGE.out.bam
             ch_bam_bai = SAMTOOLS_MERGE.out.bam
-                .join(SAMTOOLS_MERGE.out.bai, failOnMismatch: true, failOnDuplicate: true)
+                .join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true)
         }
 
         // Publish alignments as CRAM if requested
@@ -1032,8 +1033,8 @@ workflow NALLO {
 
     emit:
     aligned_assemblies                  = val_skip_genome_assembly ? channel.empty() : val_cram_output ? ALIGN_ASSEMBLIES.out.cram.join(ALIGN_ASSEMBLIES.out.crai) : ALIGN_ASSEMBLIES.out.bam.join(ALIGN_ASSEMBLIES.out.bai) // channel: [ val(meta), path(bam/cram), path(bai/crai) ]
-    aligned_reads_bam                   = (!val_skip_alignment && val_skip_phasing && !val_cram_output) ? ALIGN.out.bam : channel.empty() // channel: [ val(meta), path(bam) ]
-    aligned_reads_bai                   = (!val_skip_alignment && val_skip_phasing && !val_cram_output) ? ALIGN.out.bai : channel.empty() // channel: [ val(meta), path(bai) ]
+    aligned_reads_bam                   = (!val_skip_alignment && val_skip_phasing && !val_cram_output) ? ch_bam : channel.empty() // channel: [ val(meta), path(bam) ]
+    aligned_reads_bai                   = (!val_skip_alignment && val_skip_phasing && !val_cram_output) ? ch_bam_bai.map {meta, _bam, bai -> [meta, bai]} : channel.empty() // channel: [ val(meta), path(bai) ]
     aligned_reads_cram                  = (!val_skip_alignment && val_skip_phasing && val_cram_output) ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
     aligned_reads_crai                  = (!val_skip_alignment && val_skip_phasing && val_cram_output) ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
     annotated_paralogs                  = val_skip_annotate_paralogs ? channel.empty() : ANNOTATE_PARALOGS.out.tsv.mix(ANNOTATE_PARALOGS.out.json) // channel: [ val(meta), path(tsv/json) ]
