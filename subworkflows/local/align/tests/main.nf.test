@@ -31,7 +31,10 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(bam(workflow.out.bam_bai.get(0).get(1)).getReadsMD5()).match() }
+                { assert snapshot(
+                    bam(workflow.out.bam.get(0).get(1)).getReadsMD5(),
+                    file(workflow.out.bai.get(0).get(1)).name
+                ).match() }
             )
         }
     }
@@ -53,19 +56,28 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(bam(workflow.out.bam_bai.get(0).get(1)).getReadsMD5()).match() }
+                { assert snapshot(
+                    bam(workflow.out.bam.get(0).get(1)).getReadsMD5(),
+                    file(workflow.out.bai.get(0).get(1)).name
+                ).match() }
             )
         }
     }
 
-    test("[bam, fasta, true] - different IDs") {
+    test("[bam x 2, fasta, true] - different IDs") {
         when {
             workflow {
                 """
-                input[0] = channel.of([
-                    [ id:'test' ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                ])
+                input[0] = channel.of(
+                    tuple(
+                        [ id:'test' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    ),
+                    tuple(
+                        [ id:'test2' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true)
+                    )
+                )
                 input[1] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
                 input[2] = true
                 """
@@ -76,8 +88,10 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    bam(workflow.out.bam_bai.get(0).get(1)).getReadsMD5(),
-                    bam(workflow.out.bam_bai.get(1).get(1)).getReadsMD5()
+                    bam(workflow.out.bam.get(0).get(1)).getReadsMD5(),
+                    bam(workflow.out.bam.get(1).get(1)).getReadsMD5(),
+                    file(workflow.out.bai.get(0).get(1)).name,
+                    file(workflow.out.bai.get(1).get(1)).name
                 ).match() }
             )
         }
@@ -87,10 +101,16 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = channel.of([
-                    [ id:'test' ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                ])
+                input[0] = channel.of(
+                    tuple(
+                        [ id:'test' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    ),
+                    tuple(
+                        [ id:'test' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                    )
+                )
                 input[1] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
                 input[2] = true
                 """
@@ -100,7 +120,10 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(bam(workflow.out.bam_bai.get(0).get(1)).getReadsMD5()).match() }
+                { assert snapshot(
+                    bam(workflow.out.bam.get(0).get(1)).getReadsMD5(),
+                    file(workflow.out.bai.get(0).get(1)).name
+                ).match() }
             )
         }
 
