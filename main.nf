@@ -183,7 +183,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         ch_vep_plugin_files,
         val_alignment_processes,
         val_bigwig_modcodes,
-        val_skip_phasing && cram_output,
+        val_skip_phasing && val_cram_output,
         val_cram_output,
         val_create_hificnv_maf_track,
         val_create_sawfish_maf_track,

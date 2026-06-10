@@ -12,7 +12,7 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     ch_fasta                // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fai                  // channel: [mandatory] [ val(meta), path(fai) ]
     ch_bed                  // channel: [mandatory] [ val(meta), path(bed) ]
-    cram_output             // bool: Publish alignments as CRAM (true) or BAM (false)
+    val_cram_output             // bool: Publish alignments as CRAM (true) or BAM (false)
     ch_vcfexpress_prelude   // path: [mandatory] lua file
 
     main:
@@ -39,7 +39,7 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     )
 
     // Publish spanning reads as CRAM if requested
-    if (cram_output) {
+    if (val_cram_output) {
         SAMTOOLS_CONVERT(
             SAMTOOLS_SORT.out.bam.join(SAMTOOLS_INDEX.out.index, failOnDuplicate: true, failOnMismatch: true),
             ch_fasta.join(ch_fai).collect(),
@@ -84,6 +84,6 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     family_tbi = TRGT_MERGE.out.index                                       // channel: [ val(meta), path(tbi) ]
     sample_bam = SAMTOOLS_SORT.out.bam                                      // channel: [ val(meta), path(bam) ]
     sample_bai = SAMTOOLS_INDEX.out.index                                   // channel: [ val(meta), path(bai) ]
-    sample_cram = cram_output ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
-    sample_crai = cram_output ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
+    sample_cram = val_cram_output ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
+    sample_crai = val_cram_output ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
 }

@@ -11,7 +11,7 @@ workflow ALIGN_ASSEMBLIES {
     ch_mmi     // channel: [mandatory] [ val(meta), path(mmi)   ]
     ch_fasta // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fai // channel: [mandatory] [ val(meta), path(fai)   ]
-    cram_output // bool: Publish alignments as CRAM (true) or BAM (false)
+    val_cram_output // bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
 
@@ -46,7 +46,7 @@ workflow ALIGN_ASSEMBLIES {
     )
 
     // Publish alignment as CRAM if requested
-    if (cram_output) {
+    if (val_cram_output) {
         SAMTOOLS_CONVERT(
             SAMTOOLS_MERGE.out.bam.join(SAMTOOLS_MERGE.out.index, failOnDuplicate: true, failOnMismatch: true),
             ch_fasta.join(ch_fai, failOnDuplicate: true, failOnMismatch: true).collect(),
@@ -56,6 +56,6 @@ workflow ALIGN_ASSEMBLIES {
     emit:
     bam  = SAMTOOLS_MERGE.out.bam                                    // channel: [ val(meta), path(bam) ]
     bai  = SAMTOOLS_MERGE.out.index                                  // channel: [ val(meta), path(bai) ]
-    cram = cram_output ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
-    crai = cram_output ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
+    cram = val_cram_output ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
+    crai = val_cram_output ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
 }
