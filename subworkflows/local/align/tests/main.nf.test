@@ -14,7 +14,7 @@ nextflow_workflow {
     tag "samtools/merge"
     tag "splitubam"
 
-    test("[fastq, [], fasta, false]") {
+    test("[fastq, fasta, false]") {
         when {
             workflow {
                 """
@@ -22,9 +22,8 @@ nextflow_workflow {
                     [ id:'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
                 ])
-                input[1] = channel.empty()
-                input[2] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
-                input[3] = false
+                input[1] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
+                input[2] = false
                 """
             }
         }
@@ -37,7 +36,7 @@ nextflow_workflow {
         }
     }
 
-    test("[bam, [], fasta, true]") {
+    test("[bam, fasta, true]") {
         when {
             workflow {
                 """
@@ -45,9 +44,8 @@ nextflow_workflow {
                     [ id:'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
                 ])
-                input[1] = channel.empty()
-                input[2] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
-                input[3] = true
+                input[1] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
+                input[2] = true
                 """
             }
         }
@@ -60,7 +58,7 @@ nextflow_workflow {
         }
     }
 
-    test("[bam, [bam, bai], fasta, true] - different IDs") {
+    test("[bam, fasta, true] - different IDs") {
         when {
             workflow {
                 """
@@ -68,13 +66,8 @@ nextflow_workflow {
                     [ id:'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                 ])
-                input[1] = channel.of([
-                    [ id: 'test2' ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
-                ])
-                input[2] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
-                input[3] = true
+                input[1] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
+                input[2] = true
                 """
             }
         }
@@ -90,7 +83,7 @@ nextflow_workflow {
         }
     }
 
-    test("[bam, [bam, bai], fasta, true] - same ID") {
+    test("[bam, fasta, true] - same ID") {
         when {
             workflow {
                 """
@@ -98,13 +91,8 @@ nextflow_workflow {
                     [ id:'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                 ])
-                input[1] = channel.of([
-                    [ id: 'test' ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
-                ])
-                input[2] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
-                input[3] = true
+                input[1] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
+                input[2] = true
                 """
             }
         }
@@ -118,7 +106,7 @@ nextflow_workflow {
 
     }
 
-    test("[fastq, [], fasta, false] - stub") {
+    test("[fastq, fasta, false] - stub") {
         options "-stub"
         when {
             workflow {
@@ -127,9 +115,8 @@ nextflow_workflow {
                     [ id:'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
                 ])
-                input[1] = channel.empty()
-                input[2] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
-                input[3] = false
+                input[1] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
+                input[2] = false
                 """
             }
         }
@@ -142,7 +129,7 @@ nextflow_workflow {
         }
     }
 
-    test("[bam, [], fasta, true] - stub") {
+    test("[bam, fasta, true] - stub") {
         options "-stub"
         when {
             workflow {
@@ -151,9 +138,8 @@ nextflow_workflow {
                     [ id:'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
                 ])
-                input[1] = channel.empty()
-                input[2] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
-                input[3] = true
+                input[1] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
+                input[2] = true
                 """
             }
         }
@@ -166,7 +152,7 @@ nextflow_workflow {
         }
     }
 
-    test("[bam, [bam, bai], fasta, true] - different IDs - stub") {
+    test("[bam, fasta, true] - different IDs - stub") {
         options "-stub"
         when {
             workflow {
@@ -175,13 +161,8 @@ nextflow_workflow {
                     [ id:'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                 ])
-                input[1] = channel.of([
-                    [ id: 'test2' ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
-                ])
-                input[2] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
-                input[3] = true
+                input[1] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
+                input[2] = true
                 """
             }
         }
@@ -194,7 +175,7 @@ nextflow_workflow {
         }
     }
 
-    test("[bam, [bam, bai], fasta, true] - same ID - stub") {
+    test("[bam, fasta, true] - same ID - stub") {
         options "-stub"
         when {
             workflow {
@@ -203,13 +184,8 @@ nextflow_workflow {
                     [ id:'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                 ])
-                input[1] = channel.of([
-                    [ id: 'test' ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
-                ])
-                input[2] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
-                input[3] = true
+                input[1] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
+                input[2] = true
                 """
             }
         }
