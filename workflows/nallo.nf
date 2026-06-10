@@ -270,6 +270,12 @@ workflow NALLO {
                 .join(ALIGN.out.bai, failOnMismatch: true, failOnDuplicate: true)
         } else {
 
+            // Check that no FASTQs are in samplesheet if --premapped is set
+            // Something would crash eventually if there were FASTQs, but this is a more user-friendly error message
+            ch_samplesheet
+                .filter { _meta, reads -> reads.name =~ 'f(ast)?q(\\.gz)?$' }
+                .map { _meta, _reads -> error "FASTQ files were found in the samplesheet, but --premapped was set. Please remove FASTQ files from the samplesheet or unset --premapped." }
+
             // If bams are premapped, just merge them (ONT machines output several BAMs per sample)
             // SAMTOOLS_MERGE expects indexes in the input but is happy to merge them if the indexes are missing
             ch_samtools_merge_in = ch_samplesheet
