@@ -195,6 +195,9 @@ tool:
   perl-math-cdf:
     citation: "perl-math-cdf"
     bibliography: ""
+  mitorsaw:
+    citation: "Mitorsaw"
+    bibliography: ""
   csvtk:
     citation: "csvtk"
     bibliography: "Wei Shen (2026) csvtk: a cross-platform, efficient and practical CSV/TSV toolkit. https://github.com/shenwei356/csvtk"

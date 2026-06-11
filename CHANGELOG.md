@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1107](https://github.com/genomic-medicine-sweden/nallo/pull/1107) - Added support for using mapped BAM files as input
 - [#1120](https://github.com/genomic-medicine-sweden/nallo/pull/1120) - Added baseName to avoid `.bed` in deepvariant output name
 - [#1128](https://github.com/genomic-medicine-sweden/nallo/pull/1128) - Added nf-tests for `phasing` subworkflow
+- [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Added Mitorsaw module and Mitorsaw to validatePacBioLicense
+- [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Added `call_mitochondrial_variants` subworkflow
 
 ### Changed
 
@@ -69,10 +71,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1107](https://github.com/genomic-medicine-sweden/nallo/pull/1107) - Moved alignment into subworkflow `ALIGN`
 - [#1111](https://github.com/genomic-medicine-sweden/nallo/pull/1111) - Refactored gVCF grouping to reduce code duplication in `nallo`
 - [#1112](https://github.com/genomic-medicine-sweden/nallo/pull/1112) - Changed testdata commit to include data with a deletion in the mitochondrial chromosome
-- [#1119](https://github.com/genomic-medicine-sweden/nallo/pull/1119) - Changed Expression of `filter_snvs_expression`in test `tests/samplesheet_multisample_bam.nf.test` in order to be compatible with mitochondrial vcf fields
 - [#1118](https://github.com/genomic-medicine-sweden/nallo/pull/1118) - Changed testdata commit
 - [#1126](https://github.com/genomic-medicine-sweden/nallo/pull/1126) - Changed `ch_* = <...>` instead of `.set { }` in the pipeline
 - [#1127](https://github.com/genomic-medicine-sweden/nallo/pull/1127), [#1130](https://github.com/genomic-medicine-sweden/nallo/pull/1130) - Run `nextflow lint -format -harshil-alignment` on configuration files, local modules and subworkflows, nallo.nf
+- [#1119](https://github.com/genomic-medicine-sweden/nallo/pull/1119) - Changed Expression of `filter_snvs_expression`in test `tests/samplesheet_multisample_bam.nf.test` in order to be compatible with mitochondrial vcf fields
+- [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Changed logic in `subworkflows/local/gvcf_glnexus_norm_variants/main.nf` to handle caller from the meta including the mitochondrial caller
+- [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Mitochondrial variants do not go through the phasing
+- [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Changed output of `SCATTER_GENOME` to output `bed_nuclear_intervals` and `mitochondrial_nuclear_intervals`
 
 ### Removed
 
@@ -91,8 +96,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter |
-| ------------- | ------------- |
+| Old parameter | New parameter                   |
+| ------------- | ------------------------------- |
+|               | `--mitochondrial_sv_min_size`   |
+|               | `--mitorsaw_minimum_read_count` |
+|               | `--mitorsaw_minimum_maf`        |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.

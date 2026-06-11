@@ -734,8 +734,27 @@
                 },
                 "mitochondrial_caller": {
                     "type": "string",
-                    "default": "deepvariant",
-                    "description": "Which mitochondrial caller to use for mitochondrial variant calling (`deepvariant`)"
+                    "default": "mitorsaw",
+                    "description": "Which mitochondrial caller to use for mitochondrial variant calling"
+                },
+                "mitorsaw_minimum_maf": {
+                    "type": "number",
+                    "default": 0.1,
+                    "minimum": 0.0,
+                    "maximum": 0.5,
+                    "description": "Minimum minor allele frequency (MAF) for mitorsaw variant calling."
+                },
+                "mitorsaw_minimum_read_count": {
+                    "type": "integer",
+                    "default": 3,
+                    "minimum": 1,
+                    "description": "Minimum read count to consider a heteroplasmic variant."
+                },
+                "mitochondrial_sv_min_size": {
+                    "type": "integer",
+                    "default": 50,
+                    "minimum": 1,
+                    "description": "Minimum allele length difference (abs(strlen(REF)-strlen(ALT))) to classify a mitochondrial variant as an SV rather than a SNV/small indel."
                 },
                 "alignment_processes": {
                     "type": "integer",

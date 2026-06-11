@@ -150,10 +150,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-04-27T09:19:23.557538679",
+        "timestamp": "2026-05-27T10:42:42.026450039",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.02.0"
         }
     },
     "[bam, bai], fasta, fai, somalier_sites, ped - stub multiple samples, all unknown sex": {
@@ -479,10 +479,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-04-27T09:19:50.512040788",
+        "timestamp": "2026-05-27T10:43:07.987725943",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.02.0"
         }
     },
     "[bam, bai], fasta, fai, somalier_sites, ped - 1 sample with unknown sex": {
@@ -636,7 +636,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-05-26T13:36:06.034012681",
+        "timestamp": "2026-05-27T10:42:16.54799446",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.02.0"
@@ -965,10 +965,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-04-27T09:19:41.242175899",
+        "timestamp": "2026-05-27T10:42:59.434865957",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.02.0"
         }
     },
     "[bam, bai], fasta, fai, somalier_sites, ped - stub unknown sex": {
@@ -1122,10 +1122,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-04-27T09:19:32.137483868",
+        "timestamp": "2026-05-27T10:42:50.503289716",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.02.0"
         }
     },
     "[bam, bai], fasta, fai, somalier_sites, ped - multiple samples": {
@@ -1134,10 +1134,10 @@
             "test.pairs.tsv",
             "HG002_PacBio_Revio.bam"
         ],
-        "timestamp": "2026-03-30T14:02:57.852575879",
+        "timestamp": "2026-05-27T10:42:33.626561816",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.02.0"
         }
     }
 }

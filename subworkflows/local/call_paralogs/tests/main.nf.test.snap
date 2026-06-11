@@ -372,10 +372,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-05-07T09:22:11.438250284",
+        "timestamp": "2026-05-27T10:48:14.227591133",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.0"
+            "nextflow": "26.02.0"
         }
     },
     "one sample, one family - bam output": {
@@ -426,10 +426,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-04-01T09:15:08.74827662",
+        "timestamp": "2026-05-27T10:47:21.046507998",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.02.0"
         }
     },
     "four sample, two families - bam output": {
@@ -557,10 +557,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-03-31T19:01:15.27045506",
+        "timestamp": "2026-05-27T10:48:03.044624799",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.02.0"
         }
     },
     "four sample, two families - cram output - stub": {
@@ -1044,10 +1044,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-05-07T09:22:34.252610619",
+        "timestamp": "2026-05-27T10:48:25.61082889",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.0"
+            "nextflow": "26.02.0"
         }
     },
     "one sample, one family - cram output": {
@@ -1116,10 +1116,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-03-31T19:12:34.805257349",
+        "timestamp": "2026-05-27T10:47:39.141277756",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.02.0"
         }
     }
 }
