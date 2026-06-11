@@ -1,7 +1,7 @@
 {
     "samplesheet_premapped | --preset ONT_R10 --phaser whatshap --premapped --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            138,
+            139,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -37,6 +37,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_CHROMOGRAPH": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_MITO": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_PHASING": {
@@ -135,6 +138,9 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
+                },
+                "MITORSAW_HAPLOTYPE": {
+                    "mitorsaw": "0.2.9-0dc8e58"
                 },
                 "MODKIT_BEDMETHYLTOBIGWIG": {
                     "modkit": "0.6.1"
@@ -602,7 +608,7 @@
                 "hg002_chromograph_autozyg_chr7.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "hg002_chromograph_autozyg_chr8.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "hg002_chromograph_autozyg_chr9.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "hg002_chromograph_autozyg_chrM.png:md5,090cdf270253fbc8ddfc28df2e3d0830",
+                "hg002_chromograph_autozyg_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "hg002_chromograph_autozyg_chrX.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "hg002_chromograph_autozyg_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "hg002_chromograph_coverage_chr1.png:md5,954482b960865332f37d386da5c9fb75",
@@ -636,8 +642,8 @@
                 "hg002_modkit_pileup_hp1.bed.gz.tbi:md5,64f5cfd6919e2302bfd311d09c98a58b",
                 "hg002_modkit_pileup_hp2.bed.gz:md5,da977fec1c09e4870eb91e260c3cc085",
                 "hg002_modkit_pileup_hp2.bed.gz.tbi:md5,da42a56d8b9b363c34cafa38dd42b313",
-                "bcftools-stats-subtypes.txt:md5,ab89dd591534c7d6506dd1f1c06a0ec0",
-                "bcftools_stats_indel-lengths.txt:md5,e9fb9abfecb11a1b4c22d5538905632f",
+                "bcftools-stats-subtypes.txt:md5,a841ad875be244e56eb00c58f15be1e1",
+                "bcftools_stats_indel-lengths.txt:md5,92da4a1e1b3b54c847ca1b71a81729d7",
                 "fastqc-status-check-heatmap.txt:md5,1d927bc4f778ba9da73c0ae634119c3c",
                 "fastqc_adapter_content_plot.txt:md5,b2a5f81a96a097f9777c118f3bb39edc",
                 "fastqc_overrepresented_sequences_plot.txt:md5,af01ebd614c9dceaa58d094128a3d3ba",
@@ -654,13 +660,13 @@
                 "mosdepth_cov_dist.txt:md5,8b4562f6878d520ef4c84f788ff73785",
                 "mosdepth_cumcov_dist.txt:md5,8b4562f6878d520ef4c84f788ff73785",
                 "mosdepth_perchrom.txt:md5,bfb0b11e9c045b6286f1c13c8a07f025",
-                "multiqc_bcftools_stats.txt:md5,1334165676496c7a10164b2f7f706759",
+                "multiqc_bcftools_stats.txt:md5,4d1d999b14148ac03745e9b7231e69dc",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,9057a8b1f1d962bdfdd38b0e3afe8068",
-                "multiqc_general_stats.txt:md5,a27639ba068d40432f9805ad9648aa0d",
+                "multiqc_general_stats.txt:md5,a4c1648922e159d07457cadcad9ded59",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,a3cae1da0bceed2b1aa3a4a1b452a951",
                 "somalier_stats.txt:md5,2a9f9131270271599f02eead2a8f9b20",
-                "whatshap-stats-table.txt:md5,eba9da80d4248bfd71b0fe3ad0010e59",
+                "whatshap-stats-table.txt:md5,7638a670823f77875d6008aecdde9b21",
                 "FAM.ped:md5,980a02d81cd33305b9794d7fbaa96c1e",
                 "hg002_cramino_aligned_phased.arrow:md5,64682d12ff979a33743cdb09a600fd93",
                 "hg002_cramino_aligned.arrow:md5,64682d12ff979a33743cdb09a600fd93",
@@ -681,7 +687,7 @@
                 "FAM.vs.html:md5,a749380edef4653dade663534ddcfbd6",
                 "hg002_whatshap_stats.gtf.gz:md5,141cbfd04221ab9df0de84a2df6546b8",
                 "hg002_whatshap_stats.gtf.gz.tbi:md5,cdb4d0b6ece69c137fd9f363f7ff2445",
-                "hg002_whatshap_stats.tsv:md5,eb3194d377a2ccb13bc1d82cf2821034",
+                "hg002_whatshap_stats.tsv:md5,7ea5477273391d08295fb491dbc96d59",
                 "hg002_sambamba_depth.bed:md5,3dbcb19a18e9393b5ed07be9e153f13f",
                 "hg002_hificnv.copynum.bedgraph:md5,e1fce9752c65e89d79cea67a50774f38",
                 "hg002_hificnv.depth.bw:md5,e67443e85c1a76ec897f58ed055c6bda",
@@ -714,11 +720,11 @@
                 ],
                 [
                     "FAM_snvs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=126, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=129, phased=false, phasedAutodetect=true]"
                 ],
                 [
                     "hg002_deepvariant_snvs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=1, variantCount=591, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=578, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_hificnv_svs.vcf.gz",
@@ -741,7 +747,7 @@
                 
             ]
         ],
-        "timestamp": "2026-06-11T16:18:42.851011485",
+        "timestamp": "2026-06-11T16:29:03.72702292",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

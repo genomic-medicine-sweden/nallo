@@ -1,10 +1,13 @@
 {
     "Test VEP with mock uncompressed cache": {
         "content": [
-            55,
+            71,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
+                },
+                "BCFTOOLS_MERGE": {
+                    "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_MULTISAMPLE": {
                     "bcftools": 1.22
@@ -16,6 +19,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_STATS": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_MITO": {
                     "bcftools": 1.22
                 },
                 "BEDTOOLS_MERGE": {
@@ -66,6 +72,9 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
+                },
+                "MITORSAW_HAPLOTYPE": {
+                    "mitorsaw": "0.2.9-0dc8e58"
                 },
                 "RELATE_INFER": {
                     "somalier": "0.2.18"
@@ -145,7 +154,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-06-11T13:32:07.808616162",
+        "timestamp": "2026-06-11T16:29:07.8031472",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -153,10 +162,13 @@
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
-            43,
+            59,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
+                },
+                "BCFTOOLS_MERGE": {
+                    "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_MULTISAMPLE": {
                     "bcftools": 1.22
@@ -171,6 +183,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_STATS": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_MITO": {
                     "bcftools": 1.22
                 },
                 "BEDTOOLS_INTERSECT": {
@@ -219,6 +234,9 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
+                },
+                "MITORSAW_HAPLOTYPE": {
+                    "mitorsaw": "0.2.9-0dc8e58"
                 },
                 "RELATE_INFER": {
                     "somalier": "0.2.18"
@@ -301,7 +319,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-06-11T13:34:09.111891792",
+        "timestamp": "2026-06-11T16:30:36.79826681",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -309,13 +327,16 @@
     },
     "Test CADD with mock resources": {
         "content": [
-            68,
+            89,
             {
                 "ANNOTATE_INDELS": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
+                },
+                "BCFTOOLS_MERGE": {
+                    "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_MULTISAMPLE": {
                     "bcftools": 1.22
@@ -330,6 +351,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_MITO": {
                     "bcftools": 1.22
                 },
                 "BEDTOOLS_MERGE": {
@@ -386,6 +410,9 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
+                },
+                "MITORSAW_HAPLOTYPE": {
+                    "mitorsaw": "0.2.9-0dc8e58"
                 },
                 "REFERENCE_TO_CADD_CHRNAMES": {
                     "gawk": "5.3.1"
@@ -477,7 +504,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-06-11T13:30:15.35713582",
+        "timestamp": "2026-06-11T16:26:31.256459096",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
