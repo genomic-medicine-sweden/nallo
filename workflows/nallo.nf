@@ -16,6 +16,7 @@ include { CONVERT_INPUT_FILES as CONVERT_INPUT_FASTQS            } from '../subw
 include { CONVERT_INPUT_FILES as CONVERT_INPUT_BAMS              } from '../subworkflows/local/convert_input_files'
 include { CHROMOGRAPH                                            } from '../subworkflows/local/chromograph'
 include { BAM_INFER_SEX                                          } from '../subworkflows/local/bam_infer_sex'
+include { CALL_MITOCHONDRIAL_VARIANTS                            } from '../subworkflows/local/call_mitochondrial_variants'
 include { CALL_PARALOGS                                          } from '../subworkflows/local/call_paralogs'
 include { CALL_REPEAT_EXPANSIONS_STRDUST                         } from '../subworkflows/local/call_repeat_expansions_strdust'
 include { CALL_REPEAT_EXPANSIONS_TRGT                            } from '../subworkflows/local/call_repeat_expansions_trgt'
@@ -52,6 +53,7 @@ include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modu
 
 // nf-core
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_PHASING             } from '../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_MITO_SNVS           } from '../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CHROMOGRAPH             } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SV                      } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING                 } from '../modules/nf-core/bcftools/view/main'
@@ -440,13 +442,33 @@ workflow NALLO {
             val_snv_calling_processes,
         )
 
-        if (val_mitochondrial_caller == "deepvariant") {
+        ch_bed_intervals = SCATTER_GENOME.out.bed_nuclear_intervals
+            .map { meta, bed, num_intervals -> [meta + [caller: val_snv_caller], bed, num_intervals] }
+        ch_mitochondrial_bed = SCATTER_GENOME.out.bed_mitochondrial_intervals
+            .map { meta, bed, _num_intervals -> [meta, bed] }
 
-            ch_bed_intervals = SCATTER_GENOME.out.bed_nuclear_mitochondrial_intervals
-        }
-        else {
-            ch_bed_intervals = SCATTER_GENOME.out.bed_nuclear_intervals
-        }
+        CALL_MITOCHONDRIAL_VARIANTS(
+            ch_bam_bai,
+            ch_fasta,
+            ch_fai,
+            ch_par,
+            ch_mitochondrial_bed,
+            val_mitochondrial_caller,
+        )
+
+        /*
+         * The meta.caller is needed for GVCF_GLNEXUS_NORM_VARIANTS workflow to process the VCFs differently.
+         * the number of intervals is used in groupKey downstream, num_intervals should be the same in the nuclear and mitochondrial channels.
+         */
+        def ch_num_intervals = ch_bed_intervals.map { _meta, _bed, num_intervals -> num_intervals }.first()
+
+        ch_mitochondrial = CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_vcf
+            .join(CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_tbi, failOnMismatch: true, failOnDuplicate: true)
+            .combine(ch_num_intervals)
+            .multiMap { meta, vcf, tbi, num_intervals ->
+                vcf: [meta + [caller: val_mitochondrial_caller, genome: 'mitochondrial', num_intervals: num_intervals + 1], vcf]
+                index: [meta + [caller: val_mitochondrial_caller, genome: 'mitochondrial', num_intervals: num_intervals + 1], tbi]
+            }
 
         // Combine the BED intervals with BAM/BAI files to create a region-bam-bai for each sample.
         // This uses the whole BAM files for each region instead of splitting them.
@@ -469,19 +491,29 @@ workflow NALLO {
             val_sentieon_tech,
         )
 
-        // Group GVCFs per region and family (one region with all samples)
+        /*
+         * Group and create (GVCF_GLNEXUS_NORM_VARIANTS) a merged and normalized VCF, containing one region with all samples, to be used in annotation and ranking.
+         * We add the total number of intervals for grouping later (account for mitochondrial interval).
+         * Done for CALL_SNVS.out.gvcf but CALL_SNVS.out.vcf is used in QC_SNVS subworkflow, for now we do not want the mitochondrial variants to be included
+         * as it will make the deepvariant report harder to interpret.
+         */
         def variants_to_merge_per_family = CALL_SNVS.out.gvcf
             .join(CALL_SNVS.out.gvcf_index, failOnMismatch: true, failOnDuplicate: true)
             .map { meta, gvcf, index ->
-                [[id: meta.region.name, family_id: meta.family_id, num_intervals: meta.num_intervals], gvcf, index]
+                [[id: meta.region.name, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals + 1, caller: val_snv_caller], gvcf, index]
             }
+            .mix(ch_mitochondrial.vcf
+                    .join(ch_mitochondrial.index, failOnMismatch: true, failOnDuplicate: true)
+                    .map { meta, vcf, tbi ->
+                    [[id: meta.genome, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals , caller: meta.caller], vcf, tbi]
+                }
+            )
             .groupTuple()
             .multiMap { meta, gvcfs, indexes ->
                 gvcf: [meta, gvcfs]
                 index: [meta, indexes]
             }
 
-        // Create a merged and normalized VCF, containing one region with all samples, to be used in annotation and ranking.
         // SCATTER_GENOME.out.bed contains all regions, but we could probably pass the region BED that actually matches the variants instead...
         GVCF_GLNEXUS_NORM_VARIANTS(
             variants_to_merge_per_family.gvcf,
@@ -489,11 +521,10 @@ workflow NALLO {
             SCATTER_GENOME.out.bed,
             ch_fasta,
             ch_fai,
-            val_snv_caller,
             ch_vcfexpress_prelude,
         )
 
-        // Grouping VCF, containing one sample with all regions
+        // Grouping VCF, containing one sample with all regions except chrM, as we do not want mitochondrial variants in the deepvariant report for now.
         ch_variants_to_concat_per_sample = CALL_SNVS.out.vcf
             .map { meta, vcf ->
                 def new_meta = meta - meta.subMap('region', 'genome')
@@ -516,22 +547,25 @@ workflow NALLO {
         sample_snv_vcf = VCF_CONCAT_NORM_VARIANTS.out.vcf
         sample_snv_index = VCF_CONCAT_NORM_VARIANTS.out.index
 
-        family_snv_vcf = GVCF_GLNEXUS_NORM_VARIANTS.out.vcf
-        family_snv_index = GVCF_GLNEXUS_NORM_VARIANTS.out.index
 
         // SNV QC
         // Can we use the normalized VCF here, for DV vcfstatsreport?
         QC_SNVS(
-            VCF_CONCAT_NORM_VARIANTS.out.bcftools_concat_vcf,
+            VCF_CONCAT_NORM_VARIANTS.out.bcftools_concat_vcf.map { meta, vcf -> [meta - meta.subMap('caller'), vcf] },
             sample_snv_vcf,
             sample_snv_index,
             val_snv_caller.equals("deepvariant"),
         )
         ch_multiqc_files = ch_multiqc_files.mix(QC_SNVS.out.stats.collect { _meta, metrics -> metrics }.ifEmpty([]))
 
+        // Set family_snv_vcf and family_snv_index for clarity
+        family_snv_vcf = GVCF_GLNEXUS_NORM_VARIANTS.out.vcf
+        family_snv_index = GVCF_GLNEXUS_NORM_VARIANTS.out.index
+
         ch_snvs_per_family_unannotated_vcf_tbi = family_snv_vcf
             .join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
     }
+
     if (!val_skip_prepare_gens_input) {
         ch_gvcfs = CALL_SNVS.out.gvcf
             .join(CALL_SNVS.out.gvcf_index)
@@ -584,7 +618,7 @@ workflow NALLO {
     }
 
     //
-    // Phase SNVs and INDELs
+    // Phase SNVs, SVs and INDELs
     //
     if (!val_skip_phasing) {
 
@@ -595,13 +629,16 @@ workflow NALLO {
                 [[id: family_id], sample_ids.unique()]
             }
 
-        // Grouping SNV VCFs per family to concatenate before phasing.
-        // Right now they are split by calling regions but we need whole-genome VCFs for phasing.
+        /*
+         * The VCFs are split by calling regions but we need whole-genome VCFs for phasing, we first group by family and then concatenate the VCFs of the same family together.
+         * We group only nuclear vcf for phasing as phasing mitochondrial variants is not relevant."num_intervals - 1" happens because groupKey should not expect the mitochondrial interval.
+         */
         ch_bcftools_concat_phasing_in = family_snv_vcf
             .join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
+            .filter { meta, _vcf, _tbi -> meta.genome == "nuclear" }
             .map { meta, vcf, tbi ->
-                def new_meta = [id: meta.family_id, num_intervals: meta.num_intervals]
-                [groupKey(new_meta, meta.num_intervals), vcf, tbi]
+                def new_meta = [id: meta.family_id, num_intervals: meta.num_intervals - 1]
+                [groupKey(new_meta, new_meta.num_intervals), vcf, tbi]
             }
             .groupTuple()
             .map { key, vcfs, tbis ->
@@ -620,6 +657,7 @@ workflow NALLO {
         ch_ped_family = SOMALIER_PED_FAMILY.out.ped
             .map { meta, ped -> [[id: meta.id], val_whatshap_pedigree_phasing ? ped : []] }
 
+        // Input is one VCF per family with all the regions (except chrM) and all the samples in the family
         PHASING(
             BCFTOOLS_CONCAT_PHASING.out.vcf,
             BCFTOOLS_CONCAT_PHASING.out.tbi,
@@ -637,7 +675,7 @@ workflow NALLO {
 
         ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect { _meta, txt -> txt }.ifEmpty([]))
 
-        // Scatter whole-genome phased SNV VCFs back into regions for annotation
+        // Scatter nuclear whole-genome phased SNV VCFs back into regions for annotation.
         ch_phased_scatter_in = PHASING.out.phased_family_snvs
             .join(PHASING.out.phased_family_snvs_tbi, failOnMismatch: true, failOnDuplicate: true)
             .combine(ch_bed_intervals)
@@ -646,31 +684,50 @@ workflow NALLO {
                 bed: bed
             }
 
+        // Split the vcf into regions for annotation
         BCFTOOLS_VIEW_PHASING(
             ch_phased_scatter_in.vcf,
             ch_phased_scatter_in.bed,
             [],
             [],
         )
-        ch_snv_vcf_for_annotation = BCFTOOLS_VIEW_PHASING.out.vcf
-        ch_snv_index_for_annotation = BCFTOOLS_VIEW_PHASING.out.tbi
+        // Add the mitochondrial VCF after phasing SNVs.
+        // Add +1 to the num_intervals of nuclear channel to account for mitochondrial region
+        ch_snv_vcf_tbi_nuclear_for_annotation = BCFTOOLS_VIEW_PHASING.out.vcf
+            .join(BCFTOOLS_VIEW_PHASING.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+            .map { meta, vcf, tbi -> [meta + [num_intervals: meta.num_intervals + 1], vcf, tbi] }
+
+        ch_snv_vcf_tbi_mitochondrial_for_annotation = ch_snvs_per_family_unannotated_vcf_tbi
+            .filter { meta, _vcf, _tbi -> meta.genome == "mitochondrial" }
+
+        ch_snv_vcf_tbi_nuclear_mitochondrial_for_annotation = ch_snv_vcf_tbi_nuclear_for_annotation
+            .mix(ch_snv_vcf_tbi_mitochondrial_for_annotation)
+            .multiMap { meta, vcf, tbi ->
+                vcf: [meta, vcf]
+                tbi: [meta, tbi]
+            }
+
+        // Set phased SVs for annotation if SV calling is not skipped
         ch_sv_vcf_for_annotation = PHASING.out.phased_family_svs
         ch_sv_index_for_annotation = PHASING.out.phased_family_svs_tbi
     }
     else {
-        ch_snv_vcf_for_annotation = val_skip_snv_calling ? channel.empty() : family_snv_vcf
-        ch_snv_index_for_annotation = val_skip_snv_calling ? channel.empty() : family_snv_index
-        ch_sv_vcf_for_annotation = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_vcf
-        ch_sv_index_for_annotation = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_tbi
+        ch_snv_vcf_tbi_nuclear_mitochondrial_for_annotation   = val_skip_snv_calling ? channel.empty() : family_snv_vcf
+            .join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
+            .multiMap { meta, vcf, tbi ->
+                vcf: [meta, vcf]
+                index: [meta, tbi]
+            }
+        ch_sv_vcf_for_annotation    = val_skip_sv_calling  ? channel.empty() : CALL_SVS.out.family_vcf
+        ch_sv_index_for_annotation  = val_skip_sv_calling  ? channel.empty() : CALL_SVS.out.family_tbi
     }
 
-    //
     // Annotate SNVs
     if (!val_skip_snv_annotation) {
 
         // Annotates family VCFs per variant call region
         ANNOTATE_SNVS(
-            ch_snv_vcf_for_annotation,
+            ch_snv_vcf_tbi_nuclear_mitochondrial_for_annotation.vcf,
             ch_echtvar_databases.map { _meta, databases -> databases }.collect(),
             ch_fasta,
             ch_fai,
@@ -690,7 +747,6 @@ workflow NALLO {
                 clinical: [meta + [set: "clinical"], vcf]
                 research: [meta + [set: "research"], vcf]
             }
-        ch_clin_research_snvs_vcf.clinical
 
         ch_ann_csq_pli_snv_in = ch_clin_research_snvs_vcf.research
 

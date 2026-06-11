@@ -122,10 +122,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-27T17:02:19.82608879",
+        "timestamp": "2026-05-27T11:08:55.763897677",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
         }
     },
     "unzip fasta, fai, untar vep cache": {
@@ -251,10 +251,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-04-13T14:48:57.301226156",
+        "timestamp": "2026-05-27T11:09:06.379286539",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.2"
+            "nextflow": "26.02.0"
         }
     },
     "unzip fasta, fai, untar vep cache -stub": {
@@ -380,10 +380,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-04-13T15:00:27.864471285",
+        "timestamp": "2026-05-27T11:09:51.232075498",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.2"
+            "nextflow": "26.02.0"
         }
     },
     "unzip fasta, untar vep cache -stub": {
@@ -420,7 +420,7 @@
                         },
                         [
                             [
-
+                                
                             ]
                         ]
                     ]
@@ -456,17 +456,17 @@
                         },
                         [
                             [
-
+                                
                             ]
                         ]
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-03-27T17:02:45.223081322",
+        "timestamp": "2026-05-27T11:09:35.459342496",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
         }
     },
     "don't unzip fasta, don't untar vep cache -stub": {
@@ -544,10 +544,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-05-06T09:43:27.16030035",
+        "timestamp": "2026-05-27T11:10:09.036817093",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.0"
+            "nextflow": "26.02.0"
         }
     },
     "don't unzip fasta, untar vep cache": {
@@ -673,10 +673,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-27T17:02:32.165222787",
+        "timestamp": "2026-05-27T11:09:20.407958279",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
         }
     }
 }

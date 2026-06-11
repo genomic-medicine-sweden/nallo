@@ -13,6 +13,7 @@ nextflow_pipeline {
                 input                          = "$projectDir/assets/samplesheet_multisample_ont_bam.csv"
                 outdir                         = "$outputDir"
                 preset                         = 'ONT_R10'
+                mitochondrial_caller           = 'deepvariant'
                 alignment_processes            = 1
                 hifiasm_mode                   = 'hifi-only'
                 snv_calling_processes          = 1
