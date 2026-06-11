@@ -141,10 +141,10 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
-        "timestamp": "2026-06-11T10:46:08.093288617",
+        "timestamp": "2026-06-11T13:28:34.513208764",
         "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.04.3"
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
         }
     },
     "Test skip sex check - multisample": {
@@ -476,10 +476,10 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-05-13T09:24:42.021163819",
+        "timestamp": "2026-06-11T13:30:48.597288294",
         "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.04.0"
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
         }
     }
 }
