@@ -1561,9 +1561,33 @@
 </tr>
 <tr>
 <td><code>mitochondrial_caller</code></td>
-<td>Which mitochondrial caller to use for mitochondrial variant calling (<code>deepvariant</code>)</td>
+<td>Which mitochondrial caller to use for mitochondrial variant calling</td>
 <td><code>string</code></td>
-<td>deepvariant</td>
+<td>mitorsaw</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>mitorsaw_minimum_maf</code></td>
+<td>Minimum minor allele frequency (MAF) for mitorsaw variant calling.</td>
+<td><code>number</code></td>
+<td>0.1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>mitorsaw_minimum_read_count</code></td>
+<td>Minimum read count to consider a heteroplasmic variant.</td>
+<td><code>integer</code></td>
+<td>3</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>mitochondrial_sv_min_size</code></td>
+<td>Minimum allele length difference (abs(strlen(REF)-strlen(ALT))) to classify a mitochondrial variant as an SV rather than a SNV/small indel.</td>
+<td><code>integer</code></td>
+<td>50</td>
 <td></td>
 <td></td>
 </tr>

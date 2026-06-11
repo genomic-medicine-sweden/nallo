@@ -538,6 +538,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#call-mitochondrial-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Call mitochondrial variants
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#phasing" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1139,6 +1150,17 @@
     <span class="md-ellipsis">
       
         Call SVs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#call-mitochondrial-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Call mitochondrial variants
       
     </span>
   </a>
@@ -1778,6 +1800,53 @@ You can disable this behavior for both callers by setting <code>--create_maf_tra
 <p>Unannotated family-level VCFs per caller can be output with <code>--publish_unannotated_family_svs</code>.</p>
 </div>
 <p>Turned off with <code>--skip_sv_calling</code>.</p>
+<h4 id="call-mitochondrial-variants">Call mitochondrial variants</h4>
+<p>This subworkflow specifically calls mitochondrial variants. The resulting VCF file is then merged together with the VCF containing the nuclear variants.
+The mitochondrial caller can be selected with <code>--mitochondrial_caller</code>. Note that the mitorsaw <a href="https://github.com/PacificBiosciences/mitorsaw/blob/main/LICENSE.md">license</a> doesn't generally allow usage of ONT data.</p>
+<table>
+<thead>
+<tr>
+<th>Caller</th>
+<th>Parameter value</th>
+<th>Compatible data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mitorsaw</td>
+<td><code>mitorsaw</code></td>
+<td>Pacbio</td>
+</tr>
+<tr>
+<td>Deepvariant</td>
+<td><code>deepvariant</code></td>
+<td>Pacbio, ONT</td>
+</tr>
+</tbody>
+</table>
+<p>The following parameters can be used:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mitorsaw_minimum_maf</code></td>
+<td>Minimum minor allele frequency (MAF) for mitorsaw variant calling.</td>
+</tr>
+<tr>
+<td><code>mitorsaw_minimum_read_count</code></td>
+<td>Minimum read count to consider a heteroplasmic variant.</td>
+</tr>
+<tr>
+<td><code>mitochondrial_sv_min_size</code></td>
+<td>Minimum allele length difference (abs(strlen(REF)-strlen(ALT))) to classify a mitochondrial variant as an SV rather than a SNV/small indel.</td>
+</tr>
+</tbody>
+</table>
 <h4 id="phasing">Phasing</h4>
 <p>This subworkflow phases variants and haplotags aligned BAM files, and such relies on the alignment, SNV calling subworkflows, but requires no additional files.</p>
 <p>If SVs were called, they are phased together with SNVs if supported by the selected phaser.
