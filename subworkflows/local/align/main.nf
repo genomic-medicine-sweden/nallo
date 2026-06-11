@@ -13,26 +13,26 @@ workflow ALIGN {
 
     if (val_split_alignment) {
         SPLITUBAM(ch_ubam)
-
         ch_unmapped = SPLITUBAM.out.bam
             .transpose()
-            // Adding file key to meta for proper joining of minimap output
-            .map { meta, bam -> tuple(meta + [file: bam.name], bam) }
     } else {
         ch_unmapped = ch_ubam
     }
+
+    // Adding file key to meta for proper joining of minimap output
+    ch_minimap_in = ch_unmapped
+        .map { meta, bam -> tuple(meta + [file: bam.name], bam) }
 
     /*
      * Create a grouping key per sample that records the number of split files,
      * allowing downstream merging to trigger as soon as all alignments of a sample are ready.
      */
     ch_reads_grouping_key = ch_unmapped
-        .map { meta, bam -> tuple(meta - meta.subMap('file'), bam)}
         .groupTuple()
         .map { meta, files -> tuple(meta.id, files.size()) }
 
     MINIMAP2_ALIGN(
-        ch_unmapped,
+        ch_minimap_in,
         ch_mmi,
         true,
         'bai',

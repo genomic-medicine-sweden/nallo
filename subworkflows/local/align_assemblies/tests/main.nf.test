@@ -56,10 +56,14 @@ nextflow_workflow {
                     file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)
                 ]
                 input[2] = [
+                    [ id: 'genome' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)
+                ]
+                input[3] = [
                     [ id : 'genome' ],
                     file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
                 ]
-                input[3] = false
+                input[4] = false
                 """
             }
         }
@@ -68,7 +72,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    bam(workflow.out.bam.get(0).get(1)).getReadsMD5(),
+                    bam(workflow.out.bam.get(0).get(1)).getStatistics(),
                     file(workflow.out.bai.get(0).get(1)).name
                 ).match() }
             )
@@ -88,10 +92,14 @@ nextflow_workflow {
                     file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)
                 ]
                 input[2] = [
+                    [ id: 'genome' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)
+                ]
+                input[3] = [
                     [ id : 'genome' ],
                     file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
                 ]
-                input[3] = false
+                input[4] = false
                 """
             }
         }

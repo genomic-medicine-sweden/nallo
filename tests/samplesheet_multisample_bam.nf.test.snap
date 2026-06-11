@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            395,
+            388,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -59,9 +59,6 @@
                 },
                 "CAT_CAT": {
                     "pigz": 2.8
-                },
-                "CAT_FASTQ": {
-                    "cat": 9.5
                 },
                 "CLEAN_SNIFFLES": {
                     "clean_sniffles": 1.0
@@ -1314,10 +1311,10 @@
                 
             ]
         ],
-        "timestamp": "2026-05-28T13:06:41.811797659",
+        "timestamp": "2026-06-11T10:34:49.318731149",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.04.3"
         }
     }
 }

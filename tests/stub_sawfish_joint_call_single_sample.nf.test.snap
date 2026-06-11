@@ -1,7 +1,7 @@
 {
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
-            59,
+            56,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -86,9 +86,6 @@
                     "python": "3.8.3"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.23.1"
-                },
-                "SAMTOOLS_FASTQ": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_IMPORT": {
@@ -210,10 +207,10 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-05-06T08:12:33.401108232",
+        "timestamp": "2026-06-11T10:45:37.375205482",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.0"
+            "nextflow": "26.04.3"
         }
     }
 }

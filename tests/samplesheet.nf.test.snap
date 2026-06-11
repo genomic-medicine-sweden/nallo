@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            230,
+            227,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -216,9 +216,6 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.23.1"
-                },
-                "SAMTOOLS_FASTQ": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_IMPORT": {
@@ -841,10 +838,10 @@
                 
             ]
         ],
-        "timestamp": "2026-05-26T15:16:41.992696098",
+        "timestamp": "2026-06-11T10:27:23.891431559",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.04.3"
         }
     }
 }
