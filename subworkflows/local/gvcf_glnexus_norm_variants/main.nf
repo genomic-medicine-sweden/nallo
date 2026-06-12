@@ -6,6 +6,8 @@
 include { BCFTOOLS_PLUGINFIXPLOIDY                   } from '../../../modules/nf-core/bcftools/pluginfixploidy/main'
 include { BCFTOOLS_NORM as BCFTOOLS_NORM_MULTISAMPLE } from '../../../modules/nf-core/bcftools/norm/main'
 include { BCFTOOLS_MERGE                             } from '../../../modules/nf-core/bcftools/merge/main'
+include { BCFTOOLS_REHEADER                          } from '../../../modules/nf-core/bcftools/reheader/main'
+include { GAWK as GAWK_STRIP_CONTIG_HEADER           } from '../../../modules/nf-core/gawk/main'
 include { GLNEXUS                                    } from '../../../modules/nf-core/glnexus/main'
 include { SENTIEON_GVCFTYPER                         } from '../../../modules/nf-core/sentieon/gvcftyper/main'
 include { VCFEXPRESS                                 } from '../../../modules/nf-core/vcfexpress/main'
@@ -85,11 +87,28 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
         ch_bcftools_merge_in,
         ch_fasta_fai.collect(),
     )
-    ch_merged_family_gvcf_bcftools = BCFTOOLS_MERGE.out.vcf
+
+    /*
+     * Mitochondrial-specific callers produce VCFs with only ##contig=<ID=chrM> in the header.
+     * bcftools reheader --fai only appends missing contigs — it does not replace existing ones.
+     * So we first strip all ##contig lines with GAWK, then reheader FAI
+     * This ensures all contigs appear in reference order so the downstream sort places chrM correctly.
+     */
+
+    GAWK_STRIP_CONTIG_HEADER(
+        BCFTOOLS_MERGE.out.vcf.map { meta, vcf -> [meta, [vcf]] },
+        [],
+        false,
+    )
+
+    BCFTOOLS_REHEADER(
+        GAWK_STRIP_CONTIG_HEADER.out.output.map { meta, vcf -> [meta, vcf, [], []] },
+        ch_fai.collect(),
+    )
 
     ch_merged_family_gvcf = ch_merged_family_gvcf_glnexus
         .mix(ch_merged_family_gvcf_sentieon)
-        .mix(ch_merged_family_gvcf_bcftools)
+        .mix(BCFTOOLS_REHEADER.out.vcf)
 
     // Add FOUND_IN tag with VCFEXPRESS using the meta.caller information
     VCFEXPRESS(
@@ -101,7 +120,6 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     ch_bcftools_norm_input = VCFEXPRESS.out.vcf.map { meta, vcf ->
         [meta - meta.subMap('caller'), vcf, []]
     }
-
 
     // Decompose and normalize variants
     BCFTOOLS_NORM_MULTISAMPLE(
