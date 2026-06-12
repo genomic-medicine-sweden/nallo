@@ -90,6 +90,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1045](https://github.com/genomic-medicine-sweden/nallo/pull/1045) - Fixed `--skip_sex_check` should depend on `--skip_alignment` in workflow checks on pipeline start.
 - [#1056](https://github.com/genomic-medicine-sweden/nallo/pull/1056) - Fixed nf-test CI not passing the matrix Nextflow version to the setup action.
 - [#1079](https://github.com/genomic-medicine-sweden/nallo/pull/1079) - Fixed typo in tests for `call_methylation_methbat`
+- [#1140](https://github.com/genomic-medicine-sweden/nallo/pull/1140) - Fixed mitochondrial VCF sorting
 
 ### Parameters
 
