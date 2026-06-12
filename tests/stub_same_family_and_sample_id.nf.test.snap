@@ -1,7 +1,7 @@
 {
     "Test family id same as sample id": {
         "content": [
-            218,
+            220,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -123,6 +123,9 @@
                     "gawk": "5.3.1"
                 },
                 "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_STRIP_CONTIG_HEADER": {
                     "gawk": "5.3.1"
                 },
                 "GENMOD_ANNOTATE": {
@@ -517,7 +520,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-06-01T09:50:18.851620939",
+        "timestamp": "2026-06-12T09:53:50.104308068",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"

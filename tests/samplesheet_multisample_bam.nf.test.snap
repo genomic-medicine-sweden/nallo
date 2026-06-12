@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            400,
+            402,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -123,6 +123,9 @@
                     "gawk": "5.3.1"
                 },
                 "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_STRIP_CONTIG_HEADER": {
                     "gawk": "5.3.1"
                 },
                 "GENMOD_ANNOTATE": {
@@ -1320,7 +1323,7 @@
                 
             ]
         ],
-        "timestamp": "2026-06-01T09:29:40.560570552",
+        "timestamp": "2026-06-12T09:44:21.480474844",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"

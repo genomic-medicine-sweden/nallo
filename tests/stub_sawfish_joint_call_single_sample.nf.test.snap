@@ -1,7 +1,7 @@
 {
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
-            65,
+            67,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -13,6 +13,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_REHEADER": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_SORT": {
@@ -52,6 +55,9 @@
                     "fastqc": "0.12.1"
                 },
                 "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_STRIP_CONTIG_HEADER": {
                     "gawk": "5.3.1"
                 },
                 "GFASTATS": {
@@ -219,7 +225,7 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-06-01T09:50:49.410375208",
+        "timestamp": "2026-06-12T09:54:19.593967981",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"

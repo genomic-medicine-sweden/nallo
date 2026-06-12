@@ -152,7 +152,7 @@
     },
     "Test skip sex check - multisample": {
         "content": [
-            153,
+            155,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -170,6 +170,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_REHEADER": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_SORT": {
@@ -221,6 +224,9 @@
                     "gatk4": "4.6.2.0"
                 },
                 "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_STRIP_CONTIG_HEADER": {
                     "gawk": "5.3.1"
                 },
                 "GLNEXUS": {
@@ -485,7 +491,7 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-06-01T09:52:04.683544308",
+        "timestamp": "2026-06-12T09:55:32.785110209",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"

@@ -1,7 +1,7 @@
 {
     "test profile | --target_regions null --alignment_output_format cram": {
         "content": [
-            222,
+            224,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -123,6 +123,9 @@
                     "gawk": "5.3.1"
                 },
                 "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_STRIP_CONTIG_HEADER": {
                     "gawk": "5.3.1"
                 },
                 "GENMOD_ANNOTATE": {
@@ -811,7 +814,7 @@
                 ],
                 [
                     "FAM_snvs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=143, phased=false, phasedAutodetect=true]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=143, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_Revio_deepvariant_snvs.vcf.gz",
@@ -830,7 +833,7 @@
                 
             ]
         ],
-        "timestamp": "2026-06-01T09:44:43.66604639",
+        "timestamp": "2026-06-12T09:50:34.644433514",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"

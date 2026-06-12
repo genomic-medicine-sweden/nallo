@@ -1,7 +1,7 @@
 {
     "Test Chromograph works without SNV annotation": {
         "content": [
-            77,
+            79,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -74,6 +74,9 @@
                     "tabix": 1.17
                 },
                 "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_STRIP_CONTIG_HEADER": {
                     "gawk": "5.3.1"
                 },
                 "GLNEXUS": {
@@ -244,7 +247,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-06-01T09:52:39.499675257",
+        "timestamp": "2026-06-12T09:56:08.97406136",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -252,7 +255,7 @@
     },
     "Test Peddy without annotation": {
         "content": [
-            43,
+            45,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -264,6 +267,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_REHEADER": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_SORT": {
@@ -291,6 +297,9 @@
                     "deepvariant": "1.10.0"
                 },
                 "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_STRIP_CONTIG_HEADER": {
                     "gawk": "5.3.1"
                 },
                 "GLNEXUS": {
@@ -395,7 +404,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-06-01T09:53:06.242525686",
+        "timestamp": "2026-06-12T09:56:37.259290004",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
