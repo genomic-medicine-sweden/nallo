@@ -20,6 +20,7 @@ process SPLITUBAM {
     script:
     def args = task.ext.args ?: ''
     """
+    exit 1
     splitubam \\
         $args \\
         --threads $task.cpus \\
