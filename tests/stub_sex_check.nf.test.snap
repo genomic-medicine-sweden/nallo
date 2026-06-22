@@ -152,7 +152,7 @@
     },
     "Test skip sex check - multisample": {
         "content": [
-            155,
+            159,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -491,7 +491,7 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-06-12T09:55:32.785110209",
+        "timestamp": "2026-06-22T12:12:58.641345874",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
