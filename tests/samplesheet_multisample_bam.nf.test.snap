@@ -203,7 +203,7 @@
                     "chromograph": "1.3.1"
                 },
                 "RUN_HIPHASE": {
-                    "hiphase": "1.4.0-7bf2743"
+                    "hiphase": "1.6.0-ac3f399"
                 },
                 "SAMBAMBA_DEPTH": {
                     "sambamba": "1.0.1"
@@ -1103,8 +1103,8 @@
                 "HG003_pbcpgtools.hap2.bed.gz.tbi:md5,979335e1c28147f5490865cfd562402a",
                 "HG004_pbcpgtools.combined.bed.gz:md5,e228d4aeb9ba18168f88c4fa1d766cc4",
                 "HG004_pbcpgtools.combined.bed.gz.tbi:md5,aafd78ce775b7fa32a513a287b192297",
-                "HG004_pbcpgtools.hap1.bed.gz:md5,5af4909e02be700a548f87345e1e5c66",
-                "HG004_pbcpgtools.hap1.bed.gz.tbi:md5,a7538d7892187b54376b0456a0484960",
+                "HG004_pbcpgtools.hap1.bed.gz:md5,4381d565976822cd44ce535ba1392bcc",
+                "HG004_pbcpgtools.hap1.bed.gz.tbi:md5,bbe68e7ec3578586e7ba4875336d992d",
                 "HG004_pbcpgtools.hap2.bed.gz:md5,38341fd4935b0a6698a030a06d07058a",
                 "HG004_pbcpgtools.hap2.bed.gz.tbi:md5,3338912e982e7a53b3921fb2817f20ef",
                 "bcftools-stats-subtypes.txt:md5,a224445b24151b7bf41893ca532ef866",
@@ -1128,11 +1128,11 @@
                 "multiqc_bcftools_stats.txt:md5,881e73457fe2b72011ecaaae6a9a0b91",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,13981c8f5bcfcb8729f1eab4d267730f",
-                "multiqc_general_stats.txt:md5,72115aeb2664443d9c8cab54f467c69d",
+                "multiqc_general_stats.txt:md5,51f854aaadb27dccd93062f99b81e193",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,31502ff5497bd639dcb218978b9477d8",
                 "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
                 "somalier_stats.txt:md5,2519c648970591c8161b6233a685062f",
-                "whatshap-stats-table.txt:md5,bfcf21c8dc2012a23882c9d2a0163525",
+                "whatshap-stats-table.txt:md5,f7beb768b4d2ace0f52bb0cc13360fc3",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002_cramino_aligned_phased.arrow:md5,368993a8f0f59ae345d0b3a3fb8d0765",
                 "HG003_cramino_aligned_phased.arrow:md5,bbaab67e763f6059f7bf7166d282d8d3",
@@ -1173,7 +1173,7 @@
                 "HG003_whatshap_stats.tsv:md5,fdd8626b3853a791f3710928e586de9c",
                 "HG004_whatshap_stats.gtf.gz:md5,8423d0eac1ac62981574eec60a9c96d9",
                 "HG004_whatshap_stats.gtf.gz.tbi:md5,7d946efbc8e804ce3029a52cb90324fd",
-                "HG004_whatshap_stats.tsv:md5,8103a14ba1a61fa9bc855d2156ef17c3",
+                "HG004_whatshap_stats.tsv:md5,e5a7b1c386cec6d276edd574a4ff4c72",
                 "HG002_sambamba_depth.bed:md5,16da8e64f24ef0ec31b2ce5c0b18586c",
                 "HG003_sambamba_depth.bed:md5,6b87e82e7624db10f2d15a890bcfe6cf",
                 "HG004_sambamba_depth.bed:md5,ad9af0d845359cfd0ee86e478e5960d7",
@@ -1202,7 +1202,7 @@
                 "HG004_hificnv.depth.bw:md5,712c373e7f587ddce5c528b7c5e78dd2",
                 "HG004_hificnv.maf.bw:md5,fce75b0ffa2ea9ef96ba777ca203ce4b",
                 "HG004_pbcpgtools.combined.bw:md5,6c167d4db0b25b884eba67b690160861",
-                "HG004_pbcpgtools.hap1.bw:md5,d187e9802249043967d51b8422f7c82e",
+                "HG004_pbcpgtools.hap1.bw:md5,0274eafc026afc2f8a2369f98d4283b7",
                 "HG004_pbcpgtools.hap2.bw:md5,d7cebd17f9e4340504f60b174433b5f7"
             ],
             [
@@ -1320,7 +1320,7 @@
                 
             ]
         ],
-        "timestamp": "2026-06-01T09:29:40.560570552",
+        "timestamp": "2026-06-22T11:36:28.448046885",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
