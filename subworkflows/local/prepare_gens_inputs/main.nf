@@ -7,7 +7,6 @@ include { PREPARECOVANDBAF              } from '../../../modules/nf-core/gens/pr
 include { SAMTOOLS_VIEW                 } from '../../../modules/nf-core/samtools/view/main'
 include { SAMTOOLS_SORT                 } from '../../../modules/nf-core/samtools/sort/main'
 include { SAMTOOLS_AMPLICONCLIP         } from '../../../modules/nf-core/samtools/ampliconclip/main'
-include { BAM_QC_FILTER                 } from '../../../modules/local/filter_bam/main'
 include { GATK4_CLEANSAM               } from '../../../modules/local/gatk4/cleansam/main'
 
 workflow PREPARE_GENS_INPUTS {
@@ -20,55 +19,6 @@ workflow PREPARE_GENS_INPUTS {
     ch_mosdepth_bins           // channel: [mandatory] [ val(meta), path(bed) ]
 
     main:
-/*    ch_bam
-        .map { meta, bam, _bai -> [meta, bam] }
-        .set { ch_bam_to_clip }
-
-    // remove out of bounds reads (i.e. those that start within the chromosome in the reference but end beyond it) to avoid mosdepth errors
-    SAMTOOLS_AMPLICONCLIP(
-        ch_bam_to_clip,
-        ch_mosdepth_bins
-            .map { _meta, bed -> [bed] },
-        false,
-        false
-    )
-
-    SAMTOOLS_AMPLICONCLIP.out.bam.view()
-
-    SAMTOOLS_SORT(
-        SAMTOOLS_AMPLICONCLIP.out.bam,
-        [[],[],[]],
-        'bai'
-    )
-
-    SAMTOOLS_SORT.out.bam
-        .join(SAMTOOLS_SORT.out.index)
-        .set { ch_bam_bai_clipped }
-
-    BAM_QC_FILTER(
-        ch_bam,
-    )
-
-    BAM_QC_FILTER.out.bam_bai
-
-    GATK4_CLEANSAM(
-        ch_bam_to_clip,
-        true
-    )
-
-    GATK4_CLEANSAM.out.bam_bai
-        .set { ch_bam_bai_clipped }
-
-    ch_bam_bai_clipped
-        .combine(ch_mosdepth_bins)
-        .map { meta, bam, bai, _bins_meta, bins ->
-            [meta, bam, bai, bins]
-        }
-        .set { ch_mosdepth_in }
-
-    ch_mosdepth_in.view()
-*/
-
     ch_bam
         .combine(ch_mosdepth_bins)
         .map { meta, bam, bai, _bins_meta, bins ->
@@ -79,7 +29,6 @@ workflow PREPARE_GENS_INPUTS {
 
     // Prepare the header
     SAMTOOLS_VIEW(
-        //ch_bam_bai_clipped,
         ch_bam,
         [[],[],[]],
         [],

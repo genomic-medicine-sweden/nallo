@@ -43,7 +43,7 @@ workflow ALIGN_ASSEMBLIES {
     //SAMTOOLS_VIEW.out.bam // -> v2
         .map { meta, bam -> [ meta - meta.subMap('haplotype'), bam ] }
         .groupTuple(size: 2)
-        .map { meta, bams -> [ meta, bams, [] ] } // pas dans v2
+        .map { meta, bams -> [ meta, bams, [] ] }
         .set { ch_assemblies_per_sample }
 
     SAMTOOLS_MERGE (
@@ -60,8 +60,6 @@ workflow ALIGN_ASSEMBLIES {
     }
 
     emit:
-    //bam      = MINIMAP2_ALIGN.out.bam // channel: [ val(meta), path(bam) ]
-    //bai      = MINIMAP2_ALIGN.out.index // channel: [ val(meta), path(bai) ]
     bam = SAMTOOLS_MERGE.out.bam   // channel: [ val(meta), path(bam) ]
     bai = SAMTOOLS_MERGE.out.index // channel: [ val(meta), path(bai) ]
 }
