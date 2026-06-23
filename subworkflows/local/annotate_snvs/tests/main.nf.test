@@ -49,9 +49,10 @@ nextflow_workflow {
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
-                input[1] = [
+                input[1] = channel.of([
+                    [ id: 'db' ],
                     file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
-                ]
+                ])
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
                 input[4] = UNTAR.out.untar
@@ -91,9 +92,10 @@ nextflow_workflow {
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
-                input[1] = [
+                input[1] = channel.of([
+                    [ id: 'db' ],
                     file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
-                ]
+                ])
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
                 input[4] = UNTAR.out.untar
@@ -133,7 +135,7 @@ nextflow_workflow {
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
-                input[1] = channel.value([])
+                input[1] = [[],[]]
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
                 input[4] = UNTAR.out.untar
@@ -173,7 +175,7 @@ nextflow_workflow {
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
-                input[1] = channel.value([])
+                input[1] = [[],[]]
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
                 input[4] = UNTAR.out.untar
@@ -217,9 +219,10 @@ nextflow_workflow {
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
-                input[1] = [
+                input[1] = channel.of([
+                    [ id: 'db' ],
                     file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
-                ]
+                ])
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
                 input[4] = UNTAR.out.untar
@@ -262,9 +265,10 @@ nextflow_workflow {
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
-                input[1] = [
+                input[1] = channel.of([
+                    [ id: 'db' ],
                     file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
-                ]
+                ])
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
                 input[4] = UNTAR.out.untar

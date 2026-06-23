@@ -1,6 +1,6 @@
 include { ANNOTATE_CADD                    } from '../annotate_cadd/main'
 include { BCFTOOLS_VIEW                    } from '../../../modules/nf-core/bcftools/view/main'
-include { ECHTVAR_ANNO                     } from '../../../modules/local/echtvar/anno/main'
+include { ECHTVAR_ANNO                     } from '../../../modules/nf-core/echtvar/anno/main'
 include { ENSEMBLVEP_VEP as ENSEMBLVEP_SNV } from '../../../modules/nf-core/ensemblvep/vep/main'
 
 workflow ANNOTATE_SNVS {
@@ -25,12 +25,13 @@ workflow ANNOTATE_SNVS {
         ECHTVAR_ANNO(
             ch_vcf,
             ch_echtvar_databases,
+            'vcf.gz'
         )
     }
 
     // Allows for filtering before annotating with VEP
     if (pre_vep_filter) {
-        ch_bcftools_view_input = (annotate_echtvar ? ECHTVAR_ANNO.out.bcf : ch_vcf)
+        ch_bcftools_view_input = (annotate_echtvar ? ECHTVAR_ANNO.out.vcf : ch_vcf)
             .map { meta, vcf -> [meta, vcf, []] }
 
         BCFTOOLS_VIEW(
@@ -48,7 +49,7 @@ workflow ANNOTATE_SNVS {
     if (annotate_cadd) {
         ANNOTATE_CADD(
             ch_fai,
-            pre_vep_filter ? BCFTOOLS_VIEW.out.vcf : annotate_echtvar ? ECHTVAR_ANNO.out.bcf : ch_vcf,
+            pre_vep_filter ? BCFTOOLS_VIEW.out.vcf : annotate_echtvar ? ECHTVAR_ANNO.out.vcf : ch_vcf,
             pre_vep_filter ? BCFTOOLS_VIEW.out.tbi : ch_vcf.map { meta, _vcf -> [meta, []] },
             ch_cadd_header,
             ch_cadd_resources,
@@ -56,7 +57,7 @@ workflow ANNOTATE_SNVS {
         )
     }
 
-    ch_vep_in = (annotate_cadd ? ANNOTATE_CADD.out.vcf : pre_vep_filter ? BCFTOOLS_VIEW.out.vcf : annotate_echtvar ? ECHTVAR_ANNO.out.bcf : ch_vcf)
+    ch_vep_in = (annotate_cadd ? ANNOTATE_CADD.out.vcf : pre_vep_filter ? BCFTOOLS_VIEW.out.vcf : annotate_echtvar ? ECHTVAR_ANNO.out.vcf : ch_vcf)
         .map { meta, vcf -> [meta, vcf, []] }
 
     // Always annotate with VEP
