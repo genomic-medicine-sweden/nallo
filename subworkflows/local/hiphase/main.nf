@@ -42,7 +42,7 @@ workflow HIPHASE {
     // Run HiPhase
     RUN_HIPHASE(
         ch_hiphase_in,
-        fasta.join(fai, failOnMismatch: true, failOnDuplicate: true),
+        fasta.join(fai, failOnMismatch: true, failOnDuplicate: true).collect(),
         true,
         false,
         false,
