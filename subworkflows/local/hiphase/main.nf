@@ -12,7 +12,6 @@ workflow HIPHASE {
     fai                  // channel: [ val(meta), path(fai) ]
     phase_with_svs       // bool: Whether to include SVs in phasing (true) or not (false)
 
-
     main:
     // Prepare SNV VCF with index
     ch_snv_vcf_tbi = ch_snv_vcf
