@@ -15,38 +15,31 @@ workflow HIPHASE {
 
     main:
     // Prepare SNV VCF with index
-    ch_snv_vcf
+    ch_snv_vcf_tbi = ch_snv_vcf
         .join(ch_snv_vcf_index, failOnMismatch: true, failOnDuplicate: true)
-        .set { ch_snv_vcf_tbi }
 
     // Group BAM files by family and join with SNV VCF
-    ch_bam_bai
+    ch_hiphase_bam_snv = ch_bam_bai
         .map { meta, bam, bai -> [[id: meta.family_id], bam, bai] }
         .groupTuple()
         .join(ch_snv_vcf_tbi, failOnMismatch: true, failOnDuplicate: true)
-        .set { ch_hiphase_bam_snv }
 
     // Prepare input based on whether SVs are included
     if (phase_with_svs) {
-        ch_sv_vcf
+        ch_sv_vcf_tbi = ch_sv_vcf
             .join(ch_sv_vcf_index, failOnMismatch: true, failOnDuplicate: true)
-            .set { ch_sv_vcf_tbi }
 
-        ch_hiphase_bam_snv
+        ch_bam_vcf = ch_hiphase_bam_snv
             .join(ch_sv_vcf_tbi, failOnMismatch: true, failOnDuplicate: true)
-            .set { ch_bam_vcf }
-        ch_bam_vcf
     }
     else {
-        ch_hiphase_bam_snv
+       ch_bam_vcf = ch_hiphase_bam_snv
             .map { meta, bams, bais, snv_vcf, snv_tbi -> [meta, bams, bais, snv_vcf, snv_tbi, [], []] }
-            .set { ch_bam_vcf }
     }
 
     // Adding sample IDs to input tuples
-    ch_bam_vcf
+    ch_hiphase_in = ch_bam_vcf
         .join(ch_family_to_samples, failOnMismatch: true, failOnDuplicate: true)
-        .set { ch_hiphase_in }
     // Run HiPhase
     RUN_HIPHASE(
         ch_hiphase_in,
@@ -63,7 +56,7 @@ workflow HIPHASE {
     // The HiPhase output channels only contain family IDs
     // We need to match the haplotagged BAMs back to the original sample metadata
     // as to not lose information downstream processes might depend on.
-    RUN_HIPHASE.out.bams
+    ch_haplotagged_bam_bai = RUN_HIPHASE.out.bams
         .join(RUN_HIPHASE.out.bams_indexes, failOnMismatch: true, failOnDuplicate: true)
         .transpose()
         .combine(ch_bam_bai)
@@ -73,7 +66,6 @@ workflow HIPHASE {
         .map { _meta_phased, bam_phased, bai_phased, meta_orig, _bam_orig, _bai_orig ->
             [meta_orig, bam_phased, bai_phased]
         }
-        .set { ch_haplotagged_bam_bai }
 
     emit:
     phased_snvs = RUN_HIPHASE.out.vcfs                                                  // channel: [ val(meta), path(vcf) ]
