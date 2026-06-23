@@ -148,6 +148,11 @@
                         "git_sha": "ff05d8eb10c1191d87119ff6cfcbbc8ef110afdf",
                         "installed_by": ["modules"]
                     },
+                    "echtvar/anno": {
+                        "branch": "master",
+                        "git_sha": "05fff966500ceeefeb93587b8e06eac3b19c7e6c",
+                        "installed_by": ["modules"]
+                    },
                     "ensemblvep/filtervep": {
                         "branch": "master",
                         "git_sha": "890fdcff71928fc1470d3e669d4c430c8c770297",
