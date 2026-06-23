@@ -179,7 +179,7 @@
                     },
                     "FAM_snv_phased.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=169, phased=false, phasedAutodetect=false]",
-                    "cfea38dd33e9b9f1bbd69ac704d9408a"
+                    "76f36e0c1c6e484aa3e4520862609ccf"
                 ]
             ],
             "FAM_snv_phased.vcf.gz.tbi",
@@ -195,8 +195,8 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_PacBio_Revio_haplotagged.bam:md5,23b7f99f0f0962dbb574188856d81b28",
-                    "HG002_PacBio_Revio_haplotagged.bam.bai:md5,4bef94e827ec92a0b4c97dc7950aa02d"
+                    "HG002_PacBio_Revio_haplotagged.bam:md5,6dc1b2068e6b279c8e0b2fed13f0afdb",
+                    "HG002_PacBio_Revio_haplotagged.bam.bai:md5,76b71249874e7c0fbd0475157461f9ac"
                 ]
             ],
             [
@@ -249,7 +249,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-05T10:00:38.776183431",
+        "timestamp": "2026-06-23T11:32:03.744039838",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -606,7 +606,7 @@
                     },
                     "FAM_snv_phased.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=169, phased=false, phasedAutodetect=false]",
-                    "cfea38dd33e9b9f1bbd69ac704d9408a"
+                    "76f36e0c1c6e484aa3e4520862609ccf"
                 ]
             ],
             "FAM_snv_phased.vcf.gz.tbi",
@@ -622,8 +622,8 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_PacBio_Revio_haplotagged.bam:md5,23b7f99f0f0962dbb574188856d81b28",
-                    "HG002_PacBio_Revio_haplotagged.bam.bai:md5,4bef94e827ec92a0b4c97dc7950aa02d"
+                    "HG002_PacBio_Revio_haplotagged.bam:md5,6dc1b2068e6b279c8e0b2fed13f0afdb",
+                    "HG002_PacBio_Revio_haplotagged.bam.bai:md5,76b71249874e7c0fbd0475157461f9ac"
                 ]
             ],
             "HG002.cram",
@@ -674,7 +674,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-05T14:54:28.620288373",
+        "timestamp": "2026-06-23T11:32:28.744043569",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -1562,7 +1562,7 @@
                     },
                     "FAM_snv_phased.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=169, phased=false, phasedAutodetect=false]",
-                    "580ab46abab36cd020cd8fc2c2bb75be"
+                    "aab6dbef7714080a79738b5e610fc2f5"
                 ]
             ],
             "FAM_snv_phased.vcf.gz.tbi",
@@ -1572,7 +1572,7 @@
                         "id": "FAM"
                     },
                     "FAM_sv_phased.vcf.gz",
-                    "16c13b731169bfa9ef73d1fb721b40be"
+                    "4cecdaa511c5f9b894a78dc53e954f96"
                 ]
             ],
             "FAM_sv_phased.vcf.gz.tbi",
@@ -1582,8 +1582,8 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_PacBio_Revio_haplotagged.bam:md5,f80f119fa1a7ec05528b1982184bf3f0",
-                    "HG002_PacBio_Revio_haplotagged.bam.bai:md5,9c0028995e97549e66d6562a7b1aa9f2"
+                    "HG002_PacBio_Revio_haplotagged.bam:md5,6609ae9a3e0c9ec8485c7d971be7a1c1",
+                    "HG002_PacBio_Revio_haplotagged.bam.bai:md5,4614cbbf0cd261cb7a18762bb6f5cd18"
                 ]
             ],
             [
@@ -1636,7 +1636,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-05T10:00:54.704833395",
+        "timestamp": "2026-06-23T11:32:18.782272194",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
