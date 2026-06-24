@@ -14,7 +14,7 @@ workflow SCATTER_GENOME {
     main:
     ch_bed = channel.empty()
     ch_bed_nuclear_intervals = channel.empty()
-    ch_bed_nuclear_mitochondrial_intervals = channel.empty()
+    ch_bed_mitochondrial_intervals = channel.empty()
 
     /*
      * If make_bed_from_fai is true then build intervals from reference
@@ -27,10 +27,10 @@ workflow SCATTER_GENOME {
             false,
         )
 
-        GAWK_BUILD_INTERVALS.out.output.set { ch_bed }
+        ch_bed = GAWK_BUILD_INTERVALS.out.output
     }
     else {
-        ch_input_bed.set { ch_bed }
+        ch_bed = ch_input_bed
     }
 
     // Sort and merge overlapping regions
@@ -44,11 +44,10 @@ workflow SCATTER_GENOME {
     )
 
     // Add meta.genome so we can extract the mitochondrial region from the BED file
-    BEDTOOLS_MERGE.out.bed
+    ch_input_gawk = BEDTOOLS_MERGE.out.bed
         .flatMap { meta, bed ->
             [[meta + [genome: "nuclear"], bed], [meta + [genome: "mitochondrial"], bed]]
         }
-        .set { ch_input_gawk }
 
     // Exctract according to meta.genome, logic is in the config file
     GAWK_EXTRACT_REGIONS(
@@ -57,25 +56,18 @@ workflow SCATTER_GENOME {
         false,
     )
 
-    GAWK_EXTRACT_REGIONS.out.output
+    ch_bed_genomes = GAWK_EXTRACT_REGIONS.out.output
         .branch { meta, _bed ->
             mitochondrial: meta.genome == "mitochondrial"
             nuclear: meta.genome == "nuclear"
         }
-        .set { ch_bed_genomes }
 
-    add_bed_count(ch_bed_genomes.nuclear)
-        .map { meta, bed, num_intervals -> [meta.subMap('genome'), bed, num_intervals] }
-        .set { ch_bed_nuclear_intervals }
+    // Add the bed count to each channel
+    ch_bed_nuclear_intervals = add_bed_count(ch_bed_genomes.nuclear)
+        .map { meta, bed, num_intervals -> [meta + [num_intervals: num_intervals], bed, num_intervals] }
 
-    // Make sure that the bed is not empty before mixing
-    ch_bed_genomes.mitochondrial
-        .filter { _meta, bed -> bed.size() > 0 }
-        .set { ch_bed_mitochondrial_to_mix }
-
-    add_bed_count(
-        ch_bed_genomes.nuclear.mix(ch_bed_mitochondrial_to_mix)
-    ).map { meta, bed, num_intervals -> [meta.subMap('genome'), bed, num_intervals] }.set { ch_bed_nuclear_mitochondrial_intervals }
+    ch_bed_mitochondrial_intervals = add_bed_count(ch_bed_genomes.mitochondrial)
+        .map { meta, bed, num_intervals -> [meta + [num_intervals: num_intervals], bed, num_intervals] }
 
     // Make bed interval if split_n > 1, otherwise just pass the bed file through
     if (split_n > 1) {
@@ -91,14 +83,10 @@ workflow SCATTER_GENOME {
          * Add the bed count in order to output the number of intervals in ch_bed_nuclear_intervals for downstream processes.
          * Transpose the output so that we have [ val(meta), path(bed), val(num_intervals) ] for each interval file (chunk).
          */
-        add_bed_count(BEDTOOLS_SPLIT.out.beds)
+        ch_bed_nuclear_intervals = add_bed_count(BEDTOOLS_SPLIT.out.beds)
             .transpose()
-            .set { ch_bed_nuclear_intervals }
+            .map { meta, bed, num_intervals -> [meta + [num_intervals: num_intervals], bed, num_intervals] }
 
-        // Remove num_intervals for add_bed_count function. Then recalculate the total bed count (nuclear + mitochondrial) and mix the two channels
-        add_bed_count(
-            ch_bed_nuclear_intervals.map { meta, bed, _num_intervals -> [meta, bed] }.mix(ch_bed_mitochondrial_to_mix)
-        ).map { meta, bed, num_intervals -> [meta.subMap('genome'), bed, num_intervals] }.set { ch_bed_nuclear_mitochondrial_intervals }
 
         /*
          * Since we don't check beforehand how many intervals it's possible to split the bed file into,
@@ -121,9 +109,9 @@ workflow SCATTER_GENOME {
     }
 
     emit:
-    bed                                 = BEDTOOLS_MERGE.out.bed // channel: [ val(meta), path(bed) ]
-    bed_nuclear_intervals               = ch_bed_nuclear_intervals // channel: [ val(meta), path(bed), val(num_intervals) ]
-    bed_nuclear_mitochondrial_intervals = ch_bed_nuclear_mitochondrial_intervals // channel: [ val(meta), path(bed), val(num_intervals) ]
+    bed                         = BEDTOOLS_MERGE.out.bed         // channel: [ val(meta), path(bed) ]
+    bed_nuclear_intervals       = ch_bed_nuclear_intervals       // channel: [ val(meta), path(bed), val(num_intervals) ]
+    bed_mitochondrial_intervals = ch_bed_mitochondrial_intervals // channel: [ val(meta), path(bed), val(num_intervals) ]
 }
 
 // Function to add the bed count to a channel: [meta, bed, bed_count]

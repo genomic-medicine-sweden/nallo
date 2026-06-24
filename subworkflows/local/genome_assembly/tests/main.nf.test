@@ -20,11 +20,10 @@ nextflow_workflow {
             }
         }
         then {
-
             assertAll(
                 { assert workflow.success },
                 { assert workflow.out.assembled_haplotypes.size() == 2 },
-                { assert workflow.trace.succeeded().size() == 3 }, // 3 tasks: 1x HIFIASM 2x GFASTATS
+                { assert workflow.trace.succeeded().size() == 4 }, // 4 tasks: 1x HIFIASM_BINS, 1x HIFIASM_ASSEMBLY, 2x GFASTATS
                 { assert snapshot(workflow.out).match() }
             )
         }
@@ -71,7 +70,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.trace.succeeded().size() == 14 }, // 14 tasks: 3x FASTQ, 2x YAK_COUNT, 3x HIFIASM 6x GFASTATS.
+                { assert workflow.trace.succeeded().size() == 17 }, // 17 tasks: 3x FASTQ, 2x YAK_COUNT, 3x HIFIASM_ASSEMBLY, 3x HIFIASM_BINS, 6x GFASTATS.
                 { assert workflow.out.assembled_haplotypes.size() == 6 },
                 { assert snapshot(workflow.out).match() }
             )
@@ -125,7 +124,7 @@ nextflow_workflow {
                 // other than a manual .view() on `ch_with_both_parents`, without adding the
                 // `ch_with_both_parents` intermediate channel to the output.
                 { assert workflow.success },
-                { assert workflow.trace.succeeded().size() == 18 }, // 14 tasks: 4x FASTQ, 2x YAK_COUNT, 4x HIFIASM 8x GFASTATS.
+                { assert workflow.trace.succeeded().size() == 22 }, // 22 tasks: 4x FASTQ, 2x YAK_COUNT, 4x HIFIASM_BINS, 4x HIFIASM_ASSEMBLY, 8x GFASTATS.
                 { assert workflow.out.assembled_haplotypes.size() == 8 },
                 { assert snapshot(workflow.out).match() }
             )
@@ -170,7 +169,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.trace.succeeded().size() == 8 }, // 8 tasks: 2x FASTQ, 2x HIFIASM 4x GFASTATS.
+                { assert workflow.trace.succeeded().size() == 10 }, // 10 tasks: 2x FASTQ, 2x HIFIASM_BINS, 2x HIFIASM_ASSEMBLY, 4x GFASTATS.
                 { assert workflow.out.assembled_haplotypes.size() == 4 },
                 { assert snapshot(workflow.out).match() }
             )
@@ -198,7 +197,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert workflow.out.assembled_haplotypes.size() == 2 },
-                { assert workflow.trace.succeeded().size() == 3 }, // 3 tasks: 1x HIFIASM 2x GFASTATS
+                { assert workflow.trace.succeeded().size() == 4 }, // 4 tasks: 1x HIFIASM_BINS, 1x HIFIASM_ASSEMBLY, 2x GFASTATS
                 { assert snapshot(workflow.out).match() }
             )
         }
@@ -229,7 +228,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert workflow.out.assembled_haplotypes.size() == 2 },
-                { assert workflow.trace.succeeded().size() == 3 }, // 3 tasks: 1x HIFIASM 2x GFASTATS
+                { assert workflow.trace.succeeded().size() == 4 }, // 4 tasks: 1x HIFIASM_BINS, 1x HIFIASM_ASSEMBLY, 2x GFASTATS
                 { assert snapshot(workflow.out).match() }
             )
         }
@@ -278,7 +277,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.trace.succeeded().size() == 14 }, // 14 tasks: 3x FASTQ, 2x YAK_COUNT, 3x HIFIASM 6x GFASTATS.
+                { assert workflow.trace.succeeded().size() == 17 }, // 17 tasks: 3x FASTQ, 2x YAK_COUNT, 3x HIFIASM_BINS, 3x HIFIASM_ASSEMBLY, 6x GFASTATS.
                 { assert workflow.out.assembled_haplotypes.size() == 6 },
                 { assert snapshot(workflow.out).match() }
             )

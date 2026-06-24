@@ -3,11 +3,11 @@
         "content": [
             "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=202, phased=false, phasedAutodetect=false]"
         ],
+        "timestamp": "2026-05-27T11:12:32.147733345",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:04:59.264850386"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "1 sample - stub": {
         "content": [
@@ -46,10 +46,10 @@
                 ]
             }
         ],
+        "timestamp": "2026-05-27T11:12:43.756439024",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:05:13.257587261"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     }
 }

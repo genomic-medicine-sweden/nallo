@@ -1,20 +1,20 @@
-include { CLEAN_SNIFFLES                            } from '../../../modules/local/clean_sniffles/main'
-include { SVDB_MERGE as SVDB_MERGE_BY_CALLER        } from '../../../modules/nf-core/svdb/merge/main'
-include { SVDB_MERGE as SVDB_MERGE_BY_FAMILY        } from '../../../modules/nf-core/svdb/merge/main'
-include { BCFTOOLS_VIEW                             } from '../../../modules/nf-core/bcftools/view/main'
-include { BCFTOOLS_QUERY                            } from '../../../modules/nf-core/bcftools/query/main'
-include { BCFTOOLS_REHEADER                         } from '../../../modules/nf-core/bcftools/reheader/main'
-include { BCFTOOLS_SORT                             } from '../../../modules/nf-core/bcftools/sort/main'
-include { GAWK as CREATE_SAMPLES_FILE               } from '../../../modules/nf-core/gawk/main'
-include { HIFICNV                                   } from '../../../modules/nf-core/hificnv/main'
-include { SAWFISH_DISCOVER                          } from '../../../modules/nf-core/sawfish/discover/main'
-include { SAWFISH_JOINTCALL                         } from '../../../modules/nf-core/sawfish/jointcall/main'
-include { SEVERUS                                   } from '../../../modules/nf-core/severus/main'
-include { SNIFFLES                                  } from '../../../modules/nf-core/sniffles/main'
-include { TABIX_TABIX as TABIX_HIFICNV              } from '../../../modules/nf-core/tabix/tabix/main'
-include { TABIX_TABIX as TABIX_VCFEXPRESS           } from '../../../modules/nf-core/tabix/tabix/main'
-include { TABIX_BGZIPTABIX as TABIX_SEVERUS         } from '../../../modules/nf-core/tabix/bgziptabix/main'
-include { VCFEXPRESS                                } from '../../../modules/nf-core/vcfexpress/main'
+include { CLEAN_SNIFFLES                     } from '../../../modules/local/clean_sniffles/main'
+include { SVDB_MERGE as SVDB_MERGE_BY_CALLER } from '../../../modules/nf-core/svdb/merge/main'
+include { SVDB_MERGE as SVDB_MERGE_BY_FAMILY } from '../../../modules/nf-core/svdb/merge/main'
+include { BCFTOOLS_VIEW                      } from '../../../modules/nf-core/bcftools/view/main'
+include { BCFTOOLS_QUERY                     } from '../../../modules/nf-core/bcftools/query/main'
+include { BCFTOOLS_REHEADER                  } from '../../../modules/nf-core/bcftools/reheader/main'
+include { BCFTOOLS_SORT                      } from '../../../modules/nf-core/bcftools/sort/main'
+include { GAWK as CREATE_SAMPLES_FILE        } from '../../../modules/nf-core/gawk/main'
+include { HIFICNV                            } from '../../../modules/nf-core/hificnv/main'
+include { SAWFISH_DISCOVER                   } from '../../../modules/nf-core/sawfish/discover/main'
+include { SAWFISH_JOINTCALL                  } from '../../../modules/nf-core/sawfish/jointcall/main'
+include { SEVERUS                            } from '../../../modules/nf-core/severus/main'
+include { SNIFFLES                           } from '../../../modules/nf-core/sniffles/main'
+include { TABIX_TABIX as TABIX_HIFICNV       } from '../../../modules/nf-core/tabix/tabix/main'
+include { TABIX_TABIX as TABIX_VCFEXPRESS    } from '../../../modules/nf-core/tabix/tabix/main'
+include { TABIX_BGZIPTABIX as TABIX_SEVERUS  } from '../../../modules/nf-core/tabix/bgziptabix/main'
+include { VCFEXPRESS                         } from '../../../modules/nf-core/vcfexpress/main'
 
 workflow CALL_SVS {
     take:
@@ -31,9 +31,9 @@ workflow CALL_SVS {
     ch_sv_call_regions // channel: [ val(meta), path(bed) ]
     filter_calls_on_regions //    bool: Should we filter SV calls to the regions provided in ch_sv_call_regions?
     force_sawfish_joint_call_single_samples //    bool: Force joint-calling with Sawfish even for single samples
-    create_hificnv_maf_track                //    bool: Should we create a MAF track for HiFiCNV/Sawfish calls?
-    create_sawfish_maf_track                //    bool: Should we create a MAF track for HiFiCNV/Sawfish calls?
-    ch_vcfexpress_prelude                   // path: lua file
+    create_hificnv_maf_track //    bool: Should we create a MAF track for HiFiCNV/Sawfish calls?
+    create_sawfish_maf_track //    bool: Should we create a MAF track for HiFiCNV/Sawfish calls?
+    ch_vcfexpress_prelude // path: lua file
 
     main:
     ch_sv_calls = channel.empty()
@@ -93,18 +93,16 @@ workflow CALL_SVS {
         // Join SNV VCFs into input channels only if we want MAF track
         // Otherwise, we can skip the join and just pass an empty list to the module, since the MAF track is the only thing that needs the SNV VCFs.
         if (create_hificnv_maf_track) {
-            ch_bam_bai
+            ch_for_hificnv = ch_bam_bai
                 .join(ch_snvs, failOnMismatch: true, failOnDuplicate: true)
-                .set { ch_for_hificnv }
         }
         else {
-            ch_bam_bai
+            ch_for_hificnv = ch_bam_bai
                 .map { meta, bam, bai -> [meta, bam, bai, []] }
-                .set { ch_for_hificnv }
         }
 
         // Select expected copynumber BED based on sex before passing it to the module
-        ch_for_hificnv
+        ch_hificnv_input = ch_for_hificnv
             .combine(ch_expected_xy_bed)
             .combine(ch_expected_xx_bed)
             .multiMap { meta, bam, bai, maf, xy_meta, xy_bed, xx_meta, xx_bed ->
@@ -113,7 +111,6 @@ workflow CALL_SVS {
                 bam_bai_maf: [meta, bam, bai, maf]
                 expected_cn: [expected_cn_meta, expected_cn_bed]
             }
-            .set { ch_hificnv_input }
 
         HIFICNV(
             ch_hificnv_input.bam_bai_maf,
@@ -142,17 +139,15 @@ workflow CALL_SVS {
         // Join SNV VCFs into input channels only if we want MAF track
         // Otherwise, we can skip the join and just pass an empty list to the module, since the MAF track is the only thing that needs the SNV VCFs.
         if (create_sawfish_maf_track) {
-            ch_bam_bai
+            ch_bam_vcf_for_sawfish_discover = ch_bam_bai
                 .join(ch_snvs, failOnMismatch: true, failOnDuplicate: true)
-                .set { ch_bam_vcf_for_sawfish_discover }
         }
         else {
-            ch_bam_bai
+            ch_bam_vcf_for_sawfish_discover = ch_bam_bai
                 .map { meta, bam, bai -> [meta, bam, bai, []] }
-                .set { ch_bam_vcf_for_sawfish_discover }
         }
 
-        ch_bam_vcf_for_sawfish_discover
+        ch_sawfish_discover_input = ch_bam_vcf_for_sawfish_discover
             .combine(ch_expected_xx_bed)
             .combine(ch_expected_xy_bed)
             .multiMap { meta, bam, bai, vcf, xx_meta, xx_bed, xy_meta, xy_bed ->
@@ -162,7 +157,6 @@ workflow CALL_SVS {
                     ? [xy_meta, xy_bed]
                     : [xx_meta, xx_bed]
             }
-            .set { ch_sawfish_discover_input }
 
         SAWFISH_DISCOVER(
             ch_sawfish_discover_input.bam_bai,
@@ -175,7 +169,7 @@ workflow CALL_SVS {
         // Sawfish needs joint-calling to actually produce SV calls. Without it, there are no sample names
         // in the VCFs, and they can't be post-processed with bcftools. Therefore, we do joint-calling step
         // here directly, and skip doing it later with SVDB merging.
-        SAWFISH_DISCOVER.out.discover_dir
+        ch_sawfish_jointcall_input = SAWFISH_DISCOVER.out.discover_dir
             .join(ch_sawfish_discover_input.bam_bai, failOnMismatch: true, failOnDuplicate: true)
             .map { meta, discover_dir, bam, bai ->
                 def new_meta = force_sawfish_joint_call_single_samples
@@ -189,7 +183,6 @@ workflow CALL_SVS {
                 dir: [meta, discover_dirs]
                 bam_bai: [meta, bams, bais]
             }
-            .set { ch_sawfish_jointcall_input }
 
         SAWFISH_JOINTCALL(
             ch_sawfish_jointcall_input.dir,
@@ -224,16 +217,15 @@ workflow CALL_SVS {
         ch_sv_calls_filtered = ch_sv_calls
     }
 
-    ch_sv_calls_filtered
+    ch_vcfexpress_input = ch_sv_calls_filtered
         .multiMap { meta, vcf, _tbi ->
-            vcf: [ meta, vcf ]
+            vcf: [meta, vcf]
             sv_caller: meta.sv_caller
         }
-        .set { ch_vcfexpress_input }
 
-    VCFEXPRESS (
+    VCFEXPRESS(
         ch_vcfexpress_input.vcf,
-        ch_vcfexpress_prelude
+        ch_vcfexpress_prelude,
     )
 
     // If Severus or Sniffles was used, we need to reheader the VCF
@@ -241,17 +233,15 @@ workflow CALL_SVS {
     // HiFiCNV doesn't have this issue, so we filter it out here, and add it back later.
 
     // Starting with getting the sample name from the VCF
-    VCFEXPRESS.out.vcf
+    ch_found_in_tagged_vcf = VCFEXPRESS.out.vcf
         .branch { meta, _vcf ->
             def callers_needing_reheader = ['severus', 'sniffles']
             to_reheader: callers_needing_reheader.contains(meta.sv_caller)
             no_reheader: !callers_needing_reheader.contains(meta.sv_caller)
         }
-        .set { ch_found_in_tagged_vcf }
 
     BCFTOOLS_QUERY(
-        ch_found_in_tagged_vcf.to_reheader
-            .map { meta, vcf -> [meta, vcf, []] },
+        ch_found_in_tagged_vcf.to_reheader.map { meta, vcf -> [meta, vcf, []] },
         [],
         [],
         [],
@@ -260,10 +250,9 @@ workflow CALL_SVS {
     // Then create a "vcf_sample_name meta.id" file for bcftools reheader
     CREATE_SAMPLES_FILE(BCFTOOLS_QUERY.out.output, [], false)
 
-    ch_found_in_tagged_vcf.to_reheader
+    ch_bcftools_reheader_input = ch_found_in_tagged_vcf.to_reheader
         .join(CREATE_SAMPLES_FILE.out.output, failOnMismatch: true, failOnDuplicate: true)
         .map { meta, vcf, samples -> [meta, vcf, [], samples] }
-        .set { ch_bcftools_reheader_input }
 
     // Finally, reheader the VCF with meta.id as the sample name
     BCFTOOLS_REHEADER(
@@ -272,11 +261,10 @@ workflow CALL_SVS {
     )
 
     // Merge the reheadered SV calls with the ones that didn't need reheadering
-    BCFTOOLS_REHEADER.out.vcf
+    ch_svdb_merge_by_caller_input = BCFTOOLS_REHEADER.out.vcf
         .concat(ch_found_in_tagged_vcf.no_reheader)
         .map { meta, vcf -> [['id': meta.family_id, 'sv_caller': meta.sv_caller], vcf] }
         .groupTuple()
-        .set { ch_svdb_merge_by_caller_input }
 
     // First merge SV calls from each caller into family VCFs
     // HiFiCNV has a different BND distance from the other callers,
@@ -291,7 +279,7 @@ workflow CALL_SVS {
     // Then merge the family VCFs for each caller into a single family VCF.
     // First we need to filter the SV callers to merge,
     // Then we need to group by family (meta.id), and sort the VCFs by the caller priority for SVDB merge.
-    SVDB_MERGE_BY_CALLER.out.vcf
+    ch_svdb_merge_by_family_input = SVDB_MERGE_BY_CALLER.out.vcf
         .filter { meta, _vcf ->
             sv_callers_to_merge.contains(meta.sv_caller)
         }
@@ -307,7 +295,6 @@ workflow CALL_SVS {
             def vcf_paths = callers_vcfs.collect { caller_vcf_pair -> caller_vcf_pair[1] }
             [meta, vcf_paths]
         }
-        .set { ch_svdb_merge_by_family_input }
 
     SVDB_MERGE_BY_FAMILY(
         ch_svdb_merge_by_family_input,
@@ -316,14 +303,30 @@ workflow CALL_SVS {
     )
 
     emit:
-    family_caller_vcf = SVDB_MERGE_BY_CALLER.out.vcf // channel: [ val(meta), path(vcf) ]
-    family_caller_tbi = SVDB_MERGE_BY_CALLER.out.tbi // channel: [ val(meta), path(tbi) ]
-    family_vcf        = SVDB_MERGE_BY_FAMILY.out.vcf // channel: [ val(meta), path(vcf) ]
-    family_tbi        = SVDB_MERGE_BY_FAMILY.out.tbi // channel: [ val(meta), path(tbi) ]
+    family_caller_vcf                  = SVDB_MERGE_BY_CALLER.out.vcf                                                                                                           // channel: [ val(meta), path(vcf) ]
+    family_caller_tbi                  = SVDB_MERGE_BY_CALLER.out.tbi                                                                                                           // channel: [ val(meta), path(tbi) ]
+    family_vcf                         = SVDB_MERGE_BY_FAMILY.out.vcf                                                                                                           // channel: [ val(meta), path(vcf) ]
+    family_tbi                         = SVDB_MERGE_BY_FAMILY.out.tbi                                                                                                           // channel: [ val(meta), path(tbi) ]
+    hificnv_depth                      = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.depth : channel.empty()                                                            // channel: [ val(meta), path(bw) ]
+    hificnv_copynum                    = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.copynum : channel.empty()                                                          // channel: [ val(meta), path(bedgraph) ]
+    hificnv_maf                        = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.maf : channel.empty()                                                              // channel: [ val(meta), path(bw) ]
+    sawfish_depth_bw                   = sv_callers_to_run.contains('sawfish') ? addSampleIdFromSawfishPath(SAWFISH_JOINTCALL.out.depth_bw) : channel.empty()                   // channel: [ val(meta), path(bw) ]
+    sawfish_copynum_bedgraph           = sv_callers_to_run.contains('sawfish') ? addSampleIdFromSawfishPath(SAWFISH_JOINTCALL.out.copynum_bedgraph) : channel.empty()           // channel: [ val(meta), path(bedgraph) ]
+    sawfish_gc_bias_corrected_depth_bw = sv_callers_to_run.contains('sawfish') ? addSampleIdFromSawfishPath(SAWFISH_JOINTCALL.out.gc_bias_corrected_depth_bw) : channel.empty() // channel: [ val(meta), path(bw) ]
+    sawfish_maf_bw                     = sv_callers_to_run.contains('sawfish') ? addSampleIdFromSawfishPath(SAWFISH_JOINTCALL.out.maf_bw) : channel.empty()                     // channel: [ val(meta), path(bw) ]
 }
 
 def addCallerToMeta(ch_caller_calls, sv_caller) {
     ch_caller_calls.map { meta, vcf, tbi ->
         [meta + [sv_caller: sv_caller], vcf, tbi]
     }
+}
+
+def addSampleIdFromSawfishPath(ch_sawfish_bw_or_bedgraph) {
+    ch_sawfish_bw_or_bedgraph
+        .transpose()
+        .map { meta, file ->
+            def sample_id = file.parent.name.replaceFirst(/[^_]*_/, "")
+            [meta + ['id': sample_id], file]
+        }
 }

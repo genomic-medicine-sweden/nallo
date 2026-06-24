@@ -7,13 +7,12 @@ workflow SPLIT_MULTISAMPLE_VCF {
     ch_family_to_samples // channel: [ val(meta), val(list_of_sample_ids) ]
 
     main:
-    ch_vcf_vartype
+    ch_vcf_prepared = ch_vcf_vartype
         .combine(ch_family_to_samples, by: 0)
         .transpose()
         .map { meta, vcf, variant_type, sample_id ->
             return [[id: sample_id, family_id: meta.id, variant_type: variant_type], vcf, []]
         }
-        .set { ch_vcf_prepared }
 
     BCFTOOLS_VIEW(
         ch_vcf_prepared,
@@ -22,11 +21,10 @@ workflow SPLIT_MULTISAMPLE_VCF {
         [],
     )
 
-    BCFTOOLS_VIEW.out.vcf
+    ch_split_vcf = BCFTOOLS_VIEW.out.vcf
         .map { meta, vcf ->
             [meta.subMap(['id', 'family_id']), vcf, meta.variant_type]
         }
-        .set { ch_split_vcf }
 
     emit:
     split_vcf = ch_split_vcf // channel: [ val(meta), path(vcf), val(variant_type) ]

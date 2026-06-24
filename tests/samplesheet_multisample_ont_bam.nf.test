@@ -9,10 +9,11 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path   =  'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/'
+                pipelines_testdata_base_path   =  'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/bcd63e7dc9025450aebbca7b859ba2dae1f5a3d3/'
                 input                          = "$projectDir/assets/samplesheet_multisample_ont_bam.csv"
                 outdir                         = "$outputDir"
                 preset                         = 'ONT_R10'
+                mitochondrial_caller           = 'deepvariant'
                 alignment_processes            = 1
                 hifiasm_mode                   = 'hifi-only'
                 snv_calling_processes          = 1
@@ -21,6 +22,7 @@ nextflow_pipeline {
                 sv_callers_to_run              = "severus,hificnv,sniffles"
                 publish_unannotated_family_svs = true
                 filter_variants_hgnc_ids       = null
+                skip_methylation_annotation    = true
             }
         }
 

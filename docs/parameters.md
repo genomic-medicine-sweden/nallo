@@ -14,6 +14,7 @@ Allows skipping certain parts of the pipeline
 | `skip_genome_assembly` | Skip genome assembly and assembly variant calling | `boolean` | False |  |  |
 | `skip_alignment` | Skip read mapping (alignment) | `boolean` | False |  |  |
 | `skip_methylation_calling` | Skip methylation calling | `boolean` | False |  |  |
+| `skip_methylation_annotation` | Skip methylation annotation | `boolean` | False |  |  |
 | `skip_repeat_calling` | Skip tandem repeat calling | `boolean` | False |  |  |
 | `skip_repeat_annotation` | Skip tandem repeat annotation | `boolean` | False |  |  |
 | `skip_chromograph` | Skip chromograph image generation. True if both plot_chromograph_coverage and plot_chromograph_autozygosity are set to false. | `boolean` |  |  |  |
@@ -87,6 +88,7 @@ Reference genome related files and options required for the workflow.
 | Parameter | Description | Type | Default | Required | Hidden |
 |-----------|-----------|-----------|-----------|-----------|-----------|
 | `fasta` | Reference genome | `string` |  |  |  |
+| `fai` | Reference genome index file | `string` |  |  |  |
 
 ## Institutional config options
 
@@ -114,12 +116,11 @@ Less common options for the pipeline, typically set in a config file.
 | `plaintext_email` | Send plain-text email instead of HTML. | `boolean` |  |  | True |
 | `max_multiqc_email_size` | File size limit when attaching MultiQC reports to summary emails. | `string` | 25.MB |  | True |
 | `monochrome_logs` | Do not use coloured log outputs. | `boolean` |  |  | True |
-| `hook_url` | Incoming hook URL for messaging service <details><summary>Help</summary><small>Incoming hook URL for messaging service. Currently, MS Teams and Slack are supported.</small></details>| `string` |  |  | True |
 | `multiqc_config` | Custom config file to supply to MultiQC. | `string` |  |  | True |
 | `multiqc_logo` | Custom logo file to supply to MultiQC. File name must also be set in the MultiQC config file | `string` |  |  | True |
-| `multiqc_methods_description` | Custom MultiQC yaml file containing HTML including a methods description. | `string` |  |  |  |
+| `multiqc_methods_description` | Custom MultiQC yaml file containing HTML including a methods description. | `string` |  |  |  |bcd63e7dc9025450aebbca7b859ba2dae1f5a3d3
 | `validate_params` | Boolean whether to validate parameters against the schema at runtime | `boolean` | True |  | True |
-| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/ |  | True |
+| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/18b1ccc26292fa502be235a918bdc4e61c1ecb8a/ |  | True |
 | `trace_report_suffix` | Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss. | `string` |  |  | True |
 | `help` | Display the help message. | `['boolean', 'string']` |  |  |  |
 | `help_full` | Display the full detailed help message. | `boolean` |  |  |  |
@@ -143,6 +144,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `paraphrase_genes` | An optional comma-separated list of genes to run Paraphrase on for paralog annotation. By default all genes called by paraphase are used. | `string` |  |  |  |
 | `paraphrase_skip_keys` | An optional comma-separated list of keys to skip when running Paraphrase. By default the default skip keys are determined by Paraphrase. | `string` |  |  |  |
 | `phaser` | Which phasing software to use (`longphase`, `whatshap`, `hiphase`) (accepted: `longphase`\|`whatshap`\|`hiphase`) | `string` | longphase |  |  |
+| `whatshap_pedigree_phasing` | Enable/disable pedigree phasing when phasing with whatshap | `boolean` | True |  |  |
 | `hifiasm_mode` | Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`) (accepted: `hifi-only`\|`trio-binning`) | `string` | trio-binning |  |  |
 | `hifiasm_preset` | Hifiasm preset, is set to `--ont` when `--preset ONT_R10` is active. (accepted: ``\|`--ont`) | `string` | None |  |  |
 | `run_methbat` | Run methbat for methylation analysis, set to `true` by default when `--preset revio` is active. | `boolean` |  |  |  |
@@ -150,9 +152,15 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `methbat_male_label` | Label used for male samples in methbat profile. | `string` | MALE |  |  |
 | `methbat_female_label` | Label used for female samples in methbat profile. | `string` | FEMALE |  |  |
 | `modkit_modified_bases` | Modkit modified bases, separated by space. E.g. '5mC 5hmC' | `string` | 5mC |  |  |
+| `mitochondrial_caller` | Which mitochondrial caller to use for mitochondrial variant calling | `string` | mitorsaw |  |  |
+| `mitorsaw_minimum_maf` | Minimum minor allele frequency (MAF) for mitorsaw variant calling. | `number` | 0.1 |  |  |
+| `mitorsaw_minimum_read_count` | Minimum read count to consider a heteroplasmic variant. | `integer` | 3 |  |  |
+| `mitochondrial_sv_min_size` | Minimum allele length difference (abs(strlen(REF)-strlen(ALT))) to classify a mitochondrial variant as an SV rather than a SNV/small indel. | `integer` | 50 |  |  |
 | `alignment_processes` | If alignment_processes is bigger than 1, input files will be split and aligned in parallel to reduce processing time. | `integer` | 8 |  |  |
 | `snv_calling_processes` | If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time. Must be `1` when `--snv_caller sentieon` is used. | `integer` | 13 |  |  |
 | `vep_cache_version` | VEP cache version | `integer` | 110 |  |  |
+| `vep_mitochondrial_genome_distance` | The distance parameter used in VEP for mitochondrial SNVs | `integer` | 0 |  |  |
+| `vep_nuclear_genome_distance` | The distance parameter used in VEP for nuclear SNVs | `integer` | 5000 |  |  |
 | `vep_plugin_files` | Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required. | `string` |  |  |  |
 | `force_sawfish_joint_call_single_samples` | Force sawfish to run joint-call on single samples instead of all samples from the same family. This effectively causes SVDB to merge the samples into family VCFs instead. | `boolean` |  |  |  |
 | `filter_variants_hgnc_ids` | A tsv/csv file with a `hgnc_ids` column header, and then one numerical HGNC ID per row. E.g. `4281` or `HGNC:4281`. | `string` |  |  |  |
@@ -196,7 +204,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `strdrop_alpha` | Unadjusted probability confidence level for coverage test in strdrop. | `number` | 0.18 |  |  |
 | `strdrop_edit` | Allele similarity Levenshtein edit distance ratio cutoff in strdrop. | `number` | 0.9 |  |  |
 | `sniffles_min_support_reads` | Minimum number of reads to support a SV in Sniffles. | `number` | 3 |  |  |
-| `sniffles_min_segment_length` | Discard a read if non of its segment is larger than this in Sniffles. | `number` | 500 |  |  |
+| `sniffles_min_segment_length` | Discard a read if none of its segment is larger than this in Sniffles. | `number` | 500 |  |  |
 | `sniffles_min_heterozygous_allele_frequency` | Threshold on heterozygous allele frequency in Sniffles (0-1). | `number` | 0 |  |  |
 | `sniffles_min_sv_size` | Minimum length of SV to be reported in Sniffles. | `number` | 50 |  |  |
 | `sawfish_min_sv_size` | Co-linear SVs must have either an insertion or deletion of this size or greater to be included in the output in Sawfish. All other SV evidence patterns such as those consistent with duplications, inversions and translocations will always be included in the output. | `number` | 50 |  |  |

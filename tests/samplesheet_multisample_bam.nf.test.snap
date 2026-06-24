@@ -39,6 +39,9 @@
                 "BCFTOOLS_VIEW_CHROMOGRAPH": {
                     "bcftools": 1.22
                 },
+                "BCFTOOLS_VIEW_MITO": {
+                    "bcftools": 1.22
+                },
                 "BCFTOOLS_VIEW_PHASING": {
                     "bcftools": 1.22
                 },
@@ -68,6 +71,15 @@
                 },
                 "CREATE_SAMPLES_FILE": {
                     "gawk": "5.3.1"
+                },
+                "CSVTK_CONCAT": {
+                    "csvtk": "0.31.0"
+                },
+                "CSVTK_MUTATE2": {
+                    "csvtk": "0.31.0"
+                },
+                "CSVTK_SORT": {
+                    "csvtk": "0.31.0"
                 },
                 "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
                     "addmostsevereconsequence": "1.2.0",
@@ -139,7 +151,10 @@
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
                 },
-                "HIFIASM": {
+                "HIFIASM_ASSEMBLY": {
+                    "hifiasm": "0.25.0-r726"
+                },
+                "HIFIASM_BINS": {
                     "hifiasm": "0.25.0-r726"
                 },
                 "HIFICNV": {
@@ -156,6 +171,9 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
+                },
+                "MITORSAW_HAPLOTYPE": {
+                    "mitorsaw": "0.2.9-0dc8e58"
                 },
                 "MOSDEPTH": {
                     "mosdepth": "0.3.11"
@@ -196,7 +214,7 @@
                     "chromograph": "1.3.1"
                 },
                 "RUN_HIPHASE": {
-                    "hiphase": "1.4.0-7bf2743"
+                    "hiphase": "1.6.0-ac3f399"
                 },
                 "SAMBAMBA_DEPTH": {
                     "sambamba": "1.0.1"
@@ -261,8 +279,8 @@
                     "splitubam": "0.1.1"
                 },
                 "STRANGER": {
-                    "stranger": "0.10.0",
-                    "tabix": 1.23
+                    "stranger": "0.10.2",
+                    "tabix": "1.23.1"
                 },
                 "STRDROP_CALL": {
                     "strdrop": "0.3.1"
@@ -280,12 +298,6 @@
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
-                    "tabix": 1.21
-                },
-                "TABIX_ENSEMBLVEP_SNV": {
-                    "tabix": 1.21
-                },
-                "TABIX_ENSEMBLVEP_SV": {
                     "tabix": 1.21
                 },
                 "TABIX_HIFICNV": {
@@ -837,7 +849,7 @@
                 "HG002_chromograph_autozyg_chr7.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_autozyg_chr8.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_autozyg_chr9.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "HG002_chromograph_autozyg_chrM.png:md5,090cdf270253fbc8ddfc28df2e3d0830",
+                "HG002_chromograph_autozyg_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_autozyg_chrX.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_autozyg_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_coverage_chr1.png:md5,954482b960865332f37d386da5c9fb75",
@@ -887,7 +899,7 @@
                 "HG004_chromograph_autozyg_chr7.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG004_chromograph_autozyg_chr8.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG004_chromograph_autozyg_chr9.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "HG004_chromograph_autozyg_chrM.png:md5,090cdf270253fbc8ddfc28df2e3d0830",
+                "HG004_chromograph_autozyg_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG004_chromograph_autozyg_chrX.png:md5,4043f9dd0efed4d0dcc3fdc92678d2e8",
                 "HG004_chromograph_autozyg_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG004_chromograph_coverage_chr1.png:md5,954482b960865332f37d386da5c9fb75",
@@ -1008,11 +1020,11 @@
             [
                 [
                     "HG002_haplotagged.bam",
-                    "ca14b3f47b42f7737c45ea55dc55de8"
+                    "2aeb27563909aebd9e92e3bcc07b07a4"
                 ],
                 [
                     "HG004_haplotagged.bam",
-                    "345c1a890c682d0663303151ec2f7697"
+                    "a4f5f6708b68640841b7f976fab3a960"
                 ],
                 [
                     "HG002_aligned_assembly.bam",
@@ -1032,15 +1044,15 @@
                 ],
                 [
                     "HG002_spanning_trgt.bam",
-                    "7664d0efd20571bcf79c07d2b918aafe"
+                    "eaaaa372cae26f1e039a46899ff4e142"
                 ],
                 [
                     "HG004_spanning_trgt.bam",
-                    "977ccf1c4cab90b4581ac34da76502e4"
+                    "c8334a968268bf92dff1e959db5d9ba"
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -1057,11 +1069,11 @@
                 ],
                 [
                     "HG004_OR1D5.vcf.gz",
-                    "VcfFile [chromosomes=[chr17], sampleCount=2, variantCount=47, phased=true, phasedAutodetect=true]"
+                    "VcfFile [chromosomes=[chr17], sampleCount=2, variantCount=49, phased=true, phasedAutodetect=true]"
                 ],
                 [
                     "HG004_hba.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=13, phased=true, phasedAutodetect=true]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=275, phased=true, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_trgt.vcf.gz",
@@ -1097,7 +1109,7 @@
                 ]
             ],
             [
-                
+
             ]
         ],
         "timestamp": "2026-06-24T14:48:48.104338093",

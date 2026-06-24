@@ -1,10 +1,9 @@
-include { BCFTOOLS_MERGE   } from '../../../modules/nf-core/bcftools/merge/'
-include { STRDUST          } from '../../../modules/nf-core/strdust/'
-include { TABIX_TABIX      } from '../../../modules/nf-core/tabix/tabix/main'
-include { VCFEXPRESS       } from '../../../modules/nf-core/vcfexpress/main'
+include { BCFTOOLS_MERGE } from '../../../modules/nf-core/bcftools/merge/'
+include { STRDUST        } from '../../../modules/nf-core/strdust/'
+include { TABIX_TABIX    } from '../../../modules/nf-core/tabix/tabix/main'
+include { VCFEXPRESS     } from '../../../modules/nf-core/vcfexpress/main'
 
 workflow CALL_REPEAT_EXPANSIONS_STRDUST {
-
     take:
     ch_bam_bai              // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
     ch_fasta                // channel: [mandatory] [ val(meta), path(fasta) ]
@@ -14,37 +13,36 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
 
     main:
 
-    STRDUST (
+    STRDUST(
         ch_bam_bai,
         ch_fasta,
         ch_fai,
-        ch_bed
+        ch_bed,
     )
 
-    VCFEXPRESS (
+    VCFEXPRESS(
         STRDUST.out.vcf,
-        ch_vcfexpress_prelude
+        ch_vcfexpress_prelude,
     )
 
-    TABIX_TABIX (
+    TABIX_TABIX(
         VCFEXPRESS.out.vcf
     )
 
-    VCFEXPRESS.out.vcf
+    ch_bcftools_merge_in = VCFEXPRESS.out.vcf
         .join(TABIX_TABIX.out.index, failOnDuplicate: true, failOnMismatch: true)
-        .map { meta, vcf, tbi -> [ [ id: meta.family_id ], vcf, tbi ] }
+        .map { meta, vcf, tbi -> [[id: meta.family_id], vcf, tbi] }
         .groupTuple()
         .map { meta, vcfs, tbis -> [ meta, vcfs, tbis, [] ] }
-        .set { ch_bcftools_merge_in }
 
-    BCFTOOLS_MERGE (
+    BCFTOOLS_MERGE(
         ch_bcftools_merge_in,
-        ch_fasta.join(ch_fai, failOnMismatch: true, failOnDuplicate: true).collect()
+        ch_fasta.join(ch_fai, failOnMismatch: true, failOnDuplicate: true).collect(),
     )
 
     emit:
-    sample_vcf  = STRDUST.out.vcf          // channel: [ val(meta), path(vcf) ]
-    sample_tbi  = STRDUST.out.tbi          // channel: [ val(meta), path(tbi) ]
+    sample_vcf  = VCFEXPRESS.out.vcf       // channel: [ val(meta), path(vcf) ]
+    sample_tbi  = TABIX_TABIX.out.index    // channel: [ val(meta), path(tbi) ]
     family_vcf  = BCFTOOLS_MERGE.out.vcf   // channel: [ val(meta), path(vcf) ]
     family_tbi  = BCFTOOLS_MERGE.out.index // channel: [ val(meta), path(tbi) ]
 

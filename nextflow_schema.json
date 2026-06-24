@@ -47,6 +47,12 @@
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
+                "skip_methylation_annotation": {
+                    "type": "boolean",
+                    "description": "Skip methylation annotation",
+                    "fa_icon": "fas fa-fast-forward",
+                    "default": false
+                },
                 "skip_repeat_calling": {
                     "type": "boolean",
                     "description": "Skip tandem repeat calling",
@@ -444,6 +450,13 @@
                     "pattern": "^.*\\.(fasta|fa|fna)(\\.gz)?$",
                     "format": "file-path",
                     "exists": true
+                },
+                "fai": {
+                    "type": "string",
+                    "description": "Reference genome index file",
+                    "pattern": "^.*\\.fai$",
+                    "format": "file-path",
+                    "exists": true
                 }
             }
         },
@@ -551,13 +564,6 @@
                     "fa_icon": "fas fa-palette",
                     "hidden": true
                 },
-                "hook_url": {
-                    "type": "string",
-                    "description": "Incoming hook URL for messaging service",
-                    "fa_icon": "fas fa-people-group",
-                    "help_text": "Incoming hook URL for messaging service. Currently, MS Teams and Slack are supported.",
-                    "hidden": true
-                },
                 "multiqc_config": {
                     "type": "string",
                     "format": "file-path",
@@ -587,7 +593,7 @@
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
                     "description": "Base URL or local path to location of pipeline test dataset files",
-                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/",
+                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/18b1ccc26292fa502be235a918bdc4e61c1ecb8a/",
                     "hidden": true
                 },
                 "trace_report_suffix": {
@@ -680,6 +686,11 @@
                     "description": "Which phasing software to use (`longphase`, `whatshap`, `hiphase`)",
                     "enum": ["longphase", "whatshap", "hiphase"]
                 },
+                "whatshap_pedigree_phasing": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/disable pedigree phasing when phasing with whatshap"
+                },
                 "hifiasm_mode": {
                     "type": "string",
                     "description": "Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`)",
@@ -717,8 +728,27 @@
                 },
                 "mitochondrial_caller": {
                     "type": "string",
-                    "default": "deepvariant",
-                    "description": "Which mitochondrial caller to use for mitochondrial variant calling (`deepvariant`)"
+                    "default": "mitorsaw",
+                    "description": "Which mitochondrial caller to use for mitochondrial variant calling"
+                },
+                "mitorsaw_minimum_maf": {
+                    "type": "number",
+                    "default": 0.1,
+                    "minimum": 0.0,
+                    "maximum": 0.5,
+                    "description": "Minimum minor allele frequency (MAF) for mitorsaw variant calling."
+                },
+                "mitorsaw_minimum_read_count": {
+                    "type": "integer",
+                    "default": 3,
+                    "minimum": 1,
+                    "description": "Minimum read count to consider a heteroplasmic variant."
+                },
+                "mitochondrial_sv_min_size": {
+                    "type": "integer",
+                    "default": 50,
+                    "minimum": 1,
+                    "description": "Minimum allele length difference (abs(strlen(REF)-strlen(ALT))) to classify a mitochondrial variant as an SV rather than a SNV/small indel."
                 },
                 "alignment_processes": {
                     "type": "integer",
@@ -729,7 +759,7 @@
                 "snv_calling_processes": {
                     "type": "integer",
                     "default": 13,
-                    "description": "If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time.",
+                    "description": "If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time. Must be `1` when `--snv_caller sentieon` is used.",
                     "minimum": 1
                 },
                 "vep_cache_version": {
@@ -971,7 +1001,7 @@
                 "sniffles_min_segment_length": {
                     "type": "number",
                     "default": 500,
-                    "description": "Discard a read if non of its segment is larger than this in Sniffles."
+                    "description": "Discard a read if none of its segment is larger than this in Sniffles."
                 },
                 "sniffles_min_heterozygous_allele_frequency": {
                     "type": "number",

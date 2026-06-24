@@ -1,36 +1,48 @@
 {
     "bam, bed": {
         "content": [
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.txt"
+                ]
+            ],
+            [
+                
+            ],
+            "test_fastqc.html",
             "test_fastqc.zip",
             [
                 [
                     {
                         "id": "test"
                     },
-                    "test.mosdepth.summary.txt:md5,215fa328da69972c7f6e2ae864299f47"
+                    "test.mosdepth.summary.txt:md5,460fde6e0939e639895c4d63246ac097"
                 ]
             ],
             [
                 "chrom\tlength\tbases\tmean\tmin\tmax",
-                "chr16\t1343020\t5377008\t4.00\t0\t18",
-                "chr16_region\t16298\t130288\t7.99\t1\t18",
-                "chr17\t3073138\t544666\t0.18\t0\t24",
-                "chr17_region\t20000\t409866\t20.49\t1\t24",
-                "chr20\t2653100\t190376\t0.07\t0\t18",
-                "chr20_region\t700\t12171\t17.39\t6\t18",
-                "chrX\t16691504\t5683596\t0.34\t0\t16",
-                "chrX_region\t70\t670\t9.57\t5\t16",
-                "chrM\t16569\t3500490\t211.27\t2\t237",
-                "chrM_region\t16568\t3500329\t211.27\t2\t237",
-                "total\t23777331\t15296136\t0.64\t0\t237",
-                "total_region\t53636\t4053324\t75.57\t1\t237"
+                "chr16\t1343020\t7950330\t5.92\t0\t22",
+                "chr16_region\t16298\t292975\t17.98\t2\t22",
+                "chr17\t3073138\t825229\t0.27\t0\t36",
+                "chr17_region\t20000\t604892\t30.24\t2\t36",
+                "chr20\t2653100\t237373\t0.09\t0\t22",
+                "chr20_region\t700\t14945\t21.35\t9\t22",
+                "chrX\t16691504\t8292566\t0.50\t0\t20",
+                "chrX_region\t70\t972\t13.89\t7\t20",
+                "chrM\t16569\t640897\t38.68\t0\t56",
+                "chrM_region\t16568\t640873\t38.68\t0\t56",
+                "total\t23777331\t17946395\t0.75\t0\t56",
+                "total_region\t53636\t1554657\t28.99\t0\t56"
             ],
             [
                 [
                     {
                         "id": "test"
                     },
-                    "test.mosdepth.global.dist.txt:md5,5715c7a9f9824814fd061457548c097b"
+                    "test.mosdepth.global.dist.txt:md5,edbdcc0f9344473665dbac4e9a539d87"
                 ]
             ],
             [
@@ -38,15 +50,34 @@
                     {
                         "id": "test"
                     },
-                    "test.mosdepth.region.dist.txt:md5,f8b45b4a0f62f322542c4b4bea5f61e7"
+                    "test.mosdepth.region.dist.txt:md5,4d7346e63fe7c7978f458f12cc5d58c5"
+                ]
+            ],
+            [
+                
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.regions.bed.gz"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.regions.bed.gz.csi"
                 ]
             ]
         ],
+        "timestamp": "2026-05-27T11:10:38.563770771",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:03:24.997950374"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "bam, no bed -stub": {
         "content": [
@@ -56,23 +87,21 @@
                         {
                             "id": "test"
                         },
-                        "test.zip:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "1": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.summary.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
+                ],
+                "10": [
+                    
                 ],
                 "2": [
                     [
                         {
                             "id": "test"
                         },
-                        "test.global.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.html:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "3": [
@@ -80,11 +109,75 @@
                         {
                             "id": "test"
                         },
-                        "test.region.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.zip:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.summary.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.global.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.region.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.per-base.d4:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.regions.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "9": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.regions.bed.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "cramino_arrow": [
                     
+                ],
+                "cramino_stats": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "fastqc_html": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.html:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "fastqc_zip": [
                     [
@@ -102,7 +195,31 @@
                         "test.global.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "mosdepth_region_dist": [
+                "mosdepth_per_base_d4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.per-base.d4:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "mosdepth_regions_bed": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.regions.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "mosdepth_regions_csi": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.regions.bed.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "mosdepth_regions_dist": [
                     [
                         {
                             "id": "test"
@@ -123,11 +240,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-05-27T11:10:45.140159947",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:03:32.725478666"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "bam, bed -stub": {
         "content": [
@@ -137,15 +254,18 @@
                         {
                             "id": "test"
                         },
-                        "test.zip:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "1": [
+                    
+                ],
+                "10": [
                     [
                         {
                             "id": "test"
                         },
-                        "test.summary.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
@@ -153,7 +273,7 @@
                         {
                             "id": "test"
                         },
-                        "test.global.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.html:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "3": [
@@ -161,7 +281,7 @@
                         {
                             "id": "test"
                         },
-                        "test.region.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.zip:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "4": [
@@ -169,7 +289,66 @@
                         {
                             "id": "test"
                         },
-                        "test.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.summary.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.global.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.region.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.per-base.d4:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.regions.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "9": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.regions.bed.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "cramino_arrow": [
+                    
+                ],
+                "cramino_stats": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "fastqc_html": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.html:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "fastqc_zip": [
@@ -188,7 +367,31 @@
                         "test.global.dist.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "mosdepth_region_dist": [
+                "mosdepth_per_base_d4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.per-base.d4:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "mosdepth_regions_bed": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.regions.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "mosdepth_regions_csi": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.regions.bed.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "mosdepth_regions_dist": [
                     [
                         {
                             "id": "test"
@@ -214,48 +417,69 @@
                 ]
             }
         ],
+        "timestamp": "2026-05-27T11:10:51.849879414",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:03:41.044057728"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "bam, no bed": {
         "content": [
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.txt"
+                ]
+            ],
+            [
+                
+            ],
+            "test_fastqc.html",
             "test_fastqc.zip",
             [
                 [
                     {
                         "id": "test"
                     },
-                    "test.mosdepth.summary.txt:md5,a20e2e2e1d6f444011e510722c69bf0b"
+                    "test.mosdepth.summary.txt:md5,daa9353bc52dbc9087f66da3b8529a10"
                 ]
             ],
             [
                 "chrom\tlength\tbases\tmean\tmin\tmax",
-                "chr16\t1343020\t5377008\t4.00\t0\t18",
-                "chr17\t3073138\t544666\t0.18\t0\t24",
-                "chr20\t2653100\t190376\t0.07\t0\t18",
-                "chrX\t16691504\t5683596\t0.34\t0\t16",
-                "chrM\t16569\t3500490\t211.27\t2\t237",
-                "total\t23777331\t15296136\t0.64\t0\t237"
+                "chr16\t1343020\t7950330\t5.92\t0\t22",
+                "chr17\t3073138\t825229\t0.27\t0\t36",
+                "chr20\t2653100\t237373\t0.09\t0\t22",
+                "chrX\t16691504\t8292566\t0.50\t0\t20",
+                "chrM\t16569\t640897\t38.68\t0\t56",
+                "total\t23777331\t17946395\t0.75\t0\t56"
             ],
             [
                 [
                     {
                         "id": "test"
                     },
-                    "test.mosdepth.global.dist.txt:md5,5715c7a9f9824814fd061457548c097b"
+                    "test.mosdepth.global.dist.txt:md5,edbdcc0f9344473665dbac4e9a539d87"
                 ]
+            ],
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                
             ],
             [
                 
             ]
         ],
+        "timestamp": "2026-05-27T11:10:28.434707311",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T17:03:13.927301115"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     }
 }

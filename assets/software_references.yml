@@ -207,3 +207,9 @@ tool:
   gatk:
     citation: "GATK (Van der Auwera & O'Connor 2020)"
     bibliography: "Van der Auwera GA & O'Connor BD. (2020). Genomics in the Cloud: Using Docker, GATK, and WDL in Terra (1st Edition). O'Reilly Media."
+  mitorsaw:
+    citation: "Mitorsaw"
+    bibliography: ""
+  csvtk:
+    citation: "csvtk"
+    bibliography: "Wei Shen (2026) csvtk: a cross-platform, efficient and practical CSV/TSV toolkit. https://github.com/shenwei356/csvtk"

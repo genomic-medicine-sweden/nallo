@@ -1,8 +1,7 @@
-include { ANNOTATE_CADD                       } from '../annotate_cadd/main'
-include { BCFTOOLS_VIEW                       } from '../../../modules/nf-core/bcftools/view/main'
-include { ECHTVAR_ANNO                        } from '../../../modules/local/echtvar/anno/main'
-include { ENSEMBLVEP_VEP as ENSEMBLVEP_SNV    } from '../../../modules/nf-core/ensemblvep/vep/main'
-include { TABIX_TABIX as TABIX_ENSEMBLVEP_SNV } from '../../../modules/nf-core/tabix/tabix/main'
+include { ANNOTATE_CADD                    } from '../annotate_cadd/main'
+include { BCFTOOLS_VIEW                    } from '../../../modules/nf-core/bcftools/view/main'
+include { ECHTVAR_ANNO                     } from '../../../modules/local/echtvar/anno/main'
+include { ENSEMBLVEP_VEP as ENSEMBLVEP_SNV } from '../../../modules/nf-core/ensemblvep/vep/main'
 
 workflow ANNOTATE_SNVS {
     take:
@@ -31,9 +30,8 @@ workflow ANNOTATE_SNVS {
 
     // Allows for filtering before annotating with VEP
     if (pre_vep_filter) {
-        (annotate_echtvar ? ECHTVAR_ANNO.out.bcf : ch_vcf)
+        ch_bcftools_view_input = (annotate_echtvar ? ECHTVAR_ANNO.out.bcf : ch_vcf)
             .map { meta, vcf -> [meta, vcf, []] }
-            .set { ch_bcftools_view_input }
 
         BCFTOOLS_VIEW(
             ch_bcftools_view_input,
@@ -58,9 +56,8 @@ workflow ANNOTATE_SNVS {
         )
     }
 
-    (annotate_cadd ? ANNOTATE_CADD.out.vcf : pre_vep_filter ? BCFTOOLS_VIEW.out.vcf : annotate_echtvar ? ECHTVAR_ANNO.out.bcf : ch_vcf)
+    ch_vep_in = (annotate_cadd ? ANNOTATE_CADD.out.vcf : pre_vep_filter ? BCFTOOLS_VIEW.out.vcf : annotate_echtvar ? ECHTVAR_ANNO.out.bcf : ch_vcf)
         .map { meta, vcf -> [meta, vcf, []] }
-        .set { ch_vep_in }
 
     // Always annotate with VEP
     ENSEMBLVEP_SNV(
@@ -73,11 +70,7 @@ workflow ANNOTATE_SNVS {
         ch_vep_extra_files,
     )
 
-    TABIX_ENSEMBLVEP_SNV(
-        ENSEMBLVEP_SNV.out.vcf
-    )
-
     emit:
-    vcf      = ENSEMBLVEP_SNV.out.vcf
-    tbi      = TABIX_ENSEMBLVEP_SNV.out.index
+    vcf = ENSEMBLVEP_SNV.out.vcf
+    tbi = ENSEMBLVEP_SNV.out.tbi
 }
