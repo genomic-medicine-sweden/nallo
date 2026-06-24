@@ -25,7 +25,7 @@ workflow ANNOTATE_SNVS {
         ECHTVAR_ANNO(
             ch_vcf,
             ch_echtvar_databases,
-            'vcf.gz'
+            'bcf.gz'
         )
     }
 
