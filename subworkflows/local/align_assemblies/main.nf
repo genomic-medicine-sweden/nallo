@@ -14,7 +14,6 @@ workflow ALIGN_ASSEMBLIES {
     cram_output // bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
-
     MINIMAP2_INDEX (
         ch_fasta
     )
@@ -40,7 +39,6 @@ workflow ALIGN_ASSEMBLIES {
     )
 
     TAGBAM.out.bam
-    //SAMTOOLS_VIEW.out.bam // -> v2
         .map { meta, bam -> [ meta - meta.subMap('haplotype'), bam ] }
         .groupTuple(size: 2)
         .map { meta, bams -> [ meta, bams, [] ] }

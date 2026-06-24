@@ -5,9 +5,6 @@ include { GAWK as MOSDEPTH_GATK_FORMAT  } from '../../../modules/nf-core/gawk/ma
 include { MOSDEPTH                      } from '../../../modules/nf-core/mosdepth/main'
 include { PREPARECOVANDBAF              } from '../../../modules/nf-core/gens/preparecovandbaf/main'
 include { SAMTOOLS_VIEW                 } from '../../../modules/nf-core/samtools/view/main'
-include { SAMTOOLS_SORT                 } from '../../../modules/nf-core/samtools/sort/main'
-include { SAMTOOLS_AMPLICONCLIP         } from '../../../modules/nf-core/samtools/ampliconclip/main'
-include { GATK4_CLEANSAM               } from '../../../modules/local/gatk4/cleansam/main'
 
 workflow PREPARE_GENS_INPUTS {
     take:
@@ -25,7 +22,6 @@ workflow PREPARE_GENS_INPUTS {
             [meta, bam, bai, bins]
         }
         .set { ch_mosdepth_in }
-
 
     // Prepare the header
     SAMTOOLS_VIEW(
@@ -76,7 +72,6 @@ workflow PREPARE_GENS_INPUTS {
             pon:    [meta, pon]
         }
         .set { ch_readcounts_input }
-
 
     // Calculate coverage
     GATK4_DENOISEREADCOUNTS(

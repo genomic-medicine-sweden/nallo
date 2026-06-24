@@ -48,7 +48,7 @@ include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_PEDDY          } from '../subw
 // local
 include { CREATE_PEDIGREE_FILE as SAMPLESHEET_PED                } from '../modules/local/create_pedigree_file/main'
 include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modules/local/create_pedigree_file/main'
-include { GATK4_CLEANSAM               } from '../modules/local/gatk4/cleansam/main'
+include { GATK4_CLEANSAM               } from '../modules/nf-core/gatk4/cleansam/main'
 
 // nf-core
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_PHASING             } from '../modules/nf-core/bcftools/concat/main'
@@ -290,7 +290,6 @@ workflow NALLO {
 
     }
 
-
     /*
      * Map reads to reference
      */
@@ -503,7 +502,7 @@ workflow NALLO {
 
         GATK4_CLEANSAM(
             SAMTOOLS_CALMD.out.bam,
-            false
+            [[],[],[]],
         )
 
         SAMTOOLS_INDEX_CLEANSAM(
@@ -531,7 +530,6 @@ workflow NALLO {
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_global_dist.collect { _meta, metrics -> metrics })
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_region_dist.collect { _meta, metrics -> metrics }.ifEmpty([]))
     }
-
 
     /*
      * Call paralogous genes with paraphase
