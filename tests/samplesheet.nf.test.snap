@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            228,
+            229,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -108,6 +108,9 @@
                     "coreutils": 9.4,
                     "find": "4.6.0",
                     "pigz": 2.8
+                },
+                "GATK4_CLEANSAM": {
+                    "gatk": "4.6.2.0"
                 },
                 "GATK4_DENOISEREADCOUNTS": {
                     "gatk4": "4.6.2.0"
@@ -229,7 +232,7 @@
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_INDEX_CALMD": {
+                "SAMTOOLS_INDEX_CLEANSAM": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_INDEX_PBMM2": {
@@ -805,7 +808,7 @@
                 ],
                 [
                     "HG002_Revio_remapped_assembly.bam",
-                    "2f0c72aa0645afa2ef5c21b33d1e68e8"
+                    "a362d8cb6d3e1c04ae4a48e3dd9b90cd"
                 ],
                 [
                     "HG002_Revio_spanning_trgt.bam",
@@ -857,10 +860,10 @@
                 
             ]
         ],
-        "timestamp": "2026-04-14T10:52:03.067844513",
+        "timestamp": "2026-06-24T14:45:36.084833802",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.2"
+            "nextflow": "26.03.4"
         }
     }
 }

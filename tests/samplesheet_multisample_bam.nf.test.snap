@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            310,
+            312,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -105,6 +105,9 @@
                     "coreutils": 9.4,
                     "find": "4.6.0",
                     "pigz": 2.8
+                },
+                "GATK4_CLEANSAM": {
+                    "gatk": "4.6.2.0"
                 },
                 "GATK4_DENOISEREADCOUNTS": {
                     "gatk4": "4.6.2.0"
@@ -217,7 +220,7 @@
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_INDEX_CALMD": {
+                "SAMTOOLS_INDEX_CLEANSAM": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_INDEX_PBMM2": {
@@ -1017,7 +1020,7 @@
                 ],
                 [
                     "HG002_remapped_assembly.bam",
-                    "36d06e6bd29525868775965b830b869a"
+                    "3972b580a33c60bd25c062e5cf36a665"
                 ],
                 [
                     "HG004_aligned_assembly.bam",
@@ -1025,7 +1028,7 @@
                 ],
                 [
                     "HG004_remapped_assembly.bam",
-                    "c72af9bf30531eeeaac3257f7ac96ae1"
+                    "8236c9664d66902ee5d77e2a2e747aaa"
                 ],
                 [
                     "HG002_spanning_trgt.bam",
@@ -1097,10 +1100,10 @@
                 
             ]
         ],
-        "timestamp": "2026-04-14T10:55:19.315091148",
+        "timestamp": "2026-06-24T14:48:48.104338093",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.2"
+            "nextflow": "26.03.4"
         }
     }
 }
