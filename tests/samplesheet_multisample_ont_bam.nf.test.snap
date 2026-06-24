@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            341,
+            340,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -1226,10 +1226,10 @@
                 
             ]
         ],
-        "timestamp": "2026-06-01T09:42:50.123320994",
+        "timestamp": "2026-06-24T13:06:50.623005066",
         "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
         }
     }
 }
