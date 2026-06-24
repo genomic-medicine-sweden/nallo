@@ -113,6 +113,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | ------------------------------ | ----------- | ----------- |
 | sentieon-cli/dnascope-longread | 1.5.2       | 1.6.2       |
 | hiphase                        | 1.4.0       | 1.6.0       |
+| echtvar/anno                   | 0.2.2       | 0.2.4       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
