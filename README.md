@@ -102,7 +102,19 @@ If you would like to contribute to this pipeline, please see the [contributing g
 
 ## Citations
 
-If you use genomic-medicine-sweden/nallo for your analysis, please cite it using the following doi: [10.5281/zenodo.13748210](https://doi.org/10.5281/zenodo.13748210).
+### Nallo
+
+If you use genomic-medicine-sweden/nallo for your analysis, please cite:
+
+> **Nallo: a Nextflow pipeline for comprehensive human long-read genome analysis**
+>
+> Felix Lenner, Anders Jemt, Lucia Peña Pérez, Ramprasad Neethiraj, Peter Pruisscher, Daniel Schmitz, Annick Renevey, Pádraic Corcoran, Daniel Nilsson, Jesper Eisfeldt, Anna Lindstrand, Valtteri Wirta, Adam Ameur, Lars Feuk.
+>
+> _Bioinformatics_, Volume 42, Issue 3, March 2026, btag086, https://doi.org/10.1093/bioinformatics/btag086
+
+Specific versions of the pipeline can be referenced via zenodo: [10.5281/zenodo.13748210](https://doi.org/10.5281/zenodo.13748210).
+
+### nf-core
 
 This pipeline uses code and infrastructure developed and maintained by the [nf-core](https://nf-co.re) community, reused here under the [MIT license](https://github.com/nf-core/tools/blob/main/LICENSE).
 
