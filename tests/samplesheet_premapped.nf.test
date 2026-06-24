@@ -9,19 +9,17 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path   =  'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/bcd63e7dc9025450aebbca7b859ba2dae1f5a3d3/'
-                input                          = "$projectDir/assets/samplesheet_premapped.csv"
-                outdir                         = "$outputDir"
-                preset                         = 'ONT_R10'
-                premapped                      = true
-                hifiasm_mode                   = 'hifi-only'
-                snv_calling_processes          = 1
-                phaser                         = "whatshap"
-                sv_callers                     = "sniffles,hificnv"
-                sv_callers_to_run              = "severus,hificnv,sniffles"
-                publish_unannotated_family_svs = true
-                filter_variants_hgnc_ids       = null
-                skip_methylation_annotation    = true
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/bcd63e7dc9025450aebbca7b859ba2dae1f5a3d3/'
+                input                        = "$projectDir/assets/samplesheet_multisample_bam.csv"
+                outdir                       = "$outputDir"
+                premapped                    = true
+                phaser                       = "hiphase"
+                sv_callers                   = "sawfish"
+                sv_callers_to_run            = "sawfish,severus,hificnv,sniffles"
+                filter_snvs_expression       = "-i 'AD>0'"
+                filter_svs_expression        = "-i 'FILTER=\"PASS\"'"
+                paraphrase_output_format     = 'json'
+                create_sawfish_maf_track     = false
             }
         }
 
