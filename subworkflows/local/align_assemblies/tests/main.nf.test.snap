@@ -19,10 +19,10 @@
                     ]
                 ],
                 "2": [
-
+                    
                 ],
                 "3": [
-
+                    
                 ],
                 "bai": [
                     [
@@ -41,10 +41,10 @@
                     ]
                 ],
                 "crai": [
-
+                    
                 ],
                 "cram": [
-
+                    
                 ]
             }
         ],
@@ -56,12 +56,22 @@
     },
     "bam": {
         "content": [
-            "43bb6ef7e9eccece743204535a3abbd6",
+            {
+                "maxReadLength": 95503,
+                "minReadLength": 0,
+                "meanReadLength": 2065,
+                "maxQuality": 60,
+                "minQuality": 0,
+                "meanQuality": 23,
+                "readCount": 466,
+                "duplicateReadCount": 0,
+                "sorted": true
+            },
             "hg38.bam.bai"
         ],
-        "timestamp": "2026-03-23T16:40:14.667118455",
+        "timestamp": "2026-06-24T13:22:03.363056258",
         "meta": {
-            "nf-test": "0.9.3",
+            "nf-test": "0.9.4",
             "nextflow": "25.10.4"
         }
     }
