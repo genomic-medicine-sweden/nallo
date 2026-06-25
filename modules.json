@@ -150,7 +150,7 @@
                     },
                     "echtvar/anno": {
                         "branch": "master",
-                        "git_sha": "05fff966500ceeefeb93587b8e06eac3b19c7e6c",
+                        "git_sha": "3ae65622c8c8e6ab8390a73dd75a698308a4971b",
                         "installed_by": ["modules"]
                     },
                     "ensemblvep/filtervep": {
