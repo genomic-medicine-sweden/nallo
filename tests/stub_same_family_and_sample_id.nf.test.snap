@@ -99,7 +99,7 @@
                     "deepvariant": "1.10.0"
                 },
                 "ECHTVAR_ANNO": {
-                    "echtvar": "0.2.2"
+                    "echtvar": "0.2.4"
                 },
                 "ENSEMBLVEP_FILTERVEP": {
                     "ensemblvep": 115.2,
@@ -517,7 +517,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-06-01T09:50:18.851620939",
+        "timestamp": "2026-06-23T17:03:46.887525119",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
