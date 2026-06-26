@@ -41,6 +41,8 @@ include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_RANKED_SNVS    } from '../subw
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_GENS           } from '../subworkflows/local/vcf_concat_sort_variants/main'
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_PEDDY          } from '../subworkflows/local/vcf_concat_sort_variants/main'
 include { ANNOTATE_METHYLATION                                   } from '../subworkflows/local/annotate_methylation'
+include { PORTELLO_ASSEMBLY                                      } from '../subworkflows/local/portello_assembly/main'
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT LOCAL/NF-CORE MODULES
@@ -50,7 +52,6 @@ include { ANNOTATE_METHYLATION                                   } from '../subw
 // local
 include { CREATE_PEDIGREE_FILE as SAMPLESHEET_PED                } from '../modules/local/create_pedigree_file/main'
 include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modules/local/create_pedigree_file/main'
-include { GATK4_CLEANSAM               } from '../modules/nf-core/gatk4/cleansam/main'
 
 // nf-core
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_PHASING             } from '../modules/nf-core/bcftools/concat/main'
@@ -66,15 +67,6 @@ include { MULTIQC                                                } from '../modu
 include { PEDDY                                                  } from '../modules/nf-core/peddy/main'
 include { SPLITUBAM                                              } from '../modules/nf-core/splitubam/main'
 include { SVDB_MERGE as SVDB_MERGE_SVS_CNVS                      } from '../modules/nf-core/svdb/merge/main'
-include { PBMM2_ALIGN                                            } from '../modules/nf-core/pbmm2/align/main'
-include { FIND_CONCATENATE                                       } from '../modules/nf-core/find/concatenate/main'
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_PBMM2                 } from '../modules/nf-core/samtools/index/main'
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_CLEANSAM              } from '../modules/nf-core/samtools/index/main'
-include { PORTELLO                                               } from '../modules/nf-core/portello/main'
-include { SAMTOOLS_SORT as SAMTOOLS_SORT_PORTELLO                } from '../modules/nf-core/samtools/sort/main'
-include { MINIMAP2_INDEX                                         } from '../modules/nf-core/minimap2/index/main'
-include { SAMTOOLS_ADDREPLACERG                                  } from '../modules/nf-core/samtools/addreplacerg/main'
-include { SAMTOOLS_CALMD                                         } from '../modules/nf-core/samtools/calmd/main'
 include { paramsSummaryMap                                       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc                                   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML                                 } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -275,15 +267,11 @@ workflow NALLO {
             val_hifiasm_mode == "trio-binning",
         )
 
-        MINIMAP2_INDEX(
-            ch_fasta
-        )
-
         MINIMAP2_ASSEMBLIES(
             GENOME_ASSEMBLY.out.assembled_haplotypes
                 .map { meta, bam -> [meta - meta.subMap('haplotype'), bam] }
                 .groupTuple(size: 2),
-            MINIMAP2_INDEX.out.index.collect(),
+            PREPARE_REFERENCES.out.mmi.collect(),
             true,
             'bai',
             false,
@@ -428,95 +416,23 @@ workflow NALLO {
     }
 
     if (!params.skip_genome_assembly && params.preset != 'ONT_R10') {
-
-        GENOME_ASSEMBLY.out.assembled_haplotypes
-            .map { meta, bam -> [ meta - meta.subMap('haplotype'), bam ] }
-            .groupTuple(size: 2)
-            .set { ch_assemblies_to_concatenate }
-
-        FIND_CONCATENATE (
-            ch_assemblies_to_concatenate
+        PORTELLO_ASSEMBLY(
+            GENOME_ASSEMBLY.out.assembled_haplotypes,
+            ch_bam,
+            ch_assembly_bam_bai_updated_meta,
+            ch_fasta,
+            ch_fai,
         )
 
-        // Match BAM files and reference by sample ID for alignment with pbmm2
-        ch_bam
-            .map { meta, bam -> [[id: meta.id], meta, bam] }
-            .join(
-                FIND_CONCATENATE.out.file_out.map { meta, ref -> [[id: meta.id], ref] },
-                failOnMismatch: true,
-                failOnDuplicate: true
-            )
-            .multiMap { _key, meta, bam, ref ->
-                reads:     [meta, bam]
-                reference: [meta, ref]
-            }
-            .set { ch_pbmm2_input }
+        ch_bam = PORTELLO_ASSEMBLY.out.bam
+        ch_bam_bai = PORTELLO_ASSEMBLY.out.bam.join(PORTELLO_ASSEMBLY.out.bai, failOnMismatch: true, failOnDuplicate: true)
+    }
 
-        PBMM2_ALIGN(
-            ch_pbmm2_input.reads,
-            ch_pbmm2_input.reference,
+    if (!val_skip_rank_variants || !val_skip_phasing) {
+        // Create PED files with updated (infered sex) per family
+        SOMALIER_PED_FAMILY(
+            ch_bam.map { meta, _files -> [[id: meta.family_id], meta] }.groupTuple()
         )
-
-        SAMTOOLS_INDEX_PBMM2(PBMM2_ALIGN.out.bam)
-
-        PORTELLO (
-            ch_assembly_bam_bai_updated_meta
-                .join(PBMM2_ALIGN.out.bam)
-                .join(SAMTOOLS_INDEX_PBMM2.out.index)
-                .combine(ch_fasta.map { _meta, fasta -> fasta })
-                .map { meta, asm_to_ref_bam, asm_to_ref_bai, read_to_asm_bam, read_to_asm_bai, ref_fasta ->
-                    [
-                        meta,
-                        asm_to_ref_bam,
-                        asm_to_ref_bai,
-                        read_to_asm_bam,
-                        read_to_asm_bai,
-                        ref_fasta,
-                        'partially-phased',
-                        false
-                    ]
-                }
-        )
-
-        SAMTOOLS_SORT_PORTELLO (
-            PORTELLO.out.bam,
-            ch_fasta.join(ch_fai).collect(),
-            "bai"
-        )
-
-        SAMTOOLS_ADDREPLACERG (
-            SAMTOOLS_SORT_PORTELLO.out.bam
-                .join(SAMTOOLS_SORT_PORTELLO.out.index, failOnMismatch: true, failOnDuplicate: true)
-                .map { meta, bam, bai ->
-                    def read_group = "'@RG\\tID:${meta.id}_hifiasm\\tSM:${meta.id}'"
-                    [meta, bam, bai, read_group]
-                },
-            [[],[],[],[]]
-        )
-
-        // Add MD and NM tags for severus
-        SAMTOOLS_CALMD (
-            SAMTOOLS_ADDREPLACERG.out.bam,
-            ch_fasta.join(ch_fai).collect(),
-        )
-
-        GATK4_CLEANSAM(
-            SAMTOOLS_CALMD.out.bam,
-            [[],[],[]],
-        )
-
-        SAMTOOLS_INDEX_CLEANSAM(
-            GATK4_CLEANSAM.out.bam
-        )
-
-        ch_bam = GATK4_CLEANSAM.out.bam
-        ch_bam_bai = GATK4_CLEANSAM.out.bam.join(SAMTOOLS_INDEX_CLEANSAM.out.index, failOnMismatch: true, failOnDuplicate: true)
-        if (!val_skip_rank_variants || !val_skip_phasing) {
-            // Create PED files with updated (infered sex) per family
-            SOMALIER_PED_FAMILY(
-                ch_bam.map { meta, _files -> [[id: meta.family_id], meta] }.groupTuple()
-            )
-        }
     }
 
     //
