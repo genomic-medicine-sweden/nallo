@@ -267,6 +267,13 @@ workflow NALLO {
             val_hifiasm_mode == "trio-binning",
         )
 
+        ALIGN_ASSEMBLIES(
+            GENOME_ASSEMBLY.out.assembled_haplotypes,
+            ch_fasta,
+            ch_fai,
+            cram_output,
+        )
+
         MINIMAP2_ASSEMBLIES(
             GENOME_ASSEMBLY.out.assembled_haplotypes
                 .map { meta, bam -> [meta - meta.subMap('haplotype'), bam] }
