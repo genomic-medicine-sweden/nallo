@@ -78,6 +78,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Mitochondrial variants do not go through the phasing
 - [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Changed output of `SCATTER_GENOME` to output `bed_nuclear_intervals` and `mitochondrial_nuclear_intervals`
 - [#1145](https://github.com/genomic-medicine-sweden/nallo/pull/1145) - Replaced local hiphase module with nf-core one
+- [#1149](https://github.com/genomic-medicine-sweden/nallo/pull/1149) - Replaced local `echtvar/anno` module with nf-core one
 
 ### Removed
 
@@ -114,6 +115,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | ------------------------------ | ----------- | ----------- |
 | sentieon-cli/dnascope-longread | 1.5.2       | 1.6.2       |
 | hiphase                        | 1.4.0       | 1.6.0       |
+| echtvar/anno                   | 0.2.2       | 0.2.4       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

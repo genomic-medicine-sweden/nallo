@@ -18,10 +18,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-05-27T10:41:49.641793103",
+        "timestamp": "2026-06-24T13:50:57.652828036",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.03.4"
         }
     },
     "bcf, db, vep_cache, '110'": {
@@ -55,10 +55,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-05-27T10:41:41.281413614",
+        "timestamp": "2026-06-24T13:50:50.152336151",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.03.4"
         }
     },
     "bcf, [], vep_cache, '110' - no echtvar annotation - filter before vep": {
