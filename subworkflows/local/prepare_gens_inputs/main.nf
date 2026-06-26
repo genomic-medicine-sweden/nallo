@@ -1,10 +1,10 @@
-include { CAT_CAT                       } from '../../../modules/nf-core/cat/cat/main'
-include { GATK4_DENOISEREADCOUNTS       } from '../../../modules/nf-core/gatk4/denoisereadcounts/main'
-include { GAWK as MOSDEPTH_GATK_HEADER  } from '../../../modules/nf-core/gawk/main'
-include { GAWK as MOSDEPTH_GATK_FORMAT  } from '../../../modules/nf-core/gawk/main'
-include { MOSDEPTH                      } from '../../../modules/nf-core/mosdepth/main'
-include { PREPARECOVANDBAF              } from '../../../modules/nf-core/gens/preparecovandbaf/main'
-include { SAMTOOLS_VIEW                 } from '../../../modules/nf-core/samtools/view/main'
+include { CAT_CAT                      } from '../../../modules/nf-core/cat/cat/main'
+include { GATK4_DENOISEREADCOUNTS      } from '../../../modules/nf-core/gatk4/denoisereadcounts/main'
+include { GAWK as MOSDEPTH_GATK_HEADER } from '../../../modules/nf-core/gawk/main'
+include { GAWK as MOSDEPTH_GATK_FORMAT } from '../../../modules/nf-core/gawk/main'
+include { MOSDEPTH                     } from '../../../modules/nf-core/mosdepth/main'
+include { PREPARECOVANDBAF             } from '../../../modules/nf-core/gens/preparecovandbaf/main'
+include { SAMTOOLS_VIEW                } from '../../../modules/nf-core/samtools/view/main'
 
 workflow PREPARE_GENS_INPUTS {
     take:
@@ -68,6 +68,7 @@ workflow PREPARE_GENS_INPUTS {
             counts: [meta, counts]
             pon: [meta, pon]
         }
+
 
     // Calculate coverage
     GATK4_DENOISEREADCOUNTS(
