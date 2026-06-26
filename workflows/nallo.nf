@@ -398,41 +398,30 @@ workflow NALLO {
             .map { meta, _bam -> [[id: meta.id], meta] }
                 .set { ch_updated_sample_meta }
 
-            if (!params.skip_genome_assembly) {
+            if (!params.skip_genome_assembly && params.preset != 'ONT_R10') {
                 MINIMAP2_ASSEMBLIES.out.bam
                     .join(MINIMAP2_ASSEMBLIES.out.index, failOnMismatch: true, failOnDuplicate: true)
                     .map { meta, bam, bai -> [[id: meta.id], meta, bam, bai] }
                     .join(ch_updated_sample_meta, failOnMismatch: true, failOnDuplicate: true)
                     .map { _sample_key, _old_meta, bam, bai, updated_meta -> [updated_meta, bam, bai] }
                     .set { ch_assembly_bam_bai_updated_meta }
+
+                    PORTELLO_ASSEMBLY(
+                        GENOME_ASSEMBLY.out.assembled_haplotypes,
+                        ch_bam,
+                        ch_assembly_bam_bai_updated_meta,
+                        ch_fasta,
+                        ch_fai,
+                    )
+
+                    ch_bam = PORTELLO_ASSEMBLY.out.bam
+                    ch_bam_bai = PORTELLO_ASSEMBLY.out.bam.join(PORTELLO_ASSEMBLY.out.bai, failOnMismatch: true, failOnDuplicate: true)
+                }
             }
-        }
         else {
             ch_bam = ch_aligned_bam.map { meta, bam, _bai -> [meta, bam] }
             ch_bam_bai = ch_aligned_bam
         }
-
-        // Preserve the original aligned read BAMs for phasing before any assembly remapping overwrites ch_bam_bai.
-        ch_bam_bai_unassembled = ch_bam_bai
-
-    }
-
-    else {
-        // If we are skipping alignment, we assume the input BAMs are already aligned, and we just need to set the channels correctly to finish the assembly.
-        ch_bam = ch_samplesheet
-    }
-
-    if (!params.skip_genome_assembly && params.preset != 'ONT_R10') {
-        PORTELLO_ASSEMBLY(
-            GENOME_ASSEMBLY.out.assembled_haplotypes,
-            ch_bam,
-            ch_assembly_bam_bai_updated_meta,
-            ch_fasta,
-            ch_fai,
-        )
-
-        ch_bam = PORTELLO_ASSEMBLY.out.bam
-        ch_bam_bai = PORTELLO_ASSEMBLY.out.bam.join(PORTELLO_ASSEMBLY.out.bai, failOnMismatch: true, failOnDuplicate: true)
     }
 
     if (!val_skip_rank_variants || !val_skip_phasing) {
@@ -448,7 +437,7 @@ workflow NALLO {
     if (!val_skip_qc) {
 
         QC_ALIGNED_READS(
-            ch_bam_bai_unassembled,
+            ch_bam_bai,
             ch_fasta,
             ch_mosdepth_regions,
             ch_sambamba_regions,
@@ -717,7 +706,7 @@ workflow NALLO {
             BCFTOOLS_CONCAT_PHASING.out.tbi,
             val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_vcf,
             val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_tbi,
-            ch_bam_bai_unassembled,
+            ch_bam_bai,
             ch_family_to_samples,
             ch_fasta,
             ch_fai,
