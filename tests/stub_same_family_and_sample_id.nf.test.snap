@@ -1,7 +1,7 @@
 {
     "Test family id same as sample id": {
         "content": [
-            218,
+            228,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -116,6 +116,14 @@
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
+                "FIND_CONCATENATE": {
+                    "coreutils": 9.4,
+                    "find": "4.6.0",
+                    "pigz": 2.8
+                },
+                "GATK4_CLEANSAM": {
+                    "gatk": "4.6.2.0"
+                },
                 "GATK4_DENOISEREADCOUNTS": {
                     "gatk4": "4.6.2.0"
                 },
@@ -167,6 +175,9 @@
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283"
                 },
+                "MINIMAP2_ASSEMBLIES": {
+                    "minimap2": "2.29-r1283"
+                },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
                 },
@@ -196,6 +207,9 @@
                 "PEDDY": {
                     "peddy": "0.4.8"
                 },
+                "PORTELLO": {
+                    "portello": "0.7.0"
+                },
                 "PREPARECOVANDBAF": {
                     "preparecovandbaf": "1.1.5"
                 },
@@ -215,6 +229,12 @@
                     "create_pedigree_file": 1.0,
                     "python": "3.8.3"
                 },
+                "SAMTOOLS_ADDREPLACERG": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_CALMD": {
+                    "samtools": "1.23.1"
+                },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
                 },
@@ -227,10 +247,19 @@
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.23.1"
                 },
+                "SAMTOOLS_INDEX_CLEANSAM": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_INDEX_PBMM2": {
+                    "samtools": "1.23.1"
+                },
                 "SAMTOOLS_MERGE": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_SORT": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_SORT_PORTELLO": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_VIEW": {
@@ -319,6 +348,10 @@
                 "assembly/sample/HG002_Revio",
                 "assembly/sample/HG002_Revio/HG002_Revio.bai",
                 "assembly/sample/HG002_Revio/HG002_Revio.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam.bai",
+                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam.bai",
                 "assembly/stats",
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
@@ -517,7 +550,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-06-01T09:50:18.851620939",
+        "timestamp": "2026-06-25T15:52:54.198841413",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"

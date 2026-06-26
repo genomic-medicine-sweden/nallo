@@ -395,7 +395,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-06-01T09:53:06.242525686",
+        "timestamp": "2026-06-26T15:38:26.371228388",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"

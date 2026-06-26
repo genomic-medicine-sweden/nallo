@@ -1,7 +1,7 @@
 {
     "Test skip sex check - unknown sex": {
         "content": [
-            35,
+            36,
             {
                 "BCFTOOLS_MERGE": {
                     "bcftools": 1.22
@@ -34,6 +34,9 @@
                     "hifiasm": "0.25.0-r726"
                 },
                 "MINIMAP2_ALIGN": {
+                    "minimap2": "2.29-r1283"
+                },
+                "MINIMAP2_ASSEMBLIES": {
                     "minimap2": "2.29-r1283"
                 },
                 "MINIMAP2_INDEX": {
@@ -95,6 +98,8 @@
                 "assembly/sample/HG002_Revio",
                 "assembly/sample/HG002_Revio/HG002_Revio.bai",
                 "assembly/sample/HG002_Revio/HG002_Revio.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam.bai",
                 "assembly/stats",
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
@@ -144,15 +149,15 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
-        "timestamp": "2026-05-27T11:31:54.895514708",
+        "timestamp": "2026-06-26T15:36:50.693458315",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.03.4"
         }
     },
     "Test skip sex check - multisample": {
         "content": [
-            153,
+            114,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -319,9 +324,6 @@
                 "aligned_reads/HG002",
                 "aligned_reads/HG002/HG002_haplotagged.bam",
                 "aligned_reads/HG002/HG002_haplotagged.bam.bai",
-                "aligned_reads/HG003",
-                "aligned_reads/HG003/HG003_haplotagged.bam",
-                "aligned_reads/HG003/HG003_haplotagged.bam.bai",
                 "aligned_reads/HG004",
                 "aligned_reads/HG004/HG004_haplotagged.bam",
                 "aligned_reads/HG004/HG004_haplotagged.bam.bai",
@@ -331,11 +333,6 @@
                 "gens/HG002/HG002.baf.bed.gz.tbi",
                 "gens/HG002/HG002.cov.bed.gz",
                 "gens/HG002/HG002.cov.bed.gz.tbi",
-                "gens/HG003",
-                "gens/HG003/HG003.baf.bed.gz",
-                "gens/HG003/HG003.baf.bed.gz.tbi",
-                "gens/HG003/HG003.cov.bed.gz",
-                "gens/HG003/HG003.cov.bed.gz.tbi",
                 "gens/HG004",
                 "gens/HG004/HG004.baf.bed.gz",
                 "gens/HG004/HG004.baf.bed.gz.tbi",
@@ -350,13 +347,6 @@
                 "methylation/pileup/HG002/HG002_pbcpgtools.hap1.bed.gz.tbi",
                 "methylation/pileup/HG002/HG002_pbcpgtools.hap2.bed.gz",
                 "methylation/pileup/HG002/HG002_pbcpgtools.hap2.bed.gz.tbi",
-                "methylation/pileup/HG003",
-                "methylation/pileup/HG003/HG003_pbcpgtools.combined.bed.gz",
-                "methylation/pileup/HG003/HG003_pbcpgtools.combined.bed.gz.tbi",
-                "methylation/pileup/HG003/HG003_pbcpgtools.hap1.bed.gz",
-                "methylation/pileup/HG003/HG003_pbcpgtools.hap1.bed.gz.tbi",
-                "methylation/pileup/HG003/HG003_pbcpgtools.hap2.bed.gz",
-                "methylation/pileup/HG003/HG003_pbcpgtools.hap2.bed.gz.tbi",
                 "methylation/pileup/HG004",
                 "methylation/pileup/HG004/HG004_pbcpgtools.combined.bed.gz",
                 "methylation/pileup/HG004/HG004_pbcpgtools.combined.bed.gz.tbi",
@@ -371,8 +361,6 @@
                 "methylation/profile/sample",
                 "methylation/profile/sample/HG002",
                 "methylation/profile/sample/HG002/HG002_methbat_profile.tsv",
-                "methylation/profile/sample/HG003",
-                "methylation/profile/sample/HG003/HG003_methbat_profile.tsv",
                 "methylation/profile/sample/HG004",
                 "methylation/profile/sample/HG004/HG004_methbat_profile.tsv",
                 "multiqc",
@@ -387,8 +375,6 @@
                 "qc/bcftools_stats",
                 "qc/bcftools_stats/HG002",
                 "qc/bcftools_stats/HG002/HG002.bcftools_stats.txt",
-                "qc/bcftools_stats/HG003",
-                "qc/bcftools_stats/HG003/HG003.bcftools_stats.txt",
                 "qc/bcftools_stats/HG004",
                 "qc/bcftools_stats/HG004/HG004.bcftools_stats.txt",
                 "qc/cramino",
@@ -396,17 +382,12 @@
                 "qc/cramino/phased/HG002",
                 "qc/cramino/phased/HG002/HG002_cramino_aligned_phased.arrow",
                 "qc/cramino/phased/HG002/HG002_cramino_aligned_phased.txt",
-                "qc/cramino/phased/HG003",
-                "qc/cramino/phased/HG003/HG003_cramino_aligned_phased.arrow",
-                "qc/cramino/phased/HG003/HG003_cramino_aligned_phased.txt",
                 "qc/cramino/phased/HG004",
                 "qc/cramino/phased/HG004/HG004_cramino_aligned_phased.arrow",
                 "qc/cramino/phased/HG004/HG004_cramino_aligned_phased.txt",
                 "qc/deepvariant_vcfstatsreport",
                 "qc/deepvariant_vcfstatsreport/HG002",
                 "qc/deepvariant_vcfstatsreport/HG002/HG002.visual_report.html",
-                "qc/deepvariant_vcfstatsreport/HG003",
-                "qc/deepvariant_vcfstatsreport/HG003/HG003.visual_report.html",
                 "qc/deepvariant_vcfstatsreport/HG004",
                 "qc/deepvariant_vcfstatsreport/HG004/HG004.visual_report.html",
                 "qc/peddy",
@@ -426,10 +407,6 @@
                 "qc/phasing_stats/HG002/HG002_whatshap_stats.gtf.gz",
                 "qc/phasing_stats/HG002/HG002_whatshap_stats.gtf.gz.tbi",
                 "qc/phasing_stats/HG002/HG002_whatshap_stats.tsv",
-                "qc/phasing_stats/HG003",
-                "qc/phasing_stats/HG003/HG003_whatshap_stats.gtf.gz",
-                "qc/phasing_stats/HG003/HG003_whatshap_stats.gtf.gz.tbi",
-                "qc/phasing_stats/HG003/HG003_whatshap_stats.tsv",
                 "qc/phasing_stats/HG004",
                 "qc/phasing_stats/HG004/HG004_whatshap_stats.gtf.gz",
                 "qc/phasing_stats/HG004/HG004_whatshap_stats.gtf.gz.tbi",
@@ -445,11 +422,6 @@
                 "repeats/sample/HG002/HG002_spanning_trgt.bam.bai",
                 "repeats/sample/HG002/HG002_trgt.vcf.gz",
                 "repeats/sample/HG002/HG002_trgt.vcf.gz.tbi",
-                "repeats/sample/HG003",
-                "repeats/sample/HG003/HG003_spanning_trgt.bam",
-                "repeats/sample/HG003/HG003_spanning_trgt.bam.bai",
-                "repeats/sample/HG003/HG003_trgt.vcf.gz",
-                "repeats/sample/HG003/HG003_trgt.vcf.gz.tbi",
                 "repeats/sample/HG004",
                 "repeats/sample/HG004/HG004_spanning_trgt.bam",
                 "repeats/sample/HG004/HG004_spanning_trgt.bam.bai",
@@ -464,9 +436,6 @@
                 "snvs/sample/HG002",
                 "snvs/sample/HG002/HG002_deepvariant_snvs.vcf.gz",
                 "snvs/sample/HG002/HG002_deepvariant_snvs.vcf.gz.tbi",
-                "snvs/sample/HG003",
-                "snvs/sample/HG003/HG003_deepvariant_snvs.vcf.gz",
-                "snvs/sample/HG003/HG003_deepvariant_snvs.vcf.gz.tbi",
                 "snvs/sample/HG004",
                 "snvs/sample/HG004/HG004_deepvariant_snvs.vcf.gz",
                 "snvs/sample/HG004/HG004_deepvariant_snvs.vcf.gz.tbi",
@@ -475,17 +444,13 @@
                 "visualization_tracks/HG002/HG002_pbcpgtools.combined.bw",
                 "visualization_tracks/HG002/HG002_pbcpgtools.hap1.bw",
                 "visualization_tracks/HG002/HG002_pbcpgtools.hap2.bw",
-                "visualization_tracks/HG003",
-                "visualization_tracks/HG003/HG003_pbcpgtools.combined.bw",
-                "visualization_tracks/HG003/HG003_pbcpgtools.hap1.bw",
-                "visualization_tracks/HG003/HG003_pbcpgtools.hap2.bw",
                 "visualization_tracks/HG004",
                 "visualization_tracks/HG004/HG004_pbcpgtools.combined.bw",
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap1.bw",
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-06-01T09:52:04.683544308",
+        "timestamp": "2026-06-24T17:13:26.055927874",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"

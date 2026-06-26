@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            328,
+            344,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -232,6 +232,9 @@
                 },
                 "TABIX_TABIX": {
                     "tabix": 1.21
+                },
+                "TAGBAM": {
+                    "tagbam": "0.1.0"
                 },
                 "TIDDIT_COV": {
                     "tiddit": "3.9.4"
@@ -1134,19 +1137,19 @@
                 ],
                 [
                     "HG002_ONT_A_aligned_assembly.bam",
-                    "15cb54697e588f3de354833ce86dd56"
+                    "e5c3eae821381c03902eac099bb95943"
                 ],
                 [
                     "HG002_ONT_B_aligned_assembly.bam",
-                    "59c69607454d16eadccece86f2eb5e68"
+                    "f9f7e9b2b353e5bca51f28e7b46465fa"
                 ],
                 [
                     "HG002_ONT_C_aligned_assembly.bam",
-                    "15cb54697e588f3de354833ce86dd56"
+                    "e5c3eae821381c03902eac099bb95943"
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -1223,10 +1226,10 @@
                 ]
             ],
             [
-
+                
             ]
         ],
-        "timestamp": "2026-06-24T14:42:49.428574688",
+        "timestamp": "2026-06-26T15:16:29.31487286",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
