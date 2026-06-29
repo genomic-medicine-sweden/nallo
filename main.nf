@@ -109,6 +109,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_skip_methylation_annotation
     val_skip_peddy
     val_skip_phasing
+    val_skip_portello
     val_skip_prepare_gens_input
     val_skip_qc
     val_skip_rank_variants
@@ -215,6 +216,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         (val_skip_methylation_calling || !val_run_modkit),
         val_skip_peddy,
         val_skip_phasing,
+        val_skip_portello,
         val_skip_prepare_gens_input,
         val_skip_qc,
         val_skip_rank_variants,
@@ -396,6 +398,7 @@ workflow {
         params.skip_methylation_annotation,
         params.skip_peddy,
         params.skip_phasing,
+        params.skip_portello,
         params.skip_prepare_gens_input,
         params.skip_qc,
         params.skip_rank_variants,
@@ -506,6 +509,7 @@ workflow {
         params.skip_methylation_annotation,
         params.skip_peddy,
         params.skip_phasing,
+        params.skip_portello,
         params.skip_prepare_gens_input,
         params.skip_qc,
         params.skip_rank_variants,

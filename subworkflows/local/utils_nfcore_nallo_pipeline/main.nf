@@ -60,6 +60,7 @@ workflow PIPELINE_INITIALISATION {
     val_skip_methylation_annotation
     val_skip_peddy
     val_skip_phasing
+    val_skip_portello
     val_skip_prepare_gens_input
     val_skip_qc
     val_skip_rank_variants
@@ -171,6 +172,7 @@ workflow PIPELINE_INITIALISATION {
         qc                    : "skip_qc",
         gens                  : "skip_prepare_gens_input",
         sex_check             : "skip_sex_check",
+        portello              : "skip_portello",
     ]
 
     //
@@ -195,6 +197,7 @@ workflow PIPELINE_INITIALISATION {
         methylation           : ["mapping", "snv_calling"],
         methylation_annotation: ["mapping", "snv_calling", "methylation"],
         gens                  : ["mapping", "snv_calling"],
+        portello              : ["assembly"],
     ]
 
 
@@ -238,6 +241,7 @@ workflow PIPELINE_INITIALISATION {
             skip_genome_assembly        : val_skip_genome_assembly,
             skip_prepare_gens_input     : val_skip_prepare_gens_input,
             skip_sex_check              : val_skip_sex_check,
+            skip_portello               : val_skip_portello
         ],
         files: [
             par_regions                 : val_par_regions,

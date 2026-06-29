@@ -158,6 +158,7 @@ workflow NALLO {
     val_skip_modkit
     val_skip_peddy
     val_skip_phasing
+    val_skip_portello
     val_skip_prepare_gens_input
     val_skip_qc
     val_skip_rank_variants
@@ -398,29 +399,31 @@ workflow NALLO {
             .map { meta, _bam -> [[id: meta.id], meta] }
                 .set { ch_updated_sample_meta }
 
-            if (!params.skip_genome_assembly && params.preset != 'ONT_R10') {
+            if (!val_skip_portello) {
                 MINIMAP2_ASSEMBLIES.out.bam
                     .join(MINIMAP2_ASSEMBLIES.out.index, failOnMismatch: true, failOnDuplicate: true)
                     .map { meta, bam, bai -> [[id: meta.id], meta, bam, bai] }
                     .join(ch_updated_sample_meta, failOnMismatch: true, failOnDuplicate: true)
                     .map { _sample_key, _old_meta, bam, bai, updated_meta -> [updated_meta, bam, bai] }
                     .set { ch_assembly_bam_bai_updated_meta }
-
-                    PORTELLO_ASSEMBLY(
-                        GENOME_ASSEMBLY.out.assembled_haplotypes,
-                        ch_bam,
-                        ch_assembly_bam_bai_updated_meta,
-                        ch_fasta,
-                        ch_fai,
-                    )
-
-                    ch_bam = PORTELLO_ASSEMBLY.out.bam
-                    ch_bam_bai = PORTELLO_ASSEMBLY.out.bam.join(PORTELLO_ASSEMBLY.out.bai, failOnMismatch: true, failOnDuplicate: true)
-                }
             }
+        }
         else {
             ch_bam = ch_aligned_bam.map { meta, bam, _bai -> [meta, bam] }
             ch_bam_bai = ch_aligned_bam
+        }
+
+        if (!val_skip_portello) {
+            PORTELLO_ASSEMBLY(
+                GENOME_ASSEMBLY.out.assembled_haplotypes,
+                ch_bam,
+                ch_assembly_bam_bai_updated_meta,
+                ch_fasta,
+                ch_fai,
+            )
+
+            ch_bam = PORTELLO_ASSEMBLY.out.bam
+            ch_bam_bai = PORTELLO_ASSEMBLY.out.bam.join(PORTELLO_ASSEMBLY.out.bai, failOnMismatch: true, failOnDuplicate: true)
         }
     }
 

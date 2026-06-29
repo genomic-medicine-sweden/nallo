@@ -1,7 +1,7 @@
 {
     "Test skip sex check - unknown sex": {
         "content": [
-            36,
+            45,
             {
                 "BCFTOOLS_MERGE": {
                     "bcftools": 1.22
@@ -17,6 +17,14 @@
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
+                },
+                "FIND_CONCATENATE": {
+                    "coreutils": 9.4,
+                    "find": "4.6.0",
+                    "pigz": 2.8
+                },
+                "GATK4_CLEANSAM": {
+                    "gatk": "4.6.2.0"
                 },
                 "GAWK": {
                     "gawk": "5.3.1"
@@ -53,12 +61,21 @@
                 "PARAPHRASE": {
                     "paraphrase": "0.2.0"
                 },
+                "PORTELLO": {
+                    "portello": "0.7.0"
+                },
                 "SAMBAMBA_DEPTH": {
                     "sambamba": "1.0.1"
                 },
                 "SAMPLESHEET_PED": {
                     "create_pedigree_file": 1.0,
                     "python": "3.8.3"
+                },
+                "SAMTOOLS_ADDREPLACERG": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_CALMD": {
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
@@ -69,7 +86,16 @@
                 "SAMTOOLS_IMPORT": {
                     "samtools": "1.23.1"
                 },
+                "SAMTOOLS_INDEX_CLEANSAM": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_INDEX_PBMM2": {
+                    "samtools": "1.23.1"
+                },
                 "SAMTOOLS_MERGE": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_SORT_PORTELLO": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_VIEW": {
@@ -100,6 +126,8 @@
                 "assembly/sample/HG002_Revio/HG002_Revio.bam",
                 "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam",
                 "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam.bai",
+                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam.bai",
                 "assembly/stats",
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
@@ -149,7 +177,7 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
-        "timestamp": "2026-06-26T15:36:50.693458315",
+        "timestamp": "2026-06-29T15:13:56.606396998",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"

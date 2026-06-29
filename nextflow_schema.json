@@ -121,6 +121,11 @@
                     "type": "boolean",
                     "description": "Skip sex check",
                     "default": false
+                },
+                "skip_portello": {
+                    "type": "boolean",
+                    "description": "Skip Portello analysis",
+                    "default": false
                 }
             },
             "fa_icon": "fas fa-american-sign-language-interpreting"

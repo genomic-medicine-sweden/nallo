@@ -16,6 +16,7 @@ nextflow_pipeline {
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
                 skip_genome_assembly         = true
+                skip_portello                = true
                 // Skip irrelevant steps
                 skip_annotate_paralogs       = true
                 skip_call_paralogs           = true
@@ -63,6 +64,7 @@ nextflow_pipeline {
                 input                         = "$projectDir/assets/samplesheet.csv"
                 outdir                        = "$outputDir"
                 skip_genome_assembly          = true
+                skip_portello                 = true
                 alignment_processes           = 1
                 plot_chromograph_autozygosity = false
                 // Skip irrelevant steps

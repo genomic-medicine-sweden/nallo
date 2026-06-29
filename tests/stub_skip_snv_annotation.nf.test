@@ -18,6 +18,7 @@ nextflow_pipeline {
                 skip_annotate_paralogs       = true
                 skip_call_paralogs           = true
                 skip_genome_assembly         = true
+                skip_portello                = true
                 skip_qc                      = true
                 skip_peddy                   = true
                 skip_snv_annotation          = true
@@ -74,6 +75,7 @@ nextflow_pipeline {
                 skip_methylation_annotation  = true
                 skip_prepare_gens_input      = true
                 skip_genome_assembly         = true
+                skip_portello                = true
             }
         }
 
