@@ -58,11 +58,11 @@
                 }
             ]
         ],
+        "timestamp": "2026-05-27T13:15:41.04246909",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.5"
-        },
-        "timestamp": "2025-11-27T15:34:32.647194828"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "test function addRelationshipsToMeta with two siblings of opposite sex, each with children": {
         "content": [
@@ -121,11 +121,11 @@
                 }
             ]
         ],
+        "timestamp": "2026-05-27T13:15:30.003545274",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
-        },
-        "timestamp": "2025-08-07T15:24:19.70608758"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "test function addRelationshipsToMeta with child, parent and grandparent": {
         "content": [
@@ -171,11 +171,11 @@
                 }
             ]
         ],
+        "timestamp": "2026-05-27T13:15:35.526131053",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
-        },
-        "timestamp": "2025-08-07T15:24:23.70284565"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "test function addRelationshipsToMeta with child, two parents, one of wich also has two parents": {
         "content": [
@@ -247,11 +247,11 @@
                 }
             ]
         ],
+        "timestamp": "2026-05-27T13:15:52.461111496",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
-        },
-        "timestamp": "2025-08-07T15:24:36.651316387"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "test function addRelationshipsToMeta with two siblings, each with their child and one of the siblings has a partner": {
         "content": [
@@ -323,11 +323,11 @@
                 }
             ]
         ],
+        "timestamp": "2026-05-27T13:15:46.853932829",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
-        },
-        "timestamp": "2025-08-07T15:24:31.796868453"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "test function addRelationshipsToMeta with trio": {
         "content": [
@@ -373,11 +373,11 @@
                 }
             ]
         ],
+        "timestamp": "2026-05-27T13:15:18.50087954",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
-        },
-        "timestamp": "2025-08-07T15:24:11.672586331"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "test function addRelationshipsToMeta with no relationships": {
         "content": [
@@ -423,10 +423,10 @@
                 }
             ]
         ],
+        "timestamp": "2026-05-27T13:15:24.291538058",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.04.6"
-        },
-        "timestamp": "2025-08-07T15:24:15.890312721"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     }
 }

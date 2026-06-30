@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1073](https://github.com/genomic-medicine-sweden/nallo/pull/1073) - Added sample vcf outputs to `call_paralogs` workflow
 - [#1084](https://github.com/genomic-medicine-sweden/nallo/pull/1084) - Added new auto-generated container config files (new with nf-core/tools update)
 - [#1104](https://github.com/genomic-medicine-sweden/nallo/pull/1104) - Added `.github/nf-dev-guidelines.yaml` which the contribution guidelines are now auto-generated from via a GutHub action using the base template in https://github.com/genomic-medicine-sweden/nf-dev-guidelines and pipeline-specific sections stored in in `docs/contribution`
+- [#1120](https://github.com/genomic-medicine-sweden/nallo/pull/1120) - Added baseName to avoid `.bed` in deepvariant output name
+- [#1128](https://github.com/genomic-medicine-sweden/nallo/pull/1128) - Added nf-tests for `phasing` subworkflow
+- [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Added Mitorsaw module and Mitorsaw to validatePacBioLicense
+- [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Added `call_mitochondrial_variants` subworkflow
+- [#1148](https://github.com/genomic-medicine-sweden/nallo/pull/1148) - Added tests for `annotate_consequence_pli`
+- [#1155](https://github.com/genomic-medicine-sweden/nallo/pull/1155) - Added Nallo paper to the README
 
 ### Changed
 
@@ -54,6 +60,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1082](https://github.com/genomic-medicine-sweden/nallo/pull/1082) - Changed `nallo` to workflow outputs
 - [#1084](https://github.com/genomic-medicine-sweden/nallo/pull/1084) - Updated nf-core module for `peddy`
 - [#1088](https://github.com/genomic-medicine-sweden/nallo/pull/1088) - Changed to emit all files and indexes separately from `nallo.nf`
+- [#1089](https://github.com/genomic-medicine-sweden/nallo/pull/1089) - Version sorted workflow output related items
+- [#1090](https://github.com/genomic-medicine-sweden/nallo/pull/1090) - Renamed workflow output related items
 - [#1091](https://github.com/genomic-medicine-sweden/nallo/pull/1091) - Renamed `ch_vcf_tbi_per_region` channels in `nallo`
 - [#1093](https://github.com/genomic-medicine-sweden/nallo/pull/1093) - Simplified methylation-related conditionals in `nallo`
 - [#1094](https://github.com/genomic-medicine-sweden/nallo/pull/1094) - Simplified repeats-related conditionals in `nallo`
@@ -62,6 +70,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1097](https://github.com/genomic-medicine-sweden/nallo/pull/1097) - Simplified phasing-related if statement in `nallo`
 - [#1102](https://github.com/genomic-medicine-sweden/nallo/pull/1102) - Updated testdata commit with new genmod score config
 - [#1104](https://github.com/genomic-medicine-sweden/nallo/pull/1104) - Updated .nf-core.yml to allow for template_strings in new github/nf-dev-guidelines.yaml
+- [#1111](https://github.com/genomic-medicine-sweden/nallo/pull/1111) - Refactored gVCF grouping to reduce code duplication in `nallo`
+- [#1112](https://github.com/genomic-medicine-sweden/nallo/pull/1112) - Changed testdata commit to include data with a deletion in the mitochondrial chromosome
+- [#1118](https://github.com/genomic-medicine-sweden/nallo/pull/1118) - Changed testdata commit
+- [#1126](https://github.com/genomic-medicine-sweden/nallo/pull/1126) - Changed `ch_* = <...>` instead of `.set { }` in the pipeline
+- [#1127](https://github.com/genomic-medicine-sweden/nallo/pull/1127), [#1130](https://github.com/genomic-medicine-sweden/nallo/pull/1130) - Run `nextflow lint -format -harshil-alignment` on configuration files, local modules and subworkflows, nallo.nf
+- [#1119](https://github.com/genomic-medicine-sweden/nallo/pull/1119) - Changed Expression of `filter_snvs_expression`in test `tests/samplesheet_multisample_bam.nf.test` in order to be compatible with mitochondrial vcf fields
+- [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Changed logic in `subworkflows/local/gvcf_glnexus_norm_variants/main.nf` to handle caller from the meta including the mitochondrial caller
+- [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Mitochondrial variants do not go through the phasing
+- [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Changed output of `SCATTER_GENOME` to output `bed_nuclear_intervals` and `mitochondrial_nuclear_intervals`
+- [#1145](https://github.com/genomic-medicine-sweden/nallo/pull/1145) - Replaced local hiphase module with nf-core one
+- [#1149](https://github.com/genomic-medicine-sweden/nallo/pull/1149) - Replaced local `echtvar/anno` module with nf-core one
 
 ### Removed
 
@@ -70,17 +89,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1087](https://github.com/genomic-medicine-sweden/nallo/pull/1087) - Removed empty qc_snv.config
 - [#1092](https://github.com/genomic-medicine-sweden/nallo/pull/1092) - Removed unused SVDB import in `nallo`
 - [#1100](https://github.com/genomic-medicine-sweden/nallo/pull/1100) - Removed tabix from SNV and SV annotation subworkflows
+- [#1125](https://github.com/genomic-medicine-sweden/nallo/pull/1125) - Removed `samplesheet_ont.csv` because it is unused.
 
 ### Fixed
 
 - [#1045](https://github.com/genomic-medicine-sweden/nallo/pull/1045) - Fixed `--skip_sex_check` should depend on `--skip_alignment` in workflow checks on pipeline start.
 - [#1056](https://github.com/genomic-medicine-sweden/nallo/pull/1056) - Fixed nf-test CI not passing the matrix Nextflow version to the setup action.
 - [#1079](https://github.com/genomic-medicine-sweden/nallo/pull/1079) - Fixed typo in tests for `call_methylation_methbat`
+- [#1142](https://github.com/genomic-medicine-sweden/nallo/pull/1142) - Fixed Sentieon-specific SNV filtering to use the configured `--snv_caller` parameter
 
 ### Parameters
 
-| Old parameter | New parameter |
-| ------------- | ------------- |
+| Old parameter | New parameter                   |
+| ------------- | ------------------------------- |
+|               | `--mitochondrial_sv_min_size`   |
+|               | `--mitorsaw_minimum_read_count` |
+|               | `--mitorsaw_minimum_maf`        |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -92,6 +116,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | Tool                           | Old version | New version |
 | ------------------------------ | ----------- | ----------- |
 | sentieon-cli/dnascope-longread | 1.5.2       | 1.6.2       |
+| hiphase                        | 1.4.0       | 1.6.0       |
+| echtvar/anno                   | 0.2.2       | 0.2.4       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

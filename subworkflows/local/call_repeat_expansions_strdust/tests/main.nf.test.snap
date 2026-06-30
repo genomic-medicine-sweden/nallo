@@ -4,10 +4,10 @@
             "c175df5f90cd8da09dc5ecdb4c75cdf4",
             "c03b8d167105a2e60cf5b73df61f17d0"
         ],
-        "timestamp": "2026-05-08T13:59:14.35356137",
+        "timestamp": "2026-05-27T10:48:34.896812563",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.02.0"
         }
     },
     "[bam, bai], fasta, fai, bed - stub": {
@@ -91,10 +91,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-05-08T13:59:22.935334329",
+        "timestamp": "2026-05-27T10:48:44.335484866",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.02.0"
         }
     }
 }

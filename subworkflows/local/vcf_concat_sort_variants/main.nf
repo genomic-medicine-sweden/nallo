@@ -18,6 +18,6 @@ workflow VCF_CONCAT_SORT_VARIANTS {
     )
 
     emit:
-    vcf      = BCFTOOLS_SORT.out.vcf                            // channel: [ val(meta), path(vcf) ]
-    index    = BCFTOOLS_SORT.out.tbi.mix(BCFTOOLS_SORT.out.csi) // channel: [ val(meta), path(tbi/csi) ]
+    vcf   = BCFTOOLS_SORT.out.vcf                            // channel: [ val(meta), path(vcf) ]
+    index = BCFTOOLS_SORT.out.tbi.mix(BCFTOOLS_SORT.out.csi) // channel: [ val(meta), path(tbi/csi) ]
 }

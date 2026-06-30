@@ -118,9 +118,9 @@ Less common options for the pipeline, typically set in a config file.
 | `monochrome_logs` | Do not use coloured log outputs. | `boolean` |  |  | True |
 | `multiqc_config` | Custom config file to supply to MultiQC. | `string` |  |  | True |
 | `multiqc_logo` | Custom logo file to supply to MultiQC. File name must also be set in the MultiQC config file | `string` |  |  | True |
-| `multiqc_methods_description` | Custom MultiQC yaml file containing HTML including a methods description. | `string` |  |  |  |
+| `multiqc_methods_description` | Custom MultiQC yaml file containing HTML including a methods description. | `string` |  |  |  |bcd63e7dc9025450aebbca7b859ba2dae1f5a3d3
 | `validate_params` | Boolean whether to validate parameters against the schema at runtime | `boolean` | True |  | True |
-| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8fff73a86ec5c9360ed8da35aac5b108b9c9ef78/ |  | True |
+| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/18b1ccc26292fa502be235a918bdc4e61c1ecb8a/ |  | True |
 | `trace_report_suffix` | Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss. | `string` |  |  | True |
 | `help` | Display the help message. | `['boolean', 'string']` |  |  |  |
 | `help_full` | Display the full detailed help message. | `boolean` |  |  |  |
@@ -152,7 +152,10 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `methbat_male_label` | Label used for male samples in methbat profile. | `string` | MALE |  |  |
 | `methbat_female_label` | Label used for female samples in methbat profile. | `string` | FEMALE |  |  |
 | `modkit_modified_bases` | Modkit modified bases, separated by space. E.g. '5mC 5hmC' | `string` | 5mC |  |  |
-| `mitochondrial_caller` | Which mitochondrial caller to use for mitochondrial variant calling (`deepvariant`) | `string` | deepvariant |  |  |
+| `mitochondrial_caller` | Which mitochondrial caller to use for mitochondrial variant calling | `string` | mitorsaw |  |  |
+| `mitorsaw_minimum_maf` | Minimum minor allele frequency (MAF) for mitorsaw variant calling. | `number` | 0.1 |  |  |
+| `mitorsaw_minimum_read_count` | Minimum read count to consider a heteroplasmic variant. | `integer` | 3 |  |  |
+| `mitochondrial_sv_min_size` | Minimum allele length difference (abs(strlen(REF)-strlen(ALT))) to classify a mitochondrial variant as an SV rather than a SNV/small indel. | `integer` | 50 |  |  |
 | `alignment_processes` | If alignment_processes is bigger than 1, input files will be split and aligned in parallel to reduce processing time. | `integer` | 8 |  |  |
 | `snv_calling_processes` | If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time. Must be `1` when `--snv_caller sentieon` is used. | `integer` | 13 |  |  |
 | `vep_cache_version` | VEP cache version | `integer` | 110 |  |  |

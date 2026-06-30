@@ -11,11 +11,11 @@ workflow ANNOTATE_CSQ_PLI {
     ch_variant_consequences // channel: [mandatory] [ val(meta), path(consequences) ]
 
     main:
-    CUSTOM_ADDMOSTSEVERECONSEQUENCE (ch_vcf, ch_variant_consequences)
+    CUSTOM_ADDMOSTSEVERECONSEQUENCE(ch_vcf, ch_variant_consequences)
 
-    CUSTOM_ADDMOSTSEVEREPLI (CUSTOM_ADDMOSTSEVERECONSEQUENCE.out.vcf)
+    CUSTOM_ADDMOSTSEVEREPLI(CUSTOM_ADDMOSTSEVERECONSEQUENCE.out.vcf)
 
-    TABIX_TABIX (CUSTOM_ADDMOSTSEVEREPLI.out.vcf)
+    TABIX_TABIX(CUSTOM_ADDMOSTSEVEREPLI.out.vcf)
 
     emit:
     vcf = CUSTOM_ADDMOSTSEVEREPLI.out.vcf // channel: [ val(meta), path(vcf) ]

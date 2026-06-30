@@ -148,6 +148,11 @@
                         "git_sha": "ff05d8eb10c1191d87119ff6cfcbbc8ef110afdf",
                         "installed_by": ["modules"]
                     },
+                    "echtvar/anno": {
+                        "branch": "master",
+                        "git_sha": "3ae65622c8c8e6ab8390a73dd75a698308a4971b",
+                        "installed_by": ["modules"]
+                    },
                     "ensemblvep/filtervep": {
                         "branch": "master",
                         "git_sha": "890fdcff71928fc1470d3e669d4c430c8c770297",
@@ -227,6 +232,11 @@
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/hificnv/hificnv.diff"
                     },
+                    "hiphase": {
+                        "branch": "master",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "installed_by": ["modules"]
+                    },
                     "longphase/haplotag": {
                         "branch": "master",
                         "git_sha": "b8d30a43f33aee3148b0e9e9f00587984a4ac195",
@@ -250,6 +260,11 @@
                     "minimap2/index": {
                         "branch": "master",
                         "git_sha": "14980f759266eec42dac401fcafeb83d6c957b41",
+                        "installed_by": ["modules"]
+                    },
+                    "mitorsaw/haplotype": {
+                        "branch": "master",
+                        "git_sha": "5576986983f7fcc592e0df1f9b2d2b87c313b05e",
                         "installed_by": ["modules"]
                     },
                     "modkit/bedmethyltobigwig": {

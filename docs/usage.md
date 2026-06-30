@@ -243,6 +243,24 @@ You can disable this behavior for both callers by setting `--create_maf_track` t
 
 Turned off with `--skip_sv_calling`.
 
+#### Call mitochondrial variants
+
+This subworkflow specifically calls mitochondrial variants. The resulting VCF file is then merged together with the VCF containing the nuclear variants.
+The mitochondrial caller can be selected with `--mitochondrial_caller`. Note that the mitorsaw [license](https://github.com/PacificBiosciences/mitorsaw/blob/main/LICENSE.md) doesn't generally allow usage of ONT data.
+
+| Caller      | Parameter value | Compatible data |
+| ----------- | --------------- | --------------- |
+| Mitorsaw    | `mitorsaw`      | Pacbio          |
+| Deepvariant | `deepvariant`   | Pacbio, ONT     |
+
+The following parameters can be used:
+
+| Parameter                     | Description                                                                                                                                 |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `mitorsaw_minimum_maf`        | Minimum minor allele frequency (MAF) for mitorsaw variant calling.                                                                          |
+| `mitorsaw_minimum_read_count` | Minimum read count to consider a heteroplasmic variant.                                                                                     |
+| `mitochondrial_sv_min_size`   | Minimum allele length difference (abs(strlen(REF)-strlen(ALT))) to classify a mitochondrial variant as an SV rather than a SNV/small indel. |
+
 #### Phasing
 
 This subworkflow phases variants and haplotags aligned BAM files, and such relies on the alignment, SNV calling subworkflows, but requires no additional files.

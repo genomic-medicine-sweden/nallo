@@ -11,7 +11,7 @@ workflow ANNOTATE_SVS {
     ch_vep_extra_files    // channel: [mandatory] [ path(files) ]
 
     main:
-    ch_sv_dbs
+    ch_svdb_in = ch_sv_dbs
         .multiMap { filename, in_freq_info_key, in_allele_count_info_key, out_freq_info_key, out_allele_count_info_key ->
             vcf_dbs: filename
             in_frqs: in_freq_info_key
@@ -19,7 +19,6 @@ workflow ANNOTATE_SVS {
             out_frqs: out_freq_info_key
             out_occs: out_allele_count_info_key
         }
-        .set { ch_svdb_in }
 
     // Annotate with SVDB VCF "databases"
     SVDB_QUERY(

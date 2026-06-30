@@ -9,10 +9,11 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path   =  'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8fff73a86ec5c9360ed8da35aac5b108b9c9ef78/'
+                pipelines_testdata_base_path   =  'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/bcd63e7dc9025450aebbca7b859ba2dae1f5a3d3/'
                 input                          = "$projectDir/assets/samplesheet_multisample_ont_bam.csv"
                 outdir                         = "$outputDir"
                 preset                         = 'ONT_R10'
+                mitochondrial_caller           = 'deepvariant'
                 alignment_processes            = 1
                 hifiasm_mode                   = 'hifi-only'
                 snv_calling_processes          = 1

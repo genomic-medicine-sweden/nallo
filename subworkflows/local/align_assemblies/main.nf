@@ -37,11 +37,10 @@ workflow ALIGN_ASSEMBLIES {
         SAMTOOLS_VIEW.out.bam
     )
 
-    TAGBAM.out.bam
+    ch_assemblies_per_sample = TAGBAM.out.bam
         .map { meta, bam -> [meta - meta.subMap('haplotype'), bam] }
         .groupTuple(size: 2)
         .map { meta, bams -> [meta, bams, []] }
-        .set { ch_assemblies_per_sample }
 
     SAMTOOLS_MERGE(
         ch_assemblies_per_sample,
@@ -57,9 +56,8 @@ workflow ALIGN_ASSEMBLIES {
     }
 
     emit:
-    bam  = SAMTOOLS_MERGE.out.bam // channel: [ val(meta), path(bam) ]
-    bai  = SAMTOOLS_MERGE.out.index // channel: [ val(meta), path(bai) ]
+    bam  = SAMTOOLS_MERGE.out.bam                                    // channel: [ val(meta), path(bam) ]
+    bai  = SAMTOOLS_MERGE.out.index                                  // channel: [ val(meta), path(bai) ]
     cram = cram_output ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
     crai = cram_output ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
-
 }
