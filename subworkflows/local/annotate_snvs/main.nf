@@ -24,7 +24,7 @@ workflow ANNOTATE_SNVS {
     if (annotate_echtvar) {
         ECHTVAR_ANNO(
             ch_vcf,
-            ch_echtvar_databases,
+            ch_echtvar_databases.map { dbs -> [[:], dbs] },
             'bcf.gz'
         )
     }
