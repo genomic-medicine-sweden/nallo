@@ -197,7 +197,7 @@ workflow PIPELINE_INITIALISATION {
         methylation           : ["mapping", "snv_calling"],
         methylation_annotation: ["mapping", "snv_calling", "methylation"],
         gens                  : ["mapping", "snv_calling"],
-        portello              : ["assembly"],
+        portello              : ["mapping", "assembly"],
     ]
 
 

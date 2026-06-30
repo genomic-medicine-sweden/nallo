@@ -113,6 +113,7 @@ nextflow_pipeline {
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
                 skip_alignment               = true
+                skip_portello                = true
                 skip_annotate_paralogs       = true
                 skip_call_paralogs           = true
                 skip_chromograph             = true
