@@ -21,7 +21,7 @@ jobs:
 
       - name: Clone nf-dev-guidelines
         run: |
-          git clone --depth 1 --branch initial-concept \
+          git clone --depth 1 --branch main \
             https://github.com/genomic-medicine-sweden/nf-dev-guidelines.git \
             /tmp/nf-dev-guidelines
 
