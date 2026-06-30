@@ -1,13 +1,13 @@
 {
     "[bam, bai], fasta, fai, bed": {
         "content": [
-            "c175df5f90cd8da09dc5ecdb4c75cdf4",
-            "c03b8d167105a2e60cf5b73df61f17d0"
+            "60e47a5cb2dd72efeca7fa6756218ab5",
+            "baaf8d30d259672e76dca2e5416e7c70"
         ],
-        "timestamp": "2026-05-27T10:48:34.896812563",
+        "timestamp": "2026-06-30T17:57:53.212066212",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.03.4"
         }
     },
     "[bam, bai], fasta, fai, bed - stub": {

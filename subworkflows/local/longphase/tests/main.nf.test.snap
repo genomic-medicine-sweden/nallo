@@ -25,15 +25,15 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_haplotagged.bam:md5,7fe96c976410f3edc4102522346f90ae",
-                    "HG002_haplotagged.bam.bai:md5,7464aefd3e24613a818ed36b12550876"
+                    "HG002_haplotagged.bam:md5,0a2176325121a6d052543ca4e957e98f",
+                    "HG002_haplotagged.bam.bai:md5,6494c94109321ebde1979b0d4aecf816"
                 ]
             ]
         ],
-        "timestamp": "2026-05-27T11:05:18.844281739",
+        "timestamp": "2026-06-30T18:01:17.937480564",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.03.4"
         }
     },
     "2 samples - SNVs + SVs - stub": {
@@ -267,23 +267,23 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_haplotagged.bam:md5,bb803caf0bcdcd29e4ac01bcaf1b33d5",
-                    "HG002_haplotagged.bam.bai:md5,bd6edd181a0bedd063402ee0786d713c"
+                    "HG002_haplotagged.bam:md5,45c31932586015a33c47a17d72c9695f",
+                    "HG002_haplotagged.bam.bai:md5,17d4db856db373cb6b25f2c1f9b59c70"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_haplotagged.bam:md5,36a0aa5f4edc69f7c485ca8fcdf65a0b",
-                    "HG003_haplotagged.bam.bai:md5,80b1966880f2de438df3f279f68b53fc"
+                    "HG003_haplotagged.bam:md5,72a7c3d7fecf8c21e199a89aedfe0cea",
+                    "HG003_haplotagged.bam.bai:md5,04a355ce108ac6182be4373dfc6c1600"
                 ]
             ]
         ],
-        "timestamp": "2026-05-27T13:39:59.580824743",
+        "timestamp": "2026-06-30T18:01:42.99714475",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.03.4"
         }
     },
     "2 samples - SNVs only": {
@@ -317,16 +317,16 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_haplotagged.bam:md5,c3a6b0740eecfb80b332ef3a1f727cb8",
-                        "HG002_haplotagged.bam.bai:md5,5a65a63d11fe02b2dfc0812a152fb8c1"
+                        "HG002_haplotagged.bam:md5,4a0cd34d35e2e4738c4173565c7bc78c",
+                        "HG002_haplotagged.bam.bai:md5,25a175e68e7bd350f2bcbeb49b233b39"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003_haplotagged.bam:md5,64f9df2ada5db754c932cd57708b1a6c",
-                        "HG003_haplotagged.bam.bai:md5,993ff850dcc7ba8ab05c4209cd7eb295"
+                        "HG003_haplotagged.bam:md5,5f40efa3cf4b617041ad7e2133ef2757",
+                        "HG003_haplotagged.bam.bai:md5,981447a94b4024c48b32de5bf3c60c4b"
                     ]
                 ],
                 "haplotagged_bam_bai": [
@@ -335,16 +335,16 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_haplotagged.bam:md5,c3a6b0740eecfb80b332ef3a1f727cb8",
-                        "HG002_haplotagged.bam.bai:md5,5a65a63d11fe02b2dfc0812a152fb8c1"
+                        "HG002_haplotagged.bam:md5,4a0cd34d35e2e4738c4173565c7bc78c",
+                        "HG002_haplotagged.bam.bai:md5,25a175e68e7bd350f2bcbeb49b233b39"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003_haplotagged.bam:md5,64f9df2ada5db754c932cd57708b1a6c",
-                        "HG003_haplotagged.bam.bai:md5,993ff850dcc7ba8ab05c4209cd7eb295"
+                        "HG003_haplotagged.bam:md5,5f40efa3cf4b617041ad7e2133ef2757",
+                        "HG003_haplotagged.bam.bai:md5,981447a94b4024c48b32de5bf3c60c4b"
                     ]
                 ],
                 "phased_family_snvs": [
@@ -371,10 +371,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-05-27T11:05:03.586433185",
+        "timestamp": "2026-06-30T18:00:54.294304552",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.03.4"
         }
     },
     "1 sample - SNVs only - stub": {
@@ -483,8 +483,8 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_haplotagged.bam:md5,8899c18bb8bf53401fb12861048f38d2",
-                        "HG002_haplotagged.bam.bai:md5,31b17d6315a610310281cf9a161c7665"
+                        "HG002_haplotagged.bam:md5,15195008b605550f7fe0ee5d1c71e744",
+                        "HG002_haplotagged.bam.bai:md5,4ab344915f9117c07d1e5e7d56cb85f8"
                     ]
                 ],
                 "haplotagged_bam_bai": [
@@ -493,8 +493,8 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_haplotagged.bam:md5,8899c18bb8bf53401fb12861048f38d2",
-                        "HG002_haplotagged.bam.bai:md5,31b17d6315a610310281cf9a161c7665"
+                        "HG002_haplotagged.bam:md5,15195008b605550f7fe0ee5d1c71e744",
+                        "HG002_haplotagged.bam.bai:md5,4ab344915f9117c07d1e5e7d56cb85f8"
                     ]
                 ],
                 "phased_family_snvs": [
@@ -521,10 +521,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-05-27T11:04:53.956244275",
+        "timestamp": "2026-06-30T18:00:41.428493067",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.03.4"
         }
     },
     "2 samples - SNVs only - stub": {
