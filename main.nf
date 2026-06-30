@@ -246,6 +246,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     aligned_assemblies_bam              = NALLO.out.aligned_assemblies_bam // channel: [ val(meta), path(bam) ]
     aligned_assemblies_crai             = NALLO.out.aligned_assemblies_crai // channel: [ val(meta), path(crai) ]
     aligned_assemblies_cram             = NALLO.out.aligned_assemblies_cram // channel: [ val(meta), path(cram) ]
+    aligned_assemblies_remapped_bam     = NALLO.out.aligned_assemblies_remapped_bam // channel: [ val(meta), path(bam) ]
+    aligned_assemblies_remapped_bai     = NALLO.out.aligned_assemblies_remapped_bai // channel: [ val(meta), path(bai) ]
     aligned_haplotagged_reads_bai       = NALLO.out.aligned_haplotagged_reads_bai // channel: [ val(meta), path(bai) ]
     aligned_haplotagged_reads_bam       = NALLO.out.aligned_haplotagged_reads_bam // channel: [ val(meta), path(bam) ]
     aligned_haplotagged_reads_crai      = NALLO.out.aligned_haplotagged_reads_crai // channel: [ val(meta), path(crai) ]
@@ -550,7 +552,10 @@ workflow {
     //
     // WORKFLOW OUTPUTS: Group files by publish directory
     //
-    ch_aligned_assemblies_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_bai)
+    ch_aligned_assemblies_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_bam
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_bai)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_remapped_bam)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_remapped_bai)
 
     ch_aligned_assemblies_cram = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_cram.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_crai)
 
