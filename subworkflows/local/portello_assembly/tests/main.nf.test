@@ -3,6 +3,7 @@ nextflow_workflow {
     name "Test Workflow PORTELLO_ASSEMBLY"
     script "../main.nf"
     workflow "PORTELLO_ASSEMBLY"
+    config "./nextflow.config"
 
     setup {
         run("PREPARE_REFERENCES") {
@@ -14,12 +15,12 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
                 input[1] = []
-                input[2] = [
+                input[2] = channel.of([
                     [ id: 'vep_cache' ],
                     file(params.pipelines_testdata_base_path + 'reference/vep_cache_test_data.tar.gz', checkIfExists:true)
-                ]
+                ])
                 input[3] = true
-                input[4] = true
+                input[4] = false
                 """
             }
         }
@@ -39,18 +40,17 @@ nextflow_workflow {
             }
         }
 
-        run("MINIMAP2_ALIGN") {
-            script "../../../../modules/nf-core/minimap2/align/main.nf"
+        run("ALIGN_ASSEMBLIES") {
+            script "../../align_assemblies/main.nf"
             process {
                 """
                 input[0] = GENOME_ASSEMBLY.out.assembled_haplotypes
-                                .map { meta, bam -> [meta - meta.subMap('haplotype'), bam] }
-                                .groupTuple(size: 2)
-                input[1] = PREPARE_REFERENCES.out.mmi.collect()
-                input[2] = true
-                input[3] = 'bai'
-                input[4] = false
-                input[5] = false
+                input[1] = channel.of([
+                    [ id:'hg38' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                ])
+                input[2] = PREPARE_REFERENCES.out.fai
+                input[3] = false
                 """
             }
         }
@@ -63,18 +63,11 @@ nextflow_workflow {
                 input[0] = GENOME_ASSEMBLY.out.assembled_haplotypes
                 input[1] = Channel.of([
                     [ id: 'HG002', sex: 1 ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
                 ])
-                input[2] = Channel.of([
-                    [ id: 'HG002', sex: 1 ],
-                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/pacbio/bam/test_hifi_aligned_assembly.bam'),
-                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/pacbio/bam/test_hifi_aligned_assembly.bam.bai'),
-                ])
-                input[3] = channel.of([
-                    [ id:'hg38' ],
-                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
-                ])
+                input[2] = ALIGN_ASSEMBLIES.out.bam
+                                .join(ALIGN_ASSEMBLIES.out.bai, failOnMismatch: true, failOnDuplicate: true)
+                input[3] = PREPARE_REFERENCES.out.fasta
                 input[4] = PREPARE_REFERENCES.out.fai
                 """
             }
@@ -83,44 +76,30 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                //{ assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                    bam(workflow.out.bam.get(0).get(1)).getReadsMD5(),
+                    file(workflow.out.bai.get(0).get(1)).name
+                ).match() }
             )
         }
     }
-/*
-    test("prepare_gens_inputs - stub") {
+
+    test("1 sample - stub") {
 
         options "-stub"
 
         when {
             workflow {
                 """
-                input[0] = Channel.of([
-                    [ id: 'HG002', sex: 1 ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
-                ])
+                input[0] = GENOME_ASSEMBLY.out.assembled_haplotypes
                 input[1] = Channel.of([
                     [ id: 'HG002', sex: 1 ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant.g.vcf.gz.tbi', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
                 ])
-                input[2] = Channel.of([
-                    [ id: 'baf_positions' ],
-                    file(params.pipelines_testdata_base_path + "reference/gnomad_0.05_subset.txt")
-                ]).collect()
-                input[3] = Channel.of([
-                    [ id: 'pon_female' ],
-                    file(params.pipelines_testdata_base_path + "reference/pon.hdf5", checkIfExists: true)
-                ]).collect()
-                input[4] = Channel.of([
-                    [ id: 'pon_male' ],
-                    file(params.pipelines_testdata_base_path + "reference/pon.hdf5", checkIfExists: true)
-                ]).collect()
-                input[5] = Channel.of([
-                    [ id: 'mosdepth_bins' ],
-                    file(params.pipelines_testdata_base_path + "reference/pon_intervals.bed", checkIfExists: true)
-                ]).collect()
+                input[2] = ALIGN_ASSEMBLIES.out.bam
+                                .join(ALIGN_ASSEMBLIES.out.bai, failOnMismatch: true, failOnDuplicate: true)
+                input[3] = PREPARE_REFERENCES.out.fasta
+                input[4] = PREPARE_REFERENCES.out.fai
                 """
             }
         }
@@ -131,5 +110,5 @@ nextflow_workflow {
                 { assert snapshot(workflow.out).match() }
             )
         }
-    }*/
+    }
 }
