@@ -175,9 +175,6 @@
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283"
                 },
-                "MINIMAP2_ASSEMBLIES": {
-                    "minimap2": "2.29-r1283"
-                },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
                 },
@@ -254,6 +251,9 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_MERGE_UNFILTERED": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_SORT": {
@@ -348,8 +348,6 @@
                 "assembly/sample/HG002_Revio",
                 "assembly/sample/HG002_Revio/HG002_Revio.bai",
                 "assembly/sample/HG002_Revio/HG002_Revio.bam",
-                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam",
-                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam.bai",
                 "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam",
                 "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam.bai",
                 "assembly/stats",
@@ -550,7 +548,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-06-25T15:52:54.198841413",
+        "timestamp": "2026-07-01T12:56:21.174893089",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
