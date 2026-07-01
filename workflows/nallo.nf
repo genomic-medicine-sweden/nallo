@@ -275,19 +275,8 @@ workflow NALLO {
             cram_output,
         )
 
-        MINIMAP2_ASSEMBLIES(
-            GENOME_ASSEMBLY.out.assembled_haplotypes
-                .map { meta, bam -> [meta - meta.subMap('haplotype'), bam] }
-                .groupTuple(size: 2),
-            PREPARE_REFERENCES.out.mmi.collect(),
-            true,
-            'bai',
-            false,
-            false
-        )
-
-        ch_assembly_bam_bai_updated_meta = MINIMAP2_ASSEMBLIES.out.bam
-            .join(MINIMAP2_ASSEMBLIES.out.index, failOnMismatch: true, failOnDuplicate: true)
+        ch_assembly_bam_bai_updated_meta = ALIGN_ASSEMBLIES.out.bam
+            .join(ALIGN_ASSEMBLIES.out.bai, failOnMismatch: true, failOnDuplicate: true)
 
     }
 
@@ -400,8 +389,8 @@ workflow NALLO {
                 .set { ch_updated_sample_meta }
 
             if (!val_skip_portello) {
-                MINIMAP2_ASSEMBLIES.out.bam
-                    .join(MINIMAP2_ASSEMBLIES.out.index, failOnMismatch: true, failOnDuplicate: true)
+                ALIGN_ASSEMBLIES.out.bam
+                    .join(ALIGN_ASSEMBLIES.out.bai, failOnMismatch: true, failOnDuplicate: true)
                     .map { meta, bam, bai -> [[id: meta.id], meta, bam, bai] }
                     .join(ch_updated_sample_meta, failOnMismatch: true, failOnDuplicate: true)
                     .map { _sample_key, _old_meta, bam, bai, updated_meta -> [updated_meta, bam, bai] }
@@ -1187,8 +1176,8 @@ workflow NALLO {
     )
 
     emit:
-    aligned_assemblies_bai              = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.bai // channel: [ val(meta), path(bai) ]
-    aligned_assemblies_bam              = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.bam // channel: [ val(meta), path(bam) ]
+    aligned_assemblies_bai              = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.filtered_bai // channel: [ val(meta), path(bai) ]
+    aligned_assemblies_bam              = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.filtered_bam // channel: [ val(meta), path(bam) ]
     aligned_assemblies_crai             = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.crai // channel: [ val(meta), path(crai) ]
     aligned_assemblies_cram             = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.cram // channel: [ val(meta), path(cram) ]
     aligned_assemblies_remapped_bam     = val_skip_portello ? channel.empty() : PORTELLO_ASSEMBLY.out.bam // channel: [ val(meta), path(bam) ]

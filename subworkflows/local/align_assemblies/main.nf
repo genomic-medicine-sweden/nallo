@@ -1,9 +1,10 @@
-include { MINIMAP2_ALIGN   } from '../../../modules/nf-core/minimap2/align/main'
-include { MINIMAP2_INDEX   } from '../../../modules/nf-core/minimap2/index/main'
-include { SAMTOOLS_MERGE   } from '../../../modules/nf-core/samtools/merge/main'
-include { SAMTOOLS_VIEW    } from '../../../modules/nf-core/samtools/view/main'
-include { SAMTOOLS_CONVERT } from '../../../modules/nf-core/samtools/convert/main'
-include { TAGBAM           } from '../../../modules/nf-core/tagbam/main'
+include { MINIMAP2_ALIGN                                } from '../../../modules/nf-core/minimap2/align/main'
+include { MINIMAP2_INDEX                                } from '../../../modules/nf-core/minimap2/index/main'
+include { SAMTOOLS_MERGE                                } from '../../../modules/nf-core/samtools/merge/main'
+include { SAMTOOLS_MERGE as SAMTOOLS_MERGE_UNFILTERED   } from '../../../modules/nf-core/samtools/merge/main'
+include { SAMTOOLS_VIEW                                 } from '../../../modules/nf-core/samtools/view/main'
+include { SAMTOOLS_CONVERT                              } from '../../../modules/nf-core/samtools/convert/main'
+include { TAGBAM                                        } from '../../../modules/nf-core/tagbam/main'
 
 workflow ALIGN_ASSEMBLIES {
     take:
@@ -24,6 +25,16 @@ workflow ALIGN_ASSEMBLIES {
         'bai',
         false,
         false,
+    )
+
+    ch_assemblies_per_sample_unfiltered = MINIMAP2_ALIGN.out.bam
+        .map { meta, bam -> [meta - meta.subMap('haplotype'), bam] }
+        .groupTuple(size: 2)
+        .map { meta, bams -> [meta, bams, []] }
+
+    SAMTOOLS_MERGE_UNFILTERED(
+        ch_assemblies_per_sample_unfiltered,
+        [[], [], [], []],
     )
 
     SAMTOOLS_VIEW(
@@ -56,8 +67,10 @@ workflow ALIGN_ASSEMBLIES {
     }
 
     emit:
-    bam  = SAMTOOLS_MERGE.out.bam                                    // channel: [ val(meta), path(bam) ]
-    bai  = SAMTOOLS_MERGE.out.index                                  // channel: [ val(meta), path(bai) ]
+    bam  = SAMTOOLS_MERGE_UNFILTERED.out.bam                                    // channel: [ val(meta), path(bam) ]
+    bai  = SAMTOOLS_MERGE_UNFILTERED.out.index                                  // channel: [ val(meta), path(bai) ]
+    filtered_bam = SAMTOOLS_MERGE.out.bam                            // channel: [ val(meta), path(bam) ]
+    filtered_bai = SAMTOOLS_MERGE.out.index                          // channel: [ val(meta), path
     cram = cram_output ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
     crai = cram_output ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
 }

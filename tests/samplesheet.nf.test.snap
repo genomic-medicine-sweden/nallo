@@ -175,9 +175,6 @@
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283"
                 },
-                "MINIMAP2_ASSEMBLIES": {
-                    "minimap2": "2.29-r1283"
-                },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
                 },
@@ -260,6 +257,9 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_MERGE_UNFILTERED": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_SORT": {
@@ -358,8 +358,6 @@
                 "assembly",
                 "assembly/sample",
                 "assembly/sample/HG002_Revio",
-                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam",
-                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam.bai",
                 "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.cram",
                 "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.cram.crai",
                 "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam",
@@ -823,10 +821,6 @@
             ],
             [
                 [
-                    "HG002_Revio_aligned_assembly.bam",
-                    "816cbf728285f9ffa314f0758fc4d204"
-                ],
-                [
                     "HG002_Revio_remapped_assembly.bam",
                     "47ba27c45748437d599a24b0d310c86d"
                 ]
@@ -887,7 +881,7 @@
                 
             ]
         ],
-        "timestamp": "2026-06-26T15:00:21.00734802",
+        "timestamp": "2026-07-01T10:48:51.462404903",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"

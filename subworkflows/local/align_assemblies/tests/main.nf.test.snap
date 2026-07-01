@@ -19,10 +19,26 @@
                     ]
                 ],
                 "2": [
-
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "3": [
-
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "4": [
+                    
+                ],
+                "5": [
+                    
                 ],
                 "bai": [
                     [
@@ -41,28 +57,44 @@
                     ]
                 ],
                 "crai": [
-
+                    
                 ],
                 "cram": [
-
+                    
+                ],
+                "filtered_bai": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "filtered_bam": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ]
             }
         ],
-        "timestamp": "2026-03-31T15:08:16.168735646",
+        "timestamp": "2026-07-01T11:04:34.19242328",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.03.4"
         }
     },
     "bam": {
         "content": [
             "43bb6ef7e9eccece743204535a3abbd6",
-            "hg38.bam.bai"
+            "hg38_filtered.bam.bai"
         ],
-        "timestamp": "2026-03-23T16:40:14.667118455",
+        "timestamp": "2026-07-01T11:06:43.0282699",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.4"
         }
     }
 }
