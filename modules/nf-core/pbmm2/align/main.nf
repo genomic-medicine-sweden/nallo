@@ -4,12 +4,9 @@ process PBMM2_ALIGN {
 
 
     conda "${moduleDir}/environment.yml"
-    /*container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/pbmm2:1.14.99--h9ee0642_0':
-        'biocontainers/pbmm2:1.14.99--h9ee0642_0' }"*/
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/d7/d7f45bf94fa59ea4a47e0a5d8d67420f687dcbcc342c5337ae7961a97082cb57/data':
-        'community.wave.seqera.io/library/pbmm2:26.1.99--118eceb01c386181' }"
+    container "${ workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container ?
+        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/86/8678f70f464a6afd39f737c492a6e7d627ee7bb8a9cf54fe5008b564834084b5/data':
+        'community.wave.seqera.io/library/pbmm2:26.2.0--37598eea709c00f6' }"
 
     input:
     tuple val(meta), path(bam)
@@ -17,7 +14,7 @@ process PBMM2_ALIGN {
 
     output:
     tuple val(meta), path("*.bam"), emit: bam
-    path "versions.yml"           , emit: versions
+    tuple val("${task.process}"), val('pbmm2'), eval("pbmm2 --version  | sed '1s/pbmm2 //;q'"), topic: versions, emit: versions_pbmm2
 
     when:
     task.ext.when == null || task.ext.when
@@ -33,21 +30,11 @@ process PBMM2_ALIGN {
         $bam \\
         ${prefix}.bam \\
         --num-threads ${task.cpus}
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        pbmm2: \$(pbmm2 --version |& sed '1!d ; s/pbmm2 //')
-    END_VERSIONS
     """
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     touch ${prefix}.bam
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        pbmm2: \$(pbmm2 --version |& sed '1!d ; s/pbmm2 //')
-    END_VERSIONS
     """
 }

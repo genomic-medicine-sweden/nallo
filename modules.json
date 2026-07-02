@@ -314,7 +314,7 @@
                     },
                     "pbmm2/align": {
                         "branch": "master",
-                        "git_sha": "f84336b7fa91a65aa61d215b8c109fbb8e4b4ac6",
+                        "git_sha": "4c0a7271c05babd2226ce94c502d75a73228aa06",
                         "installed_by": ["modules"]
                     },
                     "peddy": {
