@@ -7,11 +7,12 @@ process DNASCOPE_LONGREAD_CALL_SNVS {
     container "docker.io/sentieon/sentieon-cli:1.6.2-0"
 
     input:
-    tuple val(meta), path(bam), path(bai), path(diploid_intervals_bed), path(haploid_intervals_bed)
+    tuple val(meta),  path(bam), path(bai), path(diploid_intervals_bed), path(haploid_intervals_bed)
     tuple val(meta2), path(fasta)
     tuple val(meta3), path(fai)
     tuple val(meta4), path(model_bundle)
-    val tech
+    tuple val(meta5), path(population_vcf)
+    val(tech)
 
     output:
     tuple val(meta), path("${prefix}.vcf.gz"), emit: vcf
@@ -28,23 +29,24 @@ process DNASCOPE_LONGREAD_CALL_SNVS {
     prefix = task.ext.prefix ?: "${meta.id}"
 
     def haploid_bed_arg = haploid_intervals_bed ? "--haploid_bed ${haploid_intervals_bed}" : ""
-
+    def population_vcf_arg = population_vcf ? "--pop_vcf ${population_vcf}" : ""
     """
     sentieon-cli dnascope-longread \\
-        -t ${task.cpus} \\
-        --tech ${tech} \\
-        -r ${fasta} \\
-        -i ${bam} \\
-        -m ${model_bundle} \\
-        --bed ${diploid_intervals_bed} \\
-        ${haploid_bed_arg} \\
-        --gvcf \\
-        --skip_mosdepth \\
-        --skip_cnv \\
-        --skip_svs \\
-    ${prefix}.vcf.gz
-
-   """
+         -t ${task.cpus} \\
+         --tech ${tech} \\
+         -r ${fasta} \\
+         -i ${bam} \\
+         -m ${model_bundle} \\
+         --bed ${diploid_intervals_bed} \\
+         ${haploid_bed_arg} \\
+         ${population_vcf_arg} \\
+         --gvcf \\
+         --skip_mosdepth \\
+         --skip_cnv \\
+         --skip_svs \\
+     ${prefix}.vcf.gz
+    
+    """
 
     stub:
     prefix = task.ext.prefix ?: "${meta.id}"
