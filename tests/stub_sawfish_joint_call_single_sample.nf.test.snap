@@ -89,6 +89,9 @@
                 "MOSDEPTH": {
                     "mosdepth": "0.3.11"
                 },
+                "PBMM2_ALIGN": {
+                    "pbmm2": "26.2.0"
+                },
                 "PORTELLO": {
                     "portello": "0.7.0"
                 },
@@ -250,7 +253,7 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-07-01T12:56:54.911458792",
+        "timestamp": "2026-07-02T15:05:43.769937996",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"

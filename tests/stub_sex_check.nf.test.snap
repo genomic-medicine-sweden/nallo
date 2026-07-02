@@ -58,6 +58,9 @@
                 "PARAPHRASE": {
                     "paraphrase": "0.2.0"
                 },
+                "PBMM2_ALIGN": {
+                    "pbmm2": "26.2.0"
+                },
                 "PORTELLO": {
                     "portello": "0.7.0"
                 },
@@ -175,7 +178,7 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
-        "timestamp": "2026-07-01T12:57:25.601040271",
+        "timestamp": "2026-07-02T15:06:13.895295492",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"

@@ -201,6 +201,9 @@
                 "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
                     "pbcpgtools": "3.0.0"
                 },
+                "PBMM2_ALIGN": {
+                    "pbmm2": "26.2.0"
+                },
                 "PEDDY": {
                     "peddy": "0.4.8"
                 },
@@ -548,7 +551,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-07-01T12:56:21.174893089",
+        "timestamp": "2026-07-02T15:05:02.745554525",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"

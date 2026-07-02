@@ -201,6 +201,9 @@
                 "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
                     "pbcpgtools": "3.0.0"
                 },
+                "PBMM2_ALIGN": {
+                    "pbmm2": "26.2.0"
+                },
                 "PEDDY": {
                     "peddy": "0.4.8"
                 },
@@ -881,7 +884,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-01T10:48:51.462404903",
+        "timestamp": "2026-07-02T14:51:42.329859883",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
