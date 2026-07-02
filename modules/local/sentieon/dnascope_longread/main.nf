@@ -11,6 +11,7 @@ process DNASCOPE_LONGREAD_CALL_SNVS {
    tuple val(meta2), path(fasta)
    tuple val(meta3), path(fai)
    tuple val(meta4), path(model_bundle)
+   tuple val(meta5), path(population_vcf)
    val(tech)
 
    output:
@@ -28,7 +29,7 @@ process DNASCOPE_LONGREAD_CALL_SNVS {
    prefix = task.ext.prefix ?: "${meta.id}"
 
    def haploid_bed_arg = haploid_intervals_bed ? "--haploid_bed ${haploid_intervals_bed}" : ""
-
+   def population_vcf_arg = population_vcf ? "--pop_vcf ${population_vcf}" : ""
    """
    sentieon-cli dnascope-longread \\
         -t ${task.cpus} \\
@@ -38,6 +39,7 @@ process DNASCOPE_LONGREAD_CALL_SNVS {
         -m ${model_bundle} \\
         --bed ${diploid_intervals_bed} \\
         ${haploid_bed_arg} \\
+        ${population_vcf_arg} \\
         --gvcf \\
         --skip_mosdepth \\
         --skip_cnv \\
