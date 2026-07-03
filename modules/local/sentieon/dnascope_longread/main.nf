@@ -6,8 +6,6 @@ process DNASCOPE_LONGREAD_CALL_SNVS {
 
    container "docker.io/clinicalgenomicslund/dnascope-longread:1.5.2"
 
-   secret 'SENTIEON_LICENSE'
-
    input:
    tuple val(meta),  path(bam), path(bai), path(diploid_intervals_bed), path(haploid_intervals_bed)
    tuple val(meta2), path(fasta)
