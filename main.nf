@@ -131,6 +131,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_vep_cache
     val_vep_cache_version
     ch_sentieon_population_vcf
+    ch_sentieon_population_tbi
 
     main:
 
@@ -236,7 +237,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_sv_call_regions,
         val_vep_cache,
         val_vep_cache_version,
-        ch_sentieon_population_vcf
+        ch_sentieon_population_vcf,
+        ch_sentieon_population_tbi
     )
 
     emit:
@@ -421,7 +423,8 @@ workflow {
         params.sv_call_regions,
         params.vep_cache,
         params.vep_cache_version,
-        createReferenceChannelFromPath(params.sentieon_population_vcf, channel.value([[], []]))
+        createReferenceChannelFromPath(params.sentieon_population_vcf, channel.value([[], []])),
+        createReferenceChannelFromPath(params.sentieon_population_tbi, channel.value([[], []]))
     )
     //
     // SUBWORKFLOW: Run completion tasks

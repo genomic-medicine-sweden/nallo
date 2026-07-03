@@ -12,6 +12,7 @@ process DNASCOPE_LONGREAD_CALL_SNVS {
    tuple val(meta3), path(fai)
    tuple val(meta4), path(model_bundle)
    tuple val(meta5), path(population_vcf)
+   tuple val(meta6), path(population_vcf_tbi)
    val(tech)
 
    output:

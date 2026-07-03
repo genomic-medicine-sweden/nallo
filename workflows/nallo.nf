@@ -175,6 +175,7 @@ workflow NALLO {
     val_vep_cache
     val_vep_cache_version
     ch_sentieon_population_vcf
+    ch_sentieon_population_tbi
 
     main:
     ch_multiqc_files = channel.empty()
@@ -469,6 +470,7 @@ workflow NALLO {
             val_snv_caller,
             val_sentieon_tech,
             ch_sentieon_population_vcf,
+            ch_sentieon_population_tbi,
         )
 
         // Group GVCFs per region and family (one region with all samples)
