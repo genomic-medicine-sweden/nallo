@@ -20,7 +20,8 @@ workflow CALL_SNVS {
     variant_caller // string: which variant caller to use, e.g. "deepvariant"
     sentieon_tech // string: which sequencing tech produced the reads (sentieon)
     ch_sentieon_population_vcf
-    
+    ch_sentieon_population_tbi
+
     main:
     if (variant_caller.equals("deepvariant")) {
 
@@ -97,7 +98,8 @@ workflow CALL_SNVS {
             ch_fai,
             ch_sentieon_model_bundle,
             sentieon_tech,
-            ch_sentieon_population_vcf
+            ch_sentieon_population_vcf,
+            ch_sentieon_population_tbi
         )
 
         // Sentieon produces mixed ploidy GTs, which crashes downstream tools
