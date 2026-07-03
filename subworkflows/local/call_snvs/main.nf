@@ -110,9 +110,9 @@ workflow CALL_SNVS {
             ch_fasta,
             ch_fai,
             ch_sentieon_model_bundle,
-            sentieon_tech,
             ch_sentieon_population_vcf,
-            ch_sentieon_population_tbi
+            ch_sentieon_population_tbi,
+            sentieon_tech,
         )
 
         // Sentieon produces mixed ploidy GTs, which crashes downstream tools
