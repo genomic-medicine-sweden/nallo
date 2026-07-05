@@ -212,10 +212,10 @@
                     "csvtk": "0.31.0"
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
-                    "deepvariant": null
+                    "deepvariant": "1.10.0"
                 },
                 "DEEPVARIANT_VCFSTATSREPORT": {
-                    "deepvariant": null
+                    "deepvariant": "1.10.0"
                 },
                 "GATK4_DENOISEREADCOUNTS": {
                     "gatk4": "4.6.2.0"
