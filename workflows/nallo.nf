@@ -158,6 +158,7 @@ workflow NALLO {
     val_skip_qc
     val_skip_rank_variants
     val_skip_repeat_annotation
+    val_skip_mitochondrial_calling
     val_skip_sambamba_depth
     val_skip_sex_check
     val_skip_snv_annotation
@@ -447,28 +448,32 @@ workflow NALLO {
         ch_mitochondrial_bed = SCATTER_GENOME.out.bed_mitochondrial_intervals
             .map { meta, bed, _num_intervals -> [meta, bed] }
 
-        CALL_MITOCHONDRIAL_VARIANTS(
-            ch_bam_bai,
-            ch_fasta,
-            ch_fai,
-            ch_par,
-            ch_mitochondrial_bed,
-            val_mitochondrial_caller,
-        )
-
-        /*
-         * The meta.caller is needed for GVCF_GLNEXUS_NORM_VARIANTS workflow to process the VCFs differently.
-         * the number of intervals is used in groupKey downstream, num_intervals should be the same in the nuclear and mitochondrial channels.
-         */
         def ch_num_intervals = ch_bed_intervals.map { _meta, _bed, num_intervals -> num_intervals }.first()
 
-        ch_mitochondrial = CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_vcf
-            .join(CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_tbi, failOnMismatch: true, failOnDuplicate: true)
-            .combine(ch_num_intervals)
-            .multiMap { meta, vcf, tbi, num_intervals ->
-                vcf: [meta + [caller: val_mitochondrial_caller, genome: 'mitochondrial', num_intervals: num_intervals + 1], vcf]
-                index: [meta + [caller: val_mitochondrial_caller, genome: 'mitochondrial', num_intervals: num_intervals + 1], tbi]
-            }
+        if (!val_skip_mitochondrial_calling) {
+            CALL_MITOCHONDRIAL_VARIANTS(
+                ch_bam_bai,
+                ch_fasta,
+                ch_fai,
+                ch_par,
+                ch_mitochondrial_bed,
+                val_mitochondrial_caller,
+            )
+
+            /*
+             * The meta.caller is needed for GVCF_GLNEXUS_NORM_VARIANTS workflow to process the VCFs differently.
+             * the number of intervals is used in groupKey downstream, num_intervals should be the same in the nuclear and mitochondrial channels.
+             */
+            ch_mitochondrial = CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_vcf
+                .join(CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_tbi, failOnMismatch: true, failOnDuplicate: true)
+                .combine(ch_num_intervals)
+                .multiMap { meta, vcf, tbi, num_intervals ->
+                    vcf: [meta + [caller: val_mitochondrial_caller, genome: 'mitochondrial', num_intervals: num_intervals + 1], vcf]
+                    index: [meta + [caller: val_mitochondrial_caller, genome: 'mitochondrial', num_intervals: num_intervals + 1], tbi]
+                }
+        } else {
+            ch_mitochondrial = channel.empty().multiMap { vcf: it; index: it }
+        }
 
         // Combine the BED intervals with BAM/BAI files to create a region-bam-bai for each sample.
         // This uses the whole BAM files for each region instead of splitting them.

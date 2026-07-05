@@ -34,6 +34,7 @@ nextflow_pipeline {
                 skip_methylation_calling     = true
                 skip_methylation_annotation  = true
                 skip_prepare_gens_input      = true
+                skip_mitochondrial_calling   = true
             }
         }
 
@@ -79,6 +80,7 @@ nextflow_pipeline {
                 skip_methylation_calling     = true
                 skip_methylation_annotation  = true
                 skip_prepare_gens_input      = true
+                skip_mitochondrial_calling   = true
             }
         }
 
@@ -131,6 +133,7 @@ nextflow_pipeline {
                 skip_methylation_calling     = true
                 skip_methylation_annotation  = true
                 skip_prepare_gens_input      = true
+                skip_mitochondrial_calling   = true
             }
         }
 
