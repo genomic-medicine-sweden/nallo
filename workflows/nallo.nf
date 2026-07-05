@@ -505,7 +505,8 @@ workflow NALLO {
         def variants_to_merge_per_family = CALL_SNVS.out.gvcf
             .join(CALL_SNVS.out.gvcf_index, failOnMismatch: true, failOnDuplicate: true)
             .map { meta, gvcf, index ->
-                [[id: meta.region.name, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals + 1, caller: val_snv_caller], gvcf, index]
+                def num_intervals = val_skip_mitochondrial_calling ? meta.num_intervals : meta.num_intervals + 1
+                [[id: meta.region.name, family_id: meta.family_id, genome: meta.genome, num_intervals: num_intervals, caller: val_snv_caller], gvcf, index]
             }
             .mix(ch_mitochondrial.vcf
                     .join(ch_mitochondrial.index, failOnMismatch: true, failOnDuplicate: true)

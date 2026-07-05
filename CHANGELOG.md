@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- [#1164](https://github.com/genomic-medicine-sweden/nallo/pull/1164) - Added `--skip_mitochondrial_calling` parameter to allow skipping mitochondrial variant calling
 - [#1042](https://github.com/genomic-medicine-sweden/nallo/pull/1042) - Added `somalier_html` output to `bam_infer_sex`
 - [#1047](https://github.com/genomic-medicine-sweden/nallo/pull/1047) - Added `assembly_summary` output to `genome_assembly` so that it can be used as a workflow output
 - [#1052](https://github.com/genomic-medicine-sweden/nallo/pull/1052) - Added new credit to README.md and new contributor to nextflow.config
