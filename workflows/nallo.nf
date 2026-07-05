@@ -643,7 +643,7 @@ workflow NALLO {
             .join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
             .filter { meta, _vcf, _tbi -> meta.genome == "nuclear" }
             .map { meta, vcf, tbi ->
-                def new_meta = [id: meta.family_id, num_intervals: meta.num_intervals - 1]
+                def new_meta = [id: meta.family_id, num_intervals: val_skip_mitochondrial_calling ? meta.num_intervals : meta.num_intervals - 1]
                 [groupKey(new_meta, new_meta.num_intervals), vcf, tbi]
             }
             .groupTuple()
@@ -701,7 +701,7 @@ workflow NALLO {
         // Add +1 to the num_intervals of nuclear channel to account for mitochondrial region
         ch_snv_vcf_tbi_nuclear_for_annotation = BCFTOOLS_VIEW_PHASING.out.vcf
             .join(BCFTOOLS_VIEW_PHASING.out.tbi, failOnMismatch: true, failOnDuplicate: true)
-            .map { meta, vcf, tbi -> [meta + [num_intervals: meta.num_intervals + 1], vcf, tbi] }
+            .map { meta, vcf, tbi -> [meta + [num_intervals: val_skip_mitochondrial_calling ? meta.num_intervals : meta.num_intervals + 1], vcf, tbi] }
 
         ch_snv_vcf_tbi_mitochondrial_for_annotation = ch_snvs_per_family_unannotated_vcf_tbi
             .filter { meta, _vcf, _tbi -> meta.genome == "mitochondrial" }

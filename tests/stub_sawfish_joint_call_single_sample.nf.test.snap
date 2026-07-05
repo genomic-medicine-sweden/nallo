@@ -1,13 +1,10 @@
 {
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
-            65,
+            59,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
-                },
-                "BCFTOOLS_MERGE": {
-                    "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_MULTISAMPLE": {
                     "bcftools": 1.22
@@ -22,9 +19,6 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_VIEW_MITO": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_SV": {
@@ -43,10 +37,10 @@
                     "cramino": "1.1.0"
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
-                    "deepvariant": "1.10.0"
+                    "deepvariant": null
                 },
                 "DEEPVARIANT_VCFSTATSREPORT": {
-                    "deepvariant": "1.10.0"
+                    "deepvariant": null
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -74,9 +68,6 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
-                },
-                "MITORSAW_HAPLOTYPE": {
-                    "mitorsaw": "0.2.9-0dc8e58"
                 },
                 "MOSDEPTH": {
                     "mosdepth": "0.3.11"
@@ -219,10 +210,10 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-06-01T09:50:49.410375208",
+        "timestamp": "2026-07-05T21:30:13.736637",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.04.4"
         }
     }
 }
