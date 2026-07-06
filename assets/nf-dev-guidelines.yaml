@@ -12,22 +12,10 @@ intro: |
   Contributions to the code are even more welcome ;)
 
 sections:
-  - contribution_workflow
-  - pull_requests
-  - review
-  - versioning
-  - developer_setup
-  - running_tests
+  - general
   - file: docs/contributing/adding_new_tools.md
-  - coding_conventions_header
-  - architecture
-  - adding_a_step
-  - channels
-  - parameters
-  - file: docs/contributing/publishing.md
-  - configuration
-  - writing_tests
-  - style
+  - coding_conventions
+  - updating_contribution_guidelines
 
 vars:
   repo_name: genomic-medicine-sweden/nallo
