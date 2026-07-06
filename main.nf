@@ -396,6 +396,7 @@ workflow {
         params.skip_genome_assembly,
         params.skip_methylation_calling,
         params.skip_methylation_annotation,
+        params.skip_mitochondrial_calling,
         params.skip_peddy,
         params.skip_phasing,
         params.skip_prepare_gens_input,
