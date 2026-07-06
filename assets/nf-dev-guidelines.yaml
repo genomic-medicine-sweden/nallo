@@ -23,6 +23,7 @@ vars:
   repo_url: https://github.com/genomic-medicine-sweden/nallo
   codespaces_url: https://github.com/genomic-medicine-sweden/nallo/codespaces
   workflow_file: workflows/nallo.nf
+  extra_semantic_versioning_notes: "Bugs fixed between releases belong in the `Fixed` section of the changelog, whereas bug fixes that appeared and were solved in dev should go in the `Changed` section."
   pre_commit_note: >-
     Besides the default nf-core hooks, this repository includes the
     [nf-core pipelines schema docs](https://github.com/genomic-medicine-sweden/nf-core-schema-docs)
