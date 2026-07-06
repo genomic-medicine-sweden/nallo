@@ -36,7 +36,8 @@ nextflow_workflow {
                     ]
                 )
                 input[1] = channel.value([
-                    file(params.pipelines_testdata_base_path + 'reference/gnomad_af.zip', checkIfExists: true)
+                    [:],
+                    [file(params.pipelines_testdata_base_path + 'reference/gnomad_af.zip', checkIfExists: true)]
                 ])
                 input[2] = PREPARE_REFERENCES.out.fasta
                 input[3] = PREPARE_REFERENCES.out.fai
