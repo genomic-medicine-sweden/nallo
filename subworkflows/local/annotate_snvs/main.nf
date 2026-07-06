@@ -6,7 +6,7 @@ include { ENSEMBLVEP_VEP as ENSEMBLVEP_SNV } from '../../../modules/nf-core/ense
 workflow ANNOTATE_SNVS {
     take:
     ch_vcf                   // channel: [mandatory] [ val(meta), path(vcf) ]
-    ch_echtvar_databases     // channel:  [optional] [ list(path(db)) ]
+    ch_echtvar_databases     // channel:  [optional] [ val(meta), path(db) ]
     ch_fasta                 // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fai                   // channel: [mandatory] [ val(meta), path(fai) ]
     ch_vep_cache             // channel: [mandatory] [ val(meta), path(cache) ]
@@ -24,7 +24,7 @@ workflow ANNOTATE_SNVS {
     if (annotate_echtvar) {
         ECHTVAR_ANNO(
             ch_vcf,
-            ch_echtvar_databases.map { dbs -> [[:], dbs] },
+            ch_echtvar_databases,
             'bcf.gz'
         )
     }
