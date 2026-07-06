@@ -472,7 +472,10 @@ workflow NALLO {
                     index: [meta + [caller: val_mitochondrial_caller, genome: 'mitochondrial', num_intervals: num_intervals + 1], tbi]
                 }
         } else {
-            ch_mitochondrial = channel.empty().multiMap { vcf: it; index: it }
+            ch_mitochondrial = channel.empty().multiMap { it ->
+                vcf: it
+                index: it
+            }
         }
 
         // Combine the BED intervals with BAM/BAI files to create a region-bam-bai for each sample.
