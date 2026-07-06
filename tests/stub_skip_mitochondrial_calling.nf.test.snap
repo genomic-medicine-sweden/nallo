@@ -28,10 +28,10 @@
                     "bedtools": "2.31.1"
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
-                    "deepvariant": null
+                    "deepvariant": "1.10.0"
                 },
                 "DEEPVARIANT_VCFSTATSREPORT": {
-                    "deepvariant": null
+                    "deepvariant": "1.10.0"
                 },
                 "GAWK_EXTRACT_REGIONS": {
                     "gawk": "5.3.1"
@@ -161,10 +161,10 @@
                     "bedtools": "2.31.1"
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
-                    "deepvariant": null
+                    "deepvariant": "1.10.0"
                 },
                 "DEEPVARIANT_VCFSTATSREPORT": {
-                    "deepvariant": null
+                    "deepvariant": "1.10.0"
                 },
                 "GAWK_EXTRACT_REGIONS": {
                     "gawk": "5.3.1"
