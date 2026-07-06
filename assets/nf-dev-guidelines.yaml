@@ -14,8 +14,8 @@ intro: |
 sections:
   - general
   - file: docs/contributing/adding_new_tools.md
-  - file: docs/contributing/publishing.md
   - coding_conventions
+  - file: docs/contributing/publishing.md
   - updating_contribution_guidelines
 
 vars:
