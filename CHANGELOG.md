@@ -21,6 +21,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Added `call_mitochondrial_variants` subworkflow
 - [#1148](https://github.com/genomic-medicine-sweden/nallo/pull/1148) - Added tests for `annotate_consequence_pli`
 - [#1155](https://github.com/genomic-medicine-sweden/nallo/pull/1155) - Added Nallo paper to the README
+- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added new `PORTELLO_ASSEMBLY` subworkflow
+- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added new `concatenated_haplotypes` output to `GENOME_ASSEMBLY`
+- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added new read group param to `GENOME_ASSEMBLY` to add RG, SM and DS tags to bam when converting with `SAMTOOLS_IMPORT`
+- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added unfiltered bam output to `ALIGN_ASSEMBLIES`
+- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added `SAMTOOLS_MERGE` suffix in `nextflow.config` for stub tests
+- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added remapped bam from portello output to pipeline outputs
 
 ### Changed
 
@@ -79,6 +85,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Changed output of `SCATTER_GENOME` to output `bed_nuclear_intervals` and `mitochondrial_nuclear_intervals`
 - [#1145](https://github.com/genomic-medicine-sweden/nallo/pull/1145) - Replaced local hiphase module with nf-core one
 - [#1149](https://github.com/genomic-medicine-sweden/nallo/pull/1149) - Replaced local `echtvar/anno` module with nf-core one
+- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Updated test dataset to remove tags from fastq file
 
 ### Removed
 
@@ -103,6 +110,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |               | `--mitochondrial_sv_min_size`   |
 |               | `--mitorsaw_minimum_read_count` |
 |               | `--mitorsaw_minimum_maf`        |
+|               | `--skip_portello`               |
+|               | `--aligner`                     |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -116,6 +125,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | sentieon-cli/dnascope-longread | 1.5.2       | 1.6.2       |
 | hiphase                        | 1.4.0       | 1.6.0       |
 | echtvar/anno                   | 0.2.2       | 0.2.4       |
+| portello                       |             | 0.7.0       |
+| pbmm2/align                    |             | 26.2.0      |
+| samtools/addreplacerg          |             | 1.23.1      |
+| samtools/calmd                 |             | 1.23.1      |
+| gatk4/cleansam                 |             | 4.6.2.0     |
+| find/concatenate               |             | 4.6.0       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
