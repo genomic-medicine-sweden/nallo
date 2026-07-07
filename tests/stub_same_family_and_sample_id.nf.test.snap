@@ -42,9 +42,6 @@
                 "BCFTOOLS_VIEW_CHROMOGRAPH": {
                     "bcftools": 1.22
                 },
-                "BCFTOOLS_VIEW_MITO": {
-                    "bcftools": 1.22
-                },
                 "BCFTOOLS_VIEW_PHASING": {
                     "bcftools": 1.22
                 },
@@ -177,9 +174,6 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
-                },
-                "MITORSAW_HAPLOTYPE": {
-                    "mitorsaw": "0.2.9-0dc8e58"
                 },
                 "MOSDEPTH": {
                     "mosdepth": "0.3.11"
@@ -548,7 +542,7 @@
         "timestamp": "2026-07-07T09:58:44.146662698",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.04.4"
         }
     }
 }
