@@ -42,6 +42,8 @@ include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_GENS           } from '../subw
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_PEDDY          } from '../subworkflows/local/vcf_concat_sort_variants/main'
 include { ANNOTATE_METHYLATION                                   } from '../subworkflows/local/annotate_methylation'
 include { PORTELLO_ASSEMBLY                                      } from '../subworkflows/local/portello_assembly/main'
+include { PBMM2_ALIGN                                            } from '../modules/nf-core/pbmm2/align/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_PBMM2                 } from '../modules/nf-core/samtools/index/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -266,6 +268,7 @@ workflow NALLO {
         GENOME_ASSEMBLY(
             ch_genome_assembly_input,
             val_hifiasm_mode == "trio-binning",
+            true
         )
 
         ALIGN_ASSEMBLIES(
@@ -302,23 +305,64 @@ workflow NALLO {
             .groupTuple()
             .map { meta, files -> [meta + [n_files: files.size()]] }
 
-        /*
-         * Align reads independently per split (could be a split-align-merge subworkflow)
-         */
-        MINIMAP2_ALIGN(
-            ch_reads_for_alignment,
-            PREPARE_REFERENCES.out.mmi,
-            true,
-            'bai',
-            false,
-            false,
-        )
+        if (!val_skip_portello) {
+            // Match BAM files and reference by sample ID for alignment with pbmm2
+            ch_reads_for_alignment
+                .map { meta, bam -> [[id: meta.id], meta, bam] }
+                .combine(
+                    GENOME_ASSEMBLY.out.concatenated_haplotypes
+                    .map { meta, ref -> [[id: meta.id], ref] },
+                    by: 0
+                )
+                .multiMap { _id, meta, bam, ref ->
+                    reads:     [meta, bam]
+                    reference: [meta, ref]
+                }
+                .set { ch_pbmm2_input }
+        }
+        else {
+            ch_pbmm2_input = ch_reads_for_alignment.combine(ch_fasta)
+                .multiMap { bam_meta, bam, _ref_meta, ref ->
+                    reads:     [bam_meta, bam]
+                    reference: [bam_meta, ref]
+                }
+            //or ch_pbmm2_input = channel.empty()
+        }
+
+        if (!val_skip_portello) {
+
+            PBMM2_ALIGN(
+                ch_pbmm2_input.reads,
+                ch_pbmm2_input.reference,
+            )
+
+            SAMTOOLS_INDEX_PBMM2(PBMM2_ALIGN.out.bam)
+
+            ch_aligned_reads_bam = PBMM2_ALIGN.out.bam
+            ch_aligned_reads_bai = SAMTOOLS_INDEX_PBMM2.out.index
+            }
+        else {
+            /*
+            * Align reads independently per split (could be a split-align-merge subworkflow)
+            */
+            MINIMAP2_ALIGN(
+                ch_reads_for_alignment,
+                PREPARE_REFERENCES.out.mmi,
+                true,
+                'bai',
+                false,
+                false,
+            )
+
+            ch_aligned_reads_bam = MINIMAP2_ALIGN.out.bam
+            ch_aligned_reads_bai = MINIMAP2_ALIGN.out.index
+        }
 
         /*
-         * Re-attach grouping key so BAMs can be merged per group as soon as all alignments for one sample are ready
-         */
-        ch_bam_to_merge = MINIMAP2_ALIGN.out.bam
-            .join(MINIMAP2_ALIGN.out.index, failOnDuplicate: true, failOnMismatch: true)
+        * Re-attach grouping key so BAMs can be merged per group as soon as all alignments for one sample are ready
+        */
+        ch_bam_to_merge = ch_aligned_reads_bam
+            .join(ch_aligned_reads_bai, failOnDuplicate: true, failOnMismatch: true)
             .combine(ch_reads_grouping_key)
             .filter { bam_meta, _bam, _bai, grouping_key_meta ->
                 bam_meta.id == grouping_key_meta.id
@@ -354,6 +398,19 @@ workflow NALLO {
             )
         }
 
+        if (!val_skip_portello) {
+
+            PORTELLO_ASSEMBLY(
+                ch_aligned_bam.map { meta, bam, _bai -> [meta, bam] },
+                ch_aligned_bam.map { meta, _bam, bai -> [meta, bai] },
+                ch_assembly_bam_bai_updated_meta,
+                ch_fasta,
+                ch_fai,
+            )
+
+            ch_aligned_bam = PORTELLO_ASSEMBLY.out.bam.join(PORTELLO_ASSEMBLY.out.bai, failOnMismatch: true, failOnDuplicate: true)
+        }
+
         //
         // Create PED from samplesheet
         //
@@ -383,36 +440,10 @@ workflow NALLO {
             // Set files with updated meta for subsequent processes
             ch_bam = BAM_INFER_SEX.out.bam
             ch_bam_bai = BAM_INFER_SEX.out.bam_bai
-
-            ch_bam
-            .map { meta, _bam -> [[id: meta.id], meta] }
-                .set { ch_updated_sample_meta }
-
-            if (!val_skip_portello) {
-                ALIGN_ASSEMBLIES.out.bam
-                    .join(ALIGN_ASSEMBLIES.out.bai, failOnMismatch: true, failOnDuplicate: true)
-                    .map { meta, bam, bai -> [[id: meta.id], meta, bam, bai] }
-                    .join(ch_updated_sample_meta, failOnMismatch: true, failOnDuplicate: true)
-                    .map { _sample_key, _old_meta, bam, bai, updated_meta -> [updated_meta, bam, bai] }
-                    .set { ch_assembly_bam_bai_updated_meta }
-            }
         }
         else {
             ch_bam = ch_aligned_bam.map { meta, bam, _bai -> [meta, bam] }
             ch_bam_bai = ch_aligned_bam
-        }
-
-        if (!val_skip_portello) {
-            PORTELLO_ASSEMBLY(
-                GENOME_ASSEMBLY.out.assembled_haplotypes,
-                ch_bam,
-                ch_assembly_bam_bai_updated_meta,
-                ch_fasta,
-                ch_fai,
-            )
-
-            ch_bam = PORTELLO_ASSEMBLY.out.bam
-            ch_bam_bai = PORTELLO_ASSEMBLY.out.bam.join(PORTELLO_ASSEMBLY.out.bai, failOnMismatch: true, failOnDuplicate: true)
         }
     }
 
