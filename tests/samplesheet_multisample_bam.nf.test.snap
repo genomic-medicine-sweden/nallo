@@ -970,8 +970,8 @@
                 "somalier_stats.txt:md5,efb761d75f8782bff40780a7fe706b8a",
                 "whatshap-stats-table.txt:md5,7d0b5df2c934e024515b650529318b77",
                 "FAM.ped:md5,6888b3308e11dea33d2525bcd222d561",
-                "HG002_cramino_aligned_phased.arrow:md5,39c9607be8757a92d4a7904d8e84f92b",
-                "HG004_cramino_aligned_phased.arrow:md5,78b3ada0df570878baa94e796bdba6c4",
+                "HG002_cramino_aligned_phased.arrow:md5,16862b72134560bb2cb10109580b70c2",
+                "HG004_cramino_aligned_phased.arrow:md5,8ed4f662c64af785e13e082ce34d6c38",
                 "HG002_cramino_aligned.arrow:md5,39c9607be8757a92d4a7904d8e84f92b",
                 "HG004_cramino_aligned.arrow:md5,78b3ada0df570878baa94e796bdba6c4",
                 "HG002.mosdepth.global.dist.txt:md5,a7f38521b441f0d3edfd9c9ff3c52d0a",
@@ -1116,7 +1116,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-06T15:08:08.872591624",
+        "timestamp": "2026-07-07T13:55:34.294685486",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"

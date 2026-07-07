@@ -120,10 +120,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-06T16:48:48.156048",
+        "timestamp": "2026-07-07T14:23:22.320377614",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.03.4"
         }
     },
     "Test mitochondrial calling runs by default": {
@@ -256,10 +256,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-06T16:47:20.678927",
+        "timestamp": "2026-07-07T14:22:58.378193716",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.03.4"
         }
     }
 }

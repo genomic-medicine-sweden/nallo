@@ -126,6 +126,7 @@ workflow NALLO {
     ch_vep_cache_unprocessed
     ch_vep_plugin_files
     cram_output
+    val_aligner
     val_alignment_processes
     val_bigwig_modcodes
     val_convert_unphased_aligned_reads_to_cram
@@ -330,8 +331,7 @@ workflow NALLO {
             //or ch_pbmm2_input = channel.empty()
         }
 
-        if (!val_skip_portello) {
-
+        if (val_aligner == 'pbmm2') {
             PBMM2_ALIGN(
                 ch_pbmm2_input.reads,
                 ch_pbmm2_input.reference,

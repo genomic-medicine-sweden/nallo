@@ -98,7 +98,7 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-07-07T09:53:55.414147967",
+        "timestamp": "2026-07-07T14:14:47.24453084",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -173,7 +173,7 @@
                 "pipeline_info/nallo_software_mqc_versions.yml"
             ]
         ],
-        "timestamp": "2026-07-03T15:19:30.58677677",
+        "timestamp": "2026-07-07T14:15:04.570505679",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -246,7 +246,7 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-07-07T09:53:36.499229235",
+        "timestamp": "2026-07-07T14:14:27.894606078",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"

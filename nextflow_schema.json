@@ -1027,6 +1027,12 @@
                     "type": "number",
                     "default": 50,
                     "description": "Co-linear SVs must have either an insertion or deletion of this size or greater to be included in the output in Sawfish. All other SV evidence patterns such as those consistent with duplications, inversions and translocations will always be included in the output."
+                },
+                "aligner": {
+                    "type": "string",
+                    "enum": ["pbmm2", "minimap2"],
+                    "description": "Read aligner to use for mapped reads. The default configuration uses `pbmm2` unless `skip_portello` is enabled, in which case it falls back to `minimap2`.",
+                    "default": "pbmm2"
                 }
             },
             "required": ["preset"]

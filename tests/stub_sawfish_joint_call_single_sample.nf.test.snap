@@ -1,7 +1,7 @@
 {
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
-            75,
+            69,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -244,10 +244,10 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-07-07T09:59:19.583781368",
+        "timestamp": "2026-07-07T14:17:55.747481633",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.03.4"
         }
     }
 }
