@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            228,
+            231,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -99,7 +99,7 @@
                     "deepvariant": "1.10.0"
                 },
                 "ECHTVAR_ANNO": {
-                    "echtvar": "0.2.2"
+                    "echtvar": "0.2.4"
                 },
                 "ENSEMBLVEP_FILTERVEP": {
                     "ensemblvep": 115.2,
@@ -222,6 +222,9 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_FAIDX": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_FASTQ": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_IMPORT": {
@@ -844,10 +847,10 @@
                 
             ]
         ],
-        "timestamp": "2026-06-24T11:42:31.024136829",
+        "timestamp": "2026-06-01T09:35:06.378879925",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.4"
         }
     }
 }

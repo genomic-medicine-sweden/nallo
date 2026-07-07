@@ -115,6 +115,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_skip_rank_variants
     val_skip_repeat_annotation
     val_skip_repeat_calling
+    val_skip_mitochondrial_calling
     val_skip_sambamba_depth
     val_skip_sex_check
     val_skip_snv_annotation
@@ -223,6 +224,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_skip_qc,
         val_skip_rank_variants,
         val_skip_repeat_annotation,
+        val_skip_mitochondrial_calling,
         val_skip_sambamba_depth,
         val_skip_sex_check,
         val_skip_snv_annotation,
@@ -398,6 +400,7 @@ workflow {
         params.skip_genome_assembly,
         params.skip_methylation_calling,
         params.skip_methylation_annotation,
+        params.skip_mitochondrial_calling,
         params.skip_peddy,
         params.skip_phasing,
         params.skip_prepare_gens_input,
@@ -516,6 +519,7 @@ workflow {
         params.skip_rank_variants,
         params.skip_repeat_annotation,
         params.skip_repeat_calling,
+        params.skip_mitochondrial_calling,
         params.skip_sambamba_depth,
         params.skip_sex_check,
         params.skip_snv_annotation,

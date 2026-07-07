@@ -99,7 +99,7 @@
                     "deepvariant": "1.10.0"
                 },
                 "ECHTVAR_ANNO": {
-                    "echtvar": "0.2.2"
+                    "echtvar": "0.2.4"
                 },
                 "ENSEMBLVEP_FILTERVEP": {
                     "ensemblvep": 115.2,
@@ -827,7 +827,7 @@
                 
             ]
         ],
-        "timestamp": "2026-06-24T11:47:16.595608827",
+        "timestamp": "2026-06-23T16:59:44.76450306",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

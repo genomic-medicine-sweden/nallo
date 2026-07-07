@@ -27,6 +27,7 @@ Allows skipping certain parts of the pipeline
 | `skip_call_paralogs` | Skip the calling of specific paralogous genes | `boolean` | False |  |  |
 | `skip_rank_variants` | Skip ranking of short variants | `boolean` | False |  |  |
 | `skip_prepare_gens_input` | Skip preparing input data for Gens | `boolean` | False |  |  |
+| `skip_mitochondrial_calling` | Skip mitochondrial variant calling | `boolean` | False |  |  |
 | `skip_sex_check` | Skip sex check | `boolean` | False |  |  |
 
 ## Input/output options
