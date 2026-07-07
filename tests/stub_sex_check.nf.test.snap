@@ -485,10 +485,10 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-06-01T09:52:04.683544308",
+        "timestamp": "2026-07-05T19:53:44.033069",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.04.4"
         }
     }
 }

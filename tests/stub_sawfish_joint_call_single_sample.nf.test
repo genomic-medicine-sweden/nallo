@@ -32,6 +32,7 @@ nextflow_pipeline {
                 sv_callers_merge_priority               = "sawfish"
                 force_sawfish_joint_call_single_samples = true
                 skip_prepare_gens_input                 = true
+                skip_mitochondrial_calling              = true
             }
         }
 

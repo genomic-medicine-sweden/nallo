@@ -1,57 +1,13 @@
 nextflow_pipeline {
 
-    name "Test pipeline GENOMICMEDICINESWEDEN_NALLO — Stub tests skipping SNV annotation"
+    name "Test pipeline GENOMICMEDICINESWEDEN_NALLO — Stub tests for skip_mitochondrial_calling"
     script "../main.nf"
     tag "PIPELINE"
     tag "pipeline_stub"
-    tag "stub_skip_snv_annotation"
+    tag "stub_skip_mitochondrial_calling"
     config "./nextflow.config"
 
-    test("Test Chromograph works without SNV annotation") {
-        options "-stub"
-
-        when {
-            params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/eaabae15e3ee2b074057363a7467469b09f0957e/'
-                input                        = "$projectDir/assets/samplesheet.csv"
-                outdir                       = "$outputDir"
-                skip_annotate_paralogs       = true
-                skip_call_paralogs           = true
-                skip_genome_assembly         = true
-                skip_qc                      = true
-                skip_peddy                   = true
-                skip_snv_annotation          = true
-                skip_phasing                 = true
-                skip_rank_variants           = true
-                skip_repeat_calling          = true
-                skip_repeat_annotation       = true
-                skip_sambamba_depth          = true
-                skip_methylation_calling     = true
-                skip_methylation_annotation  = true
-                skip_prepare_gens_input      = true
-                skip_mitochondrial_calling   = true
-            }
-        }
-
-        then {
-            // stable_name: All files + folders in ${params.outdir}/ with a stable name
-            def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
-            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
-            assertAll(
-                { assert workflow.success },
-                { assert versions.containsKey('TIDDIT_COV') }, // Making sure we run coverage and chromograph
-                { assert versions.containsKey('RUN_CHROMOGRAPH') },
-                { assert !versions.containsKey('RHOCALL_VIZ') }, // Autozygosity plot should be skipped since it requires SNV annotation
-                { assert snapshot(
-                    workflow.trace.succeeded().size(),
-                    versions,
-                    stable_name
-                ).match() }
-            )
-        }
-    }
-
-    test("Test Peddy without annotation") {
+    test("Test mitochondrial calling runs by default") {
         options "-stub"
 
         when {
@@ -62,31 +18,73 @@ nextflow_pipeline {
                 skip_annotate_paralogs       = true
                 skip_call_paralogs           = true
                 skip_chromograph             = true
-                skip_qc                      = true
-                skip_snv_annotation          = true
-                skip_sv_calling              = true
-                skip_sv_annotation           = true
-                skip_phasing                 = true
-                skip_rank_variants           = true
-                skip_repeat_calling          = true
-                skip_repeat_annotation       = true
-                skip_sambamba_depth          = true
-                skip_methylation_calling     = true
-                skip_methylation_annotation  = true
-                skip_prepare_gens_input      = true
-                skip_mitochondrial_calling   = true
                 skip_genome_assembly         = true
+                skip_methylation_annotation  = true
+                skip_methylation_calling     = true
+                skip_peddy                   = true
+                skip_phasing                 = true
+                skip_prepare_gens_input      = true
+                skip_qc                      = true
+                skip_rank_variants           = true
+                skip_repeat_annotation       = true
+                skip_repeat_calling          = true
+                skip_sambamba_depth          = true
+                skip_snv_annotation          = true
+                skip_sv_annotation           = true
+                skip_sv_calling              = true
             }
         }
 
         then {
-            // stable_name: All files + folders in ${params.outdir}/ with a stable name
             def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
             def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
             assertAll(
                 { assert workflow.success },
-                { assert workflow.trace.succeeded().find { it.name.contains('CONCAT_SORT_PEDDY') } != null }, // Check if we ran the correct concat/sort subworfklow
-                { assert versions.containsKey('PEDDY') },
+                { assert versions.containsKey('MITORSAW_HAPLOTYPE') },
+                { assert snapshot(
+                    workflow.trace.succeeded().size(),
+                    versions,
+                    stable_name
+                ).match() }
+            )
+        }
+    }
+
+    test("Test skip_mitochondrial_calling") {
+        options "-stub"
+
+        when {
+            params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/eaabae15e3ee2b074057363a7467469b09f0957e/'
+                input                        = "$projectDir/assets/samplesheet.csv"
+                outdir                       = "$outputDir"
+                skip_annotate_paralogs       = true
+                skip_call_paralogs           = true
+                skip_chromograph             = true
+                skip_genome_assembly         = true
+                skip_methylation_annotation  = true
+                skip_methylation_calling     = true
+                skip_mitochondrial_calling   = true
+                skip_peddy                   = true
+                skip_phasing                 = true
+                skip_prepare_gens_input      = true
+                skip_qc                      = true
+                skip_rank_variants           = true
+                skip_repeat_annotation       = true
+                skip_repeat_calling          = true
+                skip_sambamba_depth          = true
+                skip_snv_annotation          = true
+                skip_sv_annotation           = true
+                skip_sv_calling              = true
+            }
+        }
+
+        then {
+            def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
+            assertAll(
+                { assert workflow.success },
+                { assert !versions.containsKey('MITORSAW_HAPLOTYPE') },
                 { assert snapshot(
                     workflow.trace.succeeded().size(),
                     versions,
