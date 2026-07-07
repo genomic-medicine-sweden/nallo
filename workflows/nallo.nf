@@ -165,6 +165,7 @@ workflow NALLO {
     val_skip_qc
     val_skip_rank_variants
     val_skip_repeat_annotation
+    val_skip_mitochondrial_calling
     val_skip_sambamba_depth
     val_skip_sex_check
     val_skip_snv_annotation
@@ -513,28 +514,35 @@ workflow NALLO {
         ch_mitochondrial_bed = SCATTER_GENOME.out.bed_mitochondrial_intervals
             .map { meta, bed, _num_intervals -> [meta, bed] }
 
-        CALL_MITOCHONDRIAL_VARIANTS(
-            ch_bam_bai,
-            ch_fasta,
-            ch_fai,
-            ch_par,
-            ch_mitochondrial_bed,
-            val_mitochondrial_caller,
-        )
-
-        /*
-         * The meta.caller is needed for GVCF_GLNEXUS_NORM_VARIANTS workflow to process the VCFs differently.
-         * the number of intervals is used in groupKey downstream, num_intervals should be the same in the nuclear and mitochondrial channels.
-         */
         def ch_num_intervals = ch_bed_intervals.map { _meta, _bed, num_intervals -> num_intervals }.first()
 
-        ch_mitochondrial = CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_vcf
-            .join(CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_tbi, failOnMismatch: true, failOnDuplicate: true)
-            .combine(ch_num_intervals)
-            .multiMap { meta, vcf, tbi, num_intervals ->
-                vcf: [meta + [caller: val_mitochondrial_caller, genome: 'mitochondrial', num_intervals: num_intervals + 1], vcf]
-                index: [meta + [caller: val_mitochondrial_caller, genome: 'mitochondrial', num_intervals: num_intervals + 1], tbi]
+        if (!val_skip_mitochondrial_calling) {
+            CALL_MITOCHONDRIAL_VARIANTS(
+                ch_bam_bai,
+                ch_fasta,
+                ch_fai,
+                ch_par,
+                ch_mitochondrial_bed,
+                val_mitochondrial_caller,
+            )
+
+            /*
+             * The meta.caller is needed for GVCF_GLNEXUS_NORM_VARIANTS workflow to process the VCFs differently.
+             * the number of intervals is used in groupKey downstream, num_intervals should be the same in the nuclear and mitochondrial channels.
+             */
+            ch_mitochondrial = CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_vcf
+                .join(CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_tbi, failOnMismatch: true, failOnDuplicate: true)
+                .combine(ch_num_intervals)
+                .multiMap { meta, vcf, tbi, num_intervals ->
+                    vcf: [meta + [caller: val_mitochondrial_caller, genome: 'mitochondrial', num_intervals: num_intervals + 1], vcf]
+                    index: [meta + [caller: val_mitochondrial_caller, genome: 'mitochondrial', num_intervals: num_intervals + 1], tbi]
+                }
+        } else {
+            ch_mitochondrial = channel.empty().multiMap { it ->
+                vcf: it
+                index: it
             }
+        }
 
         // Combine the BED intervals with BAM/BAI files to create a region-bam-bai for each sample.
         // This uses the whole BAM files for each region instead of splitting them.
@@ -566,7 +574,8 @@ workflow NALLO {
         def variants_to_merge_per_family = CALL_SNVS.out.gvcf
             .join(CALL_SNVS.out.gvcf_index, failOnMismatch: true, failOnDuplicate: true)
             .map { meta, gvcf, index ->
-                [[id: meta.region.name, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals + 1, caller: val_snv_caller], gvcf, index]
+                def num_intervals = val_skip_mitochondrial_calling ? meta.num_intervals : meta.num_intervals + 1
+                [[id: meta.region.name, family_id: meta.family_id, genome: meta.genome, num_intervals: num_intervals, caller: val_snv_caller], gvcf, index]
             }
             .mix(ch_mitochondrial.vcf
                     .join(ch_mitochondrial.index, failOnMismatch: true, failOnDuplicate: true)
@@ -703,7 +712,7 @@ workflow NALLO {
             .join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
             .filter { meta, _vcf, _tbi -> meta.genome == "nuclear" }
             .map { meta, vcf, tbi ->
-                def new_meta = [id: meta.family_id, num_intervals: meta.num_intervals - 1]
+                def new_meta = [id: meta.family_id, num_intervals: val_skip_mitochondrial_calling ? meta.num_intervals : meta.num_intervals - 1]
                 [groupKey(new_meta, new_meta.num_intervals), vcf, tbi]
             }
             .groupTuple()
@@ -761,7 +770,7 @@ workflow NALLO {
         // Add +1 to the num_intervals of nuclear channel to account for mitochondrial region
         ch_snv_vcf_tbi_nuclear_for_annotation = BCFTOOLS_VIEW_PHASING.out.vcf
             .join(BCFTOOLS_VIEW_PHASING.out.tbi, failOnMismatch: true, failOnDuplicate: true)
-            .map { meta, vcf, tbi -> [meta + [num_intervals: meta.num_intervals + 1], vcf, tbi] }
+            .map { meta, vcf, tbi -> [meta + [num_intervals: val_skip_mitochondrial_calling ? meta.num_intervals : meta.num_intervals + 1], vcf, tbi] }
 
         ch_snv_vcf_tbi_mitochondrial_for_annotation = ch_snvs_per_family_unannotated_vcf_tbi
             .filter { meta, _vcf, _tbi -> meta.genome == "mitochondrial" }

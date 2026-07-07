@@ -1,14 +1,12 @@
 {
     "Test VEP with mock uncompressed cache": {
         "content": [
-            71,
+            55,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
                 },
-                "BCFTOOLS_MERGE": {
-                    "bcftools": 1.22
-                },
+
                 "BCFTOOLS_NORM_MULTISAMPLE": {
                     "bcftools": 1.22
                 },
@@ -21,9 +19,7 @@
                 "BCFTOOLS_STATS": {
                     "bcftools": 1.22
                 },
-                "BCFTOOLS_VIEW_MITO": {
-                    "bcftools": 1.22
-                },
+
                 "BEDTOOLS_MERGE": {
                     "bedtools": "2.31.1"
                 },
@@ -73,9 +69,7 @@
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
                 },
-                "MITORSAW_HAPLOTYPE": {
-                    "mitorsaw": "0.2.9-0dc8e58"
-                },
+
                 "RELATE_INFER": {
                     "somalier": "0.2.18"
                 },
@@ -162,14 +156,12 @@
     },
     "Test Sentieon SNV calling with mock resources": {
         "content": [
-            59,
+            43,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
                 },
-                "BCFTOOLS_MERGE": {
-                    "bcftools": 1.22
-                },
+
                 "BCFTOOLS_NORM_MULTISAMPLE": {
                     "bcftools": 1.22
                 },
@@ -185,9 +177,7 @@
                 "BCFTOOLS_STATS": {
                     "bcftools": 1.22
                 },
-                "BCFTOOLS_VIEW_MITO": {
-                    "bcftools": 1.22
-                },
+
                 "BEDTOOLS_INTERSECT": {
                     "bedtools": "2.31.1"
                 },
@@ -235,9 +225,7 @@
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
                 },
-                "MITORSAW_HAPLOTYPE": {
-                    "mitorsaw": "0.2.9-0dc8e58"
-                },
+
                 "RELATE_INFER": {
                     "somalier": "0.2.18"
                 },
@@ -327,7 +315,7 @@
     },
     "Test CADD with mock resources": {
         "content": [
-            89,
+            68,
             {
                 "ANNOTATE_INDELS": {
                     "bcftools": 1.22
@@ -335,9 +323,7 @@
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
                 },
-                "BCFTOOLS_MERGE": {
-                    "bcftools": 1.22
-                },
+
                 "BCFTOOLS_NORM_MULTISAMPLE": {
                     "bcftools": 1.22
                 },
@@ -353,9 +339,7 @@
                 "BCFTOOLS_VIEW": {
                     "bcftools": 1.22
                 },
-                "BCFTOOLS_VIEW_MITO": {
-                    "bcftools": 1.22
-                },
+
                 "BEDTOOLS_MERGE": {
                     "bedtools": "2.31.1"
                 },
@@ -411,9 +395,7 @@
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
                 },
-                "MITORSAW_HAPLOTYPE": {
-                    "mitorsaw": "0.2.9-0dc8e58"
-                },
+
                 "REFERENCE_TO_CADD_CHRNAMES": {
                     "gawk": "5.3.1"
                 },

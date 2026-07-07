@@ -58,6 +58,7 @@ workflow PIPELINE_INITIALISATION {
     val_skip_genome_assembly
     val_skip_methylation_calling
     val_skip_methylation_annotation
+    val_skip_mitochondrial_calling
     val_skip_peddy
     val_skip_phasing
     val_skip_portello
@@ -169,6 +170,7 @@ workflow PIPELINE_INITIALISATION {
         chromograph           : "skip_chromograph",
         methylation           : "skip_methylation_calling",
         methylation_annotation: "skip_methylation_annotation",
+        mitochondrial         : "skip_mitochondrial_calling",
         qc                    : "skip_qc",
         gens                  : "skip_prepare_gens_input",
         sex_check             : "skip_sex_check",
@@ -196,6 +198,7 @@ workflow PIPELINE_INITIALISATION {
         repeat_annotation     : ["mapping", "snv_calling", "phasing", "repeat_calling"],
         methylation           : ["mapping", "snv_calling"],
         methylation_annotation: ["mapping", "snv_calling", "methylation"],
+        mitochondrial         : ["mapping"],
         gens                  : ["mapping", "snv_calling"],
         portello              : ["mapping", "assembly"],
     ]
@@ -227,6 +230,7 @@ workflow PIPELINE_INITIALISATION {
             skip_phasing                : val_skip_phasing,
             skip_methylation_calling    : val_skip_methylation_calling,
             skip_methylation_annotation : val_skip_methylation_annotation,
+            skip_mitochondrial_calling  : val_skip_mitochondrial_calling,
             skip_rank_variants          : val_skip_rank_variants,
             skip_repeat_calling         : val_skip_repeat_calling,
             skip_repeat_annotation      : val_skip_repeat_annotation,
