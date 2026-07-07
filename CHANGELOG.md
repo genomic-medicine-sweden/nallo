@@ -24,7 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1155](https://github.com/genomic-medicine-sweden/nallo/pull/1155) - Added Nallo paper to the README
 - [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added new `PORTELLO_ASSEMBLY` subworkflow
 - [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added new `concatenated_haplotypes` output to `GENOME_ASSEMBLY`
-- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added new read group param to `GENOME_ASSEMBLY` to add RG, SM and DS tags to bam when converting with `SAMTOOLS_IMPORT`
+- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added new read group param to `GENOME_ASSEMBLY` config to add RG, SM and DS tags to bam when converting with `SAMTOOLS_IMPORT`
 - [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added unfiltered bam output to `ALIGN_ASSEMBLIES`
 - [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added `SAMTOOLS_MERGE` suffix in `nextflow.config` for stub tests
 - [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added remapped bam from portello output to pipeline outputs

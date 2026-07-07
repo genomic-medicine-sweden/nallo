@@ -42,8 +42,6 @@ include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_GENS           } from '../subw
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_PEDDY          } from '../subworkflows/local/vcf_concat_sort_variants/main'
 include { ANNOTATE_METHYLATION                                   } from '../subworkflows/local/annotate_methylation'
 include { PORTELLO_ASSEMBLY                                      } from '../subworkflows/local/portello_assembly/main'
-include { PBMM2_ALIGN                                            } from '../modules/nf-core/pbmm2/align/main'
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_PBMM2                 } from '../modules/nf-core/samtools/index/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -69,6 +67,8 @@ include { MULTIQC                                                } from '../modu
 include { PEDDY                                                  } from '../modules/nf-core/peddy/main'
 include { SPLITUBAM                                              } from '../modules/nf-core/splitubam/main'
 include { SVDB_MERGE as SVDB_MERGE_SVS_CNVS                      } from '../modules/nf-core/svdb/merge/main'
+include { PBMM2_ALIGN                                            } from '../modules/nf-core/pbmm2/align/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_PBMM2                 } from '../modules/nf-core/samtools/index/main'
 include { paramsSummaryMap                                       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc                                   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML                                 } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -328,7 +328,6 @@ workflow NALLO {
                     reads:     [bam_meta, bam]
                     reference: [bam_meta, ref]
                 }
-            //or ch_pbmm2_input = channel.empty()
         }
 
         if (val_aligner == 'pbmm2') {
@@ -445,13 +444,13 @@ workflow NALLO {
             ch_bam = ch_aligned_bam.map { meta, bam, _bai -> [meta, bam] }
             ch_bam_bai = ch_aligned_bam
         }
-    }
 
-    if (!val_skip_rank_variants || !val_skip_phasing) {
-        // Create PED files with updated (infered sex) per family
-        SOMALIER_PED_FAMILY(
-            ch_bam.map { meta, _files -> [[id: meta.family_id], meta] }.groupTuple()
-        )
+        if (!val_skip_rank_variants || !val_skip_phasing) {
+            // Create PED files with updated (infered sex) per family
+            SOMALIER_PED_FAMILY(
+                ch_bam.map { meta, _files -> [[id: meta.family_id], meta] }.groupTuple()
+            )
+        }
     }
 
     //
