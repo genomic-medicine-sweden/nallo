@@ -86,7 +86,7 @@
                 "SAMTOOLS_IMPORT": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_INDEX_CLEANSAM": {
+                "SAMTOOLS_INDEX": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_INDEX_PBMM2": {
@@ -98,7 +98,7 @@
                 "SAMTOOLS_MERGE_UNFILTERED": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_SORT_PORTELLO": {
+                "SAMTOOLS_SORT": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_VIEW": {
@@ -120,8 +120,8 @@
             [
                 "aligned_reads",
                 "aligned_reads/HG002_Revio",
-                "aligned_reads/HG002_Revio/HG002_Revio.bai",
-                "aligned_reads/HG002_Revio/HG002_Revio.bam",
+                "aligned_reads/HG002_Revio/HG002_Revio_remapped_assembly.bam",
+                "aligned_reads/HG002_Revio/HG002_Revio_remapped_assembly.bam.bai",
                 "assembly",
                 "assembly/sample",
                 "assembly/sample/HG002_Revio",
@@ -178,7 +178,7 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
-        "timestamp": "2026-07-02T15:06:13.895295492",
+        "timestamp": "2026-07-07T09:59:46.153899365",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"

@@ -247,9 +247,6 @@
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_INDEX_CLEANSAM": {
-                    "samtools": "1.23.1"
-                },
                 "SAMTOOLS_INDEX_PBMM2": {
                     "samtools": "1.23.1"
                 },
@@ -260,9 +257,6 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_SORT": {
-                    "samtools": "1.23.1"
-                },
-                "SAMTOOLS_SORT_PORTELLO": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_VIEW": {
@@ -551,7 +545,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-07-02T15:05:02.745554525",
+        "timestamp": "2026-07-07T09:58:44.146662698",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"

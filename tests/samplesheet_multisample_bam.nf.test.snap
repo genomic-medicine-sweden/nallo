@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            331,
+            333,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -238,9 +238,6 @@
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_INDEX_CLEANSAM": {
-                    "samtools": "1.23.1"
-                },
                 "SAMTOOLS_INDEX_PBMM2": {
                     "samtools": "1.23.1"
                 },
@@ -251,9 +248,6 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_SORT": {
-                    "samtools": "1.23.1"
-                },
-                "SAMTOOLS_SORT_PORTELLO": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_VIEW": {
@@ -973,12 +967,12 @@
                 "multiqc_general_stats.txt:md5,a556da27114f01175c2fd686eda05b75",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,d6c9b76288c2c044a7340d4303e747d1",
                 "peddy_relatedness_plot.txt:md5,bad747e25b3bf265664c734b8308720f",
-                "somalier_stats.txt:md5,6fb7bfc73dc0c27232fc5db815417f45",
+                "somalier_stats.txt:md5,efb761d75f8782bff40780a7fe706b8a",
                 "whatshap-stats-table.txt:md5,7d0b5df2c934e024515b650529318b77",
                 "FAM.ped:md5,6888b3308e11dea33d2525bcd222d561",
-                "HG002_cramino_aligned_phased.arrow:md5,db579549b29a5d5e58109226c1cc4afd",
+                "HG002_cramino_aligned_phased.arrow:md5,39c9607be8757a92d4a7904d8e84f92b",
                 "HG004_cramino_aligned_phased.arrow:md5,78b3ada0df570878baa94e796bdba6c4",
-                "HG002_cramino_aligned.arrow:md5,db579549b29a5d5e58109226c1cc4afd",
+                "HG002_cramino_aligned.arrow:md5,39c9607be8757a92d4a7904d8e84f92b",
                 "HG004_cramino_aligned.arrow:md5,78b3ada0df570878baa94e796bdba6c4",
                 "HG002.mosdepth.global.dist.txt:md5,a7f38521b441f0d3edfd9c9ff3c52d0a",
                 "HG002.mosdepth.region.dist.txt:md5,18782d77906c07c36ad27bd3326c89b7",
@@ -1030,7 +1024,7 @@
             [
                 [
                     "HG002_remapped_assembly_haplotagged.bam",
-                    "707feeef323afd67ecabd952bb5fd7eb"
+                    "f0597d255117b27f7f15fcf2f14161a3"
                 ],
                 [
                     "HG004_remapped_assembly_haplotagged.bam",
@@ -1042,7 +1036,7 @@
                 ],
                 [
                     "HG002_remapped_assembly.bam",
-                    "707feeef323afd67ecabd952bb5fd7eb"
+                    "f0597d255117b27f7f15fcf2f14161a3"
                 ],
                 [
                     "HG004_aligned_assembly.bam",
@@ -1122,7 +1116,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-02T14:54:26.690825648",
+        "timestamp": "2026-07-06T15:08:08.872591624",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
