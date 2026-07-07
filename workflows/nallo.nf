@@ -802,7 +802,7 @@ workflow NALLO {
         // Annotates family VCFs per variant call region
         ANNOTATE_SNVS(
             ch_snv_vcf_tbi_nuclear_mitochondrial_for_annotation.vcf,
-            ch_echtvar_databases.map { _meta, databases -> databases }.collect(),
+            ch_echtvar_databases.map { _meta, databases -> databases }.collect().map { dbs -> [[id: 'echtvar_db'], dbs] },
             ch_fasta,
             ch_fai,
             PREPARE_REFERENCES.out.vep_resources,

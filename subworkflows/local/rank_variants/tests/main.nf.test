@@ -33,9 +33,9 @@ nextflow_workflow {
                     [ id: 'project', num_intervals:1 ],
                     file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.bcf', checkIfExists: true)
                 ])
-                input[1] = channel.of([
-                    [id: 'db' ],
-                    file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
+                input[1] = channel.value([
+                    [ id: 'db' ],
+                    [file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)]
                 ])
                 input[2] = PREPARE_REFERENCES.out.fasta
                 input[3] = PREPARE_REFERENCES.out.fai
