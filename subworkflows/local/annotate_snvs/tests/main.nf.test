@@ -266,7 +266,7 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
                 input[1] = channel.value([
-                    [:],
+                    [ id: 'db' ],
                     [file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)]
                 ])
                 input[2] = GUNZIP.out.gunzip
