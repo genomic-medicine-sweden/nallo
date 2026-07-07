@@ -402,8 +402,7 @@ workflow NALLO {
         if (!val_skip_portello) {
 
             PORTELLO_ASSEMBLY(
-                ch_aligned_bam.map { meta, bam, _bai -> [meta, bam] },
-                ch_aligned_bam.map { meta, _bam, bai -> [meta, bai] },
+                ch_aligned_bam,
                 ch_assembly_bam_bai_updated_meta,
                 ch_fasta,
                 ch_fai,

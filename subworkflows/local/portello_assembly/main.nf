@@ -8,17 +8,15 @@ include { SAMTOOLS_CALMD        } from '../../../modules/nf-core/samtools/calmd/
 
 workflow PORTELLO_ASSEMBLY {
     take:
-    ch_bam                      // channel: [mandatory] [ val(meta), path(bam) ]
-    ch_bai                      // channel: [mandatory] [ val(meta), path(bai) ]
-    ch_assembly_bam_bai         // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
-    ch_fasta                    // channel: [mandatory] [ val(meta), path(fasta) ]
-    ch_fai                      // channel: [mandatory] [ val(meta), path(fai) ]
+    ch_reads_to_assembly_bam_bai // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
+    ch_assembly_to_ref_bam_bai   // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
+    ch_fasta                     // channel: [mandatory] [ val(meta), path(fasta) ]
+    ch_fai                       // channel: [mandatory] [ val(meta), path(fai) ]
 
     main:
     PORTELLO (
-        ch_assembly_bam_bai
-            .join(ch_bam)
-            .join(ch_bai, failOnMismatch: true, failOnDuplicate: true)
+        ch_assembly_to_ref_bam_bai
+            .join(ch_reads_to_assembly_bam_bai, failOnMismatch: true, failOnDuplicate: true)
             .combine(ch_fasta.map { _meta, fasta -> fasta })
             .map { meta, asm_to_ref_bam, asm_to_ref_bai, read_to_asm_bam, read_to_asm_bai, ref_fasta ->
                 [

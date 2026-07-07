@@ -24,51 +24,24 @@ nextflow_workflow {
                 """
             }
         }
-
-        run("GENOME_ASSEMBLY") {
-            script "../../genome_assembly/main.nf"
-            process {
-                """
-                input[0] = channel.of(
-                    [
-                        [ id: 'HG002', sex: 1  ],
-                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
-                    ]
-                )
-                input[1] = false
-                """
-            }
-        }
-
-        run("ALIGN_ASSEMBLIES") {
-            script "../../align_assemblies/main.nf"
-            process {
-                """
-                input[0] = GENOME_ASSEMBLY.out.assembled_haplotypes
-                input[1] = channel.of([
-                    [ id:'hg38' ],
-                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
-                ])
-                input[2] = PREPARE_REFERENCES.out.fai
-                input[3] = false
-                """
-            }
-        }
     }
 
     test("1 sample") {
         when {
             workflow {
                 """
-                input[0] = GENOME_ASSEMBLY.out.assembled_haplotypes
+                input[0] = Channel.of([
+                    [ id: 'HG002', sex: 1 ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_reads_to_assembly.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_reads_to_assembly.bam.bai', checkIfExists: true)
+                ])
                 input[1] = Channel.of([
                     [ id: 'HG002', sex: 1 ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_aligned_assembly.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_aligned_assembly.bam.bai', checkIfExists: true)
                 ])
-                input[2] = ALIGN_ASSEMBLIES.out.bam
-                                .join(ALIGN_ASSEMBLIES.out.bai, failOnMismatch: true, failOnDuplicate: true)
-                input[3] = PREPARE_REFERENCES.out.fasta
-                input[4] = PREPARE_REFERENCES.out.fai
+                input[2] = PREPARE_REFERENCES.out.fasta
+                input[3] = PREPARE_REFERENCES.out.fai
                 """
             }
         }
@@ -91,15 +64,18 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = GENOME_ASSEMBLY.out.assembled_haplotypes
+                input[0] = Channel.of([
+                    [ id: 'HG002', sex: 1 ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_reads_to_assembly.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_reads_to_assembly.bam.bai', checkIfExists: true)
+                ])
                 input[1] = Channel.of([
                     [ id: 'HG002', sex: 1 ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_aligned_assembly.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_aligned_assembly.bam.bai', checkIfExists: true)
                 ])
-                input[2] = ALIGN_ASSEMBLIES.out.bam
-                                .join(ALIGN_ASSEMBLIES.out.bai, failOnMismatch: true, failOnDuplicate: true)
-                input[3] = PREPARE_REFERENCES.out.fasta
-                input[4] = PREPARE_REFERENCES.out.fai
+                input[2] = PREPARE_REFERENCES.out.fasta
+                input[3] = PREPARE_REFERENCES.out.fai
                 """
             }
         }

@@ -1,10 +1,10 @@
 {
     "1 sample": {
         "content": [
-            "ea990284982029d2beb15d6e1cb8921",
+            "a196ec7f9c610132f5a4af546c50f2b1",
             "HG002_remapped_assembly.bam.bai"
         ],
-        "timestamp": "2026-07-01T12:00:40.73001846",
+        "timestamp": "2026-07-07T14:34:41.584482284",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -51,7 +51,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-01T11:58:17.333864641",
+        "timestamp": "2026-07-07T14:34:52.039038417",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
