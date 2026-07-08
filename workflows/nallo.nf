@@ -60,13 +60,11 @@ include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CHROMOGRAPH             } from '../modu
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SV                      } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING                 } from '../modules/nf-core/bcftools/view/main'
 include { MINIMAP2_ALIGN                                         } from '../modules/nf-core/minimap2/align/main'
-include { MINIMAP2_ALIGN as MINIMAP2_ASSEMBLIES                  } from '../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_MERGE                                         } from '../modules/nf-core/samtools/merge/main'
 include { SAMTOOLS_CONVERT                                       } from '../modules/nf-core/samtools/convert/main'
 include { MULTIQC                                                } from '../modules/nf-core/multiqc/main'
 include { PEDDY                                                  } from '../modules/nf-core/peddy/main'
 include { SPLITUBAM                                              } from '../modules/nf-core/splitubam/main'
-include { SVDB_MERGE as SVDB_MERGE_SVS_CNVS                      } from '../modules/nf-core/svdb/merge/main'
 include { PBMM2_ALIGN                                            } from '../modules/nf-core/pbmm2/align/main'
 include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_PBMM2                 } from '../modules/nf-core/samtools/index/main'
 include { paramsSummaryMap                                       } from 'plugin/nf-schema'
@@ -307,30 +305,30 @@ workflow NALLO {
             .groupTuple()
             .map { meta, files -> [meta + [n_files: files.size()]] }
 
-        if (!val_skip_portello) {
-            // Match BAM files and reference by sample ID for alignment with pbmm2
-            ch_reads_for_alignment
-                .map { meta, bam -> [[id: meta.id], meta, bam] }
-                .combine(
-                    GENOME_ASSEMBLY.out.concatenated_haplotypes
-                    .map { meta, ref -> [[id: meta.id], ref] },
-                    by: 0
-                )
-                .multiMap { _id, meta, bam, ref ->
-                    reads:     [meta, bam]
-                    reference: [meta, ref]
-                }
-                .set { ch_pbmm2_input }
-        }
-        else {
-            ch_pbmm2_input = ch_reads_for_alignment.combine(ch_fasta)
-                .multiMap { bam_meta, bam, _ref_meta, ref ->
-                    reads:     [bam_meta, bam]
-                    reference: [bam_meta, ref]
-                }
-        }
-
         if (val_aligner == 'pbmm2') {
+            if (!val_skip_portello) {
+                // Match BAM files and reference by sample ID for alignment with pbmm2
+                ch_reads_for_alignment
+                    .map { meta, bam -> [[id: meta.id], meta, bam] }
+                    .combine(
+                        GENOME_ASSEMBLY.out.concatenated_haplotypes
+                        .map { meta, ref -> [[id: meta.id], ref] },
+                        by: 0
+                    )
+                    .multiMap { _id, meta, bam, ref ->
+                        reads:     [meta, bam]
+                        reference: [meta, ref]
+                    }
+                    .set { ch_pbmm2_input }
+            }
+            else {
+                ch_pbmm2_input = ch_reads_for_alignment.combine(ch_fasta)
+                    .multiMap { bam_meta, bam, _ref_meta, ref ->
+                        reads:     [bam_meta, bam]
+                        reference: [bam_meta, ref]
+                    }
+            }
+
             PBMM2_ALIGN(
                 ch_pbmm2_input.reads,
                 ch_pbmm2_input.reference,
