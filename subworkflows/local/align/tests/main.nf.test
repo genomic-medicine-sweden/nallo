@@ -10,36 +10,9 @@ nextflow_workflow {
     tag "subworkflows/align"
     tag "minimap2"
     tag "minimap2/align"
-    tag "samtools"
-    tag "samtools/merge"
-    tag "splitubam"
+    tag "minimap2/index"
 
-    test("[fastq, fasta, false]") {
-        when {
-            workflow {
-                """
-                input[0] = channel.of([
-                    [ id:'test' ],
-                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
-                ])
-                input[1] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
-                input[2] = false
-                """
-            }
-        }
-
-        then {
-            assertAll(
-                { assert workflow.success },
-                { assert snapshot(
-                    bam(workflow.out.bam.get(0).get(1)).getReadsMD5(),
-                    file(workflow.out.bai.get(0).get(1)).name
-                ).match() }
-            )
-        }
-    }
-
-    test("[bam, fasta, true]") {
+    test("[bam, fasta]") {
         when {
             workflow {
                 """
@@ -48,7 +21,6 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
                 ])
                 input[1] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
-                input[2] = true
                 """
             }
         }
@@ -58,13 +30,13 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     bam(workflow.out.bam.get(0).get(1)).getReadsMD5(),
-                    file(workflow.out.bai.get(0).get(1)).name
+                    file(workflow.out.index.get(0).get(1)).name
                 ).match() }
             )
         }
     }
 
-    test("[bam x 2, fasta, true] - different IDs") {
+    test("[bam x 2, fasta] - different IDs") {
         when {
             workflow {
                 """
@@ -79,7 +51,6 @@ nextflow_workflow {
                     )
                 )
                 input[1] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
-                input[2] = true
                 """
             }
         }
@@ -90,14 +61,14 @@ nextflow_workflow {
                 { assert snapshot(
                     bam(workflow.out.bam.get(0).get(1)).getReadsMD5(),
                     bam(workflow.out.bam.get(1).get(1)).getReadsMD5(),
-                    file(workflow.out.bai.get(0).get(1)).name,
-                    file(workflow.out.bai.get(1).get(1)).name
+                    file(workflow.out.index.get(0).get(1)).name,
+                    file(workflow.out.index.get(1).get(1)).name
                 ).match() }
             )
         }
     }
 
-    test("[bam, fasta, true] - same ID") {
+    test("[bam, fasta] - same ID") {
         when {
             workflow {
                 """
@@ -112,7 +83,6 @@ nextflow_workflow {
                     )
                 )
                 input[1] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
-                input[2] = true
                 """
             }
         }
@@ -122,14 +92,14 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     bam(workflow.out.bam.get(0).get(1)).getReadsMD5(),
-                    file(workflow.out.bai.get(0).get(1)).name
+                    file(workflow.out.index.get(0).get(1)).name
                 ).match() }
             )
         }
 
     }
 
-    test("[fastq, fasta, false] - stub") {
+    test("[fastq, fasta] - stub") {
         options "-stub"
         when {
             workflow {
@@ -139,7 +109,6 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
                 ])
                 input[1] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
-                input[2] = false
                 """
             }
         }
@@ -152,7 +121,7 @@ nextflow_workflow {
         }
     }
 
-    test("[bam, fasta, true] - stub") {
+    test("[bam, fasta] - stub") {
         options "-stub"
         when {
             workflow {
@@ -162,7 +131,6 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
                 ])
                 input[1] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
-                input[2] = true
                 """
             }
         }
@@ -175,7 +143,7 @@ nextflow_workflow {
         }
     }
 
-    test("[bam, fasta, true] - different IDs - stub") {
+    test("[bam, fasta] - different IDs - stub") {
         options "-stub"
         when {
             workflow {
@@ -185,7 +153,6 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                 ])
                 input[1] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
-                input[2] = true
                 """
             }
         }
@@ -198,7 +165,7 @@ nextflow_workflow {
         }
     }
 
-    test("[bam, fasta, true] - same ID - stub") {
+    test("[bam, fasta] - same ID - stub") {
         options "-stub"
         when {
             workflow {
@@ -208,7 +175,6 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                 ])
                 input[1] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
-                input[2] = true
                 """
             }
         }

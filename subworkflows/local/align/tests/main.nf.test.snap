@@ -1,124 +1,27 @@
 {
-    "[fastq, fasta, false] - stub": {
-        "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "bai": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "bam": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ]
-            }
-        ],
-        "timestamp": "2026-06-10T11:06:06.300709792",
-        "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.04.1"
-        }
-    },
-    "[bam, fasta, true] - stub": {
-        "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "bai": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "bam": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ]
-            }
-        ],
-        "timestamp": "2026-06-10T11:06:16.372347133",
-        "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.04.1"
-        }
-    },
-    "[fastq, fasta, false]": {
-        "content": [
-            "f8c3b1118e5539d5593a03a469de541c",
-            "test_aligned.bam.bai"
-        ],
-        "timestamp": "2026-06-11T10:15:27.455247821",
-        "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.04.3"
-        }
-    },
-    "[bam, fasta, true] - same ID": {
-        "content": [
-            "17845380e973d731862a73c4697a1e7",
-            "test_aligned.bam.bai"
-        ],
-        "timestamp": "2026-06-11T10:16:15.335470987",
-        "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.04.3"
-        }
-    },
-    "[bam, fasta, true]": {
+    "[bam, fasta]": {
         "content": [
             "eeaeea791da897c73f888b97fd3ec04f",
-            "test_aligned.bam.bai"
+            "HG002_PacBio_Revio.bam.bam.bai"
         ],
-        "timestamp": "2026-06-11T10:15:39.28406866",
+        "timestamp": "2026-07-08T11:56:20.709567521",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.3"
+            "nextflow": "26.04.4"
         }
     },
-    "[bam, fasta, true] - same ID - stub": {
+    "[bam, fasta] - same ID": {
+        "content": [
+            "eeaeea791da897c73f888b97fd3ec04f",
+            "HG002_PacBio_Revio.bam.bam.bai"
+        ],
+        "timestamp": "2026-07-08T11:56:52.821903933",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.4"
+        }
+    },
+    "[bam, fasta] - same ID - stub": {
         "content": [
             {
                 "0": [
@@ -126,7 +29,7 @@
                         {
                             "id": "test"
                         },
-                        "test.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_PacBio_Revio.bam.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "1": [
@@ -134,15 +37,7 @@
                         {
                             "id": "test"
                         },
-                        "test.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "bai": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_PacBio_Revio.bam.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "bam": [
@@ -150,18 +45,26 @@
                         {
                             "id": "test"
                         },
-                        "test.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_PacBio_Revio.bam.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "index": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "HG002_PacBio_Revio.bam.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-06-10T11:06:38.27640227",
+        "timestamp": "2026-07-08T11:57:30.382725134",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.1"
+            "nextflow": "26.04.4"
         }
     },
-    "[bam, fasta, true] - different IDs - stub": {
+    "[fastq, fasta] - stub": {
         "content": [
             {
                 "0": [
@@ -169,7 +72,7 @@
                         {
                             "id": "test"
                         },
-                        "test.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_PacBio_Revio.fastq.gz.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "1": [
@@ -177,15 +80,7 @@
                         {
                             "id": "test"
                         },
-                        "test.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "bai": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_PacBio_Revio.fastq.gz.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "bam": [
@@ -193,28 +88,122 @@
                         {
                             "id": "test"
                         },
-                        "test.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_PacBio_Revio.fastq.gz.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "index": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "HG002_PacBio_Revio.fastq.gz.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-06-10T11:06:28.168548816",
+        "timestamp": "2026-07-08T11:57:01.96223662",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.1"
+            "nextflow": "26.04.4"
         }
     },
-    "[bam x 2, fasta, true] - different IDs": {
+    "[bam, fasta] - different IDs - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "HG002_PacBio_Revio.bam.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "HG002_PacBio_Revio.bam.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "bam": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "HG002_PacBio_Revio.bam.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "index": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "HG002_PacBio_Revio.bam.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-08T11:57:20.643416265",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.4"
+        }
+    },
+    "[bam x 2, fasta] - different IDs": {
         "content": [
             "1f269b91126a9fd6394487c5c05720e6",
             "eeaeea791da897c73f888b97fd3ec04f",
-            "test2_aligned.bam.bai",
-            "test_aligned.bam.bai"
+            "HG003_PacBio_Revio.bam.bam.bai",
+            "HG002_PacBio_Revio.bam.bam.bai"
         ],
-        "timestamp": "2026-06-11T10:15:57.907188349",
+        "timestamp": "2026-07-08T11:56:36.571263885",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.3"
+            "nextflow": "26.04.4"
+        }
+    },
+    "[bam, fasta] - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "HG002_PacBio_Revio.bam.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "HG002_PacBio_Revio.bam.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "bam": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "HG002_PacBio_Revio.bam.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "index": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "HG002_PacBio_Revio.bam.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-08T11:57:10.914404528",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.4"
         }
     }
 }

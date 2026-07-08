@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
 name: "align"
-description: Map reads to a reference genome using minimap2. Allows for input splitting and mixing in of mapped BAMs
+description: Map reads in BAM files to a reference genome using minimap2.
 keywords:
   - alignment
   - bam
@@ -8,8 +8,7 @@ keywords:
   - minimap2
 components:
   - minimap2/align
-  - samtools/merge
-  - splitubam
+  - minimap2/index
 input:
   - ch_ubam:
       type: file
@@ -17,30 +16,25 @@ input:
         The input channel containing unmapped BAM files.
         Structure: [ val(meta), path(bam) ]
       pattern: "*.{bam/cram/sam}"
-  - ch_mapped_bam:
+  - ch_fasta:
       type: file
       description: |
-        Optional input channel containing mapped BAM files and indexes to be merged with the newly mapped BAMs.
-        Structure: [ val(meta), path(bam), path(bai) ]
-      pattern: "*.{bam/cram}{,.bai,.crai}"
-  - ch_mmi:
-      type: file
-      description: |
-        Channel containing minimap2 index files.
-        Structure: [ val(meta), path(mmi) ]
-      pattern: "*.mmi"
-  - val_split_alignment:
-      type: bool
-      description: |
-        Whether to split the input BAM files and align them in parallel.
-        The number of splits is determined by the pipeline configuration.
+        Channel containing fasta reference file
+        Structure: [ val(meta), path(fasta) ]
+      pattern: "*.{fa,fasta,fna}{,.gz}"
 output:
-  - bam_bai:
+  - bam:
       type: file
       description: |
-        Channel containing mapped BAM and index files.
-        Structure: [ val(meta), path(bam), path(bai) ]
+        Channel containing mapped BAM files.
+        Structure: [ val(meta), path(bam) ]
       pattern: "*.bam"
+  - index:
+      type: file
+      description: |
+        Channel containing BAM index files.
+        Structure: [ val(meta), path(bai) ]
+      pattern: "*.bai"
 authors:
   - "@Schmytzi"
 maintainers:

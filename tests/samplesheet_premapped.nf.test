@@ -13,13 +13,6 @@ nextflow_pipeline {
                 input                        = "$projectDir/assets/samplesheet_multisample_bam.csv"
                 outdir                       = "$outputDir"
                 premapped                    = true
-                phaser                       = "hiphase"
-                sv_callers                   = "sawfish"
-                sv_callers_to_run            = "sawfish,severus,hificnv,sniffles"
-                filter_snvs_expression       = "-i 'AD>0'"
-                filter_svs_expression        = "-i 'FILTER=\"PASS\"'"
-                paraphrase_output_format     = 'json'
-                create_sawfish_maf_track     = false
             }
         }
 

@@ -145,8 +145,6 @@ workflow NALLO {
     val_plot_chromograph_coverage
     val_pre_vep_snv_filter_expression
     val_premapped
-    val_run_methbat
-    val_run_modkit
     val_sentieon_tech
     val_skip_alignment
     val_skip_annotate_paralogs
@@ -242,7 +240,6 @@ workflow NALLO {
 
         ALIGN_ASSEMBLIES(
             GENOME_ASSEMBLY.out.assembled_haplotypes,
-            PREPARE_REFERENCES.out.mmi,
             ch_fasta,
             ch_fai,
             val_cram_output
@@ -262,39 +259,60 @@ workflow NALLO {
                 true,
             )
 
+            if (val_alignment_processes > 1) {
+                SPLITUBAM(CONVERT_INPUT_FASTQS.out.bam)
+                ch_unmapped = SPLITUBAM.out.bam
+                    .transpose()
+                    .map { meta, bam -> tuple( meta + [file: bam.name], bam ) }
+            } else {
+                ch_unmapped = CONVERT_INPUT_FASTQS.out.bam
+            }
+
+            /*
+             * Create a grouping key per sample that records the number of split files,
+             * allowing downstream merging to trigger as soon as all alignments of a sample are ready.
+             */
+            ch_reads_grouping_key = ch_unmapped
+                .groupTuple()
+                .map { meta, files -> tuple(meta.id, files.size()) }
+
             ALIGN(
                 CONVERT_INPUT_FASTQS.out.bam,
-                PREPARE_REFERENCES.out.mmi,
-                val_alignment_processes > 1
+                ch_fasta
             )
 
-            ch_aligned_bam = ALIGN.out.bam
-                .join(ALIGN.out.bai, failOnMismatch: true, failOnDuplicate: true)
-        } else {
+            ch_aligned_for_merge = ALIGN.out.bam
+                .join(ALIGN.out.index, failOnMismatch: true, failOnDuplicate: true)
+                .combine(ch_reads_grouping_key)
+                .filter { bam_meta, _bam, _bai, group_id, _group_size ->
+                    bam_meta.id == group_id
+                }
+                .map { bam_meta, bam, bai, _group_id, group_size ->
+                    tuple(groupKey(bam_meta - bam_meta.subMap('file'), group_size), bam, bai)
+                }
+                .groupTuple()
+                .map { key, bams, bais -> tuple(key.getGroupTarget(), bams, bais) }
 
-            // Check that no FASTQs are in samplesheet if --premapped is set
-            // Something would crash eventually if there were FASTQs, but this is a more user-friendly error message
-            ch_samplesheet
-                .filter { _meta, reads -> reads.name =~ 'f(ast)?q(\\.gz)?$' }
-                .map { _meta, _reads -> error "FASTQ files were found in the samplesheet, but --premapped was set. Please remove FASTQ files from the samplesheet or unset --premapped." }
+        } else {
 
             // If bams are premapped, just merge them (ONT machines output several BAMs per sample)
             // SAMTOOLS_MERGE expects indexes in the input but is happy to merge them if the indexes are missing
-            ch_samtools_merge_in = ch_samplesheet
+            ch_aligned_for_merge = ch_samplesheet
                 .groupTuple()
                 .map { meta, reads -> [meta, reads, [] ] }
 
-            SAMTOOLS_MERGE(
-               ch_samtools_merge_in,
-               [ [], [], [], [] ]
-            )
-
-            ch_aligned_bam = SAMTOOLS_MERGE.out.bam
-                .join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true)
         }
 
+        SAMTOOLS_MERGE(
+           ch_aligned_for_merge,
+           [ [], [], [], [] ]
+        )
+
+        ch_aligned_bam = SAMTOOLS_MERGE.out.bam
+            .join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true)
+
         // Publish alignments as CRAM if requested
-        if (val_cram_output && val_skip_phasing) {
+        if (val_convert_unphased_aligned_reads_to_cram) {
             SAMTOOLS_CONVERT(
                 ch_aligned_bam,
                 ch_fasta.join(ch_fai).collect(),

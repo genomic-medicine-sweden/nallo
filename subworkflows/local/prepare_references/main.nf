@@ -1,5 +1,4 @@
 include { GUNZIP as GUNZIP_FASTA   } from '../../../modules/nf-core/gunzip/main'
-include { MINIMAP2_INDEX           } from '../../../modules/nf-core/minimap2/index/main'
 include { SAMTOOLS_FAIDX           } from '../../../modules/nf-core/samtools/faidx/main'
 include { UNTAR as UNTAR_VEP_CACHE } from '../../../modules/nf-core/untar/main'
 
@@ -35,10 +34,6 @@ workflow PREPARE_REFERENCES {
         ch_fai = fai_in
     }
 
-    MINIMAP2_INDEX(
-        ch_fasta
-    )
-
     if (untar_vep_cache) {
         UNTAR_VEP_CACHE(
             ch_vep_cache
@@ -46,7 +41,6 @@ workflow PREPARE_REFERENCES {
     }
 
     emit:
-    mmi           = MINIMAP2_INDEX.out.index.collect()                                   // channel: [ val(meta), path(mmi) ]
     fai           = ch_fai                                                               // channel: [ val(meta), path(fai) ]
     fasta         = ch_fasta                                                             // channel: [ val(meta), path(fasta) ]
     vep_resources = untar_vep_cache ? UNTAR_VEP_CACHE.out.untar.collect() : ch_vep_cache // channel: [ val(meta), path(cache) ]

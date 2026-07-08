@@ -8,16 +8,19 @@ include { TAGBAM           } from '../../../modules/nf-core/tagbam/main'
 workflow ALIGN_ASSEMBLIES {
     take:
     ch_assembly // channel: [mandatory] [ val(meta), path(fasta) ]
-    ch_mmi     // channel: [mandatory] [ val(meta), path(mmi)   ]
     ch_fasta // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fai // channel: [mandatory] [ val(meta), path(fai)   ]
     val_cram_output // bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
 
+    MINIMAP2_INDEX(
+        ch_fasta
+    )
+
     MINIMAP2_ALIGN(
         ch_assembly,
-        ch_mmi,
+        MINIMAP2_INDEX.out.mmi,
         true,
         'bai',
         false,
