@@ -4,6 +4,10 @@ nextflow_workflow {
     script "../main.nf"
     config "./nextflow.config"
     workflow "PHASING"
+    tag "hiphase"
+    tag "longphase"
+    tag "whatshap"
+    tag "qc_aligned_reads"
 
     setup {
 
