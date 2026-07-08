@@ -5,7 +5,7 @@
                 [
                     {
                         "id": "HG002",
-                        "family_id": "HG002"
+                        "family_id": "FAM"
                     },
                     "HG002_pbcpgtools.combined.bw:md5,ed33f5a39a23149a2af29f69ec1eeacc"
                 ]
@@ -14,7 +14,7 @@
                 [
                     {
                         "id": "HG002",
-                        "family_id": "HG002"
+                        "family_id": "FAM"
                     },
                     "HG002_pbcpgtools.hap1.bw:md5,3a16bf7583d1e046d124cd6f77958b6f"
                 ]
@@ -23,7 +23,7 @@
                 [
                     {
                         "id": "HG002",
-                        "family_id": "HG002"
+                        "family_id": "FAM"
                     },
                     "HG002_pbcpgtools.hap2.bw:md5,758226783285a8cf0ffe575fc7071321"
                 ]
@@ -32,7 +32,7 @@
                 [
                     {
                         "id": "HG002",
-                        "family_id": "HG002"
+                        "family_id": "FAM"
                     },
                     "HG002_pbcpgtools.combined.bed.gz:md5,6f01ec9ca68716764dfffa80b09177c8"
                 ]
@@ -42,7 +42,7 @@
                 [
                     {
                         "id": "HG002",
-                        "family_id": "HG002"
+                        "family_id": "FAM"
                     },
                     "HG002_pbcpgtools.hap1.bed.gz:md5,a7ceb2d7807aa3c1309c632d2ccfcb39"
                 ]
@@ -52,7 +52,7 @@
                 [
                     {
                         "id": "HG002",
-                        "family_id": "HG002"
+                        "family_id": "FAM"
                     },
                     "HG002_pbcpgtools.hap2.bed.gz:md5,6f4109715f0f15d127300ce9b542047a"
                 ]
@@ -64,10 +64,10 @@
                 "chr20\t2652400\t2653100\t\tUnmethylated\tUncategorized\tALL\t75\t1.0\t1.0\t\t\t\t\t0.0031596755734686773\t-0.14418758242653132\t-10.549149730898986\t0\t0\t87\t22\t0\t0"
             ]
         ],
-        "timestamp": "2026-05-27T10:43:20.195209898",
+        "timestamp": "2026-07-08T14:08:48.933859028",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.04.4"
         }
     },
     "1 sample - unphased": {
@@ -123,7 +123,7 @@
                 [
                     {
                         "id": "HG002",
-                        "family_id": "HG002"
+                        "family_id": "FAM"
                     },
                     "HG002_pbcpgtools.combined.bw:md5,ed33f5a39a23149a2af29f69ec1eeacc"
                 ]
@@ -132,7 +132,7 @@
                 [
                     {
                         "id": "HG002",
-                        "family_id": "HG002"
+                        "family_id": "FAM"
                     },
                     "HG002_pbcpgtools.hap1.bw:md5,3a16bf7583d1e046d124cd6f77958b6f"
                 ]
@@ -141,7 +141,7 @@
                 [
                     {
                         "id": "HG002",
-                        "family_id": "HG002"
+                        "family_id": "FAM"
                     },
                     "HG002_pbcpgtools.hap2.bw:md5,758226783285a8cf0ffe575fc7071321"
                 ]
@@ -150,7 +150,7 @@
                 [
                     {
                         "id": "HG002",
-                        "family_id": "HG002"
+                        "family_id": "FAM"
                     },
                     "HG002_pbcpgtools.combined.bed.gz:md5,6f01ec9ca68716764dfffa80b09177c8"
                 ]
@@ -160,7 +160,7 @@
                 [
                     {
                         "id": "HG002",
-                        "family_id": "HG002"
+                        "family_id": "FAM"
                     },
                     "HG002_pbcpgtools.hap1.bed.gz:md5,a7ceb2d7807aa3c1309c632d2ccfcb39"
                 ]
@@ -170,7 +170,7 @@
                 [
                     {
                         "id": "HG002",
-                        "family_id": "HG002"
+                        "family_id": "FAM"
                     },
                     "HG002_pbcpgtools.hap2.bed.gz:md5,6f4109715f0f15d127300ce9b542047a"
                 ]
@@ -182,84 +182,204 @@
                 "chr16\t172876\t173710\t\tUnmethylated\tHypoMethylated\tMALE\t0\t0.0\t0.00013506571646010277\t0.08653846153846154\t0.16410256410256407\t0.07756410256410255\t1.7208090014090252\t0.11794871794871793\t-0.8155868340512821\t-29.104470464990392\t65\t0\t0\t18\t8\t9"
             ]
         ],
-        "timestamp": "2026-05-27T10:43:43.308022384",
+        "timestamp": "2026-07-08T14:09:12.521764184",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.04.4"
         }
     },
     "1 sample - phased - stub": {
         "content": [
             {
                 "0": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_methbat_profile.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "1": [
                     
                 ],
                 "10": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap2.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "2": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.combined.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "3": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap1.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "4": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap2.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "5": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.combined.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
                 ],
                 "6": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.combined.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "7": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap1.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
                 ],
                 "8": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap1.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "9": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap2.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
                 ],
                 "asm_bed": [
                     
                 ],
                 "pbcpg_combined_bed": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.combined.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
                 ],
                 "pbcpg_combined_bigwig": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.combined.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "pbcpg_combined_index": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.combined.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "pbcpg_hap1_bed": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap1.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
                 ],
                 "pbcpg_hap1_bigwig": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap1.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "pbcpg_hap1_index": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap1.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "pbcpg_hap2_bed": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap2.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
                 ],
                 "pbcpg_hap2_bigwig": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap2.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "pbcpg_hap2_index": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap2.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "region_profile": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_methbat_profile.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ]
             }
         ],
-        "timestamp": "2026-07-08T11:52:03.406940176",
+        "timestamp": "2026-07-08T14:09:46.848460525",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"
@@ -286,7 +406,7 @@
                 [
                     {
                         "id": "HG002",
-                        "family_id": "HG002"
+                        "family_id": "FAM"
                     },
                     "HG002_pbcpgtools.combined.bw:md5,ed33f5a39a23149a2af29f69ec1eeacc"
                 ]
@@ -295,7 +415,7 @@
                 [
                     {
                         "id": "HG002",
-                        "family_id": "HG002"
+                        "family_id": "FAM"
                     },
                     "HG002_pbcpgtools.hap1.bw:md5,3a16bf7583d1e046d124cd6f77958b6f"
                 ]
@@ -304,7 +424,7 @@
                 [
                     {
                         "id": "HG002",
-                        "family_id": "HG002"
+                        "family_id": "FAM"
                     },
                     "HG002_pbcpgtools.hap2.bw:md5,758226783285a8cf0ffe575fc7071321"
                 ]
@@ -313,7 +433,7 @@
                 [
                     {
                         "id": "HG002",
-                        "family_id": "HG002"
+                        "family_id": "FAM"
                     },
                     "HG002_pbcpgtools.combined.bed.gz:md5,6f01ec9ca68716764dfffa80b09177c8"
                 ]
@@ -323,7 +443,7 @@
                 [
                     {
                         "id": "HG002",
-                        "family_id": "HG002"
+                        "family_id": "FAM"
                     },
                     "HG002_pbcpgtools.hap1.bed.gz:md5,a7ceb2d7807aa3c1309c632d2ccfcb39"
                 ]
@@ -333,7 +453,7 @@
                 [
                     {
                         "id": "HG002",
-                        "family_id": "HG002"
+                        "family_id": "FAM"
                     },
                     "HG002_pbcpgtools.hap2.bed.gz:md5,6f4109715f0f15d127300ce9b542047a"
                 ]
@@ -345,84 +465,216 @@
                 "chr20\t2652400\t2653100\t\tUnmethylated\tUncategorized\tALL\t75\t1.0\t1.0\t\t\t\t\t0.0031596755734686773\t-0.14418758242653132\t-10.549149730898986\t0\t0\t87\t22\t0\t0"
             ]
         ],
-        "timestamp": "2026-05-27T10:43:55.627912982",
+        "timestamp": "2026-07-08T14:09:24.636573553",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.04.4"
         }
     },
     "1 sample - bed phased - stub": {
         "content": [
             {
                 "0": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_methbat_profile.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "1": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "test.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "10": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap2.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "2": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.combined.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "3": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap1.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "4": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap2.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "5": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.combined.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
                 ],
                 "6": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.combined.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "7": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap1.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
                 ],
                 "8": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap1.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "9": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap2.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
                 ],
                 "asm_bed": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "test.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "pbcpg_combined_bed": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.combined.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
                 ],
                 "pbcpg_combined_bigwig": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.combined.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "pbcpg_combined_index": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.combined.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "pbcpg_hap1_bed": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap1.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
                 ],
                 "pbcpg_hap1_bigwig": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap1.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "pbcpg_hap1_index": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap1.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "pbcpg_hap2_bed": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap2.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
                 ],
                 "pbcpg_hap2_bigwig": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap2.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "pbcpg_hap2_index": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_pbcpgtools.hap2.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "region_profile": [
-                    
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_methbat_profile.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ]
             }
         ],
-        "timestamp": "2026-07-08T11:52:12.341849778",
+        "timestamp": "2026-07-08T14:09:57.458284301",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"

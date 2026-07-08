@@ -56,7 +56,7 @@ workflow LONGPHASE {
     }
 
     LONGPHASE_PHASE(
-        ch_longphase_phase_in.view(),
+        ch_longphase_phase_in,
         fasta,
         fai,
     )
