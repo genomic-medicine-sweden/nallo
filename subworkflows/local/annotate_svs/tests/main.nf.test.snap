@@ -2,12 +2,12 @@
     "severus, fasta, svdb, vep_cache, '110', vep_plugin_files": {
         "content": [
             "97b371e9ead544401c47225602ddb8ca",
-            "test_vep.vcf.gz.tbi"
+            "test.vcf.gz.tbi"
         ],
-        "timestamp": "2026-05-27T10:41:59.398643455",
+        "timestamp": "2026-07-08T11:50:00.249600229",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.04.4"
         }
     },
     "severus, fasta, svdb, vep_cache, '110', vep_plugin_files -stub": {
@@ -20,7 +20,7 @@
                             "single_end": false,
                             "project": "project"
                         },
-                        "test_vep.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "1": [
@@ -30,7 +30,7 @@
                             "single_end": false,
                             "project": "project"
                         },
-                        "test_vep.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "tbi": [
@@ -40,7 +40,7 @@
                             "single_end": false,
                             "project": "project"
                         },
-                        "test_vep.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "vcf": [
@@ -50,15 +50,15 @@
                             "single_end": false,
                             "project": "project"
                         },
-                        "test_vep.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-05-27T10:42:07.976167849",
+        "timestamp": "2026-07-08T11:50:08.795909116",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.04.4"
         }
     }
 }
