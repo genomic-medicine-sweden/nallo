@@ -28,10 +28,10 @@
                     ]
                 ],
                 "2": [
-
+                    
                 ],
                 "3": [
-
+                    
                 ],
                 "4": [
                     [
@@ -44,7 +44,7 @@
                     ]
                 ],
                 "5": [
-
+                    
                 ],
                 "6": [
                     [
@@ -111,7 +111,7 @@
                     ]
                 ],
                 "haplotagged_cram_crai": [
-
+                    
                 ],
                 "haplotagging_arrow": [
                     [
@@ -148,10 +148,10 @@
                     ]
                 ],
                 "phased_family_svs": [
-
+                    
                 ],
                 "phased_family_svs_tbi": [
-
+                    
                 ],
                 "stats": [
                     [
@@ -184,10 +184,10 @@
             ],
             "FAM_snv_phased.vcf.gz.tbi",
             [
-
+                
             ],
             [
-
+                
             ],
             [
                 [
@@ -195,12 +195,12 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_PacBio_Revio_haplotagged.bam:md5,6dc1b2068e6b279c8e0b2fed13f0afdb",
-                    "HG002_PacBio_Revio_haplotagged.bam.bai:md5,76b71249874e7c0fbd0475157461f9ac"
+                    "HG002_PacBio_Revio_haplotagged.bam:md5,fb0221be67a78146a4822a1911221bf7",
+                    "HG002_PacBio_Revio_haplotagged.bam.bai:md5,f9474c8bd27b5fc0c41353c2239be875"
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -236,7 +236,7 @@
                         "family_id": "FAM"
                     },
                     "HG002_cramino_aligned_phased.txt",
-                    "bbef099337851b2e82fe1003febf942d"
+                    "9d16b67b282f52584ae175feaa043fd0"
                 ]
             ],
             [
@@ -249,7 +249,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-23T11:32:03.744039838",
+        "timestamp": "2026-07-08T14:31:08.300711967",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -269,10 +269,10 @@
             ],
             "FAM_phased.vcf.gz.tbi",
             [
-
+                
             ],
             [
-
+                
             ],
             [
                 [
@@ -280,12 +280,12 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_haplotagged.bam:md5,32128d5470026d74538983a1f6877fbe",
-                    "HG002_haplotagged.bam.bai:md5,d5c08fa4e0fc2ed2af6788e87d1cf8bf"
+                    "HG002_haplotagged.bam:md5,6a719774d1f3fef8c71a27dde700e77d",
+                    "HG002_haplotagged.bam.bai:md5,0b5519b4a52f678462a13c3786c5da4c"
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -321,7 +321,7 @@
                         "family_id": "FAM"
                     },
                     "HG002_cramino_aligned_phased.txt",
-                    "e3d37c04965a2ca82e662cfb64b6dbf5"
+                    "3461ddf90e9232f6f6e4a594d8ec4dc9"
                 ]
             ],
             [
@@ -334,7 +334,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-05T10:02:26.450964569",
+        "timestamp": "2026-07-08T14:33:22.323172625",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -376,10 +376,10 @@
                     ]
                 ],
                 "2": [
-
+                    
                 ],
                 "3": [
-
+                    
                 ],
                 "4": [
                     [
@@ -400,7 +400,7 @@
                     ]
                 ],
                 "5": [
-
+                    
                 ],
                 "6": [
                     [
@@ -517,7 +517,7 @@
                     ]
                 ],
                 "haplotagged_cram_crai": [
-
+                    
                 ],
                 "haplotagging_arrow": [
                     [
@@ -568,10 +568,10 @@
                     ]
                 ],
                 "phased_family_svs": [
-
+                    
                 ],
                 "phased_family_svs_tbi": [
-
+                    
                 ],
                 "stats": [
                     [
@@ -611,10 +611,10 @@
             ],
             "FAM_snv_phased.vcf.gz.tbi",
             [
-
+                
             ],
             [
-
+                
             ],
             [
                 [
@@ -622,8 +622,8 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_PacBio_Revio_haplotagged.bam:md5,6dc1b2068e6b279c8e0b2fed13f0afdb",
-                    "HG002_PacBio_Revio_haplotagged.bam.bai:md5,76b71249874e7c0fbd0475157461f9ac"
+                    "HG002_PacBio_Revio_haplotagged.bam:md5,fb0221be67a78146a4822a1911221bf7",
+                    "HG002_PacBio_Revio_haplotagged.bam.bai:md5,f9474c8bd27b5fc0c41353c2239be875"
                 ]
             ],
             "HG002.cram",
@@ -661,7 +661,7 @@
                         "family_id": "FAM"
                     },
                     "HG002_cramino_aligned_phased.txt",
-                    "bbef099337851b2e82fe1003febf942d"
+                    "9d16b67b282f52584ae175feaa043fd0"
                 ]
             ],
             [
@@ -674,7 +674,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-23T11:32:28.744043569",
+        "timestamp": "2026-07-08T14:31:37.886138597",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -694,10 +694,10 @@
             ],
             "FAM_phased_snv.vcf.gz.tbi",
             [
-
+                
             ],
             [
-
+                
             ],
             [
                 [
@@ -705,12 +705,12 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_haplotagged.bam:md5,4f5d49201491cf04b90b7477975c9f24",
-                    "HG002_haplotagged.bam.bai:md5,44abd432f950e8f9aea46d46ccf4e31f"
+                    "HG002_haplotagged.bam:md5,ddcda5a1ac99bbdb3f055a939a270c3f",
+                    "HG002_haplotagged.bam.bai:md5,b7eebed676249de1c970e0293628e110"
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -746,7 +746,7 @@
                         "family_id": "FAM"
                     },
                     "HG002_cramino_aligned_phased.txt",
-                    "89eda83bfce73c065eb3bd96210c3324"
+                    "822b561e418d36cde19ae0f6e507b393"
                 ]
             ],
             [
@@ -759,7 +759,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-05T10:01:16.275714648",
+        "timestamp": "2026-07-08T14:31:48.16339866",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -779,10 +779,10 @@
             ],
             "FAM_phased_snv.vcf.gz.tbi",
             [
-
+                
             ],
             [
-
+                
             ],
             [
                 [
@@ -790,20 +790,20 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_haplotagged.bam:md5,37a26ae72118a064f245906f80550b87",
-                    "HG002_haplotagged.bam.bai:md5,0a60b78854a4868393a52f2318846d3d"
+                    "HG002_haplotagged.bam:md5,345156ddaf0ecee6bec7fbf9765225db",
+                    "HG002_haplotagged.bam.bai:md5,30d4d94bf938cb8a6f0b2ec58f890bcc"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_haplotagged.bam:md5,845b5b77fca6bc98adcf4e07c597da94",
-                    "HG003_haplotagged.bam.bai:md5,993ff850dcc7ba8ab05c4209cd7eb295"
+                    "HG003_haplotagged.bam:md5,802eeed7246942d75ab4c290b136db38",
+                    "HG003_haplotagged.bam.bai:md5,9fba98833c1247d2289d01e5950f4018"
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -860,7 +860,7 @@
                         "family_id": "FAM"
                     },
                     "HG002_cramino_aligned_phased.txt",
-                    "89eda83bfce73c065eb3bd96210c3324"
+                    "822b561e418d36cde19ae0f6e507b393"
                 ],
                 [
                     {
@@ -868,7 +868,7 @@
                         "family_id": "FAM"
                     },
                     "HG003_cramino_aligned_phased.txt",
-                    "c7c30a7fb750bc1b5ec666efd9b4ea75"
+                    "5689e992bfceeaa5cb82173a932ee4f7"
                 ]
             ],
             [
@@ -888,7 +888,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-05T10:01:45.035609869",
+        "timestamp": "2026-07-08T14:32:21.599690288",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -923,20 +923,20 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_haplotagged.bam:md5,f3948ffa4babec70c840a30e68880699",
-                    "HG002_haplotagged.bam.bai:md5,bd6edd181a0bedd063402ee0786d713c"
+                    "HG002_haplotagged.bam:md5,fd031094648a3e2e824e865321bd7ef3",
+                    "HG002_haplotagged.bam.bai:md5,17d4db856db373cb6b25f2c1f9b59c70"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_haplotagged.bam:md5,17ab9167608f335099cab3e7902c5e0c",
-                    "HG003_haplotagged.bam.bai:md5,d73f17528a20592377be4b2ce2e0dd85"
+                    "HG003_haplotagged.bam:md5,38e2d64c676761c98071a5ed78f7c495",
+                    "HG003_haplotagged.bam.bai:md5,6ca4030439de8f34decd00265b400334"
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -993,7 +993,7 @@
                         "family_id": "FAM"
                     },
                     "HG002_cramino_aligned_phased.txt",
-                    "89eda83bfce73c065eb3bd96210c3324"
+                    "822b561e418d36cde19ae0f6e507b393"
                 ],
                 [
                     {
@@ -1001,7 +1001,7 @@
                         "family_id": "FAM"
                     },
                     "HG003_cramino_aligned_phased.txt",
-                    "c7c30a7fb750bc1b5ec666efd9b4ea75"
+                    "5689e992bfceeaa5cb82173a932ee4f7"
                 ]
             ],
             [
@@ -1021,7 +1021,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-05T10:02:03.442241572",
+        "timestamp": "2026-07-08T14:32:48.221207637",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -1047,19 +1047,19 @@
                     ]
                 ],
                 "10": [
-
+                    
                 ],
                 "2": [
-
+                    
                 ],
                 "3": [
-
+                    
                 ],
                 "4": [
-
+                    
                 ],
                 "5": [
-
+                    
                 ],
                 "6": [
                     [
@@ -1089,7 +1089,7 @@
                     ]
                 ],
                 "9": [
-
+                    
                 ],
                 "blocks": [
                     [
@@ -1110,16 +1110,16 @@
                     ]
                 ],
                 "haplotagged_bam_bai": [
-
+                    
                 ],
                 "haplotagged_cram_crai": [
-
+                    
                 ],
                 "haplotagging_arrow": [
-
+                    
                 ],
                 "haplotagging_stats": [
-
+                    
                 ],
                 "phased_family_snvs": [
                     [
@@ -1138,10 +1138,10 @@
                     ]
                 ],
                 "phased_family_svs": [
-
+                    
                 ],
                 "phased_family_svs_tbi": [
-
+                    
                 ],
                 "stats": [
                     [
@@ -1189,10 +1189,10 @@
                     ]
                 ],
                 "2": [
-
+                    
                 ],
                 "3": [
-
+                    
                 ],
                 "4": [
                     [
@@ -1205,7 +1205,7 @@
                     ]
                 ],
                 "5": [
-
+                    
                 ],
                 "6": [
                     [
@@ -1272,7 +1272,7 @@
                     ]
                 ],
                 "haplotagged_cram_crai": [
-
+                    
                 ],
                 "haplotagging_arrow": [
                     [
@@ -1309,10 +1309,10 @@
                     ]
                 ],
                 "phased_family_svs": [
-
+                    
                 ],
                 "phased_family_svs_tbi": [
-
+                    
                 ],
                 "stats": [
                     [
@@ -1351,19 +1351,19 @@
                     ]
                 ],
                 "10": [
-
+                    
                 ],
                 "2": [
-
+                    
                 ],
                 "3": [
-
+                    
                 ],
                 "4": [
-
+                    
                 ],
                 "5": [
-
+                    
                 ],
                 "6": [
                     [
@@ -1393,7 +1393,7 @@
                     ]
                 ],
                 "9": [
-
+                    
                 ],
                 "blocks": [
                     [
@@ -1414,16 +1414,16 @@
                     ]
                 ],
                 "haplotagged_bam_bai": [
-
+                    
                 ],
                 "haplotagged_cram_crai": [
-
+                    
                 ],
                 "haplotagging_arrow": [
-
+                    
                 ],
                 "haplotagging_stats": [
-
+                    
                 ],
                 "phased_family_snvs": [
                     [
@@ -1442,10 +1442,10 @@
                     ]
                 ],
                 "phased_family_svs": [
-
+                    
                 ],
                 "phased_family_svs_tbi": [
-
+                    
                 ],
                 "stats": [
                     [
@@ -1493,12 +1493,12 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_haplotagged.bam:md5,c4e0682980250079a4e50b3860191072",
-                    "HG002_haplotagged.bam.bai:md5,7464aefd3e24613a818ed36b12550876"
+                    "HG002_haplotagged.bam:md5,52da027ef2ae3945a146281e1cea17a8",
+                    "HG002_haplotagged.bam.bai:md5,6494c94109321ebde1979b0d4aecf816"
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -1534,7 +1534,7 @@
                         "family_id": "FAM"
                     },
                     "HG002_cramino_aligned_phased.txt",
-                    "89eda83bfce73c065eb3bd96210c3324"
+                    "822b561e418d36cde19ae0f6e507b393"
                 ]
             ],
             [
@@ -1547,7 +1547,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-05T10:01:33.045434855",
+        "timestamp": "2026-07-08T14:32:07.900946382",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
@@ -1582,12 +1582,12 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_PacBio_Revio_haplotagged.bam:md5,6609ae9a3e0c9ec8485c7d971be7a1c1",
-                    "HG002_PacBio_Revio_haplotagged.bam.bai:md5,4614cbbf0cd261cb7a18762bb6f5cd18"
+                    "HG002_PacBio_Revio_haplotagged.bam:md5,070340eb255b4e6f3e4e0f31ceb15a3c",
+                    "HG002_PacBio_Revio_haplotagged.bam.bai:md5,b78b5123f907c26b3e19cfdd9f91dd82"
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -1623,7 +1623,7 @@
                         "family_id": "FAM"
                     },
                     "HG002_cramino_aligned_phased.txt",
-                    "bbef099337851b2e82fe1003febf942d"
+                    "9d16b67b282f52584ae175feaa043fd0"
                 ]
             ],
             [
@@ -1636,7 +1636,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-23T11:32:18.782272194",
+        "timestamp": "2026-07-08T14:31:27.755388344",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
