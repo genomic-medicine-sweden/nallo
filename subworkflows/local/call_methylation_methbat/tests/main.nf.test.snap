@@ -192,197 +192,77 @@
         "content": [
             {
                 "0": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_methbat_profile.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "1": [
                     
                 ],
                 "10": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "2": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "3": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "4": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "5": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
+                    
                 ],
                 "6": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "7": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
+                    
                 ],
                 "8": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "9": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
+                    
                 ],
                 "asm_bed": [
                     
                 ],
                 "pbcpg_combined_bed": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
+                    
                 ],
                 "pbcpg_combined_bigwig": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "pbcpg_combined_index": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "pbcpg_hap1_bed": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
+                    
                 ],
                 "pbcpg_hap1_bigwig": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "pbcpg_hap1_index": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "pbcpg_hap2_bed": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
+                    
                 ],
                 "pbcpg_hap2_bigwig": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "pbcpg_hap2_index": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "region_profile": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_methbat_profile.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ]
             }
         ],
-        "timestamp": "2026-05-27T10:44:18.152009831",
+        "timestamp": "2026-07-08T11:52:03.406940176",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.04.4"
         }
     },
     "1 sample - bed phased": {
@@ -475,209 +355,77 @@
         "content": [
             {
                 "0": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_methbat_profile.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "1": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "test.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "10": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "2": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "3": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "4": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "5": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
+                    
                 ],
                 "6": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "7": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
+                    
                 ],
                 "8": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "9": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
+                    
                 ],
                 "asm_bed": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "test.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "pbcpg_combined_bed": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
+                    
                 ],
                 "pbcpg_combined_bigwig": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "pbcpg_combined_index": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.combined.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "pbcpg_hap1_bed": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
+                    
                 ],
                 "pbcpg_hap1_bigwig": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "pbcpg_hap1_index": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap1.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "pbcpg_hap2_bed": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
+                    
                 ],
                 "pbcpg_hap2_bigwig": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "pbcpg_hap2_index": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_pbcpgtools.hap2.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "region_profile": [
-                    [
-                        {
-                            "id": "HG002",
-                            "family_id": "HG002"
-                        },
-                        "HG002_methbat_profile.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ]
             }
         ],
-        "timestamp": "2026-05-27T10:44:28.808329247",
+        "timestamp": "2026-07-08T11:52:12.341849778",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.04.4"
         }
     },
     "1 sample - bed unphased": {
