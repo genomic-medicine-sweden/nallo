@@ -1161,10 +1161,10 @@
                 "whatshap-stats-table.txt:md5,e02bfeb73de49596f446d234a473a8aa",
                 "FAM.ped:md5,5a77571883af2ba2ca60ae0e2f81a6fb",
                 "HG002_cramino_aligned_phased.arrow:md5,16862b72134560bb2cb10109580b70c2",
-                "HG003_cramino_aligned_phased.arrow:md5,d6a5a33f22e2c061ceab9891f9da7c1d",
+                "HG003_cramino_aligned_phased.arrow:md5,87cc242552e9a9fd5de8ead87b89784f",
                 "HG004_cramino_aligned_phased.arrow:md5,8ed4f662c64af785e13e082ce34d6c38",
                 "HG002_cramino_aligned.arrow:md5,39c9607be8757a92d4a7904d8e84f92b",
-                "HG003_cramino_aligned.arrow:md5,b323e86952854a869405b06e21b41d00",
+                "HG003_cramino_aligned.arrow:md5,91e5757a1a43f93eeb70e58cf9621d04",
                 "HG004_cramino_aligned.arrow:md5,78b3ada0df570878baa94e796bdba6c4",
                 "HG002.mosdepth.global.dist.txt:md5,a7f38521b441f0d3edfd9c9ff3c52d0a",
                 "HG002.mosdepth.region.dist.txt:md5,18782d77906c07c36ad27bd3326c89b7",
@@ -1238,7 +1238,7 @@
                 ],
                 [
                     "HG003_remapped_assembly_haplotagged.bam",
-                    "fbe8d2ae932079cd3752a1914be682b0"
+                    "a15432b5058bce950b104ce6ad97da8a"
                 ],
                 [
                     "HG004_remapped_assembly_haplotagged.bam",
@@ -1258,7 +1258,7 @@
                 ],
                 [
                     "HG003_remapped_assembly.bam",
-                    "fbe8d2ae932079cd3752a1914be682b0"
+                    "a15432b5058bce950b104ce6ad97da8a"
                 ],
                 [
                     "HG004_aligned_assembly.bam",
@@ -1358,7 +1358,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-07T18:38:30.983702132",
+        "timestamp": "2026-07-08T09:09:46.059971642",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
