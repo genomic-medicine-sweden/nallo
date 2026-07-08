@@ -3,22 +3,21 @@ include { ENSEMBLVEP_VEP as ENSEMBLVEP_SV } from '../../../modules/nf-core/ensem
 
 workflow ANNOTATE_SVS {
     take:
-    ch_vcf                // channel: [mandatory] [ val(meta), path(vcf) ]
-    ch_fasta              // channel: [mandatory] [ val(meta), path(fasta) ]
-    ch_sv_dbs             // channel: [mandatory] [ val(meta), path(csv) ]
-    ch_vep_cache          // channel: [mandatory] [ val(meta), path(cache) ]
+    ch_vcf // channel: [mandatory] [ val(meta), path(vcf) ]
+    ch_fasta // channel: [mandatory] [ val(meta), path(fasta) ]
+    ch_sv_dbs // channel: [mandatory] [ val(meta), path(csv) ]
+    ch_vep_cache // channel: [mandatory] [ val(meta), path(cache) ]
     val_vep_cache_version // string: [mandatory] default: 110
-    ch_vep_extra_files    // channel: [mandatory] [ path(files) ]
+    ch_vep_extra_files // channel: [mandatory] [ path(files) ]
 
     main:
-    ch_svdb_in = ch_sv_dbs
-        .multiMap { filename, in_freq_info_key, in_allele_count_info_key, out_freq_info_key, out_allele_count_info_key ->
-            vcf_dbs: filename
-            in_frqs: in_freq_info_key
-            in_occs: in_allele_count_info_key
-            out_frqs: out_freq_info_key
-            out_occs: out_allele_count_info_key
-        }
+    ch_svdb_in = ch_sv_dbs.multiMap { filename, in_freq_info_key, in_allele_count_info_key, out_freq_info_key, out_allele_count_info_key ->
+        vcf_dbs: filename
+        in_frqs: in_freq_info_key
+        in_occs: in_allele_count_info_key
+        out_frqs: out_freq_info_key
+        out_occs: out_allele_count_info_key
+    }
 
     // Annotate with SVDB VCF "databases"
     SVDB_QUERY(

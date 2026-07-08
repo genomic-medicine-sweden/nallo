@@ -2,7 +2,7 @@ include { PARAPHRASE } from '../../../modules/nf-core/paraphrase/main'
 
 workflow ANNOTATE_PARALOGS {
     take:
-    ch_json                  // channel: [ val(meta), path(json) ]
+    ch_json // channel: [ val(meta), path(json) ]
     paraphrase_output_format // string: Output format for paraphrase (json or tsv)
     ch_paraphrase_rules_yaml // channel: [ val(meta), path(yaml) ]
 
@@ -14,7 +14,7 @@ workflow ANNOTATE_PARALOGS {
      * The order of JSON files and sample names must remain aligned, since paraphrase assigns sample names to JSONs by positional order.
      */
     ch_paraphase_jsons_per_family = ch_json
-        .map { meta, json -> [ [ 'id': meta.family_id ], json, meta.id ] }
+        .map { meta, json -> [['id': meta.family_id], json, meta.id] }
         .groupTuple()
 
     PARAPHRASE(
