@@ -36,4 +36,5 @@ repos:
     hooks:
       - id: nextflow-lint
         files: '\.nf$|nextflow\.config$'
-        args: ["-output", "json"]
+        exclude: "^(modules/nf-core|subworkflows/nf-core)/"
+        args: ["-output", "json", "-format", "-harshil-alignment", "-sort-declarations"]
