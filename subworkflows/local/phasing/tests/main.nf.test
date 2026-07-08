@@ -7,7 +7,7 @@ nextflow_workflow {
     tag "hiphase"
     tag "longphase"
     tag "whatshap"
-    tag "qc_aligned_reads"
+    tag "qc_phasing"
 
     setup {
 
