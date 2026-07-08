@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            428,
+            432,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -62,6 +62,9 @@
                 },
                 "CAT_CAT": {
                     "pigz": 2.8
+                },
+                "CAT_FASTQ": {
+                    "cat": 9.5
                 },
                 "CLEAN_SNIFFLES": {
                     "clean_sniffles": 1.0
@@ -330,6 +333,9 @@
                 },
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.13.0dev"
+                },
+                "YAK_COUNT": {
+                    "yak": "0.1-r69-dirty"
                 }
             },
             [
@@ -947,16 +953,16 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ],
             [
-                "HG002_haplotype_1.assembly_summary:md5,78160830a6d16f9fd755b4e3d534e92a",
-                "HG002_haplotype_2.assembly_summary:md5,14c17d81b950ad977c51aa432cef31c1",
+                "HG002_haplotype_1.assembly_summary:md5,a6ad30c5ee5267ca1b283564f1e5d129",
+                "HG002_haplotype_2.assembly_summary:md5,b99223d6c7d9ac989c98ec6b419d91e1",
                 "HG003_haplotype_1.assembly_summary:md5,13dee2d12769dd9f9ba6f4e490e385b3",
                 "HG003_haplotype_2.assembly_summary:md5,750e1bf8191b520ff6afc302987cbc35",
                 "HG004_haplotype_1.assembly_summary:md5,d77dc8fbbb8a6dce71c9640d6a6be355",
                 "HG004_haplotype_2.assembly_summary:md5,adc271665fb11761203e53773de1215f",
                 "HG002.baf.bed.gz:md5,17eeed682bc6c4ec6a38c8815825c745",
                 "HG002.baf.bed.gz.tbi:md5,bf1456dcf859072f9f57b8918addeddb",
-                "HG002.cov.bed.gz:md5,b34dff737ec3e29ac31f0766dad90477",
-                "HG002.cov.bed.gz.tbi:md5,4a9a7b128ef36d2c6ca193e952922039",
+                "HG002.cov.bed.gz:md5,7b7ba601db1dda7ab90b8862e7ec18b8",
+                "HG002.cov.bed.gz.tbi:md5,7b30a66104790697830893f2e1d3c877",
                 "HG003.baf.bed.gz:md5,ae5519588bf5ed6be85ba3405d37e0db",
                 "HG003.baf.bed.gz.tbi:md5,7946c1f50222d577971aae066ac32ff9",
                 "HG003.cov.bed.gz:md5,539add58e883a2feaf037082d4c2dc24",
@@ -997,7 +1003,7 @@
                 "HG002_chromograph_coverage_chr13.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002_chromograph_coverage_chr14.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002_chromograph_coverage_chr15.png:md5,954482b960865332f37d386da5c9fb75",
-                "HG002_chromograph_coverage_chr16.png:md5,1d6303161090842bd3440f006785dae7",
+                "HG002_chromograph_coverage_chr16.png:md5,78ca4b704fd2d054b97f75f0caee9fb7",
                 "HG002_chromograph_coverage_chr17.png:md5,3a3014812a660b4f4d401c3b78dce7bf",
                 "HG002_chromograph_coverage_chr18.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002_chromograph_coverage_chr19.png:md5,954482b960865332f37d386da5c9fb75",
@@ -1013,7 +1019,7 @@
                 "HG002_chromograph_coverage_chr8.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002_chromograph_coverage_chr9.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002_chromograph_coverage_chrM.png:md5,954482b960865332f37d386da5c9fb75",
-                "HG002_chromograph_coverage_chrX.png:md5,5b38f2e5033afee0974cf6876560123d",
+                "HG002_chromograph_coverage_chrX.png:md5,60a986ec137cfaebb30293872ecd9231",
                 "HG002_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG003_chromograph_autozyg_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG003_chromograph_autozyg_chr10.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -1115,8 +1121,8 @@
                 "HG004_chromograph_coverage_chrM.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG004_chromograph_coverage_chrX.png:md5,44c18de3b3d94bdc7eb010b5fe99216a",
                 "HG004_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
-                "HG002_pbcpgtools.combined.bed.gz:md5,8a1293c232100e1f93c057aacf91d279",
-                "HG002_pbcpgtools.combined.bed.gz.tbi:md5,bec71d5b75a9eddf76d4932c897b2d18",
+                "HG002_pbcpgtools.combined.bed.gz:md5,f40dc0fdcdadf517f6fbd0622eb5c9ad",
+                "HG002_pbcpgtools.combined.bed.gz.tbi:md5,b0f3a6771e0b6932183848af44fa3b50",
                 "HG002_pbcpgtools.hap1.bed.gz:md5,dc1da4ce1cd0c288478aeaf84fff10ff",
                 "HG002_pbcpgtools.hap1.bed.gz.tbi:md5,6d8de5c561cd4993e23f97e77d687622",
                 "HG002_pbcpgtools.hap2.bed.gz:md5,76a80cb59575c9659412ca5078798345",
@@ -1136,41 +1142,41 @@
                 "bcftools-stats-subtypes.txt:md5,7ff0d336d225e77c4bc70d8c24a5eed1",
                 "bcftools_stats_indel-lengths.txt:md5,2947390673d791003d48a676e7095739",
                 "fastqc-status-check-heatmap.txt:md5,f67860347368dd43ec3be3a53e1085dc",
-                "fastqc_adapter_content_plot.txt:md5,27a309c619e7efeecc9125a4807cfeaf",
-                "fastqc_overrepresented_sequences_plot.txt:md5,e4376999e08abb450aafe26e3ad931f7",
+                "fastqc_adapter_content_plot.txt:md5,977a14d0a229fb62fa79426bc8d79534",
+                "fastqc_overrepresented_sequences_plot.txt:md5,39f5feb1737b248e86b9b39a1d043879",
                 "fastqc_per_base_n_content_plot.txt:md5,a1b9be680733df6b9dda4c1f43ce0460",
-                "fastqc_per_base_sequence_quality_plot.txt:md5,b4113410846cfff78e63ba0efdc449c9",
-                "fastqc_per_sequence_gc_content_plot_Counts.txt:md5,d63545fabe6fe0a5ce56222c13d674c6",
-                "fastqc_per_sequence_gc_content_plot_Percentages.txt:md5,e0596ff85d0e60ed4e08403a7f8fee17",
-                "fastqc_per_sequence_quality_scores_plot.txt:md5,1c071b46c46ede1cf40cc3fc92bcf564",
-                "fastqc_sequence_counts_plot.txt:md5,e45788456f87b4bc6aa473a1b87ed526",
-                "fastqc_sequence_duplication_levels_plot.txt:md5,0eb6ad8396fa1f0b9a4b5c9899db508a",
-                "fastqc_sequence_length_distribution_plot.txt:md5,67e4b9bc2d2037825a67bac813cf3567",
-                "mosdepth-coverage-per-contig-multi.txt:md5,4fa1a0d512e1f6e3b4bf7f0ae8150e6e",
+                "fastqc_per_base_sequence_quality_plot.txt:md5,5833f93214b1ad3af76378a718795c6d",
+                "fastqc_per_sequence_gc_content_plot_Counts.txt:md5,f83b266bdd46db24100ec9e6c48a2835",
+                "fastqc_per_sequence_gc_content_plot_Percentages.txt:md5,738c42b1705ba330f393f3cb68183960",
+                "fastqc_per_sequence_quality_scores_plot.txt:md5,ba018e3ee5b6a46d66186deacf7e2363",
+                "fastqc_sequence_counts_plot.txt:md5,d238a9977a1d19ab52f96f455d0e5592",
+                "fastqc_sequence_duplication_levels_plot.txt:md5,8db16e6e73e9a83c5be8aa659bb7627f",
+                "fastqc_sequence_length_distribution_plot.txt:md5,857053502c26f2cd47999313c6f55ad1",
+                "mosdepth-coverage-per-contig-multi.txt:md5,71c75dd738ee0117d3a483dfb2adfbe2",
                 "mosdepth-cumcoverage-dist-id.txt:md5,b0ef712fc04303215db6997c3f54705b",
                 "mosdepth_cov_dist.txt:md5,89dfdf2287ed8e395284643954556cb1",
                 "mosdepth_cumcov_dist.txt:md5,89dfdf2287ed8e395284643954556cb1",
-                "mosdepth_perchrom.txt:md5,ac5abed1b7c728d9d3b2b48f2d431ed4",
+                "mosdepth_perchrom.txt:md5,951ce17952a1bdd096bffb1b60020296",
                 "multiqc_bcftools_stats.txt:md5,76f588ad3f387f15f8bb15301a16adf1",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
-                "multiqc_fastqc.txt:md5,a315759e5d443105f8e1092170a1ec35",
-                "multiqc_general_stats.txt:md5,d0ba2f91e34d142127633326fd0801e4",
+                "multiqc_fastqc.txt:md5,ace1ff42b44a8ec24ede4837f85f65d8",
+                "multiqc_general_stats.txt:md5,a8fc686476d255f15188ede85661e1fd",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,5367473f043564c1995035e669f25b76",
                 "peddy_relatedness_plot.txt:md5,5a222289faa4c08ad4f9f33e424490e1",
-                "somalier_stats.txt:md5,66950d509c4fe9b52120812062d48a4f",
+                "somalier_stats.txt:md5,a6119aecaa54536d9b358b7feba7841a",
                 "whatshap-stats-table.txt:md5,e02bfeb73de49596f446d234a473a8aa",
-                "FAM.ped:md5,5a77571883af2ba2ca60ae0e2f81a6fb",
-                "HG002_cramino_aligned_phased.arrow:md5,16862b72134560bb2cb10109580b70c2",
-                "HG003_cramino_aligned_phased.arrow:md5,82cc263f896b69bfe380bd98191b8de8",
+                "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
+                "HG002_cramino_aligned_phased.arrow:md5,abd5187c433a65e3b7eab2acfa9226c5",
+                "HG003_cramino_aligned_phased.arrow:md5,38314de5866a75c364b0969fa2cbbeb3",
                 "HG004_cramino_aligned_phased.arrow:md5,8ed4f662c64af785e13e082ce34d6c38",
-                "HG002_cramino_aligned.arrow:md5,39c9607be8757a92d4a7904d8e84f92b",
-                "HG003_cramino_aligned.arrow:md5,91e5757a1a43f93eeb70e58cf9621d04",
+                "HG002_cramino_aligned.arrow:md5,1d33857ea5185f3afe9724a88c9e39fa",
+                "HG003_cramino_aligned.arrow:md5,b323e86952854a869405b06e21b41d00",
                 "HG004_cramino_aligned.arrow:md5,78b3ada0df570878baa94e796bdba6c4",
-                "HG002.mosdepth.global.dist.txt:md5,a7f38521b441f0d3edfd9c9ff3c52d0a",
-                "HG002.mosdepth.region.dist.txt:md5,18782d77906c07c36ad27bd3326c89b7",
-                "HG002.mosdepth.summary.txt:md5,f0b615ce571bed5e3d15fde05870a1dc",
-                "HG002.regions.bed.gz:md5,bfb6058ba3607ec03ac54e955a9c7f14",
-                "HG002.regions.bed.gz.csi:md5,53d39415973b1d59177328db4a1f2e28",
+                "HG002.mosdepth.global.dist.txt:md5,7595e2f7ac278f28335b6e5c0bce445d",
+                "HG002.mosdepth.region.dist.txt:md5,6678002e5033170c85d393b384165161",
+                "HG002.mosdepth.summary.txt:md5,ccdcd76fac702357555938eb21856b11",
+                "HG002.regions.bed.gz:md5,029dcec0c9165f066809fe7c76e02f44",
+                "HG002.regions.bed.gz.csi:md5,1092e94f8868b266eaaf41994a9614a6",
                 "HG003.mosdepth.global.dist.txt:md5,fee97d4a20620d6537b1a7427c969a54",
                 "HG003.mosdepth.region.dist.txt:md5,faa7d476cbd91fce87aec5bd43878234",
                 "HG003.mosdepth.summary.txt:md5,93353d6323df51e771f89b2edf08e093",
@@ -1183,14 +1189,14 @@
                 "HG004.regions.bed.gz.csi:md5,c974ce2bd4f6bbc77c4ddf12dbcea891",
                 "FAM.het_check.csv:md5,cee3921a92235b499e9c2e671382e516",
                 "FAM.het_check.png:md5,47eecc1d4a68f80fd31f1c0ce2ef8d2f",
-                "FAM.html:md5,97f0ba7a3b5cd5ec0d736707e4134e45",
-                "FAM.ped_check.csv:md5,ffd13b5fc6fb9ad067c300799f6c9cbb",
-                "FAM.ped_check.png:md5,f18241c79688567dd1156f46ae660b55",
-                "FAM.ped_check.rel-difference.csv:md5,64e754a510b150277570c911e19ab323",
-                "FAM.peddy.ped:md5,a199caf51c4fcd2db709628fb3562801",
+                "FAM.html:md5,451b5beb76883ad4fba982987373df7d",
+                "FAM.ped_check.csv:md5,f364e33f3b0df26ed2a41b4f42dbd846",
+                "FAM.ped_check.png:md5,2b056e641994959e5855242510bdb6ef",
+                "FAM.ped_check.rel-difference.csv:md5,8b6862c23df8ac376aa5938a11555c0d",
+                "FAM.peddy.ped:md5,2e9c40a7804e1917dad63fd1b101f192",
                 "FAM.sex_check.csv:md5,3545391400744dd9c6e0ed159430cdf1",
                 "FAM.sex_check.png:md5,cd17e86624373b4ea853450295157779",
-                "FAM.vs.html:md5,45da6aa0e8b28a3da5d8b6780932aacd",
+                "FAM.vs.html:md5,748a5128677fa5a403480e748563fbcb",
                 "HG002_whatshap_stats.gtf.gz:md5,072b94b49e22c91ce228fd7af61478f9",
                 "HG002_whatshap_stats.gtf.gz.tbi:md5,d7f6a35681a1f666c917ec58d1f6800c",
                 "HG002_whatshap_stats.tsv:md5,fc0b9ae696765773cae2b6f658224783",
@@ -1203,13 +1209,13 @@
                 "HG002_sambamba_depth.bed:md5,8c8ca76928e63eba0f5dbb6b69ba0002",
                 "HG003_sambamba_depth.bed:md5,57f7f98bfd9a17804092ea48c34501df",
                 "HG004_sambamba_depth.bed:md5,ea2e1e367a00a402af517cf6c4c38d93",
-                "HG002_copynum_sawfish.bedgraph:md5,ce16199645a9cfdf684f73749505c6a5",
-                "HG002_depth_sawfish.bw:md5,e392b1f8c9f097b0e7f0b286bd2a8501",
-                "HG002_gc_bias_corrected_depth_sawfish.bw:md5,e392b1f8c9f097b0e7f0b286bd2a8501",
-                "HG002_hificnv.copynum.bedgraph:md5,4bae8fea970747afca27b076682e621c",
-                "HG002_hificnv.depth.bw:md5,d8e90f40ec72e2f03cae806c7a749259",
+                "HG002_copynum_sawfish.bedgraph:md5,49302f770636d690bcfb7df147fd5538",
+                "HG002_depth_sawfish.bw:md5,510e4febf2a10afa6fd1e59226299fea",
+                "HG002_gc_bias_corrected_depth_sawfish.bw:md5,510e4febf2a10afa6fd1e59226299fea",
+                "HG002_hificnv.copynum.bedgraph:md5,5adb96ba8c04d2c4bfa276f84f2d8a7d",
+                "HG002_hificnv.depth.bw:md5,b191131467ddbe9f246f81e219ef2033",
                 "HG002_hificnv.maf.bw:md5,dcb00832078379701b6b97dc82b80db0",
-                "HG002_pbcpgtools.combined.bw:md5,8697fca67a8b1ff9f27db9d2bb13a8f7",
+                "HG002_pbcpgtools.combined.bw:md5,aab778043dac8303ca73f9e599477019",
                 "HG002_pbcpgtools.hap1.bw:md5,144906023f255775de5c18e2f5625b9a",
                 "HG002_pbcpgtools.hap2.bw:md5,35d6e2837fa6d62c89f9a8c98f86b834",
                 "HG003_copynum_sawfish.bedgraph:md5,ce823a4f540bc27be2153e59a1c0b638",
@@ -1221,7 +1227,7 @@
                 "HG003_pbcpgtools.combined.bw:md5,4e0a353f5fa532b8941440b6beded4f4",
                 "HG003_pbcpgtools.hap1.bw:md5,a5b25724fa29cba01c53242c2497ed1e",
                 "HG003_pbcpgtools.hap2.bw:md5,744f823dadfebb367af6bb63fc2c3f68",
-                "HG004_copynum_sawfish.bedgraph:md5,d6510d3111705a896827d6ebd82bef56",
+                "HG004_copynum_sawfish.bedgraph:md5,b14793626afe22ec74e45e1c4a6efe72",
                 "HG004_depth_sawfish.bw:md5,68c3c7432ed8d0d5992b295b8a90bbaf",
                 "HG004_gc_bias_corrected_depth_sawfish.bw:md5,68c3c7432ed8d0d5992b295b8a90bbaf",
                 "HG004_hificnv.copynum.bedgraph:md5,c5e423965caccda67a685129ddb6ca50",
@@ -1234,11 +1240,11 @@
             [
                 [
                     "HG002_remapped_assembly_haplotagged.bam",
-                    "f0597d255117b27f7f15fcf2f14161a3"
+                    "c42b80298d92b4f02fa86bfe33699014"
                 ],
                 [
                     "HG003_remapped_assembly_haplotagged.bam",
-                    "cd0049e7b8ced21984fd2e9de78b9e61"
+                    "39be37b3504dbab881cc084fdf059681"
                 ],
                 [
                     "HG004_remapped_assembly_haplotagged.bam",
@@ -1246,11 +1252,11 @@
                 ],
                 [
                     "HG002_aligned_assembly.bam",
-                    "4aa453654b4ffef072bb233a3f5700dc"
+                    "744af813396a9a2ddaf7a0f15389e0ee"
                 ],
                 [
                     "HG002_remapped_assembly.bam",
-                    "f0597d255117b27f7f15fcf2f14161a3"
+                    "c42b80298d92b4f02fa86bfe33699014"
                 ],
                 [
                     "HG003_aligned_assembly.bam",
@@ -1258,7 +1264,7 @@
                 ],
                 [
                     "HG003_remapped_assembly.bam",
-                    "cd0049e7b8ced21984fd2e9de78b9e61"
+                    "39be37b3504dbab881cc084fdf059681"
                 ],
                 [
                     "HG004_aligned_assembly.bam",
@@ -1358,7 +1364,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-08T14:36:11.746926823",
+        "timestamp": "2026-07-08T15:43:32.704827633",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
