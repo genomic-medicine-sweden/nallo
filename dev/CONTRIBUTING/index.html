@@ -21,7 +21,7 @@
     
     
       
-        <title>genomic-medicine-sweden/nallo: Contributing Guidelines - genomic-medicine-sweden/nallo</title>
+        <title>CONTRIBUTING - genomic-medicine-sweden/nallo</title>
       
     
     
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              genomic-medicine-sweden/nallo: Contributing Guidelines
+              CONTRIBUTING
             
           </span>
         </div>
@@ -704,17 +704,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#publishing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Publishing
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -747,8 +736,30 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#publishing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Publishing
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-contribution-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Updating contribution guidelines
+      
+    </span>
+  </a>
   
 </li>
       
@@ -772,6 +783,10 @@
   
 
 
+<!-- THIS FILE IS AUTO-GENERATED. DO NOT EDIT DIRECTLY. -->
+<!-- To update pipeline-specific content: edit repo-config.yaml or your custom section files. -->
+<!-- To update shared guidelines: trigger or wait for the daily sync workflow. -->
+
 <h1 id="genomic-medicine-swedennallo-contributing-guidelines"><code>genomic-medicine-sweden/nallo</code>: Contributing Guidelines</h1>
 <p>Hi there!
 Many thanks for taking an interest in improving genomic-medicine-sweden/nallo.</p>
@@ -780,6 +795,9 @@ Please use the pre-filled template to save time.</p>
 <p>However, don't be put off by this template - other more general issues and suggestions are welcome!
 Contributions to the code are even more welcome ;)</p>
 <h2 id="table-of-contents">Table of contents</h2>
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 <ul>
 <li><a href="#general">General</a></li>
 <li><a href="#contribution-workflow">Contribution workflow</a><ul>
@@ -812,16 +830,16 @@ Contributions to the code are even more welcome ;)</p>
 <li><a href="#coding-conventions">Coding conventions</a></li>
 <li><a href="#architecture--structure">Architecture &amp; structure</a></li>
 <li><a href="#adding-a-new-step">Adding a new step</a></li>
-<li><a href="#channels">Channels</a><ul>
-<li><a href="#naming-schemes">Naming schemes</a></li>
-</ul>
-</li>
+<li><a href="#channels">Channels</a></li>
 <li><a href="#parameters">Parameters</a></li>
-<li><a href="#publishing">Publishing</a></li>
 <li><a href="#configuration">Configuration</a></li>
 <li><a href="#writing-tests">Writing tests</a></li>
 <li><a href="#style">Style</a></li>
+<li><a href="#publishing">Publishing</a></li>
+<li><a href="#updating-contribution-guidelines">Updating contribution guidelines</a></li>
 </ul>
+<!-- END doctoc -->
+
 <h2 id="general">General</h2>
 <h3 id="contribution-workflow">Contribution workflow</h3>
 <p>If you'd like to write some code for genomic-medicine-sweden/nallo, the standard workflow is as follows:</p>
@@ -845,19 +863,19 @@ Contributions to the code are even more welcome ;)</p>
 <p>Be positive and constructive in your review, and whenever possible offer suggestions for improvement rather than just pointing out issues.</p>
 <h3 id="software-versioning-changelog-and-updates">Software versioning, changelog and updates</h3>
 <h4 id="semantic-versioning-and-changelog">Semantic versioning and changelog</h4>
-<p>Release versioning tries to be maintained according to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a> and a changelog is maintained according to the <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a> format. Although, for a Nextflow pipeline it can be hard to decide what is a breaking/non-breaking API change.</p>
+<p>Release versioning is maintained according to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a> and a changelog is maintained according to the <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a> format. Although, for a Nextflow pipeline it can be hard to decide what is a breaking/non-breaking API change.</p>
 <p>Bugs fixed between releases belong in the <code>Fixed</code> section of the changelog, whereas bug fixes that appeared and were solved in dev should go in the <code>Changed</code> section.</p>
 <h5 id="patch">Patch</h5>
 <p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/26a0.svg" title=":warning:" /> Only in the unlikely and regretful event of a release happening with a bug.</p>
 <ul>
-<li>On the genomic-medicine-sweden/nallo repository, make a new branch <code>patch</code> based on <code>upstream/main</code> or <code>upstream/master</code>.</li>
+<li>Make a new branch <code>patch</code> based on <code>upstream/main</code> or <code>upstream/master</code>.</li>
 <li>Fix the bug, and bump version (X.Y.Z+1).</li>
 <li>Open a pull-request from <code>patch</code> to <code>main</code>/<code>master</code> with the changes.</li>
 </ul>
 <h4 id="nextflow-version-bumping">Nextflow version bumping</h4>
-<p>You may bump the minimum required version of nextflow in the pipeline with: <code>nf-core pipelines bump-version --nextflow . [min-nf-version]</code></p>
+<p>If you are using a new feature from core Nextflow, you may bump the minimum required version of nextflow in the pipeline with: <code>nf-core pipelines bump-version --nextflow . [min-nf-version]</code></p>
 <h4 id="update-nf-core-template">Update nf-core template</h4>
-<p>Since this is not an nf-core pipeline, the nf-core template is not automatically updated in the <code>TEMPLATE</code> branch. Follow these step to update the template:</p>
+<p>Since this is not an nf-core pipeline, the nf-core template is not automatically updated in the <code>TEMPLATE</code> branch. Follow these steps to update the template:</p>
 <ol>
 <li>Update the <code>TEMPLATE</code> branch by running <code>nf-core pipelines sync</code>. Fix any merge conflicts.</li>
 <li>Open a PR to merge the <code>TEMPLATE</code> branch into <code>dev</code> to update the template files in the main codebase.</li>
@@ -866,11 +884,11 @@ Contributions to the code are even more welcome ;)</p>
 <h4 id="installation-and-dependencies-for-development">Installation and dependencies for development</h4>
 <p>In order to run the pipeline, develop and test your changes locally, we recommend that you set up:</p>
 <ul>
-<li>A conda environment with <code>nextflow</code>, <code>nf-core</code> tools and <code>nf-test</code>. - For this, follow the instructions from the <a href="https://nf-co.re/docs/nf-core-tools/cli/installation#install-with-conda">nf-core documentation</a> and install <code>nf-test</code> from bioconda or by following the <a href="https://www.nf-test.com/installation/">nf-test installation instructions</a> . Additional information about <a href="https://nf-co.re/docs/usage/getting_started/installation/">installation of nf-core dependencies</a> is also available, if needed.</li>
+<li>A conda environment with <code>nextflow</code>, <code>nf-core</code> tools and <code>nf-test</code>. For this, follow the instructions from the <a href="https://nf-co.re/docs/nf-core-tools/cli/installation#install-with-conda">nf-core documentation</a> and install <code>nf-test</code> from bioconda or by following the <a href="https://www.nf-test.com/installation/">nf-test installation instructions</a>. Additional information about <a href="https://nf-co.re/docs/usage/getting_started/installation/">installation of nf-core dependencies</a> is also available, if needed.</li>
 <li>Install Docker (https://www.docker.com/products/docker-desktop/) and make sure the daemon is running when you want to run the tests locally.</li>
 </ul>
 <p>Make sure to <a href="https://nf-co.re/docs/usage/introduction#how-to-run-a-pipeline">test your setup</a> with <code>-profile test</code> before running the workflow on actual data.</p>
-<p>Additionally, pre-commit hooks should be set up to automatically check the code and generate parameters documentation when committing. To install the pre-commit hooks, run <code>pre-commit install</code> in the root of the repository. Besides the default nf-core hooks, this repository includes the <a href="https://github.com/genomic-medicine-sweden/nf-core-schema-docs">nf-core pipelines schema docs</a> hook. It automatically updates parameter documentation whenever your commit includes changes to <code>nextflow_schema.json</code>.</p>
+<p>Additionally, pre-commit hooks are set up to automatically check the code and generate parameters documentation when committing. To install the pre-commit hooks, run <code>pre-commit install</code> in the root of the repository. Besides the default nf-core hooks, this repository includes the <a href="https://github.com/genomic-medicine-sweden/nf-core-schema-docs">nf-core pipelines schema docs</a> hook. It automatically updates parameter documentation whenever your commit includes changes to <code>nextflow_schema.json</code>.</p>
 <h4 id="github-codespaces">GitHub Codespaces</h4>
 <p>This repo includes a devcontainer configuration which will create a GitHub Codespaces for Nextflow development! This is an online developer environment that runs in your browser, complete with VSCode and a terminal.</p>
 <p>To get started:</p>
@@ -888,13 +906,15 @@ Contributions to the code are even more welcome ;)</p>
 <p>You have the option to test your changes locally by running the pipeline. For receiving warnings about process selectors and other <code>debug</code> information, it is recommended to use the debug profile. Execute all the tests with the following command:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--profile<span class="w"> </span>debug,test,docker<span class="w"> </span>--verbose
 </span></code></pre></div>
-<p>You can also run <code>nf-test test &lt;path&gt;</code> for a single given test, <code>nf-test test --tag PIPELINE</code> to run all pipeline tests, or <code>nf-test test --tag call_snvs,annotate_snvs</code> to run multiple subworkflow test.</p>
+<p>You can also run <code>nf-test test &lt;path&gt;</code> for a single given test,
+<code>nf-test test --tag PIPELINE</code> to run all pipeline tests, or
+<code>nf-test test --tag call_snvs,annotate_snvs</code> to run multiple subworkflow tests.</p>
 <p>When you create a pull request with changes, <a href="https://github.com/features/actions">GitHub Actions</a> will run automatic tests.
 Typically, pull-requests are only fully reviewed when these tests are passing, though of course we can help out before then.</p>
 <p>There are typically two types of tests that run:</p>
 <h4 id="lint-tests">Lint tests</h4>
 <p><code>nf-core</code> has a <a href="https://nf-co.re/developers/guidelines">set of guidelines</a> which all pipelines must adhere to.
-To enforce these and ensure that all pipelines stay in sync, they have developed a helper tool which runs checks on the pipeline code. This is in the <a href="https://github.com/nf-core/tools">nf-core/tools repository</a> and once installed can be run locally with the <code>nf-core pipelines lint &lt;pipeline-directory&gt;</code> command.</p>
+To enforce these and ensure that all pipelines stay in sync, nf-core has developed a helper tool which runs checks on the pipeline code. This is in the <a href="https://github.com/nf-core/tools">nf-core/tools repository</a> and once installed can be run locally with the <code>nf-core pipelines lint &lt;pipeline-directory&gt;</code> command.</p>
 <p>If any failures or warnings are encountered, please follow the listed URL for more documentation.</p>
 <h4 id="pipeline-tests">Pipeline tests</h4>
 <p>This pipeline is set up with a minimal set of test-data.
@@ -926,7 +946,7 @@ These tests are run both with the latest available version of <code>Nextflow</co
 <li>Add sanity checks and validation for all relevant parameters.</li>
 <li>Perform local tests to validate that the new code works as expected.</li>
 <li>If applicable, add a new test in the <code>tests</code> directory.</li>
-<li>Update MultiQC config <code>assets/multiqc_config.yml</code> so relevant suffixes, file name clean up and module plots are in the appropriate order. If applicable, add a <a href="https://https://multiqc.info/">MultiQC</a> module.</li>
+<li>Update MultiQC config <code>assets/multiqc_config.yml</code> so relevant suffixes, file name clean up and module plots are in the appropriate order. If applicable, add a <a href="https://multiqc.info/">MultiQC</a> module.</li>
 <li>Add a description of the output files and if relevant any appropriate images from the MultiQC report to <code>docs/output.md</code>.</li>
 </ol>
 <h3 id="channels">Channels</h3>
@@ -936,67 +956,71 @@ These tests are run both with the latest available version of <code>Nextflow</co
 <h3 id="parameters">Parameters</h3>
 <ul>
 <li><code>params</code> must only be accessed in the main unnamed workflow (<code>workflow</code> in <code>main.nf</code>). Subworkflows and named workflows receive all values as explicit <code>val_*</code> arguments. Never reference <code>params</code> directly inside a subworkflow.</li>
-<li>Parameters should be initialised/defined with default values within the <code>params</code> scope in <code>nextflow.config</code>. Don't hardcode values that a user might reasonably want to change. Once added, run nf-core pipelines schema build to register them in nextflow_schema.json.</li>
-</ul>
-<h3 id="publishing">Publishing</h3>
-<p>We are currently migrating from using <code>publishDir</code> to workflow outputs.</p>
-<ul>
-<li>Workflows and subworkflows needs to emit all result files that need to be published.</li>
-<li>Main workflow has logic to mix together files that will be published in the same output directory.</li>
-<li>Publish block should publish one channel per directory whenever possible in the main workflow (main.nf)</li>
-<li>Output block determine directories for each channel that comes from publish block (main.nf).</li>
-<li>Keep file naming/prefixes in the configs as much as possible.</li>
-<li>Remove the corresponding <code>publishDir</code> entry from <code>conf/modules/</code> when adding a process to <code>ch_publish</code>.</li>
+<li>Parameters should be initialised/defined with default values within the <code>params</code> scope in <code>nextflow.config</code>. Don't hardcode values that a user might reasonably want to change. Once added, run <code>nf-core pipelines schema build</code> to register them in <code>nextflow_schema.json</code>.</li>
 </ul>
 <h3 id="configuration">Configuration</h3>
 <ul>
 <li>Process-level options go in <code>conf/subworkflows/&lt;subworkflow_name&gt;.config</code>, not inline in the subworkflow <code>.nf</code> file.</li>
-<li>Use module configs strictly for defining <code>ext.args</code>, <code>ext.args2</code>, and <code>ext.prefix</code>.</li>
+<li>Use module configs strictly for defining <code>ext.args</code>, <code>ext.args2</code>, and <code>ext.prefix</code>. Do not place complex decision-making, conditions or workflow behaviour logic there.</li>
 <li>Conditional behavior (e.g. save as CRAM vs BAM) should be handled in the subworkflow — not via config-level flags.</li>
 <li>Process resource requirements (CPUs / memory / time) go in <code>conf/base.config</code> using <code>withLabel:</code> selectors so they can be shared across processes. Use <code>${task.cpus}</code> and <code>${task.memory}</code> in <code>script:</code> blocks to apply them dynamically.</li>
 </ul>
 <h3 id="writing-tests">Writing tests</h3>
 <ul>
-<li>Every subworkflow should have real tests and <code>-stub</code> tests at <code>subworkflows/local/&lt;name&gt;/tests/main.nf.test</code>.</li>
+<li>Every subworkflow should have tests at <code>subworkflows/local/&lt;name&gt;/tests/main.nf.test</code>.</li>
 <li>Snapshot files (<code>*.nf.test.snap</code>) are committed alongside tests — update them when outputs change.</li>
 <li>Pipeline-level tests live in <code>tests/</code>.</li>
-<li>When modules in tests require different parameters, use <code>params { &lt;module&gt;_args = ... }</code> similar to https://nf-co.re/docs/specifications/components/modules/testing#configuration-of-extargs-in-tests instead of having mutliple configs.</li>
+<li>Every subworkflow should also have <code>-stub</code> tests.</li>
+<li>When modules in tests require different parameters, use <code>params { &lt;module&gt;_args = ... }</code> (see <a href="https://nf-co.re/docs/specifications/components/modules/testing#configuration-of-extargs-in-tests">nf-core docs</a>) instead of having multiple configs.</li>
 </ul>
 <h3 id="style">Style</h3>
 <ul>
-<li>Sort <code>include</code> statements alphabetically by the name inside the braces. Right-pad each name with spaces so all closing <code>}</code> align to the same column (the longest name in the block sets the width):</li>
-</ul>
-<div class="language-groovy highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">BCFTOOLS_VIEW</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">FILTER_VCF</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../../../modules/nf-core/bcftools/view/main&#39;</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">TIDDIT_COV</span><span class="w">                  </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../../../modules/nf-core/tiddit/cov/main&#39;</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">VCF2CYTOSURE</span><span class="w">                </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../../../modules/nf-core/vcf2cytosure/main&#39;</span>
-</span></code></pre></div>
-<ul>
 <li>Both <code>take:</code> and <code>emit:</code> block entries require an inline type comment. Use <code>name // type: [mandatory|optional] description</code> for <code>take:</code> and <code>name = value // channel: [type description]</code> for <code>emit:</code>. Always include the comment — never leave an entry uncommented.</li>
 </ul>
-<div class="language-groovy highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nl">take:</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">ch_vcf</span><span class="w">                </span><span class="c1">// channel: [mandatory] [ val(meta), path(vcf) ]</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">ch_reduced_penetrance</span><span class="w"> </span><span class="c1">// channel: [optional]  [ path(penetrance) ]</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">val_aligner</span><span class="w">           </span><span class="c1">// string:  [mandatory] aligner name (bwa/bwamem2/bwameme)</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">process_with_sort</span><span class="w">     </span><span class="c1">// Boolean</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="nl">emit:</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="n">vcf</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">ch_vcf</span><span class="w">      </span><span class="c1">// channel: [ val(meta), path(vcf) ]</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="n">publish</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_publish</span><span class="w">  </span><span class="c1">// channel: [ val(destination), val(value) ]</span>
+<div class="language-groovy highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nl">take:</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">ch_vcf</span><span class="w">                </span><span class="c1">// channel: [mandatory] [ val(meta), path(vcf) ]</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">ch_reduced_penetrance</span><span class="w"> </span><span class="c1">// channel: [optional]  [ path(penetrance) ]</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">val_aligner</span><span class="w">           </span><span class="c1">// string:  [mandatory] aligner name (bwa/bwamem2/bwameme)</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">process_with_sort</span><span class="w">     </span><span class="c1">// Boolean</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nl">emit:</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">vcf</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">ch_vcf</span><span class="w">      </span><span class="c1">// channel: [ val(meta), path(vcf) ]</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">publish</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_publish</span><span class="w">  </span><span class="c1">// channel: [ val(destination), val(value) ]</span>
 </span></code></pre></div>
 <ul>
-<li>Use <code>ch_* = &lt;...&gt;</code> to declare a new channel, using <code>.set</code> will <a href="https://docs.seqera.io/nextflow/workflow-typed#restricted-syntax">soon be restricted</a>.</li>
-<li>Use the nextflow code formatting (<code>nextflow lint -harshil-alignment -format file.nf</code>) after making changes, but beware that it currently removes some inline comments.</li>
-<li>Use comment-blocks for multi-line comments, e.g.:</li>
+<li>Use <code>ch_* = &lt;...&gt;</code> to declare a new channel. Avoid using <code>.set { ch_* }</code>.</li>
+<li>Sort <code>include</code> statements alphabetically by the name inside the braces. Right-pad each name with spaces so all closing <code>}</code> align to the same column (the longest name in the block sets the width):</li>
 </ul>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>/*
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a> * This is
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a> * a multi-line comment.
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a> */
+<div class="language-groovy highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">BCFTOOLS_VIEW</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">FILTER_VCF</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../../../modules/nf-core/bcftools/view/main&#39;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">TIDDIT_COV</span><span class="w">                  </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../../../modules/nf-core/tiddit/cov/main&#39;</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">VCF2CYTOSURE</span><span class="w">                </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../../../modules/nf-core/vcf2cytosure/main&#39;</span>
+</span></code></pre></div>
+<ul>
+<li>Use nextflow code formatting (<code>nextflow lint -harshil-alignment -format file.nf</code>) after making changes, but beware that it currently removes some inline comments.</li>
+<li>Use comment-blocks for multi-line comments:</li>
+</ul>
+<div class="language-groovy highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cm">/*</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="cm"> * This is</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="cm"> * a multi-line comment.</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="cm"> */</span>
 </span></code></pre></div>
 <ul>
 <li>Use <code>[...]</code> instead of <code>tuple(...)</code>.</li>
 <li>Avoid nested if-else statements, prefer single-level statements when possible.</li>
 </ul>
+<h3 id="publishing">Publishing</h3>
+<p>We are currently migrating from using <code>publishDir</code> to workflow outputs.</p>
+<ul>
+<li>Workflows and subworkflows need to emit all result files that need to be published.</li>
+<li>Main workflow has logic to mix together files that will be published in the same output directory.</li>
+<li>Publish block should publish one channel per directory whenever possible in the main workflow (<code>main.nf</code>).</li>
+<li>Output block determines directories for each channel that comes from the publish block (<code>main.nf</code>).</li>
+<li>Keep file naming/prefixes in the configs as much as possible.</li>
+<li>Remove the corresponding <code>publishDir</code> entry from <code>conf/modules/</code> when adding a process to <code>ch_publish</code>.</li>
+</ul>
+<h2 id="updating-contribution-guidelines">Updating contribution guidelines</h2>
+<p>This document is generated using <a href="https://github.com/genomic-medicine-sweden/nf-dev-guidelines">genomic-medicine-sweden/nf-dev-guidelines</a>.
+Follow the instructions in the <a href="https://github.com/genomic-medicine-sweden/nf-dev-guidelines#readme-ov-file">README</a> to update the contribution guidelines.</p>
 
 
 
