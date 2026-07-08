@@ -89,6 +89,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1145](https://github.com/genomic-medicine-sweden/nallo/pull/1145) - Replaced local hiphase module with nf-core one
 - [#1149](https://github.com/genomic-medicine-sweden/nallo/pull/1149) - Replaced local `echtvar/anno` module with nf-core one
 - [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Updated test dataset to remove tags from fastq file
+- [#1169](https://github.com/genomic-medicine-sweden/nallo/pull/1169) - Updated nf-dev guidelines sync config
+- [#1178](https://github.com/genomic-medicine-sweden/nallo/pull/1178) - Updated dataset with unmasked reference and only ML and MM tags in the fastq test file
 
 ### Removed
 
@@ -107,6 +109,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1142](https://github.com/genomic-medicine-sweden/nallo/pull/1142) - Fixed Sentieon-specific SNV filtering to use the configured `--snv_caller` parameter
 - [#1172](https://github.com/genomic-medicine-sweden/nallo/pull/1172) - Fixed `--ubam` being set for `QC_PHASING:CRAMINO`, suppressing alignment-dependent metrics including `read_identity`
 - [#1162](https://github.com/genomic-medicine-sweden/nallo/pull/1162) - Fixed `ECHTVAR_ANNO` channel shape mismatch after nf-core module swap by wrapping databases channel with meta
+- [#1180](https://github.com/genomic-medicine-sweden/nallo/pull/1180) - Fixed pipeline configs affecting subworkflow tests (that should be isolated)
 
 ### Parameters
 
