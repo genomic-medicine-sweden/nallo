@@ -37,4 +37,4 @@ repos:
       - id: nextflow-lint
         files: '\.nf$|nextflow\.config$'
         exclude: "^(modules/nf-core|subworkflows/nf-core|conf/containers_)/"
-        args: ["-output", "json", "-format", "-harshil-alignment", "-sort-declarations"]
+        args: ["-output", "json", "-format", "-harshil-alignment"]
