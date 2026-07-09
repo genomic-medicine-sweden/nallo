@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            231,
+            217,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -137,20 +137,11 @@
                 "GENMOD_SCORE": {
                     "genmod": "3.10.2"
                 },
-                "GFASTATS": {
-                    "gfastats": "1.3.11"
-                },
                 "GLNEXUS": {
                     "glnexus": "1.4.3"
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
-                },
-                "HIFIASM_ASSEMBLY": {
-                    "hifiasm": "0.25.0-r726"
-                },
-                "HIFIASM_BINS": {
-                    "hifiasm": "0.25.0-r726"
                 },
                 "HIFICNV": {
                     "hificnv": "1.0.0-36e6461"
@@ -224,9 +215,6 @@
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_FASTQ": {
-                    "samtools": "1.23.1"
-                },
                 "SAMTOOLS_IMPORT": {
                     "samtools": "1.23.1"
                 },
@@ -296,9 +284,6 @@
                 "TABIX_TABIX": {
                     "tabix": 1.21
                 },
-                "TAGBAM": {
-                    "tagbam": "0.1.0"
-                },
                 "TIDDIT_COV": {
                     "tiddit": "3.9.4"
                 },
@@ -326,15 +311,6 @@
                 "aligned_reads/HG002_Revio",
                 "aligned_reads/HG002_Revio/HG002_Revio_haplotagged.cram",
                 "aligned_reads/HG002_Revio/HG002_Revio_haplotagged.cram.crai",
-                "assembly",
-                "assembly/sample",
-                "assembly/sample/HG002_Revio",
-                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.cram",
-                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.cram.crai",
-                "assembly/stats",
-                "assembly/stats/HG002_Revio",
-                "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
-                "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
                 "gens",
                 "gens/HG002_Revio",
                 "gens/HG002_Revio/HG002_Revio.baf.bed.gz",
@@ -667,8 +643,6 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ],
             [
-                "HG002_Revio_haplotype_1.assembly_summary:md5,7b580367cc0806818f9597d84bd7e5d3",
-                "HG002_Revio_haplotype_2.assembly_summary:md5,53928ced28326a9fae5f2b8f7d25ea18",
                 "HG002_Revio.baf.bed.gz:md5,6665b135f673d204ec030883683605ea",
                 "HG002_Revio.baf.bed.gz.tbi:md5,3e21a7933ca52383f0b8ccf221b05fc7",
                 "HG002_Revio.cov.bed.gz:md5,04addec86adce344b4cf3df83ad632e5",
@@ -756,7 +730,7 @@
                 "whatshap-stats-table.txt:md5,6dc8816b1d0837f4fb4c407624f92c4d",
                 "FAM_paraphase_annotated.tsv:md5,f95c3b89013784ed27feb71c46c09d85",
                 "FAM.ped:md5,bd5cec27ba7337a85cf98e787131e2b5",
-                "HG002_Revio_cramino_aligned_phased.arrow:md5,ab44441ba16a9c1d0f938fd5e51d630f",
+                "HG002_Revio_cramino_aligned_phased.arrow:md5,59218ecb157374692c12a6ffc63ad0e0",
                 "HG002_Revio_cramino_aligned.arrow:md5,ab44441ba16a9c1d0f938fd5e51d630f",
                 "HG002_Revio.mosdepth.global.dist.txt:md5,e550f23c23fb25565de66e50d8cedf84",
                 "HG002_Revio.mosdepth.region.dist.txt:md5,37e272c54826150c8456c7859f3aae4f",
@@ -795,10 +769,6 @@
                 [
                     "HG002_Revio_haplotagged.cram",
                     "f8c3b1118e5539d5593a03a469de541c"
-                ],
-                [
-                    "HG002_Revio_aligned_assembly.cram",
-                    "2f1773961a831fa3e4fd0b2085f5df30"
                 ],
                 [
                     "HG002_Revio_spanning_trgt.cram",
@@ -847,10 +817,10 @@
                 
             ]
         ],
-        "timestamp": "2026-06-01T09:35:06.378879925",
+        "timestamp": "2026-07-08T14:54:10.917191798",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.04.4"
         }
     }
 }

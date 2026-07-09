@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            340,
+            341,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -1047,9 +1047,9 @@
                 "whatshap-stats-table.txt:md5,f9313dcc3c901abb055dda4850dc255e",
                 "FAM.ped:md5,deb1ee6bd38d6e8f7cb92801d8a12f12",
                 "FAM2.ped:md5,a863aa424b288ec0f6a2c68ab55af10e",
-                "HG002_ONT_A_cramino_aligned_phased.arrow:md5,44ef49d003493ef027e1b0b0c0b4bf2f",
-                "HG002_ONT_B_cramino_aligned_phased.arrow:md5,21da674605180b67f85e5e2dcafd187e",
-                "HG002_ONT_C_cramino_aligned_phased.arrow:md5,44ef49d003493ef027e1b0b0c0b4bf2f",
+                "HG002_ONT_A_cramino_aligned_phased.arrow:md5,f516402d4fc885ef70f4bac39aed93c9",
+                "HG002_ONT_B_cramino_aligned_phased.arrow:md5,606a15f749126986a1afe51c992b710b",
+                "HG002_ONT_C_cramino_aligned_phased.arrow:md5,f516402d4fc885ef70f4bac39aed93c9",
                 "HG002_ONT_A_cramino_aligned.arrow:md5,44ef49d003493ef027e1b0b0c0b4bf2f",
                 "HG002_ONT_B_cramino_aligned.arrow:md5,21da674605180b67f85e5e2dcafd187e",
                 "HG002_ONT_C_cramino_aligned.arrow:md5,44ef49d003493ef027e1b0b0c0b4bf2f",
@@ -1226,10 +1226,10 @@
                 
             ]
         ],
-        "timestamp": "2026-06-23T16:57:16.948077305",
+        "timestamp": "2026-07-08T15:07:01.781368348",
         "meta": {
-            "nf-test": "0.9.4",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.4"
         }
     }
 }

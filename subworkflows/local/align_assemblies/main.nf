@@ -20,7 +20,7 @@ workflow ALIGN_ASSEMBLIES {
 
     MINIMAP2_ALIGN(
         ch_assembly,
-        MINIMAP2_INDEX.out.mmi,
+        MINIMAP2_INDEX.out.index.collect(),
         true,
         'bai',
         false,
