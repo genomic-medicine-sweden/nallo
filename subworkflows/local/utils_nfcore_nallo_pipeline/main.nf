@@ -168,7 +168,6 @@ workflow PIPELINE_INITIALISATION {
         repeat_annotation: "skip_repeat_annotation",
         chromograph: "skip_chromograph",
         methylation: "skip_methylation_calling",
-        methbat: "skip_methbat",
         methylation_annotation: "skip_methylation_annotation",
         mitochondrial: "skip_mitochondrial_calling",
         qc: "skip_qc",
