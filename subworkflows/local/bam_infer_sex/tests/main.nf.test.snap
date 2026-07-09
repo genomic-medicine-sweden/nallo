@@ -150,10 +150,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-06-30T17:49:19.500818169",
+        "timestamp": "2026-05-27T10:42:42.026450039",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.02.0"
         }
     },
     "[bam, bai], fasta, fai, somalier_sites, ped - stub multiple samples, all unknown sex": {
@@ -479,10 +479,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-06-30T17:49:43.480976859",
+        "timestamp": "2026-05-27T10:43:07.987725943",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.02.0"
         }
     },
     "[bam, bai], fasta, fai, somalier_sites, ped - 1 sample with unknown sex": {
@@ -636,10 +636,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-06-30T17:48:55.271785841",
+        "timestamp": "2026-05-27T10:42:16.54799446",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.02.0"
         }
     },
     "[bam, bai], fasta, fai, somalier_sites, ped - stub multiple samples": {
@@ -965,10 +965,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-06-30T17:49:35.379514662",
+        "timestamp": "2026-05-27T10:42:59.434865957",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.02.0"
         }
     },
     "[bam, bai], fasta, fai, somalier_sites, ped - stub unknown sex": {
@@ -1122,10 +1122,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-06-30T17:49:27.166894179",
+        "timestamp": "2026-05-27T10:42:50.503289716",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.02.0"
         }
     },
     "[bam, bai], fasta, fai, somalier_sites, ped - multiple samples": {
