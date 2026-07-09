@@ -21,6 +21,7 @@ workflow CALL_METHYLATION_MODKIT {
         ch_bed,
     )
 
+    // Only convert files with content
     ch_bedmethyl_to_bigwig_in = MODKIT_PILEUP.out.bedgz
         .transpose()
         .tap { ch_bedmethyl }

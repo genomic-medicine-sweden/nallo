@@ -21,7 +21,6 @@ workflow PHASING {
     ch_pedigree // channel: [ val(meta), path(pedigree) ]
 
     main:
-    // Phase variants and haplotag reads with Longphase
     if (phaser.equals("longphase")) {
 
         LONGPHASE(

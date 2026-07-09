@@ -21,8 +21,8 @@ workflow QC_ALIGNED_READS {
         ch_bam_bai
     )
 
-    ch_mosdepth_in = ch_bam_bai.combine(ch_mosdepth_bed.map { _meta, bed -> bed }.toList())
     // toList() enables passing [] if ch_bed is empty
+    ch_mosdepth_in = ch_bam_bai.combine(ch_mosdepth_bed.map { _meta, bed -> bed }.toList())
 
     MOSDEPTH(
         ch_mosdepth_in,
