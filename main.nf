@@ -20,6 +20,336 @@ include {
     createReferenceChannelFromPath ;
     createReferenceChannelFromSamplesheet
 } from './subworkflows/local/utils_nfcore_nallo_pipeline'
+
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    NAMED WORKFLOWS FOR PIPELINE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+//
+// WORKFLOW: Run main analysis pipeline depending on type of input
+//
+workflow GENOMICMEDICINESWEDEN_NALLO {
+    take:
+    ch_cadd_header
+    ch_cadd_prescored_indels
+    ch_cadd_resources
+    ch_echtvar_databases
+    ch_exclude_bed
+    ch_expected_xx_bed
+    ch_expected_xy_bed
+    ch_fasta
+    ch_fai
+    ch_genmod_reduced_penetrance
+    ch_genmod_score_config_snvs
+    ch_genmod_score_config_svs
+    ch_gens_baf_positions
+    ch_gens_coverage_bins
+    ch_gens_panel_of_normals_female
+    ch_gens_panel_of_normals_male
+    ch_hgnc_ids
+    ch_samplesheet
+    ch_methbat_regions
+    ch_modkit_call_regions
+    ch_mosdepth_regions
+    ch_paraphrase_rules
+    ch_par
+    ch_peddy_sites
+    ch_sambamba_regions
+    ch_sentieon_female_diploid_bed
+    ch_sentieon_male_diploid_bed
+    ch_sentieon_male_haploid_bed
+    ch_sentieon_model_bundle
+    ch_snv_call_regions
+    ch_somalier_sites
+    ch_stranger_repeat_catalog
+    ch_str_bed
+    ch_strdrop_training_set_json
+    ch_sv_call_regions
+    ch_svdb_sv_databases
+    ch_tandem_repeats
+    ch_variant_consequences_snvs
+    ch_variant_consequences_svs
+    ch_vcfexpress_prelude
+    ch_vep_cache_unprocessed
+    ch_vep_plugin_files
+    cram_output
+    val_alignment_processes
+    val_bigwig_modcodes
+    val_create_hificnv_maf_track
+    val_create_sawfish_maf_track
+    val_echtvar_snv_databases
+    val_fasta
+    val_filter_snvs_expression
+    val_filter_svs_expression
+    val_filter_variants_hgnc_ids
+    val_force_sawfish_joint_call_single_samples
+    val_hifiasm_mode
+    val_mitochondrial_caller
+    val_multiqc_config
+    val_multiqc_logo
+    val_multiqc_methods_description
+    val_outdir
+    val_paraphrase_output_format
+    val_phaser
+    val_whatshap_pedigree_phasing
+    val_plot_chromograph_autozygosity
+    val_plot_chromograph_coverage
+    val_pre_vep_snv_filter_expression
+    val_run_methbat
+    val_run_modkit
+    val_sentieon_tech
+    val_skip_alignment
+    val_skip_annotate_paralogs
+    val_skip_call_paralogs
+    val_skip_chromograph
+    val_skip_genome_assembly
+    val_skip_methylation_calling
+    val_skip_methylation_annotation
+    val_skip_peddy
+    val_skip_phasing
+    val_skip_prepare_gens_input
+    val_skip_qc
+    val_skip_rank_variants
+    val_skip_repeat_annotation
+    val_skip_repeat_calling
+    val_skip_mitochondrial_calling
+    val_skip_sambamba_depth
+    val_skip_sex_check
+    val_skip_snv_annotation
+    val_skip_snv_calling
+    val_skip_sv_annotation
+    val_skip_sv_calling
+    val_snv_caller
+    val_snv_calling_processes
+    val_snv_call_regions
+    val_str_caller
+    val_strdrop_training_set_json
+    val_sv_callers_merge_priority
+    val_sv_callers_to_merge
+    val_sv_callers_to_run
+    val_sv_call_regions
+    val_vep_cache
+    val_vep_cache_version
+
+    main:
+
+    //
+    // WORKFLOW: Run pipeline
+    //
+    NALLO(
+        ch_cadd_header,
+        ch_cadd_prescored_indels,
+        ch_cadd_resources,
+        ch_echtvar_databases,
+        ch_exclude_bed,
+        ch_expected_xx_bed,
+        ch_expected_xy_bed,
+        ch_fasta,
+        ch_fai,
+        ch_genmod_reduced_penetrance,
+        ch_genmod_score_config_snvs,
+        ch_genmod_score_config_svs,
+        ch_gens_baf_positions,
+        ch_gens_coverage_bins,
+        ch_gens_panel_of_normals_female,
+        ch_gens_panel_of_normals_male,
+        ch_hgnc_ids,
+        ch_samplesheet,
+        ch_methbat_regions,
+        ch_modkit_call_regions,
+        ch_mosdepth_regions,
+        ch_paraphrase_rules,
+        ch_par,
+        ch_peddy_sites,
+        ch_sambamba_regions,
+        ch_sentieon_female_diploid_bed,
+        ch_sentieon_male_diploid_bed,
+        ch_sentieon_male_haploid_bed,
+        ch_sentieon_model_bundle,
+        ch_snv_call_regions,
+        ch_somalier_sites,
+        ch_stranger_repeat_catalog,
+        ch_str_bed,
+        ch_strdrop_training_set_json,
+        ch_sv_call_regions,
+        ch_svdb_sv_databases,
+        ch_tandem_repeats,
+        ch_variant_consequences_snvs,
+        ch_variant_consequences_svs,
+        ch_vcfexpress_prelude,
+        ch_vep_cache_unprocessed,
+        ch_vep_plugin_files,
+        cram_output,
+        val_alignment_processes,
+        val_bigwig_modcodes,
+        val_skip_phasing && cram_output,
+        val_create_hificnv_maf_track,
+        val_create_sawfish_maf_track,
+        val_echtvar_snv_databases,
+        val_fasta,
+        val_filter_snvs_expression,
+        val_filter_svs_expression,
+        val_filter_variants_hgnc_ids,
+        val_force_sawfish_joint_call_single_samples,
+        val_hifiasm_mode,
+        val_mitochondrial_caller,
+        val_multiqc_config,
+        val_multiqc_logo,
+        val_multiqc_methods_description,
+        val_outdir,
+        val_paraphrase_output_format,
+        val_phaser,
+        val_whatshap_pedigree_phasing,
+        val_plot_chromograph_autozygosity,
+        val_plot_chromograph_coverage,
+        val_pre_vep_snv_filter_expression,
+        val_sentieon_tech,
+        val_skip_alignment,
+        val_skip_annotate_paralogs,
+        val_skip_call_paralogs,
+        val_skip_chromograph,
+        val_skip_genome_assembly,
+        (val_skip_methylation_calling || !val_run_methbat),
+        val_skip_methylation_annotation,
+        (val_skip_methylation_calling || !val_run_modkit),
+        val_skip_peddy,
+        val_skip_phasing,
+        val_skip_prepare_gens_input,
+        val_skip_qc,
+        val_skip_rank_variants,
+        val_skip_repeat_annotation,
+        val_skip_mitochondrial_calling,
+        val_skip_sambamba_depth,
+        val_skip_sex_check,
+        val_skip_snv_annotation,
+        val_skip_snv_calling,
+        val_skip_repeat_calling || val_str_caller != "trgt",
+        val_skip_sv_annotation,
+        val_skip_sv_calling,
+        val_skip_repeat_calling || val_str_caller != "strdust",
+        val_snv_caller,
+        val_snv_calling_processes,
+        val_snv_call_regions,
+        val_strdrop_training_set_json,
+        val_sv_callers_merge_priority,
+        val_sv_callers_to_merge,
+        val_sv_callers_to_run,
+        val_sv_call_regions,
+        val_vep_cache,
+        val_vep_cache_version,
+    )
+
+    emit:
+    aligned_assemblies_bai              = NALLO.out.aligned_assemblies_bai // channel: [ val(meta), path(bai) ]
+    aligned_assemblies_bam              = NALLO.out.aligned_assemblies_bam // channel: [ val(meta), path(bam) ]
+    aligned_assemblies_crai             = NALLO.out.aligned_assemblies_crai // channel: [ val(meta), path(crai) ]
+    aligned_assemblies_cram             = NALLO.out.aligned_assemblies_cram // channel: [ val(meta), path(cram) ]
+    aligned_haplotagged_reads_bai       = NALLO.out.aligned_haplotagged_reads_bai // channel: [ val(meta), path(bai) ]
+    aligned_haplotagged_reads_bam       = NALLO.out.aligned_haplotagged_reads_bam // channel: [ val(meta), path(bam) ]
+    aligned_haplotagged_reads_crai      = NALLO.out.aligned_haplotagged_reads_crai // channel: [ val(meta), path(crai) ]
+    aligned_haplotagged_reads_cram      = NALLO.out.aligned_haplotagged_reads_cram // channel: [ val(meta), path(cram) ]
+    aligned_reads_bai                   = NALLO.out.aligned_reads_bai // channel: [ val(meta), path(bai) ]
+    aligned_reads_bam                   = NALLO.out.aligned_reads_bam // channel: [ val(meta), path(bam) ]
+    aligned_reads_crai                  = NALLO.out.aligned_reads_crai // channel: [ val(meta), path(crai) ]
+    aligned_reads_cram                  = NALLO.out.aligned_reads_cram // channel: [ val(meta), path(cram) ]
+    assembly_summary                    = NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
+    chromograph_plots                   = NALLO.out.chromograph_plots // channel: [ val(meta), path(png) ]
+    cramino_phased_arrow                = NALLO.out.cramino_phased_arrow // channel: [ val(meta), path("*.arrow") ]
+    cramino_phased_stats                = NALLO.out.cramino_phased_stats // channel: [ val(meta), path("*.txt") ]
+    cramino_unphased_arrow              = NALLO.out.cramino_unphased_arrow // channel: [ val(meta), path(arrow) ]
+    cramino_unphased_stats              = NALLO.out.cramino_unphased_stats // channel: [ val(meta), path(txt) ]
+    fastqc_html                         = NALLO.out.fastqc_html // channel: [ val(meta), path(html) ]
+    fastqc_zip                          = NALLO.out.fastqc_zip // channel: [ val(meta), path(zip) ]
+    gens_baf_bed                        = NALLO.out.gens_baf_bed // channel: [ val(meta), path(baf.bed.gz) ]
+    gens_baf_tbi                        = NALLO.out.gens_baf_tbi // channel: [ val(meta), path(baf.bed.gz.tbi) ]
+    gens_cov_bed                        = NALLO.out.gens_cov_bed // channel: [ val(meta), path(cov.bed.gz) ]
+    gens_cov_tbi                        = NALLO.out.gens_cov_tbi // channel: [ val(meta), path(cov.bed.gz.tbi) ]
+    hificnv_copynum_bedgraph            = NALLO.out.hificnv_copynum_bedgraph // channel: [ val(meta), path(bedgraph) ]
+    hificnv_depth_bw                    = NALLO.out.hificnv_depth_bw // channel: [ val(meta), path(bw) ]
+    hificnv_maf_bw                      = NALLO.out.hificnv_maf_bw // channel: [ val(meta), path(bw) ]
+    methylation_family_annotated        = NALLO.out.methylation_family_annotated // channel: [ val(meta), path(methylated_regions_by_family) ]
+    methylation_methbat_combined_bed    = NALLO.out.methylation_methbat_combined_bed // channel: [ val(meta), path(bed.gz) ]
+    methylation_methbat_combined_bigwig = NALLO.out.methylation_methbat_combined_bigwig // channel: [ val(meta), path(combined.bw) ]
+    methylation_methbat_combined_index  = NALLO.out.methylation_methbat_combined_index // channel: [ val(meta), path(bed.gz.tbi) ]
+    methylation_methbat_hap1_bed        = NALLO.out.methylation_methbat_hap1_bed // channel: [ val(meta), path(bed.gz) ]
+    methylation_methbat_hap1_bigwig     = NALLO.out.methylation_methbat_hap1_bigwig // channel: [ val(meta), path(hap1.bw) ]
+    methylation_methbat_hap1_index      = NALLO.out.methylation_methbat_hap1_index // channel: [ val(meta), path(bed.gz.tbi) ]
+    methylation_methbat_hap2_bed        = NALLO.out.methylation_methbat_hap2_bed // channel: [ val(meta), path(bed.gz) ]
+    methylation_methbat_hap2_bigwig     = NALLO.out.methylation_methbat_hap2_bigwig // channel: [ val(meta), path(hap2.bw) ]
+    methylation_methbat_hap2_index      = NALLO.out.methylation_methbat_hap2_index // channel: [ val(meta), path(bed.gz.tbi) ]
+    methylation_methbat_profiles        = NALLO.out.methylation_methbat_profiles // channel: [ val(meta), path(region_profile) ]
+    methylation_modkit_bed              = NALLO.out.methylation_modkit_bed // channel: [ val(meta), path(bed.gz) ]
+    methylation_modkit_bigwig           = NALLO.out.methylation_modkit_bigwig // channel: [ val(meta), path(bw) ]
+    methylation_modkit_tbi              = NALLO.out.methylation_modkit_tbi // channel: [ val(meta), path(bed.gz.tbi) ]
+    mosdepth_global_dist                = NALLO.out.mosdepth_global_dist // channel: [ val(meta), path(txt) ]
+    mosdepth_per_base_d4                = NALLO.out.mosdepth_per_base_d4 // channel: [ val(meta), path(d4) ]
+    mosdepth_regions_bed                = NALLO.out.mosdepth_regions_bed // channel: [ val(meta), path(bed.gz) ]
+    mosdepth_regions_csi                = NALLO.out.mosdepth_regions_csi // channel: [ val(meta), path(bed.gz.csi) ]
+    mosdepth_regions_dist               = NALLO.out.mosdepth_regions_dist // channel: [ val(meta), path(txt) ]
+    mosdepth_summary                    = NALLO.out.mosdepth_summary // channel: [ val(meta), path(txt) ]
+    multiqc_data                        = NALLO.out.multiqc_data // channel: [ val(meta), path(*_data) ]
+    multiqc_plots                       = NALLO.out.multiqc_plots // channel: [ val(meta), path(*_plots) ]
+    multiqc_report                      = NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
+    paralogs_family_annotated_json      = NALLO.out.paralogs_family_annotated_json // channel: [ val(meta), path(tsv) ]
+    paralogs_family_annotated_tsv       = NALLO.out.paralogs_family_annotated_tsv // channel: [ val(meta), path(json) ]
+    paralogs_family_tbi                 = NALLO.out.paralogs_family_tbi // channel: [ val(meta), path(tbi) ]
+    paralogs_family_vcf                 = NALLO.out.paralogs_family_vcf // channel: [ val(meta), path(vcf) ]
+    paralogs_sample_bai                 = NALLO.out.paralogs_sample_bai // channel: [ val(meta), path(bai) ]
+    paralogs_sample_bam                 = NALLO.out.paralogs_sample_bam // channel: [ val(meta), path(bam) ]
+    paralogs_sample_crai                = NALLO.out.paralogs_sample_crai // channel: [ val(meta), path(crai) ]
+    paralogs_sample_cram                = NALLO.out.paralogs_sample_cram // channel: [ val(meta), path(cram) ]
+    paralogs_sample_json                = NALLO.out.paralogs_sample_json // channel: [ val(meta), path(json) ]
+    paralogs_sample_tbi                 = NALLO.out.paralogs_sample_tbi // channel: [ val(meta), path(tbi) ]
+    paralogs_sample_vcf                 = NALLO.out.paralogs_sample_vcf // channel: [ val(meta), path(vcf) ]
+    peddy_het_check_csv                 = NALLO.out.peddy_het_check_csv // channel: [ val(meta), path(csv) ]
+    peddy_het_check_png                 = NALLO.out.peddy_het_check_png // channel: [ val(meta), path(png) ]
+    peddy_html                          = NALLO.out.peddy_html // channel: [ val(meta), path(html) ]
+    peddy_ped                           = NALLO.out.peddy_ped // channel: [ val(meta), path(ped) ]
+    peddy_ped_check_csv                 = NALLO.out.peddy_ped_check_csv // channel: [ val(meta), path(csv) ]
+    peddy_ped_check_png                 = NALLO.out.peddy_ped_check_png // channel: [ val(meta), path(png) ]
+    peddy_ped_check_rel_difference_csv  = NALLO.out.peddy_ped_check_rel_difference_csv // channel: [ val(meta), path(csv) ]
+    peddy_sex_check_csv                 = NALLO.out.peddy_sex_check_csv // channel: [ val(meta), path(csv) ]
+    peddy_sex_check_png                 = NALLO.out.peddy_sex_check_png // channel: [ val(meta), path(png) ]
+    peddy_vs_html                       = NALLO.out.peddy_vs_html // channel: [ val(meta), path(html) ]
+    pedigree                            = NALLO.out.pedigree // channel: [ val(meta), path(ped) ]
+    phasing_blocks_gtf                  = NALLO.out.phasing_blocks_gtf // channel: [ val(meta), path("*.blocks.gtf.gz") ]
+    phasing_blocks_tbi                  = NALLO.out.phasing_blocks_tbi // channel: [ val(meta), path("*.blocks.gtf.gz.tbi") ]
+    qc_bcftools_stats                   = NALLO.out.qc_bcftools_stats // channel: [ val(meta), path(txt) ]
+    qc_deepvariant_vcfstatsreport       = NALLO.out.qc_deepvariant_vcfstatsreport // channel: [ val(meta), path(html) ]
+    qc_sambamba_depth_bed               = NALLO.out.qc_sambamba_depth_bed // channel: [ val(meta), path(bed) ]
+    qc_whatshap_stats                   = NALLO.out.qc_whatshap_stats // channel: [ val(meta), path("*.stats.tsv") ]
+    repeats_annotated_family_tbi        = NALLO.out.repeats_annotated_family_tbi // channel: [ val(meta), path(tbi) ]
+    repeats_annotated_family_vcf        = NALLO.out.repeats_annotated_family_vcf // channel: [ val(meta), path(vcf) ]
+    repeats_strdust_family_tbi          = NALLO.out.repeats_strdust_family_tbi // channel: [ val(meta), path(tbi) ]
+    repeats_strdust_family_vcf          = NALLO.out.repeats_strdust_family_vcf // channel: [ val(meta), path(vcf) ]
+    repeats_strdust_sample_tbi          = NALLO.out.repeats_strdust_sample_tbi // channel: [ val(meta), path(tbi) ]
+    repeats_strdust_sample_vcf          = NALLO.out.repeats_strdust_sample_vcf // channel: [ val(meta), path(vcf) ]
+    repeats_trgt_family_tbi             = NALLO.out.repeats_trgt_family_tbi // channel: [ val(meta), path(tbi) ]
+    repeats_trgt_family_vcf             = NALLO.out.repeats_trgt_family_vcf // channel: [ val(meta), path(vcf) ]
+    repeats_trgt_sample_bai             = NALLO.out.repeats_trgt_sample_bai // channel: [ val(meta), path(bai) ]
+    repeats_trgt_sample_bam             = NALLO.out.repeats_trgt_sample_bam // channel: [ val(meta), path(bam) ]
+    repeats_trgt_sample_crai            = NALLO.out.repeats_trgt_sample_crai // channel: [ val(meta), path(crai) ]
+    repeats_trgt_sample_cram            = NALLO.out.repeats_trgt_sample_cram // channel: [ val(meta), path(cram) ]
+    repeats_trgt_sample_tbi             = NALLO.out.repeats_trgt_sample_tbi // channel: [ val(meta), path(tbi) ]
+    repeats_trgt_sample_vcf             = NALLO.out.repeats_trgt_sample_vcf // channel: [ val(meta), path(vcf) ]
+    sawfish_copynum_bedgraph            = NALLO.out.sawfish_copynum_bedgraph // channel: [ val(meta), path(bedgraph) ]
+    sawfish_depth_bw                    = NALLO.out.sawfish_depth_bw // channel: [ val(meta), path(bw) ]
+    sawfish_gc_bias_corrected_depth_bw  = NALLO.out.sawfish_gc_bias_corrected_depth_bw // channel: [ val(meta), path(bw) ]
+    sawfish_maf_bw                      = NALLO.out.sawfish_maf_bw // channel: [ val(meta), path(bw) ]
+    snvs_family_tbi                     = NALLO.out.snvs_family_tbi // channel: [ val(meta), path(tbi) ]
+    snvs_family_vcf                     = NALLO.out.snvs_family_vcf // channel: [ val(meta), path(vcf) ]
+    snvs_sample_tbi                     = NALLO.out.snvs_sample_tbi // channel: [ val(meta), path(tbi) ]
+    snvs_sample_vcf                     = NALLO.out.snvs_sample_vcf // channel: [ val(meta), path(vcf) ]
+    somalier_relate_html                = NALLO.out.somalier_relate_html // channel: [ val(meta), path(html) ]
+    somalier_relate_pairs               = NALLO.out.somalier_relate_pairs // channel: [ val(meta), path(pairs.tsv) ]
+    somalier_relate_samples             = NALLO.out.somalier_relate_samples // channel: [ val(meta), path(samples.tsv) ]
+    svs_per_family_and_caller_tbi       = NALLO.out.svs_per_family_and_caller_tbi // channel: [ val(meta), path(tbi) ]
+    svs_per_family_and_caller_vcf       = NALLO.out.svs_per_family_and_caller_vcf // channel: [ val(meta), path(vcf) ]
+    svs_per_family_tbi                  = NALLO.out.svs_per_family_tbi // channel: [ val(meta), path(tbi) ]
+    svs_per_family_vcf                  = NALLO.out.svs_per_family_vcf // channel: [ val(meta), path(vcf.gz) ]
+}
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -518,334 +848,4 @@ output {
             file >> "visualization_tracks/${meta.id}/${meta.id}_${file.baseName}_sawfish.${file.extension}"
         }
     }
-}
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    NAMED WORKFLOWS FOR PIPELINE
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
-//
-// WORKFLOW: Run main analysis pipeline depending on type of input
-//
-workflow GENOMICMEDICINESWEDEN_NALLO {
-    take:
-    ch_cadd_header
-    ch_cadd_prescored_indels
-    ch_cadd_resources
-    ch_echtvar_databases
-    ch_exclude_bed
-    ch_expected_xx_bed
-    ch_expected_xy_bed
-    ch_fasta
-    ch_fai
-    ch_genmod_reduced_penetrance
-    ch_genmod_score_config_snvs
-    ch_genmod_score_config_svs
-    ch_gens_baf_positions
-    ch_gens_coverage_bins
-    ch_gens_panel_of_normals_female
-    ch_gens_panel_of_normals_male
-    ch_hgnc_ids
-    ch_samplesheet
-    ch_methbat_regions
-    ch_modkit_call_regions
-    ch_mosdepth_regions
-    ch_paraphrase_rules
-    ch_par
-    ch_peddy_sites
-    ch_sambamba_regions
-    ch_sentieon_female_diploid_bed
-    ch_sentieon_male_diploid_bed
-    ch_sentieon_male_haploid_bed
-    ch_sentieon_model_bundle
-    ch_snv_call_regions
-    ch_somalier_sites
-    ch_stranger_repeat_catalog
-    ch_str_bed
-    ch_strdrop_training_set_json
-    ch_sv_call_regions
-    ch_svdb_sv_databases
-    ch_tandem_repeats
-    ch_variant_consequences_snvs
-    ch_variant_consequences_svs
-    ch_vcfexpress_prelude
-    ch_vep_cache_unprocessed
-    ch_vep_plugin_files
-    cram_output
-    val_alignment_processes
-    val_bigwig_modcodes
-    val_create_hificnv_maf_track
-    val_create_sawfish_maf_track
-    val_echtvar_snv_databases
-    val_fasta
-    val_filter_snvs_expression
-    val_filter_svs_expression
-    val_filter_variants_hgnc_ids
-    val_force_sawfish_joint_call_single_samples
-    val_hifiasm_mode
-    val_mitochondrial_caller
-    val_multiqc_config
-    val_multiqc_logo
-    val_multiqc_methods_description
-    val_outdir
-    val_paraphrase_output_format
-    val_phaser
-    val_whatshap_pedigree_phasing
-    val_plot_chromograph_autozygosity
-    val_plot_chromograph_coverage
-    val_pre_vep_snv_filter_expression
-    val_run_methbat
-    val_run_modkit
-    val_sentieon_tech
-    val_skip_alignment
-    val_skip_annotate_paralogs
-    val_skip_call_paralogs
-    val_skip_chromograph
-    val_skip_genome_assembly
-    val_skip_methylation_calling
-    val_skip_methylation_annotation
-    val_skip_peddy
-    val_skip_phasing
-    val_skip_prepare_gens_input
-    val_skip_qc
-    val_skip_rank_variants
-    val_skip_repeat_annotation
-    val_skip_repeat_calling
-    val_skip_mitochondrial_calling
-    val_skip_sambamba_depth
-    val_skip_sex_check
-    val_skip_snv_annotation
-    val_skip_snv_calling
-    val_skip_sv_annotation
-    val_skip_sv_calling
-    val_snv_caller
-    val_snv_calling_processes
-    val_snv_call_regions
-    val_str_caller
-    val_strdrop_training_set_json
-    val_sv_callers_merge_priority
-    val_sv_callers_to_merge
-    val_sv_callers_to_run
-    val_sv_call_regions
-    val_vep_cache
-    val_vep_cache_version
-
-    main:
-
-    //
-    // WORKFLOW: Run pipeline
-    //
-    NALLO(
-        ch_cadd_header,
-        ch_cadd_prescored_indels,
-        ch_cadd_resources,
-        ch_echtvar_databases,
-        ch_exclude_bed,
-        ch_expected_xx_bed,
-        ch_expected_xy_bed,
-        ch_fasta,
-        ch_fai,
-        ch_genmod_reduced_penetrance,
-        ch_genmod_score_config_snvs,
-        ch_genmod_score_config_svs,
-        ch_gens_baf_positions,
-        ch_gens_coverage_bins,
-        ch_gens_panel_of_normals_female,
-        ch_gens_panel_of_normals_male,
-        ch_hgnc_ids,
-        ch_samplesheet,
-        ch_methbat_regions,
-        ch_modkit_call_regions,
-        ch_mosdepth_regions,
-        ch_paraphrase_rules,
-        ch_par,
-        ch_peddy_sites,
-        ch_sambamba_regions,
-        ch_sentieon_female_diploid_bed,
-        ch_sentieon_male_diploid_bed,
-        ch_sentieon_male_haploid_bed,
-        ch_sentieon_model_bundle,
-        ch_snv_call_regions,
-        ch_somalier_sites,
-        ch_stranger_repeat_catalog,
-        ch_str_bed,
-        ch_strdrop_training_set_json,
-        ch_sv_call_regions,
-        ch_svdb_sv_databases,
-        ch_tandem_repeats,
-        ch_variant_consequences_snvs,
-        ch_variant_consequences_svs,
-        ch_vcfexpress_prelude,
-        ch_vep_cache_unprocessed,
-        ch_vep_plugin_files,
-        cram_output,
-        val_alignment_processes,
-        val_bigwig_modcodes,
-        val_skip_phasing && cram_output,
-        val_create_hificnv_maf_track,
-        val_create_sawfish_maf_track,
-        val_echtvar_snv_databases,
-        val_fasta,
-        val_filter_snvs_expression,
-        val_filter_svs_expression,
-        val_filter_variants_hgnc_ids,
-        val_force_sawfish_joint_call_single_samples,
-        val_hifiasm_mode,
-        val_mitochondrial_caller,
-        val_multiqc_config,
-        val_multiqc_logo,
-        val_multiqc_methods_description,
-        val_outdir,
-        val_paraphrase_output_format,
-        val_phaser,
-        val_whatshap_pedigree_phasing,
-        val_plot_chromograph_autozygosity,
-        val_plot_chromograph_coverage,
-        val_pre_vep_snv_filter_expression,
-        val_sentieon_tech,
-        val_skip_alignment,
-        val_skip_annotate_paralogs,
-        val_skip_call_paralogs,
-        val_skip_chromograph,
-        val_skip_genome_assembly,
-        (val_skip_methylation_calling || !val_run_methbat),
-        val_skip_methylation_annotation,
-        (val_skip_methylation_calling || !val_run_modkit),
-        val_skip_peddy,
-        val_skip_phasing,
-        val_skip_prepare_gens_input,
-        val_skip_qc,
-        val_skip_rank_variants,
-        val_skip_repeat_annotation,
-        val_skip_mitochondrial_calling,
-        val_skip_sambamba_depth,
-        val_skip_sex_check,
-        val_skip_snv_annotation,
-        val_skip_snv_calling,
-        val_skip_repeat_calling || val_str_caller != "trgt",
-        val_skip_sv_annotation,
-        val_skip_sv_calling,
-        val_skip_repeat_calling || val_str_caller != "strdust",
-        val_snv_caller,
-        val_snv_calling_processes,
-        val_snv_call_regions,
-        val_strdrop_training_set_json,
-        val_sv_callers_merge_priority,
-        val_sv_callers_to_merge,
-        val_sv_callers_to_run,
-        val_sv_call_regions,
-        val_vep_cache,
-        val_vep_cache_version,
-    )
-
-    emit:
-    aligned_assemblies_bai              = NALLO.out.aligned_assemblies_bai // channel: [ val(meta), path(bai) ]
-    aligned_assemblies_bam              = NALLO.out.aligned_assemblies_bam // channel: [ val(meta), path(bam) ]
-    aligned_assemblies_crai             = NALLO.out.aligned_assemblies_crai // channel: [ val(meta), path(crai) ]
-    aligned_assemblies_cram             = NALLO.out.aligned_assemblies_cram // channel: [ val(meta), path(cram) ]
-    aligned_haplotagged_reads_bai       = NALLO.out.aligned_haplotagged_reads_bai // channel: [ val(meta), path(bai) ]
-    aligned_haplotagged_reads_bam       = NALLO.out.aligned_haplotagged_reads_bam // channel: [ val(meta), path(bam) ]
-    aligned_haplotagged_reads_crai      = NALLO.out.aligned_haplotagged_reads_crai // channel: [ val(meta), path(crai) ]
-    aligned_haplotagged_reads_cram      = NALLO.out.aligned_haplotagged_reads_cram // channel: [ val(meta), path(cram) ]
-    aligned_reads_bai                   = NALLO.out.aligned_reads_bai // channel: [ val(meta), path(bai) ]
-    aligned_reads_bam                   = NALLO.out.aligned_reads_bam // channel: [ val(meta), path(bam) ]
-    aligned_reads_crai                  = NALLO.out.aligned_reads_crai // channel: [ val(meta), path(crai) ]
-    aligned_reads_cram                  = NALLO.out.aligned_reads_cram // channel: [ val(meta), path(cram) ]
-    assembly_summary                    = NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
-    chromograph_plots                   = NALLO.out.chromograph_plots // channel: [ val(meta), path(png) ]
-    cramino_phased_arrow                = NALLO.out.cramino_phased_arrow // channel: [ val(meta), path("*.arrow") ]
-    cramino_phased_stats                = NALLO.out.cramino_phased_stats // channel: [ val(meta), path("*.txt") ]
-    cramino_unphased_arrow              = NALLO.out.cramino_unphased_arrow // channel: [ val(meta), path(arrow) ]
-    cramino_unphased_stats              = NALLO.out.cramino_unphased_stats // channel: [ val(meta), path(txt) ]
-    fastqc_html                         = NALLO.out.fastqc_html // channel: [ val(meta), path(html) ]
-    fastqc_zip                          = NALLO.out.fastqc_zip // channel: [ val(meta), path(zip) ]
-    gens_baf_bed                        = NALLO.out.gens_baf_bed // channel: [ val(meta), path(baf.bed.gz) ]
-    gens_baf_tbi                        = NALLO.out.gens_baf_tbi // channel: [ val(meta), path(baf.bed.gz.tbi) ]
-    gens_cov_bed                        = NALLO.out.gens_cov_bed // channel: [ val(meta), path(cov.bed.gz) ]
-    gens_cov_tbi                        = NALLO.out.gens_cov_tbi // channel: [ val(meta), path(cov.bed.gz.tbi) ]
-    hificnv_copynum_bedgraph            = NALLO.out.hificnv_copynum_bedgraph // channel: [ val(meta), path(bedgraph) ]
-    hificnv_depth_bw                    = NALLO.out.hificnv_depth_bw // channel: [ val(meta), path(bw) ]
-    hificnv_maf_bw                      = NALLO.out.hificnv_maf_bw // channel: [ val(meta), path(bw) ]
-    methylation_family_annotated        = NALLO.out.methylation_family_annotated // channel: [ val(meta), path(methylated_regions_by_family) ]
-    methylation_methbat_combined_bed    = NALLO.out.methylation_methbat_combined_bed // channel: [ val(meta), path(bed.gz) ]
-    methylation_methbat_combined_bigwig = NALLO.out.methylation_methbat_combined_bigwig // channel: [ val(meta), path(combined.bw) ]
-    methylation_methbat_combined_index  = NALLO.out.methylation_methbat_combined_index // channel: [ val(meta), path(bed.gz.tbi) ]
-    methylation_methbat_hap1_bed        = NALLO.out.methylation_methbat_hap1_bed // channel: [ val(meta), path(bed.gz) ]
-    methylation_methbat_hap1_bigwig     = NALLO.out.methylation_methbat_hap1_bigwig // channel: [ val(meta), path(hap1.bw) ]
-    methylation_methbat_hap1_index      = NALLO.out.methylation_methbat_hap1_index // channel: [ val(meta), path(bed.gz.tbi) ]
-    methylation_methbat_hap2_bed        = NALLO.out.methylation_methbat_hap2_bed // channel: [ val(meta), path(bed.gz) ]
-    methylation_methbat_hap2_bigwig     = NALLO.out.methylation_methbat_hap2_bigwig // channel: [ val(meta), path(hap2.bw) ]
-    methylation_methbat_hap2_index      = NALLO.out.methylation_methbat_hap2_index // channel: [ val(meta), path(bed.gz.tbi) ]
-    methylation_methbat_profiles        = NALLO.out.methylation_methbat_profiles // channel: [ val(meta), path(region_profile) ]
-    methylation_modkit_bed              = NALLO.out.methylation_modkit_bed // channel: [ val(meta), path(bed.gz) ]
-    methylation_modkit_bigwig           = NALLO.out.methylation_modkit_bigwig // channel: [ val(meta), path(bw) ]
-    methylation_modkit_tbi              = NALLO.out.methylation_modkit_tbi // channel: [ val(meta), path(bed.gz.tbi) ]
-    mosdepth_global_dist                = NALLO.out.mosdepth_global_dist // channel: [ val(meta), path(txt) ]
-    mosdepth_per_base_d4                = NALLO.out.mosdepth_per_base_d4 // channel: [ val(meta), path(d4) ]
-    mosdepth_regions_bed                = NALLO.out.mosdepth_regions_bed // channel: [ val(meta), path(bed.gz) ]
-    mosdepth_regions_csi                = NALLO.out.mosdepth_regions_csi // channel: [ val(meta), path(bed.gz.csi) ]
-    mosdepth_regions_dist               = NALLO.out.mosdepth_regions_dist // channel: [ val(meta), path(txt) ]
-    mosdepth_summary                    = NALLO.out.mosdepth_summary // channel: [ val(meta), path(txt) ]
-    multiqc_data                        = NALLO.out.multiqc_data // channel: [ val(meta), path(*_data) ]
-    multiqc_plots                       = NALLO.out.multiqc_plots // channel: [ val(meta), path(*_plots) ]
-    multiqc_report                      = NALLO.out.multiqc_report // channel: /path/to/multiqc_report.html
-    paralogs_family_annotated_json      = NALLO.out.paralogs_family_annotated_json // channel: [ val(meta), path(tsv) ]
-    paralogs_family_annotated_tsv       = NALLO.out.paralogs_family_annotated_tsv // channel: [ val(meta), path(json) ]
-    paralogs_family_tbi                 = NALLO.out.paralogs_family_tbi // channel: [ val(meta), path(tbi) ]
-    paralogs_family_vcf                 = NALLO.out.paralogs_family_vcf // channel: [ val(meta), path(vcf) ]
-    paralogs_sample_bai                 = NALLO.out.paralogs_sample_bai // channel: [ val(meta), path(bai) ]
-    paralogs_sample_bam                 = NALLO.out.paralogs_sample_bam // channel: [ val(meta), path(bam) ]
-    paralogs_sample_crai                = NALLO.out.paralogs_sample_crai // channel: [ val(meta), path(crai) ]
-    paralogs_sample_cram                = NALLO.out.paralogs_sample_cram // channel: [ val(meta), path(cram) ]
-    paralogs_sample_json                = NALLO.out.paralogs_sample_json // channel: [ val(meta), path(json) ]
-    paralogs_sample_tbi                 = NALLO.out.paralogs_sample_tbi // channel: [ val(meta), path(tbi) ]
-    paralogs_sample_vcf                 = NALLO.out.paralogs_sample_vcf // channel: [ val(meta), path(vcf) ]
-    peddy_het_check_csv                 = NALLO.out.peddy_het_check_csv // channel: [ val(meta), path(csv) ]
-    peddy_het_check_png                 = NALLO.out.peddy_het_check_png // channel: [ val(meta), path(png) ]
-    peddy_html                          = NALLO.out.peddy_html // channel: [ val(meta), path(html) ]
-    peddy_ped                           = NALLO.out.peddy_ped // channel: [ val(meta), path(ped) ]
-    peddy_ped_check_csv                 = NALLO.out.peddy_ped_check_csv // channel: [ val(meta), path(csv) ]
-    peddy_ped_check_png                 = NALLO.out.peddy_ped_check_png // channel: [ val(meta), path(png) ]
-    peddy_ped_check_rel_difference_csv  = NALLO.out.peddy_ped_check_rel_difference_csv // channel: [ val(meta), path(csv) ]
-    peddy_sex_check_csv                 = NALLO.out.peddy_sex_check_csv // channel: [ val(meta), path(csv) ]
-    peddy_sex_check_png                 = NALLO.out.peddy_sex_check_png // channel: [ val(meta), path(png) ]
-    peddy_vs_html                       = NALLO.out.peddy_vs_html // channel: [ val(meta), path(html) ]
-    pedigree                            = NALLO.out.pedigree // channel: [ val(meta), path(ped) ]
-    phasing_blocks_gtf                  = NALLO.out.phasing_blocks_gtf // channel: [ val(meta), path("*.blocks.gtf.gz") ]
-    phasing_blocks_tbi                  = NALLO.out.phasing_blocks_tbi // channel: [ val(meta), path("*.blocks.gtf.gz.tbi") ]
-    qc_bcftools_stats                   = NALLO.out.qc_bcftools_stats // channel: [ val(meta), path(txt) ]
-    qc_deepvariant_vcfstatsreport       = NALLO.out.qc_deepvariant_vcfstatsreport // channel: [ val(meta), path(html) ]
-    qc_sambamba_depth_bed               = NALLO.out.qc_sambamba_depth_bed // channel: [ val(meta), path(bed) ]
-    qc_whatshap_stats                   = NALLO.out.qc_whatshap_stats // channel: [ val(meta), path("*.stats.tsv") ]
-    repeats_annotated_family_tbi        = NALLO.out.repeats_annotated_family_tbi // channel: [ val(meta), path(tbi) ]
-    repeats_annotated_family_vcf        = NALLO.out.repeats_annotated_family_vcf // channel: [ val(meta), path(vcf) ]
-    repeats_strdust_family_tbi          = NALLO.out.repeats_strdust_family_tbi // channel: [ val(meta), path(tbi) ]
-    repeats_strdust_family_vcf          = NALLO.out.repeats_strdust_family_vcf // channel: [ val(meta), path(vcf) ]
-    repeats_strdust_sample_tbi          = NALLO.out.repeats_strdust_sample_tbi // channel: [ val(meta), path(tbi) ]
-    repeats_strdust_sample_vcf          = NALLO.out.repeats_strdust_sample_vcf // channel: [ val(meta), path(vcf) ]
-    repeats_trgt_family_tbi             = NALLO.out.repeats_trgt_family_tbi // channel: [ val(meta), path(tbi) ]
-    repeats_trgt_family_vcf             = NALLO.out.repeats_trgt_family_vcf // channel: [ val(meta), path(vcf) ]
-    repeats_trgt_sample_bai             = NALLO.out.repeats_trgt_sample_bai // channel: [ val(meta), path(bai) ]
-    repeats_trgt_sample_bam             = NALLO.out.repeats_trgt_sample_bam // channel: [ val(meta), path(bam) ]
-    repeats_trgt_sample_crai            = NALLO.out.repeats_trgt_sample_crai // channel: [ val(meta), path(crai) ]
-    repeats_trgt_sample_cram            = NALLO.out.repeats_trgt_sample_cram // channel: [ val(meta), path(cram) ]
-    repeats_trgt_sample_tbi             = NALLO.out.repeats_trgt_sample_tbi // channel: [ val(meta), path(tbi) ]
-    repeats_trgt_sample_vcf             = NALLO.out.repeats_trgt_sample_vcf // channel: [ val(meta), path(vcf) ]
-    sawfish_copynum_bedgraph            = NALLO.out.sawfish_copynum_bedgraph // channel: [ val(meta), path(bedgraph) ]
-    sawfish_depth_bw                    = NALLO.out.sawfish_depth_bw // channel: [ val(meta), path(bw) ]
-    sawfish_gc_bias_corrected_depth_bw  = NALLO.out.sawfish_gc_bias_corrected_depth_bw // channel: [ val(meta), path(bw) ]
-    sawfish_maf_bw                      = NALLO.out.sawfish_maf_bw // channel: [ val(meta), path(bw) ]
-    snvs_family_tbi                     = NALLO.out.snvs_family_tbi // channel: [ val(meta), path(tbi) ]
-    snvs_family_vcf                     = NALLO.out.snvs_family_vcf // channel: [ val(meta), path(vcf) ]
-    snvs_sample_tbi                     = NALLO.out.snvs_sample_tbi // channel: [ val(meta), path(tbi) ]
-    snvs_sample_vcf                     = NALLO.out.snvs_sample_vcf // channel: [ val(meta), path(vcf) ]
-    somalier_relate_html                = NALLO.out.somalier_relate_html // channel: [ val(meta), path(html) ]
-    somalier_relate_pairs               = NALLO.out.somalier_relate_pairs // channel: [ val(meta), path(pairs.tsv) ]
-    somalier_relate_samples             = NALLO.out.somalier_relate_samples // channel: [ val(meta), path(samples.tsv) ]
-    svs_per_family_and_caller_tbi       = NALLO.out.svs_per_family_and_caller_tbi // channel: [ val(meta), path(tbi) ]
-    svs_per_family_and_caller_vcf       = NALLO.out.svs_per_family_and_caller_vcf // channel: [ val(meta), path(vcf) ]
-    svs_per_family_tbi                  = NALLO.out.svs_per_family_tbi // channel: [ val(meta), path(tbi) ]
-    svs_per_family_vcf                  = NALLO.out.svs_per_family_vcf // channel: [ val(meta), path(vcf.gz) ]
 }
