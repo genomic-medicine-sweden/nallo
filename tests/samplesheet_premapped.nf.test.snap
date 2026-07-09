@@ -1,5 +1,5 @@
 {
-    "samplesheet_premapped | --preset ONT_R10 --phaser whatshap --premapped --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
+    "samplesheet_premapped | --premapped": {
         "content": [
             392,
             {
@@ -698,7 +698,7 @@
                 "paraphase",
                 "paraphase/family",
                 "paraphase/family/FAM",
-                "paraphase/family/FAM/FAM_paraphase_annotated.tsv",
+                "paraphase/family/FAM/FAM_paraphase_annotated.json",
                 "paraphase/family/FAM/FAM_paraphase_merged.vcf.gz",
                 "paraphase/family/FAM/FAM_paraphase_merged.vcf.gz.tbi",
                 "paraphase/sample",
@@ -1118,7 +1118,6 @@
                 "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
                 "somalier_stats.txt:md5,22bd1aabdb8da1fe0e49f5a4469bdf79",
                 "whatshap-stats-table.txt:md5,2089923ebbe6068dfa995df6294c8ae1",
-                "FAM_paraphase_annotated.tsv:md5,6d680215a6650b3d889fed9335ed1251",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002_cramino_aligned_phased.arrow:md5,43d836c524b00c87ccf80a322e47294d",
                 "HG003_cramino_aligned_phased.arrow:md5,3dbdcb3873a561fc10192f5c4326d4d5",
@@ -1297,7 +1296,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-09T11:01:10.583244577",
+        "timestamp": "2026-07-09T15:06:49.832977509",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"

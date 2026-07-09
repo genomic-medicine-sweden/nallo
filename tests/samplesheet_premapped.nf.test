@@ -4,7 +4,7 @@ nextflow_pipeline {
     script "../main.nf"
     tag "PIPELINE"
 
-    test("samplesheet_premapped | --preset ONT_R10 --phaser whatshap --premapped --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs") {
+    test("samplesheet_premapped | --premapped") {
         tag "samplesheet_multisample_ont_bam"
 
         when {
@@ -13,6 +13,7 @@ nextflow_pipeline {
                 input                        = "$projectDir/assets/samplesheet_multisample_bam.csv"
                 outdir                       = "$outputDir"
                 premapped                    = true
+                paraphrase_output_format     = 'json'
             }
         }
 
