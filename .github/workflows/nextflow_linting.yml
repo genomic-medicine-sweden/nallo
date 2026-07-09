@@ -4,8 +4,6 @@ name: Nextflow format linting
 # that the code is correctly formatted.
 on:
   pull_request:
-  release:
-    types: [published]
 
 jobs:
   lint:
