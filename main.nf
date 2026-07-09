@@ -86,6 +86,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_filter_variants_hgnc_ids
     val_force_sawfish_joint_call_single_samples
     val_hifiasm_mode
+    val_methylation_callers
     val_mitochondrial_caller
     val_multiqc_config
     val_multiqc_logo
@@ -97,7 +98,6 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_plot_chromograph_autozygosity
     val_plot_chromograph_coverage
     val_pre_vep_snv_filter_expression
-    val_methylation_callers
     val_sentieon_tech
     val_skip_alignment
     val_skip_annotate_paralogs
