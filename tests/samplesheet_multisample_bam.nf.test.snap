@@ -1146,8 +1146,8 @@
                 "fastqc_overrepresented_sequences_plot.txt:md5,39f5feb1737b248e86b9b39a1d043879",
                 "fastqc_per_base_n_content_plot.txt:md5,a1b9be680733df6b9dda4c1f43ce0460",
                 "fastqc_per_base_sequence_quality_plot.txt:md5,5833f93214b1ad3af76378a718795c6d",
-                "fastqc_per_sequence_gc_content_plot_Counts.txt:md5,f83b266bdd46db24100ec9e6c48a2835",
-                "fastqc_per_sequence_gc_content_plot_Percentages.txt:md5,738c42b1705ba330f393f3cb68183960",
+                "fastqc_per_sequence_gc_content_plot_Counts.txt:md5,01bb389923709766aa9a604665708640",
+                "fastqc_per_sequence_gc_content_plot_Percentages.txt:md5,9d704f0c40d1a156887ce32a96aff833",
                 "fastqc_per_sequence_quality_scores_plot.txt:md5,ba018e3ee5b6a46d66186deacf7e2363",
                 "fastqc_sequence_counts_plot.txt:md5,d238a9977a1d19ab52f96f455d0e5592",
                 "fastqc_sequence_duplication_levels_plot.txt:md5,8db16e6e73e9a83c5be8aa659bb7627f",
@@ -1166,12 +1166,12 @@
                 "somalier_stats.txt:md5,a6119aecaa54536d9b358b7feba7841a",
                 "whatshap-stats-table.txt:md5,e02bfeb73de49596f446d234a473a8aa",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
-                "HG002_cramino_aligned_phased.arrow:md5,abd5187c433a65e3b7eab2acfa9226c5",
-                "HG003_cramino_aligned_phased.arrow:md5,38314de5866a75c364b0969fa2cbbeb3",
-                "HG004_cramino_aligned_phased.arrow:md5,8ed4f662c64af785e13e082ce34d6c38",
-                "HG002_cramino_aligned.arrow:md5,1d33857ea5185f3afe9724a88c9e39fa",
-                "HG003_cramino_aligned.arrow:md5,b323e86952854a869405b06e21b41d00",
-                "HG004_cramino_aligned.arrow:md5,78b3ada0df570878baa94e796bdba6c4",
+                "HG002_cramino_aligned_phased.arrow:md5,3eb25deab87902671e92fa2b13a30c7b",
+                "HG003_cramino_aligned_phased.arrow:md5,03e094bd12788c023eaf07d4e833bb19",
+                "HG004_cramino_aligned_phased.arrow:md5,4ec310cfba1ddb493ca5ff4ca0a36e9b",
+                "HG002_cramino_aligned.arrow:md5,be3d0a5717c475b229e3662d906694fd",
+                "HG003_cramino_aligned.arrow:md5,68a5632e993b8e5a0fdf5854892a3bf4",
+                "HG004_cramino_aligned.arrow:md5,eb7be09c456d8115c8cc840c5b14b53d",
                 "HG002.mosdepth.global.dist.txt:md5,7595e2f7ac278f28335b6e5c0bce445d",
                 "HG002.mosdepth.region.dist.txt:md5,6678002e5033170c85d393b384165161",
                 "HG002.mosdepth.summary.txt:md5,ccdcd76fac702357555938eb21856b11",
@@ -1240,15 +1240,15 @@
             [
                 [
                     "HG002_remapped_assembly_haplotagged.bam",
-                    "c42b80298d92b4f02fa86bfe33699014"
+                    "bea86bc6d726abf4cc7c72d6842f01ce"
                 ],
                 [
                     "HG003_remapped_assembly_haplotagged.bam",
-                    "39be37b3504dbab881cc084fdf059681"
+                    "312656faad56309f58b8952e98ec0d21"
                 ],
                 [
                     "HG004_remapped_assembly_haplotagged.bam",
-                    "fa08afb0962a49bf705adaf65917ef69"
+                    "1d66a88c11299eb0a598efd15ccc9c50"
                 ],
                 [
                     "HG002_aligned_assembly.bam",
@@ -1256,7 +1256,7 @@
                 ],
                 [
                     "HG002_remapped_assembly.bam",
-                    "c42b80298d92b4f02fa86bfe33699014"
+                    "bea86bc6d726abf4cc7c72d6842f01ce"
                 ],
                 [
                     "HG003_aligned_assembly.bam",
@@ -1264,7 +1264,7 @@
                 ],
                 [
                     "HG003_remapped_assembly.bam",
-                    "39be37b3504dbab881cc084fdf059681"
+                    "312656faad56309f58b8952e98ec0d21"
                 ],
                 [
                     "HG004_aligned_assembly.bam",
@@ -1272,7 +1272,7 @@
                 ],
                 [
                     "HG004_remapped_assembly.bam",
-                    "fa08afb0962a49bf705adaf65917ef69"
+                    "1d66a88c11299eb0a598efd15ccc9c50"
                 ],
                 [
                     "HG002_spanning_trgt.bam",
@@ -1364,7 +1364,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-08T15:43:32.704827633",
+        "timestamp": "2026-07-09T10:07:24.718390431",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.03.4"
