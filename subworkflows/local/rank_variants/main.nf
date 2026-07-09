@@ -10,18 +10,17 @@ include { BCFTOOLS_SORT   } from '../../../modules/nf-core/bcftools/sort/main'
 
 workflow RANK_VARIANTS {
     take:
-    ch_vcf                       // channel: [mandatory] [ val(meta), path(vcf) ]
-    ch_ped                       // channel: [mandatory] [ val(meta), path(ped) ]
+    ch_vcf // channel: [mandatory] [ val(meta), path(vcf) ]
+    ch_ped // channel: [mandatory] [ val(meta), path(ped) ]
     ch_genmod_reduced_penetrance // channel: [mandatory] [ val(meta), path(penetrance) ]
-    ch_score_config              // channel: [mandatory] [ val(meta), path(ini) ]
+    ch_score_config // channel: [mandatory] [ val(meta), path(ini) ]
 
     main:
     GENMOD_ANNOTATE(
         ch_vcf
     )
 
-    ch_genmod_models_in = GENMOD_ANNOTATE.out.vcf
-        .join(ch_ped, failOnMismatch: true, failOnDuplicate: true)
+    ch_genmod_models_in = GENMOD_ANNOTATE.out.vcf.join(ch_ped, failOnMismatch: true, failOnDuplicate: true)
 
     GENMOD_MODELS(
         ch_genmod_models_in,
@@ -33,7 +32,7 @@ workflow RANK_VARIANTS {
         .join(ch_score_config, failOnMismatch: true, failOnDuplicate: true)
 
     GENMOD_SCORE(
-        ch_genmod_score_in,
+        ch_genmod_score_in
     )
 
     GENMOD_COMPOUND(
