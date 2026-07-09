@@ -1,0 +1,33 @@
+name: nextflow linting
+# This workflow is triggered on pushes and PRs to the repository.
+# It runs the `nextflow lint` and markdown lint tests to ensure
+# that the code meets the nf-core guidelines.
+on:
+  pull_request:
+  release:
+    types: [published]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out pipeline code
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
+      - name: Install Nextflow
+        uses: nf-core/setup-nextflow@b4ec1bc7c16a94435159de94a05253542fddf6ef # v3
+
+      - name: Run prek
+        uses: j178/prek-action@6ad80277337ad479fe43bd70701c3f7f8aa74db3 # v2
+        with:
+          extra-args: 'nextflow-lint'
+
+      - name: Verify formatting
+        run: |
+          if ! git diff --quiet; then
+            echo "The following files were modified by the formatter:"
+            git --no-pager diff --stat
+            echo
+            echo "Please run pre-commit locally and commit the changes."
+            exit 1
+          fi
