@@ -121,7 +121,7 @@ Less common options for the pipeline, typically set in a config file.
 | `multiqc_logo` | Custom logo file to supply to MultiQC. File name must also be set in the MultiQC config file | `string` |  |  | True |
 | `multiqc_methods_description` | Custom MultiQC yaml file containing HTML including a methods description. | `string` |  |  |  |
 | `validate_params` | Boolean whether to validate parameters against the schema at runtime | `boolean` | True |  | True |
-| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5c13b255beab25a536375fec42f9da3413fc65a5/ |  | True |
+| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/18b1ccc26292fa502be235a918bdc4e61c1ecb8a/ |  | True |
 | `trace_report_suffix` | Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss. | `string` |  |  | True |
 | `help` | Display the help message. | `['boolean', 'string']` |  |  |  |
 | `help_full` | Display the full detailed help message. | `boolean` |  |  |  |
@@ -148,8 +148,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `whatshap_pedigree_phasing` | Enable/disable pedigree phasing when phasing with whatshap | `boolean` | True |  |  |
 | `hifiasm_mode` | Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`) (accepted: `hifi-only`\|`trio-binning`) | `string` | trio-binning |  |  |
 | `hifiasm_preset` | Hifiasm preset, is set to `--ont` when `--preset ONT_R10` is active. (accepted: ``\|`--ont`) | `string` | None |  |  |
-| `run_methbat` | Run methbat for methylation analysis, set to `true` by default when `--preset revio` is active. | `boolean` |  |  |  |
-| `run_modkit` | Run modkit for methylation analysis, set to `true` by default when `--preset ONT_R10` is active. | `boolean` |  |  |  |
+| `methylation_callers` | Which methylation callers to use. Several callers can be specified, separated by commas (e.g. methbat,modkit). Defaults to `methbat` when `--preset revio` is active and `modkit` when `--preset ONT_R10` is active. | `string` | methbat |  |  |
 | `methbat_male_label` | Label used for male samples in methbat profile. | `string` | MALE |  |  |
 | `methbat_female_label` | Label used for female samples in methbat profile. | `string` | FEMALE |  |  |
 | `modkit_modified_bases` | Modkit modified bases, separated by space. E.g. '5mC 5hmC' | `string` | 5mC |  |  |

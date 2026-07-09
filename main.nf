@@ -97,8 +97,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_plot_chromograph_autozygosity
     val_plot_chromograph_coverage
     val_pre_vep_snv_filter_expression
-    val_run_methbat
-    val_run_modkit
+    val_methylation_callers
     val_sentieon_tech
     val_skip_alignment
     val_skip_annotate_paralogs
@@ -211,9 +210,9 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_skip_call_paralogs,
         val_skip_chromograph,
         val_skip_genome_assembly,
-        (val_skip_methylation_calling || !val_run_methbat),
+        (val_skip_methylation_calling || !val_methylation_callers.tokenize(',').collect { it.trim() }.contains('methbat')),
         val_skip_methylation_annotation,
-        (val_skip_methylation_calling || !val_run_modkit),
+        (val_skip_methylation_calling || !val_methylation_callers.tokenize(',').collect { it.trim() }.contains('modkit')),
         val_skip_peddy,
         val_skip_phasing,
         val_skip_prepare_gens_input,
@@ -384,10 +383,10 @@ workflow {
         params.gens_panel_of_normals_male,
         params.input,
         params.methbat_regions,
+        params.methylation_callers,
         params.mitochondrial_caller,
         params.par_regions,
         params.phaser,
-        params.run_methbat,
         params.sambamba_regions,
         params.skip_alignment,
         params.skip_annotate_paralogs,
@@ -497,8 +496,7 @@ workflow {
         params.plot_chromograph_autozygosity,
         params.plot_chromograph_coverage,
         params.pre_vep_snv_filter_expression,
-        params.run_methbat,
-        params.run_modkit,
+        params.methylation_callers,
         params.sentieon_tech,
         params.skip_alignment,
         params.skip_annotate_paralogs,

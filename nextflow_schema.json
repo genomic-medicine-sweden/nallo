@@ -598,7 +598,7 @@
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
                     "description": "Base URL or local path to location of pipeline test dataset files",
-                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5c13b255beab25a536375fec42f9da3413fc65a5/",
+                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/18b1ccc26292fa502be235a918bdc4e61c1ecb8a/",
                     "hidden": true
                 },
                 "trace_report_suffix": {
@@ -708,13 +708,11 @@
                     "enum": ["", "--ont"],
                     "default": null
                 },
-                "run_methbat": {
-                    "type": "boolean",
-                    "description": "Run methbat for methylation analysis, set to `true` by default when `--preset revio` is active."
-                },
-                "run_modkit": {
-                    "type": "boolean",
-                    "description": "Run modkit for methylation analysis, set to `true` by default when `--preset ONT_R10` is active."
+                "methylation_callers": {
+                    "type": "string",
+                    "description": "Which methylation callers to use. Several callers can be specified, separated by commas (e.g. methbat,modkit). Defaults to `methbat` when `--preset revio` is active and `modkit` when `--preset ONT_R10` is active.",
+                    "default": "methbat",
+                    "fa_icon": "fas fa-dna"
                 },
                 "methbat_male_label": {
                     "type": "string",
