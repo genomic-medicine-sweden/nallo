@@ -195,8 +195,7 @@ workflow PIPELINE_INITIALISATION {
         repeat_calling: ["mapping", "snv_calling", "phasing"],
         repeat_annotation: ["mapping", "snv_calling", "phasing", "repeat_calling"],
         methylation: ["mapping", "snv_calling"],
-        methbat: ["mapping", "snv_calling", "methylation"],
-        methylation_annotation: ["mapping", "snv_calling", "methylation", "methbat"],
+        methylation_annotation: ["mapping", "snv_calling", "methylation"],
         mitochondrial: ["mapping"],
         gens: ["mapping", "snv_calling"],
     ]
