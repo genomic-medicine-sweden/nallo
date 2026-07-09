@@ -316,6 +316,11 @@ workflow PIPELINE_INITIALISATION {
     // Check that all families has at least one sample with affected phenotype if ranking is active
     validateAllFamiliesHasAffectedSamples(ch_samplesheet, val_skip_rank_variants)
 
+    // Check that methbat_regions is provided when methbat is active
+    if (!val_skip_methylation_calling && val_methylation_callers.tokenize(',').collect { it.trim() }.contains('methbat') && !val_methbat_regions) {
+        error("Error: --methbat_regions file must be provided when methbat is in --methylation_callers. Remove methbat from --methylation_callers or use --skip_methylation_calling to disable methylation calling.")
+    }
+
     // Check that sex check is not skipped if there are samples with unknown sex
     validateRequiresSexCheck(ch_samplesheet, val_skip_sex_check, val_skip_snv_calling, val_skip_methylation_calling, val_methylation_callers, val_skip_peddy, val_skip_prepare_gens_input, val_skip_repeat_calling, val_str_caller)
 
