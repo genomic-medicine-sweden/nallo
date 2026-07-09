@@ -1,7 +1,7 @@
-name: nextflow format linting
+name: Nextflow format linting
 # This workflow is triggered on pushes and PRs to the repository.
-# It runs the `nextflow lint` and markdown lint tests to ensure
-# that the code meets the nf-core guidelines.
+# It runs the `nextflow lint` part of the pre-commit to ensure
+# that the code is correctly formatted.
 on:
   pull_request:
   release:
@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Check out pipeline code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          fetch-depth: 0
 
       - name: Install Nextflow
         uses: nf-core/setup-nextflow@b4ec1bc7c16a94435159de94a05253542fddf6ef # v3
