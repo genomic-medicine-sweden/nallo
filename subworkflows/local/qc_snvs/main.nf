@@ -6,9 +6,9 @@ include { BCFTOOLS_STATS             } from '../../../modules/nf-core/bcftools/s
 
 workflow QC_SNVS {
     take:
-    ch_vcf                         // channel: [mandatory] [ val(meta), path(vcf) ]
-    ch_normalized_vcf              // channel: [mandatory] [ val(meta), path(vcf) ]
-    ch_normalized_index            // channel: [mandatory] [ val(meta), path(vcf) ]
+    ch_vcf // channel: [mandatory] [ val(meta), path(vcf) ]
+    ch_normalized_vcf // channel: [mandatory] [ val(meta), path(vcf) ]
+    ch_normalized_index // channel: [mandatory] [ val(meta), path(vcf) ]
     run_deepvariant_vcfstatsreport // value: bool
 
     main:
@@ -34,6 +34,6 @@ workflow QC_SNVS {
     )
 
     emit:
-    vcfstatsreport = ch_vcfstatsreport        // channel: [ val(meta), path(html) ]
+    vcfstatsreport = ch_vcfstatsreport // channel: [ val(meta), path(html) ]
     stats          = BCFTOOLS_STATS.out.stats // channel: [ val(meta), path(txt) ]
 }

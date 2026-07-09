@@ -85,6 +85,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1169](https://github.com/genomic-medicine-sweden/nallo/pull/1169) - Updated nf-dev guidelines sync config
 - [#1178](https://github.com/genomic-medicine-sweden/nallo/pull/1178) - Updated dataset with unmasked reference and only ML and MM tags in the fastq test file
 - [#1181](https://github.com/genomic-medicine-sweden/nallo/pull/1181) - Updated minimum nextflow version to 26.04.4
+- [#1183](https://github.com/genomic-medicine-sweden/nallo/pull/1183) - Formatted all local subworkflows and modules with `nextflow lint -format -harshil-alignment`
 
 ### Removed
 

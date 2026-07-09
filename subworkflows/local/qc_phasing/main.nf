@@ -5,13 +5,13 @@ include { TABIX_BGZIPTABIX } from '../../../modules/nf-core/tabix/bgziptabix/mai
 
 workflow QC_PHASING {
     take:
-    ch_phased_family_snvs     // channel: [ val(meta), path(vcf) ]
+    ch_phased_family_snvs // channel: [ val(meta), path(vcf) ]
     ch_phased_family_snvs_tbi // channel: [ val(meta), path(tbi) ]
-    ch_phased_family_svs      // channel: [ val(meta), path(vcf) ] Optional
-    ch_phased_family_svs_tbi  // channel: [ val(meta), path(tbi) ] Optional
-    ch_bam_bai_haplotagged    // channel: [ val(meta), path(bam), path(bai) ]
-    ch_family_to_samples      // channel: [ val(family_id), val(list_of_sample_ids) ]
-    phase_with_svs            // bool: Whether SVs were included in phasing (true) or not (false)
+    ch_phased_family_svs // channel: [ val(meta), path(vcf) ] Optional
+    ch_phased_family_svs_tbi // channel: [ val(meta), path(tbi) ] Optional
+    ch_bam_bai_haplotagged // channel: [ val(meta), path(bam), path(bai) ]
+    ch_family_to_samples // channel: [ val(family_id), val(list_of_sample_ids) ]
+    phase_with_svs // bool: Whether SVs were included in phasing (true) or not (false)
 
     main:
     // If we co-phased SVs, concatenate SNV and SV VCFs to get accurate stats from WhatsHap
@@ -50,18 +50,17 @@ workflow QC_PHASING {
 
     TABIX_BGZIPTABIX(WHATSHAP_STATS.out.gtf)
 
-    ch_phasing_gtf = TABIX_BGZIPTABIX.out.gz_index
-        .multiMap { meta, gtf, index ->
-            gz: [meta, gtf]
-            tbi: [meta, index]
-        }
+    ch_phasing_gtf = TABIX_BGZIPTABIX.out.gz_index.multiMap { meta, gtf, index ->
+        gz: [meta, gtf]
+        tbi: [meta, index]
+    }
 
     CRAMINO(ch_bam_bai_haplotagged)
 
     emit:
     phasing_stats        = WHATSHAP_STATS.out.tsv // channel: [ val(meta), path(stats) ]
-    phasing_blocks       = ch_phasing_gtf.gz      // channel: [ val(meta), path(gtf)   ]
-    phasing_blocks_index = ch_phasing_gtf.tbi     // channel: [ val(meta), path(tbi)   ]
-    haplotagging_stats   = CRAMINO.out.stats      // channel: [ val(meta), path(txt)   ]
-    haplotagging_arrow   = CRAMINO.out.arrow      // channel: [ val(meta), path(arrow) ]
+    phasing_blocks       = ch_phasing_gtf.gz // channel: [ val(meta), path(gtf)   ]
+    phasing_blocks_index = ch_phasing_gtf.tbi // channel: [ val(meta), path(tbi)   ]
+    haplotagging_stats   = CRAMINO.out.stats // channel: [ val(meta), path(txt)   ]
+    haplotagging_arrow   = CRAMINO.out.arrow // channel: [ val(meta), path(arrow) ]
 }
