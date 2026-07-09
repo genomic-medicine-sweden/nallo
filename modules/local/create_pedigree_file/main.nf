@@ -19,7 +19,7 @@ process CREATE_PEDIGREE_FILE {
     task.ext.when == null || task.ext.when
 
     script:
-    def prefix  = task.ext.prefix ?: "${meta.id}"
+    def prefix = task.ext.prefix ?: "${meta.id}"
     def samples = (sample_metas.collect().size() > 1)
         ? sample_metas.sort { a, b ->
             // First sort on family_id, then on sample id

@@ -7,11 +7,11 @@ include { QC_PHASING       } from '../../../subworkflows/local/qc_phasing/main'
 
 workflow PHASING {
     take:
-    ch_snv_vcf           // channel: [ val(meta), path(vcf) ]
-    ch_snv_vcf_index     // channel: [ val(meta), path(tbi) ]
-    ch_sv_vcf            // channel: [ val(meta), path(vcf) ] Optional
-    ch_sv_vcf_index      // channel: [ val(meta), path(tbi) ] Optional
-    ch_bam_bai           // channel: [ val(meta), path(bam), path(bai) ]
+    ch_snv_vcf // channel: [ val(meta), path(vcf) ]
+    ch_snv_vcf_index // channel: [ val(meta), path(tbi) ]
+    ch_sv_vcf // channel: [ val(meta), path(vcf) ] Optional
+    ch_sv_vcf_index // channel: [ val(meta), path(tbi) ] Optional
+    ch_bam_bai // channel: [ val(meta), path(bam), path(bai) ]
     ch_family_to_samples // channel: [ val(meta), val(set_of_sample_ids) ]
     fasta                // channel: [ val(meta), path(fasta) ]
     fai                  // channel: [ val(meta), path(fai) ]
@@ -21,7 +21,6 @@ workflow PHASING {
     ch_pedigree          // channel: [ val(meta), path(pedigree) ]
 
     main:
-    // Phase variants and haplotag reads with Longphase
     if (phaser.equals("longphase")) {
 
         LONGPHASE(
@@ -40,7 +39,6 @@ workflow PHASING {
         ch_phased_family_svs_tbi = phase_with_svs ? LONGPHASE.out.phased_family_svs_tbi : ch_sv_vcf_index
         ch_bam_bai_haplotagged = LONGPHASE.out.haplotagged_bam_bai
     }
-    // Phase variants and haplotag reads with WhatsHap
     else if (phaser.equals("whatshap")) {
 
         WHATSHAP(
@@ -58,7 +56,6 @@ workflow PHASING {
         ch_phased_family_svs_tbi = ch_sv_vcf_index
         ch_bam_bai_haplotagged = WHATSHAP.out.haplotagged_bam_bai
     }
-    // Phase variants and haplotag reads with HiPhase
     else if (phaser.equals("hiphase")) {
 
         HIPHASE(

@@ -16,8 +16,7 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     ch_vcfexpress_prelude   // path: [mandatory] lua file
 
     main:
-    ch_trgt_input = ch_bam_bai
-        .map { meta, bam, bai -> [meta, bam, bai, meta.sex == 1 ? 'XY' : 'XX'] }
+    ch_trgt_input = ch_bam_bai.map { meta, bam, bai -> [meta, bam, bai, meta.sex == 1 ? 'XY' : 'XX'] }
 
     // Run TRGT
     TRGT_GENOTYPE(

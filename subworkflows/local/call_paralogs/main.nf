@@ -19,7 +19,7 @@ workflow CALL_PARALOGS {
         [[], []],
     )
 
-   ch_paraphase_vcf_tbis = PARAPHASE.out.vcf
+    ch_paraphase_vcf_tbis = PARAPHASE.out.vcf
         .transpose()
         .map { meta, vcf ->
             [['id': vcf.simpleName, 'family_id': meta.family_id], vcf, []]
@@ -44,8 +44,7 @@ workflow CALL_PARALOGS {
         false,
     )
 
-    ch_bcftools_reheader_in = ch_paraphase_vcf_tbis
-        .join(GAWK.out.output, failOnMismatch: true, failOnDuplicate: true)
+    ch_bcftools_reheader_in = ch_paraphase_vcf_tbis.join(GAWK.out.output, failOnMismatch: true, failOnDuplicate: true)
 
     BCFTOOLS_REHEADER(ch_bcftools_reheader_in, [[], []])
 

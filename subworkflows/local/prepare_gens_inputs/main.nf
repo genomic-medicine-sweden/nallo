@@ -8,12 +8,12 @@ include { SAMTOOLS_VIEW                } from '../../../modules/nf-core/samtools
 
 workflow PREPARE_GENS_INPUTS {
     take:
-    ch_bam                     // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
-    ch_gvcf                    // channel: [mandatory] [ val(meta), path(gvcfs)], [path(tbis) ]
-    ch_baf_positions           // channel: [mandatory] [ val(meta), path(gz) ]
+    ch_bam // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
+    ch_gvcf // channel: [mandatory] [ val(meta), path(gvcfs)], [path(tbis) ]
+    ch_baf_positions // channel: [mandatory] [ val(meta), path(gz) ]
     ch_panel_of_normals_female // channel: [mandatory] [ val(meta), path(hd5) ]
-    ch_panel_of_normals_male   // channel: [mandatory] [ val(meta), path(hd5) ]
-    ch_mosdepth_bins           // channel: [mandatory] [ val(meta), path(bed) ]
+    ch_panel_of_normals_male // channel: [mandatory] [ val(meta), path(hd5) ]
+    ch_mosdepth_bins // channel: [mandatory] [ val(meta), path(bed) ]
 
     main:
     ch_mosdepth_in = ch_bam
@@ -55,11 +55,10 @@ workflow PREPARE_GENS_INPUTS {
 
     CAT_CAT(ch_cat_input)
 
-    ch_branched = CAT_CAT.out.file_out
-        .branch { meta, _file ->
-            male: meta.sex == 1
-            female: meta.sex == 2
-        }
+    ch_branched = CAT_CAT.out.file_out.branch { meta, _file ->
+        male: meta.sex == 1
+        female: meta.sex == 2
+    }
 
     ch_readcounts_input = ch_branched.male
         .combine(ch_panel_of_normals_male)
@@ -76,12 +75,10 @@ workflow PREPARE_GENS_INPUTS {
         ch_readcounts_input.pon,
     )
 
-    ch_gens_input = GATK4_DENOISEREADCOUNTS.out.standardized
-        .join(ch_gvcf)
+    ch_gens_input = GATK4_DENOISEREADCOUNTS.out.standardized.join(ch_gvcf)
 
     // Generate final outputs
-    baf_positions = ch_baf_positions
-        .map { _meta, pos -> pos }
+    baf_positions = ch_baf_positions.map { _meta, pos -> pos }
 
     PREPARECOVANDBAF(
         ch_gens_input,

@@ -7,7 +7,7 @@ include { CUSTOM_ADDMOSTSEVEREPLI         } from '../../../modules/nf-core/custo
 include { TABIX_TABIX                     } from '../../../modules/nf-core/tabix/tabix/main'
 workflow ANNOTATE_CSQ_PLI {
     take:
-    ch_vcf                  // channel: [mandatory] [ val(meta), path(vcf) ]
+    ch_vcf // channel: [mandatory] [ val(meta), path(vcf) ]
     ch_variant_consequences // channel: [mandatory] [ val(meta), path(consequences) ]
 
     main:
@@ -19,5 +19,5 @@ workflow ANNOTATE_CSQ_PLI {
 
     emit:
     vcf = CUSTOM_ADDMOSTSEVEREPLI.out.vcf // channel: [ val(meta), path(vcf) ]
-    tbi = TABIX_TABIX.out.index           // channel: [ val(meta), path(tbi) ]
+    tbi = TABIX_TABIX.out.index // channel: [ val(meta), path(tbi) ]
 }
