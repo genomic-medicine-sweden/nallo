@@ -712,7 +712,8 @@
                     "type": "string",
                     "description": "Which methylation callers to use. Several callers can be specified, separated by commas (e.g. methbat,modkit). Defaults to `methbat` when `--preset revio` is active and `modkit` when `--preset ONT_R10` is active.",
                     "default": "methbat",
-                    "fa_icon": "fas fa-dna"
+                    "fa_icon": "fas fa-dna",
+                    "pattern": "(?i)^$|^(methbat|modkit)(,(methbat|modkit))*$"
                 },
                 "methbat_male_label": {
                     "type": "string",
