@@ -225,7 +225,6 @@ workflow PIPELINE_INITIALISATION {
         skip_peddy: val_skip_peddy,
         skip_phasing: val_skip_phasing,
         skip_methylation_calling: val_skip_methylation_calling,
-        skip_methbat: (val_skip_methylation_calling || !val_methylation_callers.tokenize(',').collect { it.trim() }.contains('methbat')),
         skip_methylation_annotation: val_skip_methylation_annotation,
         skip_mitochondrial_calling: val_skip_mitochondrial_calling,
         skip_rank_variants: val_skip_rank_variants,
