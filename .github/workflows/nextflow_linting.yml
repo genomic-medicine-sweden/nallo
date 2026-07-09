@@ -1,4 +1,4 @@
-name: nextflow linting
+name: nextflow format linting
 # This workflow is triggered on pushes and PRs to the repository.
 # It runs the `nextflow lint` and markdown lint tests to ensure
 # that the code meets the nf-core guidelines.
@@ -20,7 +20,7 @@ jobs:
       - name: Run prek
         uses: j178/prek-action@6ad80277337ad479fe43bd70701c3f7f8aa74db3 # v2
         with:
-          extra-args: "--to-ref HEAD nextflow-lint"
+          extra-args: "--from-ref ${{ github.event.pull_request.base.sha }} --to-ref ${{ github.sha }} nextflow-lint"
 
       - name: Verify formatting
         run: |
