@@ -260,7 +260,6 @@ workflow PIPELINE_INITIALISATION {
         variant_consequences_snvs: val_variant_consequences_snvs,
         variant_consequences_svs: val_variant_consequences_svs,
         vep_plugin_files: val_vep_plugin_files,
-        methbat_regions: val_methbat_regions,
         gens_baf_positions: val_gens_baf_positions,
         gens_panel_of_normals_female: val_gens_panel_of_normals_female,
         gens_panel_of_normals_male: val_gens_panel_of_normals_male,
