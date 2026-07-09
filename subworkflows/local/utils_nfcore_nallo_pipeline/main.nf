@@ -217,7 +217,6 @@ workflow PIPELINE_INITIALISATION {
         repeat_annotation: ["stranger_repeat_catalog"],
         gens: ["gens_baf_positions", "gens_panel_of_normals_female", "gens_panel_of_normals_male", "gens_coverage_bins"],
         sex_check: ["somalier_sites"],
-        methbat: ["methbat_regions"],
     ]
 
     def parameterStatus = [workflow: [
