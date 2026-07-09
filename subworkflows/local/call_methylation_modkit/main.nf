@@ -4,10 +4,10 @@ include { TABIX_TABIX              } from '../../../modules/nf-core/tabix/tabix/
 workflow CALL_METHYLATION_MODKIT {
     take:
     ch_bam_bai // channel: [ val(meta), bam, bai ]
-    ch_fasta   // channel: [ val(meta), fasta ]
-    ch_fai     // channel: [ val(meta), fai ]
-    ch_bed     // channel: [ val(meta), bed ]
-    modcodes   // String or List
+    ch_fasta // channel: [ val(meta), fasta ]
+    ch_fai // channel: [ val(meta), fai ]
+    ch_bed // channel: [ val(meta), bed ]
+    modcodes // String or List
 
     main:
     ch_fasta_fai = ch_fasta
@@ -21,10 +21,10 @@ workflow CALL_METHYLATION_MODKIT {
         ch_bed,
     )
 
+    // Only convert files with content
     ch_bedmethyl_to_bigwig_in = MODKIT_PILEUP.out.bedgz
         .transpose()
         .tap { ch_bedmethyl }
-        // Only convert files with content
         .filter { _meta, bed -> gzNotEmptyBySize(bed) }
 
     TABIX_TABIX(
@@ -38,13 +38,13 @@ workflow CALL_METHYLATION_MODKIT {
     )
 
     emit:
-    bed      = ch_bedmethyl                    // channel: [ val(meta), path(bed) ]
-    tbi      = TABIX_TABIX.out.index           // channel: [ val(meta), path(tbi) ]
-    bigwig   = MODKIT_BEDMETHYLTOBIGWIG.out.bw // channel: [ val(meta), path(bw) ]
+    bed    = ch_bedmethyl // channel: [ val(meta), path(bed) ]
+    tbi    = TABIX_TABIX.out.index // channel: [ val(meta), path(tbi) ]
+    bigwig = MODKIT_BEDMETHYLTOBIGWIG.out.bw // channel: [ val(meta), path(bw) ]
 }
 
 def gzNotEmptyBySize(file_path) {
-    File gzipFile = file_path.toFile()
+    def gzipFile: File = file_path.toFile()
     // When modkit produces an emty file, its size seems to be 168 bytes
     if (gzipFile.length() > 168) {
         return true
