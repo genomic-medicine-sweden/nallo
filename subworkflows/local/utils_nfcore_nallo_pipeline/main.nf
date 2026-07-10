@@ -306,8 +306,13 @@ workflow PIPELINE_INITIALISATION {
     validateAllFamiliesHasAffectedSamples(ch_samplesheet, val_skip_rank_variants)
 
     // Check that methbat_regions is provided when methbat is active
-    if (!val_skip_methylation_calling && val_methylation_callers.tokenize(',').collect { it.trim().toLowerCase() }.contains('methbat') && !val_methbat_regions) {
+    if (!val_skip_methylation_calling && val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }.contains('methbat') && !val_methbat_regions) {
         error("Error: --methbat_regions file must be provided when methbat is in --methylation_callers. Remove methbat from --methylation_callers or use --skip_methylation_calling to disable methylation calling.")
+    }
+
+    // Check that methbat is in --methylation_callers when methylation annotation is active
+    if (!val_skip_methylation_annotation && !val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }.contains('methbat')) {
+        error("Error: methbat must be in --methylation_callers when running without --skip_methylation_annotation. Add methbat to --methylation_callers or use --skip_methylation_annotation to disable methylation annotation.")
     }
 
     // Check that sex check is not skipped if there are samples with unknown sex
@@ -690,7 +695,7 @@ def validateRequiresSexCheck(ch_samplesheet, val_skip_sex_check, val_skip_snv_ca
         .map { sample, _sex -> sample }
         .collect()
         .subscribe { sampleList ->
-            if (sampleList && (!val_skip_snv_calling || (!val_skip_methylation_calling && val_methylation_callers.tokenize(',').collect { it.trim().toLowerCase() }.contains('methbat')) || !val_skip_peddy || !val_skip_prepare_gens_input || (!val_skip_repeat_calling && val_str_caller == 'trgt'))) {
+            if (sampleList && (!val_skip_snv_calling || (!val_skip_methylation_calling && val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }.contains('methbat')) || !val_skip_peddy || !val_skip_prepare_gens_input || (!val_skip_repeat_calling && val_str_caller == 'trgt'))) {
                 error("ERROR: Unknown sex for sample(s): ${sampleList.join(", ")} while pipeline requires known sex; --skip_sex_check cannot be active.")
             }
         }
