@@ -1528,18 +1528,10 @@
 <td></td>
 </tr>
 <tr>
-<td><code>run_methbat</code></td>
-<td>Run methbat for methylation analysis, set to <code>true</code> by default when <code>--preset revio</code> is active.</td>
-<td><code>boolean</code></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>run_modkit</code></td>
-<td>Run modkit for methylation analysis, set to <code>true</code> by default when <code>--preset ONT_R10</code> is active.</td>
-<td><code>boolean</code></td>
-<td></td>
+<td><code>methylation_callers</code></td>
+<td>Which methylation callers to use. Several callers can be specified, separated by commas (e.g. methbat,modkit). Defaults to <code>methbat</code> when <code>--preset revio</code> is active and <code>modkit</code> when <code>--preset ONT_R10</code> is active.</td>
+<td><code>string</code></td>
+<td>methbat</td>
 <td></td>
 <td></td>
 </tr>
