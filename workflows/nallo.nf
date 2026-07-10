@@ -1016,7 +1016,7 @@ workflow NALLO {
         ch_methylation_profiles = CALL_METHYLATION_METHBAT.out.region_profile
     }
 
-    if (!val_skip_methylation_annotation) {
+    if (!val_skip_methylation_annotation && !val_skip_methbat) {
         ANNOTATE_METHYLATION(
             ch_methylation_profiles
         )

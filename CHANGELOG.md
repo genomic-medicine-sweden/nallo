@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1173](https://github.com/genomic-medicine-sweden/nallo/pull/1173) - Added formatting to pre-commit
 - [#1178](https://github.com/genomic-medicine-sweden/nallo/pull/1178) - Added nextflow lint -format CI check
 - [#1194](https://github.com/genomic-medicine-sweden/nallo/pull/1194) - Added new `concatenated_haplotypes` output to `GENOME_ASSEMBLY`
+- [#1163](https://github.com/genomic-medicine-sweden/nallo/pull/1163) - Added `--methylation_callers` parameter to control which methylation callers are active, following the same pattern as `--sv_callers`
 
 ### Changed
 
@@ -100,6 +101,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1092](https://github.com/genomic-medicine-sweden/nallo/pull/1092) - Removed unused SVDB import in `nallo`
 - [#1100](https://github.com/genomic-medicine-sweden/nallo/pull/1100) - Removed tabix from SNV and SV annotation subworkflows
 - [#1125](https://github.com/genomic-medicine-sweden/nallo/pull/1125) - Removed `samplesheet_ont.csv` because it is unused.
+- [#1163](https://github.com/genomic-medicine-sweden/nallo/pull/1163) - Removed `--run_methbat` and `--run_modkit` parameters; use `--methylation_callers` instead
 
 ### Fixed
 
@@ -110,14 +112,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1172](https://github.com/genomic-medicine-sweden/nallo/pull/1172) - Fixed `--ubam` being set for `QC_PHASING:CRAMINO`, suppressing alignment-dependent metrics including `read_identity`
 - [#1162](https://github.com/genomic-medicine-sweden/nallo/pull/1162) - Fixed `ECHTVAR_ANNO` channel shape mismatch after nf-core module swap by wrapping databases channel with meta
 - [#1180](https://github.com/genomic-medicine-sweden/nallo/pull/1180) - Fixed pipeline configs affecting subworkflow tests (that should be isolated)
+- [#1163](https://github.com/genomic-medicine-sweden/nallo/pull/1163) - Fixed `--skip_methylation_annotation` default: now `true` when methbat is not active, so methylation annotation is only enabled when methbat ran
 
 ### Parameters
 
-| Old parameter | New parameter                   |
-| ------------- | ------------------------------- |
-|               | `--mitochondrial_sv_min_size`   |
-|               | `--mitorsaw_minimum_read_count` |
-|               | `--mitorsaw_minimum_maf`        |
+| Old parameter                    | New parameter                   |
+| -------------------------------- | ------------------------------- |
+|                                  | `--mitochondrial_sv_min_size`   |
+|                                  | `--mitorsaw_minimum_read_count` |
+|                                  | `--mitorsaw_minimum_maf`        |
+| `--run_methbat` / `--run_modkit` | `--methylation_callers`         |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.

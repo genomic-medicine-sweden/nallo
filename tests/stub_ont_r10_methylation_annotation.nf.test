@@ -1,0 +1,53 @@
+nextflow_pipeline {
+
+    name "Test pipeline GENOMICMEDICINESWEDEN_NALLO — Stub test for ONT_R10 methylation annotation"
+    script "../main.nf"
+    tag "PIPELINE"
+    tag "pipeline_stub"
+    tag "stub_ont_r10_methylation_annotation"
+    config "./nextflow.config"
+
+    test("ONT_R10 preset with default methylation annotation settings") {
+        options "-stub"
+
+        when {
+            params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5c13b255beab25a536375fec42f9da3413fc65a5/'
+                input                        = "$projectDir/assets/samplesheet_multisample_ont_bam.csv"
+                outdir                       = "$outputDir"
+                preset                       = "ONT_R10"
+                // Null out params with exists:true that are not needed for this test
+                sv_call_regions              = null
+                gens_panel_of_normals_female = null
+                gens_panel_of_normals_male   = null
+                // Skip steps irrelevant to methylation annotation
+                skip_genome_assembly         = true
+                skip_annotate_paralogs       = true
+                skip_call_paralogs           = true
+                skip_chromograph             = true
+                skip_peddy                   = true
+                skip_prepare_gens_input      = true
+                skip_rank_variants           = true
+                skip_repeat_annotation       = true
+                skip_sv_calling              = true
+                skip_sv_annotation           = true
+                skip_snv_annotation          = true
+            }
+        }
+
+        then {
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
+            assertAll(
+                { assert workflow.success },
+                { assert versions.containsKey('MODKIT_PILEUP') },           // modkit runs for ONT_R10
+                { assert !versions.containsKey('METHBAT_PROFILE') },         // methbat does not run for ONT_R10
+                { assert !versions.containsKey('CSVTK_MUTATE2') },           // methylation annotation skipped when methbat did not run
+                { assert snapshot(
+                    workflow.trace.succeeded().size(),
+                    versions,
+                ).match() }
+            )
+        }
+    }
+
+}
