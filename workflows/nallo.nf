@@ -272,7 +272,7 @@ workflow NALLO {
            [ [], [], [], [] ]
         )
 
-        ch_aligned_bam = SAMTOOLS_MERGE.out.bam.dump()
+        ch_aligned_bam = SAMTOOLS_MERGE.out.bam
             .join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true)
 
         // Publish alignments as CRAM if requested
@@ -343,7 +343,7 @@ workflow NALLO {
         // Since starting with FASTQs is a rare case, no splitting of FASTQs alone just for the assembly is implmenented
 
         CONVERT_INPUT_BAMS(
-            val_skip_alignment || val_premapped || val_alignment_processes == 1 ? ch_samplesheet : SPLITUBAM.out.bam,
+            val_skip_alignment || val_premapped || (val_alignment_processes == 1) ? ch_samplesheet : SPLITUBAM.out.bam.transpose(),
             true,
             false,
         )
