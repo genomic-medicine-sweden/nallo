@@ -3,6 +3,7 @@ nextflow_pipeline {
     name "Test pipeline GENOMICMEDICINESWEDEN_NALLO — Stub test for ONT_R10 methylation annotation"
     script "../main.nf"
     tag "PIPELINE"
+    tag "pipeline_stub"
     tag "stub_ont_r10_methylation_annotation"
     config "./nextflow.config"
 
