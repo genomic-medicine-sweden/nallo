@@ -222,9 +222,9 @@ workflow NALLO {
 
             if (val_alignment_processes > 1) {
                 SPLITUBAM(CONVERT_INPUT_FASTQS.out.bam)
-                ch_unmapped = SPLITUBAM.out.bam
-                    .transpose()
-            } else {
+                ch_unmapped = SPLITUBAM.out.bam.transpose()
+            }
+            else {
                 ch_unmapped = CONVERT_INPUT_FASTQS.out.bam
             }
 
@@ -237,12 +237,11 @@ workflow NALLO {
                 .map { meta, files -> tuple(meta.id, files.size()) }
 
             // Add original file name to meta to join correct alignments and indexes
-            ch_align_in = ch_unmapped
-                .map { meta, bam -> tuple( meta + [file: bam.name], bam ) }
+            ch_align_in = ch_unmapped.map { meta, bam -> tuple(meta + [file: bam.name], bam) }
 
             ALIGN(
                 ch_align_in,
-                ch_fasta
+                ch_fasta,
             )
 
             ch_aligned_for_merge = ALIGN.out.bam
@@ -256,24 +255,22 @@ workflow NALLO {
                 }
                 .groupTuple()
                 .map { key, bams, bais -> tuple(key.getGroupTarget(), bams, bais) }
-
-        } else {
+        }
+        else {
 
             // If bams are premapped, just merge them (ONT machines output several BAMs per sample)
             // SAMTOOLS_MERGE expects indexes in the input but is happy to merge them if the indexes are missing
             ch_aligned_for_merge = ch_samplesheet
                 .groupTuple()
-                .map { meta, reads -> [meta, reads, [] ] }
-
+                .map { meta, reads -> [meta, reads, []] }
         }
 
         SAMTOOLS_MERGE(
-           ch_aligned_for_merge,
-           [ [], [], [], [] ]
+            ch_aligned_for_merge,
+            [[], [], [], []],
         )
 
-        ch_aligned_bam = SAMTOOLS_MERGE.out.bam
-            .join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true)
+        ch_aligned_bam = SAMTOOLS_MERGE.out.bam.join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true)
 
         // Publish alignments as CRAM if requested
         if (val_convert_unphased_aligned_reads_to_cram) {
@@ -311,7 +308,8 @@ workflow NALLO {
             // Set files with updated meta for subsequent processes
             ch_bam = BAM_INFER_SEX.out.bam
             ch_bam_bai = BAM_INFER_SEX.out.bam_bai
-        } else {
+        }
+        else {
             ch_bam = ch_aligned_bam.map { meta, bam, _bai -> [meta, bam] }
             ch_bam_bai = ch_aligned_bam
         }
@@ -349,20 +347,20 @@ workflow NALLO {
         )
 
         // contains all FASTQ files, including those not converted
-        ch_genome_assembly_input = CONVERT_INPUT_BAMS.out.fastq
-            .groupTuple()
+        ch_genome_assembly_input = CONVERT_INPUT_BAMS.out.fastq.groupTuple()
 
         // Hifiasm assembly
         GENOME_ASSEMBLY(
             ch_genome_assembly_input,
             val_hifiasm_mode == "trio-binning",
+            false,
         )
 
         ALIGN_ASSEMBLIES(
             GENOME_ASSEMBLY.out.assembled_haplotypes,
             ch_fasta,
             ch_fai,
-            val_cram_output
+            val_cram_output,
         )
     }
     //
@@ -651,7 +649,7 @@ workflow NALLO {
             val_phaser,
             !val_skip_sv_calling,
             val_cram_output,
-            ch_ped_family
+            ch_ped_family,
         )
 
         ch_multiqc_files = ch_multiqc_files.mix(PHASING.out.stats.collect { _meta, txt -> txt }.ifEmpty([]))
@@ -993,7 +991,7 @@ workflow NALLO {
         ch_methylation_profiles = CALL_METHYLATION_METHBAT.out.region_profile
     }
 
-    if (!val_skip_methylation_annotation) {
+    if (!val_skip_methylation_annotation && !val_skip_methbat) {
         ANNOTATE_METHYLATION(
             ch_methylation_profiles
         )

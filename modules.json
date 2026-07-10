@@ -169,6 +169,11 @@
                         "git_sha": "79b36b51048048374b642289bfe9e591ef56fe05",
                         "installed_by": ["modules"]
                     },
+                    "find/concatenate": {
+                        "branch": "master",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "installed_by": ["modules"]
+                    },
                     "gatk4/denoisereadcounts": {
                         "branch": "master",
                         "git_sha": "86308d628760125908c5c77540517effe0f8880f",

@@ -46,11 +46,11 @@ workflow PIPELINE_INITIALISATION {
     val_gens_panel_of_normals_male
     val_input
     val_methbat_regions
+    val_methylation_callers
     val_mitochondrial_caller
     val_par_regions
     val_phaser
     val_premapped
-    val_run_methbat
     val_sambamba_regions
     val_skip_alignment
     val_skip_annotate_paralogs
@@ -270,7 +270,7 @@ workflow PIPELINE_INITIALISATION {
     //
     // Custom validation for pipeline parameters
     //
-    validateInputParameters(parameterStatus, workflowSkips, workflowDependencies, fileDependencies, val_skip_methylation_calling, val_run_methbat, val_methbat_regions)
+    validateInputParameters(parameterStatus, workflowSkips, workflowDependencies, fileDependencies)
     validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs, val_mitochondrial_caller)
     validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge)
 
@@ -303,8 +303,18 @@ workflow PIPELINE_INITIALISATION {
     // Check that all families has at least one sample with affected phenotype if ranking is active
     validateAllFamiliesHasAffectedSamples(ch_samplesheet, val_skip_rank_variants)
 
+    // Check that methbat_regions is provided when methbat is active
+    if (!val_skip_methylation_calling && val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }.contains('methbat') && !val_methbat_regions) {
+        error("Error: --methbat_regions file must be provided when methbat is in --methylation_callers. Remove methbat from --methylation_callers or use --skip_methylation_calling to disable methylation calling.")
+    }
+
+    // Check that methbat is in --methylation_callers when methylation annotation is active
+    if (!val_skip_methylation_annotation && !val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }.contains('methbat')) {
+        error("Error: methbat must be in --methylation_callers when running without --skip_methylation_annotation. Add methbat to --methylation_callers or use --skip_methylation_annotation to disable methylation annotation.")
+    }
+
     // Check that sex check is not skipped if there are samples with unknown sex
-    validateRequiresSexCheck(ch_samplesheet, val_skip_sex_check, val_skip_snv_calling, val_skip_methylation_calling, val_run_methbat, val_skip_peddy, val_skip_prepare_gens_input, val_skip_repeat_calling, val_str_caller)
+    validateRequiresSexCheck(ch_samplesheet, val_skip_sex_check, val_skip_snv_calling, val_skip_methylation_calling, val_methylation_callers, val_skip_peddy, val_skip_prepare_gens_input, val_skip_repeat_calling, val_str_caller)
 
     // Check that there's no more than one project
     validateSingleProjectPerRun(ch_samplesheet)
@@ -378,8 +388,8 @@ workflow PIPELINE_COMPLETION {
 //
 // Check and validate pipeline parameters
 //
-def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDependencies, val_skip_methylation_calling, val_run_methbat, val_methbat_regions) {
-    validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies, val_skip_methylation_calling, val_run_methbat, val_methbat_regions)
+def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDependencies) {
+    validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies)
 }
 
 // Check that no FASTQs are in samplesheet if --premapped is set
@@ -512,7 +522,7 @@ def citationBibliographyText(ch_topic_versions_string, references_yaml, descript
 //
 // Validate  workflow skip combinations
 //
-def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies, val_skip_methylation_calling, val_run_methbat, val_methbat_regions) {
+def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies) {
     // Array to store errors
     def errors = []
     // For each of the "workflow", "files"
@@ -530,11 +540,6 @@ def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, 
     if (errors) {
         def error_string = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" + "  " + errors.join("\n  ") + "\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         error(error_string)
-    }
-    // Extra case for checking if methbat regions are provided when needed.
-    // The above error would suggest the opposite of the fix
-    if (!val_skip_methylation_calling && val_run_methbat && !val_methbat_regions) {
-        error("Error: --methbat_regions file must be provided when --run_methbat is set to true. Set --run_methbat=false or --skip_methylation_calling to disable MethBat.")
     }
 }
 
@@ -687,7 +692,7 @@ def validateAllFamiliesHasAffectedSamples(ch_samplesheet, val_skip_rank_variants
 
 // SNV calling, methylation with MethBat, Peddy, prepare_gens_inputs and call_repeat_expansions with TRGT require known sex.
 // This is a convenience function to fail early if there are samples without known sex.
-def validateRequiresSexCheck(ch_samplesheet, val_skip_sex_check, val_skip_snv_calling, val_skip_methylation_calling, val_run_methbat, val_skip_peddy, val_skip_prepare_gens_input, val_skip_repeat_calling, val_str_caller) {
+def validateRequiresSexCheck(ch_samplesheet, val_skip_sex_check, val_skip_snv_calling, val_skip_methylation_calling, val_methylation_callers, val_skip_peddy, val_skip_prepare_gens_input, val_skip_repeat_calling, val_str_caller) {
 
     if (!val_skip_sex_check) {
         return null
@@ -701,7 +706,7 @@ def validateRequiresSexCheck(ch_samplesheet, val_skip_sex_check, val_skip_snv_ca
         .map { sample, _sex -> sample }
         .collect()
         .subscribe { sampleList ->
-            if (sampleList && (!val_skip_snv_calling || (!val_skip_methylation_calling && val_run_methbat == true) || !val_skip_peddy || !val_skip_prepare_gens_input || (!val_skip_repeat_calling && val_str_caller == 'trgt'))) {
+            if (sampleList && (!val_skip_snv_calling || (!val_skip_methylation_calling && val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }.contains('methbat')) || !val_skip_peddy || !val_skip_prepare_gens_input || (!val_skip_repeat_calling && val_str_caller == 'trgt'))) {
                 error("ERROR: Unknown sex for sample(s): ${sampleList.join(", ")} while pipeline requires known sex; --skip_sex_check cannot be active.")
             }
         }
