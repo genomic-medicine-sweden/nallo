@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1164](https://github.com/genomic-medicine-sweden/nallo/pull/1164) - Added `--skip_mitochondrial_calling` parameter to allow skipping mitochondrial variant calling
 - [#1173](https://github.com/genomic-medicine-sweden/nallo/pull/1173) - Added formatting to pre-commit
 - [#1178](https://github.com/genomic-medicine-sweden/nallo/pull/1178) - Added nextflow lint -format CI check
-- [#1191](https://github.com/genomic-medicine-sweden/nallo/pull/1191) - Added new `concatenated_haplotypes` output to `GENOME_ASSEMBLY`
+- [#1194](https://github.com/genomic-medicine-sweden/nallo/pull/1194) - Added new `concatenated_haplotypes` output to `GENOME_ASSEMBLY`
 
 ### Changed
 
