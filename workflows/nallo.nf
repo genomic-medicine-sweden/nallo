@@ -261,7 +261,7 @@ workflow NALLO {
         GENOME_ASSEMBLY(
             ch_genome_assembly_input,
             val_hifiasm_mode == "trio-binning",
-            true,
+            false,
         )
 
         ALIGN_ASSEMBLIES(
