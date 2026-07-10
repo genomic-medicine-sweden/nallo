@@ -195,6 +195,12 @@ tool:
   perl-math-cdf:
     citation: "perl-math-cdf"
     bibliography: ""
+  coreutils:
+    citation: "GNU coreutils"
+    bibliography: ""
+  find:
+    citation: "find/concatenate"
+    bibliography: ""
   mitorsaw:
     citation: "Mitorsaw"
     bibliography: ""

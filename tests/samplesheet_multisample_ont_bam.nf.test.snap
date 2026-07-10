@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            341,
+            344,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -93,6 +93,11 @@
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
+                },
+                "FIND_CONCATENATE": {
+                    "coreutils": 9.4,
+                    "find": "4.6.0",
+                    "pigz": 2.8
                 },
                 "GATK4_DENOISEREADCOUNTS": {
                     "gatk4": "4.6.2.0"
@@ -1226,10 +1231,10 @@
                 
             ]
         ],
-        "timestamp": "2026-06-23T16:57:16.948077305",
+        "timestamp": "2026-07-10T11:37:01.485791832",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.06.0"
         }
     }
 }

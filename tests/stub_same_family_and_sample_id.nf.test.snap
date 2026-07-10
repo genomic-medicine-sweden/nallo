@@ -1,7 +1,7 @@
 {
     "Test family id same as sample id": {
         "content": [
-            192,
+            193,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -112,6 +112,11 @@
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
+                },
+                "FIND_CONCATENATE": {
+                    "coreutils": 9.4,
+                    "find": "4.6.0",
+                    "pigz": 2.8
                 },
                 "GATK4_DENOISEREADCOUNTS": {
                     "gatk4": "4.6.2.0"
@@ -511,10 +516,10 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-07-05T21:56:22.137144",
+        "timestamp": "2026-07-10T11:41:51.966986279",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.06.0"
         }
     }
 }
