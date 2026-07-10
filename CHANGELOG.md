@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1173](https://github.com/genomic-medicine-sweden/nallo/pull/1173) - Added formatting to pre-commit
 - [#1178](https://github.com/genomic-medicine-sweden/nallo/pull/1173) - Added nextflow lint -format CI check
 - [#1195](https://github.com/genomic-medicine-sweden/nallo/pull/1195) - Added unfiltered bam output to `ALIGN_ASSEMBLIES`
+- [#1194](https://github.com/genomic-medicine-sweden/nallo/pull/1194) - Added new `concatenated_haplotypes` output to `GENOME_ASSEMBLY`
 - [#1163](https://github.com/genomic-medicine-sweden/nallo/pull/1163) - Added `--methylation_callers` parameter to control which methylation callers are active, following the same pattern as `--sv_callers`
 
 ### Changed
@@ -92,6 +93,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1182](https://github.com/genomic-medicine-sweden/nallo/pull/1182) - Formatted all config files with `nextflow lint -format -harshil-alignment`
 - [#1183](https://github.com/genomic-medicine-sweden/nallo/pull/1183) - Formatted all local subworkflows and modules with `nextflow lint -format -harshil-alignment`
 - [#1189](https://github.com/genomic-medicine-sweden/nallo/pull/1189) - Changed to use intro section added in https://github.com/genomic-medicine-sweden/nf-dev-guidelines/pull/39
+- [#1184](https://github.com/genomic-medicine-sweden/nallo/pull/1184) - Update `.nf-core.yml` to remove lint ignore directive for template strings in `assets/nf-dev-guidelines.yaml`.
 
 ### Removed
 
@@ -136,6 +138,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | sentieon-cli/dnascope-longread | 1.5.2       | 1.6.2       |
 | hiphase                        | 1.4.0       | 1.6.0       |
 | echtvar/anno                   | 0.2.2       | 0.2.4       |
+| find/concatenate               |             | 4.6.0       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
