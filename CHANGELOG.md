@@ -23,6 +23,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1148](https://github.com/genomic-medicine-sweden/nallo/pull/1148) - Added tests for `annotate_consequence_pli`
 - [#1155](https://github.com/genomic-medicine-sweden/nallo/pull/1155) - Added Nallo paper to the README
 - [#1164](https://github.com/genomic-medicine-sweden/nallo/pull/1164) - Added `--skip_mitochondrial_calling` parameter to allow skipping mitochondrial variant calling
+- [#1173](https://github.com/genomic-medicine-sweden/nallo/pull/1173) - Added formatting to pre-commit
+- [#1178](https://github.com/genomic-medicine-sweden/nallo/pull/1173) - Added nextflow lint -format CI check
 
 ### Changed
 
@@ -87,6 +89,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1181](https://github.com/genomic-medicine-sweden/nallo/pull/1181) - Updated minimum nextflow version to 26.04.4
 - [#1182](https://github.com/genomic-medicine-sweden/nallo/pull/1182) - Formatted all config files with `nextflow lint -format -harshil-alignment`
 - [#1183](https://github.com/genomic-medicine-sweden/nallo/pull/1183) - Formatted all local subworkflows and modules with `nextflow lint -format -harshil-alignment`
+- [#1189](https://github.com/genomic-medicine-sweden/nallo/pull/1189) - Changed to use intro section added in https://github.com/genomic-medicine-sweden/nf-dev-guidelines/pull/39
 
 ### Removed
 
