@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1155](https://github.com/genomic-medicine-sweden/nallo/pull/1155) - Added Nallo paper to the README
 - [#1164](https://github.com/genomic-medicine-sweden/nallo/pull/1164) - Added `--skip_mitochondrial_calling` parameter to allow skipping mitochondrial variant calling
 - [#1173](https://github.com/genomic-medicine-sweden/nallo/pull/1173) - Added formatting to pre-commit
+- [#1178](https://github.com/genomic-medicine-sweden/nallo/pull/1173) - Added nextflow lint -format CI check
 
 ### Changed
 
