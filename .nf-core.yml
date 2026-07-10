@@ -34,8 +34,6 @@ lint:
   nextflow_config:
     - manifest.name
     - manifest.homePage
-  template_strings:
-    - assets/nf-dev-guidelines.yaml
 nf_core_version: 4.0.2
 repository_type: pipeline
 template:
