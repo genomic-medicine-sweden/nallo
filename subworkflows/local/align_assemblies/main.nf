@@ -27,25 +27,8 @@ workflow ALIGN_ASSEMBLIES {
         false,
     )
 
-    ch_assemblies_per_sample_unfiltered = MINIMAP2_ALIGN.out.bam
-        .map { meta, bam -> [meta - meta.subMap('haplotype'), bam] }
-        .groupTuple(size: 2)
-        .map { meta, bams -> [meta, bams, []] }
-
-    SAMTOOLS_MERGE_UNFILTERED(
-        ch_assemblies_per_sample_unfiltered,
-        [[], [], [], []],
-    )
-
-    SAMTOOLS_VIEW(
-        MINIMAP2_ALIGN.out.bam.join(MINIMAP2_ALIGN.out.index, failOnMismatch: true, failOnDuplicate: true),
-        [[], [], []],
-        [],
-        false,
-    )
-
     TAGBAM(
-        SAMTOOLS_VIEW.out.bam
+        MINIMAP2_ALIGN.out.bam
     )
 
     ch_assemblies_per_sample = TAGBAM.out.bam
@@ -58,19 +41,26 @@ workflow ALIGN_ASSEMBLIES {
         [[], [], [], []],
     )
 
+    SAMTOOLS_VIEW(
+        SAMTOOLS_MERGE.out.bam.join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true),
+        [[], [], []],
+        [],
+        'bai',
+    )
+
     // Publish alignment as CRAM if requested
     if (cram_output) {
         SAMTOOLS_CONVERT(
-            SAMTOOLS_MERGE.out.bam.join(SAMTOOLS_MERGE.out.index, failOnDuplicate: true, failOnMismatch: true),
+            SAMTOOLS_VIEW.out.bam.join(SAMTOOLS_VIEW.out.bai, failOnDuplicate: true, failOnMismatch: true),
             ch_fasta.join(ch_fai, failOnDuplicate: true, failOnMismatch: true).collect(),
         )
     }
 
     emit:
-    unfiltered_bam = SAMTOOLS_MERGE_UNFILTERED.out.bam // channel: [ val(meta), path(bam) ]
-    unfiltered_bai = SAMTOOLS_MERGE_UNFILTERED.out.index // channel: [ val(meta), path(bai) ]
-    bam            = SAMTOOLS_MERGE.out.bam // channel: [ val(meta), path(bam) ]
-    bai            = SAMTOOLS_MERGE.out.index // channel: [ val(meta), path
+    unfiltered_bam = SAMTOOLS_MERGE.out.bam // channel: [ val(meta), path(bam) ]
+    unfiltered_bai = SAMTOOLS_MERGE.out.index // channel: [ val(meta), path(bai) ]
+    bam            = SAMTOOLS_VIEW.out.bam // channel: [ val(meta), path(bam) ]
+    bai            = SAMTOOLS_VIEW.out.bai // channel: [ val(meta), path(bai) ]
     cram           = cram_output ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
     crai           = cram_output ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
 }

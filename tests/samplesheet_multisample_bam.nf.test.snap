@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            403,
+            397,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -222,9 +222,6 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.23.1"
-                },
-                "SAMTOOLS_MERGE_UNFILTERED": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_SORT": {
@@ -1323,7 +1320,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-10T12:30:11.432317765",
+        "timestamp": "2026-07-10T15:35:59.172016652",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.06.0"
