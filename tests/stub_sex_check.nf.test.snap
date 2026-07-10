@@ -1,7 +1,7 @@
 {
     "Test skip sex check - unknown sex": {
         "content": [
-            36,
+            35,
             {
                 "BCFTOOLS_MERGE": {
                     "bcftools": 1.22
@@ -17,11 +17,6 @@
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
-                },
-                "FIND_CONCATENATE": {
-                    "coreutils": 9.4,
-                    "find": "4.6.0",
-                    "pigz": 2.8
                 },
                 "GAWK": {
                     "gawk": "5.3.1"
@@ -149,7 +144,7 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
-        "timestamp": "2026-07-10T11:42:41.384303238",
+        "timestamp": "2026-07-10T13:40:33.711602959",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.06.0"

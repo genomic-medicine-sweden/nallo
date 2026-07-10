@@ -1,7 +1,7 @@
 {
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
-            60,
+            59,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -44,11 +44,6 @@
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
-                },
-                "FIND_CONCATENATE": {
-                    "coreutils": 9.4,
-                    "find": "4.6.0",
-                    "pigz": 2.8
                 },
                 "GAWK_EXTRACT_REGIONS": {
                     "gawk": "5.3.1"
@@ -215,7 +210,7 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-07-10T11:42:18.791893487",
+        "timestamp": "2026-07-10T13:23:36.309541629",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.06.0"

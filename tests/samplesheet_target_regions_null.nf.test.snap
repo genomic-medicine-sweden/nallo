@@ -1,7 +1,7 @@
 {
     "test profile | --target_regions null --alignment_output_format cram": {
         "content": [
-            223,
+            222,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -115,11 +115,6 @@
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
-                },
-                "FIND_CONCATENATE": {
-                    "coreutils": 9.4,
-                    "find": "4.6.0",
-                    "pigz": 2.8
                 },
                 "GATK4_DENOISEREADCOUNTS": {
                     "gatk4": "4.6.2.0"
@@ -835,7 +830,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-10T11:38:54.849595698",
+        "timestamp": "2026-07-10T13:36:50.020637603",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.06.0"

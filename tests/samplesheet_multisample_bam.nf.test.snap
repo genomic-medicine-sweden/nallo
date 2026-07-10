@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            403,
+            400,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -115,11 +115,6 @@
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
-                },
-                "FIND_CONCATENATE": {
-                    "coreutils": 9.4,
-                    "find": "4.6.0",
-                    "pigz": 2.8
                 },
                 "GATK4_DENOISEREADCOUNTS": {
                     "gatk4": "4.6.2.0"
@@ -1325,7 +1320,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-10T11:32:44.12749604",
+        "timestamp": "2026-07-10T13:29:02.260916406",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.06.0"
