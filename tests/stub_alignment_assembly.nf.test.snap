@@ -165,10 +165,10 @@
                 "pipeline_info/nallo_software_mqc_versions.yml"
             ]
         ],
-        "timestamp": "2026-05-27T11:28:36.47024665",
+        "timestamp": "2026-07-10T13:23:04.669912083",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.06.0"
         }
     },
     "Test alignment without genome assembly": {

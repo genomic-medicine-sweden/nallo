@@ -3,6 +3,8 @@ include { HIFIASM as HIFIASM_BINS     } from '../../../modules/nf-core/hifiasm'
 include { HIFIASM as HIFIASM_ASSEMBLY } from '../../../modules/nf-core/hifiasm'
 include { YAK_COUNT                   } from '../../../modules/nf-core/yak/count/main'
 include { GFASTATS                    } from '../../../modules/nf-core/gfastats/main'
+include { FIND_CONCATENATE            } from '../../../modules/nf-core/find/concatenate/main'
+
 
 // This subworkflow assembles and outputs haplotypes from a set of reads (grouped per sample), using hifiasm and gfastats.
 // It assumes that while each sample can have multiple files, each sample belongs to one family at most.
@@ -10,6 +12,7 @@ workflow GENOME_ASSEMBLY {
     take:
     ch_reads // channel: [ val(meta), fastqs ]
     trio_binning // bool: Should we use trio binning mode where possible?
+    concat_assemblies // bool: Should we concatenate haplotypes per sample?
 
     main:
     if (trio_binning) {
@@ -116,7 +119,23 @@ workflow GENOME_ASSEMBLY {
         [[], []],
     )
 
+    if (concat_assemblies) {
+        ch_assemblies_to_concatenate = GFASTATS.out.assembly
+            .map { meta, bam -> [meta - meta.subMap('haplotype'), bam] }
+            .groupTuple(size: 2)
+
+        FIND_CONCATENATE(
+            ch_assemblies_to_concatenate
+        )
+
+        ch_concatenated_haplotypes = FIND_CONCATENATE.out.file_out
+    }
+    else {
+        ch_concatenated_haplotypes = channel.empty()
+    }
+
     emit:
-    assembled_haplotypes = GFASTATS.out.assembly // channel: [ val(meta), path(fasta) ]
-    assembly_summary     = GFASTATS.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
+    assembled_haplotypes    = GFASTATS.out.assembly // channel: [ val(meta), path(fasta) ]
+    assembly_summary        = GFASTATS.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
+    concatenated_haplotypes = ch_concatenated_haplotypes // channel: [ val(meta), path(fasta) ]
 }
