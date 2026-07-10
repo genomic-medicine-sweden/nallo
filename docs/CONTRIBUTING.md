@@ -4,20 +4,12 @@
 
 # `genomic-medicine-sweden/nallo`: Contributing Guidelines
 
-Hi there!
-Many thanks for taking an interest in improving genomic-medicine-sweden/nallo.
-
-We try to manage the required tasks for genomic-medicine-sweden/nallo using GitHub issues, you probably came to this page when creating one.
-Please use the pre-filled template to save time.
-
-However, don't be put off by this template - other more general issues and suggestions are welcome!
-Contributions to the code are even more welcome ;)
-
 ## Table of contents
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+- [Introduction](#introduction)
 - [General](#general)
   - [Contribution workflow](#contribution-workflow)
     - [Pull Requests](#pull-requests)
@@ -48,6 +40,17 @@ Contributions to the code are even more welcome ;)
 - [Updating contribution guidelines](#updating-contribution-guidelines)
 
 <!-- END doctoc -->
+
+## Introduction
+
+Hi there!
+Many thanks for taking an interest in improving genomic-medicine-sweden/nallo.
+
+We try to manage the required tasks for genomic-medicine-sweden/nallo using GitHub issues, you probably came to this page when creating one.
+Please use the pre-filled template to save time.
+
+However, don't be put off by this template - other more general issues and suggestions are welcome!
+Contributions to the code are even more welcome ;)
 
 ## General
 
