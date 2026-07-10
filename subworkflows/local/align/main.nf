@@ -1,7 +1,5 @@
 include { MINIMAP2_ALIGN   } from '../../../modules/nf-core/minimap2/align/main'
 include { MINIMAP2_INDEX   } from '../../../modules/nf-core/minimap2/index/main'
-include { SAMTOOLS_MERGE   } from '../../../modules/nf-core/samtools/merge/main'
-include { SPLITUBAM        } from '../../../modules/nf-core/splitubam/main'
 
 workflow ALIGN {
 
