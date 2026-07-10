@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            341,
+            344,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -183,6 +183,9 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_MERGE_UNFILTERED": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_VIEW": {
@@ -1226,10 +1229,10 @@
                 
             ]
         ],
-        "timestamp": "2026-06-23T16:57:16.948077305",
+        "timestamp": "2026-07-10T12:34:23.237035417",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.06.0"
         }
     }
 }

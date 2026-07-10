@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1164](https://github.com/genomic-medicine-sweden/nallo/pull/1164) - Added `--skip_mitochondrial_calling` parameter to allow skipping mitochondrial variant calling
 - [#1173](https://github.com/genomic-medicine-sweden/nallo/pull/1173) - Added formatting to pre-commit
 - [#1178](https://github.com/genomic-medicine-sweden/nallo/pull/1173) - Added nextflow lint -format CI check
+- [#1195](https://github.com/genomic-medicine-sweden/nallo/pull/1195) - Added unfiltered bam output to `ALIGN_ASSEMBLIES`
 
 ### Changed
 
@@ -99,6 +100,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1092](https://github.com/genomic-medicine-sweden/nallo/pull/1092) - Removed unused SVDB import in `nallo`
 - [#1100](https://github.com/genomic-medicine-sweden/nallo/pull/1100) - Removed tabix from SNV and SV annotation subworkflows
 - [#1125](https://github.com/genomic-medicine-sweden/nallo/pull/1125) - Removed `samplesheet_ont.csv` because it is unused.
+- [#1195](https://github.com/genomic-medicine-sweden/nallo/pull/1195) - Removed `HG002_Revio_cramino_aligned_phased.arrow.new` that was added by mistake
 
 ### Fixed
 

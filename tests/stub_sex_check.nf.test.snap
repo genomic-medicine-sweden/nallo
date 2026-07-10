@@ -1,7 +1,7 @@
 {
     "Test skip sex check - unknown sex": {
         "content": [
-            35,
+            36,
             {
                 "BCFTOOLS_MERGE": {
                     "bcftools": 1.22
@@ -67,6 +67,9 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_MERGE_UNFILTERED": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_VIEW": {
@@ -144,10 +147,10 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
-        "timestamp": "2026-05-27T11:31:54.895514708",
+        "timestamp": "2026-07-10T12:40:51.553336696",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.06.0"
         }
     },
     "Test skip sex check - multisample": {

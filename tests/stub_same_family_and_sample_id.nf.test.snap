@@ -1,7 +1,7 @@
 {
     "Test family id same as sample id": {
         "content": [
-            192,
+            193,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -222,6 +222,9 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_MERGE_UNFILTERED": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_SORT": {
@@ -511,10 +514,10 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-07-05T21:56:22.137144",
+        "timestamp": "2026-07-10T12:39:45.688781439",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.06.0"
         }
     }
 }
