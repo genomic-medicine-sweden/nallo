@@ -1,7 +1,7 @@
 {
     "ONT_R10 preset with default methylation annotation settings": {
         "content": [
-            145,
+            146,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -49,13 +49,16 @@
                     "cramino": "1.1.0"
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
-                    "deepvariant": "1.10.0"
+                    "deepvariant": null
                 },
                 "DEEPVARIANT_VCFSTATSREPORT": {
-                    "deepvariant": "1.10.0"
+                    "deepvariant": null
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
+                },
+                "GAWK": {
+                    "gawk": "5.3.1"
                 },
                 "GAWK_EXTRACT_REGIONS": {
                     "gawk": "5.3.1"

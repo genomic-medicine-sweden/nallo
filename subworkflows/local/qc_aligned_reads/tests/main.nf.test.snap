@@ -94,6 +94,22 @@
                     
                 ],
                 "10": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.thresholds.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "11": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.thresholds.bed.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "12": [
                     
                 ],
                 "2": [
@@ -235,15 +251,31 @@
                         "test.summary.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
+                "mosdepth_thresholds_bed": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.thresholds.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "mosdepth_thresholds_csi": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.thresholds.bed.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
                 "sambamba_depth_bed": [
                     
                 ]
             }
         ],
-        "timestamp": "2026-05-27T11:10:45.140159947",
+        "timestamp": "2026-07-13T10:07:53.479901",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.04.4"
         }
     },
     "bam, bed -stub": {
@@ -265,6 +297,22 @@
                         {
                             "id": "test"
                         },
+                        "test.thresholds.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "11": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.thresholds.bed.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "12": [
+                    [
+                        {
+                            "id": "test"
+                        },
                         "test.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
@@ -407,6 +455,22 @@
                         "test.summary.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
+                "mosdepth_thresholds_bed": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.thresholds.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "mosdepth_thresholds_csi": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.thresholds.bed.gz.csi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
                 "sambamba_depth_bed": [
                     [
                         {
@@ -417,10 +481,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-05-27T11:10:51.849879414",
+        "timestamp": "2026-07-13T10:08:43.158337",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.04.4"
         }
     },
     "bam, no bed": {

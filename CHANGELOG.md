@@ -35,6 +35,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1208](https://github.com/genomic-medicine-sweden/nallo/pull/1208) - Added `SAMTOOLS_CALMD` to add MD tag needed for sniffles after pbmm2
 - [#1208](https://github.com/genomic-medicine-sweden/nallo/pull/1208) - Added new read group param to `CONVERT_INPUT_FASTQS` config to add RG, SM and DS tags to bam when converting with `SAMTOOLS_IMPORT` and read aligner is pbmm2
 - [#1209](https://github.com/genomic-medicine-sweden/nallo/pull/1209) - Added tests for `clean_sniffles`
+- [#1159](https://github.com/genomic-medicine-sweden/nallo/pull/1159) - Added `ONT_R10_AS` preset for Oxford Nanopore adaptive sampling runs, with preset defaults: `sv_callers=sniffles`, `skip_mitochondrial_calling=true`, `skip_sex_check=true`, `skip_genome_assembly=true`
+- [#1159](https://github.com/genomic-medicine-sweden/nallo/pull/1159) - Added on-target read pre-filtering in `QC_ALIGNED_READS`: when `--target_regions` is set, reads are filtered with `SAMTOOLS_VIEW` to on-target regions before CRAMINO QC, ensuring QC metrics reflect only on-target data
 
 ### Changed
 
@@ -106,6 +108,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1197](https://github.com/genomic-medicine-sweden/nallo/pull/1197) - Updated all genmod modules
 - [#1196](https://github.com/genomic-medicine-sweden/nallo/pull/1196) - Updated SVDB modules
 - [#1206](https://github.com/genomic-medicine-sweden/nallo/pull/1206) - Changed default glnexus config from `DeepVariant_unfiltered` to a custom config in `assets/` due to unfixed [bug](https://github.com/dnanexus-rnd/GLnexus/issues/286)?
+- [#1159](https://github.com/genomic-medicine-sweden/nallo/pull/1159) - Changed `call_methylation_modkit` to use GAWK to strip non-BED content from `modkit_call_regions` before processing
+- [#1159](https://github.com/genomic-medicine-sweden/nallo/pull/1159) - Changed mosdepth MultiQC input to use the regional coverage distribution when `--target_regions` is set
 
 ### Removed
 
@@ -142,6 +146,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                                  | `--read_aligner`                |
 |                                  | `--pbmm2_preset`                |
 |                                  | `--glnexus_config`              |
+|                                  | `--preset ONT_R10_AS`           |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.

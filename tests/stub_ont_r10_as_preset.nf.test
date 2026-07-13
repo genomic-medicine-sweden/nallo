@@ -1,0 +1,46 @@
+nextflow_pipeline {
+
+    name "Test pipeline GENOMICMEDICINESWEDEN_NALLO — Stub test for ONT_R10_AS preset"
+    script "../main.nf"
+    tag "PIPELINE"
+    tag "stub_ont_r10_as_preset"
+
+    test("ONT_R10_AS preset with target_regions applies adaptive sampling defaults") {
+        options "-stub"
+
+        when {
+            params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5c13b255beab25a536375fec42f9da3413fc65a5/'
+                input                        = "$projectDir/assets/samplesheet_multisample_ont_bam.csv"
+                outdir                       = "$outputDir"
+                preset                       = "ONT_R10_AS"
+                target_regions               = params.pipelines_testdata_base_path + 'reference/test_data.bed'
+                // Null out params with exists:true not needed for this test
+                sv_call_regions              = null
+                gens_panel_of_normals_female = null
+                gens_panel_of_normals_male   = null
+                snv_calling_processes         = 1
+                // Skip annotation steps irrelevant to preset validation
+                skip_prepare_gens_input      = true
+                skip_rank_variants           = true
+                skip_sv_annotation           = true
+                skip_snv_annotation          = true
+            }
+        }
+
+        then {
+            def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
+            assertAll(
+                { assert workflow.success },
+                { assert !versions.containsKey('MITORSAW_HAPLOTYPE') }, // skip_mitochondrial_calling=true in ONT_R10_AS
+                { assert snapshot(
+                    workflow.trace.succeeded().size(),
+                    versions,
+                    stable_name
+                ).match() }
+            )
+        }
+    }
+
+}
