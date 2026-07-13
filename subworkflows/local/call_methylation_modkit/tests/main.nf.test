@@ -67,7 +67,7 @@ nextflow_workflow {
                 input[0] = PHASING.out.haplotagged_bam_bai
                 input[1] = PREPARE_REFERENCES.out.fasta
                 input[2] = PREPARE_REFERENCES.out.fai
-                input[3] = [[],[]]
+                input[3] = channel.of([[],[]])
                 input[4] = 'h,m'
                 """
             }
@@ -95,7 +95,7 @@ nextflow_workflow {
                 ])
                 input[1] = PREPARE_REFERENCES.out.fasta
                 input[2] = PREPARE_REFERENCES.out.fai
-                input[3] = [[],[]]
+                input[3] = channel.of([[],[]])
                 input[4] = 'h,m'
                 """
             }
@@ -176,7 +176,7 @@ nextflow_workflow {
                 input[0] = PHASING.out.haplotagged_bam_bai
                 input[1] = PREPARE_REFERENCES.out.fasta
                 input[2] = PREPARE_REFERENCES.out.fai
-                input[3] = [[],[]]
+                input[3] = channel.of([[],[]])
                 input[4] = 'h,m'
                 """
             }
@@ -232,7 +232,7 @@ nextflow_workflow {
                 ])
                 input[1] = PREPARE_REFERENCES.out.fasta
                 input[2] = PREPARE_REFERENCES.out.fai
-                input[3] = [[],[]]
+                input[3] = channel.of([[],[]])
                 input[4] = 'h,m'
                 """
             }

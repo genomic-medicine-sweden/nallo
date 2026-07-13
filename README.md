@@ -77,13 +77,13 @@ project,sample,file,family_id,paternal_id,maternal_id,sex,phenotype
  my_project,HG004,/path/to/HG004.bam,NIST,0,0,2,1
 ```
 
-Supply a reference genome with `--fasta` and choose a matching `--preset` for your data (`revio`, `pacbio`, `ONT_R10`). Now, you can run the pipeline using:
+Supply a reference genome with `--fasta` and choose a matching `--preset` for your data (`revio`, `pacbio`, `ONT_R10` or `ONT_R10_AS`). Now, you can run the pipeline using:
 
 ```bash
 nextflow run genomic-medicine-sweden/nallo \
     -profile <docker/singularity/.../institute> \
     --input samplesheet.csv \
-    --preset <revio/pacbio/ONT_R10> \
+    --preset <revio/pacbio/ONT_R10/ONT_R10_AS> \
     --fasta <reference.fasta> \
     --outdir <OUTDIR>
 ```

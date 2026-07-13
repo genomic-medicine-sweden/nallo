@@ -644,8 +644,8 @@
                 "preset": {
                     "type": "string",
                     "default": "revio",
-                    "description": "Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`)",
-                    "enum": ["revio", "pacbio", "ONT_R10"]
+                    "description": "Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`, `ONT_R10_AS`)",
+                    "enum": ["revio", "pacbio", "ONT_R10", "ONT_R10_AS"]
                 },
                 "sv_callers": {
                     "type": "string",

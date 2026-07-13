@@ -290,8 +290,10 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     methylation_modkit_tbi              = NALLO.out.methylation_modkit_tbi // channel: [ val(meta), path(bed.gz.tbi) ]
     mosdepth_global_dist                = NALLO.out.mosdepth_global_dist // channel: [ val(meta), path(txt) ]
     mosdepth_per_base_d4                = NALLO.out.mosdepth_per_base_d4 // channel: [ val(meta), path(d4) ]
-    mosdepth_regions_bed                = NALLO.out.mosdepth_regions_bed // channel: [ val(meta), path(bed.gz) ]
+    mosdepth_regions_bed                = NALLO.out.mosdepth_regions_bed // channel: [ val(meta), path(bed.gz)     ]
     mosdepth_regions_csi                = NALLO.out.mosdepth_regions_csi // channel: [ val(meta), path(bed.gz.csi) ]
+    mosdepth_thresholds_bed             = NALLO.out.mosdepth_thresholds_bed // channel: [ val(meta), path(bed.gz)     ]
+    mosdepth_thresholds_csi             = NALLO.out.mosdepth_thresholds_csi // channel: [ val(meta), path(bed.gz.csi) ]
     mosdepth_regions_dist               = NALLO.out.mosdepth_regions_dist // channel: [ val(meta), path(txt) ]
     mosdepth_summary                    = NALLO.out.mosdepth_summary // channel: [ val(meta), path(txt) ]
     multiqc_data                        = NALLO.out.multiqc_data // channel: [ val(meta), path(*_data) ]
@@ -523,7 +525,7 @@ workflow {
         params.skip_repeat_annotation,
         params.skip_repeat_calling,
         params.skip_mitochondrial_calling,
-        params.skip_sambamba_depth,
+        !params.sambamba_regions,
         params.skip_sex_check,
         params.skip_snv_annotation,
         params.skip_snv_calling,
@@ -625,6 +627,8 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_per_base_d4)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_regions_bed)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_regions_csi)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_thresholds_bed)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_thresholds_csi)
 
     ch_qc_whatshap_stats = GENOMICMEDICINESWEDEN_NALLO.out.qc_whatshap_stats
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks_gtf)

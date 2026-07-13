@@ -67,6 +67,11 @@ This document describes the pipeline output files and the tools used to generate
 | `multiqc/multiqc_data/`       | Directory containing parsed statistics    |
 | `multiqc/multiqc_plots/`      | Directory containing static report images |
 
+When running with `--target_regions` (or `ONT_R10_AS` preset), two additional custom tables appear in the report in the following order:
+
+1. **On-target read QC** — cramino summary statistics (number of reads, yield, N50, median and mean length, median identity) computed from the on-target read subset
+2. **Per-region coverage** — mean coverage and percentage of bases covered at ≥20X and ≥30X per target region, derived from mosdepth thresholds output
+
 ## Pipeline Information
 
 [Nextflow](https://www.nextflow.io/docs/latest/tracing.html) generates reports for troubleshooting, performance, and traceability.
@@ -114,9 +119,10 @@ This document describes the pipeline output files and the tools used to generate
 | `qc/mosdepth/{sample}/{sample}.mosdepth.global.dist.txt` | Cumulative distribution of bases covered for at least a given coverage value, across chromosomes and the whole genome | :white_check_mark:      | :white_check_mark:         |
 | `qc/mosdepth/{sample}/{sample}.mosdepth.summary.txt`     | Mosdepth summary file                                                                                                 | :white_check_mark:      | :white_check_mark:         |
 | `qc/mosdepth/{sample}/{sample}.mosdepth.region.dist.txt` | Cumulative distribution of bases covered for at least a given coverage value, across regions                          | :white_check_mark:      |                            |
-| `qc/mosdepth/{sample}/{sample}.per-base.d4`              | Per-base depth in d4 format. Output if `--mosdepth_d4_output` is set                                                  | :white_check_mark:      |
-| `qc/mosdepth/{sample}/{sample}.regions.bed.gz`           | Depth per region                                                                                                      | :white_check_mark:      |
-| `qc/mosdepth/{sample}/{sample}.regions.bed.gz.csi`       | Index of the regions.bed.gz file                                                                                      | :white_check_mark:      |
+| `qc/mosdepth/{sample}/{sample}.per-base.d4`              | Per-base depth in d4 format. Output if `--mosdepth_d4_output` is set                                                  | :white_check_mark:      |                            |
+| `qc/mosdepth/{sample}/{sample}.regions.bed.gz`           | Mean depth per target region                                                                                          | :white_check_mark:      |                            |
+| `qc/mosdepth/{sample}/{sample}.regions.bed.gz.csi`       | Index of the regions.bed.gz file                                                                                      | :white_check_mark:      |                            |
+| `qc/mosdepth/{sample}/{sample}.thresholds.bed.gz`        | Bases covered at ≥20X and ≥30X per target region                                                                      | :white_check_mark:      |                            |
 
 ### Cramino
 
