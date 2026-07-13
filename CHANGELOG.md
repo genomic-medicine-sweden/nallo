@@ -93,6 +93,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1183](https://github.com/genomic-medicine-sweden/nallo/pull/1183) - Formatted all local subworkflows and modules with `nextflow lint -format -harshil-alignment`
 - [#1189](https://github.com/genomic-medicine-sweden/nallo/pull/1189) - Changed to use intro section added in https://github.com/genomic-medicine-sweden/nf-dev-guidelines/pull/39
 - [#1184](https://github.com/genomic-medicine-sweden/nallo/pull/1184) - Update `.nf-core.yml` to remove lint ignore directive for template strings in `assets/nf-dev-guidelines.yaml`.
+- [#1185](https://github.com/genomic-medicine-sweden/nallo/pull/1185) - Rename nf-dev-guidelines config to `contribution-guidelines-config.yaml`.
 
 ### Removed
 
