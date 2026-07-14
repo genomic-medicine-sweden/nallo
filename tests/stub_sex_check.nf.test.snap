@@ -1,7 +1,7 @@
 {
     "Test skip sex check - unknown sex": {
         "content": [
-            35,
+            34,
             {
                 "BCFTOOLS_MERGE": {
                     "bcftools": 1.22
@@ -93,8 +93,8 @@
                 "assembly",
                 "assembly/sample",
                 "assembly/sample/HG002_Revio",
-                "assembly/sample/HG002_Revio/HG002_Revio.bai",
-                "assembly/sample/HG002_Revio/HG002_Revio.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam.bai",
                 "assembly/stats",
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
@@ -144,7 +144,7 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
-        "timestamp": "2026-07-10T14:24:09.057851021",
+        "timestamp": "2026-07-10T15:46:26.287271344",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"

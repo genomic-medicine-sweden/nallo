@@ -1,7 +1,7 @@
 {
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
-            28,
+            58,
             {
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.13.0dev"
@@ -13,6 +13,10 @@
                 "aligned_reads/HG002_Revio/HG002_Revio.bai",
                 "aligned_reads/HG002_Revio/HG002_Revio.bam",
                 "assembly",
+                "assembly/sample",
+                "assembly/sample/HG002_Revio",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam.bai",
                 "assembly/stats",
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
@@ -21,7 +25,7 @@
                 "pipeline_info/nallo_software_mqc_versions.yml"
             ]
         ],
-        "timestamp": "2026-07-14T13:28:19.093710518",
+        "timestamp": "2026-07-10T15:46:07.242736433",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"

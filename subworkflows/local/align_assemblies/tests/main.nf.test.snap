@@ -29,7 +29,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "hg38_filtered.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "bam": [
@@ -37,7 +37,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "hg38_filtered.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "crai": [
@@ -48,10 +48,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-03-31T15:08:16.168735646",
+        "timestamp": "2026-07-10T14:58:07.965712798",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.06.0"
         }
     },
     "bam": {

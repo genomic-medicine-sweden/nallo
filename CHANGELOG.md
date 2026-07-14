@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1164](https://github.com/genomic-medicine-sweden/nallo/pull/1164) - Added `--skip_mitochondrial_calling` parameter to allow skipping mitochondrial variant calling
 - [#1173](https://github.com/genomic-medicine-sweden/nallo/pull/1173) - Added formatting to pre-commit
 - [#1178](https://github.com/genomic-medicine-sweden/nallo/pull/1178) - Added nextflow lint -format CI check
+- [#1195](https://github.com/genomic-medicine-sweden/nallo/pull/1195) - Added unfiltered bam output to `ALIGN_ASSEMBLIES`
 - [#1194](https://github.com/genomic-medicine-sweden/nallo/pull/1194) - Added new `concatenated_haplotypes` output to `GENOME_ASSEMBLY`
 - [#1163](https://github.com/genomic-medicine-sweden/nallo/pull/1163) - Added `--methylation_callers` parameter to control which methylation callers are active, following the same pattern as `--sv_callers`
 
@@ -96,6 +97,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1183](https://github.com/genomic-medicine-sweden/nallo/pull/1183) - Formatted all local subworkflows and modules with `nextflow lint -format -harshil-alignment`
 - [#1189](https://github.com/genomic-medicine-sweden/nallo/pull/1189) - Changed to use intro section added in https://github.com/genomic-medicine-sweden/nf-dev-guidelines/pull/39
 - [#1184](https://github.com/genomic-medicine-sweden/nallo/pull/1184) - Update `.nf-core.yml` to remove lint ignore directive for template strings in `assets/nf-dev-guidelines.yaml`.
+- [#1185](https://github.com/genomic-medicine-sweden/nallo/pull/1185) - Rename nf-dev-guidelines config to `contribution-guidelines-config.yaml`.
+- [#1196](https://github.com/genomic-medicine-sweden/nallo/pull/1196) - Updated SVDB modules
 
 ### Removed
 
@@ -117,6 +120,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1162](https://github.com/genomic-medicine-sweden/nallo/pull/1162) - Fixed `ECHTVAR_ANNO` channel shape mismatch after nf-core module swap by wrapping databases channel with meta
 - [#1180](https://github.com/genomic-medicine-sweden/nallo/pull/1180) - Fixed pipeline configs affecting subworkflow tests (that should be isolated)
 - [#1163](https://github.com/genomic-medicine-sweden/nallo/pull/1163) - Fixed `--skip_methylation_annotation` default: now `true` when methbat is not active, so methylation annotation is only enabled when methbat ran
+- [#1196](https://github.com/genomic-medicine-sweden/nallo/pull/1196) - Fixed SVDB merge reordering priorities on retries
 
 ### Parameters
 

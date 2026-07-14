@@ -31,7 +31,7 @@ jobs:
       - name: Generate CONTRIBUTING.md
         run: |
           python /tmp/nf-dev-guidelines/generator/generate.py \
-            --config assets/nf-dev-guidelines.yaml \
+            --config assets/contribution-guidelines-config.yaml \
             --guidelines /tmp/nf-dev-guidelines \
             --repo-root . \
             --output docs/CONTRIBUTING.md

@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            26,
+            230,
             {
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.13.0dev"
@@ -40,7 +40,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-14T13:28:49.996158058",
+        "timestamp": "2026-07-10T15:32:31.916259113",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"

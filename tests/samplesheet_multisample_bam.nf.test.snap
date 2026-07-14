@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            39,
+            397,
             {
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.13.0dev"
@@ -27,7 +27,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-14T13:28:39.081329956",
+        "timestamp": "2026-07-10T15:35:59.172016652",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"
