@@ -96,6 +96,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1184](https://github.com/genomic-medicine-sweden/nallo/pull/1184) - Update `.nf-core.yml` to remove lint ignore directive for template strings in `assets/nf-dev-guidelines.yaml`.
 - [#1185](https://github.com/genomic-medicine-sweden/nallo/pull/1185) - Rename nf-dev-guidelines config to `contribution-guidelines-config.yaml`.
 - [#1197](https://github.com/genomic-medicine-sweden/nallo/pull/1197) - Updated all genmod modules
+- [#1196](https://github.com/genomic-medicine-sweden/nallo/pull/1196) - Updated SVDB modules
 
 ### Removed
 
@@ -117,6 +118,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1162](https://github.com/genomic-medicine-sweden/nallo/pull/1162) - Fixed `ECHTVAR_ANNO` channel shape mismatch after nf-core module swap by wrapping databases channel with meta
 - [#1180](https://github.com/genomic-medicine-sweden/nallo/pull/1180) - Fixed pipeline configs affecting subworkflow tests (that should be isolated)
 - [#1163](https://github.com/genomic-medicine-sweden/nallo/pull/1163) - Fixed `--skip_methylation_annotation` default: now `true` when methbat is not active, so methylation annotation is only enabled when methbat ran
+- [#1196](https://github.com/genomic-medicine-sweden/nallo/pull/1196) - Fixed SVDB merge reordering priorities on retries
 
 ### Parameters
 
