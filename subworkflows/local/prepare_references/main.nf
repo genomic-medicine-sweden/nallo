@@ -40,7 +40,7 @@ workflow PREPARE_REFERENCES {
     }
 
     emit:
-    fai           = ch_fai                                                               // channel: [ val(meta), path(fai) ]
-    fasta         = ch_fasta                                                             // channel: [ val(meta), path(fasta) ]
+    fai           = ch_fai // channel: [ val(meta), path(fai) ]
+    fasta         = ch_fasta // channel: [ val(meta), path(fasta) ]
     vep_resources = untar_vep_cache ? UNTAR_VEP_CACHE.out.untar.collect() : ch_vep_cache // channel: [ val(meta), path(cache) ]
 }

@@ -7,9 +7,9 @@ include { SAMTOOLS_CONVERT  } from '../../../modules/nf-core/samtools/convert/ma
 
 workflow CALL_PARALOGS {
     take:
-    bam_bai     // channel: [ val(meta), bam, bai ]
-    fasta       // channel: [ val(meta), fasta ]
-    fai         // channel: [ val(meta), fai ]
+    bam_bai // channel: [ val(meta), bam, bai ]
+    fasta // channel: [ val(meta), fasta ]
+    fai // channel: [ val(meta), fai ]
     val_cram_output // bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
@@ -67,13 +67,13 @@ workflow CALL_PARALOGS {
     }
 
     emit:
-    bam        = PARAPHASE.out.bam                                         // channel: [ val(meta), path(bam)  ]
-    bai        = PARAPHASE.out.bai                                         // channel: [ val(meta), path(bai)  ]
+    bam        = PARAPHASE.out.bam // channel: [ val(meta), path(bam)  ]
+    bai        = PARAPHASE.out.bai // channel: [ val(meta), path(bai)  ]
     cram       = val_cram_output ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
     crai       = val_cram_output ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
-    json       = PARAPHASE.out.json                                        // channel: [ val(meta), path(json) ]
-    sample_vcf = PARAPHASE.out.vcf.transpose()                             // channel: [ val(meta), path(vcf)  ]
-    sample_tbi = PARAPHASE.out.vcf_index.transpose()                       // channel: [ val(meta), path(tbi)  ]
-    family_vcf = BCFTOOLS_MERGE.out.vcf                                    // channel: [ val(meta), path(vcf)  ]
-    family_tbi = BCFTOOLS_MERGE.out.index                                  // channel: [ val(meta), path(tbi)  ]
+    json       = PARAPHASE.out.json // channel: [ val(meta), path(json) ]
+    sample_vcf = PARAPHASE.out.vcf.transpose() // channel: [ val(meta), path(vcf)  ]
+    sample_tbi = PARAPHASE.out.vcf_index.transpose() // channel: [ val(meta), path(tbi)  ]
+    family_vcf = BCFTOOLS_MERGE.out.vcf // channel: [ val(meta), path(vcf)  ]
+    family_tbi = BCFTOOLS_MERGE.out.index // channel: [ val(meta), path(tbi)  ]
 }

@@ -13,12 +13,12 @@ workflow PHASING {
     ch_sv_vcf_index // channel: [ val(meta), path(tbi) ] Optional
     ch_bam_bai // channel: [ val(meta), path(bam), path(bai) ]
     ch_family_to_samples // channel: [ val(meta), val(set_of_sample_ids) ]
-    fasta                // channel: [ val(meta), path(fasta) ]
-    fai                  // channel: [ val(meta), path(fai) ]
-    phaser               // string:  Phasing tool to use
-    phase_with_svs       // bool:    Whether to include SVs in phasing (true) or not (false)
-    val_cram_output          // bool:    Publish alignments as CRAM (true) or BAM (false)
-    ch_pedigree          // channel: [ val(meta), path(pedigree) ]
+    fasta // channel: [ val(meta), path(fasta) ]
+    fai // channel: [ val(meta), path(fai) ]
+    phaser // string:  Phasing tool to use
+    phase_with_svs // bool:    Whether to include SVs in phasing (true) or not (false)
+    val_cram_output // bool:    Publish alignments as CRAM (true) or BAM (false)
+    ch_pedigree // channel: [ val(meta), path(pedigree) ]
 
     main:
     if (phaser.equals("longphase")) {
@@ -97,15 +97,15 @@ workflow PHASING {
     }
 
     emit:
-    phased_family_snvs     = ch_phased_family_snvs                                    // channel: [ val(meta), path(vcf) ]
-    phased_family_snvs_tbi = ch_phased_family_snvs_tbi                                // channel: [ val(meta), path(tbi) ]
-    phased_family_svs      = ch_phased_family_svs                                     // channel: [ val(meta), path(vcf) ]
-    phased_family_svs_tbi  = ch_phased_family_svs_tbi                                 // channel: [ val(meta), path(tbi) ]
-    haplotagged_bam_bai    = ch_bam_bai_haplotagged                                   // channel: [ val(meta), path(bam), path(bai) ]
+    phased_family_snvs     = ch_phased_family_snvs // channel: [ val(meta), path(vcf) ]
+    phased_family_snvs_tbi = ch_phased_family_snvs_tbi // channel: [ val(meta), path(tbi) ]
+    phased_family_svs      = ch_phased_family_svs // channel: [ val(meta), path(vcf) ]
+    phased_family_svs_tbi  = ch_phased_family_svs_tbi // channel: [ val(meta), path(tbi) ]
+    haplotagged_bam_bai    = ch_bam_bai_haplotagged // channel: [ val(meta), path(bam), path(bai) ]
     haplotagged_cram_crai  = val_cram_output ? ch_haplotagged_cram_crai : channel.empty() // channel: [ val(meta), path(cram), path(crai) ]
-    stats                  = QC_PHASING.out.phasing_stats                             // channel: [ val(meta), path("*.stats.tsv") ]
-    blocks                 = QC_PHASING.out.phasing_blocks                            // channel: [ val(meta), path("*.blocks.gtf.gz") ]
-    blocks_index           = QC_PHASING.out.phasing_blocks_index                      // channel: [ val(meta), path("*.blocks.gtf.gz.tbi") ]
-    haplotagging_stats     = QC_PHASING.out.haplotagging_stats                        // channel: [ val(meta), path("*.txt") ]
-    haplotagging_arrow     = QC_PHASING.out.haplotagging_arrow                        // channel: [ val(meta), path("*.arrow") ]
+    stats                  = QC_PHASING.out.phasing_stats // channel: [ val(meta), path("*.stats.tsv") ]
+    blocks                 = QC_PHASING.out.phasing_blocks // channel: [ val(meta), path("*.blocks.gtf.gz") ]
+    blocks_index           = QC_PHASING.out.phasing_blocks_index // channel: [ val(meta), path("*.blocks.gtf.gz.tbi") ]
+    haplotagging_stats     = QC_PHASING.out.haplotagging_stats // channel: [ val(meta), path("*.txt") ]
+    haplotagging_arrow     = QC_PHASING.out.haplotagging_arrow // channel: [ val(meta), path("*.arrow") ]
 }

@@ -1,11 +1,10 @@
-include { MINIMAP2_ALIGN   } from '../../../modules/nf-core/minimap2/align/main'
-include { MINIMAP2_INDEX   } from '../../../modules/nf-core/minimap2/index/main'
+include { MINIMAP2_ALIGN } from '../../../modules/nf-core/minimap2/align/main'
+include { MINIMAP2_INDEX } from '../../../modules/nf-core/minimap2/index/main'
 
 workflow ALIGN {
-
     take:
-    ch_ubam             // channel: [mandatory] [ val(meta), path(reads)]
-    ch_fasta            // channel: [mandatory] [ val(meta), path(fasta) ]
+    ch_ubam // channel: [mandatory] [ val(meta), path(reads)]
+    ch_fasta // channel: [mandatory] [ val(meta), path(fasta) ]
 
     main:
 
