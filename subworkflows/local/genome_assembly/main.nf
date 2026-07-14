@@ -121,10 +121,10 @@ workflow GENOME_ASSEMBLY {
 
     if (concat_assemblies) {
         ch_assemblies_to_concatenate = GFASTATS.out.assembly
-            .map { meta, bam -> [ meta - meta.subMap('haplotype'), bam ] }
+            .map { meta, bam -> [meta - meta.subMap('haplotype'), bam] }
             .groupTuple(size: 2)
 
-        FIND_CONCATENATE (
+        FIND_CONCATENATE(
             ch_assemblies_to_concatenate
         )
 
@@ -135,7 +135,7 @@ workflow GENOME_ASSEMBLY {
     }
 
     emit:
-    assembled_haplotypes = GFASTATS.out.assembly // channel: [ val(meta), path(fasta) ]
-    assembly_summary     = GFASTATS.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
-    concatenated_haplotypes = ch_concatenated_haplotypes   // channel: [ val(meta), path(assembly_stats) ]
+    assembled_haplotypes    = GFASTATS.out.assembly // channel: [ val(meta), path(fasta) ]
+    assembly_summary        = GFASTATS.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
+    concatenated_haplotypes = ch_concatenated_haplotypes // channel: [ val(meta), path(fasta) ]
 }

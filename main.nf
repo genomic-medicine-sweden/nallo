@@ -87,6 +87,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_filter_variants_hgnc_ids
     val_force_sawfish_joint_call_single_samples
     val_hifiasm_mode
+    val_methylation_callers
     val_mitochondrial_caller
     val_multiqc_config
     val_multiqc_logo
@@ -98,8 +99,6 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_plot_chromograph_autozygosity
     val_plot_chromograph_coverage
     val_pre_vep_snv_filter_expression
-    val_run_methbat
-    val_run_modkit
     val_sentieon_tech
     val_skip_alignment
     val_skip_annotate_paralogs
@@ -214,9 +213,9 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_skip_call_paralogs,
         val_skip_chromograph,
         val_skip_genome_assembly,
-        (val_skip_methylation_calling || !val_run_methbat),
+        (val_skip_methylation_calling || !val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }.contains('methbat')),
         val_skip_methylation_annotation,
-        (val_skip_methylation_calling || !val_run_modkit),
+        (val_skip_methylation_calling || !val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }.contains('modkit')),
         val_skip_peddy,
         val_skip_phasing,
         val_skip_portello,
@@ -390,10 +389,10 @@ workflow {
         params.gens_panel_of_normals_male,
         params.input,
         params.methbat_regions,
+        params.methylation_callers,
         params.mitochondrial_caller,
         params.par_regions,
         params.phaser,
-        params.run_methbat,
         params.sambamba_regions,
         params.skip_alignment,
         params.skip_annotate_paralogs,
@@ -494,6 +493,7 @@ workflow {
         params.filter_variants_hgnc_ids,
         params.force_sawfish_joint_call_single_samples,
         params.hifiasm_mode,
+        params.methylation_callers,
         params.mitochondrial_caller,
         params.multiqc_config,
         params.multiqc_logo,
@@ -505,8 +505,6 @@ workflow {
         params.plot_chromograph_autozygosity,
         params.plot_chromograph_coverage,
         params.pre_vep_snv_filter_expression,
-        params.run_methbat,
-        params.run_modkit,
         params.sentieon_tech,
         params.skip_alignment,
         params.skip_annotate_paralogs,

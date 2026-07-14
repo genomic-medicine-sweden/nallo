@@ -1,7 +1,7 @@
 {
     "Test family id same as sample id": {
         "content": [
-            202,
+            191,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -337,10 +337,8 @@
                 "assembly",
                 "assembly/sample",
                 "assembly/sample/HG002_Revio",
-                "assembly/sample/HG002_Revio/HG002_Revio.bai",
-                "assembly/sample/HG002_Revio/HG002_Revio.bam",
-                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam",
-                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam.bai",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam.bai",
                 "assembly/stats",
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
@@ -539,10 +537,10 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-07-07T14:17:18.093086564",
+        "timestamp": "2026-07-10T15:45:39.544649458",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.06.0"
         }
     }
 }

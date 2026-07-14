@@ -106,7 +106,7 @@
     },
     "Test genome assembly without alignment": {
         "content": [
-            19,
+            16,
             {
                 "FIND_CONCATENATE": {
                     "coreutils": 9.4,
@@ -157,8 +157,8 @@
                 "assembly",
                 "assembly/sample",
                 "assembly/sample/HG002_Revio",
-                "assembly/sample/HG002_Revio/HG002_Revio.bai",
-                "assembly/sample/HG002_Revio/HG002_Revio.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam.bai",
                 "assembly/stats",
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
@@ -173,10 +173,10 @@
                 "pipeline_info/nallo_software_mqc_versions.yml"
             ]
         ],
-        "timestamp": "2026-07-07T14:15:04.570505679",
+        "timestamp": "2026-07-10T15:42:54.889704209",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.06.0"
         }
     },
     "Test alignment without genome assembly": {
