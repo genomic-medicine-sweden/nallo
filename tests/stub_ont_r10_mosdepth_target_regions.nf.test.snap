@@ -46,10 +46,10 @@
                     "cramino": "1.1.0"
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
-                    "deepvariant": null
+                    "deepvariant": "1.10.0"
                 },
                 "DEEPVARIANT_VCFSTATSREPORT": {
-                    "deepvariant": null
+                    "deepvariant": "1.10.0"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"

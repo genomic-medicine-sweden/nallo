@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            338,
+            339,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -96,6 +96,9 @@
                 },
                 "GATK4_DENOISEREADCOUNTS": {
                     "gatk4": "4.6.2.0"
+                },
+                "GAWK": {
+                    "gawk": "5.3.1"
                 },
                 "GAWK_EXTRACT_REGIONS": {
                     "gawk": "5.3.1"
@@ -1032,11 +1035,11 @@
                 "fastqc_sequence_counts_plot.txt:md5,b3436d120378e296eb228580d7e3c1c2",
                 "fastqc_sequence_duplication_levels_plot.txt:md5,416a0eaa23d5888fa6c4bac4f925449d",
                 "fastqc_sequence_length_distribution_plot.txt:md5,5cfec4af740c91125537fb324383796b",
-                "mosdepth-coverage-per-contig-multi.txt:md5,7a0ac9fab6d60eceacdf70bacff6e3e3",
-                "mosdepth-cumcoverage-dist-id.txt:md5,12349568b2ead0da5b9a261365ef8b88",
-                "mosdepth_cov_dist.txt:md5,b29de25423122a83e7f4f11456bc283f",
-                "mosdepth_cumcov_dist.txt:md5,b29de25423122a83e7f4f11456bc283f",
-                "mosdepth_perchrom.txt:md5,d00651e9be3f83cdd34a9f02c3653c17",
+                "mosdepth-coverage-per-contig-multi.txt:md5,49bf15a48f2729563526b55fa3aa316e",
+                "mosdepth-cumcoverage-dist-id.txt:md5,b7f7db0774f0fef7f5aa824f1b7310f9",
+                "mosdepth_cov_dist.txt:md5,34d42c2b23250d289ce2c0adf394891f",
+                "mosdepth_cumcov_dist.txt:md5,34d42c2b23250d289ce2c0adf394891f",
+                "mosdepth_perchrom.txt:md5,ca490536a8c80cf070199755d8c61eb0",
                 "multiqc_bcftools_stats.txt:md5,fba914d91a1df00b6fedab048a4c777a",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,d35b5896e9582af1c1a57716dd2cf7ba",
@@ -1050,9 +1053,9 @@
                 "HG002_ONT_A_cramino_aligned_phased.arrow:md5,f516402d4fc885ef70f4bac39aed93c9",
                 "HG002_ONT_B_cramino_aligned_phased.arrow:md5,606a15f749126986a1afe51c992b710b",
                 "HG002_ONT_C_cramino_aligned_phased.arrow:md5,f516402d4fc885ef70f4bac39aed93c9",
-                "HG002_ONT_A_cramino_aligned.arrow:md5,44ef49d003493ef027e1b0b0c0b4bf2f",
-                "HG002_ONT_B_cramino_aligned.arrow:md5,21da674605180b67f85e5e2dcafd187e",
-                "HG002_ONT_C_cramino_aligned.arrow:md5,44ef49d003493ef027e1b0b0c0b4bf2f",
+                "HG002_ONT_A_cramino_aligned.arrow:md5,f516402d4fc885ef70f4bac39aed93c9",
+                "HG002_ONT_B_cramino_aligned.arrow:md5,606a15f749126986a1afe51c992b710b",
+                "HG002_ONT_C_cramino_aligned.arrow:md5,f516402d4fc885ef70f4bac39aed93c9",
                 "HG002_ONT_A.mosdepth.global.dist.txt:md5,9543b21553dad77d4217eb6580b13c2c",
                 "HG002_ONT_A.mosdepth.region.dist.txt:md5,e25a124f8284e22d82c010ba1122eca0",
                 "HG002_ONT_A.mosdepth.summary.txt:md5,5cef946c1a46a496dfcbf2503d6b6a49",

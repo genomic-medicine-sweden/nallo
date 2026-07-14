@@ -446,6 +446,8 @@
                 "qc/mosdepth/HG002_Revio/HG002_Revio.regions.bed.gz",
                 "qc/mosdepth/HG002_Revio/HG002_Revio.regions.bed.gz.csi",
                 "qc/mosdepth/HG002_Revio/HG002_Revio.summary.txt",
+                "qc/mosdepth/HG002_Revio/HG002_Revio.thresholds.bed.gz",
+                "qc/mosdepth/HG002_Revio/HG002_Revio.thresholds.bed.gz.csi",
                 "qc/peddy",
                 "qc/peddy/HG002_Revio",
                 "qc/peddy/HG002_Revio/HG002_Revio.het_check.csv",
