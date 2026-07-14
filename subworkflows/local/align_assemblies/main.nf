@@ -1,10 +1,9 @@
-include { MINIMAP2_ALIGN                              } from '../../../modules/nf-core/minimap2/align/main'
-include { MINIMAP2_INDEX                              } from '../../../modules/nf-core/minimap2/index/main'
-include { SAMTOOLS_MERGE                              } from '../../../modules/nf-core/samtools/merge/main'
-include { SAMTOOLS_MERGE as SAMTOOLS_MERGE_UNFILTERED } from '../../../modules/nf-core/samtools/merge/main'
-include { SAMTOOLS_VIEW                               } from '../../../modules/nf-core/samtools/view/main'
-include { SAMTOOLS_CONVERT                            } from '../../../modules/nf-core/samtools/convert/main'
-include { TAGBAM                                      } from '../../../modules/nf-core/tagbam/main'
+include { MINIMAP2_ALIGN   } from '../../../modules/nf-core/minimap2/align/main'
+include { MINIMAP2_INDEX   } from '../../../modules/nf-core/minimap2/index/main'
+include { SAMTOOLS_MERGE   } from '../../../modules/nf-core/samtools/merge/main'
+include { SAMTOOLS_VIEW    } from '../../../modules/nf-core/samtools/view/main'
+include { SAMTOOLS_CONVERT } from '../../../modules/nf-core/samtools/convert/main'
+include { TAGBAM           } from '../../../modules/nf-core/tagbam/main'
 
 workflow ALIGN_ASSEMBLIES {
     take:

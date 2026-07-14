@@ -23,12 +23,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1148](https://github.com/genomic-medicine-sweden/nallo/pull/1148) - Added tests for `annotate_consequence_pli`
 - [#1155](https://github.com/genomic-medicine-sweden/nallo/pull/1155) - Added Nallo paper to the README
 - [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added new `PORTELLO_ASSEMBLY` subworkflow
-- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added new `concatenated_haplotypes` output to `GENOME_ASSEMBLY`
-- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added new read group param to `GENOME_ASSEMBLY` config to add RG, SM and DS tags to bam when converting with `SAMTOOLS_IMPORT`
-- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added unfiltered bam output to `ALIGN_ASSEMBLIES`
-- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added `SAMTOOLS_MERGE` suffix in `nextflow.config` for stub tests
+- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added new read group param to `CONVERT_INPUT_FASTQS` config to add RG, SM and DS tags to bam when converting with `SAMTOOLS_IMPORT`
 - [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added remapped bam from portello output to pipeline outputs
-- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added suffix for `SAMTOOLS_MERGE` and force only one cpu for `PORTELLO` and `LONGPHASE` to test config to fix unstable snapshots
+- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added suffix for `SAMTOOLS_MERGE` and force only one cpu for `PORTELLO` and `LONGPHASE` to test config in `nextflow.config` to fix unstable snapshots
 - [#1164](https://github.com/genomic-medicine-sweden/nallo/pull/1164) - Added `--skip_mitochondrial_calling` parameter to allow skipping mitochondrial variant calling
 - [#1173](https://github.com/genomic-medicine-sweden/nallo/pull/1173) - Added formatting to pre-commit
 - [#1178](https://github.com/genomic-medicine-sweden/nallo/pull/1178) - Added nextflow lint -format CI check
@@ -126,14 +123,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter | New parameter                   |
-| ------------- | ------------------------------- |
-|               | `--mitochondrial_sv_min_size`   |
-|               | `--mitorsaw_minimum_read_count` |
-|               | `--mitorsaw_minimum_maf`        |
+| Old parameter                    | New parameter                   |
+| -------------------------------- | ------------------------------- |
+|                                  | `--mitochondrial_sv_min_size`   |
+|                                  | `--mitorsaw_minimum_read_count` |
+|                                  | `--mitorsaw_minimum_maf`        |
 | `--run_methbat` / `--run_modkit` | `--methylation_callers`         |
-|               | `--skip_portello`               |
-|               | `--aligner`                     |
+|                                  | `--skip_portello`               |
+|                                  | `--aligner`                     |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
