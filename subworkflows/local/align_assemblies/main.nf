@@ -61,6 +61,6 @@ workflow ALIGN_ASSEMBLIES {
     unfiltered_bai = SAMTOOLS_MERGE.out.index // channel: [ val(meta), path(bai) ]
     bam            = SAMTOOLS_VIEW.out.bam // channel: [ val(meta), path(bam) ]
     bai            = SAMTOOLS_VIEW.out.bai // channel: [ val(meta), path(bai) ]
-    cram           = cram_output ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
-    crai           = cram_output ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
+    cram           = val_cram_output ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
+    crai           = val_cram_output ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
 }
