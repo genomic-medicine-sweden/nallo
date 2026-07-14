@@ -1,7 +1,7 @@
 {
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
-            59,
+            58,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -141,8 +141,8 @@
                 "assembly",
                 "assembly/sample",
                 "assembly/sample/HG002_Revio",
-                "assembly/sample/HG002_Revio/HG002_Revio.bai",
-                "assembly/sample/HG002_Revio/HG002_Revio.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam.bai",
                 "assembly/stats",
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
@@ -210,7 +210,7 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-07-10T13:23:36.309541629",
+        "timestamp": "2026-07-10T15:46:07.242736433",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.06.0"
