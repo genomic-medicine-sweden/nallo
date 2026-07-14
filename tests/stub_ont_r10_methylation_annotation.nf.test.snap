@@ -1,147 +1,14 @@
 {
     "ONT_R10 preset with default methylation annotation settings": {
         "content": [
-            145,
+            28,
             {
-                "BCFTOOLS_CONCAT": {
-                    "bcftools": 1.21
-                },
-                "BCFTOOLS_CONCAT_PHASING": {
-                    "bcftools": 1.21
-                },
-                "BCFTOOLS_INDEX": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_MERGE": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_NORM_MULTISAMPLE": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_NORM_SINGLESAMPLE": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_SORT": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_STATS": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_VIEW": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_VIEW_MITO": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_VIEW_PHASING": {
-                    "bcftools": 1.22
-                },
-                "BEDTOOLS_MERGE": {
-                    "bedtools": "2.31.1"
-                },
-                "BEDTOOLS_SORT": {
-                    "bedtools": "2.31.1"
-                },
-                "BEDTOOLS_SPLIT": {
-                    "bedtools": "2.31.1"
-                },
-                "CRAMINO": {
-                    "cramino": "1.1.0"
-                },
-                "DEEPVARIANT_RUNDEEPVARIANT": {
-                    "deepvariant": "1.10.0"
-                },
-                "DEEPVARIANT_VCFSTATSREPORT": {
-                    "deepvariant": "1.10.0"
-                },
-                "FASTQC": {
-                    "fastqc": "0.12.1"
-                },
-                "GAWK_EXTRACT_REGIONS": {
-                    "gawk": "5.3.1"
-                },
-                "GLNEXUS": {
-                    "glnexus": "1.4.3"
-                },
-                "GUNZIP_FASTA": {
-                    "gunzip": 1.13
-                },
-                "LONGPHASE_HAPLOTAG": {
-                    "longphase": "2.0.1"
-                },
-                "LONGPHASE_PHASE": {
-                    "longphase": "2.0.1"
-                },
-                "MINIMAP2_ALIGN": {
-                    "minimap2": "2.29-r1283"
-                },
-                "MINIMAP2_INDEX": {
-                    "minimap2": "2.29-r1283"
-                },
-                "MITORSAW_HAPLOTYPE": {
-                    "mitorsaw": "0.2.9-0dc8e58"
-                },
-                "MODKIT_PILEUP": {
-                    "modkit": "0.6.1"
-                },
-                "MOSDEPTH": {
-                    "mosdepth": "0.3.11"
-                },
-                "RELATE_RELATE": {
-                    "somalier": "0.2.18"
-                },
-                "SAMBAMBA_DEPTH": {
-                    "sambamba": "1.0.1"
-                },
-                "SAMPLESHEET_PED": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
-                },
-                "SAMTOOLS_FAIDX": {
-                    "samtools": "1.23.1"
-                },
-                "SAMTOOLS_INDEX": {
-                    "samtools": "1.23.1"
-                },
-                "SAMTOOLS_MERGE": {
-                    "samtools": "1.23.1"
-                },
-                "SOMALIER_EXTRACT": {
-                    "somalier": "0.2.18"
-                },
-                "SOMALIER_PED_FAMILY": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
-                },
-                "SPLITUBAM": {
-                    "splitubam": "0.1.1"
-                },
-                "STRDUST": {
-                    "bgzip": "1.23.1",
-                    "strdust": "0.16.0"
-                },
-                "TABIX_BGZIPTABIX": {
-                    "bgzip": 1.21,
-                    "tabix": 1.21
-                },
-                "TABIX_TABIX": {
-                    "tabix": 1.21
-                },
-                "UNTAR_VEP_CACHE": {
-                    "untar": 1.34
-                },
-                "VCFEXPRESS": {
-                    "vcfexpress": "0.3.4"
-                },
-                "WHATSHAP_STATS": {
-                    "whatshap": 2.8
-                },
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.13.0dev"
                 }
             }
         ],
-        "timestamp": "2026-07-06T09:19:10.499642",
+        "timestamp": "2026-07-14T13:28:06.580134682",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"
