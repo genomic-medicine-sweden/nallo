@@ -1043,7 +1043,7 @@
                 "multiqc_bcftools_stats.txt:md5,fba914d91a1df00b6fedab048a4c777a",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,d35b5896e9582af1c1a57716dd2cf7ba",
-                "multiqc_general_stats.txt:md5,5160166f62f01b25155180d8650493cf",
+                "multiqc_general_stats.txt:md5,42c97a405d2accd0aa6b1c9e2cedd3cc",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,f644fc0ce39328719b84c83f9517f3b1",
                 "peddy_relatedness_plot.txt:md5,c180406a5f106d03fa7c96a3cf188a7d",
                 "somalier_stats.txt:md5,b169a23cecd1d3b1e79d0f615073c5dc",
