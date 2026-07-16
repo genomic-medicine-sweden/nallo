@@ -29,6 +29,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1194](https://github.com/genomic-medicine-sweden/nallo/pull/1194) - Added new `concatenated_haplotypes` output to `GENOME_ASSEMBLY`
 - [#1163](https://github.com/genomic-medicine-sweden/nallo/pull/1163) - Added `--methylation_callers` parameter to control which methylation callers are active, following the same pattern as `--sv_callers`
 - [#1198](https://github.com/genomic-medicine-sweden/nallo/pull/1198) - Added parameter `--phased` for GENMOD models if phasing is not skipped
+- [#1206](https://github.com/genomic-medicine-sweden/nallo/pull/1206) - Added new `glnexus_config` parameter
+- [#1206](https://github.com/genomic-medicine-sweden/nallo/pull/1206) - Added default custom glnexus config in `assets/`
 
 ### Changed
 
@@ -131,6 +133,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                                  | `--mitorsaw_minimum_read_count` |
 |                                  | `--mitorsaw_minimum_maf`        |
 | `--run_methbat` / `--run_modkit` | `--methylation_callers`         |
+|                                  | `--glnexus_config`              |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
