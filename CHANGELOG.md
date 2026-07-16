@@ -148,6 +148,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | genmod/compound                | 3.10.2      | 3.12.0      |
 | genmod/models                  | 3.10.2      | 3.12.0      |
 | genmod/score                   | 3.10.2      | 3.12.0      |
+| mitorsaw/haplotype             |             | 0.2.9       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
