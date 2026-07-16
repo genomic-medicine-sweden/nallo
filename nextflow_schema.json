@@ -1024,8 +1024,8 @@
                 },
                 "glnexus_config": {
                     "type": "string",
-                    "default": "$projectDir/assets/glnexus_config_dp1.yml",
-                    "description": "Glnexus config to use for merging gVCFs."
+                    "default": null,
+                    "description": "Glnexus config file to use for merging gVCFs. If no file is provided, the default config 'DeepVariant_unfiltered' will be used."
                 }
             },
             "required": ["preset"]

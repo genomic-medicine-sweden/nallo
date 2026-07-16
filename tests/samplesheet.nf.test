@@ -15,6 +15,7 @@ nextflow_pipeline {
                 alignment_output_format      = "cram"
                 sv_callers                   = "sawfish,severus,hificnv"
                 sv_callers_to_run            = "sawfish,severus,hificnv,sniffles"
+                glnexus_config               = "$projectDir/assets/glnexus_config_dp1.yml"
             }
         }
 

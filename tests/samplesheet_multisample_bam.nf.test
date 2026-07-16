@@ -19,6 +19,7 @@ nextflow_pipeline {
                 filter_svs_expression        = "-i 'FILTER=\"PASS\"'"
                 paraphrase_output_format     = 'json'
                 create_sawfish_maf_track     = false
+                glnexus_config               = "$projectDir/assets/glnexus_config_dp1.yml"
             }
         }
 
