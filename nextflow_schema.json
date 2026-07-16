@@ -1021,6 +1021,11 @@
                     "type": "number",
                     "default": 50,
                     "description": "Co-linear SVs must have either an insertion or deletion of this size or greater to be included in the output in Sawfish. All other SV evidence patterns such as those consistent with duplications, inversions and translocations will always be included in the output."
+                },
+                "glnexus_config": {
+                    "type": "string",
+                    "default": "$projectDir/assets/glnexus_config_dp1.yml",
+                    "description": "Glnexus config to use for merging gVCFs."
                 }
             },
             "required": ["preset"]
