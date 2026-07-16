@@ -1,0 +1,52 @@
+nextflow_workflow {
+
+    name "Test Workflow ANNOTATE_METHYLATION"
+    script "../main.nf"
+    config "./nextflow.config"
+    workflow "ANNOTATE_METHYLATION"
+
+    test("csv") {
+        when {
+            workflow {
+                """
+                input[0] = [
+                    [ id:'test' ],
+                    file(params.modules_testdata_base_path + 'generic/csv/test.csv', checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+         then {
+            assert workflow.success
+            assertAll(
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+
+    }
+
+    test("csv - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = [
+                    [ id:'test' ],
+                    file(params.modules_testdata_base_path + 'generic/csv/test.csv', checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assert workflow.success
+            assertAll(
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+
+    }
+}

@@ -1,0 +1,56 @@
+{
+    "csv - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": null
+                        },
+                        "null_methbat_profile_annotated.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "methylation_annotation": [
+                    [
+                        {
+                            "id": null
+                        },
+                        "null_methbat_profile_annotated.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-16T13:42:52.568375871",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.06.0"
+        }
+    },
+    "csv": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": null
+                        },
+                        "null_methbat_profile_annotated.tsv:md5,c210a7cb577f9007412a4e7bc748a4d0"
+                    ]
+                ],
+                "methylation_annotation": [
+                    [
+                        {
+                            "id": null
+                        },
+                        "null_methbat_profile_annotated.tsv:md5,c210a7cb577f9007412a4e7bc748a4d0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-16T13:45:20.975215436",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.06.0"
+        }
+    }
+}
