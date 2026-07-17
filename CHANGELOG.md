@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1073](https://github.com/genomic-medicine-sweden/nallo/pull/1073) - Added sample vcf outputs to `call_paralogs` workflow
 - [#1084](https://github.com/genomic-medicine-sweden/nallo/pull/1084) - Added new auto-generated container config files (new with nf-core/tools update)
 - [#1104](https://github.com/genomic-medicine-sweden/nallo/pull/1104) - Added `.github/nf-dev-guidelines.yaml` which the contribution guidelines are now auto-generated from via a GutHub action using the base template in https://github.com/genomic-medicine-sweden/nf-dev-guidelines and pipeline-specific sections stored in in `docs/contribution`
+- [#1107](https://github.com/genomic-medicine-sweden/nallo/pull/1107) - Added support for using mapped BAM files as input
 - [#1120](https://github.com/genomic-medicine-sweden/nallo/pull/1120) - Added baseName to avoid `.bed` in deepvariant output name
 - [#1128](https://github.com/genomic-medicine-sweden/nallo/pull/1128) - Added nf-tests for `phasing` subworkflow
 - [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Added Mitorsaw module and Mitorsaw to validatePacBioLicense
@@ -32,6 +33,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1195](https://github.com/genomic-medicine-sweden/nallo/pull/1195) - Added unfiltered bam output to `ALIGN_ASSEMBLIES`
 - [#1194](https://github.com/genomic-medicine-sweden/nallo/pull/1194) - Added new `concatenated_haplotypes` output to `GENOME_ASSEMBLY`
 - [#1163](https://github.com/genomic-medicine-sweden/nallo/pull/1163) - Added `--methylation_callers` parameter to control which methylation callers are active, following the same pattern as `--sv_callers`
+- [#1198](https://github.com/genomic-medicine-sweden/nallo/pull/1198) - Added parameter `--phased` for GENMOD models if phasing is not skipped
+- [#1204](https://github.com/genomic-medicine-sweden/nallo/pull/1204) - Added nf-tests for `annotate_methylation` subworkflow
 
 ### Changed
 
@@ -80,6 +83,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1097](https://github.com/genomic-medicine-sweden/nallo/pull/1097) - Simplified phasing-related if statement in `nallo`
 - [#1102](https://github.com/genomic-medicine-sweden/nallo/pull/1102) - Updated testdata commit with new genmod score config
 - [#1104](https://github.com/genomic-medicine-sweden/nallo/pull/1104) - Updated .nf-core.yml to allow for template_strings in new github/nf-dev-guidelines.yaml
+- [#1107](https://github.com/genomic-medicine-sweden/nallo/pull/1107) - Moved alignment into subworkflow `ALIGN`
 - [#1111](https://github.com/genomic-medicine-sweden/nallo/pull/1111) - Refactored gVCF grouping to reduce code duplication in `nallo`
 - [#1112](https://github.com/genomic-medicine-sweden/nallo/pull/1112) - Changed testdata commit to include data with a deletion in the mitochondrial chromosome
 - [#1118](https://github.com/genomic-medicine-sweden/nallo/pull/1118) - Changed testdata commit
@@ -99,6 +103,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1189](https://github.com/genomic-medicine-sweden/nallo/pull/1189) - Changed to use intro section added in https://github.com/genomic-medicine-sweden/nf-dev-guidelines/pull/39
 - [#1184](https://github.com/genomic-medicine-sweden/nallo/pull/1184) - Update `.nf-core.yml` to remove lint ignore directive for template strings in `assets/nf-dev-guidelines.yaml`.
 - [#1185](https://github.com/genomic-medicine-sweden/nallo/pull/1185) - Rename nf-dev-guidelines config to `contribution-guidelines-config.yaml`.
+- [#1197](https://github.com/genomic-medicine-sweden/nallo/pull/1197) - Updated all genmod modules
+- [#1196](https://github.com/genomic-medicine-sweden/nallo/pull/1196) - Updated SVDB modules
 
 ### Removed
 
@@ -109,6 +115,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1100](https://github.com/genomic-medicine-sweden/nallo/pull/1100) - Removed tabix from SNV and SV annotation subworkflows
 - [#1125](https://github.com/genomic-medicine-sweden/nallo/pull/1125) - Removed `samplesheet_ont.csv` because it is unused.
 - [#1163](https://github.com/genomic-medicine-sweden/nallo/pull/1163) - Removed `--run_methbat` and `--run_modkit` parameters; use `--methylation_callers` instead
+- [#1205](https://github.com/genomic-medicine-sweden/nallo/pull/1205) - Removed use of 2 cpus for `GENMOD_MODELS` in `base.config` since the bug was fixed in v.3.12.0
 
 ### Fixed
 
@@ -120,6 +127,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1162](https://github.com/genomic-medicine-sweden/nallo/pull/1162) - Fixed `ECHTVAR_ANNO` channel shape mismatch after nf-core module swap by wrapping databases channel with meta
 - [#1180](https://github.com/genomic-medicine-sweden/nallo/pull/1180) - Fixed pipeline configs affecting subworkflow tests (that should be isolated)
 - [#1163](https://github.com/genomic-medicine-sweden/nallo/pull/1163) - Fixed `--skip_methylation_annotation` default: now `true` when methbat is not active, so methylation annotation is only enabled when methbat ran
+- [#1196](https://github.com/genomic-medicine-sweden/nallo/pull/1196) - Fixed SVDB merge reordering priorities on retries
+- [#1201](https://github.com/genomic-medicine-sweden/nallo/pull/1201) - Fixed nf-test not triggering on configuration file changes
 
 ### Parameters
 
@@ -150,6 +159,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | samtools/calmd                 |             | 1.23.1      |
 | gatk4/cleansam                 |             | 4.6.2.0     |
 | find/concatenate               |             | 4.6.0       |
+| genmod/annotate                | 3.10.2      | 3.12.0      |
+| genmod/compound                | 3.10.2      | 3.12.0      |
+| genmod/models                  | 3.10.2      | 3.12.0      |
+| genmod/score                   | 3.10.2      | 3.12.0      |
+| mitorsaw/haplotype             |             | 0.2.9       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

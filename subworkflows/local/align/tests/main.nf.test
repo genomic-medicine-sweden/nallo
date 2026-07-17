@@ -1,0 +1,55 @@
+nextflow_workflow {
+
+    name "Test Subworkflow ALIGN"
+    script "../main.nf"
+    workflow "ALIGN"
+    config "./nextflow.config"
+
+    test("[bam, fasta]") {
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                ])
+                input[1] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    bam(workflow.out.bam.get(0).get(1)).getReadsMD5(),
+                    file(workflow.out.index.get(0).get(1)).name
+                ).match() }
+            )
+        }
+    }
+
+
+    test("[fastq, fasta] - stub") {
+        options "-stub"
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
+                ])
+                input[1] = [ [ id: 'hg38'], params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz']
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+}

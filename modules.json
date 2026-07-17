@@ -191,24 +191,23 @@
                     },
                     "genmod/annotate": {
                         "branch": "master",
-                        "git_sha": "7557033683e4016e7d474a23445f75deae2fb729",
+                        "git_sha": "d9ea9450490d297bc38cfca10bf8c5bd7d84e413",
                         "installed_by": ["modules"]
                     },
                     "genmod/compound": {
                         "branch": "master",
-                        "git_sha": "7557033683e4016e7d474a23445f75deae2fb729",
+                        "git_sha": "d9ea9450490d297bc38cfca10bf8c5bd7d84e413",
                         "installed_by": ["modules"]
                     },
                     "genmod/models": {
                         "branch": "master",
-                        "git_sha": "7557033683e4016e7d474a23445f75deae2fb729",
+                        "git_sha": "d9ea9450490d297bc38cfca10bf8c5bd7d84e413",
                         "installed_by": ["modules"]
                     },
                     "genmod/score": {
                         "branch": "master",
-                        "git_sha": "fed68e7b4b193b36c1abc552586694d43a88f6fb",
-                        "installed_by": ["modules"],
-                        "patch": "modules/nf-core/genmod/score/genmod-score.diff"
+                        "git_sha": "d9ea9450490d297bc38cfca10bf8c5bd7d84e413",
+                        "installed_by": ["modules"]
                     },
                     "gens/preparecovandbaf": {
                         "branch": "master",
@@ -429,7 +428,7 @@
                     },
                     "splitubam": {
                         "branch": "master",
-                        "git_sha": "9f8e03645cadda3a2a92e820069c4a38474e51cf",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"]
                     },
                     "stranger": {
@@ -449,12 +448,12 @@
                     },
                     "svdb/merge": {
                         "branch": "master",
-                        "git_sha": "7d09b5f86908bdd951e42aef9994ad5bb0f6c307",
+                        "git_sha": "6bc8ff03ace2cb373f683b9502ce79930c8a07f0",
                         "installed_by": ["modules"]
                     },
                     "svdb/query": {
                         "branch": "master",
-                        "git_sha": "7d09b5f86908bdd951e42aef9994ad5bb0f6c307",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"]
                     },
                     "tabix/bgziptabix": {

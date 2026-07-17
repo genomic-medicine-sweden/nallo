@@ -1,0 +1,105 @@
+nextflow_workflow {
+
+    name "Test Workflow ANNOTATE_METHYLATION"
+    script "../main.nf"
+    config "./nextflow.config"
+    workflow "ANNOTATE_METHYLATION"
+
+    test("1 sample") {
+        when {
+            workflow {
+                """
+                input[0] = [
+                    [ id:'test', family_id:'FAM'],
+                    file(params.modules_testdata_base_path + 'generic/csv/test.csv', checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+         then {
+            assert workflow.success
+            assertAll(
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("2 samples") {
+        when {
+            workflow {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id:'test', family_id:'FAM' ],
+                        file(params.modules_testdata_base_path + 'generic/csv/test.csv', checkIfExists: true),
+                    ],
+                    [
+                        [ id:'test2', family_id:'FAM' ],
+                        file(params.modules_testdata_base_path + 'generic/csv/test2.csv', checkIfExists: true),
+                    ]
+                )
+                """
+            }
+        }
+
+         then {
+            assert workflow.success
+            assertAll(
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("1 sample - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = [
+                    [ id:'test', family_id:'FAM'],
+                    file(params.modules_testdata_base_path + 'generic/csv/test.csv', checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assert workflow.success
+            assertAll(
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("2 samples - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id:'test', family_id:'FAM' ],
+                        file(params.modules_testdata_base_path + 'generic/csv/test.csv', checkIfExists: true),
+                    ],
+                    [
+                        [ id:'test2', family_id:'FAM' ],
+                        file(params.modules_testdata_base_path + 'generic/csv/test2.csv', checkIfExists: true),
+                    ]
+                )
+                """
+            }
+        }
+
+         then {
+            assert workflow.success
+            assertAll(
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+}

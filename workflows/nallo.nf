@@ -5,6 +5,7 @@ include { samplesheetToList                                      } from 'plugin/
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+include { ALIGN                                                  } from '../subworkflows/local/align'
 include { ALIGN_ASSEMBLIES                                       } from '../subworkflows/local/align_assemblies'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV                    } from '../subworkflows/local/annotate_consequence_pli'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SVS                    } from '../subworkflows/local/annotate_consequence_pli'
@@ -123,11 +124,11 @@ workflow NALLO {
     ch_vcfexpress_prelude
     ch_vep_cache_unprocessed
     ch_vep_plugin_files
-    cram_output
     val_aligner
     val_alignment_processes
     val_bigwig_modcodes
     val_convert_unphased_aligned_reads_to_cram
+    val_cram_output
     val_create_hificnv_maf_track
     val_create_sawfish_maf_track
     val_echtvar_snv_databases
@@ -148,6 +149,7 @@ workflow NALLO {
     val_plot_chromograph_autozygosity
     val_plot_chromograph_coverage
     val_pre_vep_snv_filter_expression
+    val_premapped
     val_sentieon_tech
     val_skip_alignment
     val_skip_annotate_paralogs
@@ -208,184 +210,73 @@ workflow NALLO {
         ch_fai = PREPARE_REFERENCES.out.fai
     }
 
-    // Convert FASTQ to BAM only if alignment or should be done.
-    // Since we assume that the majority of pipeline runs will use BAM files as input,
-    // we start all files as BAMs for simplicity except for the assembly, which requires FASTQs.
-    if (!val_skip_alignment) {
-
-        CONVERT_INPUT_FASTQS(
-            ch_samplesheet,
-            false,
-            true,
-        )
-    }
-
-    // To speed up the alignement, we can split the BAM files into smaller chunks.
-    // We can also use the split BAM files for FASTQ conversion to the assembly workflow,
-    // instead of the original BAM files which should allow the assembly to start sooner.
-    //
-    // We could change the name of alignment processes to something more generic, like `--split_input_files`?
-    // If we start running more trios we also need to consider that the parents at the moment needs to be merged
-    // before YAK. So, we could consider adding some logic to handle that case,
-    // to avoid unneccessary splitting and merging just for a minor speedup in the conversion.
-    if (!val_skip_alignment && val_alignment_processes > 1) {
-
-        // contains all BAM files, including those not converted.
-        SPLITUBAM(
-            CONVERT_INPUT_FASTQS.out.bam
-        )
-    }
-
-    //
-    // Hifiasm assembly and alignment to reference genome
-    //
-    if (!val_skip_genome_assembly) {
-
-        // Now, if we started with BAM files, we do alignment and split the BAM files (this is the main case),
-        // then we converted any FASTQs to BAMs, the original BAMs will have been split, and we can convert those
-        // to FASTQs for the assembly.
-        //
-        // We could possibly implement something where we would check if the converted BAM had an original FASTQ,
-        // then we could use that FASTQ directly for the assembly. But since this is a rare case, it's not implemented.
-        //
-        // If we didn't split the files, there's currently no need to take the converted BAMs,
-        // so we take the original FASTQs instead if there are any, and also convert the original BAMs to FASTQs,
-        // so we can use those for the assembly.
-        //
-        // Since starting with FASTQs is a rare case, no splitting of FASTQs alone just for the assembly is implmenented
-
-        CONVERT_INPUT_BAMS(
-            !val_skip_alignment && val_alignment_processes > 1 ? SPLITUBAM.out.bam.transpose() : ch_samplesheet,
-            true,
-            false,
-        )
-
-        // contains all FASTQ files, including those not converted
-        ch_genome_assembly_input = CONVERT_INPUT_BAMS.out.fastq.groupTuple()
-
-        // Hifiasm assembly
-        GENOME_ASSEMBLY(
-            ch_genome_assembly_input,
-            val_hifiasm_mode == "trio-binning",
-            true,
-        )
-
-        ALIGN_ASSEMBLIES(
-            GENOME_ASSEMBLY.out.assembled_haplotypes,
-            ch_fasta,
-            ch_fai,
-            cram_output,
-        )
-
-        ch_assembly_bam_bai_updated_meta = ALIGN_ASSEMBLIES.out.bam.join(ALIGN_ASSEMBLIES.out.bai, failOnMismatch: true, failOnDuplicate: true)
-    }
 
     /*
      * Map reads to reference
      */
     if (!val_skip_alignment) {
 
-        /*
-         * Ensure each BAM has a unique identify,
-         * enabling correct grouping and downstream merging.
-         */
-        ch_reads_for_alignment = (val_alignment_processes > 1
-            ? SPLITUBAM.out.bam.transpose()
-            : CONVERT_INPUT_FASTQS.out.bam).map { meta, bam -> [meta + [file: bam.name], bam] }
+        if (!val_premapped) {
 
-        /*
-         * Create a grouping key per sample that records the number of split files,
-         * allowing downstream merging to trigger as soon as all alignments of a sample are ready.
-         */
-        ch_reads_grouping_key = ch_reads_for_alignment
-            .map { meta, bam -> [meta - meta.subMap('file'), bam] }
-            .groupTuple()
-            .map { meta, files -> [meta + [n_files: files.size()]] }
+            CONVERT_INPUT_FASTQS(
+                ch_samplesheet,
+                false,
+                true,
+            )
 
-        if (val_aligner == 'pbmm2') {
-            if (!val_skip_portello) {
-                // Match BAM files and reference by sample ID for alignment with pbmm2
-                ch_reads_for_alignment
-                    .map { meta, bam -> [[id: meta.id], meta, bam] }
-                    .combine(
-                        GENOME_ASSEMBLY.out.concatenated_haplotypes.map { meta, ref -> [[id: meta.id], ref] },
-                        by: 0
-                    )
-                    .multiMap { _id, meta, bam, ref ->
-                        reads: [meta, bam]
-                        reference: [meta, ref]
-                    }
-                    .set { ch_pbmm2_input }
+            if (val_alignment_processes > 1) {
+                SPLITUBAM(CONVERT_INPUT_FASTQS.out.bam)
+                ch_unmapped = SPLITUBAM.out.bam.transpose()
             }
             else {
-                ch_pbmm2_input = ch_reads_for_alignment
-                    .combine(ch_fasta)
-                    .multiMap { bam_meta, bam, _ref_meta, ref ->
-                        reads: [bam_meta, bam]
-                        reference: [bam_meta, ref]
-                    }
+                ch_unmapped = CONVERT_INPUT_FASTQS.out.bam
             }
 
-            PBMM2_ALIGN(
-                ch_pbmm2_input.reads,
-                ch_pbmm2_input.reference,
+            /*
+             * Create a grouping key per sample that records the number of split files,
+             * allowing downstream merging to trigger as soon as all alignments of a sample are ready.
+             */
+            ch_reads_grouping_key = ch_unmapped
+                .groupTuple()
+                .map { meta, files -> tuple(meta.id, files.size()) }
+
+            // Add original file name to meta to join correct alignments and indexes
+            ch_align_in = ch_unmapped.map { meta, bam -> tuple(meta + [file: bam.name], bam) }
+
+            ALIGN(
+                ch_align_in,
+                ch_fasta,
             )
 
-            SAMTOOLS_INDEX_PBMM2(PBMM2_ALIGN.out.bam)
-
-            ch_aligned_reads_bam = PBMM2_ALIGN.out.bam
-            ch_aligned_reads_bai = SAMTOOLS_INDEX_PBMM2.out.index
+            ch_aligned_for_merge = ALIGN.out.bam
+                .join(ALIGN.out.index, failOnMismatch: true, failOnDuplicate: true)
+                .combine(ch_reads_grouping_key)
+                .filter { bam_meta, _bam, _bai, group_id, _group_size ->
+                    bam_meta.id == group_id
+                }
+                .map { bam_meta, bam, bai, _group_id, group_size ->
+                    tuple(groupKey(bam_meta - bam_meta.subMap('file'), group_size), bam, bai)
+                }
+                .groupTuple()
+                .map { key, bams, bais -> tuple(key.getGroupTarget(), bams, bais) }
         }
         else {
-            /*
-            * Align reads independently per split (could be a split-align-merge subworkflow)
-            */
-            MINIMAP2_ALIGN(
-                ch_reads_for_alignment,
-                PREPARE_REFERENCES.out.mmi,
-                true,
-                'bai',
-                false,
-                false,
-            )
 
-            ch_aligned_reads_bam = MINIMAP2_ALIGN.out.bam
-            ch_aligned_reads_bai = MINIMAP2_ALIGN.out.index
+            // If bams are premapped, just merge them (ONT machines output several BAMs per sample)
+            // SAMTOOLS_MERGE expects indexes in the input but is happy to merge them if the indexes are missing
+            ch_aligned_for_merge = ch_samplesheet
+                .groupTuple()
+                .map { meta, reads -> [meta, reads, []] }
         }
 
-        /*
-        * Re-attach grouping key so BAMs can be merged per group as soon as all alignments for one sample are ready
-        */
-        ch_bam_to_merge = ch_aligned_reads_bam
-            .join(ch_aligned_reads_bai, failOnDuplicate: true, failOnMismatch: true)
-            .combine(ch_reads_grouping_key)
-            .filter { bam_meta, _bam, _bai, grouping_key_meta ->
-                bam_meta.id == grouping_key_meta.id
-            }
-            .map { bam_meta, bam, bai, grouping_key_meta ->
-                [bam_meta - bam_meta.subMap('file') + [n_files: grouping_key_meta.n_files], bam, bai]
-            }
-            .map { meta, bam, bai ->
-                [groupKey(meta, meta.n_files), bam, bai]
-            }
-            .groupTuple()
-
-        /*
-         * Always merge here even if there's only one file,
-         * because alignment runs without knowledge of group completeness (n_files),
-         * and we can't therefore output from the alignment step with correct naming.
-         */
         SAMTOOLS_MERGE(
-            ch_bam_to_merge,
+            ch_aligned_for_merge,
             [[], [], [], []],
         )
 
-        // Combine merged with unmerged bam files
-        ch_aligned_bam = SAMTOOLS_MERGE.out.bam
-            .join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true)
-            .map { meta, bam, bai -> [meta - meta.subMap('n_files'), bam, bai] }
+        ch_aligned_bam = SAMTOOLS_MERGE.out.bam.join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true)
 
-        // Convert alignments as CRAM if requested
+        // Publish alignments as CRAM if requested
         if (val_convert_unphased_aligned_reads_to_cram) {
             SAMTOOLS_CONVERT(
                 ch_aligned_bam,
@@ -448,6 +339,50 @@ workflow NALLO {
     }
 
     //
+    // Hifiasm assembly and alignment to reference genome
+    //
+    if (!val_skip_genome_assembly) {
+
+        // Now, if we started with BAM files, we do alignment and split the BAM files (this is the main case),
+        // then we converted any FASTQs to BAMs, the original BAMs will have been split, and we can convert those
+        // to FASTQs for the assembly.
+        //
+        // We could possibly implement something where we would check if the converted BAM had an original FASTQ,
+        // then we could use that FASTQ directly for the assembly. But since this is a rare case, it's not implemented.
+        //
+        // If we didn't split the files, there's currently no need to take the converted BAMs,
+        // so we take the original FASTQs instead if there are any, and also convert the original BAMs to FASTQs,
+        // so we can use those for the assembly.
+        //
+        // Since starting with FASTQs is a rare case, no splitting of FASTQs alone just for the assembly is implemented
+
+        CONVERT_INPUT_BAMS(
+            val_skip_alignment || val_premapped || (val_alignment_processes == 1) ? ch_samplesheet : SPLITUBAM.out.bam.transpose(),
+            true,
+            false,
+        )
+
+        // contains all FASTQ files, including those not converted
+        ch_genome_assembly_input = CONVERT_INPUT_BAMS.out.fastq.groupTuple()
+
+        // Hifiasm assembly
+        GENOME_ASSEMBLY(
+            ch_genome_assembly_input,
+            val_hifiasm_mode == "trio-binning",
+            false,
+        )
+
+        ALIGN_ASSEMBLIES(
+            GENOME_ASSEMBLY.out.assembled_haplotypes,
+            ch_fasta,
+            ch_fai,
+            val_cram_output,
+        )
+        
+        ch_assembly_bam_bai_updated_meta = ALIGN_ASSEMBLIES.out.bam.join(ALIGN_ASSEMBLIES.out.bai, failOnMismatch: true, failOnDuplicate: true)
+
+    }
+    //
     // Run read QC with FastQC, mosdepth and cramino
     //
     if (!val_skip_qc) {
@@ -473,7 +408,7 @@ workflow NALLO {
             ch_bam_bai,
             ch_fasta,
             ch_fai,
-            cram_output,
+            val_cram_output,
         )
     }
 
@@ -732,7 +667,7 @@ workflow NALLO {
             ch_fai,
             val_phaser,
             !val_skip_sv_calling,
-            cram_output,
+            val_cram_output,
             ch_ped_family,
         )
 
@@ -1090,7 +1025,7 @@ workflow NALLO {
             ch_fasta,
             ch_fai,
             ch_str_bed,
-            cram_output,
+            val_cram_output,
             ch_vcfexpress_prelude,
         )
 
