@@ -209,3 +209,5 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `sniffles_min_heterozygous_allele_frequency` | Threshold on heterozygous allele frequency in Sniffles (0-1). | `number` | 0 |  |  |
 | `sniffles_min_sv_size` | Minimum length of SV to be reported in Sniffles. | `number` | 50 |  |  |
 | `sawfish_min_sv_size` | Co-linear SVs must have either an insertion or deletion of this size or greater to be included in the output in Sawfish. All other SV evidence patterns such as those consistent with duplications, inversions and translocations will always be included in the output. | `number` | 50 |  |  |
+| `reads_aligner` | Which aligner to use for read alignment. Supported arguments are minimap2 or pbmm2. (accepted: `minimap2`\|`pbmm2`) | `string` | minimap2 |  |  |
+| `pbmm2_preset` | Preset to use for pbmm2. Supported arguments are HIFI, CCS, or SUBREAD. (accepted: `HIFI`\|`CCS`\|`SUBREAD`) | `string` | HIFI |  |  |

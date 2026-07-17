@@ -145,6 +145,7 @@ workflow NALLO {
     val_plot_chromograph_coverage
     val_pre_vep_snv_filter_expression
     val_premapped
+    val_reads_aligner
     val_sentieon_tech
     val_skip_alignment
     val_skip_annotate_paralogs
@@ -242,6 +243,8 @@ workflow NALLO {
             ALIGN(
                 ch_align_in,
                 ch_fasta,
+                ch_fai,
+                val_reads_aligner,
             )
 
             ch_aligned_for_merge = ALIGN.out.bam
