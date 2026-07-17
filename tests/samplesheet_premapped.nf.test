@@ -5,7 +5,7 @@ nextflow_pipeline {
     tag "PIPELINE"
 
     test("samplesheet_premapped | --premapped") {
-        tag "samplesheet_multisample_ont_bam"
+        tag "samplesheet_multisample_bam"
 
         when {
             params {
