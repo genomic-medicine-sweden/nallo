@@ -80,21 +80,31 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-10T14:58:07.965712798",
+        "timestamp": "2026-07-14T13:51:35.347244772",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.06.0"
+            "nextflow": "26.04.4"
         }
     },
     "bam": {
         "content": [
-            "43bb6ef7e9eccece743204535a3abbd6",
+            {
+                "maxReadLength": 95503,
+                "minReadLength": 0,
+                "meanReadLength": 2065,
+                "maxQuality": 60,
+                "minQuality": 0,
+                "meanQuality": 23,
+                "readCount": 466,
+                "duplicateReadCount": 0,
+                "sorted": true
+            },
             "hg38_filtered.bam.bai"
         ],
-        "timestamp": "2026-07-10T12:11:18.930397005",
+        "timestamp": "2026-07-14T13:51:06.980094437",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.06.0"
+            "nextflow": "26.04.4"
         }
     }
 }

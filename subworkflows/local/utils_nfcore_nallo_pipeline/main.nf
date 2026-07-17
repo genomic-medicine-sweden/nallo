@@ -50,6 +50,7 @@ workflow PIPELINE_INITIALISATION {
     val_mitochondrial_caller
     val_par_regions
     val_phaser
+    val_premapped
     val_sambamba_regions
     val_skip_alignment
     val_skip_annotate_paralogs
@@ -290,11 +291,8 @@ workflow PIPELINE_INITIALISATION {
         .map { sample, metas, reads ->
             [sample, metas[0] + [single_end: true], reads]
         }
-        .flatMap { _sample, meta, reads ->
-            reads.collect { read ->
-                return [meta, read]
-            }
-        }
+        .map { _sample, meta, reads -> tuple(meta, reads) }
+        .transpose()
         .map { meta, reads -> [meta.family_id, meta, reads] }
         .groupTuple()
         .map { _family, metas, reads ->
@@ -329,6 +327,11 @@ workflow PIPELINE_INITIALISATION {
 
     // Check that the parents are present in the samplesheet
     validateParentExistsInFamily(ch_samplesheet)
+
+    // Check that the samplesheet does not contain FASTQs if --premapped is set
+    if (val_premapped) {
+        validateNoFastqInInput(ch_samplesheet)
+    }
 
     emit:
     samplesheet = ch_samplesheet
@@ -387,6 +390,14 @@ workflow PIPELINE_COMPLETION {
 //
 def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDependencies) {
     validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies)
+}
+
+// Check that no FASTQs are in samplesheet if --premapped is set
+// Something would crash eventually if there were FASTQs, but this is a more user-friendly error message
+def validateNoFastqInInput(input) {
+    input
+        .filter { _meta, reads -> reads.name =~ 'f(ast)?q(\\.gz)?$' }
+        .map { _meta, _reads -> error("FASTQ files were found in the samplesheet, but --premapped was set. Please remove FASTQ files from the samplesheet or unset --premapped.") }
 }
 //
 // Validate channels from input samplesheet
