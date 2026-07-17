@@ -1,7 +1,7 @@
 {
     "samplesheet_premapped | --premapped": {
         "content": [
-            389,
+            352,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -137,20 +137,11 @@
                 "GENMOD_SCORE": {
                     "genmod": "3.12.0"
                 },
-                "GFASTATS": {
-                    "gfastats": "1.3.11"
-                },
                 "GLNEXUS": {
                     "glnexus": "1.4.3"
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
-                },
-                "HIFIASM_ASSEMBLY": {
-                    "hifiasm": "0.25.0-r726"
-                },
-                "HIFIASM_BINS": {
-                    "hifiasm": "0.25.0-r726"
                 },
                 "HIFICNV": {
                     "hificnv": "1.0.0-36e6461"
@@ -163,12 +154,6 @@
                 },
                 "METHBAT_PROFILE": {
                     "methbat": "0.17.0-7c5e249"
-                },
-                "MINIMAP2_ALIGN": {
-                    "minimap2": "2.29-r1283"
-                },
-                "MINIMAP2_INDEX": {
-                    "minimap2": "2.29-r1283"
                 },
                 "MITORSAW_HAPLOTYPE": {
                     "mitorsaw": "0.2.9-0dc8e58"
@@ -216,9 +201,6 @@
                     "python": "3.8.3"
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.23.1"
-                },
-                "SAMTOOLS_FASTQ": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_INDEX": {
@@ -278,9 +260,6 @@
                 "TABIX_TABIX": {
                     "tabix": 1.21
                 },
-                "TAGBAM": {
-                    "tagbam": "0.1.0"
-                },
                 "TIDDIT_COV": {
                     "tiddit": "3.9.4"
                 },
@@ -301,9 +280,6 @@
                 },
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.13.0dev"
-                },
-                "YAK_COUNT": {
-                    "yak": "0.1-r69-dirty"
                 }
             },
             [
@@ -317,27 +293,6 @@
                 "aligned_reads/HG004",
                 "aligned_reads/HG004/HG004_haplotagged.bam",
                 "aligned_reads/HG004/HG004_haplotagged.bam.bai",
-                "assembly",
-                "assembly/sample",
-                "assembly/sample/HG002",
-                "assembly/sample/HG002/HG002_aligned_assembly.bam",
-                "assembly/sample/HG002/HG002_aligned_assembly.bam.bai",
-                "assembly/sample/HG003",
-                "assembly/sample/HG003/HG003_aligned_assembly.bam",
-                "assembly/sample/HG003/HG003_aligned_assembly.bam.bai",
-                "assembly/sample/HG004",
-                "assembly/sample/HG004/HG004_aligned_assembly.bam",
-                "assembly/sample/HG004/HG004_aligned_assembly.bam.bai",
-                "assembly/stats",
-                "assembly/stats/HG002",
-                "assembly/stats/HG002/HG002_haplotype_1.assembly_summary",
-                "assembly/stats/HG002/HG002_haplotype_2.assembly_summary",
-                "assembly/stats/HG003",
-                "assembly/stats/HG003/HG003_haplotype_1.assembly_summary",
-                "assembly/stats/HG003/HG003_haplotype_2.assembly_summary",
-                "assembly/stats/HG004",
-                "assembly/stats/HG004/HG004_haplotype_1.assembly_summary",
-                "assembly/stats/HG004/HG004_haplotype_2.assembly_summary",
                 "gens",
                 "gens/HG002",
                 "gens/HG002/HG002.baf.bed.gz",
@@ -906,12 +861,6 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ],
             [
-                "HG002_haplotype_1.assembly_summary:md5,a6ad30c5ee5267ca1b283564f1e5d129",
-                "HG002_haplotype_2.assembly_summary:md5,b99223d6c7d9ac989c98ec6b419d91e1",
-                "HG003_haplotype_1.assembly_summary:md5,13dee2d12769dd9f9ba6f4e490e385b3",
-                "HG003_haplotype_2.assembly_summary:md5,750e1bf8191b520ff6afc302987cbc35",
-                "HG004_haplotype_1.assembly_summary:md5,d77dc8fbbb8a6dce71c9640d6a6be355",
-                "HG004_haplotype_2.assembly_summary:md5,adc271665fb11761203e53773de1215f",
                 "HG002.baf.bed.gz:md5,6665b135f673d204ec030883683605ea",
                 "HG002.baf.bed.gz.tbi:md5,3e21a7933ca52383f0b8ccf221b05fc7",
                 "HG002.cov.bed.gz:md5,0ecae09658e7f861daae7d284b593550",
@@ -1195,18 +1144,6 @@
                     "2b776dae5bae4889b786825ff96b2264"
                 ],
                 [
-                    "HG002_aligned_assembly.bam",
-                    "ceeca92bfd6ef76f27505cce3d9ac1be"
-                ],
-                [
-                    "HG003_aligned_assembly.bam",
-                    "e5f5b7d3a689c00000d1ea1d4e9c3af1"
-                ],
-                [
-                    "HG004_aligned_assembly.bam",
-                    "209d2e152341caa5e67f78c870ff2e5e"
-                ],
-                [
                     "HG002_spanning_trgt.bam",
                     "30ba267e3b89ce97d0df96640b22d265"
                 ],
@@ -1296,7 +1233,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-14T15:56:50.995045828",
+        "timestamp": "2026-07-17T09:28:27.952901392",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"
