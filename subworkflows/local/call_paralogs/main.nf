@@ -10,7 +10,7 @@ workflow CALL_PARALOGS {
     bam_bai // channel: [ val(meta), bam, bai ]
     fasta // channel: [ val(meta), fasta ]
     fai // channel: [ val(meta), fai ]
-    cram_output // bool: Publish alignments as CRAM (true) or BAM (false)
+    val_cram_output // bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
     PARAPHASE(
@@ -59,7 +59,7 @@ workflow CALL_PARALOGS {
         fasta.join(fai, failOnMismatch: true, failOnDuplicate: true).collect(),
     )
 
-    if (cram_output) {
+    if (val_cram_output) {
         SAMTOOLS_CONVERT(
             PARAPHASE.out.bam.join(PARAPHASE.out.bai, failOnDuplicate: true, failOnMismatch: true),
             fasta.join(fai, failOnDuplicate: true, failOnMismatch: true).collect(),
@@ -69,8 +69,8 @@ workflow CALL_PARALOGS {
     emit:
     bam        = PARAPHASE.out.bam // channel: [ val(meta), path(bam)  ]
     bai        = PARAPHASE.out.bai // channel: [ val(meta), path(bai)  ]
-    cram       = cram_output ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
-    crai       = cram_output ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
+    cram       = val_cram_output ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
+    crai       = val_cram_output ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
     json       = PARAPHASE.out.json // channel: [ val(meta), path(json) ]
     sample_vcf = PARAPHASE.out.vcf.transpose() // channel: [ val(meta), path(vcf)  ]
     sample_tbi = PARAPHASE.out.vcf_index.transpose() // channel: [ val(meta), path(tbi)  ]

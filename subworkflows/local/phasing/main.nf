@@ -17,7 +17,7 @@ workflow PHASING {
     fai // channel: [ val(meta), path(fai) ]
     phaser // string:  Phasing tool to use
     phase_with_svs // bool:    Whether to include SVs in phasing (true) or not (false)
-    cram_output // bool:    Publish alignments as CRAM (true) or BAM (false)
+    val_cram_output // bool:    Publish alignments as CRAM (true) or BAM (false)
     ch_pedigree // channel: [ val(meta), path(pedigree) ]
 
     main:
@@ -87,7 +87,7 @@ workflow PHASING {
         phase_with_svs && !phaser.equals("whatshap"),
     )
 
-    if (cram_output) {
+    if (val_cram_output) {
         SAMTOOLS_CONVERT(
             ch_bam_bai_haplotagged,
             fasta.join(fai).collect(),
@@ -102,7 +102,7 @@ workflow PHASING {
     phased_family_svs      = ch_phased_family_svs // channel: [ val(meta), path(vcf) ]
     phased_family_svs_tbi  = ch_phased_family_svs_tbi // channel: [ val(meta), path(tbi) ]
     haplotagged_bam_bai    = ch_bam_bai_haplotagged // channel: [ val(meta), path(bam), path(bai) ]
-    haplotagged_cram_crai  = cram_output ? ch_haplotagged_cram_crai : channel.empty() // channel: [ val(meta), path(cram), path(crai) ]
+    haplotagged_cram_crai  = val_cram_output ? ch_haplotagged_cram_crai : channel.empty() // channel: [ val(meta), path(cram), path(crai) ]
     stats                  = QC_PHASING.out.phasing_stats // channel: [ val(meta), path("*.stats.tsv") ]
     blocks                 = QC_PHASING.out.phasing_blocks // channel: [ val(meta), path("*.blocks.gtf.gz") ]
     blocks_index           = QC_PHASING.out.phasing_blocks_index // channel: [ val(meta), path("*.blocks.gtf.gz.tbi") ]
