@@ -338,7 +338,7 @@ workflow NALLO {
         // so we take the original FASTQs instead if there are any, and also convert the original BAMs to FASTQs,
         // so we can use those for the assembly.
         //
-        // Since starting with FASTQs is a rare case, no splitting of FASTQs alone just for the assembly is implmenented
+        // Since starting with FASTQs is a rare case, no splitting of FASTQs alone just for the assembly is implemented
 
         CONVERT_INPUT_BAMS(
             val_skip_alignment || val_premapped || (val_alignment_processes == 1) ? ch_samplesheet : SPLITUBAM.out.bam.transpose(),
