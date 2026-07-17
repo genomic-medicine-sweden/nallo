@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1073](https://github.com/genomic-medicine-sweden/nallo/pull/1073) - Added sample vcf outputs to `call_paralogs` workflow
 - [#1084](https://github.com/genomic-medicine-sweden/nallo/pull/1084) - Added new auto-generated container config files (new with nf-core/tools update)
 - [#1104](https://github.com/genomic-medicine-sweden/nallo/pull/1104) - Added `.github/nf-dev-guidelines.yaml` which the contribution guidelines are now auto-generated from via a GutHub action using the base template in https://github.com/genomic-medicine-sweden/nf-dev-guidelines and pipeline-specific sections stored in in `docs/contribution`
+- [#1107](https://github.com/genomic-medicine-sweden/nallo/pull/1107) - Added support for using mapped BAM files as input
 - [#1120](https://github.com/genomic-medicine-sweden/nallo/pull/1120) - Added baseName to avoid `.bed` in deepvariant output name
 - [#1128](https://github.com/genomic-medicine-sweden/nallo/pull/1128) - Added nf-tests for `phasing` subworkflow
 - [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Added Mitorsaw module and Mitorsaw to validatePacBioLicense
@@ -31,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1198](https://github.com/genomic-medicine-sweden/nallo/pull/1198) - Added parameter `--phased` for GENMOD models if phasing is not skipped
 - [#1206](https://github.com/genomic-medicine-sweden/nallo/pull/1206) - Added new `glnexus_config` parameter
 - [#1206](https://github.com/genomic-medicine-sweden/nallo/pull/1206) - Added default custom glnexus config in `assets/`
+- [#1204](https://github.com/genomic-medicine-sweden/nallo/pull/1204) - Added nf-tests for `annotate_methylation` subworkflow
 
 ### Changed
 
@@ -79,6 +81,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1097](https://github.com/genomic-medicine-sweden/nallo/pull/1097) - Simplified phasing-related if statement in `nallo`
 - [#1102](https://github.com/genomic-medicine-sweden/nallo/pull/1102) - Updated testdata commit with new genmod score config
 - [#1104](https://github.com/genomic-medicine-sweden/nallo/pull/1104) - Updated .nf-core.yml to allow for template_strings in new github/nf-dev-guidelines.yaml
+- [#1107](https://github.com/genomic-medicine-sweden/nallo/pull/1107) - Moved alignment into subworkflow `ALIGN`
 - [#1111](https://github.com/genomic-medicine-sweden/nallo/pull/1111) - Refactored gVCF grouping to reduce code duplication in `nallo`
 - [#1112](https://github.com/genomic-medicine-sweden/nallo/pull/1112) - Changed testdata commit to include data with a deletion in the mitochondrial chromosome
 - [#1118](https://github.com/genomic-medicine-sweden/nallo/pull/1118) - Changed testdata commit
