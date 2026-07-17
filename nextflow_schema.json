@@ -1031,7 +1031,7 @@
                 "glnexus_config": {
                     "type": "string",
                     "default": "assets/glnexus_config_dp1.yml",
-                    "description": "Glnexus config file to use for merging gVCFs. If no file is provided, the default config 'DeepVariant_unfiltered' will be used."
+                    "description": "Glnexus config file to use for merging gVCFs. The default file used is `assets/glnexus_config_dp1.yml`. If no file at all is provided (if this parameter is set to null), the default config 'DeepVariant_unfiltered' will be used."
                 }
             },
             "required": ["preset"]
