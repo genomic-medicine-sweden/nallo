@@ -26,7 +26,7 @@ workflow ALIGN {
             ch_pbmm2_input.reference,
         )
 
-        // Add MD and NM tags for severus
+        // Add MD and NM tags for sniffles and severus
         SAMTOOLS_CALMD(
             PBMM2_ALIGN.out.bam,
             ch_fasta.join(ch_fai).collect(),
