@@ -37,7 +37,8 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     }
 
     // GLNEXUS processes deepvariant gVCFs
-    ch_deepvariant_gvcfs = branched_gvcfs.deepvariant.combine(ch_custom_glnexus_config.map { _meta, config -> config })
+    // toList() enables passing [] if ch_custom_glnexus_config is empty
+    ch_deepvariant_gvcfs = branched_gvcfs.deepvariant.combine(ch_custom_glnexus_config.map { _meta, config -> config }.toList())
 
     GLNEXUS(
         ch_deepvariant_gvcfs,
