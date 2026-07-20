@@ -99,7 +99,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_plot_chromograph_coverage
     val_pre_vep_snv_filter_expression
     val_premapped
-    val_reads_aligner
+    val_read_aligner
     val_sentieon_tech
     val_skip_alignment
     val_skip_annotate_paralogs
@@ -207,7 +207,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_plot_chromograph_coverage,
         val_pre_vep_snv_filter_expression,
         val_premapped,
-        val_reads_aligner,
+        val_read_aligner,
         val_sentieon_tech,
         val_skip_alignment,
         val_skip_annotate_paralogs,
@@ -503,7 +503,7 @@ workflow {
         params.plot_chromograph_coverage,
         params.pre_vep_snv_filter_expression,
         params.premapped,
-        params.reads_aligner,
+        params.read_aligner,
         params.sentieon_tech,
         params.skip_alignment,
         params.skip_annotate_paralogs,

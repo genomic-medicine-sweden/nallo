@@ -14,16 +14,10 @@ workflow ALIGN {
     main:
 
     if (val_aligner == 'pbmm2') {
-        ch_pbmm2_input = ch_ubam
-            .combine(ch_fasta)
-            .multiMap { bam_meta, bam, _ref_meta, ref ->
-                reads: [bam_meta, bam]
-                reference: [bam_meta, ref]
-            }
 
         PBMM2_ALIGN(
-            ch_pbmm2_input.reads,
-            ch_pbmm2_input.reference,
+            ch_ubam,
+            ch_fasta,
         )
 
         // Add MD and NM tags for sniffles and severus
@@ -38,6 +32,7 @@ workflow ALIGN {
         ch_aligned_reads_bai = SAMTOOLS_INDEX.out.index
     }
     else {
+
         MINIMAP2_INDEX(
             ch_fasta
         )

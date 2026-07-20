@@ -137,7 +137,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                                  | `--mitorsaw_minimum_read_count` |
 |                                  | `--mitorsaw_minimum_maf`        |
 | `--run_methbat` / `--run_modkit` | `--methylation_callers`         |
-|                                  | `--reads_aligner`               |
+|                                  | `--read_aligner`                |
 |                                  | `--pbmm2_preset`                |
 
 > [!NOTE]
@@ -159,7 +159,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | genmod/score                   | 3.10.2      | 3.12.0      |
 | mitorsaw/haplotype             |             | 0.2.9       |
 | pbmm2/align                    |             | 26.2.0      |
-| samtools/calmd                 |             | 1.23.1      |
+| samtools/calmd                 |             | 1.24        |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
