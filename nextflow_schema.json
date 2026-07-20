@@ -1036,7 +1036,7 @@
                 },
                 "pbmm2_preset": {
                     "type": "string",
-                    "default": "HIFI",
+                    "default": "CCS",
                     "description": "Preset to use for pbmm2. Supported arguments are HIFI, CCS, or SUBREAD.",
                     "enum": ["HIFI", "CCS", "SUBREAD"]
                 }
