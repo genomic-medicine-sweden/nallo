@@ -76,7 +76,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    bam(workflow.out.bam.get(0).get(1)).getReadsMD5(),
+                    bam(workflow.out.bam.get(0).get(1)).getStatistics(),
                     file(workflow.out.index.get(0).get(1)).name
                 ).match() }
             )
@@ -131,10 +131,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(
-                    bam(workflow.out.bam.get(0).get(1)).getReadsMD5(),
-                    file(workflow.out.index.get(0).get(1)).name
-                ).match() }
+                { assert snapshot(workflow.out).match() }
             )
         }
     }

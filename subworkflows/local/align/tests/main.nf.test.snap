@@ -1,24 +1,66 @@
 {
     "[bam, fasta] - pbmm2": {
         "content": [
-            "89bb2b41bf3fa97f6abd5e12d89ab1ef",
+            {
+                "maxReadLength": 33619,
+                "minReadLength": 1915,
+                "meanReadLength": 16960,
+                "maxQuality": 60,
+                "minQuality": 0,
+                "meanQuality": 53,
+                "readCount": 1223,
+                "duplicateReadCount": 0,
+                "sorted": false
+            },
             "test_aligned_reads.bam.bai"
         ],
-        "timestamp": "2026-07-17T16:20:43.436797765",
+        "timestamp": "2026-07-21T13:59:28.54453896",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.06.0"
+            "nextflow": "26.07.0"
         }
     },
     "[bam, fasta] - pbmm2 - stub": {
         "content": [
-            "d41d8cd98f00b204e9800998ecf8427e",
-            "test_aligned_reads.bam.bai"
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_aligned_reads.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_aligned_reads.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "bam": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_aligned_reads.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "index": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_aligned_reads.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
         ],
-        "timestamp": "2026-07-17T16:20:57.260927661",
+        "timestamp": "2026-07-21T13:56:16.722176344",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.06.0"
+            "nextflow": "26.07.0"
         }
     },
     "[bam, fasta] - minimap2": {
