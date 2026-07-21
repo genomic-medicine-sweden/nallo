@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1206](https://github.com/genomic-medicine-sweden/nallo/pull/1206) - Added new `glnexus_config` parameter
 - [#1206](https://github.com/genomic-medicine-sweden/nallo/pull/1206) - Added default custom glnexus config in `assets/`
 - [#1204](https://github.com/genomic-medicine-sweden/nallo/pull/1204) - Added nf-tests for `annotate_methylation` subworkflow
+- [#1204](https://github.com/genomic-medicine-sweden/nallo/pull/1204), [#1211](https://github.com/genomic-medicine-sweden/nallo/pull/1211) - Added nf-tests for `annotate_methylation` subworkflow
 
 ### Changed
 
