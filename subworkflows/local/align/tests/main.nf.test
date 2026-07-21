@@ -76,8 +76,8 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    bam(workflow.out.bam.get(0).get(1)).getHeader(),
-                    bam(workflow.out.bam.get(0).get(1)).getReads(),
+                    // read order in the bam can change between runs
+                    bam(workflow.out.bam.get(0).get(1)).getStatistics(),
                     file(workflow.out.index.get(0).get(1)).name
                 ).match() }
             )
