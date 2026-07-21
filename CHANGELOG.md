@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1208](https://github.com/genomic-medicine-sweden/nallo/pull/1208) - Added pbmm2 as reads aligner option in `ALIGN` subworkflow
 - [#1208](https://github.com/genomic-medicine-sweden/nallo/pull/1208) - Added `SAMTOOLS_CALMD` to add MD tag needed for severus after pbmm2
 - [#1208](https://github.com/genomic-medicine-sweden/nallo/pull/1208) - Added new read group param to `CONVERT_INPUT_FASTQS` config to add RG, SM and DS tags to bam when converting with `SAMTOOLS_IMPORT` and read aligner is pbmm2
+- [#1204](https://github.com/genomic-medicine-sweden/nallo/pull/1204), [#1211](https://github.com/genomic-medicine-sweden/nallo/pull/1211) - Added nf-tests for `annotate_methylation` subworkflow
 
 ### Changed
 
