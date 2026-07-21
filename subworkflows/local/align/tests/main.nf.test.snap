@@ -97,7 +97,7 @@
                 "@PG\tID:samtools.1\tPN:samtools\tVN:1.21\tPP:samtools\tCL:samtools reheader -c cat - tmp/HG002_PacBio_Revio.rg.txt -",
                 "@PG\tID:samtools.2\tPN:samtools\tVN:1.21\tPP:samtools.1\tCL:samtools sort -o tmp/nuclear_subsampled.bam",
                 "@PG\tID:samtools.3\tPN:samtools\tVN:1.21\tPP:samtools.2\tCL:samtools merge -c -p -f -O BAM testdata/HG002_PacBio_Revio.bam tmp/nuclear_subsampled.bam tmp/chrM_with_deletion_subsampled.bam",
-                "@PG\tID:pbmm2\tPN:pbmm2\tVN:26.2.0 (commit v26.2.0)\tCL:pbmm2 align --sort --preset CCS --unmapped --sample test --strip hg38.test.fa HG002_PacBio_Revio.bam test_aligned_reads_no_md.bam --num-threads 4",
+                "@PG\tID:pbmm2\tPN:pbmm2\tVN:26.2.0 (commit v26.2.0)\tCL:pbmm2 align --sort --preset CCS --unmapped --sample test --strip -j 1 hg38.test.fa HG002_PacBio_Revio.bam test_aligned_reads_no_md.bam --num-threads 4",
                 "@PG\tID:samtools.4\tPN:samtools\tPP:samtools.3\tVN:1.24\tCL:samtools calmd -@ 2 -b test_aligned_reads_no_md.bam hg38.test.fa"
             ],
             [
@@ -1327,7 +1327,7 @@
             ],
             "test_aligned_reads.bam.bai"
         ],
-        "timestamp": "2026-07-21T14:53:20.504030496",
+        "timestamp": "2026-07-21T15:02:53.993056476",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
