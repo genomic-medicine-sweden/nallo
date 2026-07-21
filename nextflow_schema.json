@@ -1037,7 +1037,7 @@
                 "pbmm2_preset": {
                     "type": "string",
                     "default": "CCS",
-                    "description": "Preset to use for pbmm2. Supported arguments are HIFI, CCS, or SUBREAD. Warning : please use CCS instead of HIFI when using fastq files as input.",
+                    "description": "Preset to use for pbmm2. Supported arguments are HIFI, CCS, or SUBREAD.",
                     "enum": ["HIFI", "CCS", "SUBREAD"]
                 }
             },
