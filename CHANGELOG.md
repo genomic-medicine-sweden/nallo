@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Fixed`
 
 - [#1212](https://github.com/genomic-medicine-sweden/nallo/pull/1212) - Updated `peddy` nf-core module to fix this [issue](https://github.com/genomic-medicine-sweden/nallo/issues/1084#event-28314854442)
+- [#1212](https://github.com/genomic-medicine-sweden/nallo/pull/1212) - Fixed nf-test CI not passing the matrix Nextflow version to the setup action.
 
 ## 0.12.0 - [2026-04-28]
 
