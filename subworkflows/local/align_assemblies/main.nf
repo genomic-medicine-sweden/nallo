@@ -44,7 +44,8 @@ workflow ALIGN_ASSEMBLIES {
     SAMTOOLS_VIEW(
         SAMTOOLS_MERGE.out.bam.join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true),
         [[], [], []],
-        [],
+        [[], []],
+        [[], []],
         'bai',
     )
 

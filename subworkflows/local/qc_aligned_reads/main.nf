@@ -32,7 +32,8 @@ workflow QC_ALIGNED_READS {
         SAMTOOLS_VIEW(
             ch_cramino_branches.targeted.map { meta, bam, bai, _bed -> [meta, bam, bai] },
             [[], [], []],
-            [],
+            [[], []],
+            ch_cramino_branches.targeted.map { meta, _bam, _bai, bed -> [meta, bed] },
             'bai',
         )
 
