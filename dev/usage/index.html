@@ -1673,6 +1673,10 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </tbody>
 </table>
 <p>Turned off with <code>--skip_alignment</code>.</p>
+<div class="admonition info">
+<p class="admonition-title">Using pbmm2 with fastq files</p>
+<p>pbmm2 can be used to align the reads to the reference. If you are running the pipeline with fastq files as input, they will be converted to bam files for the analysis, and a <code>DS:READTYPE=CCS</code> tag will be added to the header. Without this tag, pbmm2 will not be able to run successfully. This tag is only added under these conditions (pbmm2 as aligner and fastq as input).</p>
+</div>
 <h4 id="sex-check">Sex check</h4>
 <p>Some subworkflows are sex-dependent and need a sex-inference step if samples are input with unknown sex. This step requires <code>--somalier_sites</code>.</p>
 <table>
