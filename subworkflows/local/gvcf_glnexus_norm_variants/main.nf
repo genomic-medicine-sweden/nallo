@@ -18,6 +18,7 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     ch_fasta // channel: [mandatory] [ val(meta), path(fasta)     ]
     ch_fai // channel: [mandatory] [ val(meta), path(fai)       ]
     ch_vcfexpress_prelude // path: [mandatory] lua file
+    ch_custom_glnexus_config // path: [optional]  [ val(meta), path(config_file) ]
 
     main:
     ch_merged_family_gvcf = channel.empty()
@@ -36,8 +37,11 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     }
 
     // GLNEXUS processes deepvariant gVCFs
+    // toList() enables passing [] if ch_custom_glnexus_config is empty
+    ch_deepvariant_gvcfs = branched_gvcfs.deepvariant.combine(ch_custom_glnexus_config.map { _meta, config -> config }.toList())
+
     GLNEXUS(
-        branched_gvcfs.deepvariant.map { meta, gvcfs -> [meta, gvcfs, []] },
+        ch_deepvariant_gvcfs,
         ch_bed,
     )
 

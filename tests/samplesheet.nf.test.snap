@@ -750,10 +750,10 @@
                 "multiqc_bcftools_stats.txt:md5,f8f254c8471497f024fc70a593a226f2",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,2deabd92df5e8a789d971b8adcb4d957",
-                "multiqc_general_stats.txt:md5,7e90e1ff7c76fe13d0b55fd57b1082a1",
+                "multiqc_general_stats.txt:md5,6ef50b4eb1b26996aee4442d73eb9bec",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,1ba29a9165b1c24067b3f723230b4feb",
                 "somalier_stats.txt:md5,e126d444d466c0e6a21e8ae56ddcf819",
-                "whatshap-stats-table.txt:md5,6dc8816b1d0837f4fb4c407624f92c4d",
+                "whatshap-stats-table.txt:md5,c37f978ef46561ab4b195ebf10005b70",
                 "FAM_paraphase_annotated.tsv:md5,f95c3b89013784ed27feb71c46c09d85",
                 "FAM.ped:md5,bd5cec27ba7337a85cf98e787131e2b5",
                 "HG002_Revio_cramino_aligned_phased.arrow:md5,59218ecb157374692c12a6ffc63ad0e0",
@@ -775,7 +775,7 @@
                 "FAM.vs.html:md5,a749380edef4653dade663534ddcfbd6",
                 "HG002_Revio_whatshap_stats.gtf.gz:md5,bf0cad1ea2534b19efbf14f80e9606d0",
                 "HG002_Revio_whatshap_stats.gtf.gz.tbi:md5,bdea257624c090d9563cc20f835b5b92",
-                "HG002_Revio_whatshap_stats.tsv:md5,57c634e51a2cd07aa29a7b6f673508bc",
+                "HG002_Revio_whatshap_stats.tsv:md5,b1a9da8092c740d4b7abec5af734eef0",
                 "HG002_Revio_sambamba_depth.bed:md5,b3d30778daacc696fc15159dd86d1211",
                 "HG002_Revio_copynum_sawfish.bedgraph:md5,035508c2ed50050144632a54b60453eb",
                 "HG002_Revio_depth_sawfish.bw:md5,0f2388d565456986f628932e6a1e1778",
@@ -824,11 +824,11 @@
                 ],
                 [
                     "FAM_snvs_annotated_ranked_clinical.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=63, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=61, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_snvs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=143, phased=false, phasedAutodetect=true]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=141, phased=false, phasedAutodetect=true]"
                 ],
                 [
                     "HG002_Revio_deepvariant_snvs.vcf.gz",
@@ -847,7 +847,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-14T14:16:28.399824196",
+        "timestamp": "2026-07-17T13:28:43.528525388",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"

@@ -94,6 +94,7 @@ workflow NALLO {
     ch_gens_coverage_bins
     ch_gens_panel_of_normals_female
     ch_gens_panel_of_normals_male
+    ch_glnexus_config
     ch_hgnc_ids
     ch_samplesheet
     ch_methbat_regions
@@ -507,6 +508,7 @@ workflow NALLO {
             ch_fasta,
             ch_fai,
             ch_vcfexpress_prelude,
+            ch_glnexus_config,
         )
 
         // Grouping VCF, containing one sample with all regions except chrM, as we do not want mitochondrial variants in the deepvariant report for now.
