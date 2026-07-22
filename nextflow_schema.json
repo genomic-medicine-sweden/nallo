@@ -1039,6 +1039,7 @@
                     "default": "CCS",
                     "description": "Preset to use for pbmm2. Supported arguments are HIFI, CCS, or SUBREAD.",
                     "enum": ["HIFI", "CCS", "SUBREAD"]
+                },
                 "glnexus_config": {
                     "type": "string",
                     "default": null,
