@@ -106,7 +106,7 @@
     },
     "Test genome assembly without alignment": {
         "content": [
-            16,
+            15,
             {
                 "FIND_CONCATENATE": {
                     "coreutils": 9.4,
@@ -173,10 +173,10 @@
                 "pipeline_info/nallo_software_mqc_versions.yml"
             ]
         ],
-        "timestamp": "2026-07-10T15:42:54.889704209",
+        "timestamp": "2026-07-14T13:53:49.202391545",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.06.0"
+            "nextflow": "26.04.4"
         }
     },
     "Test alignment without genome assembly": {

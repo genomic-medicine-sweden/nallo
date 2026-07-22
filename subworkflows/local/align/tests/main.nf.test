@@ -1,0 +1,140 @@
+nextflow_workflow {
+
+    name "Test Subworkflow ALIGN"
+    script "../main.nf"
+    workflow "ALIGN"
+    config "./nextflow.config"
+
+    setup {
+        run("GUNZIP") {
+            script "../../../../modules/nf-core/gunzip/main.nf"
+            process {
+                """
+                input[0] = [
+                    [ id:'hg38' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                ]
+                """
+            }
+        }
+        run("SAMTOOLS_FAIDX") {
+            script "../../../../modules/nf-core/samtools/faidx/main.nf"
+            process {
+                """
+                input[0] = GUNZIP.out.gunzip.map { meta, fasta -> [meta, fasta, []] }
+                input[1] = false
+                """
+            }
+        }
+    }
+
+    test("[bam, fasta] - minimap2") {
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                ])
+                input[1] = channel.of([
+                    [ id: 'hg38'],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                ])
+                input[2] = [[],[]]
+                input[3] = 'minimap2'
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    bam(workflow.out.bam.get(0).get(1)).getReadsMD5(),
+                    file(workflow.out.index.get(0).get(1)).name
+                ).match() }
+            )
+        }
+    }
+
+    test("[bam, fasta] - pbmm2") {
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                ])
+                input[1] = GUNZIP.out.gunzip
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = 'pbmm2'
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    // read order in the bam can change between runs
+                    bam(workflow.out.bam.get(0).get(1)).getStatistics(),
+                    file(workflow.out.index.get(0).get(1)).name
+                ).match() }
+            )
+        }
+    }
+
+    test("[fastq, fasta] - minimap2 - stub") {
+        options "-stub"
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.fastq.gz', checkIfExists: true)
+                ])
+                input[1] = channel.of([
+                    [ id: 'hg38'],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                ])
+                input[2] = [[],[]]
+                input[3] = 'minimap2'
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+        test("[bam, fasta] - pbmm2 - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                ])
+                input[1] = GUNZIP.out.gunzip
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = 'pbmm2'
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+}

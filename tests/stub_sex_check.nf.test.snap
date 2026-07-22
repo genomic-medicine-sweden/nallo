@@ -176,10 +176,10 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
-        "timestamp": "2026-07-10T15:46:26.287271344",
+        "timestamp": "2026-07-14T13:52:40.20286653",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.06.0"
+            "nextflow": "26.04.4"
         }
     },
     "Test skip sex check - multisample": {

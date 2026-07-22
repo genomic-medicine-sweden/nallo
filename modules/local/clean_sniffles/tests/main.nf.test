@@ -1,0 +1,73 @@
+nextflow_process {
+
+    name "Test Process CLEAN_SNIFFLES"
+    script "../main.nf"
+    process "CLEAN_SNIFFLES"
+
+    tag "modules"
+    tag "modules_local"
+    tag "clean_sniffles"
+    tag "sniffles"
+    config "./nextflow.config"
+
+    setup {
+            run("SNIFFLES") {
+                script "../../../../modules/nf-core/sniffles/main.nf"
+                process {
+                    """
+                    input[0] = [
+                            [id: 'HG002'],
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                            file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                    """
+                }
+            }
+    }
+
+    test("clean_sniffles") {
+
+        when {
+            process {
+                """
+                input[0] = SNIFFLES.out.vcf
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.versions_clean_sniffles,
+                    // timestamp on third line
+                    (path(process.out.vcf.get(0).get(1)).readLines()[0,1] + path(process.out.vcf.get(0).get(1)).readLines().drop(3)).join('\n').md5()
+                ).match() }
+            )
+        }
+    }
+
+    test("clean_sniffles -stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = SNIFFLES.out.vcf
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.versions_clean_sniffles,
+                    // timestamp on third line
+                    (path(process.out.vcf.get(0).get(1)).readLines()[0,1] + path(process.out.vcf.get(0).get(1)).readLines().drop(3)).join('\n').md5()
+                ).match() }
+            )
+        }
+    }
+}

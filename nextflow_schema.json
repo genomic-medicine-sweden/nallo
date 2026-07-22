@@ -171,6 +171,12 @@
                     "description": "MultiQC report title. Printed as page header, used for filename if not otherwise specified.",
                     "fa_icon": "fas fa-file-signature"
                 },
+                "premapped": {
+                    "type": "boolean",
+                    "description": "Whether the input data is already mapped to the reference genome",
+                    "fa_icon": "fas fa-fast-forward",
+                    "default": false
+                },
                 "cadd_prescored_indels": {
                     "type": "string",
                     "exists": true,
@@ -1027,11 +1033,22 @@
                     "default": 50,
                     "description": "Co-linear SVs must have either an insertion or deletion of this size or greater to be included in the output in Sawfish. All other SV evidence patterns such as those consistent with duplications, inversions and translocations will always be included in the output."
                 },
-                "aligner": {
+                "read_aligner": {
                     "type": "string",
-                    "enum": ["pbmm2", "minimap2"],
-                    "description": "Read aligner to use for mapped reads. The default configuration uses `pbmm2` unless `skip_portello` is enabled, in which case it falls back to `minimap2`.",
-                    "default": "pbmm2"
+                    "default": "minimap2",
+                    "description": "Which aligner to use for read alignment. Supported arguments are minimap2 or pbmm2.",
+                    "enum": ["minimap2", "pbmm2"]
+                },
+                "pbmm2_preset": {
+                    "type": "string",
+                    "default": "CCS",
+                    "description": "Preset to use for pbmm2. Supported arguments are HIFI, CCS, or SUBREAD.",
+                    "enum": ["HIFI", "CCS", "SUBREAD"]
+                },
+                "glnexus_config": {
+                    "type": "string",
+                    "default": null,
+                    "description": "Glnexus config to use for merging gVCFs. If no file is provided, the default config `assets/glnexus_config_dp1.yml` will be used."
                 }
             },
             "required": ["preset"]
