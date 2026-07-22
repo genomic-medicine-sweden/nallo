@@ -773,25 +773,28 @@
                 "FAM.sex_check.csv:md5,8a514547cb837ee103173bdbdcf8c38a",
                 "FAM.sex_check.png:md5,4e5326286496a795e87faf056c07ecb6",
                 "FAM.vs.html:md5,a749380edef4653dade663534ddcfbd6",
-                "HG002_Revio_whatshap_stats.gtf.gz:md5,c95fc3486a300c2c6bdc88afe5dc127a",
-                "HG002_Revio_whatshap_stats.gtf.gz.tbi:md5,c75ae1abe997ead58f579498187ac6a2",
-                "HG002_Revio_whatshap_stats.tsv:md5,f8e8c0027051e776a9ff3a3fe518d196",
-                "HG002_Revio_sambamba_depth.bed:md5,2fb508a9f2682c986cf07be975643bf5",
-                "HG002_Revio_copynum_sawfish.bedgraph:md5,a133cc7c68b0685122ce17070ea58704",
-                "HG002_Revio_depth_sawfish.bw:md5,797e2b7a1cfa43876aa7ee2901301659",
-                "HG002_Revio_gc_bias_corrected_depth_sawfish.bw:md5,797e2b7a1cfa43876aa7ee2901301659",
-                "HG002_Revio_hificnv.copynum.bedgraph:md5,c5aa835abf6ae2d2bb46c60cec7fcd38",
-                "HG002_Revio_hificnv.depth.bw:md5,c9b3e51d0e48df788857aaa104ffa864",
-                "HG002_Revio_hificnv.maf.bw:md5,dd73fd6dc96bca774cbaade8e199f6fd",
-                "HG002_Revio_maf_sawfish.bw:md5,dd73fd6dc96bca774cbaade8e199f6fd",
-                "HG002_Revio_pbcpgtools.combined.bw:md5,6ecc19e28303a4271ef0a803d88b0d1d",
-                "HG002_Revio_pbcpgtools.hap1.bw:md5,bf71ec4686a9ebd6903c886e2d612dd4",
-                "HG002_Revio_pbcpgtools.hap2.bw:md5,f712cbadf2757e85641be0171b21b54d"
+                "HG002_Revio_whatshap_stats.gtf.gz:md5,bf0cad1ea2534b19efbf14f80e9606d0",
+                "HG002_Revio_whatshap_stats.gtf.gz.tbi:md5,bdea257624c090d9563cc20f835b5b92",
+                "HG002_Revio_whatshap_stats.tsv:md5,b1a9da8092c740d4b7abec5af734eef0",
+                "HG002_Revio_sambamba_depth.bed:md5,b3d30778daacc696fc15159dd86d1211",
+                "HG002_Revio_copynum_sawfish.bedgraph:md5,035508c2ed50050144632a54b60453eb",
+                "HG002_Revio_depth_sawfish.bw:md5,0f2388d565456986f628932e6a1e1778",
+                "HG002_Revio_gc_bias_corrected_depth_sawfish.bw:md5,0f2388d565456986f628932e6a1e1778",
+                "HG002_Revio_hificnv.copynum.bedgraph:md5,d9f899d17bebcbb6e1b3e4a593ece3d8",
+                "HG002_Revio_hificnv.depth.bw:md5,73951a6eb4f47f0f5f3c89a9243bbbcf",
+                "HG002_Revio_hificnv.maf.bw:md5,c56d5595cc537591a4bda214715ef223",
+                "HG002_Revio_maf_sawfish.bw:md5,c56d5595cc537591a4bda214715ef223",
+                "HG002_Revio_pbcpgtools.combined.bw:md5,313535b2c3f653e78affd6e32c99a1d3",
+                "HG002_Revio_pbcpgtools.hap1.bw:md5,fe98da5500087326cace4262925b54b9",
+                "HG002_Revio_pbcpgtools.hap2.bw:md5,e452d2986e38ba275033e8e613183b8d"
+            ],
+            [
+                
             ],
             [
                 [
-                    "HG002_Revio_haplotagged.bam",
-                    "4914da895c558bc7a096ad9969bebf3f"
+                    "HG002_Revio_haplotagged.cram",
+                    "f8c3b1118e5539d5593a03a469de541c"
                 ],
                 [
                     "HG002_Revio_aligned_assembly.cram",
@@ -841,7 +844,7 @@
                 ]
             ],
             [
-
+                
             ]
         ],
         "timestamp": "2026-07-17T13:28:43.528525388",
