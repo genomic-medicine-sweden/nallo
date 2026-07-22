@@ -289,7 +289,7 @@
                     },
                     "peddy": {
                         "branch": "master",
-                        "git_sha": "f6cba554dee5a4e180a40f5b1d5df651848d95b9",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"]
                     },
                     "rhocall/viz": {
