@@ -207,3 +207,6 @@ tool:
   csvtk:
     citation: "csvtk"
     bibliography: "Wei Shen (2026) csvtk: a cross-platform, efficient and practical CSV/TSV toolkit. https://github.com/shenwei356/csvtk"
+  pbmm2:
+    citation: "pbmm2 (Li 2022)"
+    bibliography: "Li H. pbmm2: PacBio's implementation of minimap2 for PacBio data. Bioinformatics. 2022;38(10):2621-2623. doi:10.1093/bioinformatics/btac123"

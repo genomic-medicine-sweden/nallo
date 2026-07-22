@@ -31,6 +31,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1163](https://github.com/genomic-medicine-sweden/nallo/pull/1163) - Added `--methylation_callers` parameter to control which methylation callers are active, following the same pattern as `--sv_callers`
 - [#1198](https://github.com/genomic-medicine-sweden/nallo/pull/1198) - Added parameter `--phased` for GENMOD models if phasing is not skipped
 - [#1204](https://github.com/genomic-medicine-sweden/nallo/pull/1204), [#1211](https://github.com/genomic-medicine-sweden/nallo/pull/1211) - Added nf-tests for `annotate_methylation` subworkflow
+- [#1208](https://github.com/genomic-medicine-sweden/nallo/pull/1208) - Added pbmm2 as reads aligner option in `ALIGN` subworkflow
+- [#1208](https://github.com/genomic-medicine-sweden/nallo/pull/1208) - Added `SAMTOOLS_CALMD` to add MD tag needed for sniffles after pbmm2
+- [#1208](https://github.com/genomic-medicine-sweden/nallo/pull/1208) - Added new read group param to `CONVERT_INPUT_FASTQS` config to add RG, SM and DS tags to bam when converting with `SAMTOOLS_IMPORT` and read aligner is pbmm2
 - [#1209](https://github.com/genomic-medicine-sweden/nallo/pull/1209) - Added tests for `clean_sniffles`
 
 ### Changed
@@ -136,6 +139,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                                  | `--mitorsaw_minimum_read_count` |
 |                                  | `--mitorsaw_minimum_maf`        |
 | `--run_methbat` / `--run_modkit` | `--methylation_callers`         |
+|                                  | `--read_aligner`                |
+|                                  | `--pbmm2_preset`                |
 |                                  | `--glnexus_config`              |
 
 > [!NOTE]
@@ -156,6 +161,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | genmod/models                  | 3.10.2      | 3.12.0      |
 | genmod/score                   | 3.10.2      | 3.12.0      |
 | mitorsaw/haplotype             |             | 0.2.9       |
+| pbmm2/align                    |             | 26.2.0      |
+| samtools/calmd                 |             | 1.24        |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

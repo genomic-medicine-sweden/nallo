@@ -144,6 +144,10 @@ The majority of subworkflows depend on the alignment subworkflow which requires 
 
 Turned off with `--skip_alignment`.
 
+!!!info "Using pbmm2 with fastq files"
+
+    pbmm2 can be used to align the reads to the reference. If you are running the pipeline with fastq files as input, they will be converted to bam files for the analysis, and a `DS:READTYPE=CCS` tag will be added to the header. Without this tag, pbmm2 will not be able to run successfully. This tag is only added under these conditions (pbmm2 as aligner and fastq as input).
+
 #### Sex check
 
 Some subworkflows are sex-dependent and need a sex-inference step if samples are input with unknown sex. This step requires `--somalier_sites`.

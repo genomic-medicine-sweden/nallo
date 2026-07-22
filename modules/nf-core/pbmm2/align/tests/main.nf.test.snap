@@ -1,0 +1,54 @@
+{
+    "pbmm2 - bam": {
+        "content": [
+            {
+                "bam": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.bam:md5,f2be1fe20bbccf66afae237452e112cd"
+                    ]
+                ],
+                "versions_pbmm2": [
+                    [
+                        "PBMM2_ALIGN",
+                        "pbmm2",
+                        "26.2.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-01T15:03:18.017362993",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.4"
+        }
+    },
+    "pbmm2  - bam - stub": {
+        "content": [
+            {
+                "bam": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_pbmm2": [
+                    [
+                        "PBMM2_ALIGN",
+                        "pbmm2",
+                        "26.2.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-01T15:03:21.711112389",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.4"
+        }
+    }
+}

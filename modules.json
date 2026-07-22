@@ -306,6 +306,11 @@
                         "git_sha": "64bb01afeed82185575118fb35c87767512e5dae",
                         "installed_by": ["modules"]
                     },
+                    "pbmm2/align": {
+                        "branch": "master",
+                        "git_sha": "4c0a7271c05babd2226ce94c502d75a73228aa06",
+                        "installed_by": ["modules"]
+                    },
                     "peddy": {
                         "branch": "master",
                         "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
@@ -320,6 +325,11 @@
                     "sambamba/depth": {
                         "branch": "master",
                         "git_sha": "e77ac7823fd6c24218114bf3073207534a0ece34",
+                        "installed_by": ["modules"]
+                    },
+                    "samtools/calmd": {
+                        "branch": "master",
+                        "git_sha": "9339809fcb90af8a8b7051e6cd914894d5c52002",
                         "installed_by": ["modules"]
                     },
                     "samtools/convert": {
