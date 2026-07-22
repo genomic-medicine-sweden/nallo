@@ -98,6 +98,7 @@ workflow NALLO {
     ch_gens_coverage_bins
     ch_gens_panel_of_normals_female
     ch_gens_panel_of_normals_male
+    ch_glnexus_config
     ch_hgnc_ids
     ch_samplesheet
     ch_methbat_regions
@@ -150,6 +151,7 @@ workflow NALLO {
     val_plot_chromograph_coverage
     val_pre_vep_snv_filter_expression
     val_premapped
+    val_read_aligner
     val_sentieon_tech
     val_skip_alignment
     val_skip_annotate_paralogs
@@ -246,6 +248,8 @@ workflow NALLO {
             ALIGN(
                 ch_align_in,
                 ch_fasta,
+                ch_fai,
+                val_read_aligner,
             )
 
             ch_aligned_for_merge = ALIGN.out.bam
@@ -523,6 +527,7 @@ workflow NALLO {
             ch_fasta,
             ch_fai,
             ch_vcfexpress_prelude,
+            ch_glnexus_config,
         )
 
         // Grouping VCF, containing one sample with all regions except chrM, as we do not want mitochondrial variants in the deepvariant report for now.

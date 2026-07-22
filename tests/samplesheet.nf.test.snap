@@ -850,7 +850,7 @@
                 ],
                 [
                     "FAM_snvs_annotated_ranked_clinical.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=63, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=61, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_snvs_annotated_ranked_research.vcf.gz",
@@ -873,7 +873,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-14T14:16:28.399824196",
+        "timestamp": "2026-07-17T13:28:43.528525388",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"

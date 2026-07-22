@@ -11,7 +11,7 @@ nextflow_workflow {
                 """
                 input[0] = [
                     [ id:'test', family_id:'FAM'],
-                    file(params.modules_testdata_base_path + 'generic/csv/test.csv', checkIfExists: true)
+                    file(params.modules_testdata_base_path + 'generic/tsv/test.tsv', checkIfExists: true)
                 ]
                 """
             }
@@ -32,11 +32,11 @@ nextflow_workflow {
                 input[0] = channel.of(
                     [
                         [ id:'test', family_id:'FAM' ],
-                        file(params.modules_testdata_base_path + 'generic/csv/test.csv', checkIfExists: true),
+                        file(params.modules_testdata_base_path + 'generic/tsv/test.tsv', checkIfExists: true),
                     ],
                     [
                         [ id:'test2', family_id:'FAM' ],
-                        file(params.modules_testdata_base_path + 'generic/csv/test2.csv', checkIfExists: true),
+                        file(params.modules_testdata_base_path + 'generic/tsv/test.tsv', checkIfExists: true),
                     ]
                 )
                 """
@@ -60,7 +60,7 @@ nextflow_workflow {
                 """
                 input[0] = [
                     [ id:'test', family_id:'FAM'],
-                    file(params.modules_testdata_base_path + 'generic/csv/test.csv', checkIfExists: true)
+                    file(params.modules_testdata_base_path + 'generic/tsv/test.tsv', checkIfExists: true)
                 ]
                 """
             }
@@ -84,11 +84,11 @@ nextflow_workflow {
                 input[0] = channel.of(
                     [
                         [ id:'test', family_id:'FAM' ],
-                        file(params.modules_testdata_base_path + 'generic/csv/test.csv', checkIfExists: true),
+                        file(params.modules_testdata_base_path + 'generic/tsv/test.tsv', checkIfExists: true),
                     ],
                     [
                         [ id:'test2', family_id:'FAM' ],
-                        file(params.modules_testdata_base_path + 'generic/csv/test2.csv', checkIfExists: true),
+                        file(params.modules_testdata_base_path + 'generic/tsv/test.tsv', checkIfExists: true),
                     ]
                 )
                 """

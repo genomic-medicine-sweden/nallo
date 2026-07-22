@@ -34,7 +34,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1194](https://github.com/genomic-medicine-sweden/nallo/pull/1194) - Added new `concatenated_haplotypes` output to `GENOME_ASSEMBLY`
 - [#1163](https://github.com/genomic-medicine-sweden/nallo/pull/1163) - Added `--methylation_callers` parameter to control which methylation callers are active, following the same pattern as `--sv_callers`
 - [#1198](https://github.com/genomic-medicine-sweden/nallo/pull/1198) - Added parameter `--phased` for GENMOD models if phasing is not skipped
-- [#1204](https://github.com/genomic-medicine-sweden/nallo/pull/1204) - Added nf-tests for `annotate_methylation` subworkflow
+- [#1204](https://github.com/genomic-medicine-sweden/nallo/pull/1204), [#1211](https://github.com/genomic-medicine-sweden/nallo/pull/1211) - Added nf-tests for `annotate_methylation` subworkflow
+- [#1208](https://github.com/genomic-medicine-sweden/nallo/pull/1208) - Added pbmm2 as reads aligner option in `ALIGN` subworkflow
+- [#1208](https://github.com/genomic-medicine-sweden/nallo/pull/1208) - Added `SAMTOOLS_CALMD` to add MD tag needed for sniffles after pbmm2
+- [#1208](https://github.com/genomic-medicine-sweden/nallo/pull/1208) - Added new read group param to `CONVERT_INPUT_FASTQS` config to add RG, SM and DS tags to bam when converting with `SAMTOOLS_IMPORT` and read aligner is pbmm2
+- [#1209](https://github.com/genomic-medicine-sweden/nallo/pull/1209) - Added tests for `clean_sniffles`
 
 ### Changed
 
@@ -105,6 +109,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1185](https://github.com/genomic-medicine-sweden/nallo/pull/1185) - Rename nf-dev-guidelines config to `contribution-guidelines-config.yaml`.
 - [#1197](https://github.com/genomic-medicine-sweden/nallo/pull/1197) - Updated all genmod modules
 - [#1196](https://github.com/genomic-medicine-sweden/nallo/pull/1196) - Updated SVDB modules
+- [#1206](https://github.com/genomic-medicine-sweden/nallo/pull/1206) - Changed default glnexus config from `DeepVariant_unfiltered` to a custom config in `assets/` due to unfixed [bug](https://github.com/dnanexus-rnd/GLnexus/issues/286)?
 
 ### Removed
 
@@ -140,6 +145,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `--run_methbat` / `--run_modkit` | `--methylation_callers`         |
 |                                  | `--skip_portello`               |
 |                                  | `--aligner`                     |
+|                                  | `--read_aligner`                |
+|                                  | `--pbmm2_preset`                |
+|                                  | `--glnexus_config`              |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -164,6 +172,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | genmod/models                  | 3.10.2      | 3.12.0      |
 | genmod/score                   | 3.10.2      | 3.12.0      |
 | mitorsaw/haplotype             |             | 0.2.9       |
+| pbmm2/align                    |             | 26.2.0      |
+| samtools/calmd                 |             | 1.24        |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

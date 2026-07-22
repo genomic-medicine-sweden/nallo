@@ -48,6 +48,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     ch_gens_coverage_bins
     ch_gens_panel_of_normals_female
     ch_gens_panel_of_normals_male
+    ch_glnexus_config
     ch_hgnc_ids
     ch_samplesheet
     ch_methbat_regions
@@ -100,6 +101,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_plot_chromograph_coverage
     val_pre_vep_snv_filter_expression
     val_premapped
+    val_read_aligner
     val_sentieon_tech
     val_skip_alignment
     val_skip_annotate_paralogs
@@ -157,6 +159,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         ch_gens_coverage_bins,
         ch_gens_panel_of_normals_female,
         ch_gens_panel_of_normals_male,
+        ch_glnexus_config,
         ch_hgnc_ids,
         ch_samplesheet,
         ch_methbat_regions,
@@ -209,6 +212,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_plot_chromograph_coverage,
         val_pre_vep_snv_filter_expression,
         val_premapped,
+        val_read_aligner,
         val_sentieon_tech,
         val_skip_alignment,
         val_skip_annotate_paralogs,
@@ -457,6 +461,7 @@ workflow {
         createReferenceChannelFromPath(params.gens_coverage_bins),
         createReferenceChannelFromPath(params.gens_panel_of_normals_female, '', 'female_pon'),
         createReferenceChannelFromPath(params.gens_panel_of_normals_male, '', 'male_pon'),
+        createReferenceChannelFromPath(params.glnexus_config, channel.value([[id: 'glnexus_config'], "${projectDir}/assets/glnexus_config_dp1.yml"])),
         createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', channel.value([])).map { hgnc_id_list -> hgnc_id_list[0].toString() }.collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true).map { file -> [[id: 'hgnc_ids'], file] }.collect(),
         PIPELINE_INITIALISATION.out.samplesheet,
         createReferenceChannelFromPath(params.methbat_regions),
@@ -509,6 +514,7 @@ workflow {
         params.plot_chromograph_coverage,
         params.pre_vep_snv_filter_expression,
         params.premapped,
+        params.read_aligner,
         params.sentieon_tech,
         params.skip_alignment,
         params.skip_annotate_paralogs,
