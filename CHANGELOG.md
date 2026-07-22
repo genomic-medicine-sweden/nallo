@@ -30,8 +30,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1194](https://github.com/genomic-medicine-sweden/nallo/pull/1194) - Added new `concatenated_haplotypes` output to `GENOME_ASSEMBLY`
 - [#1163](https://github.com/genomic-medicine-sweden/nallo/pull/1163) - Added `--methylation_callers` parameter to control which methylation callers are active, following the same pattern as `--sv_callers`
 - [#1198](https://github.com/genomic-medicine-sweden/nallo/pull/1198) - Added parameter `--phased` for GENMOD models if phasing is not skipped
-- [#1206](https://github.com/genomic-medicine-sweden/nallo/pull/1206) - Added new `glnexus_config` parameter
-- [#1206](https://github.com/genomic-medicine-sweden/nallo/pull/1206) - Added default custom glnexus config in `assets/`
 - [#1204](https://github.com/genomic-medicine-sweden/nallo/pull/1204), [#1211](https://github.com/genomic-medicine-sweden/nallo/pull/1211) - Added nf-tests for `annotate_methylation` subworkflow
 
 ### Changed
@@ -103,6 +101,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1185](https://github.com/genomic-medicine-sweden/nallo/pull/1185) - Rename nf-dev-guidelines config to `contribution-guidelines-config.yaml`.
 - [#1197](https://github.com/genomic-medicine-sweden/nallo/pull/1197) - Updated all genmod modules
 - [#1196](https://github.com/genomic-medicine-sweden/nallo/pull/1196) - Updated SVDB modules
+- [#1206](https://github.com/genomic-medicine-sweden/nallo/pull/1206) - Changed default glnexus config from `DeepVariant_unfiltered` to a custom config in `assets/` due to unfixed [bug](https://github.com/dnanexus-rnd/GLnexus/issues/286)?
 
 ### Removed
 
