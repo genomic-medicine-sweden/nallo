@@ -102,6 +102,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1185](https://github.com/genomic-medicine-sweden/nallo/pull/1185) - Rename nf-dev-guidelines config to `contribution-guidelines-config.yaml`.
 - [#1197](https://github.com/genomic-medicine-sweden/nallo/pull/1197) - Updated all genmod modules
 - [#1196](https://github.com/genomic-medicine-sweden/nallo/pull/1196) - Updated SVDB modules
+- [#1206](https://github.com/genomic-medicine-sweden/nallo/pull/1206) - Changed default glnexus config from `DeepVariant_unfiltered` to a custom config in `assets/` due to unfixed [bug](https://github.com/dnanexus-rnd/GLnexus/issues/286)?
 
 ### Removed
 
@@ -135,6 +136,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                                  | `--mitorsaw_minimum_read_count` |
 |                                  | `--mitorsaw_minimum_maf`        |
 | `--run_methbat` / `--run_modkit` | `--methylation_callers`         |
+|                                  | `--glnexus_config`              |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
