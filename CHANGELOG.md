@@ -5,9 +5,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 0.12.1 - [2026-07-22]
 
-### Added
-
-- [#1214](https://github.com/genomic-medicine-sweden/nallo/pull/1214) - Added new auto-generated container config files (new with nf-core/tools update)
 
 ### `Fixed`
 
