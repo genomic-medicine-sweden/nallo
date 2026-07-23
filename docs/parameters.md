@@ -54,6 +54,7 @@ Define where the pipeline should find input data and save output data.
 | `vep_cache` | A path to the VEP cache location | `string` |  |  |  |
 | `target_regions` | A BED file with regions of interest. | `string` |  |  |  |
 | `methbat_regions` | A tsv file with only regions of interest (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv) or with both regions and background cohort values (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv), made with methbat build | `string` |  |  |  |
+| `cramino_regions` | A BED file used to filter reads to on-target regions before cramino QC. By default this is the same as `target_regions`. | `string` |  |  |  |
 | `modkit_call_regions` | A BED file with regions of interest for the methylation pileups. By default this is the same as `target_regions`. | `string` |  |  |  |
 | `mosdepth_regions` | A BED file with regions of interest used in mosdepth. By default this is the same as `qc_regions`. | `string` |  |  |  |
 | `mosdepth_d4_output` | Should mosdepth output d4-files. | `boolean` | False |  |  |
