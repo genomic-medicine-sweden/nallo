@@ -528,7 +528,7 @@ workflow {
         params.skip_repeat_annotation,
         params.skip_repeat_calling,
         params.skip_mitochondrial_calling,
-        !params.sambamba_regions,
+        params.skip_sambamba_depth,
         params.skip_sex_check,
         params.skip_snv_annotation,
         params.skip_snv_calling,
