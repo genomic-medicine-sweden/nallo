@@ -1,7 +1,7 @@
 {
     "Test family id same as sample id": {
         "content": [
-            191,
+            189,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -161,11 +161,9 @@
                 "METHBAT_PROFILE": {
                     "methbat": "0.17.0-7c5e249"
                 },
-                "MINIMAP2_ALIGN": {
-                    "minimap2": "2.29-r1283"
-                },
-                "MINIMAP2_INDEX": {
-                    "minimap2": "2.29-r1283"
+                "MM2PLUS_ALIGN": {
+                    "mm2plus": 1.3,
+                    "samtools": 1.24
                 },
                 "MOSDEPTH": {
                     "mosdepth": "0.3.11"
@@ -511,10 +509,10 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-07-14T14:15:01.123774723",
+        "timestamp": "2026-07-23T16:24:13.678334886",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.07.0"
         }
     }
 }

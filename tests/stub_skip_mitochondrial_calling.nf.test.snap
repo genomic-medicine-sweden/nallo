@@ -1,7 +1,7 @@
 {
     "Test skip_mitochondrial_calling": {
         "content": [
-            34,
+            33,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -42,11 +42,9 @@
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
                 },
-                "MINIMAP2_ALIGN": {
-                    "minimap2": "2.29-r1283"
-                },
-                "MINIMAP2_INDEX": {
-                    "minimap2": "2.29-r1283"
+                "MM2PLUS_ALIGN": {
+                    "mm2plus": 1.3,
+                    "samtools": 1.24
                 },
                 "RELATE_INFER": {
                     "somalier": "0.2.18"
@@ -120,15 +118,15 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-14T13:55:20.694142535",
+        "timestamp": "2026-07-23T16:26:33.359292494",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.07.0"
         }
     },
     "Test mitochondrial calling runs by default": {
         "content": [
-            40,
+            39,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -175,14 +173,12 @@
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
                 },
-                "MINIMAP2_ALIGN": {
-                    "minimap2": "2.29-r1283"
-                },
-                "MINIMAP2_INDEX": {
-                    "minimap2": "2.29-r1283"
-                },
                 "MITORSAW_HAPLOTYPE": {
                     "mitorsaw": "0.2.9-0dc8e58"
+                },
+                "MM2PLUS_ALIGN": {
+                    "mm2plus": 1.3,
+                    "samtools": 1.24
                 },
                 "RELATE_INFER": {
                     "somalier": "0.2.18"
@@ -256,10 +252,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-14T13:53:38.664579914",
+        "timestamp": "2026-07-23T16:26:10.559542761",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.07.0"
         }
     }
 }

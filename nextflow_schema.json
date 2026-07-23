@@ -1031,8 +1031,8 @@
                 "read_aligner": {
                     "type": "string",
                     "default": "minimap2",
-                    "description": "Which aligner to use for read alignment. Supported arguments are minimap2 or pbmm2.",
-                    "enum": ["minimap2", "pbmm2"]
+                    "description": "Which aligner to use for read alignment. Supported arguments are mm2plus, minimap2 or pbmm2.",
+                    "enum": ["minimap2", "pbmm2", "mm2plus"]
                 },
                 "pbmm2_preset": {
                     "type": "string",
@@ -1044,6 +1044,12 @@
                     "type": "string",
                     "default": null,
                     "description": "Glnexus config to use for merging gVCFs. If no file is provided, the default config `assets/glnexus_config_dp1.yml` will be used."
+                },
+                "assembly_aligner": {
+                    "type": "string",
+                    "default": "mm2plus",
+                    "description": "Which aligner to use for assembly alignment. Supported arguments are mm2plus or minimap2.",
+                    "enum": ["mm2plus", "minimap2"]
                 }
             },
             "required": ["preset"]

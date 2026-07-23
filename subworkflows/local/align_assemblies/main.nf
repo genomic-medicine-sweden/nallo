@@ -1,5 +1,6 @@
 include { MINIMAP2_ALIGN   } from '../../../modules/nf-core/minimap2/align/main'
 include { MINIMAP2_INDEX   } from '../../../modules/nf-core/minimap2/index/main'
+include { MM2PLUS_ALIGN    } from '../../../modules/nf-core/mm2plus/align/main'
 include { SAMTOOLS_MERGE   } from '../../../modules/nf-core/samtools/merge/main'
 include { SAMTOOLS_VIEW    } from '../../../modules/nf-core/samtools/view/main'
 include { SAMTOOLS_CONVERT } from '../../../modules/nf-core/samtools/convert/main'
@@ -11,24 +12,42 @@ workflow ALIGN_ASSEMBLIES {
     ch_fasta // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fai // channel: [mandatory] [ val(meta), path(fai)   ]
     val_cram_output // bool: Publish alignments as CRAM (true) or BAM (false)
+    val_assembly_aligner // string: Which aligner to use for assembly alignment
 
     main:
 
-    MINIMAP2_INDEX(
-        ch_fasta
-    )
+    if (val_assembly_aligner == 'mm2plus') {
 
-    MINIMAP2_ALIGN(
-        ch_assembly,
-        MINIMAP2_INDEX.out.index.collect(),
-        true,
-        'bai',
-        false,
-        false,
-    )
+        MM2PLUS_ALIGN(
+            ch_assembly,
+            ch_fasta,
+            true,
+            'bai',
+            false,
+            false,
+        )
+        ch_aligned_assemblies_bam = MM2PLUS_ALIGN.out.bam
+    }
+    else {
+
+        MINIMAP2_INDEX(
+            ch_fasta
+        )
+
+        MINIMAP2_ALIGN(
+            ch_assembly,
+            MINIMAP2_INDEX.out.index.collect(),
+            true,
+            'bai',
+            false,
+            false,
+        )
+
+        ch_aligned_assemblies_bam = MINIMAP2_ALIGN.out.bam
+    }
 
     TAGBAM(
-        MINIMAP2_ALIGN.out.bam
+        ch_aligned_assemblies_bam
     )
 
     ch_assemblies_per_sample = TAGBAM.out.bam

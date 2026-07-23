@@ -76,6 +76,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     ch_vep_cache_unprocessed
     ch_vep_plugin_files
     val_alignment_processes
+    val_assembly_aligner
     val_bigwig_modcodes
     val_cram_output
     val_create_hificnv_maf_track
@@ -185,6 +186,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         ch_vep_cache_unprocessed,
         ch_vep_plugin_files,
         val_alignment_processes,
+        val_assembly_aligner,
         val_bigwig_modcodes,
         val_skip_phasing && val_cram_output,
         val_cram_output,
@@ -482,6 +484,7 @@ workflow {
         createReferenceChannelFromPath(params.vep_cache, channel.value([[], []])),
         createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', channel.value([])),
         params.alignment_processes,
+        params.assembly_aligner,
         params.bigwig_modcodes,
         params.alignment_output_format == 'cram',
         params.create_hificnv_maf_track,

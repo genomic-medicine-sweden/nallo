@@ -1,7 +1,7 @@
 {
     "test profile | --target_regions null --alignment_output_format cram": {
         "content": [
-            221,
+            219,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -164,14 +164,12 @@
                 "METHBAT_PROFILE": {
                     "methbat": "0.17.0-7c5e249"
                 },
-                "MINIMAP2_ALIGN": {
-                    "minimap2": "2.29-r1283"
-                },
-                "MINIMAP2_INDEX": {
-                    "minimap2": "2.29-r1283"
-                },
                 "MITORSAW_HAPLOTYPE": {
                     "mitorsaw": "0.2.9-0dc8e58"
+                },
+                "MM2PLUS_ALIGN": {
+                    "mm2plus": 1.3,
+                    "samtools": 1.24
                 },
                 "MOSDEPTH": {
                     "mosdepth": "0.3.11"
@@ -710,8 +708,8 @@
                 "HG002_Revio_chromograph_coverage_chrM.png:md5,f8b3af5db305513f712f17941962f315",
                 "HG002_Revio_chromograph_coverage_chrX.png:md5,396d5ba4d250214a723094c4449137dd",
                 "HG002_Revio_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
-                "HG002_Revio_pbcpgtools.combined.bed.gz:md5,1d629cc1fe5ceb77270b710279670c08",
-                "HG002_Revio_pbcpgtools.combined.bed.gz.tbi:md5,878dbe40d7e4840ede21300245d40984",
+                "HG002_Revio_pbcpgtools.combined.bed.gz:md5,41306143df93d5714a19a5e3c3d81a84",
+                "HG002_Revio_pbcpgtools.combined.bed.gz.tbi:md5,2ef1e4aee34de43cc8a95a426eae1cae",
                 "HG002_Revio_pbcpgtools.hap1.bed.gz:md5,d3dbe945e97613fd96064ede31003516",
                 "HG002_Revio_pbcpgtools.hap1.bed.gz.tbi:md5,a00ad9e00d45f8b86aeeab029cf54651",
                 "HG002_Revio_pbcpgtools.hap2.bed.gz:md5,3a3756145c1efbf4ba594132b5cd0168",
@@ -737,18 +735,18 @@
                 "multiqc_bcftools_stats.txt:md5,f8f254c8471497f024fc70a593a226f2",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,2deabd92df5e8a789d971b8adcb4d957",
-                "multiqc_general_stats.txt:md5,d586b49b7e9c4de6c200903071de8814",
+                "multiqc_general_stats.txt:md5,2be1c44254b7e8234d77c3648e696577",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,b983debaadc2eff7c0287d9290cbfb78",
                 "somalier_stats.txt:md5,e126d444d466c0e6a21e8ae56ddcf819",
                 "whatshap-stats-table.txt:md5,f3cd43e9c962d4a0293706d7836ffade",
                 "FAM_paraphase_annotated.tsv:md5,f95c3b89013784ed27feb71c46c09d85",
                 "FAM.ped:md5,bd5cec27ba7337a85cf98e787131e2b5",
-                "HG002_Revio_cramino_aligned_phased.arrow:md5,59218ecb157374692c12a6ffc63ad0e0",
-                "HG002_Revio_cramino_aligned.arrow:md5,ab44441ba16a9c1d0f938fd5e51d630f",
+                "HG002_Revio_cramino_aligned_phased.arrow:md5,7bc071eae31b9814d3b039c84267f13b",
+                "HG002_Revio_cramino_aligned.arrow:md5,2b75bc95273d025ea2b4eadf0de1bc10",
                 "HG002_Revio.mosdepth.global.dist.txt:md5,e550f23c23fb25565de66e50d8cedf84",
                 "HG002_Revio.mosdepth.region.dist.txt:md5,37e272c54826150c8456c7859f3aae4f",
-                "HG002_Revio.mosdepth.summary.txt:md5,14abaad13cc529c1e93675d6b7f71acf",
-                "HG002_Revio.regions.bed.gz:md5,147fd862f577cd9d99f565a69ff13e5b",
+                "HG002_Revio.mosdepth.summary.txt:md5,5b311a97cbd7a3180c87756415a53ffa",
+                "HG002_Revio.regions.bed.gz:md5,2300f79224159662b0aeb7728c10b9c8",
                 "HG002_Revio.regions.bed.gz.csi:md5,c5d556d9609ea10975e041bf58781ed6",
                 "FAM.het_check.csv:md5,ee8bee8a1ba8fc08870c7722ba5c19a9",
                 "FAM.het_check.png:md5,37e02cf7ba185ab0fa977ead59017f76",
@@ -765,9 +763,9 @@
                 "HG002_Revio_whatshap_stats.tsv:md5,f9d9eb77e0c69869274d8259daef1af0",
                 "HG002_Revio_sambamba_depth.bed:md5,b3d30778daacc696fc15159dd86d1211",
                 "HG002_Revio_hificnv.copynum.bedgraph:md5,d9f899d17bebcbb6e1b3e4a593ece3d8",
-                "HG002_Revio_hificnv.depth.bw:md5,73951a6eb4f47f0f5f3c89a9243bbbcf",
+                "HG002_Revio_hificnv.depth.bw:md5,0fd0b7086113194796592b3be4dd1593",
                 "HG002_Revio_hificnv.maf.bw:md5,c56d5595cc537591a4bda214715ef223",
-                "HG002_Revio_pbcpgtools.combined.bw:md5,431b1e98239778d0d672b769dbcc28a9",
+                "HG002_Revio_pbcpgtools.combined.bw:md5,a2f46c837037285c21a3a6f2882c5fd4",
                 "HG002_Revio_pbcpgtools.hap1.bw:md5,2a73265e47263e0b0eb49b4d1650d148",
                 "HG002_Revio_pbcpgtools.hap2.bw:md5,50bfa45bc454c23536fe878f47aea5bd"
             ],
@@ -778,7 +776,7 @@
                 ],
                 [
                     "HG002_Revio_aligned_assembly.bam",
-                    "2f1773961a831fa3e4fd0b2085f5df30"
+                    "1ea737528d5ae4a5ca723993a9d13847"
                 ],
                 [
                     "HG002_Revio_spanning_trgt.bam",
@@ -830,10 +828,10 @@
                 
             ]
         ],
-        "timestamp": "2026-07-16T15:11:46.850298558",
+        "timestamp": "2026-07-23T16:20:38.011424341",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.07.0"
         }
     }
 }

@@ -1,5 +1,6 @@
 include { MINIMAP2_ALIGN } from '../../../modules/nf-core/minimap2/align/main'
 include { MINIMAP2_INDEX } from '../../../modules/nf-core/minimap2/index/main'
+include { MM2PLUS_ALIGN  } from '../../../modules/nf-core/mm2plus/align/main'
 include { PBMM2_ALIGN    } from '../../../modules/nf-core/pbmm2/align/main'
 include { SAMTOOLS_INDEX } from '../../../modules/nf-core/samtools/index/main'
 include { SAMTOOLS_CALMD } from '../../../modules/nf-core/samtools/calmd/main'
@@ -30,6 +31,20 @@ workflow ALIGN {
 
         ch_aligned_reads_bam = SAMTOOLS_CALMD.out.bam
         ch_aligned_reads_bai = SAMTOOLS_INDEX.out.index
+    }
+    if (val_aligner == 'mm2plus') {
+
+        MM2PLUS_ALIGN(
+            ch_ubam,
+            ch_fasta,
+            true,
+            'bai',
+            false,
+            false,
+        )
+
+        ch_aligned_reads_bam = MM2PLUS_ALIGN.out.bam
+        ch_aligned_reads_bai = MM2PLUS_ALIGN.out.index
     }
     else {
 
