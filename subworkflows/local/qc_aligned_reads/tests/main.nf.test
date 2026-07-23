@@ -21,7 +21,7 @@ nextflow_workflow {
                 input[2] = channel.of([[],[]])
                 input[3] = channel.of([[],[]])
                 input[4] = false
-                input[5] = false
+                input[5] = channel.of([[],[]])
                 """
             }
         }
@@ -71,7 +71,10 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
                 ])
                 input[4] = true
-                input[5] = true
+                input[5] = channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
+                ])
                 """
             }
         }
@@ -117,7 +120,7 @@ nextflow_workflow {
                 input[2] = channel.of([[],[]])
                 input[3] = channel.of([[],[]])
                 input[4] = false
-                input[5] = false
+                input[5] = channel.of([[],[]])
                 """
             }
         }
@@ -156,7 +159,10 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
                 ])
                 input[4] = true
-                input[5] = true
+                input[5] = channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true)
+                ])
                 """
             }
         }

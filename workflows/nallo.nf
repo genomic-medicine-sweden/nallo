@@ -97,6 +97,7 @@ workflow NALLO {
     ch_glnexus_config
     ch_hgnc_ids
     ch_samplesheet
+    ch_cramino_regions
     ch_methbat_regions
     ch_modkit_call_regions
     ch_mosdepth_regions
@@ -378,7 +379,7 @@ workflow NALLO {
             ch_mosdepth_regions,
             ch_sambamba_regions,
             !val_skip_sambamba_depth,
-            params.target_regions as boolean,
+            ch_cramino_regions,
         )
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.fastqc_zip.collect { _meta, metrics -> metrics }.ifEmpty([]))
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_summary.collect { _meta, metrics -> metrics })

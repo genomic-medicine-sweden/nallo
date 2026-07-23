@@ -308,7 +308,7 @@
                 "snvs/sample/HG002_ONT_C/HG002_ONT_C_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-22T16:46:04.778039",
+        "timestamp": "2026-07-23T09:08:22.193478",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"

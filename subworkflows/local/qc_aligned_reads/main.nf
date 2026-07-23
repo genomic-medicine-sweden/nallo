@@ -10,7 +10,7 @@ workflow QC_ALIGNED_READS {
     ch_mosdepth_bed // channel: [ val(meta), bed ]
     ch_sambamba_bed // channel: [ val(meta), bed ]
     run_sambamba_depth // bool: Should sambamba depth be run?
-    filter_ontarget // bool: Filter reads to on-target regions before cramino QC
+    ch_cramino_bed // channel: [ val(meta), bed ] or empty; filters reads to on-target regions before cramino QC
 
     main:
     ch_sambamba_depth_bed = channel.empty()
@@ -19,33 +19,27 @@ workflow QC_ALIGNED_READS {
         ch_bam_bai.map { meta, bam, _bai -> [meta, bam] }
     )
 
-    if (filter_ontarget) {
-        // Filter to on-target reads before cramino when running adaptive sampling
-        ch_bam_bai
-            .combine(ch_mosdepth_bed.map { _meta, bed -> bed }.toList())
-            .branch { _meta, _bam, _bai, bed ->
-                targeted: bed
-                wgs: true
-            }
-            .set { ch_cramino_branches }
+    ch_bam_bai
+        .combine(ch_cramino_bed.map { _meta, bed -> bed }.toList())
+        .branch { meta, bam, bai, bed ->
+            targeted: bed
+            wgs: !bed
+        }
+        .set { ch_cramino_branches }
 
-        SAMTOOLS_VIEW(
-            ch_cramino_branches.targeted.map { meta, bam, bai, _bed -> [meta, bam, bai] },
-            [[], [], []],
-            [[], []],
-            ch_cramino_branches.targeted.map { meta, _bam, _bai, bed -> [meta, bed] },
-            'bai',
+    SAMTOOLS_VIEW(
+        ch_cramino_branches.targeted.map { meta, bam, bai, _bed -> [meta, bam, bai] },
+        [[], [], []],
+        [[], []],
+        ch_cramino_branches.targeted.map { meta, _bam, _bai, bed -> [meta, bed] },
+        'bai',
+    )
+
+    ch_bam_bai_for_cramino = ch_cramino_branches.wgs
+        .map { meta, bam, bai, _bed -> [meta, bam, bai] }
+        .mix(
+            SAMTOOLS_VIEW.out.bam.join(SAMTOOLS_VIEW.out.bai)
         )
-
-        ch_bam_bai_for_cramino = ch_cramino_branches.wgs
-            .map { meta, bam, bai, _bed -> [meta, bam, bai] }
-            .mix(
-                SAMTOOLS_VIEW.out.bam.join(SAMTOOLS_VIEW.out.bai)
-            )
-    }
-    else {
-        ch_bam_bai_for_cramino = ch_bam_bai
-    }
 
     CRAMINO(
         ch_bam_bai_for_cramino
