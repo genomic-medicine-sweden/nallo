@@ -75,7 +75,6 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     ch_vcfexpress_prelude
     ch_vep_cache_unprocessed
     ch_vep_plugin_files
-    val_aligner
     val_alignment_processes
     val_bigwig_modcodes
     val_cram_output
@@ -186,7 +185,6 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         ch_vcfexpress_prelude,
         ch_vep_cache_unprocessed,
         ch_vep_plugin_files,
-        val_aligner,
         val_alignment_processes,
         val_bigwig_modcodes,
         val_skip_phasing && val_cram_output,
@@ -488,7 +486,6 @@ workflow {
         file("${projectDir}/assets/vcf_express_found_in_prelude.lua"),
         createReferenceChannelFromPath(params.vep_cache, channel.value([[], []])),
         createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', channel.value([])),
-        params.aligner,
         params.alignment_processes,
         params.bigwig_modcodes,
         params.alignment_output_format == 'cram',

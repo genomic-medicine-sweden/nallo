@@ -66,8 +66,6 @@ include { SAMTOOLS_CONVERT                                       } from '../modu
 include { MULTIQC                                                } from '../modules/nf-core/multiqc/main'
 include { PEDDY                                                  } from '../modules/nf-core/peddy/main'
 include { SPLITUBAM                                              } from '../modules/nf-core/splitubam/main'
-include { PBMM2_ALIGN                                            } from '../modules/nf-core/pbmm2/align/main'
-include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_PBMM2                 } from '../modules/nf-core/samtools/index/main'
 include { paramsSummaryMap                                       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc                                   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML                                 } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -125,7 +123,6 @@ workflow NALLO {
     ch_vcfexpress_prelude
     ch_vep_cache_unprocessed
     ch_vep_plugin_files
-    val_aligner
     val_alignment_processes
     val_bigwig_modcodes
     val_convert_unphased_aligned_reads_to_cram
@@ -233,7 +230,56 @@ workflow NALLO {
             else {
                 ch_unmapped = CONVERT_INPUT_FASTQS.out.bam
             }
+        }
+    }
 
+    //
+    // Hifiasm assembly and alignment to reference genome
+    //
+    if (!val_skip_genome_assembly) {
+
+        // Now, if we started with BAM files, we do alignment and split the BAM files (this is the main case),
+        // then we converted any FASTQs to BAMs, the original BAMs will have been split, and we can convert those
+        // to FASTQs for the assembly.
+        //
+        // We could possibly implement something where we would check if the converted BAM had an original FASTQ,
+        // then we could use that FASTQ directly for the assembly. But since this is a rare case, it's not implemented.
+        //
+        // If we didn't split the files, there's currently no need to take the converted BAMs,
+        // so we take the original FASTQs instead if there are any, and also convert the original BAMs to FASTQs,
+        // so we can use those for the assembly.
+        //
+        // Since starting with FASTQs is a rare case, no splitting of FASTQs alone just for the assembly is implemented
+
+        CONVERT_INPUT_BAMS(
+            val_skip_alignment || val_premapped || (val_alignment_processes == 1) ? ch_samplesheet : SPLITUBAM.out.bam.transpose(),
+            true,
+            false,
+        )
+
+        // contains all FASTQ files, including those not converted
+        ch_genome_assembly_input = CONVERT_INPUT_BAMS.out.fastq.groupTuple()
+
+        // Hifiasm assembly
+        GENOME_ASSEMBLY(
+            ch_genome_assembly_input,
+            val_hifiasm_mode == "trio-binning",
+            !val_skip_portello ? true : false,
+        )
+
+        ALIGN_ASSEMBLIES(
+            GENOME_ASSEMBLY.out.assembled_haplotypes,
+            ch_fasta,
+            ch_fai,
+            val_cram_output,
+        )
+
+        ch_assembly_bam_bai = ALIGN_ASSEMBLIES.out.unfiltered_bam.join(ALIGN_ASSEMBLIES.out.unfiltered_bai, failOnMismatch: true, failOnDuplicate: true)
+    }
+
+    if (!val_skip_alignment) {
+
+        if (!val_premapped) {
             /*
              * Create a grouping key per sample that records the number of split files,
              * allowing downstream merging to trigger as soon as all alignments of a sample are ready.
@@ -247,9 +293,10 @@ workflow NALLO {
 
             ALIGN(
                 ch_align_in,
-                ch_fasta,
+                !val_skip_portello ? GENOME_ASSEMBLY.out.concatenated_haplotypes : ch_fasta,
                 ch_fai,
                 val_read_aligner,
+                val_skip_portello,
             )
 
             ch_aligned_for_merge = ALIGN.out.bam
@@ -292,12 +339,13 @@ workflow NALLO {
 
             PORTELLO_ASSEMBLY(
                 ch_aligned_bam,
-                ch_assembly_bam_bai_updated_meta,
+                ch_assembly_bam_bai,
                 ch_fasta,
                 ch_fai,
             )
 
             ch_aligned_bam = PORTELLO_ASSEMBLY.out.bam.join(PORTELLO_ASSEMBLY.out.bai, failOnMismatch: true, failOnDuplicate: true)
+            PORTELLO_ASSEMBLY.out.bam.dump(tag: "portello out")
         }
 
         //
@@ -342,50 +390,6 @@ workflow NALLO {
         }
     }
 
-    //
-    // Hifiasm assembly and alignment to reference genome
-    //
-    if (!val_skip_genome_assembly) {
-
-        // Now, if we started with BAM files, we do alignment and split the BAM files (this is the main case),
-        // then we converted any FASTQs to BAMs, the original BAMs will have been split, and we can convert those
-        // to FASTQs for the assembly.
-        //
-        // We could possibly implement something where we would check if the converted BAM had an original FASTQ,
-        // then we could use that FASTQ directly for the assembly. But since this is a rare case, it's not implemented.
-        //
-        // If we didn't split the files, there's currently no need to take the converted BAMs,
-        // so we take the original FASTQs instead if there are any, and also convert the original BAMs to FASTQs,
-        // so we can use those for the assembly.
-        //
-        // Since starting with FASTQs is a rare case, no splitting of FASTQs alone just for the assembly is implemented
-
-        CONVERT_INPUT_BAMS(
-            val_skip_alignment || val_premapped || (val_alignment_processes == 1) ? ch_samplesheet : SPLITUBAM.out.bam.transpose(),
-            true,
-            false,
-        )
-
-        // contains all FASTQ files, including those not converted
-        ch_genome_assembly_input = CONVERT_INPUT_BAMS.out.fastq.groupTuple()
-
-        // Hifiasm assembly
-        GENOME_ASSEMBLY(
-            ch_genome_assembly_input,
-            val_hifiasm_mode == "trio-binning",
-            false,
-        )
-
-        ALIGN_ASSEMBLIES(
-            GENOME_ASSEMBLY.out.assembled_haplotypes,
-            ch_fasta,
-            ch_fai,
-            val_cram_output,
-        )
-        
-        ch_assembly_bam_bai_updated_meta = ALIGN_ASSEMBLIES.out.bam.join(ALIGN_ASSEMBLIES.out.bai, failOnMismatch: true, failOnDuplicate: true)
-
-    }
     //
     // Run read QC with FastQC, mosdepth and cramino
     //
@@ -1138,8 +1142,8 @@ workflow NALLO {
     )
 
     emit:
-    aligned_assemblies_bai              = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.filtered_bai // channel: [ val(meta), path(bai) ]
-    aligned_assemblies_bam              = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.filtered_bam // channel: [ val(meta), path(bam) ]
+    aligned_assemblies_bai              = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.bai // channel: [ val(meta), path(bai) ]
+    aligned_assemblies_bam              = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.bam // channel: [ val(meta), path(bam) ]
     aligned_assemblies_crai             = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.crai // channel: [ val(meta), path(crai) ]
     aligned_assemblies_cram             = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.cram // channel: [ val(meta), path(cram) ]
     aligned_assemblies_remapped_bam     = val_skip_portello ? channel.empty() : PORTELLO_ASSEMBLY.out.bam // channel: [ val(meta), path(bam) ]

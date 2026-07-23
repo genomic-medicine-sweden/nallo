@@ -1,7 +1,7 @@
 {
     "Test family id same as sample id": {
         "content": [
-            191,
+            199,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -227,7 +227,7 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_CALMD": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
@@ -241,13 +241,7 @@
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_INDEX_PBMM2": {
-                    "samtools": "1.23.1"
-                },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.23.1"
-                },
-                "SAMTOOLS_MERGE_UNFILTERED": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_SORT": {
@@ -339,6 +333,8 @@
                 "assembly/sample/HG002_Revio",
                 "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam",
                 "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam.bai",
+                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam.bai",
                 "assembly/stats",
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
@@ -537,10 +533,10 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-07-14T14:15:01.123774723",
+        "timestamp": "2026-07-23T13:53:44.568953546",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.07.0"
         }
     }
 }

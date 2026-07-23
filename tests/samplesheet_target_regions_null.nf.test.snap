@@ -1,7 +1,7 @@
 {
     "test profile | --target_regions null --alignment_output_format cram": {
         "content": [
-            221,
+            229,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -236,7 +236,7 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_CALMD": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
@@ -250,13 +250,7 @@
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_INDEX_PBMM2": {
-                    "samtools": "1.23.1"
-                },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.23.1"
-                },
-                "SAMTOOLS_MERGE_UNFILTERED": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_SORT": {
@@ -765,14 +759,14 @@
                 "multiqc_bcftools_stats.txt:md5,009029c6a1b29eee835cb7ef2eb38922",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,c57ab2d31d8ae3dacd26a6a88a771db5",
-                "multiqc_general_stats.txt:md5,175fea3821e260923c35cddc8c914e3a",
+                "multiqc_general_stats.txt:md5,9ae915a28ef64517d120c9f5a59c116c",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,276b94ef1d6eb3ccf84b2a9d20c52d43",
                 "somalier_stats.txt:md5,b1702cbb8557e85471accd5045ce275b",
-                "whatshap-stats-table.txt:md5,fdb1399557997801e497608e086c9b71",
+                "whatshap-stats-table.txt:md5,f04a7994715e7509caec2f367c91ff95",
                 "FAM_paraphase_annotated.tsv:md5,f95c3b89013784ed27feb71c46c09d85",
                 "FAM.ped:md5,bd5cec27ba7337a85cf98e787131e2b5",
-                "HG002_Revio_cramino_aligned_phased.arrow:md5,e5b629a701284bad02e9be4e12c7241c",
-                "HG002_Revio_cramino_aligned.arrow:md5,97d15e201f5bd16b1118643a7bea43fb",
+                "HG002_Revio_cramino_aligned_phased.arrow:md5,323fdfa3c51dde8b533aa8f147d41f46",
+                "HG002_Revio_cramino_aligned.arrow:md5,5f3105c42c4622a51b42dda15c810b6c",
                 "HG002_Revio.mosdepth.global.dist.txt:md5,28155a82b220d8f5d1758188a69368c6",
                 "HG002_Revio.mosdepth.region.dist.txt:md5,65712d5faff5eddf045d1ef0df0ae5ea",
                 "HG002_Revio.mosdepth.summary.txt:md5,982a0131d67c4c4427ea607d5fbfdc23",
@@ -790,7 +784,7 @@
                 "FAM.vs.html:md5,a749380edef4653dade663534ddcfbd6",
                 "HG002_Revio_whatshap_stats.gtf.gz:md5,b379689cdf08b3adebf792d1c7824219",
                 "HG002_Revio_whatshap_stats.gtf.gz.tbi:md5,11c573a6bdaedd3e3016ffb275e86681",
-                "HG002_Revio_whatshap_stats.tsv:md5,a7aae1c101bdf72c9e7bc43181d2222e",
+                "HG002_Revio_whatshap_stats.tsv:md5,046f3c9f97fee5ea58f71e961021820b",
                 "HG002_Revio_sambamba_depth.bed:md5,fe708d4a3b8b809a04e4ed911d89713a",
                 "HG002_Revio_hificnv.copynum.bedgraph:md5,010e50c5c530c966e29976138fe8ccf7",
                 "HG002_Revio_hificnv.depth.bw:md5,93d7db9a2817b36f2235e5916d026a53",
@@ -802,7 +796,7 @@
             [
                 [
                     "HG002_Revio_haplotagged.bam",
-                    "514a336fb8fe651d735f245e5c7a52c4"
+                    "fe6eafe12fa6ff013afa9fc92bc89d37"
                 ],
                 [
                     "HG002_Revio_aligned_assembly.bam",
@@ -810,7 +804,7 @@
                 ],
                 [
                     "HG002_Revio_remapped_assembly.bam",
-                    "514a336fb8fe651d735f245e5c7a52c4"
+                    "fe6eafe12fa6ff013afa9fc92bc89d37"
                 ],
                 [
                     "HG002_Revio_spanning_trgt.bam",
@@ -839,7 +833,7 @@
                 ],
                 [
                     "FAM_snvs_annotated_ranked_clinical.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=61, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=63, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_snvs_annotated_ranked_research.vcf.gz",
@@ -862,10 +856,10 @@
                 
             ]
         ],
-        "timestamp": "2026-07-16T15:11:46.850298558",
+        "timestamp": "2026-07-23T13:32:03.252287458",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.07.0"
         }
     }
 }

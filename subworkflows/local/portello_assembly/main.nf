@@ -14,22 +14,20 @@ workflow PORTELLO_ASSEMBLY {
     ch_fai // channel: [mandatory] [ val(meta), path(fai) ]
 
     main:
+
     PORTELLO(
-        ch_assembly_to_ref_bam_bai
-            .join(ch_reads_to_assembly_bam_bai, failOnMismatch: true, failOnDuplicate: true)
-            .combine(ch_fasta.map { _meta, fasta -> fasta })
-            .map { meta, asm_to_ref_bam, asm_to_ref_bai, read_to_asm_bam, read_to_asm_bai, ref_fasta ->
-                [
-                    meta,
-                    asm_to_ref_bam,
-                    asm_to_ref_bai,
-                    read_to_asm_bam,
-                    read_to_asm_bai,
-                    ref_fasta,
-                    'partially-phased',
-                    false
-                ]
-                }
+        ch_assembly_to_ref_bam_bai.join(ch_reads_to_assembly_bam_bai, failOnMismatch: true, failOnDuplicate: true).combine(ch_fasta.map { _meta, fasta -> fasta }).map { meta, asm_to_ref_bam, asm_to_ref_bai, read_to_asm_bam, read_to_asm_bai, ref_fasta ->
+            [
+                meta,
+                asm_to_ref_bam,
+                asm_to_ref_bai,
+                read_to_asm_bam,
+                read_to_asm_bai,
+                ref_fasta,
+                'partially-phased',
+                false,
+            ]
+        }
     )
 
     SAMTOOLS_SORT(
@@ -39,12 +37,10 @@ workflow PORTELLO_ASSEMBLY {
     )
 
     SAMTOOLS_ADDREPLACERG(
-        SAMTOOLS_SORT.out.bam
-            .join(SAMTOOLS_SORT.out.index, failOnMismatch: true, failOnDuplicate: true)
-            .map { meta, bam, bai ->
-                def read_group = "'@RG\\tID:${meta.id}_hifiasm\\tSM:${meta.id}'"
-                [meta, bam, bai, read_group]
-            },
+        SAMTOOLS_SORT.out.bam.join(SAMTOOLS_SORT.out.index, failOnMismatch: true, failOnDuplicate: true).map { meta, bam, bai ->
+            def read_group = "'@RG\\tID:${meta.id}_hifiasm\\tSM:${meta.id}'"
+            [meta, bam, bai, read_group]
+        },
         [[], [], [], []],
     )
 
