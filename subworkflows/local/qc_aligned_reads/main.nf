@@ -22,20 +22,20 @@ workflow QC_ALIGNED_READS {
     ch_bam_bai
         .combine(ch_cramino_bed.map { _meta, bed -> bed }.toList())
         .branch { meta, bam, bai, bed ->
-            targeted: bed
-            wgs: !bed
+            bed: bed
+            no_bed: !bed
         }
         .set { ch_cramino_branches }
 
     SAMTOOLS_VIEW(
-        ch_cramino_branches.targeted.map { meta, bam, bai, _bed -> [meta, bam, bai] },
+        ch_cramino_branches.bed.map { meta, bam, bai, _bed -> [meta, bam, bai] },
         [[], [], []],
         [[], []],
-        ch_cramino_branches.targeted.map { meta, _bam, _bai, bed -> [meta, bed] },
+        ch_cramino_branches.bed.map { meta, _bam, _bai, bed -> [meta, bed] },
         'bai',
     )
 
-    ch_bam_bai_for_cramino = ch_cramino_branches.wgs
+    ch_bam_bai_for_cramino = ch_cramino_branches.no_bed
         .map { meta, bam, bai, _bed -> [meta, bam, bai] }
         .mix(
             SAMTOOLS_VIEW.out.bam.join(SAMTOOLS_VIEW.out.bai)
