@@ -10,7 +10,7 @@ workflow QC_ALIGNED_READS {
     ch_mosdepth_bed // channel: [ val(meta), bed ]
     ch_sambamba_bed // channel: [ val(meta), bed ]
     run_sambamba_depth // bool: Should sambamba depth be run?
-    ch_cramino_bed // channel: [ val(meta), bed ] or empty; filters reads to on-target regions before cramino QC
+    ch_cramino_bed // channel: [ val(meta), bed ] or empty; if supplied, reads are filtered to regions in the bed file before cramino QC
 
     main:
     ch_sambamba_depth_bed = channel.empty()
