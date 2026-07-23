@@ -67,11 +67,6 @@ This document describes the pipeline output files and the tools used to generate
 | `multiqc/multiqc_data/`       | Directory containing parsed statistics    |
 | `multiqc/multiqc_plots/`      | Directory containing static report images |
 
-When running with `--target_regions` (or `ONT_R10_AS` preset), two additional custom tables appear in the report in the following order:
-
-1. **On-target read QC** — cramino summary statistics (number of reads, yield, N50, median and mean length, median identity) computed from the on-target read subset
-2. **Per-region coverage** — mean coverage and percentage of bases covered at ≥20X and ≥30X per target region, derived from mosdepth thresholds output
-
 ## Pipeline Information
 
 [Nextflow](https://www.nextflow.io/docs/latest/tracing.html) generates reports for troubleshooting, performance, and traceability.
