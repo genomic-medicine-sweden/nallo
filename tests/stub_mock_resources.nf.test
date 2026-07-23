@@ -22,7 +22,6 @@ nextflow_pipeline {
                 skip_annotate_paralogs       = true
                 skip_chromograph             = true
                 skip_genome_assembly         = true
-                skip_portello                = true
                 skip_call_paralogs           = true
                 skip_qc                      = true
                 skip_sv_calling              = true
@@ -69,7 +68,6 @@ nextflow_pipeline {
                 skip_annotate_paralogs       = true
                 skip_chromograph             = true
                 skip_genome_assembly         = true
-                skip_portello                = true
                 skip_call_paralogs           = true
                 skip_qc                      = true
                 skip_sv_calling              = true
@@ -123,7 +121,6 @@ nextflow_pipeline {
                 skip_annotate_paralogs       = true
                 skip_chromograph             = true
                 skip_genome_assembly         = true
-                skip_portello                = true
                 skip_call_paralogs           = true
                 skip_qc                      = true
                 skip_sv_calling              = true

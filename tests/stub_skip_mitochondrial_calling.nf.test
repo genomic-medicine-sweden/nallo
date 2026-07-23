@@ -23,7 +23,6 @@ nextflow_pipeline {
                 skip_methylation_calling     = true
                 skip_peddy                   = true
                 skip_phasing                 = true
-                skip_portello                = true
                 skip_prepare_gens_input      = true
                 skip_qc                      = true
                 skip_rank_variants           = true
@@ -68,7 +67,6 @@ nextflow_pipeline {
                 skip_mitochondrial_calling   = true
                 skip_peddy                   = true
                 skip_phasing                 = true
-                skip_portello                = true
                 skip_prepare_gens_input      = true
                 skip_qc                      = true
                 skip_rank_variants           = true
