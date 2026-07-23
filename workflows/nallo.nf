@@ -387,8 +387,7 @@ workflow NALLO {
         ch_multiqc_files = ch_multiqc_files.mix(
             (val_mosdepth_regions
                 ? QC_ALIGNED_READS.out.mosdepth_regions_dist
-                : QC_ALIGNED_READS.out.mosdepth_global_dist)
-                .collect { _meta, metrics -> metrics }
+                : QC_ALIGNED_READS.out.mosdepth_global_dist).collect { _meta, metrics -> metrics }
         )
     }
 
