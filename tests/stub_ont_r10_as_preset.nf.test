@@ -43,4 +43,24 @@ nextflow_pipeline {
         }
     }
 
+    test("ONT_R10_AS preset without target_regions fails with informative error") {
+        options "-stub"
+
+        when {
+            params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5c13b255beab25a536375fec42f9da3413fc65a5/'
+                input                        = "$projectDir/assets/samplesheet_multisample_ont_bam.csv"
+                outdir                       = "$outputDir"
+                preset                       = "ONT_R10_AS"
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.failed },
+                { assert workflow.stdout.any { it.contains("--target_regions must be provided when using --preset ONT_R10_AS") } }
+            )
+        }
+    }
+
 }
