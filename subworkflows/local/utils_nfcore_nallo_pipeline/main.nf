@@ -313,6 +313,11 @@ workflow PIPELINE_INITIALISATION {
         error("Error: methbat must be in --methylation_callers when running without --skip_methylation_annotation. Add methbat to --methylation_callers or use --skip_methylation_annotation to disable methylation annotation.")
     }
 
+    // Check that target_regions is provided when using the ONT_R10_AS preset
+    if (params.preset == 'ONT_R10_AS' && !params.target_regions) {
+        error("Error: --target_regions must be provided when using --preset ONT_R10_AS. The ONT_R10_AS preset is designed for adaptive sampling runs which require target regions for calling and QC.")
+    }
+
     // Check that sex check is not skipped if there are samples with unknown sex
     validateRequiresSexCheck(ch_samplesheet, val_skip_sex_check, val_skip_snv_calling, val_skip_methylation_calling, val_methylation_callers, val_skip_peddy, val_skip_prepare_gens_input, val_skip_repeat_calling, val_str_caller)
 

@@ -466,7 +466,7 @@
                 "visualization_tracks/HG002_ONT_C/HG002_ONT_C_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-07-22T16:43:00.278385",
+        "timestamp": "2026-07-23T12:08:02.555161",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"
