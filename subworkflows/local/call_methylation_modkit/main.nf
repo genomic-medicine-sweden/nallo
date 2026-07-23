@@ -29,8 +29,8 @@ workflow CALL_METHYLATION_MODKIT {
         false,
     )
 
-    // .first() converts from queue channel back to value channel so all samples get the bed
-    ch_bed_for_modkit = ch_bed_branches.no_bed.mix(GAWK.out.output).first()
+    // .collect() converts from queue channel back to value channel so all samples get the bed
+    ch_bed_for_modkit = ch_bed_branches.no_bed.mix(GAWK.out.output).collect()
 
     // Performs pileups per haplotype if the phasing workflow is on, set in config
     MODKIT_PILEUP(
