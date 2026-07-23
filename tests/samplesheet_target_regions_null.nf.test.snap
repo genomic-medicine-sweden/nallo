@@ -237,7 +237,7 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_VIEW": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SEVERUS": {
                     "severus": 1.7
@@ -785,9 +785,7 @@
                     "30ba267e3b89ce97d0df96640b22d265"
                 ]
             ],
-            [
-                
-            ],
+            [],
             [
                 [
                     "FAM_paraphase_merged.vcf.gz",
@@ -826,9 +824,7 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=13, phased=false, phasedAutodetect=false]"
                 ]
             ],
-            [
-                
-            ]
+            []
         ],
         "timestamp": "2026-07-16T15:11:46.850298558",
         "meta": {

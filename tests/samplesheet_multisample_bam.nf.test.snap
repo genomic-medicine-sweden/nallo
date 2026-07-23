@@ -228,7 +228,7 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_VIEW": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAWFISH_DISCOVER": {
                     "sawfish": "2.2.0"
@@ -1243,9 +1243,7 @@
                     "c8334a968268bf92dff1e959db5d9ba"
                 ]
             ],
-            [
-                
-            ],
+            [],
             [
                 [
                     "FAM_paraphase_merged.vcf.gz",
@@ -1316,9 +1314,7 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=3, variantCount=33, phased=false, phasedAutodetect=false]"
                 ]
             ],
-            [
-                
-            ]
+            []
         ],
         "timestamp": "2026-07-16T15:05:03.272918283",
         "meta": {

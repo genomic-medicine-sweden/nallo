@@ -98,7 +98,7 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_VIEW": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAWFISH_DISCOVER": {
                     "sawfish": "2.2.0"

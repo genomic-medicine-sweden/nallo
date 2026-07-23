@@ -240,7 +240,7 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_VIEW": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAWFISH_DISCOVER": {
                     "sawfish": "2.2.0"
@@ -788,9 +788,7 @@
                 "HG002_Revio_pbcpgtools.hap1.bw:md5,fe98da5500087326cace4262925b54b9",
                 "HG002_Revio_pbcpgtools.hap2.bw:md5,e452d2986e38ba275033e8e613183b8d"
             ],
-            [
-                
-            ],
+            [],
             [
                 [
                     "HG002_Revio_haplotagged.cram",
@@ -843,9 +841,7 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=17, phased=false, phasedAutodetect=false]"
                 ]
             ],
-            [
-                
-            ]
+            []
         ],
         "timestamp": "2026-07-17T13:28:43.528525388",
         "meta": {
