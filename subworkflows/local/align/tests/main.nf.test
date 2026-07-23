@@ -42,6 +42,7 @@ nextflow_workflow {
                 ])
                 input[2] = [[],[]]
                 input[3] = 'minimap2'
+                input[4] = false
                 """
             }
         }
@@ -68,6 +69,7 @@ nextflow_workflow {
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
                 input[3] = 'pbmm2'
+                input[4] = true
                 """
             }
         }
@@ -99,6 +101,7 @@ nextflow_workflow {
                 ])
                 input[2] = [[],[]]
                 input[3] = 'minimap2'
+                input[4] = false
                 """
             }
         }
@@ -125,6 +128,7 @@ nextflow_workflow {
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
                 input[3] = 'pbmm2'
+                input[4] = false
                 """
             }
         }

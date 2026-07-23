@@ -145,7 +145,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-07T09:55:11.445974782",
+        "timestamp": "2026-07-14T13:56:12.434829413",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"
@@ -301,7 +301,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-07T09:55:36.268057375",
+        "timestamp": "2026-07-14T13:57:38.41736562",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"
@@ -477,7 +477,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-07T09:54:43.388224966",
+        "timestamp": "2026-07-14T13:54:22.524719258",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"

@@ -24,40 +24,20 @@
         "content": [
             {
                 "0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_aligned_reads.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "1": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_aligned_reads.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "bam": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_aligned_reads.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ],
                 "index": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_aligned_reads.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
+                    
                 ]
             }
         ],
-        "timestamp": "2026-07-21T13:56:16.722176344",
+        "timestamp": "2026-07-23T15:02:38.379722014",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"

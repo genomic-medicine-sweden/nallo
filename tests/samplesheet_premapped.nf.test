@@ -15,6 +15,7 @@ nextflow_pipeline {
                 premapped                    = true
                 paraphrase_output_format     = 'json'
                 skip_genome_assembly         = true
+                skip_portello                = true
             }
         }
 

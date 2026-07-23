@@ -814,7 +814,7 @@
             [
                 [
                     "HG002_Revio_haplotagged.cram",
-                    "8bdadb908f5f2ae02f8622069ca372ee"
+                    "fe6eafe12fa6ff013afa9fc92bc89d37"
                 ],
                 [
                     "HG002_Revio_aligned_assembly.cram",
@@ -867,7 +867,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-23T14:09:42.101657406",
+        "timestamp": "2026-07-23T14:50:51.510365905",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"

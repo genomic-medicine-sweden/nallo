@@ -10,7 +10,7 @@ workflow ALIGN {
     ch_fasta // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fai // channel: [mandatory] [ val(meta), path(fai) ]
     val_aligner // channel: [mandatory] [ val(aligner) ]
-    val_skip_portello // channel: [mandatory] [ val(skip_portello) ]
+    val_skip_portello // boolean: [mandatory] [ true|false ]
 
     main:
 
