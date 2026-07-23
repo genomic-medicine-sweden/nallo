@@ -19,7 +19,7 @@ workflow CALL_METHYLATION_MODKIT {
     ch_bed
         .branch { _meta, bed ->
             with_bed: bed
-            no_bed: true
+            no_bed: !bed
         }
         .set { ch_bed_branches }
 
