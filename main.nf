@@ -90,6 +90,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_hifiasm_mode
     val_methylation_callers
     val_mitochondrial_caller
+    val_mosdepth_regions
     val_multiqc_config
     val_multiqc_logo
     val_multiqc_methods_description
@@ -200,6 +201,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_force_sawfish_joint_call_single_samples,
         val_hifiasm_mode,
         val_mitochondrial_caller,
+        val_mosdepth_regions,
         val_multiqc_config,
         val_multiqc_logo,
         val_multiqc_methods_description,
@@ -500,6 +502,7 @@ workflow {
         params.hifiasm_mode,
         params.methylation_callers,
         params.mitochondrial_caller,
+        params.mosdepth_regions,
         params.multiqc_config,
         params.multiqc_logo,
         params.multiqc_methods_description,

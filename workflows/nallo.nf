@@ -136,6 +136,7 @@ workflow NALLO {
     val_force_sawfish_joint_call_single_samples
     val_hifiasm_mode
     val_mitochondrial_caller
+    val_mosdepth_regions
     val_multiqc_config
     val_multiqc_logo
     val_multiqc_methods_description
@@ -383,12 +384,12 @@ workflow NALLO {
         )
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.fastqc_zip.collect { _meta, metrics -> metrics }.ifEmpty([]))
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_summary.collect { _meta, metrics -> metrics })
-        if (params.mosdepth_regions) {
-            ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_regions_dist.collect { _meta, metrics -> metrics })
-        }
-        else {
-            ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_global_dist.collect { _meta, metrics -> metrics })
-        }
+        ch_multiqc_files = ch_multiqc_files.mix(
+            (val_mosdepth_regions
+                ? QC_ALIGNED_READS.out.mosdepth_regions_dist
+                : QC_ALIGNED_READS.out.mosdepth_global_dist)
+                .collect { _meta, metrics -> metrics }
+        )
     }
 
     /*
