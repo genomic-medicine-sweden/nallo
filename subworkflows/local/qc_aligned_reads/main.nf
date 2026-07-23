@@ -19,8 +19,11 @@ workflow QC_ALIGNED_READS {
         ch_bam_bai.map { meta, bam, _bai -> [meta, bam] }
     )
 
+    ch_cramino_bed_list = ch_cramino_bed.map { _meta, bed -> bed }.toList()
+    ch_mosdepth_bed_list = ch_mosdepth_bed.map { _meta, bed -> bed }.toList()
+
     ch_bam_bai
-        .combine(ch_cramino_bed.map { _meta, bed -> bed }.toList())
+        .combine(ch_cramino_bed_list)
         .branch { meta, bam, bai, bed ->
             bed: bed
             no_bed: !bed
@@ -45,8 +48,7 @@ workflow QC_ALIGNED_READS {
         ch_bam_bai_for_cramino
     )
 
-    // toList() enables passing [] if ch_bed is empty
-    ch_mosdepth_in = ch_bam_bai.combine(ch_mosdepth_bed.map { _meta, bed -> bed }.toList())
+    ch_mosdepth_in = ch_bam_bai.combine(ch_mosdepth_bed_list)
 
     MOSDEPTH(
         ch_mosdepth_in,
