@@ -235,10 +235,10 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-07-24T09:12:42.67696034",
+        "timestamp": "2026-07-14T14:14:19.679829595",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.4"
         }
     },
     "Test Peddy without annotation": {
@@ -377,10 +377,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-24T09:13:06.053552654",
+        "timestamp": "2026-07-14T13:54:11.226483415",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.4"
         }
     }
 }
