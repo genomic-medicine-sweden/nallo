@@ -1035,7 +1035,7 @@
                 },
                 "read_aligner": {
                     "type": "string",
-                    "default": "minimap2",
+                    "default": "pbmm2",
                     "description": "Which aligner to use for read alignment. Supported arguments are minimap2 or pbmm2.",
                     "enum": ["minimap2", "pbmm2"]
                 },
