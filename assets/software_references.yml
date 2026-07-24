@@ -211,5 +211,5 @@ tool:
     citation: "pbmm2 (Li 2022)"
     bibliography: "Li H. pbmm2: PacBio's implementation of minimap2 for PacBio data. Bioinformatics. 2022;38(10):2621-2623. doi:10.1093/bioinformatics/btac123"
   mm2plus:
-    citation: "mm2plus"
-    bibliography: ""
+    citation: "mm2plus (Chandra et al. 2024)"
+    bibliography: "Ghanshyam Chandra, Md Vasimuddin, Sanchit Misra and Chirag Jain. Accelerating whole-genome alignment in the age of complete genome assemblies. bioRxiv 2024. doi: https://doi.org/10.1101/2024.11.25.625328"
