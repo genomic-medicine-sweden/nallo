@@ -345,7 +345,6 @@ workflow NALLO {
             )
 
             ch_aligned_bam = PORTELLO_ASSEMBLY.out.bam.join(PORTELLO_ASSEMBLY.out.bai, failOnMismatch: true, failOnDuplicate: true)
-            PORTELLO_ASSEMBLY.out.bam.dump(tag: "portello out")
         }
 
         //

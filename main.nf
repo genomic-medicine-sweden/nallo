@@ -564,12 +564,11 @@ workflow {
     //
     // WORKFLOW OUTPUTS: Group files by publish directory
     //
-    ch_aligned_assemblies_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_bam
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_bai)
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_remapped_bam)
-        .mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_remapped_bai)
+    ch_aligned_assemblies_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_bai)
 
     ch_aligned_assemblies_cram = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_cram.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_crai)
+
+    ch_aligned_assemblies_remapped = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_remapped_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_remapped_bai)
 
     ch_aligned_haplotagged_reads_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_haplotagged_reads_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_haplotagged_reads_bai)
 
@@ -680,6 +679,7 @@ workflow {
     publish:
     aligned_assemblies_bam         = ch_aligned_assemblies_bam // channel: [ val(meta), path(bam/bai) ]
     aligned_assemblies_cram        = ch_aligned_assemblies_cram // channel: [ val(meta), path(cram/crai) ]
+    aligned_assemblies_remapped    = ch_aligned_assemblies_remapped // channel: [ val(meta), path(bam/bai) ]
     aligned_haplotagged_reads_bam  = ch_aligned_haplotagged_reads_bam // channel: [ val(meta), path(bam/bai) ]
     aligned_haplotagged_reads_cram = ch_aligned_haplotagged_reads_cram // channel: [ val(meta), path(cram/crai) ]
     aligned_reads_bam              = ch_aligned_reads_bam // channel: [ val(meta), path(bam/bai) ]
@@ -728,6 +728,9 @@ output {
     aligned_assemblies_cram {
         path { meta, _file -> "assembly/sample/${meta.id}/" }
         enabled params.alignment_output_format == 'cram'
+    }
+    aligned_assemblies_remapped {
+        path { meta, _file -> "assembly/sample/${meta.id}/" }
     }
     aligned_haplotagged_reads_bam {
         // HiPhase uses the input file (aligned reads) as template for naming output, so we need to remove the "_aligned" suffix here

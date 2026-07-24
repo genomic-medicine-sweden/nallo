@@ -351,6 +351,8 @@
                 "assembly/sample/HG002_Revio",
                 "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.cram",
                 "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.cram.crai",
+                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam",
+                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam.bai",
                 "assembly/stats",
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
@@ -809,7 +811,10 @@
                 "HG002_Revio_pbcpgtools.hap2.bw:md5,59f18a7c255b7d87c94c37f8e043b90e"
             ],
             [
-                
+                [
+                    "HG002_Revio_remapped_assembly.bam",
+                    "fe6eafe12fa6ff013afa9fc92bc89d37"
+                ]
             ],
             [
                 [
@@ -867,7 +872,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-23T14:50:51.510365905",
+        "timestamp": "2026-07-24T14:19:36.885231049",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
