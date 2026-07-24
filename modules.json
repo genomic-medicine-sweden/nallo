@@ -171,7 +171,7 @@
                     },
                     "find/concatenate": {
                         "branch": "master",
-                        "git_sha": "8d8ab5d337f91c136f0bf78ec137e0599a2024ce",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"]
                     },
                     "gatk4/cleansam": {
