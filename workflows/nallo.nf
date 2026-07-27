@@ -137,6 +137,7 @@ workflow NALLO {
     val_hifiasm_mode
     val_mitochondrial_caller
     val_mosdepth_regions
+    val_cramino_regions
     val_multiqc_config
     val_multiqc_logo
     val_multiqc_methods_description
@@ -380,7 +381,7 @@ workflow NALLO {
             ch_mosdepth_regions,
             ch_sambamba_regions,
             !val_skip_sambamba_depth,
-            params.cramino_regions as boolean,
+            val_cramino_regions,
             ch_cramino_regions,
         )
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.fastqc_zip.collect { _meta, metrics -> metrics }.ifEmpty([]))
