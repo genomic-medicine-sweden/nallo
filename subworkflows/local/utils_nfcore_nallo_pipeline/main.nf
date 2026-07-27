@@ -253,7 +253,7 @@ workflow PIPELINE_INITIALISATION {
     //
     validateInputParameters(parameterStatus, workflowSkips, workflowDependencies, fileDependencies)
     validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs, val_mitochondrial_caller)
-    validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge)
+    validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge, val_premapped, val_skip_portello)
 
     //
     // Create channel from input file provided through val_input
@@ -705,7 +705,7 @@ def validateSingleProjectPerRun(ch_samplesheet) {
         }
 }
 
-def validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge) {
+def validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge, val_premapped, val_skip_portello) {
     if (val_str_caller.matches('strdust') && !val_skip_repeat_annotation) {
         error("ERROR: Repeat annotation is not supported for STRdust. Run with --skip_repeat_annotation if you want to use STRdust.")
     }
@@ -727,6 +727,10 @@ def validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, va
 
     if (!val_skip_phasing && !val_skip_sv_calling && val_phaser == 'hiphase' && val_sv_callers_to_merge != 'sawfish') {
         error("ERROR: HiPhase SV phasing only supports Sawfish at the moment. Set --sv_callers to 'sawfish' if you want to use HiPhase. You may run other SV callers without passing them to HiPhase using --sv_callers_to_run.")
+    }
+
+    if (val_premapped && !val_skip_portello) {
+        error("ERROR: --premapped cannot be used together with Portello. Please run with --skip_portello if your data is premapped.")
     }
 }
 
