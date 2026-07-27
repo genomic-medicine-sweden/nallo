@@ -168,6 +168,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | mitorsaw/haplotype             |             | 0.2.9       |
 | pbmm2/align                    |             | 26.2.0      |
 | samtools/calmd                 |             | 1.24        |
+| samtools/view                  | 1.23.1      | 1.24        |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
