@@ -16,12 +16,10 @@ workflow CALL_METHYLATION_MODKIT {
         .collect()
 
     // Trim BED to 3 columns; modkit pileup --include-bed requires a 3-column BED
-    ch_bed
-        .branch { _meta, bed ->
-            with_bed: bed
-            no_bed: !bed
-        }
-        .set { ch_bed_branches }
+    ch_bed_branches = ch_bed.branch { _meta, bed ->
+        with_bed: bed
+        no_bed: !bed
+    }
 
     GAWK(
         ch_bed_branches.with_bed,
