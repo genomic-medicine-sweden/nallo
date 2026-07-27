@@ -10,7 +10,8 @@ workflow QC_ALIGNED_READS {
     ch_mosdepth_bed // channel: [ val(meta), bed ]
     ch_sambamba_bed // channel: [ val(meta), bed ]
     run_sambamba_depth // bool: Should sambamba depth be run?
-    ch_cramino_bed // channel: [ val(meta), bed ] or empty; if supplied, reads are filtered to regions in the bed file before cramino QC
+    filter_bam_for_cramino // bool: Should the bam be filtered to cramino bed regions before cramino QC?
+    ch_cramino_bed // channel: [ val(meta), bed ]
 
     main:
     ch_sambamba_depth_bed = channel.empty()
@@ -19,30 +20,21 @@ workflow QC_ALIGNED_READS {
         ch_bam_bai.map { meta, bam, _bai -> [meta, bam] }
     )
 
-    ch_cramino_bed_list = ch_cramino_bed.map { _meta, bed -> bed }.toList()
     ch_mosdepth_bed_list = ch_mosdepth_bed.map { _meta, bed -> bed }.toList()
 
-    ch_bam_bai
-        .combine(ch_cramino_bed_list)
-        .branch { meta, bam, bai, bed ->
-            bed: bed
-            no_bed: !bed
-        }
-        .set { ch_cramino_branches }
-
-    SAMTOOLS_VIEW(
-        ch_cramino_branches.bed.map { meta, bam, bai, _bed -> [meta, bam, bai] },
-        [[], [], []],
-        [[], []],
-        ch_cramino_branches.bed.map { meta, _bam, _bai, bed -> [meta, bed] },
-        'bai',
-    )
-
-    ch_bam_bai_for_cramino = ch_cramino_branches.no_bed
-        .map { meta, bam, bai, _bed -> [meta, bam, bai] }
-        .mix(
-            SAMTOOLS_VIEW.out.bam.join(SAMTOOLS_VIEW.out.bai)
+    if (filter_bam_for_cramino) {
+        SAMTOOLS_VIEW(
+            ch_bam_bai,
+            [[], [], []],
+            [[], []],
+            ch_cramino_bed,
+            'bai',
         )
+        ch_bam_bai_for_cramino = SAMTOOLS_VIEW.out.bam.join(SAMTOOLS_VIEW.out.bai)
+    }
+    else {
+        ch_bam_bai_for_cramino = ch_bam_bai
+    }
 
     CRAMINO(
         ch_bam_bai_for_cramino

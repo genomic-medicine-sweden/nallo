@@ -380,6 +380,7 @@ workflow NALLO {
             ch_mosdepth_regions,
             ch_sambamba_regions,
             !val_skip_sambamba_depth,
+            params.cramino_regions as boolean,
             ch_cramino_regions,
         )
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.fastqc_zip.collect { _meta, metrics -> metrics }.ifEmpty([]))
