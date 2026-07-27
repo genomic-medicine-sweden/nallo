@@ -16,11 +16,15 @@ workflow ALIGN_ASSEMBLIES {
 
     main:
 
+    MINIMAP2_INDEX(
+        ch_fasta
+    )
+
     if (val_assembly_aligner == 'mm2plus') {
 
         MM2PLUS_ALIGN(
             ch_assembly,
-            ch_fasta,
+            MINIMAP2_INDEX.out.index.collect(),
             true,
             'bai',
             false,
@@ -29,10 +33,6 @@ workflow ALIGN_ASSEMBLIES {
         ch_aligned_assemblies_bam = MM2PLUS_ALIGN.out.bam
     }
     else {
-
-        MINIMAP2_INDEX(
-            ch_fasta
-        )
 
         MINIMAP2_ALIGN(
             ch_assembly,

@@ -34,9 +34,13 @@ workflow ALIGN {
     }
     if (val_aligner == 'mm2plus') {
 
+        MINIMAP2_INDEX(
+            ch_fasta
+        )
+
         MM2PLUS_ALIGN(
             ch_ubam,
-            ch_fasta,
+            MINIMAP2_INDEX.out.index.collect(),
             true,
             'bai',
             false,

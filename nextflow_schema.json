@@ -1047,7 +1047,7 @@
                 },
                 "assembly_aligner": {
                     "type": "string",
-                    "default": "mm2plus",
+                    "default": "minimap2",
                     "description": "Which aligner to use for assembly alignment. Supported arguments are mm2plus or minimap2.",
                     "enum": ["mm2plus", "minimap2"]
                 }

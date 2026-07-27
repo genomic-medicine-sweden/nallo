@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            336,
+            338,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -129,6 +129,9 @@
                 },
                 "HIFICNV": {
                     "hificnv": "1.0.0-36e6461"
+                },
+                "MINIMAP2_INDEX": {
+                    "minimap2": "2.29-r1283"
                 },
                 "MM2PLUS_ALIGN": {
                     "mm2plus": 1.3,
@@ -1132,15 +1135,15 @@
                 ],
                 [
                     "HG002_ONT_A_aligned_assembly.bam",
-                    "5f9aa10a29c3d6b59ae3219c3d745d56"
+                    "482b02d21b389b548f1f4a1090da0f86"
                 ],
                 [
                     "HG002_ONT_B_aligned_assembly.bam",
-                    "23ec2f2e6666982a98269768ee42a7d4"
+                    "32835786f8b6511c9e9894442219a324"
                 ],
                 [
                     "HG002_ONT_C_aligned_assembly.bam",
-                    "5f9aa10a29c3d6b59ae3219c3d745d56"
+                    "482b02d21b389b548f1f4a1090da0f86"
                 ]
             ],
             [
@@ -1224,7 +1227,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-23T16:15:41.479967012",
+        "timestamp": "2026-07-27T14:43:10.513998656",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"

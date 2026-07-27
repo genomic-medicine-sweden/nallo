@@ -23,6 +23,8 @@ nextflow_pipeline {
                 publish_unannotated_family_svs = true
                 filter_variants_hgnc_ids       = null
                 skip_methylation_annotation    = true
+                read_aligner                   = 'mm2plus'
+                assembly_aligner               = 'mm2plus'
             }
         }
 

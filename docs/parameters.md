@@ -212,4 +212,4 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `read_aligner` | Which aligner to use for read alignment. Supported arguments are mm2plus, minimap2 or pbmm2. (accepted: `minimap2`\|`pbmm2`\|`mm2plus`) | `string` | minimap2 |  |  |
 | `pbmm2_preset` | Preset to use for pbmm2. Supported arguments are HIFI, CCS, or SUBREAD. (accepted: `HIFI`\|`CCS`\|`SUBREAD`) | `string` | CCS |  |  |
 | `glnexus_config` | Glnexus config to use for merging gVCFs. If no file is provided, the default config `assets/glnexus_config_dp1.yml` will be used. | `string` | None |  |  |
-| `assembly_aligner` | Which aligner to use for assembly alignment. Supported arguments are mm2plus or minimap2. (accepted: `mm2plus`\|`minimap2`) | `string` | mm2plus |  |  |
+| `assembly_aligner` | Which aligner to use for assembly alignment. Supported arguments are mm2plus or minimap2. (accepted: `mm2plus`\|`minimap2`) | `string` | minimap2 |  |  |
