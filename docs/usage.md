@@ -104,7 +104,6 @@ This pipeline comes with four different presets that should be set with the `--p
 
     - Filter aligned reads to on-target regions before cramino QC, so yield and N50 reflect enriched reads only
     - Run mosdepth with per-region depth and coverage thresholds (≥20X, ≥30X) for each target region
-    - Skip mitochondrial variant calling by default, as the mitochondrial genome is not typically enriched by adaptive sampling and insufficient or uneven coverage causes the variant caller to fail. For runs specifically targeting the mitochondrial genome, mitochondrial calling can be re-enabled with `--skip_mitochondrial_calling false`; however, since autosomal coverage will be near zero, genome-wide callers should also be disabled (`--skip_snv_calling true --skip_sv_calling true`).
 
 ### Reference files
 
