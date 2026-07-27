@@ -33,6 +33,8 @@ nextflow_pipeline {
                 skip_sv_annotation           = true
                 skip_sv_calling              = true
                 skip_sex_check               = true
+                // skip_portello for fastq input
+                skip_portello                = true
             }
         }
 

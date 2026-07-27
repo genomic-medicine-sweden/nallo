@@ -1,7 +1,7 @@
 {
     "Test sawfish with force_sawfish_joint_call_single_samples true": {
         "content": [
-            66,
+            58,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -45,14 +45,6 @@
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
-                "FIND_CONCATENATE": {
-                    "coreutils": 9.4,
-                    "find": "4.6.0",
-                    "pigz": 2.8
-                },
-                "GATK4_CLEANSAM": {
-                    "gatk": "4.6.2.0"
-                },
                 "GAWK_EXTRACT_REGIONS": {
                     "gawk": "5.3.1"
                 },
@@ -80,12 +72,6 @@
                 "MOSDEPTH": {
                     "mosdepth": "0.3.11"
                 },
-                "PBMM2_ALIGN": {
-                    "pbmm2": "26.2.0"
-                },
-                "PORTELLO": {
-                    "portello": "0.7.0"
-                },
                 "RELATE_INFER": {
                     "somalier": "0.2.18"
                 },
@@ -99,12 +85,6 @@
                     "create_pedigree_file": 1.0,
                     "python": "3.8.3"
                 },
-                "SAMTOOLS_ADDREPLACERG": {
-                    "samtools": "1.23.1"
-                },
-                "SAMTOOLS_CALMD": {
-                    "samtools": 1.24
-                },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
                 },
@@ -114,13 +94,7 @@
                 "SAMTOOLS_IMPORT": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_INDEX": {
-                    "samtools": "1.23.1"
-                },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.23.1"
-                },
-                "SAMTOOLS_SORT": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_VIEW": {
@@ -162,15 +136,13 @@
             [
                 "aligned_reads",
                 "aligned_reads/HG002_Revio",
-                "aligned_reads/HG002_Revio/HG002_Revio_remapped_assembly.bam",
-                "aligned_reads/HG002_Revio/HG002_Revio_remapped_assembly.bam.bai",
+                "aligned_reads/HG002_Revio/HG002_Revio.bai",
+                "aligned_reads/HG002_Revio/HG002_Revio.bam",
                 "assembly",
                 "assembly/sample",
                 "assembly/sample/HG002_Revio",
                 "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam",
                 "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam.bai",
-                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam",
-                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam.bai",
                 "assembly/stats",
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
@@ -238,7 +210,7 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-07-23T13:51:11.716162626",
+        "timestamp": "2026-07-27T11:26:29.050387313",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"

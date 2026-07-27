@@ -309,9 +309,12 @@ workflow PIPELINE_INITIALISATION {
     // Check that the parents are present in the samplesheet
     validateParentExistsInFamily(ch_samplesheet)
 
-    // Check that the samplesheet does not contain FASTQs if --premapped is set
+    // Check that the samplesheet does not contain FASTQs if --premapped is set or --skip_portello is not set
     if (val_premapped) {
-        validateNoFastqInInput(ch_samplesheet)
+        validateNoFastqInInput(ch_samplesheet, '--premapped', true)
+    }
+    if (!val_skip_portello) {
+        validateNoFastqInInput(ch_samplesheet, '--skip_portello', false)
     }
 
     emit:
@@ -375,10 +378,10 @@ def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDe
 
 // Check that no FASTQs are in samplesheet if --premapped is set
 // Something would crash eventually if there were FASTQs, but this is a more user-friendly error message
-def validateNoFastqInInput(input) {
+def validateNoFastqInInput(input, parameter, current_status) {
     input
         .filter { _meta, reads -> reads.name =~ 'f(ast)?q(\\.gz)?$' }
-        .map { _meta, _reads -> error("FASTQ files were found in the samplesheet, but --premapped was set. Please remove FASTQ files from the samplesheet or unset --premapped.") }
+        .map { _meta, _reads -> error("FASTQ files were found in the samplesheet, but ${parameter} was set to ${current_status}. Please remove FASTQ files from the samplesheet or set ${parameter} to ${!current_status}.") }
 }
 //
 // Validate channels from input samplesheet

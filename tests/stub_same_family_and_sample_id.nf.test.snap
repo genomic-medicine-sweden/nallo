@@ -1,7 +1,7 @@
 {
     "Test family id same as sample id": {
         "content": [
-            199,
+            191,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -113,14 +113,6 @@
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
-                "FIND_CONCATENATE": {
-                    "coreutils": 9.4,
-                    "find": "4.6.0",
-                    "pigz": 2.8
-                },
-                "GATK4_CLEANSAM": {
-                    "gatk": "4.6.2.0"
-                },
                 "GATK4_DENOISEREADCOUNTS": {
                     "gatk4": "4.6.2.0"
                 },
@@ -195,14 +187,8 @@
                 "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
                     "pbcpgtools": "3.0.0"
                 },
-                "PBMM2_ALIGN": {
-                    "pbmm2": "26.2.0"
-                },
                 "PEDDY": {
                     "peddy": "0.4.8"
-                },
-                "PORTELLO": {
-                    "portello": "0.7.0"
                 },
                 "PREPARECOVANDBAF": {
                     "preparecovandbaf": "1.1.5"
@@ -222,12 +208,6 @@
                 "SAMPLESHEET_PED": {
                     "create_pedigree_file": 1.0,
                     "python": "3.8.3"
-                },
-                "SAMTOOLS_ADDREPLACERG": {
-                    "samtools": "1.23.1"
-                },
-                "SAMTOOLS_CALMD": {
-                    "samtools": 1.24
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
@@ -333,8 +313,6 @@
                 "assembly/sample/HG002_Revio",
                 "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam",
                 "assembly/sample/HG002_Revio/HG002_Revio_aligned_assembly.bam.bai",
-                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam",
-                "assembly/sample/HG002_Revio/HG002_Revio_remapped_assembly.bam.bai",
                 "assembly/stats",
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
@@ -533,7 +511,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-07-23T13:53:44.568953546",
+        "timestamp": "2026-07-27T10:57:21.195880379",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
