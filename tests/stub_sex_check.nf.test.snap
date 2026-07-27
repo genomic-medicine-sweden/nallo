@@ -1,7 +1,7 @@
 {
     "Test skip sex check - unknown sex": {
         "content": [
-            33,
+            34,
             {
                 "BCFTOOLS_MERGE": {
                     "bcftools": 1.22
@@ -38,10 +38,6 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
-                },
-                "MM2PLUS_ALIGN": {
-                    "mm2plus": 1.3,
-                    "samtools": 1.24
                 },
                 "MOSDEPTH": {
                     "mosdepth": "0.3.11"
@@ -148,7 +144,7 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
-        "timestamp": "2026-07-24T09:10:39.292167638",
+        "timestamp": "2026-07-27T15:39:44.31338428",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"

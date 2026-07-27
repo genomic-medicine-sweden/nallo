@@ -1,7 +1,7 @@
 {
     "test profile | --target_regions null --alignment_output_format cram": {
         "content": [
-            220,
+            221,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -172,10 +172,6 @@
                 },
                 "MITORSAW_HAPLOTYPE": {
                     "mitorsaw": "0.2.9-0dc8e58"
-                },
-                "MM2PLUS_ALIGN": {
-                    "mm2plus": 1.3,
-                    "samtools": 1.24
                 },
                 "MOSDEPTH": {
                     "mosdepth": "0.3.11"
@@ -782,7 +778,7 @@
                 ],
                 [
                     "HG002_Revio_aligned_assembly.bam",
-                    "1ea737528d5ae4a5ca723993a9d13847"
+                    "2f1773961a831fa3e4fd0b2085f5df30"
                 ],
                 [
                     "HG002_Revio_spanning_trgt.bam",
@@ -834,7 +830,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-24T09:05:54.149024514",
+        "timestamp": "2026-07-27T15:35:19.634772363",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"

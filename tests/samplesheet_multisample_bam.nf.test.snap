@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            396,
+            397,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -166,10 +166,6 @@
                 },
                 "MITORSAW_HAPLOTYPE": {
                     "mitorsaw": "0.2.9-0dc8e58"
-                },
-                "MM2PLUS_ALIGN": {
-                    "mm2plus": 1.3,
-                    "samtools": 1.24
                 },
                 "MOSDEPTH": {
                     "mosdepth": "0.3.11"
@@ -1224,15 +1220,15 @@
                 ],
                 [
                     "HG002_aligned_assembly.bam",
-                    "c9dbabea122b4a932d34e25cb75062e1"
+                    "ceeca92bfd6ef76f27505cce3d9ac1be"
                 ],
                 [
                     "HG003_aligned_assembly.bam",
-                    "641efefa3df9c28f2b4fd0ed66b129d0"
+                    "e5f5b7d3a689c00000d1ea1d4e9c3af1"
                 ],
                 [
                     "HG004_aligned_assembly.bam",
-                    "d48bcba9b7ac2871c3f6a926565fb4f5"
+                    "209d2e152341caa5e67f78c870ff2e5e"
                 ],
                 [
                     "HG002_spanning_trgt.bam",
@@ -1324,7 +1320,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-24T08:56:41.247263324",
+        "timestamp": "2026-07-27T15:26:03.608207928",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
