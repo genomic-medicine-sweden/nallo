@@ -51,6 +51,7 @@ workflow PIPELINE_INITIALISATION {
     val_par_regions
     val_phaser
     val_premapped
+    val_preset
     val_sambamba_regions
     val_skip_alignment
     val_skip_annotate_paralogs
@@ -84,6 +85,7 @@ workflow PIPELINE_INITIALISATION {
     val_sv_callers_merge_priority
     val_sv_callers_to_merge
     val_sv_callers_to_run
+    val_target_regions
     val_variant_consequences_snvs
     val_variant_consequences_svs
     val_vep_cache
@@ -314,7 +316,7 @@ workflow PIPELINE_INITIALISATION {
     }
 
     // Check that target_regions is provided when using the ONT_R10_AS preset
-    if (params.preset == 'ONT_R10_AS' && !params.target_regions) {
+    if (val_preset == 'ONT_R10_AS' && !val_target_regions) {
         error("Error: --target_regions must be provided when using --preset ONT_R10_AS. The ONT_R10_AS preset is designed for adaptive sampling runs which require target regions for calling and QC.")
     }
 
