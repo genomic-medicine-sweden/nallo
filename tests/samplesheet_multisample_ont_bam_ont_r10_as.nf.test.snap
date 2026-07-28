@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10_AS --target_regions test_data.bed --phaser whatshap --alignment_processes 1 --snv_calling_processes 1": {
         "content": [
-            274,
+            303,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -807,7 +807,7 @@
                 "HG002_ONT_A_chromograph_autozyg_chr7.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_A_chromograph_autozyg_chr8.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_A_chromograph_autozyg_chr9.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "HG002_ONT_A_chromograph_autozyg_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_ONT_A_chromograph_autozyg_chrM.png:md5,090cdf270253fbc8ddfc28df2e3d0830",
                 "HG002_ONT_A_chromograph_autozyg_chrX.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_A_chromograph_autozyg_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_A_chromograph_coverage_chr1.png:md5,954482b960865332f37d386da5c9fb75",
@@ -857,7 +857,7 @@
                 "HG002_ONT_B_chromograph_autozyg_chr7.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_B_chromograph_autozyg_chr8.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_B_chromograph_autozyg_chr9.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "HG002_ONT_B_chromograph_autozyg_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_ONT_B_chromograph_autozyg_chrM.png:md5,090cdf270253fbc8ddfc28df2e3d0830",
                 "HG002_ONT_B_chromograph_autozyg_chrX.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_B_chromograph_autozyg_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_B_chromograph_coverage_chr1.png:md5,954482b960865332f37d386da5c9fb75",
@@ -907,7 +907,7 @@
                 "HG002_ONT_C_chromograph_autozyg_chr7.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_C_chromograph_autozyg_chr8.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_C_chromograph_autozyg_chr9.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "HG002_ONT_C_chromograph_autozyg_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_ONT_C_chromograph_autozyg_chrM.png:md5,090cdf270253fbc8ddfc28df2e3d0830",
                 "HG002_ONT_C_chromograph_autozyg_chrX.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_C_chromograph_autozyg_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_C_chromograph_coverage_chr1.png:md5,954482b960865332f37d386da5c9fb75",
@@ -1098,11 +1098,11 @@
                 ],
                 [
                     "FAM_snvs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=2, variantCount=119, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=2, variantCount=127, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM2_snvs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=118, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=126, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_ONT_A_deepvariant_snvs.vcf.gz",
@@ -1153,7 +1153,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-23T12:40:03.385162426",
+        "timestamp": "2026-07-28T10:26:22.755372585",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
