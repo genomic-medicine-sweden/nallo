@@ -64,7 +64,7 @@ runs:
 
         set -o pipefail
         if ! run_nf_test 2>&1 | tee nf-test.log; then
-          if grep -qE "Connection reset|Connection timed out|no space left on device|Can't stage file.*https://|file does not exist.*https://" nf-test.log; then
+          if grep -iqE "connection reset|Connection timed out|no space left on device|Can't stage file.*https://|file does not exist.*https://|Failed to pull singularity image" nf-test.log; then
             echo "::warning::Transient network/disk failure detected — retrying once"
             run_nf_test
           else
