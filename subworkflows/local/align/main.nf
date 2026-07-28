@@ -40,7 +40,7 @@ workflow ALIGN {
 
         MM2PLUS_ALIGN(
             ch_ubam,
-            MINIMAP2_INDEX.out.index.collect(),
+            MM2PLUS_INDEX.out.index.collect(),
             true,
             'bai',
             false,
