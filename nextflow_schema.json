@@ -268,6 +268,13 @@
                     "description": "A tsv file with only regions of interest (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv) or with both regions and background cohort values (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv), made with methbat build",
                     "exists": true
                 },
+                "cramino_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.bed$",
+                    "format": "file-path",
+                    "description": "A BED file used to filter reads to on-target regions before cramino QC. By default this is the same as `target_regions`.",
+                    "exists": true
+                },
                 "modkit_call_regions": {
                     "type": "string",
                     "pattern": "^\\S+\\.bed$",
@@ -649,8 +656,8 @@
                 "preset": {
                     "type": "string",
                     "default": "revio",
-                    "description": "Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`)",
-                    "enum": ["revio", "pacbio", "ONT_R10"]
+                    "description": "Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`, `ONT_R10_AS`)",
+                    "enum": ["revio", "pacbio", "ONT_R10", "ONT_R10_AS"]
                 },
                 "sv_callers": {
                     "type": "string",

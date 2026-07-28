@@ -51,6 +51,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     ch_glnexus_config
     ch_hgnc_ids
     ch_samplesheet
+    ch_cramino_regions
     ch_methbat_regions
     ch_modkit_call_regions
     ch_mosdepth_regions
@@ -90,6 +91,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_hifiasm_mode
     val_methylation_callers
     val_mitochondrial_caller
+    val_mosdepth_regions
+    val_cramino_regions
     val_multiqc_config
     val_multiqc_logo
     val_multiqc_methods_description
@@ -162,6 +165,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         ch_glnexus_config,
         ch_hgnc_ids,
         ch_samplesheet,
+        ch_cramino_regions,
         ch_methbat_regions,
         ch_modkit_call_regions,
         ch_mosdepth_regions,
@@ -201,6 +205,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_force_sawfish_joint_call_single_samples,
         val_hifiasm_mode,
         val_mitochondrial_caller,
+        val_mosdepth_regions,
+        val_cramino_regions,
         val_multiqc_config,
         val_multiqc_logo,
         val_multiqc_methods_description,
@@ -296,8 +302,10 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     methylation_modkit_tbi              = NALLO.out.methylation_modkit_tbi // channel: [ val(meta), path(bed.gz.tbi) ]
     mosdepth_global_dist                = NALLO.out.mosdepth_global_dist // channel: [ val(meta), path(txt) ]
     mosdepth_per_base_d4                = NALLO.out.mosdepth_per_base_d4 // channel: [ val(meta), path(d4) ]
-    mosdepth_regions_bed                = NALLO.out.mosdepth_regions_bed // channel: [ val(meta), path(bed.gz) ]
+    mosdepth_regions_bed                = NALLO.out.mosdepth_regions_bed // channel: [ val(meta), path(bed.gz)     ]
     mosdepth_regions_csi                = NALLO.out.mosdepth_regions_csi // channel: [ val(meta), path(bed.gz.csi) ]
+    mosdepth_thresholds_bed             = NALLO.out.mosdepth_thresholds_bed // channel: [ val(meta), path(bed.gz)     ]
+    mosdepth_thresholds_csi             = NALLO.out.mosdepth_thresholds_csi // channel: [ val(meta), path(bed.gz.csi) ]
     mosdepth_regions_dist               = NALLO.out.mosdepth_regions_dist // channel: [ val(meta), path(txt) ]
     mosdepth_summary                    = NALLO.out.mosdepth_summary // channel: [ val(meta), path(txt) ]
     multiqc_data                        = NALLO.out.multiqc_data // channel: [ val(meta), path(*_data) ]
@@ -400,6 +408,7 @@ workflow {
         params.par_regions,
         params.phaser,
         params.premapped,
+        params.preset,
         params.sambamba_regions,
         params.skip_alignment,
         params.skip_annotate_paralogs,
@@ -434,6 +443,7 @@ workflow {
         params.sv_callers_merge_priority,
         params.sv_callers_to_merge,
         params.sv_callers_to_run,
+        params.target_regions,
         params.variant_consequences_snvs,
         params.variant_consequences_svs,
         params.vep_cache,
@@ -464,6 +474,7 @@ workflow {
         createReferenceChannelFromPath(params.glnexus_config, channel.value([[id: 'glnexus_config'], "${projectDir}/assets/glnexus_config_dp1.yml"])),
         createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', channel.value([])).map { hgnc_id_list -> hgnc_id_list[0].toString() }.collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true).map { file -> [[id: 'hgnc_ids'], file] }.collect(),
         PIPELINE_INITIALISATION.out.samplesheet,
+        createReferenceChannelFromPath(params.cramino_regions, channel.value([[], []])),
         createReferenceChannelFromPath(params.methbat_regions),
         createReferenceChannelFromPath(params.modkit_call_regions, channel.value([[], []])),
         createReferenceChannelFromPath(params.mosdepth_regions, channel.value([[], []])),
@@ -503,6 +514,8 @@ workflow {
         params.hifiasm_mode,
         params.methylation_callers,
         params.mitochondrial_caller,
+        params.mosdepth_regions,
+        params.cramino_regions,
         params.multiqc_config,
         params.multiqc_logo,
         params.multiqc_methods_description,
@@ -636,6 +649,8 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_per_base_d4)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_regions_bed)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_regions_csi)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_thresholds_bed)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_thresholds_csi)
 
     ch_qc_whatshap_stats = GENOMICMEDICINESWEDEN_NALLO.out.qc_whatshap_stats
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks_gtf)

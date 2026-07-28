@@ -1,7 +1,7 @@
 {
     "ONT_R10 preset with default methylation annotation settings": {
         "content": [
-            126,
+            127,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -50,6 +50,9 @@
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
+                },
+                "GAWK": {
+                    "gawk": "5.3.1"
                 },
                 "GAWK_EXTRACT_REGIONS": {
                     "gawk": "5.3.1"

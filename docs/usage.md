@@ -87,13 +87,23 @@ testrun,HG003,/path/to/HG003.fastq.gz,NIST,0,0,2,1
 
 ### Presets
 
-This pipeline comes with three different presets that should be set with the `--preset` parameter: `revio` (default), `pacbio` or `ONT_R10`. The preset parameter controls certain technology specific tools and parameters.
+This pipeline comes with four different presets that should be set with the `--preset` parameter: `revio` (default), `pacbio`, `ONT_R10` or `ONT_R10_AS`. The preset parameter controls certain technology specific tools and parameters.
 
 !!!info "Preset effects on subworkflows"
 
-    - `--skip_repeat_annotation` will be set to `true` for `ONT_R10`
-    - `--skip_call_paralogs` will be set to `true` for `ONT_R10`
+    - `--skip_repeat_annotation` will be set to `true` for `ONT_R10` and `ONT_R10_AS`
+    - `--skip_call_paralogs` will be set to `true` for `ONT_R10` and `ONT_R10_AS`
     - `--skip_methylation_calling` will be set to `true` for `pacbio`
+    - `--skip_mitochondrial_calling` will be set to `true` for `ONT_R10_AS`
+
+!!!info "ONT_R10_AS — adaptive sampling preset"
+
+    `ONT_R10_AS` is intended for Oxford Nanopore adaptive sampling runs. In adaptive sampling, the sequencer selectively enriches reads from target regions in real time; rejected off-target reads are still output and will map across the genome. The preset inherits all `ONT_R10` settings and adds targeted-run behaviour on top.
+
+    Provide the BED file of enriched regions with `--target_regions`. This single parameter automatically sets all region-related parameters (`--mosdepth_regions`, `--modkit_include_bed`, `--snv_call_regions`, `--sv_call_regions`). The pipeline will then:
+
+    - Filter aligned reads to on-target regions before cramino QC, so yield and N50 reflect enriched reads only
+    - Run mosdepth with per-region depth and coverage thresholds (≥20X, ≥30X) for each target region
 
 ### Reference files
 

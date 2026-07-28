@@ -99,6 +99,7 @@ workflow NALLO {
     ch_glnexus_config
     ch_hgnc_ids
     ch_samplesheet
+    ch_cramino_regions
     ch_methbat_regions
     ch_modkit_call_regions
     ch_mosdepth_regions
@@ -138,6 +139,8 @@ workflow NALLO {
     val_force_sawfish_joint_call_single_samples
     val_hifiasm_mode
     val_mitochondrial_caller
+    val_mosdepth_regions
+    val_cramino_regions
     val_multiqc_config
     val_multiqc_logo
     val_multiqc_methods_description
@@ -402,11 +405,16 @@ workflow NALLO {
             ch_mosdepth_regions,
             ch_sambamba_regions,
             !val_skip_sambamba_depth,
+            val_cramino_regions,
+            ch_cramino_regions,
         )
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.fastqc_zip.collect { _meta, metrics -> metrics }.ifEmpty([]))
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_summary.collect { _meta, metrics -> metrics })
-        ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_global_dist.collect { _meta, metrics -> metrics })
-        ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_regions_dist.collect { _meta, metrics -> metrics }.ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(
+            (val_mosdepth_regions
+                ? QC_ALIGNED_READS.out.mosdepth_regions_dist
+                : QC_ALIGNED_READS.out.mosdepth_global_dist).collect { _meta, metrics -> metrics }
+        )
     }
 
     /*
@@ -1188,8 +1196,10 @@ workflow NALLO {
     methylation_modkit_tbi              = val_skip_modkit ? channel.empty() : CALL_METHYLATION_MODKIT.out.tbi // channel: [ val(meta), path(bed.gz.tbi) ]
     mosdepth_global_dist                = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_global_dist // channel: [ val(meta), path(txt) ]
     mosdepth_per_base_d4                = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_per_base_d4 // channel: [ val(meta), path(d4) ]
-    mosdepth_regions_bed                = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_regions_bed // channel: [ val(meta), path(bed.gz) ]
+    mosdepth_regions_bed                = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_regions_bed // channel: [ val(meta), path(bed.gz)     ]
     mosdepth_regions_csi                = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_regions_csi // channel: [ val(meta), path(bed.gz.csi) ]
+    mosdepth_thresholds_bed             = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_thresholds_bed // channel: [ val(meta), path(bed.gz)     ]
+    mosdepth_thresholds_csi             = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_thresholds_csi // channel: [ val(meta), path(bed.gz.csi) ]
     mosdepth_regions_dist               = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_regions_dist // channel: [ val(meta), path(txt) ]
     mosdepth_summary                    = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_summary // channel: [ val(meta), path(txt) ]
     multiqc_data                        = MULTIQC.out.data // channel: [ val(meta), path(*_data) ]

@@ -51,6 +51,7 @@ workflow PIPELINE_INITIALISATION {
     val_par_regions
     val_phaser
     val_premapped
+    val_preset
     val_sambamba_regions
     val_skip_alignment
     val_skip_annotate_paralogs
@@ -85,6 +86,7 @@ workflow PIPELINE_INITIALISATION {
     val_sv_callers_merge_priority
     val_sv_callers_to_merge
     val_sv_callers_to_run
+    val_target_regions
     val_variant_consequences_snvs
     val_variant_consequences_svs
     val_vep_cache
@@ -292,6 +294,11 @@ workflow PIPELINE_INITIALISATION {
     // Check that methbat is in --methylation_callers when methylation annotation is active
     if (!val_skip_methylation_annotation && !val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }.contains('methbat')) {
         error("Error: methbat must be in --methylation_callers when running without --skip_methylation_annotation. Add methbat to --methylation_callers or use --skip_methylation_annotation to disable methylation annotation.")
+    }
+
+    // Check that target_regions is provided when using the ONT_R10_AS preset
+    if (val_preset == 'ONT_R10_AS' && !val_target_regions) {
+        error("Error: --target_regions must be provided when using --preset ONT_R10_AS. The ONT_R10_AS preset is designed for adaptive sampling runs which require target regions for calling and QC.")
     }
 
     // Check that sex check is not skipped if there are samples with unknown sex
