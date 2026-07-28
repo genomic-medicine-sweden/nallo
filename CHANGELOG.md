@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1209](https://github.com/genomic-medicine-sweden/nallo/pull/1209) - Added tests for `clean_sniffles`
 - [#1159](https://github.com/genomic-medicine-sweden/nallo/pull/1159) - Added `ONT_R10_AS` preset for Oxford Nanopore adaptive sampling runs, with preset defaults: `sv_callers=sniffles`, `skip_mitochondrial_calling=true`, `skip_sex_check=true`, `skip_genome_assembly=true`
 - [#1159](https://github.com/genomic-medicine-sweden/nallo/pull/1159) - Added on-target read pre-filtering in `QC_ALIGNED_READS`: when `--target_regions` is set, reads are filtered with `SAMTOOLS_VIEW` to on-target regions before CRAMINO QC, ensuring QC metrics reflect only on-target data
+- [#1217](https://github.com/genomic-medicine-sweden/nallo/pull/1217) - Added `mm2plus` as an option to align reads to the reference and for assembly alignment
 
 ### Changed
 
@@ -148,6 +149,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                                  | `--pbmm2_preset`                |
 |                                  | `--glnexus_config`              |
 |                                  | `--preset ONT_R10_AS`           |
+|                                  | `--assembly_aligner`            |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -170,6 +172,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | pbmm2/align                    |             | 26.2.0      |
 | samtools/calmd                 |             | 1.24        |
 | samtools/view                  | 1.23.1      | 1.24        |
+| mm2plus                        |             | 1.3         |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

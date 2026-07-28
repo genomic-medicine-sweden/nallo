@@ -123,6 +123,7 @@ workflow NALLO {
     ch_vep_cache_unprocessed
     ch_vep_plugin_files
     val_alignment_processes
+    val_assembly_aligner
     val_bigwig_modcodes
     val_convert_unphased_aligned_reads_to_cram
     val_cram_output
@@ -368,6 +369,7 @@ workflow NALLO {
             ch_fasta,
             ch_fai,
             val_cram_output,
+            val_assembly_aligner,
         )
     }
     //
