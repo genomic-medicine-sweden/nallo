@@ -1,6 +1,7 @@
 include { MODKIT_PILEUP            } from '../../../modules/nf-core/modkit/pileup/main'
 include { MODKIT_BEDMETHYLTOBIGWIG } from '../../../modules/nf-core/modkit/bedmethyltobigwig/main'
 include { TABIX_TABIX              } from '../../../modules/nf-core/tabix/tabix/main'
+include { GAWK                     } from '../../../modules/nf-core/gawk/main'
 workflow CALL_METHYLATION_MODKIT {
     take:
     ch_bam_bai // channel: [ val(meta), bam, bai ]
@@ -14,11 +15,26 @@ workflow CALL_METHYLATION_MODKIT {
         .combine(ch_fai.map { _meta, fai -> fai })
         .collect()
 
+    // Trim BED to 3 columns; modkit pileup --include-bed requires a 3-column BED
+    ch_bed_branches = ch_bed.branch { _meta, bed ->
+        with_bed: bed
+        no_bed: !bed
+    }
+
+    GAWK(
+        ch_bed_branches.with_bed,
+        [],
+        false,
+    )
+
+    // .collect() converts from queue channel back to value channel so all samples get the bed
+    ch_bed_for_modkit = ch_bed_branches.no_bed.mix(GAWK.out.output).collect()
+
     // Performs pileups per haplotype if the phasing workflow is on, set in config
     MODKIT_PILEUP(
         ch_bam_bai,
         ch_fasta_fai,
-        ch_bed,
+        ch_bed_for_modkit,
     )
 
     // Only convert files with content
