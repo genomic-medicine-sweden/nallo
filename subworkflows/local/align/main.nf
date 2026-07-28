@@ -34,7 +34,7 @@ workflow ALIGN {
     }
     if (val_aligner == 'mm2plus') {
 
-        MINIMAP2_INDEX(
+        MM2PLUS_INDEX(
             ch_fasta
         )
 
