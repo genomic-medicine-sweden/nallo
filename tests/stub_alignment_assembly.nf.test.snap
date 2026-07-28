@@ -98,10 +98,10 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-07-24T09:06:34.95440235",
+        "timestamp": "2026-07-14T14:13:58.500072651",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.4"
         }
     },
     "Test genome assembly without alignment": {
@@ -165,10 +165,10 @@
                 "pipeline_info/nallo_software_mqc_versions.yml"
             ]
         ],
-        "timestamp": "2026-07-27T15:36:10.588997523",
+        "timestamp": "2026-07-14T13:53:49.202391545",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.4"
         }
     },
     "Test alignment without genome assembly": {
@@ -238,10 +238,10 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-07-24T09:06:11.154012797",
+        "timestamp": "2026-07-14T13:52:23.610342856",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.4"
         }
     }
 }
