@@ -112,6 +112,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1159](https://github.com/genomic-medicine-sweden/nallo/pull/1159) - Changed `call_methylation_modkit` to use GAWK to strip non-BED content from `modkit_call_regions` before processing
 - [#1159](https://github.com/genomic-medicine-sweden/nallo/pull/1159) - Changed mosdepth MultiQC input to use the regional coverage distribution when `--target_regions` is set
 - [#1218](https://github.com/genomic-medicine-sweden/nallo/pull/1218) - Changed default mitochondrial caller for the `ONT_R10` preset to `deepvariant`
+- [#1219](https://github.com/genomic-medicine-sweden/nallo/pull/1219) - Changed nf-test CI action to retry once on transient network/disk failures
 
 ### Removed
 
