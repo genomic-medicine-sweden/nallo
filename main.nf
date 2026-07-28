@@ -507,7 +507,7 @@ workflow {
         params.methylation_callers,
         params.mitochondrial_caller,
         params.mosdepth_regions,
-        params.cramino_regions as boolean,
+        params.cramino_regions,
         params.multiqc_config,
         params.multiqc_logo,
         params.multiqc_methods_description,
