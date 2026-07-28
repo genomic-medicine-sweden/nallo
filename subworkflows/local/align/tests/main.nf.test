@@ -58,6 +58,35 @@ nextflow_workflow {
         }
     }
 
+    test("[bam, fasta] - mm2plus") {
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                ])
+                input[1] = channel.of([
+                    [ id: 'hg38'],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                ])
+                input[2] = [[],[]]
+                input[3] = 'mm2plus'
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    bam(workflow.out.bam.get(0).get(1)).getReadsMD5(),
+                    file(workflow.out.index.get(0).get(1)).name
+                ).match() }
+            )
+        }
+    }
+
     test("[bam, fasta] - pbmm2 - skip portello") {
         when {
             workflow {
@@ -129,6 +158,35 @@ nextflow_workflow {
                 input[2] = SAMTOOLS_FAIDX.out.fai
                 input[3] = 'pbmm2'
                 input[4] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("[bam, fasta] - mm2plus - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                ])
+                input[1] = channel.of([
+                    [ id: 'hg38'],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                ])
+                input[2] = [[],[]]
+                input[3] = 'mm2plus'
                 """
             }
         }

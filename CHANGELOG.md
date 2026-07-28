@@ -38,6 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1208](https://github.com/genomic-medicine-sweden/nallo/pull/1208) - Added `SAMTOOLS_CALMD` to add MD tag needed for sniffles after pbmm2
 - [#1208](https://github.com/genomic-medicine-sweden/nallo/pull/1208) - Added new read group param to `CONVERT_INPUT_FASTQS` config to add RG, SM and DS tags to bam when converting with `SAMTOOLS_IMPORT` and read aligner is pbmm2
 - [#1209](https://github.com/genomic-medicine-sweden/nallo/pull/1209) - Added tests for `clean_sniffles`
+- [#1217](https://github.com/genomic-medicine-sweden/nallo/pull/1217) - Added `mm2plus` as an option to align reads to the reference and for assembly alignment
 
 ### Changed
 
@@ -109,6 +110,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1197](https://github.com/genomic-medicine-sweden/nallo/pull/1197) - Updated all genmod modules
 - [#1196](https://github.com/genomic-medicine-sweden/nallo/pull/1196) - Updated SVDB modules
 - [#1206](https://github.com/genomic-medicine-sweden/nallo/pull/1206) - Changed default glnexus config from `DeepVariant_unfiltered` to a custom config in `assets/` due to unfixed [bug](https://github.com/dnanexus-rnd/GLnexus/issues/286)?
+- [#1218](https://github.com/genomic-medicine-sweden/nallo/pull/1218) - Changed default mitochondrial caller for the `ONT_R10` preset to `deepvariant`
 
 ### Removed
 
@@ -146,6 +148,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                                  | `--read_aligner`                |
 |                                  | `--pbmm2_preset`                |
 |                                  | `--glnexus_config`              |
+|                                  | `--assembly_aligner`            |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -170,11 +173,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | mitorsaw/haplotype             |             | 0.2.9       |
 | pbmm2/align                    |             | 26.2.0      |
 | samtools/calmd                 |             | 1.24        |
+| mm2plus                        |             | 1.3         |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
 > Version has been added if just the new version information is present.
 > Version has been removed if new version information isn't present.
+
+## 0.12.1 - [2026-07-22]
+
+### `Fixed`
+
+- [#1214](https://github.com/genomic-medicine-sweden/nallo/pull/1214) - Updated `peddy` nf-core module to fix this [issue](https://github.com/genomic-medicine-sweden/nallo/issues/1084#event-28314854442)
+- [#1214](https://github.com/genomic-medicine-sweden/nallo/pull/1214) - Fixed nf-test CI not passing the matrix Nextflow version to the setup action.
 
 ## 0.12.0 - [2026-04-28]
 

@@ -74,6 +74,60 @@
             "nextflow": "26.07.0"
         }
     },
+    "[bam, fasta] - mm2plus - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "bam": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "index": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-23T15:21:52.320282535",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.07.0"
+        }
+    },
+    "[bam, fasta] - mm2plus": {
+        "content": [
+            "8ae63fe5d3a9bf7a8f08c5266d729a05",
+            "test.bam.bai"
+        ],
+        "timestamp": "2026-07-28T09:43:06.226881485",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.07.0"
+        }
+    },
     "[fastq, fasta] - minimap2 - stub": {
         "content": [
             {
