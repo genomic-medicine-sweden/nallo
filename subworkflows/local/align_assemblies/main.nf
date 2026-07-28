@@ -24,7 +24,7 @@ workflow ALIGN_ASSEMBLIES {
 
         MM2PLUS_ALIGN(
             ch_assembly,
-            MINIMAP2_INDEX.out.index.collect(),
+            MM2PLUS_INDEX.out.index.collect(),
             true,
             'bai',
             false,
