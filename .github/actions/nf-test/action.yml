@@ -51,17 +51,26 @@ runs:
       env:
         NFT_WORKDIR: ${{ env.NFT_WORKDIR }}
       run: |
-        nf-test test \
-          --profile=+${{ inputs.profile }} \
-          $(if [ -n "${{ inputs.tags }}" ]; then echo "--tag ${{ inputs.tags }}"; fi) \
-          --ci \
-          --changed-since HEAD^ \
-          --verbose \
-          --tap=test.tap \
-          --shard ${{ inputs.shard }}/${{ inputs.total_shards }}
+        run_nf_test() {
+          nf-test test \
+            --profile=+${{ inputs.profile }} \
+            $(if [ -n "${{ inputs.tags }}" ]; then echo "--tag ${{ inputs.tags }}"; fi) \
+            --ci \
+            --changed-since HEAD^ \
+            --verbose \
+            --tap=test.tap \
+            --shard ${{ inputs.shard }}/${{ inputs.total_shards }}
+        }
 
-          # Save the absolute path of the test.tap file to the output
-          echo "tap_file_path=$(realpath test.tap)" >> $GITHUB_OUTPUT
+        set -o pipefail
+        if ! run_nf_test 2>&1 | tee nf-test.log; then
+          if grep -qE "Connection reset|Connection timed out|no space left on device|Can't stage file.*https://|file does not exist.*https://" nf-test.log; then
+            echo "::warning::Transient network/disk failure detected — retrying once"
+            run_nf_test
+          else
+            exit 1
+          fi
+        fi
 
     - name: Generate test summary
       if: always()
