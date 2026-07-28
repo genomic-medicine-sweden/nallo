@@ -1,5 +1,59 @@
 {
-    "[bam, fasta] - pbmm2": {
+    "[bam, fasta] - pbmm2 - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_aligned_reads_no_md.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_aligned_reads_no_md.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "bam": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_aligned_reads_no_md.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "index": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_aligned_reads_no_md.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-28T08:54:58.521209193",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.07.0"
+        }
+    },
+    "[bam, fasta] - minimap2": {
+        "content": [
+            "eeaeea791da897c73f888b97fd3ec04f",
+            "HG002_PacBio_Revio.bam.bam.bai"
+        ],
+        "timestamp": "2026-07-28T08:52:38.592341698",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.07.0"
+        }
+    },
+    "[bam, fasta] - pbmm2 - skip portello": {
         "content": [
             {
                 "maxReadLength": 33619,
@@ -14,44 +68,10 @@
             },
             "test_aligned_reads.bam.bai"
         ],
-        "timestamp": "2026-07-21T16:05:46.223976943",
+        "timestamp": "2026-07-28T08:52:56.90272483",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
-        }
-    },
-    "[bam, fasta] - pbmm2 - stub": {
-        "content": [
-            {
-                "0": [
-                    
-                ],
-                "1": [
-                    
-                ],
-                "bam": [
-                    
-                ],
-                "index": [
-                    
-                ]
-            }
-        ],
-        "timestamp": "2026-07-23T15:02:38.379722014",
-        "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
-        }
-    },
-    "[bam, fasta] - minimap2": {
-        "content": [
-            "eeaeea791da897c73f888b97fd3ec04f",
-            "HG002_PacBio_Revio.bam.bam.bai"
-        ],
-        "timestamp": "2026-07-17T16:19:18.734302777",
-        "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.06.0"
         }
     },
     "[fastq, fasta] - minimap2 - stub": {
@@ -91,10 +111,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-17T16:19:36.068394593",
+        "timestamp": "2026-07-28T08:53:07.547430963",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.06.0"
+            "nextflow": "26.07.0"
         }
     }
 }

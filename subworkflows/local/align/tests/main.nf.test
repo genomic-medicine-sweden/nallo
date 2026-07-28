@@ -11,7 +11,7 @@ nextflow_workflow {
             process {
                 """
                 input[0] = [
-                    [ id:'hg38' ],
+                    [ id:'test' ],
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ]
                 """
@@ -58,7 +58,7 @@ nextflow_workflow {
         }
     }
 
-    test("[bam, fasta] - pbmm2") {
+    test("[bam, fasta] - pbmm2 - skip portello") {
         when {
             workflow {
                 """
