@@ -45,7 +45,7 @@ nextflow_workflow {
 
     }
 
-    test("bam") {
+    test("bam - minimap2") {
 
         when {
             workflow {
@@ -60,6 +60,7 @@ nextflow_workflow {
                     file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
                 ]
                 input[3] = false
+                input[4] = 'minimap2'
                 """
             }
         }
@@ -68,14 +69,45 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    bam(workflow.out.bam.get(0).get(1)).getStatistics(),
+                    bam(workflow.out.bam.get(0).get(1)).getReadsMD5(),
                     file(workflow.out.bai.get(0).get(1)).name
                 ).match() }
             )
         }
     }
 
-    test("bam - stub") {
+    test("bam - mm2plus") {
+
+        when {
+            workflow {
+                """
+                input[0] = GFASTATS.out.assembly
+                input[1] = [
+                    [ id: 'genome' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)
+                ]
+                input[2] = [
+                    [ id : 'genome' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
+                ]
+                input[3] = false
+                input[4] = 'mm2plus'
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    bam(workflow.out.bam.get(0).get(1)).getReadsMD5(),
+                    file(workflow.out.bai.get(0).get(1)).name
+                ).match() }
+            )
+        }
+    }
+
+    test("bam - minimap2 - stub") {
 
         options "-stub"
 
@@ -92,6 +124,7 @@ nextflow_workflow {
                     file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
                 ]
                 input[3] = false
+                input[4] = 'minimap2'
                 """
             }
         }
@@ -102,6 +135,35 @@ nextflow_workflow {
                 { assert snapshot(workflow.out).match() }
             )
         }
+    }
 
+    test("bam - mm2plus - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = GFASTATS.out.assembly
+                input[1] = [
+                    [ id: 'genome' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)
+                ]
+                input[2] = [
+                    [ id : 'genome' ],
+                    file(params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
+                ]
+                input[3] = false
+                input[4] = 'mm2plus'
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
     }
 }
