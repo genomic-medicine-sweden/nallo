@@ -1,6 +1,7 @@
 include { MINIMAP2_ALIGN   } from '../../../modules/nf-core/minimap2/align/main'
 include { MINIMAP2_INDEX   } from '../../../modules/nf-core/minimap2/index/main'
 include { MM2PLUS_ALIGN    } from '../../../modules/nf-core/mm2plus/align/main'
+include { MM2PLUS_INDEX    } from '../../../modules/nf-core/mm2plus/index/main'
 include { SAMTOOLS_MERGE   } from '../../../modules/nf-core/samtools/merge/main'
 include { SAMTOOLS_VIEW    } from '../../../modules/nf-core/samtools/view/main'
 include { SAMTOOLS_CONVERT } from '../../../modules/nf-core/samtools/convert/main'
@@ -16,11 +17,11 @@ workflow ALIGN_ASSEMBLIES {
 
     main:
 
-    MINIMAP2_INDEX(
-        ch_fasta
-    )
-
     if (val_assembly_aligner == 'mm2plus') {
+
+        MM2PLUS_INDEX(
+            ch_fasta
+        )
 
         MM2PLUS_ALIGN(
             ch_assembly,
@@ -33,6 +34,10 @@ workflow ALIGN_ASSEMBLIES {
         ch_aligned_assemblies_bam = MM2PLUS_ALIGN.out.bam
     }
     else {
+
+        MINIMAP2_INDEX(
+            ch_fasta
+        )
 
         MINIMAP2_ALIGN(
             ch_assembly,

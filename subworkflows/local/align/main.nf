@@ -1,6 +1,7 @@
 include { MINIMAP2_ALIGN } from '../../../modules/nf-core/minimap2/align/main'
 include { MINIMAP2_INDEX } from '../../../modules/nf-core/minimap2/index/main'
 include { MM2PLUS_ALIGN  } from '../../../modules/nf-core/mm2plus/align/main'
+include { MM2PLUS_INDEX  } from '../../../modules/nf-core/mm2plus/index/main'
 include { PBMM2_ALIGN    } from '../../../modules/nf-core/pbmm2/align/main'
 include { SAMTOOLS_INDEX } from '../../../modules/nf-core/samtools/index/main'
 include { SAMTOOLS_CALMD } from '../../../modules/nf-core/samtools/calmd/main'

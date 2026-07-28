@@ -119,10 +119,10 @@
     },
     "[bam, fasta] - mm2plus": {
         "content": [
-            "2791d5e6faf109a36a3104424428fee7",
+            "8ae63fe5d3a9bf7a8f08c5266d729a05",
             "test.bam.bai"
         ],
-        "timestamp": "2026-07-27T14:48:23.52406154",
+        "timestamp": "2026-07-28T09:43:06.226881485",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
