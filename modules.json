@@ -276,6 +276,11 @@
                         "git_sha": "1a377ebc4e9850b9a9880650bbec9152a0060459",
                         "installed_by": ["modules"]
                     },
+                    "mm2plus/index": {
+                        "branch": "master",
+                        "git_sha": "b0914a2b2cfd5571912e9c5bea2e6f1d34f02cb2",
+                        "installed_by": ["modules"]
+                    },
                     "modkit/bedmethyltobigwig": {
                         "branch": "master",
                         "git_sha": "3d81317a30d1016b533982d6b84df07713ae520a",
