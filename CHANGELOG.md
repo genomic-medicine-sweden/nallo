@@ -106,6 +106,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1197](https://github.com/genomic-medicine-sweden/nallo/pull/1197) - Updated all genmod modules
 - [#1196](https://github.com/genomic-medicine-sweden/nallo/pull/1196) - Updated SVDB modules
 - [#1206](https://github.com/genomic-medicine-sweden/nallo/pull/1206) - Changed default glnexus config from `DeepVariant_unfiltered` to a custom config in `assets/` due to unfixed [bug](https://github.com/dnanexus-rnd/GLnexus/issues/286)?
+- [#1218](https://github.com/genomic-medicine-sweden/nallo/pull/1218) - Changed default mitochondrial caller for the `ONT_R10` preset to `deepvariant`
 
 ### Removed
 
