@@ -110,6 +110,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1206](https://github.com/genomic-medicine-sweden/nallo/pull/1206) - Changed default glnexus config from `DeepVariant_unfiltered` to a custom config in `assets/` due to unfixed [bug](https://github.com/dnanexus-rnd/GLnexus/issues/286)?
 - [#1159](https://github.com/genomic-medicine-sweden/nallo/pull/1159) - Changed `call_methylation_modkit` to use GAWK to strip non-BED content from `modkit_call_regions` before processing
 - [#1159](https://github.com/genomic-medicine-sweden/nallo/pull/1159) - Changed mosdepth MultiQC input to use the regional coverage distribution when `--target_regions` is set
+- [#1218](https://github.com/genomic-medicine-sweden/nallo/pull/1218) - Changed default mitochondrial caller for the `ONT_R10` preset to `deepvariant`
 
 ### Removed
 

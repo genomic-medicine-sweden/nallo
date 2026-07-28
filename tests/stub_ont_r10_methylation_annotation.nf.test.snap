@@ -1,7 +1,7 @@
 {
     "ONT_R10 preset with default methylation annotation settings": {
         "content": [
-            146,
+            126,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -21,16 +21,10 @@
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
                     "bcftools": 1.22
                 },
-                "BCFTOOLS_SORT": {
-                    "bcftools": 1.22
-                },
                 "BCFTOOLS_STATS": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_VIEW_MITO": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_PHASING": {
@@ -80,9 +74,6 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
-                },
-                "MITORSAW_HAPLOTYPE": {
-                    "mitorsaw": "0.2.9-0dc8e58"
                 },
                 "MODKIT_PILEUP": {
                     "modkit": "0.6.1"
@@ -144,7 +135,7 @@
                 }
             }
         ],
-        "timestamp": "2026-07-14T13:53:43.549060825",
+        "timestamp": "2026-07-27T10:58:47.444208625",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"
