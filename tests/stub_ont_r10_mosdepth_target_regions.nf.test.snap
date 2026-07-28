@@ -1,7 +1,7 @@
 {
     "ONT_R10 preset with target_regions uses mosdepth region distribution for MultiQC": {
         "content": [
-            136,
+            117,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -21,16 +21,10 @@
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
                     "bcftools": 1.22
                 },
-                "BCFTOOLS_SORT": {
-                    "bcftools": 1.22
-                },
                 "BCFTOOLS_STATS": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_VIEW_MITO": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_PHASING": {
@@ -77,9 +71,6 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
-                },
-                "MITORSAW_HAPLOTYPE": {
-                    "mitorsaw": "0.2.9-0dc8e58"
                 },
                 "MODKIT_PILEUP": {
                     "modkit": "0.6.1"
@@ -289,13 +280,6 @@
                 "repeats/sample/HG002_ONT_C/HG002_ONT_C_strdust.vcf.gz",
                 "repeats/sample/HG002_ONT_C/HG002_ONT_C_strdust.vcf.gz.tbi",
                 "snvs",
-                "snvs/family",
-                "snvs/family/FAM",
-                "snvs/family/FAM/FAM_snvs.vcf.gz",
-                "snvs/family/FAM/FAM_snvs.vcf.gz.tbi",
-                "snvs/family/FAM2",
-                "snvs/family/FAM2/FAM2_snvs.vcf.gz",
-                "snvs/family/FAM2/FAM2_snvs.vcf.gz.tbi",
                 "snvs/sample",
                 "snvs/sample/HG002_ONT_A",
                 "snvs/sample/HG002_ONT_A/HG002_ONT_A_deepvariant_snvs.vcf.gz",
