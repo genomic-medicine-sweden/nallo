@@ -13,7 +13,7 @@
                         {
                             "id": "NIST"
                         },
-                        "NIST.json:md5,1b80767f6671417609aa16e0cacc0480"
+                        "NIST.json:md5,50d1140aa73aaf2395fc1a175d006dc3"
                     ]
                 ],
                 "1": [
@@ -30,7 +30,7 @@
                         {
                             "id": "NIST"
                         },
-                        "NIST.json:md5,1b80767f6671417609aa16e0cacc0480"
+                        "NIST.json:md5,50d1140aa73aaf2395fc1a175d006dc3"
                     ]
                 ],
                 "tsv": [
@@ -38,10 +38,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-05-27T10:39:22.606462455",
+        "timestamp": "2026-07-28T08:34:23.364007653",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.04.6"
         }
     },
     "two familes, multiple sampels - tsv format - rules": {
@@ -61,11 +61,11 @@
                         {
                             "id": "NIST"
                         },
-                        "NIST.tsv:md5,9362a2f93be59eb0518e254ab567166c"
+                        "NIST.tsv:md5,f48c1507728b340e56d103fd18f829bb"
                     ]
                 ],
                 "json": [
-
+                    
                 ],
                 "tsv": [
                     [
@@ -78,15 +78,15 @@
                         {
                             "id": "NIST"
                         },
-                        "NIST.tsv:md5,9362a2f93be59eb0518e254ab567166c"
+                        "NIST.tsv:md5,f48c1507728b340e56d103fd18f829bb"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-05-27T10:39:40.666600188",
+        "timestamp": "2026-07-28T08:36:39.306157194",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.04.6"
         }
     },
     "two familes, multiple sampels - tsv format - rules - stub": {
