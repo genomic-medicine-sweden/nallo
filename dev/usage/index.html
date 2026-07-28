@@ -1623,13 +1623,23 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <p>If you have multiple files per sample, they can be added on separate rows. Keep all columns except <code>file</code> identical for each sample. The files will be merged after alignment or before assembly.</p>
 </div>
 <h3 id="presets">Presets</h3>
-<p>This pipeline comes with three different presets that should be set with the <code>--preset</code> parameter: <code>revio</code> (default), <code>pacbio</code> or <code>ONT_R10</code>. The preset parameter controls certain technology specific tools and parameters.</p>
+<p>This pipeline comes with four different presets that should be set with the <code>--preset</code> parameter: <code>revio</code> (default), <code>pacbio</code>, <code>ONT_R10</code> or <code>ONT_R10_AS</code>. The preset parameter controls certain technology specific tools and parameters.</p>
 <div class="admonition info">
 <p class="admonition-title">Preset effects on subworkflows</p>
 <ul>
-<li><code>--skip_repeat_annotation</code> will be set to <code>true</code> for <code>ONT_R10</code></li>
-<li><code>--skip_call_paralogs</code> will be set to <code>true</code> for <code>ONT_R10</code></li>
+<li><code>--skip_repeat_annotation</code> will be set to <code>true</code> for <code>ONT_R10</code> and <code>ONT_R10_AS</code></li>
+<li><code>--skip_call_paralogs</code> will be set to <code>true</code> for <code>ONT_R10</code> and <code>ONT_R10_AS</code></li>
 <li><code>--skip_methylation_calling</code> will be set to <code>true</code> for <code>pacbio</code></li>
+<li><code>--skip_mitochondrial_calling</code> will be set to <code>true</code> for <code>ONT_R10_AS</code></li>
+</ul>
+</div>
+<div class="admonition info">
+<p class="admonition-title">ONT_R10_AS — adaptive sampling preset</p>
+<p><code>ONT_R10_AS</code> is intended for Oxford Nanopore adaptive sampling runs. In adaptive sampling, the sequencer selectively enriches reads from target regions in real time; rejected off-target reads are still output and will map across the genome. The preset inherits all <code>ONT_R10</code> settings and adds targeted-run behaviour on top.</p>
+<p>Provide the BED file of enriched regions with <code>--target_regions</code>. This single parameter automatically sets all region-related parameters (<code>--mosdepth_regions</code>, <code>--modkit_include_bed</code>, <code>--snv_call_regions</code>, <code>--sv_call_regions</code>). The pipeline will then:</p>
+<ul>
+<li>Filter aligned reads to on-target regions before cramino QC, so yield and N50 reflect enriched reads only</li>
+<li>Run mosdepth with per-region depth and coverage thresholds (≥20X, ≥30X) for each target region</li>
 </ul>
 </div>
 <h3 id="reference-files">Reference files</h3>

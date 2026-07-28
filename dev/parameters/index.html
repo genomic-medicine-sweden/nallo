@@ -936,6 +936,14 @@
 <td></td>
 </tr>
 <tr>
+<td><code>cramino_regions</code></td>
+<td>A BED file used to filter reads to on-target regions before cramino QC. By default this is the same as <code>target_regions</code>.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td><code>modkit_call_regions</code></td>
 <td>A BED file with regions of interest for the methylation pileups. By default this is the same as <code>target_regions</code>.</td>
 <td><code>string</code></td>
@@ -1089,7 +1097,7 @@
 </tr>
 <tr>
 <td><code>paraphrase_output_format</code></td>
-<td>Output format for paralog annotation from Paraphrase. Either <code>tsv</code> or <code>json</code>. (accepted: <code>tsv</code>|<code>json</code>)</td>
+<td>Output format for paralog annotation from Paraphrase. Either <code>tsv</code> or <code>json</code>.</td>
 <td><code>string</code></td>
 <td>tsv</td>
 <td></td>
@@ -1121,7 +1129,7 @@
 </tr>
 <tr>
 <td><code>alignment_output_format</code></td>
-<td>Output format for alignment files. Either <code>bam</code> or <code>cram</code> (accepted: <code>bam</code>|<code>cram</code>)</td>
+<td>Output format for alignment files. Either <code>bam</code> or <code>cram</code></td>
 <td><code>string</code></td>
 <td>bam</td>
 <td></td>
@@ -1289,7 +1297,7 @@
 </tr>
 <tr>
 <td><code>publish_dir_mode</code></td>
-<td>Method used to save pipeline results to output directory. (accepted: <code>symlink</code>|<code>rellink</code>|<code>link</code>|<code>copy</code>|<code>copyNoFollow</code>|<code>move</code>) <details><summary>Help</summary><small>The Nextflow <code>publishDir</code> option specifies which intermediate files should be saved to the output directory. This option tells the pipeline what method should be used to move these files. See <a href="https://www.nextflow.io/docs/latest/process.html#publishdir">Nextflow docs</a> for details.</small></details></td>
+<td>Method used to save pipeline results to output directory. <details><summary>Help</summary><small>The Nextflow <code>publishDir</code> option specifies which intermediate files should be saved to the output directory. This option tells the pipeline what method should be used to move these files. See <a href="https://www.nextflow.io/docs/latest/process.html#publishdir">Nextflow docs</a> for details.</small></details></td>
 <td><code>string</code></td>
 <td>copy</td>
 <td></td>
@@ -1433,7 +1441,7 @@
 </tr>
 <tr>
 <td><code>preset</code></td>
-<td>Enable or disable certain parts of the pipeline by default, depending on data type (<code>revio</code>, <code>pacbio</code>, <code>ONT_R10</code>) (accepted: <code>revio</code>|<code>pacbio</code>|<code>ONT_R10</code>)</td>
+<td>Enable or disable certain parts of the pipeline by default, depending on data type (<code>revio</code>, <code>pacbio</code>, <code>ONT_R10</code>, <code>ONT_R10_AS</code>)</td>
 <td><code>string</code></td>
 <td>revio</td>
 <td>True</td>
@@ -1473,7 +1481,7 @@
 </tr>
 <tr>
 <td><code>snv_caller</code></td>
-<td>Which short variant software to use (<code>deepvariant</code>) (accepted: <code>deepvariant</code>|<code>sentieon</code>)</td>
+<td>Which short variant software to use (<code>deepvariant</code>)</td>
 <td><code>string</code></td>
 <td>deepvariant</td>
 <td></td>
@@ -1481,7 +1489,7 @@
 </tr>
 <tr>
 <td><code>str_caller</code></td>
-<td>Which caller to use for short tandem repeat expansions (TRGT or STRdust). (accepted: <code>trgt</code>|<code>strdust</code>)</td>
+<td>Which caller to use for short tandem repeat expansions (TRGT or STRdust).</td>
 <td><code>string</code></td>
 <td>trgt</td>
 <td></td>
@@ -1505,7 +1513,7 @@
 </tr>
 <tr>
 <td><code>phaser</code></td>
-<td>Which phasing software to use (<code>longphase</code>, <code>whatshap</code>, <code>hiphase</code>) (accepted: <code>longphase</code>|<code>whatshap</code>|<code>hiphase</code>)</td>
+<td>Which phasing software to use (<code>longphase</code>, <code>whatshap</code>, <code>hiphase</code>)</td>
 <td><code>string</code></td>
 <td>longphase</td>
 <td></td>
@@ -1521,7 +1529,7 @@
 </tr>
 <tr>
 <td><code>hifiasm_mode</code></td>
-<td>Run hifiasm in hifi-only or hifi-trio mode (<code>hifi-only</code>, <code>trio-binning</code>) (accepted: <code>hifi-only</code>|<code>trio-binning</code>)</td>
+<td>Run hifiasm in hifi-only or hifi-trio mode (<code>hifi-only</code>, <code>trio-binning</code>)</td>
 <td><code>string</code></td>
 <td>trio-binning</td>
 <td></td>
@@ -1529,7 +1537,7 @@
 </tr>
 <tr>
 <td><code>hifiasm_preset</code></td>
-<td>Hifiasm preset, is set to <code>--ont</code> when <code>--preset ONT_R10</code> is active. (accepted: <code>`\|</code>--ont`)</td>
+<td>Hifiasm preset, is set to <code>--ont</code> when <code>--preset ONT_R10</code> is active.</td>
 <td><code>string</code></td>
 <td>None</td>
 <td></td>
@@ -1681,7 +1689,7 @@
 </tr>
 <tr>
 <td><code>deepvariant_model_type</code></td>
-<td>Sets the model type used for DeepVariant. This is set automatically using <code>--preset</code> by default. (accepted: <code>PACBIO</code>|<code>ONT_R104</code>)</td>
+<td>Sets the model type used for DeepVariant. This is set automatically using <code>--preset</code> by default.</td>
 <td><code>string</code></td>
 <td>PACBIO</td>
 <td></td>
@@ -1689,7 +1697,7 @@
 </tr>
 <tr>
 <td><code>minimap2_read_mapping_preset</code></td>
-<td>Sets the minimap2-preset (-x) for read alignment. This is set automatically using the pipeline <code>--preset</code> by default. (accepted: <code>map-hifi</code>|<code>map-ont</code>|<code>lr:hq</code>|<code>lr:hqae</code>)</td>
+<td>Sets the minimap2-preset (-x) for read alignment. This is set automatically using the pipeline <code>--preset</code> by default.</td>
 <td><code>string</code></td>
 <td>map-hifi</td>
 <td></td>
@@ -1921,7 +1929,7 @@
 </tr>
 <tr>
 <td><code>sentieon_tech</code></td>
-<td>Sequencing technology used to generate the reads. Supported arguments are ONT or HiFi. (accepted: <code>HiFi</code>|<code>ONT</code>)</td>
+<td>Sequencing technology used to generate the reads. Supported arguments are ONT or HiFi.</td>
 <td><code>string</code></td>
 <td>HiFi</td>
 <td></td>
@@ -2017,7 +2025,7 @@
 </tr>
 <tr>
 <td><code>read_aligner</code></td>
-<td>Which aligner to use for read alignment. Supported arguments are mm2plus, minimap2 or pbmm2. (accepted: <code>minimap2</code>|<code>pbmm2</code>|<code>mm2plus</code>)</td>
+<td>Which aligner to use for read alignment. Supported arguments are mm2plus, minimap2 or pbmm2.</td>
 <td><code>string</code></td>
 <td>minimap2</td>
 <td></td>
@@ -2025,7 +2033,7 @@
 </tr>
 <tr>
 <td><code>pbmm2_preset</code></td>
-<td>Preset to use for pbmm2. Supported arguments are HIFI, CCS, or SUBREAD. (accepted: <code>HIFI</code>|<code>CCS</code>|<code>SUBREAD</code>)</td>
+<td>Preset to use for pbmm2. Supported arguments are HIFI, CCS, or SUBREAD.</td>
 <td><code>string</code></td>
 <td>CCS</td>
 <td></td>
@@ -2041,7 +2049,7 @@
 </tr>
 <tr>
 <td><code>assembly_aligner</code></td>
-<td>Which aligner to use for assembly alignment. Supported arguments are mm2plus or minimap2. (accepted: <code>mm2plus</code>|<code>minimap2</code>)</td>
+<td>Which aligner to use for assembly alignment. Supported arguments are mm2plus or minimap2.</td>
 <td><code>string</code></td>
 <td>minimap2</td>
 <td></td>
