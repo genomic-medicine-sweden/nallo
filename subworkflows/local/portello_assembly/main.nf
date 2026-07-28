@@ -44,7 +44,7 @@ workflow PORTELLO_ASSEMBLY {
         [[], [], [], []],
     )
 
-    // Add MD and NM tags for severus
+    // Add MD and NM tags for severus and sniffles
     SAMTOOLS_CALMD(
         SAMTOOLS_ADDREPLACERG.out.bam,
         ch_fasta.join(ch_fai).collect(),

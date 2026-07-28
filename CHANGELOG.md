@@ -24,9 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1148](https://github.com/genomic-medicine-sweden/nallo/pull/1148) - Added tests for `annotate_consequence_pli`
 - [#1155](https://github.com/genomic-medicine-sweden/nallo/pull/1155) - Added Nallo paper to the README
 - [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added new `PORTELLO_ASSEMBLY` subworkflow
-- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added new read group param to `CONVERT_INPUT_FASTQS` config to add RG, SM and DS tags to bam when converting with `SAMTOOLS_IMPORT`
 - [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added remapped bam from portello output to pipeline outputs
-- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added suffix for `SAMTOOLS_MERGE` and force only one cpu for `PORTELLO` and `LONGPHASE` to test config in `nextflow.config` to fix unstable snapshots
+- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added suffix for `SAMTOOLS_MERGE` and force only one cpu for `PORTELLO` to test config in `nextflow.config` to fix unstable snapshots
 - [#1164](https://github.com/genomic-medicine-sweden/nallo/pull/1164) - Added `--skip_mitochondrial_calling` parameter to allow skipping mitochondrial variant calling
 - [#1173](https://github.com/genomic-medicine-sweden/nallo/pull/1173) - Added formatting to pre-commit
 - [#1178](https://github.com/genomic-medicine-sweden/nallo/pull/1178) - Added nextflow lint -format CI check
@@ -144,7 +143,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                                  | `--mitorsaw_minimum_maf`        |
 | `--run_methbat` / `--run_modkit` | `--methylation_callers`         |
 |                                  | `--skip_portello`               |
-|                                  | `--aligner`                     |
 |                                  | `--read_aligner`                |
 |                                  | `--pbmm2_preset`                |
 |                                  | `--glnexus_config`              |
@@ -162,9 +160,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | hiphase                        | 1.4.0       | 1.6.0       |
 | echtvar/anno                   | 0.2.2       | 0.2.4       |
 | portello                       |             | 0.7.0       |
-| pbmm2/align                    |             | 26.2.0      |
 | samtools/addreplacerg          |             | 1.23.1      |
-| samtools/calmd                 |             | 1.23.1      |
 | gatk4/cleansam                 |             | 4.6.2.0     |
 | find/concatenate               |             | 4.6.0       |
 | genmod/annotate                | 3.10.2      | 3.12.0      |
