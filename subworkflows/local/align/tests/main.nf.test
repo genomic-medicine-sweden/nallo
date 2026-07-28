@@ -72,6 +72,7 @@ nextflow_workflow {
                 ])
                 input[2] = [[],[]]
                 input[3] = 'mm2plus'
+                input[4] = false
                 """
             }
         }
@@ -187,6 +188,7 @@ nextflow_workflow {
                 ])
                 input[2] = [[],[]]
                 input[3] = 'mm2plus'
+                input[4] = false
                 """
             }
         }

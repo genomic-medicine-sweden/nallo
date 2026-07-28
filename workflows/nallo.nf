@@ -273,6 +273,7 @@ workflow NALLO {
             ch_fasta,
             ch_fai,
             val_cram_output,
+            val_assembly_aligner,
         )
 
         ch_assembly_bam_bai = ALIGN_ASSEMBLIES.out.unfiltered_bam.join(ALIGN_ASSEMBLIES.out.unfiltered_bai, failOnMismatch: true, failOnDuplicate: true)

@@ -81,7 +81,7 @@ workflow ALIGN {
         ch_aligned_reads_bam = MM2PLUS_ALIGN.out.bam
         ch_aligned_reads_bai = MM2PLUS_ALIGN.out.index
     }
-    else {
+    if (val_aligner == 'minimap2') {
 
         MINIMAP2_INDEX(
             ch_fasta
