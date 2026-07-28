@@ -1146,11 +1146,11 @@
                 "fastqc_sequence_counts_plot.txt:md5,d238a9977a1d19ab52f96f455d0e5592",
                 "fastqc_sequence_duplication_levels_plot.txt:md5,8db16e6e73e9a83c5be8aa659bb7627f",
                 "fastqc_sequence_length_distribution_plot.txt:md5,857053502c26f2cd47999313c6f55ad1",
-                "mosdepth-coverage-per-contig-multi.txt:md5,71c75dd738ee0117d3a483dfb2adfbe2",
+                "mosdepth-coverage-per-contig-multi.txt:md5,91b1370ff5a4ad62da5ef98257abd770",
                 "mosdepth-cumcoverage-dist-id.txt:md5,b0ef712fc04303215db6997c3f54705b",
                 "mosdepth_cov_dist.txt:md5,89dfdf2287ed8e395284643954556cb1",
                 "mosdepth_cumcov_dist.txt:md5,89dfdf2287ed8e395284643954556cb1",
-                "mosdepth_perchrom.txt:md5,951ce17952a1bdd096bffb1b60020296",
+                "mosdepth_perchrom.txt:md5,4890c63101272eb3ff304178a32a836a",
                 "multiqc_bcftools_stats.txt:md5,76f588ad3f387f15f8bb15301a16adf1",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,ace1ff42b44a8ec24ede4837f85f65d8",
@@ -1163,9 +1163,9 @@
                 "HG002_cramino_aligned_phased.arrow:md5,3eb25deab87902671e92fa2b13a30c7b",
                 "HG003_cramino_aligned_phased.arrow:md5,03e094bd12788c023eaf07d4e833bb19",
                 "HG004_cramino_aligned_phased.arrow:md5,4ec310cfba1ddb493ca5ff4ca0a36e9b",
-                "HG002_cramino_aligned.arrow:md5,be3d0a5717c475b229e3662d906694fd",
-                "HG003_cramino_aligned.arrow:md5,68a5632e993b8e5a0fdf5854892a3bf4",
-                "HG004_cramino_aligned.arrow:md5,eb7be09c456d8115c8cc840c5b14b53d",
+                "HG002_cramino_aligned.arrow:md5,3eb25deab87902671e92fa2b13a30c7b",
+                "HG003_cramino_aligned.arrow:md5,03e094bd12788c023eaf07d4e833bb19",
+                "HG004_cramino_aligned.arrow:md5,4ec310cfba1ddb493ca5ff4ca0a36e9b",
                 "HG002.mosdepth.global.dist.txt:md5,7595e2f7ac278f28335b6e5c0bce445d",
                 "HG002.mosdepth.region.dist.txt:md5,6678002e5033170c85d393b384165161",
                 "HG002.mosdepth.summary.txt:md5,ccdcd76fac702357555938eb21856b11",
@@ -1281,7 +1281,9 @@
                     "c8334a968268bf92dff1e959db5d9ba"
                 ]
             ],
-            [],
+            [
+                
+            ],
             [
                 [
                     "FAM_paraphase_merged.vcf.gz",
@@ -1352,9 +1354,11 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=3, variantCount=44, phased=false, phasedAutodetect=false]"
                 ]
             ],
-            []
+            [
+                
+            ]
         ],
-        "timestamp": "2026-07-23T13:25:27.688515598",
+        "timestamp": "2026-07-28T15:06:50.635049014",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
