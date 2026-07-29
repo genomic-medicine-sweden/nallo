@@ -263,17 +263,17 @@ workflow CALL_SVS {
     )
 
     emit:
-    family_caller_vcf                  = MERGE_SVS.out.family_caller_vcf                                                                                                          // channel: [ val(meta), path(vcf) ]
-    family_caller_tbi                  = MERGE_SVS.out.family_caller_tbi                                                                                                           // channel: [ val(meta), path(tbi) ]
-    family_vcf                         = MERGE_SVS.out.family_vcf                                                                                                       // channel: [ val(meta), path(vcf) ]
-    family_tbi                         = MERGE_SVS.out.family_tbi
-    hificnv_depth                      = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.depth : channel.empty() // channel: [ val(meta), path(bw) ]
-    hificnv_copynum                    = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.copynum : channel.empty() // channel: [ val(meta), path(bedgraph) ]
-    hificnv_maf                        = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.maf : channel.empty() // channel: [ val(meta), path(bw) ]
-    sawfish_depth_bw                   = sv_callers_to_run.contains('sawfish') ? addSampleIdFromSawfishPath(SAWFISH_JOINTCALL.out.depth_bw) : channel.empty() // channel: [ val(meta), path(bw) ]
-    sawfish_copynum_bedgraph           = sv_callers_to_run.contains('sawfish') ? addSampleIdFromSawfishPath(SAWFISH_JOINTCALL.out.copynum_bedgraph) : channel.empty() // channel: [ val(meta), path(bedgraph) ]
+    family_caller_vcf                  = MERGE_SVS.out.family_caller_vcf                                                                                                        // channel: [ val(meta), path(vcf) ]
+    family_caller_tbi                  = MERGE_SVS.out.family_caller_tbi                                                                                                        // channel: [ val(meta), path(tbi) ]
+    family_vcf                         = MERGE_SVS.out.family_vcf                                                                                                               // channel: [ val(meta), path(vcf) ]
+    family_tbi                         = MERGE_SVS.out.family_tbi                                                                                                               // channel: [ val(meta), path(vcf) ]
+    hificnv_depth                      = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.depth : channel.empty()                                                            // channel: [ val(meta), path(bw) ]
+    hificnv_copynum                    = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.copynum : channel.empty()                                                          // channel: [ val(meta), path(bedgraph) ]
+    hificnv_maf                        = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.maf : channel.empty()                                                              // channel: [ val(meta), path(bw) ]
+    sawfish_depth_bw                   = sv_callers_to_run.contains('sawfish') ? addSampleIdFromSawfishPath(SAWFISH_JOINTCALL.out.depth_bw) : channel.empty()                   // channel: [ val(meta), path(bw) ]
+    sawfish_copynum_bedgraph           = sv_callers_to_run.contains('sawfish') ? addSampleIdFromSawfishPath(SAWFISH_JOINTCALL.out.copynum_bedgraph) : channel.empty()           // channel: [ val(meta), path(bedgraph) ]
     sawfish_gc_bias_corrected_depth_bw = sv_callers_to_run.contains('sawfish') ? addSampleIdFromSawfishPath(SAWFISH_JOINTCALL.out.gc_bias_corrected_depth_bw) : channel.empty() // channel: [ val(meta), path(bw) ]
-    sawfish_maf_bw                     = sv_callers_to_run.contains('sawfish') ? addSampleIdFromSawfishPath(SAWFISH_JOINTCALL.out.maf_bw) : channel.empty() // channel: [ val(meta), path(bw) ]
+    sawfish_maf_bw                     = sv_callers_to_run.contains('sawfish') ? addSampleIdFromSawfishPath(SAWFISH_JOINTCALL.out.maf_bw) : channel.empty()                     // channel: [ val(meta), path(bw) ]
 }
 
 def addCallerToMeta(ch_caller_calls, sv_caller) {
