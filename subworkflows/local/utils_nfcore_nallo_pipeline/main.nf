@@ -225,7 +225,30 @@ workflow PIPELINE_INITIALISATION {
         sex_check: ["somalier_sites"],
     ]
 
-    def parameterStatus = [workflow: [skip_annotate_paralogs: val_skip_annotate_paralogs, skip_snv_calling: val_skip_snv_calling, skip_peddy: val_skip_peddy, skip_phasing: val_skip_phasing, skip_methylation_calling: val_skip_methylation_calling, skip_methylation_annotation: val_skip_methylation_annotation, skip_mitochondrial_calling: val_skip_mitochondrial_calling, skip_rank_variants: val_skip_rank_variants, skip_repeat_calling: val_skip_repeat_calling, skip_repeat_annotation: val_skip_repeat_annotation, skip_chromograph: val_skip_chromograph, skip_sambamba_depth: val_skip_sambamba_depth, skip_snv_annotation: val_skip_snv_annotation, skip_sv_calling: val_skip_sv_calling, skip_sv_annotation: val_skip_sv_annotation, skip_call_paralogs: val_skip_call_paralogs, skip_alignment: val_skip_alignment, skip_qc: val_skip_qc, skip_genome_assembly: val_skip_genome_assembly, skip_prepare_gens_input: val_skip_prepare_gens_input, skip_sex_check: val_skip_sex_check, skip_portello: val_skip_portello], files: [
+    def parameterStatus = [workflow: [
+        skip_annotate_paralogs: val_skip_annotate_paralogs,
+        skip_snv_calling: val_skip_snv_calling,
+        skip_peddy: val_skip_peddy,
+        skip_phasing: val_skip_phasing,
+        skip_methylation_calling: val_skip_methylation_calling,
+        skip_methylation_annotation: val_skip_methylation_annotation,
+        skip_mitochondrial_calling: val_skip_mitochondrial_calling,
+        skip_rank_variants: val_skip_rank_variants,
+        skip_repeat_calling: val_skip_repeat_calling,
+        skip_repeat_annotation: val_skip_repeat_annotation,
+        skip_chromograph: val_skip_chromograph,
+        skip_sambamba_depth: val_skip_sambamba_depth,
+        skip_snv_annotation: val_skip_snv_annotation,
+        skip_sv_calling: val_skip_sv_calling,
+        skip_sv_annotation: val_skip_sv_annotation,
+        skip_call_paralogs: val_skip_call_paralogs,
+        skip_alignment: val_skip_alignment,
+        skip_qc: val_skip_qc,
+        skip_genome_assembly: val_skip_genome_assembly,
+        skip_prepare_gens_input: val_skip_prepare_gens_input,
+        skip_sex_check: val_skip_sex_check,
+        skip_portello: val_skip_portello,
+    ], files: [
         par_regions: val_par_regions,
         echtvar_snv_databases: val_echtvar_snv_databases,
         sambamba_regions: val_sambamba_regions,

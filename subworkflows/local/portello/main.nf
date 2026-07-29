@@ -36,6 +36,7 @@ workflow PORTELLO {
         "bai",
     )
 
+    // Add back read groups for somalier
     SAMTOOLS_ADDREPLACERG(
         SAMTOOLS_SORT.out.bam.join(SAMTOOLS_SORT.out.index, failOnMismatch: true, failOnDuplicate: true).map { meta, bam, bai ->
             def read_group = "'@RG\\tID:${meta.id}_hifiasm\\tSM:${meta.id}'"

@@ -697,7 +697,7 @@ workflow {
     publish:
     aligned_assemblies_bam         = ch_aligned_assemblies_bam // channel: [ val(meta), path(bam/bai) ]
     aligned_assemblies_cram        = ch_aligned_assemblies_cram // channel: [ val(meta), path(cram/crai) ]
-    aligned_assemblies_remapped    = ch_aligned_assemblies_remapped // channel: [ val(meta), path(bam/bai) ]
+    aligned_portello_reads_bam     = ch_aligned_assemblies_remapped // channel: [ val(meta), path(bam/bai) ]
     aligned_haplotagged_reads_bam  = ch_aligned_haplotagged_reads_bam // channel: [ val(meta), path(bam/bai) ]
     aligned_haplotagged_reads_cram = ch_aligned_haplotagged_reads_cram // channel: [ val(meta), path(cram/crai) ]
     aligned_reads_bam              = ch_aligned_reads_bam // channel: [ val(meta), path(bam/bai) ]
@@ -747,20 +747,20 @@ output {
         path { meta, _file -> "assembly/sample/${meta.id}/" }
         enabled params.alignment_output_format == 'cram'
     }
-    aligned_assemblies_remapped {
-        path { meta, _file -> "assembly/sample/${meta.id}/" }
+    aligned_portello_reads_bam {
+        path { meta, _file -> "aligned_reads/${meta.id}/" }
     }
     aligned_haplotagged_reads_bam {
         // HiPhase uses the input file (aligned reads) as template for naming output, so we need to remove the "_aligned" suffix here
         path { meta, file ->
-            file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_aligned", "")}"
+            file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_remapped_reads", "")}"
         }
         enabled params.alignment_output_format == 'bam'
     }
     aligned_haplotagged_reads_cram {
         // HiPhase uses the input file (aligned reads) as template for naming output, so we need to remove the "_aligned" suffix here
         path { meta, file ->
-            file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_aligned", "")}"
+            file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_remapped_reads", "")}"
         }
         enabled params.alignment_output_format == 'cram'
     }
