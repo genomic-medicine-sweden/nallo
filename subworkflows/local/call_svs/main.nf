@@ -6,7 +6,6 @@ include { BCFTOOLS_QUERY                     } from '../../../modules/nf-core/bc
 include { BCFTOOLS_REHEADER                  } from '../../../modules/nf-core/bcftools/reheader/main'
 include { BCFTOOLS_SORT                      } from '../../../modules/nf-core/bcftools/sort/main'
 include { GAWK as CREATE_SAMPLES_FILE        } from '../../../modules/nf-core/gawk/main'
-include { MERGE_SVS                          } from '../../../subworkflows/local/merge_svs/main'
 include { HIFICNV                            } from '../../../modules/nf-core/hificnv/main'
 include { SAWFISH_DISCOVER                   } from '../../../modules/nf-core/sawfish/discover/main'
 include { SAWFISH_JOINTCALL                  } from '../../../modules/nf-core/sawfish/jointcall/main'
@@ -27,8 +26,6 @@ workflow CALL_SVS {
     ch_expected_xx_bed // channel: [ val(meta), path(bed) ]
     ch_exclude_bed // channel: [ val(meta), path(bed) ]
     sv_callers_to_run //    List: [ 'caller1', 'caller2', 'caller3' ]
-    sv_callers_to_merge //    List: [ 'caller1', 'caller2', 'caller3' ]
-    caller_priority //    List: [ 'caller3', 'caller1', 'caller2' ]
     ch_sv_call_regions // channel: [ val(meta), path(bed) ]
     filter_calls_on_regions //    bool: Should we filter SV calls to the regions provided in ch_sv_call_regions?
     force_sawfish_joint_call_single_samples //    bool: Force joint-calling with Sawfish even for single samples
@@ -255,18 +252,9 @@ workflow CALL_SVS {
         [[], []],
     )
 
-    MERGE_SVS(
-        BCFTOOLS_REHEADER.out.vcf,
-        ch_found_in_tagged_vcf.no_reheader,
-        sv_callers_to_merge,
-        caller_priority,
-    )
-
     emit:
-    family_caller_vcf                  = MERGE_SVS.out.family_caller_vcf                                                                                                        // channel: [ val(meta), path(vcf) ]
-    family_caller_tbi                  = MERGE_SVS.out.family_caller_tbi                                                                                                        // channel: [ val(meta), path(tbi) ]
-    family_vcf                         = MERGE_SVS.out.family_vcf                                                                                                               // channel: [ val(meta), path(vcf) ]
-    family_tbi                         = MERGE_SVS.out.family_tbi                                                                                                               // channel: [ val(meta), path(vcf) ]
+    reheadered_vcf                     = BCFTOOLS_REHEADER.out.vcf
+    found_in_tag_no_reheader           = ch_found_in_tagged_vcf.no_reheader                                                                                                     // channel: [ val(meta), path(vcf) ]                                                                                                              // channel: [ val(meta), path(vcf) ]
     hificnv_depth                      = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.depth : channel.empty()                                                            // channel: [ val(meta), path(bw) ]
     hificnv_copynum                    = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.copynum : channel.empty()                                                          // channel: [ val(meta), path(bedgraph) ]
     hificnv_maf                        = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.maf : channel.empty()                                                              // channel: [ val(meta), path(bw) ]
