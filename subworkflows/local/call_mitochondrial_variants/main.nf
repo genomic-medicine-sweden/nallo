@@ -82,10 +82,9 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
             ch_fai.collect(),
         )
 
-        ch_mito_split_input = BCFTOOLS_REHEADER.out.vcf
-            .flatMap { meta, vcf ->
-                [[meta + [variant_type: "snv"], vcf, []], [meta + [variant_type: "sv"], vcf, []]]
-            }
+        ch_mito_split_input = BCFTOOLS_REHEADER.out.vcf.flatMap { meta, vcf ->
+            [[meta + [variant_type: "snv"], vcf, []], [meta + [variant_type: "sv"], vcf, []]]
+        }
 
         BCFTOOLS_VIEW_MITO(ch_mito_split_input, [], [], [])
 
