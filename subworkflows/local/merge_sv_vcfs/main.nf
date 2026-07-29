@@ -26,7 +26,6 @@ workflow MERGE_SV_VCFS {
         [],
         true,
     )
-    SVDB_MERGE_BY_CALLER.out.vcf.dump(tag: 'SVDB_MERGE_BY_CALLER')
 
     /*
      * Then merge the family VCFs for each caller into a single family VCF.
@@ -49,7 +48,6 @@ workflow MERGE_SV_VCFS {
             def vcf_paths = callers_vcfs.collect { caller_vcf_pair -> caller_vcf_pair[1] }
             [meta, vcf_paths]
         }
-    ch_svdb_merge_by_family_input.dump(tag: 'ch_svdb_merge_by_family_input')
     SVDB_MERGE_BY_FAMILY(
         ch_svdb_merge_by_family_input,
         caller_priority,
@@ -57,9 +55,9 @@ workflow MERGE_SV_VCFS {
     )
 
     emit:
-    family_caller_vcf = SVDB_MERGE_BY_CALLER.out.vcf                                                                                                           // channel: [ val(meta), path(vcf) ]
-    family_caller_tbi = SVDB_MERGE_BY_CALLER.out.tbi                                                                                                           // channel: [ val(meta), path(tbi) ]
-    family_vcf        = SVDB_MERGE_BY_FAMILY.out.vcf                                                                                                           // channel: [ val(meta), path(vcf) ]
-    family_tbi        = SVDB_MERGE_BY_FAMILY.out.tbi
+    family_caller_vcf = SVDB_MERGE_BY_CALLER.out.vcf // channel: [ val(meta), path(vcf) ]
+    family_caller_tbi = SVDB_MERGE_BY_CALLER.out.tbi // channel: [ val(meta), path(tbi) ]
+    family_vcf        = SVDB_MERGE_BY_FAMILY.out.vcf // channel: [ val(meta), path(vcf) ]
+    family_tbi        = SVDB_MERGE_BY_FAMILY.out.tbi // channel: [ val(meta), path(tbi) ]
 
 }
