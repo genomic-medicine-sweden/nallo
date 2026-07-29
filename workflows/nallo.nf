@@ -268,7 +268,7 @@ workflow NALLO {
         GENOME_ASSEMBLY(
             ch_genome_assembly_input,
             val_hifiasm_mode == "trio-binning",
-            !val_skip_portello ? true : false,
+            !val_skip_portello,
         )
 
         ALIGN_ASSEMBLIES(
