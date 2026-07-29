@@ -6,7 +6,7 @@ include { BCFTOOLS_QUERY                     } from '../../../modules/nf-core/bc
 include { BCFTOOLS_REHEADER                  } from '../../../modules/nf-core/bcftools/reheader/main'
 include { BCFTOOLS_SORT                      } from '../../../modules/nf-core/bcftools/sort/main'
 include { GAWK as CREATE_SAMPLES_FILE        } from '../../../modules/nf-core/gawk/main'
-include { MERGE_SV_VCFS                      } from '../../../subworkflows/local/merge_sv_vcfs/main'
+include { MERGE_SVS                          } from '../../../subworkflows/local/merge_svs/main'
 include { HIFICNV                            } from '../../../modules/nf-core/hificnv/main'
 include { SAWFISH_DISCOVER                   } from '../../../modules/nf-core/sawfish/discover/main'
 include { SAWFISH_JOINTCALL                  } from '../../../modules/nf-core/sawfish/jointcall/main'
@@ -261,7 +261,7 @@ workflow CALL_SVS {
         [[], []],
     )
 
-    MERGE_SV_VCFS(
+    MERGE_SVS(
         BCFTOOLS_REHEADER.out.vcf,
         ch_found_in_tagged_vcf.no_reheader,
         sv_callers_to_merge,
@@ -269,10 +269,10 @@ workflow CALL_SVS {
     )
 
     emit:
-    family_caller_vcf                  = MERGE_SV_VCFS.out.family_caller_vcf                                                                                                          // channel: [ val(meta), path(vcf) ]
-    family_caller_tbi                  = MERGE_SV_VCFS.out.family_caller_tbi                                                                                                           // channel: [ val(meta), path(tbi) ]
-    family_vcf                         = MERGE_SV_VCFS.out.family_vcf                                                                                                       // channel: [ val(meta), path(vcf) ]
-    family_tbi                         = MERGE_SV_VCFS.out.family_tbi                                                                                                           // channel: [ val(meta), path(tbi) ]
+    family_caller_vcf                  = MERGE_SVS.out.family_caller_vcf                                                                                                          // channel: [ val(meta), path(vcf) ]
+    family_caller_tbi                  = MERGE_SVS.out.family_caller_tbi                                                                                                           // channel: [ val(meta), path(tbi) ]
+    family_vcf                         = MERGE_SVS.out.family_vcf                                                                                                       // channel: [ val(meta), path(vcf) ]
+    family_tbi                         = MERGE_SVS.out.family_tbi                                                                                                           // channel: [ val(meta), path(tbi) ]
     hificnv_depth                      = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.depth : channel.empty()                                                            // channel: [ val(meta), path(bw) ]
     hificnv_copynum                    = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.copynum : channel.empty()                                                          // channel: [ val(meta), path(bedgraph) ]
     hificnv_maf                        = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.maf : channel.empty()                                                              // channel: [ val(meta), path(bw) ]

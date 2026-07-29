@@ -1,7 +1,7 @@
 include { SVDB_MERGE as SVDB_MERGE_BY_CALLER } from '../../../modules/nf-core/svdb/merge/main'
 include { SVDB_MERGE as SVDB_MERGE_BY_FAMILY } from '../../../modules/nf-core/svdb/merge/main'
 
-workflow MERGE_SV_VCFS {
+workflow MERGE_SVS {
     take:
     ch_reheadered_vcf   // channel: [ val(meta), path(vcf) ]
     ch_vcf              // channel: [ val(meta), path(vcf) ]
