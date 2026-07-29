@@ -47,7 +47,7 @@ workflow ALIGN {
         )
 
         if (val_skip_portello) {
-            // Add MD and NM tags for sniffles and severus
+            // Add MD tag for sniffles
             SAMTOOLS_CALMD(
                 PBMM2_ALIGN.out.bam,
                 ch_fasta.join(ch_fai).collect(),
