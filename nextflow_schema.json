@@ -117,6 +117,11 @@
                     "description": "Skip preparing input data for Gens",
                     "default": false
                 },
+                "skip_mitochondrial_calling": {
+                    "type": "boolean",
+                    "description": "Skip mitochondrial variant calling",
+                    "default": false
+                },
                 "skip_sex_check": {
                     "type": "boolean",
                     "description": "Skip sex check",
@@ -160,6 +165,12 @@
                     "type": "string",
                     "description": "MultiQC report title. Printed as page header, used for filename if not otherwise specified.",
                     "fa_icon": "fas fa-file-signature"
+                },
+                "premapped": {
+                    "type": "boolean",
+                    "description": "Whether the input data is already mapped to the reference genome",
+                    "fa_icon": "fas fa-fast-forward",
+                    "default": false
                 },
                 "cadd_prescored_indels": {
                     "type": "string",
@@ -250,6 +261,13 @@
                     "pattern": "^\\S+\\.tsv$",
                     "format": "file-path",
                     "description": "A tsv file with only regions of interest (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv) or with both regions and background cohort values (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv), made with methbat build",
+                    "exists": true
+                },
+                "cramino_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.bed$",
+                    "format": "file-path",
+                    "description": "A BED file used to filter reads to on-target regions before cramino QC. By default this is the same as `target_regions`.",
                     "exists": true
                 },
                 "modkit_call_regions": {
@@ -593,7 +611,7 @@
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
                     "description": "Base URL or local path to location of pipeline test dataset files",
-                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/18b1ccc26292fa502be235a918bdc4e61c1ecb8a/",
+                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5c13b255beab25a536375fec42f9da3413fc65a5/",
                     "hidden": true
                 },
                 "trace_report_suffix": {
@@ -633,8 +651,8 @@
                 "preset": {
                     "type": "string",
                     "default": "revio",
-                    "description": "Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`)",
-                    "enum": ["revio", "pacbio", "ONT_R10"]
+                    "description": "Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`, `ONT_R10_AS`)",
+                    "enum": ["revio", "pacbio", "ONT_R10", "ONT_R10_AS"]
                 },
                 "sv_callers": {
                     "type": "string",
@@ -703,13 +721,12 @@
                     "enum": ["", "--ont"],
                     "default": null
                 },
-                "run_methbat": {
-                    "type": "boolean",
-                    "description": "Run methbat for methylation analysis, set to `true` by default when `--preset revio` is active."
-                },
-                "run_modkit": {
-                    "type": "boolean",
-                    "description": "Run modkit for methylation analysis, set to `true` by default when `--preset ONT_R10` is active."
+                "methylation_callers": {
+                    "type": "string",
+                    "description": "Which methylation callers to use. Several callers can be specified, separated by commas (e.g. methbat,modkit). Defaults to `methbat` when `--preset revio` is active and `modkit` when `--preset ONT_R10` is active.",
+                    "default": "methbat",
+                    "fa_icon": "fas fa-dna",
+                    "pattern": "(?i)^$|^(methbat|modkit)(,(methbat|modkit))*$"
                 },
                 "methbat_male_label": {
                     "type": "string",
@@ -1017,6 +1034,29 @@
                     "type": "number",
                     "default": 50,
                     "description": "Co-linear SVs must have either an insertion or deletion of this size or greater to be included in the output in Sawfish. All other SV evidence patterns such as those consistent with duplications, inversions and translocations will always be included in the output."
+                },
+                "read_aligner": {
+                    "type": "string",
+                    "default": "minimap2",
+                    "description": "Which aligner to use for read alignment. Supported arguments are mm2plus, minimap2 or pbmm2.",
+                    "enum": ["minimap2", "pbmm2", "mm2plus"]
+                },
+                "pbmm2_preset": {
+                    "type": "string",
+                    "default": "CCS",
+                    "description": "Preset to use for pbmm2. Supported arguments are HIFI, CCS, or SUBREAD.",
+                    "enum": ["HIFI", "CCS", "SUBREAD"]
+                },
+                "glnexus_config": {
+                    "type": "string",
+                    "default": null,
+                    "description": "Glnexus config to use for merging gVCFs. If no file is provided, the default config `assets/glnexus_config_dp1.yml` will be used."
+                },
+                "assembly_aligner": {
+                    "type": "string",
+                    "default": "minimap2",
+                    "description": "Which aligner to use for assembly alignment. Supported arguments are mm2plus or minimap2.",
+                    "enum": ["mm2plus", "minimap2"]
                 }
             },
             "required": ["preset"]

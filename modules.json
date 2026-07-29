@@ -148,6 +148,11 @@
                         "git_sha": "ff05d8eb10c1191d87119ff6cfcbbc8ef110afdf",
                         "installed_by": ["modules"]
                     },
+                    "echtvar/anno": {
+                        "branch": "master",
+                        "git_sha": "3ae65622c8c8e6ab8390a73dd75a698308a4971b",
+                        "installed_by": ["modules"]
+                    },
                     "ensemblvep/filtervep": {
                         "branch": "master",
                         "git_sha": "890fdcff71928fc1470d3e669d4c430c8c770297",
@@ -164,6 +169,11 @@
                         "git_sha": "79b36b51048048374b642289bfe9e591ef56fe05",
                         "installed_by": ["modules"]
                     },
+                    "find/concatenate": {
+                        "branch": "master",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "installed_by": ["modules"]
+                    },
                     "gatk4/denoisereadcounts": {
                         "branch": "master",
                         "git_sha": "86308d628760125908c5c77540517effe0f8880f",
@@ -176,24 +186,23 @@
                     },
                     "genmod/annotate": {
                         "branch": "master",
-                        "git_sha": "7557033683e4016e7d474a23445f75deae2fb729",
+                        "git_sha": "d9ea9450490d297bc38cfca10bf8c5bd7d84e413",
                         "installed_by": ["modules"]
                     },
                     "genmod/compound": {
                         "branch": "master",
-                        "git_sha": "7557033683e4016e7d474a23445f75deae2fb729",
+                        "git_sha": "d9ea9450490d297bc38cfca10bf8c5bd7d84e413",
                         "installed_by": ["modules"]
                     },
                     "genmod/models": {
                         "branch": "master",
-                        "git_sha": "7557033683e4016e7d474a23445f75deae2fb729",
+                        "git_sha": "d9ea9450490d297bc38cfca10bf8c5bd7d84e413",
                         "installed_by": ["modules"]
                     },
                     "genmod/score": {
                         "branch": "master",
-                        "git_sha": "fed68e7b4b193b36c1abc552586694d43a88f6fb",
-                        "installed_by": ["modules"],
-                        "patch": "modules/nf-core/genmod/score/genmod-score.diff"
+                        "git_sha": "d9ea9450490d297bc38cfca10bf8c5bd7d84e413",
+                        "installed_by": ["modules"]
                     },
                     "gens/preparecovandbaf": {
                         "branch": "master",
@@ -227,6 +236,11 @@
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/hificnv/hificnv.diff"
                     },
+                    "hiphase": {
+                        "branch": "master",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "installed_by": ["modules"]
+                    },
                     "longphase/haplotag": {
                         "branch": "master",
                         "git_sha": "b8d30a43f33aee3148b0e9e9f00587984a4ac195",
@@ -255,6 +269,16 @@
                     "mitorsaw/haplotype": {
                         "branch": "master",
                         "git_sha": "5576986983f7fcc592e0df1f9b2d2b87c313b05e",
+                        "installed_by": ["modules"]
+                    },
+                    "mm2plus/align": {
+                        "branch": "master",
+                        "git_sha": "1a377ebc4e9850b9a9880650bbec9152a0060459",
+                        "installed_by": ["modules"]
+                    },
+                    "mm2plus/index": {
+                        "branch": "master",
+                        "git_sha": "b0914a2b2cfd5571912e9c5bea2e6f1d34f02cb2",
                         "installed_by": ["modules"]
                     },
                     "modkit/bedmethyltobigwig": {
@@ -292,6 +316,11 @@
                         "git_sha": "64bb01afeed82185575118fb35c87767512e5dae",
                         "installed_by": ["modules"]
                     },
+                    "pbmm2/align": {
+                        "branch": "master",
+                        "git_sha": "4c0a7271c05babd2226ce94c502d75a73228aa06",
+                        "installed_by": ["modules"]
+                    },
                     "peddy": {
                         "branch": "master",
                         "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
@@ -306,6 +335,11 @@
                     "sambamba/depth": {
                         "branch": "master",
                         "git_sha": "e77ac7823fd6c24218114bf3073207534a0ece34",
+                        "installed_by": ["modules"]
+                    },
+                    "samtools/calmd": {
+                        "branch": "master",
+                        "git_sha": "9339809fcb90af8a8b7051e6cd914894d5c52002",
                         "installed_by": ["modules"]
                     },
                     "samtools/convert": {
@@ -346,7 +380,7 @@
                     },
                     "samtools/view": {
                         "branch": "master",
-                        "git_sha": "156feda0cb6589cd29c04902004fa3b53bc00205",
+                        "git_sha": "9339809fcb90af8a8b7051e6cd914894d5c52002",
                         "installed_by": ["modules"]
                     },
                     "sawfish/discover": {
@@ -389,7 +423,7 @@
                     },
                     "splitubam": {
                         "branch": "master",
-                        "git_sha": "9f8e03645cadda3a2a92e820069c4a38474e51cf",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"]
                     },
                     "stranger": {
@@ -409,12 +443,12 @@
                     },
                     "svdb/merge": {
                         "branch": "master",
-                        "git_sha": "7d09b5f86908bdd951e42aef9994ad5bb0f6c307",
+                        "git_sha": "6bc8ff03ace2cb373f683b9502ce79930c8a07f0",
                         "installed_by": ["modules"]
                     },
                     "svdb/query": {
                         "branch": "master",
-                        "git_sha": "7d09b5f86908bdd951e42aef9994ad5bb0f6c307",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"]
                     },
                     "tabix/bgziptabix": {

@@ -5,11 +5,11 @@ include { VCFEXPRESS     } from '../../../modules/nf-core/vcfexpress/main'
 
 workflow CALL_REPEAT_EXPANSIONS_STRDUST {
     take:
-    ch_bam_bai              // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
-    ch_fasta                // channel: [mandatory] [ val(meta), path(fasta) ]
-    ch_fai                  // channel: [mandatory] [ val(meta), path(fai) ]
-    ch_bed                  // channel: [mandatory] [ val(meta), path(bed) ]
-    ch_vcfexpress_prelude   // path: [mandatory] lua file
+    ch_bam_bai // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
+    ch_fasta // channel: [mandatory] [ val(meta), path(fasta) ]
+    ch_fai // channel: [mandatory] [ val(meta), path(fai) ]
+    ch_bed // channel: [mandatory] [ val(meta), path(bed) ]
+    ch_vcfexpress_prelude // path: [mandatory] lua file
 
     main:
 
@@ -33,7 +33,7 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
         .join(TABIX_TABIX.out.index, failOnDuplicate: true, failOnMismatch: true)
         .map { meta, vcf, tbi -> [[id: meta.family_id], vcf, tbi] }
         .groupTuple()
-        .map { meta, vcfs, tbis -> [ meta, vcfs, tbis, [] ] }
+        .map { meta, vcfs, tbis -> [meta, vcfs, tbis, []] }
 
     BCFTOOLS_MERGE(
         ch_bcftools_merge_in,
@@ -41,9 +41,8 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
     )
 
     emit:
-    sample_vcf  = VCFEXPRESS.out.vcf       // channel: [ val(meta), path(vcf) ]
-    sample_tbi  = TABIX_TABIX.out.index    // channel: [ val(meta), path(tbi) ]
-    family_vcf  = BCFTOOLS_MERGE.out.vcf   // channel: [ val(meta), path(vcf) ]
-    family_tbi  = BCFTOOLS_MERGE.out.index // channel: [ val(meta), path(tbi) ]
-
+    sample_vcf = VCFEXPRESS.out.vcf // channel: [ val(meta), path(vcf) ]
+    sample_tbi = TABIX_TABIX.out.index // channel: [ val(meta), path(tbi) ]
+    family_vcf = BCFTOOLS_MERGE.out.vcf // channel: [ val(meta), path(vcf) ]
+    family_tbi = BCFTOOLS_MERGE.out.index // channel: [ val(meta), path(tbi) ]
 }

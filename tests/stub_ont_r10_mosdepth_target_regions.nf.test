@@ -1,0 +1,54 @@
+nextflow_pipeline {
+
+    name "Test pipeline GENOMICMEDICINESWEDEN_NALLO — Stub test for mosdepth with target regions"
+    script "../main.nf"
+    tag "PIPELINE"
+    tag "stub_ont_r10_mosdepth_target_regions"
+
+    test("ONT_R10 preset with target_regions uses mosdepth region distribution for MultiQC") {
+        options "-stub"
+
+        when {
+            params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5c13b255beab25a536375fec42f9da3413fc65a5/'
+                input                        = "$projectDir/assets/samplesheet_multisample_ont_bam.csv"
+                outdir                       = "$outputDir"
+                preset                       = "ONT_R10"
+                target_regions               = params.pipelines_testdata_base_path + 'reference/test_data.bed'
+                // Null out params with exists:true not needed for this test
+                sv_call_regions              = null
+                gens_panel_of_normals_female = null
+                gens_panel_of_normals_male   = null
+                vep_cache                    = null
+                vep_plugin_files             = null
+                snv_calling_processes         = 1
+                // Skip steps irrelevant to QC
+                skip_genome_assembly         = true
+                skip_annotate_paralogs       = true
+                skip_call_paralogs           = true
+                skip_chromograph             = true
+                skip_peddy                   = true
+                skip_prepare_gens_input      = true
+                skip_rank_variants           = true
+                skip_repeat_annotation       = true
+                skip_sv_calling              = true
+                skip_sv_annotation           = true
+                skip_snv_annotation          = true
+            }
+        }
+
+        then {
+            def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.trace.succeeded().size(),
+                    versions,
+                    stable_name
+                ).match() }
+            )
+        }
+    }
+
+}

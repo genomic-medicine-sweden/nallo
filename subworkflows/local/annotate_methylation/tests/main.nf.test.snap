@@ -1,0 +1,110 @@
+{
+    "1 sample": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_methbat_profile_annotated.tsv:md5,c9ae94bb0471e88a6d6c145001fb54fa"
+                    ]
+                ],
+                "methylation_annotation": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_methbat_profile_annotated.tsv:md5,c9ae94bb0471e88a6d6c145001fb54fa"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-20T16:10:23.281602858",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.06.0"
+        }
+    },
+    "2 samples": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_methbat_profile_annotated.tsv:md5,2697ae1fe447653616f91676e23db35d"
+                    ]
+                ],
+                "methylation_annotation": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_methbat_profile_annotated.tsv:md5,2697ae1fe447653616f91676e23db35d"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-20T16:30:31.517611923",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.06.0"
+        }
+    },
+    "2 samples - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_methbat_profile_annotated.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "methylation_annotation": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_methbat_profile_annotated.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-17T10:47:33.316420334",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.06.0"
+        }
+    },
+    "1 sample - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_methbat_profile_annotated.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "methylation_annotation": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_methbat_profile_annotated.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-17T10:47:27.319931908",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.06.0"
+        }
+    }
+}

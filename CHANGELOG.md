@@ -15,10 +15,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1068](https://github.com/genomic-medicine-sweden/nallo/pull/1068) - Added HiFiCNV and Sawfish visualization track outputs to `call_svs`
 - [#1073](https://github.com/genomic-medicine-sweden/nallo/pull/1073) - Added sample vcf outputs to `call_paralogs` workflow
 - [#1084](https://github.com/genomic-medicine-sweden/nallo/pull/1084) - Added new auto-generated container config files (new with nf-core/tools update)
+- [#1104](https://github.com/genomic-medicine-sweden/nallo/pull/1104) - Added `.github/nf-dev-guidelines.yaml` which the contribution guidelines are now auto-generated from via a GutHub action using the base template in https://github.com/genomic-medicine-sweden/nf-dev-guidelines and pipeline-specific sections stored in in `docs/contribution`
+- [#1107](https://github.com/genomic-medicine-sweden/nallo/pull/1107) - Added support for using mapped BAM files as input
 - [#1120](https://github.com/genomic-medicine-sweden/nallo/pull/1120) - Added baseName to avoid `.bed` in deepvariant output name
 - [#1128](https://github.com/genomic-medicine-sweden/nallo/pull/1128) - Added nf-tests for `phasing` subworkflow
 - [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Added Mitorsaw module and Mitorsaw to validatePacBioLicense
 - [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Added `call_mitochondrial_variants` subworkflow
+- [#1148](https://github.com/genomic-medicine-sweden/nallo/pull/1148) - Added tests for `annotate_consequence_pli`
+- [#1155](https://github.com/genomic-medicine-sweden/nallo/pull/1155) - Added Nallo paper to the README
+- [#1164](https://github.com/genomic-medicine-sweden/nallo/pull/1164) - Added `--skip_mitochondrial_calling` parameter to allow skipping mitochondrial variant calling
+- [#1173](https://github.com/genomic-medicine-sweden/nallo/pull/1173) - Added formatting to pre-commit
+- [#1178](https://github.com/genomic-medicine-sweden/nallo/pull/1178) - Added nextflow lint -format CI check
+- [#1195](https://github.com/genomic-medicine-sweden/nallo/pull/1195) - Added unfiltered bam output to `ALIGN_ASSEMBLIES`
+- [#1194](https://github.com/genomic-medicine-sweden/nallo/pull/1194) - Added new `concatenated_haplotypes` output to `GENOME_ASSEMBLY`
+- [#1163](https://github.com/genomic-medicine-sweden/nallo/pull/1163) - Added `--methylation_callers` parameter to control which methylation callers are active, following the same pattern as `--sv_callers`
+- [#1198](https://github.com/genomic-medicine-sweden/nallo/pull/1198) - Added parameter `--phased` for GENMOD models if phasing is not skipped
+- [#1204](https://github.com/genomic-medicine-sweden/nallo/pull/1204), [#1211](https://github.com/genomic-medicine-sweden/nallo/pull/1211) - Added nf-tests for `annotate_methylation` subworkflow
+- [#1208](https://github.com/genomic-medicine-sweden/nallo/pull/1208) - Added pbmm2 as reads aligner option in `ALIGN` subworkflow
+- [#1208](https://github.com/genomic-medicine-sweden/nallo/pull/1208) - Added `SAMTOOLS_CALMD` to add MD tag needed for sniffles after pbmm2
+- [#1208](https://github.com/genomic-medicine-sweden/nallo/pull/1208) - Added new read group param to `CONVERT_INPUT_FASTQS` config to add RG, SM and DS tags to bam when converting with `SAMTOOLS_IMPORT` and read aligner is pbmm2
+- [#1209](https://github.com/genomic-medicine-sweden/nallo/pull/1209) - Added tests for `clean_sniffles`
+- [#1159](https://github.com/genomic-medicine-sweden/nallo/pull/1159) - Added `ONT_R10_AS` preset for Oxford Nanopore adaptive sampling runs, with preset defaults: `sv_callers=sniffles`, `skip_mitochondrial_calling=true`, `skip_sex_check=true`, `skip_genome_assembly=true`
+- [#1159](https://github.com/genomic-medicine-sweden/nallo/pull/1159) - Added on-target read pre-filtering in `QC_ALIGNED_READS`: when `--target_regions` is set, reads are filtered with `SAMTOOLS_VIEW` to on-target regions before CRAMINO QC, ensuring QC metrics reflect only on-target data
+- [#1217](https://github.com/genomic-medicine-sweden/nallo/pull/1217) - Added `mm2plus` as an option to align reads to the reference and for assembly alignment
 - [#1141](https://github.com/genomic-medicine-sweden/nallo/pull/1141) - Added `MERGE_SVS` subworkflow
 
 ### Changed
@@ -67,6 +86,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1096](https://github.com/genomic-medicine-sweden/nallo/pull/1096) - Simplified cram-related conditionals in `nallo`
 - [#1097](https://github.com/genomic-medicine-sweden/nallo/pull/1097) - Simplified phasing-related if statement in `nallo`
 - [#1102](https://github.com/genomic-medicine-sweden/nallo/pull/1102) - Updated testdata commit with new genmod score config
+- [#1104](https://github.com/genomic-medicine-sweden/nallo/pull/1104) - Updated .nf-core.yml to allow for template_strings in new github/nf-dev-guidelines.yaml
+- [#1107](https://github.com/genomic-medicine-sweden/nallo/pull/1107) - Moved alignment into subworkflow `ALIGN`
 - [#1111](https://github.com/genomic-medicine-sweden/nallo/pull/1111) - Refactored gVCF grouping to reduce code duplication in `nallo`
 - [#1112](https://github.com/genomic-medicine-sweden/nallo/pull/1112) - Changed testdata commit to include data with a deletion in the mitochondrial chromosome
 - [#1118](https://github.com/genomic-medicine-sweden/nallo/pull/1118) - Changed testdata commit
@@ -76,6 +97,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Changed logic in `subworkflows/local/gvcf_glnexus_norm_variants/main.nf` to handle caller from the meta including the mitochondrial caller
 - [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Mitochondrial variants do not go through the phasing
 - [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Changed output of `SCATTER_GENOME` to output `bed_nuclear_intervals` and `mitochondrial_nuclear_intervals`
+- [#1145](https://github.com/genomic-medicine-sweden/nallo/pull/1145) - Replaced local hiphase module with nf-core one
+- [#1149](https://github.com/genomic-medicine-sweden/nallo/pull/1149) - Replaced local `echtvar/anno` module with nf-core one
+- [#1169](https://github.com/genomic-medicine-sweden/nallo/pull/1169) - Updated nf-dev guidelines sync config
+- [#1178](https://github.com/genomic-medicine-sweden/nallo/pull/1178) - Updated dataset with unmasked reference and only ML and MM tags in the fastq test file
+- [#1181](https://github.com/genomic-medicine-sweden/nallo/pull/1181) - Updated minimum nextflow version to 26.04.4
+- [#1182](https://github.com/genomic-medicine-sweden/nallo/pull/1182) - Formatted all config files with `nextflow lint -format -harshil-alignment`
+- [#1183](https://github.com/genomic-medicine-sweden/nallo/pull/1183) - Formatted all local subworkflows and modules with `nextflow lint -format -harshil-alignment`
+- [#1189](https://github.com/genomic-medicine-sweden/nallo/pull/1189) - Changed to use intro section added in https://github.com/genomic-medicine-sweden/nf-dev-guidelines/pull/39
+- [#1184](https://github.com/genomic-medicine-sweden/nallo/pull/1184) - Update `.nf-core.yml` to remove lint ignore directive for template strings in `assets/nf-dev-guidelines.yaml`.
+- [#1185](https://github.com/genomic-medicine-sweden/nallo/pull/1185) - Rename nf-dev-guidelines config to `contribution-guidelines-config.yaml`.
+- [#1197](https://github.com/genomic-medicine-sweden/nallo/pull/1197) - Updated all genmod modules
+- [#1196](https://github.com/genomic-medicine-sweden/nallo/pull/1196) - Updated SVDB modules
+- [#1206](https://github.com/genomic-medicine-sweden/nallo/pull/1206) - Changed default glnexus config from `DeepVariant_unfiltered` to a custom config in `assets/` due to unfixed [bug](https://github.com/dnanexus-rnd/GLnexus/issues/286)?
+- [#1159](https://github.com/genomic-medicine-sweden/nallo/pull/1159) - Changed `call_methylation_modkit` to use GAWK to strip non-BED content from `modkit_call_regions` before processing
+- [#1159](https://github.com/genomic-medicine-sweden/nallo/pull/1159) - Changed mosdepth MultiQC input to use the regional coverage distribution when `--target_regions` is set
+- [#1218](https://github.com/genomic-medicine-sweden/nallo/pull/1218) - Changed default mitochondrial caller for the `ONT_R10` preset to `deepvariant`
+- [#1219](https://github.com/genomic-medicine-sweden/nallo/pull/1219) - Changed nf-test CI action to retry once on transient network/disk failures
 
 ### Removed
 
@@ -85,20 +123,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1092](https://github.com/genomic-medicine-sweden/nallo/pull/1092) - Removed unused SVDB import in `nallo`
 - [#1100](https://github.com/genomic-medicine-sweden/nallo/pull/1100) - Removed tabix from SNV and SV annotation subworkflows
 - [#1125](https://github.com/genomic-medicine-sweden/nallo/pull/1125) - Removed `samplesheet_ont.csv` because it is unused.
+- [#1163](https://github.com/genomic-medicine-sweden/nallo/pull/1163) - Removed `--run_methbat` and `--run_modkit` parameters; use `--methylation_callers` instead
+- [#1205](https://github.com/genomic-medicine-sweden/nallo/pull/1205) - Removed use of 2 cpus for `GENMOD_MODELS` in `base.config` since the bug was fixed in v.3.12.0
 
 ### Fixed
 
 - [#1045](https://github.com/genomic-medicine-sweden/nallo/pull/1045) - Fixed `--skip_sex_check` should depend on `--skip_alignment` in workflow checks on pipeline start.
 - [#1056](https://github.com/genomic-medicine-sweden/nallo/pull/1056) - Fixed nf-test CI not passing the matrix Nextflow version to the setup action.
 - [#1079](https://github.com/genomic-medicine-sweden/nallo/pull/1079) - Fixed typo in tests for `call_methylation_methbat`
+- [#1142](https://github.com/genomic-medicine-sweden/nallo/pull/1142) - Fixed Sentieon-specific SNV filtering to use the configured `--snv_caller` parameter
+- [#1172](https://github.com/genomic-medicine-sweden/nallo/pull/1172) - Fixed `--ubam` being set for `QC_PHASING:CRAMINO`, suppressing alignment-dependent metrics including `read_identity`
+- [#1162](https://github.com/genomic-medicine-sweden/nallo/pull/1162) - Fixed `ECHTVAR_ANNO` channel shape mismatch after nf-core module swap by wrapping databases channel with meta
+- [#1180](https://github.com/genomic-medicine-sweden/nallo/pull/1180) - Fixed pipeline configs affecting subworkflow tests (that should be isolated)
+- [#1163](https://github.com/genomic-medicine-sweden/nallo/pull/1163) - Fixed `--skip_methylation_annotation` default: now `true` when methbat is not active, so methylation annotation is only enabled when methbat ran
+- [#1196](https://github.com/genomic-medicine-sweden/nallo/pull/1196) - Fixed SVDB merge reordering priorities on retries
+- [#1201](https://github.com/genomic-medicine-sweden/nallo/pull/1201) - Fixed nf-test not triggering on configuration file changes
 
 ### Parameters
 
-| Old parameter | New parameter                   |
-| ------------- | ------------------------------- |
-|               | `--mitochondrial_sv_min_size`   |
-|               | `--mitorsaw_minimum_read_count` |
-|               | `--mitorsaw_minimum_maf`        |
+| Old parameter                    | New parameter                   |
+| -------------------------------- | ------------------------------- |
+|                                  | `--mitochondrial_sv_min_size`   |
+|                                  | `--mitorsaw_minimum_read_count` |
+|                                  | `--mitorsaw_minimum_maf`        |
+| `--run_methbat` / `--run_modkit` | `--methylation_callers`         |
+|                                  | `--read_aligner`                |
+|                                  | `--pbmm2_preset`                |
+|                                  | `--glnexus_config`              |
+|                                  | `--preset ONT_R10_AS`           |
+|                                  | `--assembly_aligner`            |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -110,11 +163,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | Tool                           | Old version | New version |
 | ------------------------------ | ----------- | ----------- |
 | sentieon-cli/dnascope-longread | 1.5.2       | 1.6.2       |
+| hiphase                        | 1.4.0       | 1.6.0       |
+| echtvar/anno                   | 0.2.2       | 0.2.4       |
+| find/concatenate               |             | 4.6.0       |
+| genmod/annotate                | 3.10.2      | 3.12.0      |
+| genmod/compound                | 3.10.2      | 3.12.0      |
+| genmod/models                  | 3.10.2      | 3.12.0      |
+| genmod/score                   | 3.10.2      | 3.12.0      |
+| mitorsaw/haplotype             |             | 0.2.9       |
+| pbmm2/align                    |             | 26.2.0      |
+| samtools/calmd                 |             | 1.24        |
+| samtools/view                  | 1.23.1      | 1.24        |
+| mm2plus                        |             | 1.3         |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
 > Version has been added if just the new version information is present.
 > Version has been removed if new version information isn't present.
+
+## 0.12.1 - [2026-07-22]
+
+### `Fixed`
+
+- [#1214](https://github.com/genomic-medicine-sweden/nallo/pull/1214) - Updated `peddy` nf-core module to fix this [issue](https://github.com/genomic-medicine-sweden/nallo/issues/1084#event-28314854442)
+- [#1214](https://github.com/genomic-medicine-sweden/nallo/pull/1214) - Fixed nf-test CI not passing the matrix Nextflow version to the setup action.
 
 ## 0.12.0 - [2026-04-28]
 

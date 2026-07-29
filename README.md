@@ -3,7 +3,7 @@
 [![GitHub Actions Linting Status](https://github.com/genomic-medicine-sweden/nallo/actions/workflows/linting.yml/badge.svg)](https://github.com/genomic-medicine-sweden/nallo/actions/workflows/linting.yml)
 [![Cite with Zenodo](https://zenodo.org/badge/DOI/10.5281/zenodo.13748210.svg)](https://doi.org/10.5281/zenodo.13748210)
 [![nf-test](https://img.shields.io/badge/unit_tests-nf--test-337ab7.svg)](https://www.nf-test.com)
-[![Nextflow](https://img.shields.io/badge/version-%E2%89%A525.10.4-green?style=flat&logo=nextflow&logoColor=white&color=%230DC09D&link=https%3A%2F%2Fnextflow.io)](https://www.nextflow.io/)
+[![Nextflow](https://img.shields.io/badge/version-%E2%89%A526.04.4-green?style=flat&logo=nextflow&logoColor=white&color=%230DC09D&link=https%3A%2F%2Fnextflow.io)](https://www.nextflow.io/)
 [![nf-core template version](https://img.shields.io/badge/nf--core_template-4.0.2-green?style=flat&logo=nfcore&logoColor=white&color=%2324B064&link=https%3A%2F%2Fnf-co.re)](https://github.com/nf-core/tools/releases/tag/4.0.2)
 [![run with docker](https://img.shields.io/badge/run%20with-docker-0db7ed?labelColor=000000&logo=docker)](https://www.docker.com/)
 [![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
@@ -77,13 +77,13 @@ project,sample,file,family_id,paternal_id,maternal_id,sex,phenotype
  my_project,HG004,/path/to/HG004.bam,NIST,0,0,2,1
 ```
 
-Supply a reference genome with `--fasta` and choose a matching `--preset` for your data (`revio`, `pacbio`, `ONT_R10`). Now, you can run the pipeline using:
+Supply a reference genome with `--fasta` and choose a matching `--preset` for your data (`revio`, `pacbio`, `ONT_R10` or `ONT_R10_AS`). Now, you can run the pipeline using:
 
 ```bash
 nextflow run genomic-medicine-sweden/nallo \
     -profile <docker/singularity/.../institute> \
     --input samplesheet.csv \
-    --preset <revio/pacbio/ONT_R10> \
+    --preset <revio/pacbio/ONT_R10/ONT_R10_AS> \
     --fasta <reference.fasta> \
     --outdir <OUTDIR>
 ```
@@ -102,7 +102,19 @@ If you would like to contribute to this pipeline, please see the [contributing g
 
 ## Citations
 
-If you use genomic-medicine-sweden/nallo for your analysis, please cite it using the following doi: [10.5281/zenodo.13748210](https://doi.org/10.5281/zenodo.13748210).
+### Nallo
+
+If you use genomic-medicine-sweden/nallo for your analysis, please cite:
+
+> **Nallo: a Nextflow pipeline for comprehensive human long-read genome analysis**
+>
+> Felix Lenner, Anders Jemt, Lucia Peña Pérez, Ramprasad Neethiraj, Peter Pruisscher, Daniel Schmitz, Annick Renevey, Pádraic Corcoran, Daniel Nilsson, Jesper Eisfeldt, Anna Lindstrand, Valtteri Wirta, Adam Ameur, Lars Feuk.
+>
+> _Bioinformatics_, Volume 42, Issue 3, March 2026, btag086, https://doi.org/10.1093/bioinformatics/btag086
+
+Specific versions of the pipeline can be referenced via zenodo: [10.5281/zenodo.13748210](https://doi.org/10.5281/zenodo.13748210).
+
+### nf-core
 
 This pipeline uses code and infrastructure developed and maintained by the [nf-core](https://nf-co.re) community, reused here under the [MIT license](https://github.com/nf-core/tools/blob/main/LICENSE).
 

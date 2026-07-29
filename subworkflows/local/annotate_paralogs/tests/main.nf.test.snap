@@ -38,10 +38,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-05-27T10:39:22.606462455",
+        "timestamp": "2026-07-28T09:43:47.601787766",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.04.6"
         }
     },
     "two familes, multiple sampels - tsv format - rules": {
@@ -83,10 +83,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-05-27T10:39:40.666600188",
+        "timestamp": "2026-07-28T08:36:39.306157194",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.04.6"
         }
     },
     "two familes, multiple sampels - tsv format - rules - stub": {

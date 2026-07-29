@@ -1,5 +1,5 @@
 {
-    "bam - stub": {
+    "bam - mm2plus - stub": {
         "content": [
             {
                 "0": [
@@ -19,17 +19,33 @@
                     ]
                 ],
                 "2": [
-
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38_filtered.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "3": [
-
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38_filtered.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "4": [
+                    
+                ],
+                "5": [
+                    
                 ],
                 "bai": [
                     [
                         {
                             "id": "hg38"
                         },
-                        "hg38.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "hg38_filtered.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "bam": [
@@ -37,32 +53,146 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "hg38_filtered.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "crai": [
-
+                    
                 ],
                 "cram": [
-
+                    
+                ],
+                "unfiltered_bai": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "unfiltered_bam": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ]
             }
         ],
-        "timestamp": "2026-03-31T15:08:16.168735646",
+        "timestamp": "2026-07-23T15:52:34.012681018",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.07.0"
         }
     },
-    "bam": {
+    "bam - mm2plus": {
+        "content": [
+            "49691621cdfd398fb5e7b29780c56d8f",
+            "hg38_filtered.bam.bai"
+        ],
+        "timestamp": "2026-07-23T15:52:18.336328421",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.07.0"
+        }
+    },
+    "bam - minimap2 - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38_filtered.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38_filtered.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "4": [
+                    
+                ],
+                "5": [
+                    
+                ],
+                "bai": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38_filtered.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "bam": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38_filtered.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "crai": [
+                    
+                ],
+                "cram": [
+                    
+                ],
+                "unfiltered_bai": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "unfiltered_bam": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "hg38.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-23T15:52:26.204449008",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.07.0"
+        }
+    },
+    "bam - minimap2": {
         "content": [
             "43bb6ef7e9eccece743204535a3abbd6",
-            "hg38.bam.bai"
+            "hg38_filtered.bam.bai"
         ],
-        "timestamp": "2026-03-23T16:40:14.667118455",
+        "timestamp": "2026-07-23T15:52:09.555417771",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
+            "nf-test": "0.9.5",
+            "nextflow": "26.07.0"
         }
     }
 }
