@@ -3,6 +3,8 @@ include { HIFIASM as HIFIASM_BINS     } from '../../../modules/nf-core/hifiasm'
 include { HIFIASM as HIFIASM_ASSEMBLY } from '../../../modules/nf-core/hifiasm'
 include { YAK_COUNT                   } from '../../../modules/nf-core/yak/count/main'
 include { GFASTATS                    } from '../../../modules/nf-core/gfastats/main'
+include { FIND_CONCATENATE            } from '../../../modules/nf-core/find/concatenate/main'
+
 
 // This subworkflow assembles and outputs haplotypes from a set of reads (grouped per sample), using hifiasm and gfastats.
 // It assumes that while each sample can have multiple files, each sample belongs to one family at most.
@@ -10,25 +12,24 @@ workflow GENOME_ASSEMBLY {
     take:
     ch_reads // channel: [ val(meta), fastqs ]
     trio_binning // bool: Should we use trio binning mode where possible?
+    concat_assemblies // bool: Should we concatenate haplotypes per sample?
 
     main:
     if (trio_binning) {
         // First, we need to branch the samples based on their relationship
-        ch_branched_samples = ch_reads
-            .branch { meta, _reads ->
-                def is_parent = meta.relationship in ['father', 'mother']
-                paired_parents: is_parent && meta.has_other_parent
-                children_with_both_parents: meta.relationship == 'child' && meta.two_parents
-                other: true
-            }
+        ch_branched_samples = ch_reads.branch { meta, _reads ->
+            def is_parent = meta.relationship in ['father', 'mother']
+            paired_parents: is_parent && meta.has_other_parent
+            children_with_both_parents: meta.relationship == 'child' && meta.two_parents
+            other: true
+        }
 
         // Then, the files from parents of children with both parents will need to be concatenated before yak
         // in case there are multiple files for the same parent.
-        ch_paired_parents_for_yak = ch_branched_samples.paired_parents
-            .branch { _meta, fastqs ->
-                cat: fastqs.size() > 1
-                no_cat: fastqs.size() == 1
-            }
+        ch_paired_parents_for_yak = ch_branched_samples.paired_parents.branch { _meta, fastqs ->
+            cat: fastqs.size() > 1
+            no_cat: fastqs.size() == 1
+        }
 
         CAT_FASTQ(
             ch_paired_parents_for_yak.cat
@@ -73,11 +74,10 @@ workflow GENOME_ASSEMBLY {
             }
     }
     else {
-        ch_hifiasm_in = ch_reads
-            .multiMap { meta, reads ->
-                reads: [meta, reads, []]
-                yak: [meta, [], []]
-            }
+        ch_hifiasm_in = ch_reads.multiMap { meta, reads ->
+            reads: [meta, reads, []]
+            yak: [meta, [], []]
+        }
     }
 
     HIFIASM_BINS(
@@ -104,11 +104,9 @@ workflow GENOME_ASSEMBLY {
         ch_hifiasm_assembly_in.bins,
     )
 
-    ch_gfastats_paternal_in = HIFIASM_ASSEMBLY.out.hap1_contigs
-        .map { meta, fasta -> [meta + ['haplotype': 1], fasta] }
+    ch_gfastats_paternal_in = HIFIASM_ASSEMBLY.out.hap1_contigs.map { meta, fasta -> [meta + ['haplotype': 1], fasta] }
 
-    ch_gfastats_maternal_in = HIFIASM_ASSEMBLY.out.hap2_contigs
-        .map { meta, fasta -> [meta + ['haplotype': 2], fasta] }
+    ch_gfastats_maternal_in = HIFIASM_ASSEMBLY.out.hap2_contigs.map { meta, fasta -> [meta + ['haplotype': 2], fasta] }
 
     GFASTATS(
         ch_gfastats_paternal_in.mix(ch_gfastats_maternal_in),
@@ -121,7 +119,23 @@ workflow GENOME_ASSEMBLY {
         [[], []],
     )
 
+    if (concat_assemblies) {
+        ch_assemblies_to_concatenate = GFASTATS.out.assembly
+            .map { meta, bam -> [meta - meta.subMap('haplotype'), bam] }
+            .groupTuple(size: 2)
+
+        FIND_CONCATENATE(
+            ch_assemblies_to_concatenate
+        )
+
+        ch_concatenated_haplotypes = FIND_CONCATENATE.out.file_out
+    }
+    else {
+        ch_concatenated_haplotypes = channel.empty()
+    }
+
     emit:
-    assembled_haplotypes = GFASTATS.out.assembly         // channel: [ val(meta), path(fasta) ]
-    assembly_summary     = GFASTATS.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
+    assembled_haplotypes    = GFASTATS.out.assembly // channel: [ val(meta), path(fasta) ]
+    assembly_summary        = GFASTATS.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
+    concatenated_haplotypes = ch_concatenated_haplotypes // channel: [ val(meta), path(fasta) ]
 }

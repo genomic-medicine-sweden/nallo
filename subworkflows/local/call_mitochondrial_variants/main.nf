@@ -10,12 +10,12 @@ include { MITORSAW_HAPLOTYPE                  } from '../../../modules/nf-core/m
 
 workflow CALL_MITOCHONDRIAL_VARIANTS {
     take:
-    ch_bam_bai            // channel: [val(meta), path(bam), path(bai)]
-    ch_fasta              // channel: [val(meta), path(fasta)]
-    ch_fai                // channel: [val(meta), path(fai)]
-    ch_par_bed            // channel: [val(meta), path(bed)]  – PAR regions (deepvariant)
-    ch_mitochondrial_bed  // channel: [val(meta), path(bed)]  – mitochondrial interval (deepvariant)
-    mitochondrial_caller  // string
+    ch_bam_bai // channel: [val(meta), path(bam), path(bai)]
+    ch_fasta // channel: [val(meta), path(fasta)]
+    ch_fai // channel: [val(meta), path(fai)]
+    ch_par_bed // channel: [val(meta), path(bed)]  – PAR regions (deepvariant)
+    ch_mitochondrial_bed // channel: [val(meta), path(bed)]  – mitochondrial interval (deepvariant)
+    mitochondrial_caller // string
 
     main:
     ch_fasta_fai = ch_fasta
@@ -35,7 +35,7 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
     }
     else if (mitochondrial_caller == "deepvariant") {
 
-    /*
+        /*
      * Add the mitochondrial BED to every sample, skip if BED is empty. We do not want to run Deepvariant with an empty bed.
      * The BED can be empty if there is no chrM region in the original BED processed in SCATTER_GENOME
      */
@@ -89,36 +89,34 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
 
         BCFTOOLS_VIEW_MITO(ch_mito_split_input, [], [], [])
 
-        ch_mito_vcf_split = BCFTOOLS_VIEW_MITO.out.vcf
-            .branch { meta, _vcf ->
-                snv: meta.variant_type == "snv"
-                sv: meta.variant_type == "sv"
-            }
+        ch_mito_vcf_split = BCFTOOLS_VIEW_MITO.out.vcf.branch { meta, _vcf ->
+            snv: meta.variant_type == "snv"
+            sv: meta.variant_type == "sv"
+        }
 
-        ch_mito_tbi_split = BCFTOOLS_VIEW_MITO.out.tbi
-            .branch { meta, _tbi ->
-                snv: meta.variant_type == "snv"
-                sv: meta.variant_type == "sv"
-            }
+        ch_mito_tbi_split = BCFTOOLS_VIEW_MITO.out.tbi.branch { meta, _tbi ->
+            snv: meta.variant_type == "snv"
+            sv: meta.variant_type == "sv"
+        }
 
 
         ch_snv_vcf = remove_variant_type_from_meta(ch_mito_vcf_split.snv)
         ch_snv_tbi = remove_variant_type_from_meta(ch_mito_tbi_split.snv)
-        ch_sv_vcf  = remove_variant_type_from_meta(ch_mito_vcf_split.sv)
-        ch_sv_tbi  = remove_variant_type_from_meta(ch_mito_tbi_split.sv)
-
-    } else {
+        ch_sv_vcf = remove_variant_type_from_meta(ch_mito_vcf_split.sv)
+        ch_sv_tbi = remove_variant_type_from_meta(ch_mito_tbi_split.sv)
+    }
+    else {
         ch_snv_vcf = ch_vcf
         ch_snv_tbi = ch_tbi
-        ch_sv_vcf  = channel.empty()
-        ch_sv_tbi  = channel.empty()
+        ch_sv_vcf = channel.empty()
+        ch_sv_tbi = channel.empty()
     }
 
     emit:
-    mitochondrial_snv_vcf = ch_snv_vcf  // channel: [val(meta), path(vcf)]
-    mitochondrial_snv_tbi = ch_snv_tbi  // channel: [val(meta), path(tbi)]
-    mitochondrial_sv_vcf  = ch_sv_vcf   // channel: [val(meta), path(vcf)]
-    mitochondrial_sv_tbi  = ch_sv_tbi   // channel: [val(meta), path(tbi)]
+    mitochondrial_snv_vcf = ch_snv_vcf // channel: [val(meta), path(vcf)]
+    mitochondrial_snv_tbi = ch_snv_tbi // channel: [val(meta), path(tbi)]
+    mitochondrial_sv_vcf  = ch_sv_vcf // channel: [val(meta), path(vcf)]
+    mitochondrial_sv_tbi  = ch_sv_tbi // channel: [val(meta), path(tbi)]
 }
 def remove_variant_type_from_meta(channel) {
     channel.map { meta, file -> [meta - meta.subMap('variant_type'), file] }

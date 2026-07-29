@@ -14,34 +14,36 @@ include { VCFEXPRESS                                 } from '../../../modules/nf
 
 workflow GVCF_GLNEXUS_NORM_VARIANTS {
     take:
-    ch_gvcfs              // channel: [mandatory] [ val(meta), path(gvcfs)     ]
-    ch_tbis               // channel: [mandatory] [ val(meta), path(tbis)      ]
-    ch_bed                // channel: [optional]  [ val(meta), path(input_bed) ]
-    ch_fasta              // channel: [mandatory] [ val(meta), path(fasta)     ]
-    ch_fai                // channel: [mandatory] [ val(meta), path(fai)       ]
+    ch_gvcfs // channel: [mandatory] [ val(meta), path(gvcfs)     ]
+    ch_tbis // channel: [mandatory] [ val(meta), path(tbis)      ]
+    ch_bed // channel: [optional]  [ val(meta), path(input_bed) ]
+    ch_fasta // channel: [mandatory] [ val(meta), path(fasta)     ]
+    ch_fai // channel: [mandatory] [ val(meta), path(fai)       ]
     ch_vcfexpress_prelude // path: [mandatory] lua file
+    ch_custom_glnexus_config // path: [optional]  [ val(meta), path(config_file) ]
 
     main:
     ch_merged_family_gvcf = channel.empty()
 
     // Branching gVCFs and TBI channels by caller, as they need to be processed differently in the next steps
-    branched_gvcfs = ch_gvcfs
-        .branch { meta, _gvcfs ->
-            mitorsaw: meta.caller == "mitorsaw"
-            sentieon: meta.caller == "sentieon"
-            deepvariant: meta.caller == "deepvariant"
-        }
+    branched_gvcfs = ch_gvcfs.branch { meta, _gvcfs ->
+        mitorsaw: meta.caller == "mitorsaw"
+        sentieon: meta.caller == "sentieon"
+        deepvariant: meta.caller == "deepvariant"
+    }
 
-    branched_tbis = ch_tbis
-        .branch { meta, _tbi ->
-            mitorsaw: meta.caller == "mitorsaw"
-            sentieon: meta.caller == "sentieon"
-            deepvariant: meta.caller == "deepvariant"
-        }
+    branched_tbis = ch_tbis.branch { meta, _tbi ->
+        mitorsaw: meta.caller == "mitorsaw"
+        sentieon: meta.caller == "sentieon"
+        deepvariant: meta.caller == "deepvariant"
+    }
 
     // GLNEXUS processes deepvariant gVCFs
+    // toList() enables passing [] if ch_custom_glnexus_config is empty
+    ch_deepvariant_gvcfs = branched_gvcfs.deepvariant.combine(ch_custom_glnexus_config.map { _meta, config -> config }.toList())
+
     GLNEXUS(
-        branched_gvcfs.deepvariant.map { meta, gvcfs -> [meta, gvcfs, []] },
+        ch_deepvariant_gvcfs,
         ch_bed,
     )
 
@@ -76,7 +78,8 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     ch_merged_family_gvcf_sentieon = BCFTOOLS_PLUGINFIXPLOIDY.out.vcf
 
     // BCFTOOLS_MERGE is used for the mitochondrial specific caller
-    ch_bcftools_merge_in = branched_gvcfs.mitorsaw.join(branched_tbis.mitorsaw, failOnMismatch: true, failOnDuplicate: true)
+    ch_bcftools_merge_in = branched_gvcfs.mitorsaw
+        .join(branched_tbis.mitorsaw, failOnMismatch: true, failOnDuplicate: true)
         .map { meta, gvcfs, tbis ->
             [meta, gvcfs, tbis, []]
         }
@@ -110,6 +113,6 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     )
 
     emit:
-    vcf   = BCFTOOLS_NORM_MULTISAMPLE.out.vcf                                        // channel: [ val(meta), path(vcf) ]
+    vcf   = BCFTOOLS_NORM_MULTISAMPLE.out.vcf // channel: [ val(meta), path(vcf) ]
     index = BCFTOOLS_NORM_MULTISAMPLE.out.tbi.mix(BCFTOOLS_NORM_MULTISAMPLE.out.csi) // channel: [ val(meta), path(tbi/csi) ]
 }

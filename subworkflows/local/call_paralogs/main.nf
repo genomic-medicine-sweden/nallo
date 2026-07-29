@@ -7,10 +7,10 @@ include { SAMTOOLS_CONVERT  } from '../../../modules/nf-core/samtools/convert/ma
 
 workflow CALL_PARALOGS {
     take:
-    bam_bai     // channel: [ val(meta), bam, bai ]
-    fasta       // channel: [ val(meta), fasta ]
-    fai         // channel: [ val(meta), fai ]
-    cram_output // bool: Publish alignments as CRAM (true) or BAM (false)
+    bam_bai // channel: [ val(meta), bam, bai ]
+    fasta // channel: [ val(meta), fasta ]
+    fai // channel: [ val(meta), fai ]
+    val_cram_output // bool: Publish alignments as CRAM (true) or BAM (false)
 
     main:
     PARAPHASE(
@@ -19,7 +19,7 @@ workflow CALL_PARALOGS {
         [[], []],
     )
 
-   ch_paraphase_vcf_tbis = PARAPHASE.out.vcf
+    ch_paraphase_vcf_tbis = PARAPHASE.out.vcf
         .transpose()
         .map { meta, vcf ->
             [['id': vcf.simpleName, 'family_id': meta.family_id], vcf, []]
@@ -44,8 +44,7 @@ workflow CALL_PARALOGS {
         false,
     )
 
-    ch_bcftools_reheader_in = ch_paraphase_vcf_tbis
-        .join(GAWK.out.output, failOnMismatch: true, failOnDuplicate: true)
+    ch_bcftools_reheader_in = ch_paraphase_vcf_tbis.join(GAWK.out.output, failOnMismatch: true, failOnDuplicate: true)
 
     BCFTOOLS_REHEADER(ch_bcftools_reheader_in, [[], []])
 
@@ -60,7 +59,7 @@ workflow CALL_PARALOGS {
         fasta.join(fai, failOnMismatch: true, failOnDuplicate: true).collect(),
     )
 
-    if (cram_output) {
+    if (val_cram_output) {
         SAMTOOLS_CONVERT(
             PARAPHASE.out.bam.join(PARAPHASE.out.bai, failOnDuplicate: true, failOnMismatch: true),
             fasta.join(fai, failOnDuplicate: true, failOnMismatch: true).collect(),
@@ -68,13 +67,13 @@ workflow CALL_PARALOGS {
     }
 
     emit:
-    bam        = PARAPHASE.out.bam                                         // channel: [ val(meta), path(bam)  ]
-    bai        = PARAPHASE.out.bai                                         // channel: [ val(meta), path(bai)  ]
-    cram       = cram_output ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
-    crai       = cram_output ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
-    json       = PARAPHASE.out.json                                        // channel: [ val(meta), path(json) ]
-    sample_vcf = PARAPHASE.out.vcf.transpose()                             // channel: [ val(meta), path(vcf)  ]
-    sample_tbi = PARAPHASE.out.vcf_index.transpose()                       // channel: [ val(meta), path(tbi)  ]
-    family_vcf = BCFTOOLS_MERGE.out.vcf                                    // channel: [ val(meta), path(vcf)  ]
-    family_tbi = BCFTOOLS_MERGE.out.index                                  // channel: [ val(meta), path(tbi)  ]
+    bam        = PARAPHASE.out.bam // channel: [ val(meta), path(bam)  ]
+    bai        = PARAPHASE.out.bai // channel: [ val(meta), path(bai)  ]
+    cram       = val_cram_output ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
+    crai       = val_cram_output ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
+    json       = PARAPHASE.out.json // channel: [ val(meta), path(json) ]
+    sample_vcf = PARAPHASE.out.vcf.transpose() // channel: [ val(meta), path(vcf)  ]
+    sample_tbi = PARAPHASE.out.vcf_index.transpose() // channel: [ val(meta), path(tbi)  ]
+    family_vcf = BCFTOOLS_MERGE.out.vcf // channel: [ val(meta), path(vcf)  ]
+    family_tbi = BCFTOOLS_MERGE.out.index // channel: [ val(meta), path(tbi)  ]
 }

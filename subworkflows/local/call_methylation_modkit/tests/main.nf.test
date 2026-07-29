@@ -27,28 +27,28 @@ nextflow_workflow {
             process {
                 """
                 input[0] = channel.of([
-                    [ id: 'HG002' ],
+                    [ id: 'FAM' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
                 input[1] = channel.of([
-                    [ id: 'HG002' ],
+                    [ id: 'FAM' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
                 ])
                 input[2] = channel.empty()
                 input[3] = channel.empty()
                 input[4] = channel.of([
-                    [ id: 'HG002', family_id: 'HG002' ],
+                    [ id: 'HG002', family_id: 'FAM' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
-                input[5] = channel.of( [ [ id : 'HG002' ], 'HG002' ] )
+                input[5] = channel.of( [ [ id : 'FAM' ], 'HG002' ] )
                 input[6] = PREPARE_REFERENCES.out.fasta
                 input[7] = PREPARE_REFERENCES.out.fai
                 input[8] = 'longphase'
                 input[9] = false
                 input[10] = false
                 input[11] = [
-                    [ id:'HG002' ], // meta map
+                    [ id:'FAM' ], // meta map
                     []
                 ]
                 """
@@ -67,7 +67,7 @@ nextflow_workflow {
                 input[0] = PHASING.out.haplotagged_bam_bai
                 input[1] = PREPARE_REFERENCES.out.fasta
                 input[2] = PREPARE_REFERENCES.out.fai
-                input[3] = [[],[]]
+                input[3] = channel.of([[],[]])
                 input[4] = 'h,m'
                 """
             }
@@ -95,7 +95,7 @@ nextflow_workflow {
                 ])
                 input[1] = PREPARE_REFERENCES.out.fasta
                 input[2] = PREPARE_REFERENCES.out.fai
-                input[3] = [[],[]]
+                input[3] = channel.of([[],[]])
                 input[4] = 'h,m'
                 """
             }
@@ -176,7 +176,7 @@ nextflow_workflow {
                 input[0] = PHASING.out.haplotagged_bam_bai
                 input[1] = PREPARE_REFERENCES.out.fasta
                 input[2] = PREPARE_REFERENCES.out.fai
-                input[3] = [[],[]]
+                input[3] = channel.of([[],[]])
                 input[4] = 'h,m'
                 """
             }
@@ -232,7 +232,7 @@ nextflow_workflow {
                 ])
                 input[1] = PREPARE_REFERENCES.out.fasta
                 input[2] = PREPARE_REFERENCES.out.fai
-                input[3] = [[],[]]
+                input[3] = channel.of([[],[]])
                 input[4] = 'h,m'
                 """
             }

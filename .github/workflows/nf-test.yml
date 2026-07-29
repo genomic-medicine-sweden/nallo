@@ -59,7 +59,7 @@ jobs:
           - isMain: false
             tag: "samplesheet_target_regions_null"
         NXF_VER:
-          - "25.10.4"
+          - "26.04.4"
           - "latest-everything"
         include:
           - tag: "samplesheet"
@@ -67,6 +67,8 @@ jobs:
           - tag: "samplesheet_multisample_bam"
             runCleanup: true
           - tag: "samplesheet_multisample_ont_bam"
+            runCleanup: true
+          - tag: "samplesheet_multisample_ont_bam_ont_r10_as"
             runCleanup: true
           - tag: "samplesheet_target_regions_null"
             runCleanup: true

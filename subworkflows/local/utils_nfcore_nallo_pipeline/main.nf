@@ -25,13 +25,13 @@ include { UTILS_NEXTFLOW_PIPELINE } from '../../nf-core/utils_nextflow_pipeline'
 
 workflow PIPELINE_INITIALISATION {
     take:
-    help              // boolean: Display help message and exit
-    help_full         // boolean: Show the full help message
-    monochrome_logs   // boolean: Do not use coloured log outputs
+    help // boolean: Display help message and exit
+    help_full // boolean: Show the full help message
+    monochrome_logs // boolean: Do not use coloured log outputs
     nextflow_cli_args // array: List of positional nextflow CLI args
-    outdir            // string: The output directory where the results will be saved
-    show_hidden       // boolean: Show hidden parameters in the help message
-    validate_params   // boolean: Boolean whether to validate parameters against the schema at runtime
+    outdir // string: The output directory where the results will be saved
+    show_hidden // boolean: Show hidden parameters in the help message
+    validate_params // boolean: Boolean whether to validate parameters against the schema at runtime
     val_cnv_excluded_regions
     val_cnv_expected_xx_cn
     val_cnv_expected_xy_cn
@@ -46,10 +46,12 @@ workflow PIPELINE_INITIALISATION {
     val_gens_panel_of_normals_male
     val_input
     val_methbat_regions
+    val_methylation_callers
     val_mitochondrial_caller
     val_par_regions
     val_phaser
-    val_run_methbat
+    val_premapped
+    val_preset
     val_sambamba_regions
     val_skip_alignment
     val_skip_annotate_paralogs
@@ -58,6 +60,7 @@ workflow PIPELINE_INITIALISATION {
     val_skip_genome_assembly
     val_skip_methylation_calling
     val_skip_methylation_annotation
+    val_skip_mitochondrial_calling
     val_skip_peddy
     val_skip_phasing
     val_skip_prepare_gens_input
@@ -82,6 +85,7 @@ workflow PIPELINE_INITIALISATION {
     val_sv_callers_merge_priority
     val_sv_callers_to_merge
     val_sv_callers_to_run
+    val_target_regions
     val_variant_consequences_snvs
     val_variant_consequences_svs
     val_vep_cache
@@ -151,50 +155,52 @@ workflow PIPELINE_INITIALISATION {
     // Define subworkflows and their associated "--skip"
     //
     def workflowSkips = [
-        annotate_paralogs     : "skip_annotate_paralogs",
-        assembly              : "skip_genome_assembly",
-        sambamba_depth        : "skip_sambamba_depth",
-        mapping               : "skip_alignment",
-        snv_calling           : "skip_snv_calling",
-        snv_annotation        : "skip_snv_annotation",
-        sv_calling            : "skip_sv_calling",
-        sv_annotation         : "skip_sv_annotation",
-        call_paralogs         : "skip_call_paralogs",
-        peddy                 : "skip_peddy",
-        phasing               : "skip_phasing",
-        rank_variants         : "skip_rank_variants",
-        repeat_calling        : "skip_repeat_calling",
-        repeat_annotation     : "skip_repeat_annotation",
-        chromograph           : "skip_chromograph",
-        methylation           : "skip_methylation_calling",
+        annotate_paralogs: "skip_annotate_paralogs",
+        assembly: "skip_genome_assembly",
+        sambamba_depth: "skip_sambamba_depth",
+        mapping: "skip_alignment",
+        snv_calling: "skip_snv_calling",
+        snv_annotation: "skip_snv_annotation",
+        sv_calling: "skip_sv_calling",
+        sv_annotation: "skip_sv_annotation",
+        call_paralogs: "skip_call_paralogs",
+        peddy: "skip_peddy",
+        phasing: "skip_phasing",
+        rank_variants: "skip_rank_variants",
+        repeat_calling: "skip_repeat_calling",
+        repeat_annotation: "skip_repeat_annotation",
+        chromograph: "skip_chromograph",
+        methylation: "skip_methylation_calling",
         methylation_annotation: "skip_methylation_annotation",
-        qc                    : "skip_qc",
-        gens                  : "skip_prepare_gens_input",
-        sex_check             : "skip_sex_check",
+        mitochondrial: "skip_mitochondrial_calling",
+        qc: "skip_qc",
+        gens: "skip_prepare_gens_input",
+        sex_check: "skip_sex_check",
     ]
 
     //
     //  E.g., the CNV-calling workflow depends on mapping and snv_calling and can't run without them.
     //
     def workflowDependencies = [
-        call_paralogs         : ["mapping"],
-        chromograph           : ["mapping"],
-        snv_calling           : ["mapping"],
-        qc                    : ["mapping"],
-        sambamba_depth        : ["mapping"],
-        sex_check             : ["mapping"],
-        sv_calling            : ["mapping"],
-        annotate_paralogs     : ["mapping", "call_paralogs"],
-        sv_annotation         : ["mapping", "sv_calling"],
-        peddy                 : ["mapping", "snv_calling"],
-        snv_annotation        : ["mapping", "snv_calling"],
-        phasing               : ["mapping", "snv_calling"],
-        rank_variants         : ["mapping", "snv_calling", "snv_annotation", "sv_annotation"],
-        repeat_calling        : ["mapping", "snv_calling", "phasing"],
-        repeat_annotation     : ["mapping", "snv_calling", "phasing", "repeat_calling"],
-        methylation           : ["mapping", "snv_calling"],
+        call_paralogs: ["mapping"],
+        chromograph: ["mapping"],
+        snv_calling: ["mapping"],
+        qc: ["mapping"],
+        sambamba_depth: ["mapping"],
+        sex_check: ["mapping"],
+        sv_calling: ["mapping"],
+        annotate_paralogs: ["mapping", "call_paralogs"],
+        sv_annotation: ["mapping", "sv_calling"],
+        peddy: ["mapping", "snv_calling"],
+        snv_annotation: ["mapping", "snv_calling"],
+        phasing: ["mapping", "snv_calling"],
+        rank_variants: ["mapping", "snv_calling", "snv_annotation", "sv_annotation"],
+        repeat_calling: ["mapping", "snv_calling", "phasing"],
+        repeat_annotation: ["mapping", "snv_calling", "phasing", "repeat_calling"],
+        methylation: ["mapping", "snv_calling"],
         methylation_annotation: ["mapping", "snv_calling", "methylation"],
-        gens                  : ["mapping", "snv_calling"],
+        mitochondrial: ["mapping"],
+        gens: ["mapping", "snv_calling"],
     ]
 
 
@@ -202,88 +208,83 @@ workflow PIPELINE_INITIALISATION {
     // E.g., the par_regions file is required by the assembly workflow and the assembly workflow can't run without par_regions
     //
     def fileDependencies = [
-        mapping          : ["fasta"],
-        assembly         : ["fasta"], // The assembly workflow should perhaps be split into two - assembly and alignment (requires ref)
-        sambamba_depth   : ["sambamba_regions"],
-        snv_calling      : ["fasta", "par_regions"],
-        snv_annotation   : ["vep_cache", "vep_plugin_files", "variant_consequences_snvs"],
-        sv_calling       : ["fasta"],
-        sv_annotation    : ["svdb_sv_databases", "vep_cache", "vep_plugin_files", "variant_consequences_svs"],
-        rank_variants    : ["genmod_reduced_penetrance", "genmod_score_config_snvs", "genmod_score_config_svs"],
-        repeat_calling   : ["str_bed"],
+        mapping: ["fasta"],
+        assembly: ["fasta"],
+        sambamba_depth: ["sambamba_regions"],
+        snv_calling: ["fasta", "par_regions"],
+        snv_annotation: ["vep_cache", "vep_plugin_files", "variant_consequences_snvs"],
+        sv_calling: ["fasta"],
+        sv_annotation: ["svdb_sv_databases", "vep_cache", "vep_plugin_files", "variant_consequences_svs"],
+        rank_variants: ["genmod_reduced_penetrance", "genmod_score_config_snvs", "genmod_score_config_svs"],
+        repeat_calling: ["str_bed"],
         repeat_annotation: ["stranger_repeat_catalog"],
-        gens             : ["gens_baf_positions", "gens_panel_of_normals_female", "gens_panel_of_normals_male", "gens_coverage_bins"],
-        sex_check        : ["somalier_sites"],
+        gens: ["gens_baf_positions", "gens_panel_of_normals_female", "gens_panel_of_normals_male", "gens_coverage_bins"],
+        sex_check: ["somalier_sites"],
     ]
 
-    def parameterStatus = [
-        workflow: [
-            skip_annotate_paralogs      : val_skip_annotate_paralogs,
-            skip_snv_calling            : val_skip_snv_calling,
-            skip_peddy                  : val_skip_peddy,
-            skip_phasing                : val_skip_phasing,
-            skip_methylation_calling    : val_skip_methylation_calling,
-            skip_methylation_annotation : val_skip_methylation_annotation,
-            skip_rank_variants          : val_skip_rank_variants,
-            skip_repeat_calling         : val_skip_repeat_calling,
-            skip_repeat_annotation      : val_skip_repeat_annotation,
-            skip_chromograph            : val_skip_chromograph,
-            skip_sambamba_depth         : val_skip_sambamba_depth,
-            skip_snv_annotation         : val_skip_snv_annotation,
-            skip_sv_calling             : val_skip_sv_calling,
-            skip_sv_annotation          : val_skip_sv_annotation,
-            skip_call_paralogs          : val_skip_call_paralogs,
-            skip_alignment              : val_skip_alignment,
-            skip_qc                     : val_skip_qc,
-            skip_genome_assembly        : val_skip_genome_assembly,
-            skip_prepare_gens_input     : val_skip_prepare_gens_input,
-            skip_sex_check              : val_skip_sex_check,
-        ],
-        files: [
-            par_regions                 : val_par_regions,
-            echtvar_snv_databases       : val_echtvar_snv_databases,
-            sambamba_regions            : val_sambamba_regions,
-            svdb_sv_databases           : val_svdb_sv_databases,
-            somalier_sites              : val_somalier_sites,
-            vep_cache                   : val_vep_cache,
-            cnv_expected_xy_cn          : val_cnv_expected_xy_cn,
-            cnv_expected_xx_cn          : val_cnv_expected_xx_cn,
-            cnv_excluded_regions        : val_cnv_excluded_regions,
-            fasta                       : val_fasta,
-            str_bed                     : val_str_bed,
-            stranger_repeat_catalog     : val_stranger_repeat_catalog,
-            genmod_reduced_penetrance   : val_genmod_reduced_penetrance,
-            genmod_score_config_snvs    : val_genmod_score_config_snvs,
-            genmod_score_config_svs     : val_genmod_score_config_svs,
-            variant_consequences_snvs   : val_variant_consequences_snvs,
-            variant_consequences_svs    : val_variant_consequences_svs,
-            vep_plugin_files            : val_vep_plugin_files,
-            gens_baf_positions          : val_gens_baf_positions,
+    def parameterStatus = [workflow: [
+        skip_annotate_paralogs: val_skip_annotate_paralogs,
+        skip_snv_calling: val_skip_snv_calling,
+        skip_peddy: val_skip_peddy,
+        skip_phasing: val_skip_phasing,
+        skip_methylation_calling: val_skip_methylation_calling,
+        skip_methylation_annotation: val_skip_methylation_annotation,
+        skip_mitochondrial_calling: val_skip_mitochondrial_calling,
+        skip_rank_variants: val_skip_rank_variants,
+        skip_repeat_calling: val_skip_repeat_calling,
+        skip_repeat_annotation: val_skip_repeat_annotation,
+        skip_chromograph: val_skip_chromograph,
+        skip_sambamba_depth: val_skip_sambamba_depth,
+        skip_snv_annotation: val_skip_snv_annotation,
+        skip_sv_calling: val_skip_sv_calling,
+        skip_sv_annotation: val_skip_sv_annotation,
+        skip_call_paralogs: val_skip_call_paralogs,
+        skip_alignment: val_skip_alignment,
+        skip_qc: val_skip_qc,
+        skip_genome_assembly: val_skip_genome_assembly,
+        skip_prepare_gens_input: val_skip_prepare_gens_input,
+        skip_sex_check: val_skip_sex_check,
+    ], files: [
+        par_regions: val_par_regions,
+        echtvar_snv_databases: val_echtvar_snv_databases,
+        sambamba_regions: val_sambamba_regions,
+        svdb_sv_databases: val_svdb_sv_databases,
+        somalier_sites: val_somalier_sites,
+        vep_cache: val_vep_cache,
+        cnv_expected_xy_cn: val_cnv_expected_xy_cn,
+        cnv_expected_xx_cn: val_cnv_expected_xx_cn,
+        cnv_excluded_regions: val_cnv_excluded_regions,
+        fasta: val_fasta,
+        str_bed: val_str_bed,
+        stranger_repeat_catalog: val_stranger_repeat_catalog,
+        genmod_reduced_penetrance: val_genmod_reduced_penetrance,
+        genmod_score_config_snvs: val_genmod_score_config_snvs,
+        genmod_score_config_svs: val_genmod_score_config_svs,
+        variant_consequences_snvs: val_variant_consequences_snvs,
+        variant_consequences_svs: val_variant_consequences_svs,
+        vep_plugin_files: val_vep_plugin_files,
+        gens_baf_positions: val_gens_baf_positions,
         gens_panel_of_normals_female: val_gens_panel_of_normals_female,
-            gens_panel_of_normals_male  : val_gens_panel_of_normals_male,
-            gens_coverage_bins          : val_gens_coverage_bins,
-        ]
-    ]
+        gens_panel_of_normals_male: val_gens_panel_of_normals_male,
+        gens_coverage_bins: val_gens_coverage_bins,
+    ]]
 
     //
     // Custom validation for pipeline parameters
     //
-    validateInputParameters(parameterStatus, workflowSkips, workflowDependencies, fileDependencies, val_skip_methylation_calling, val_run_methbat, val_methbat_regions)
+    validateInputParameters(parameterStatus, workflowSkips, workflowDependencies, fileDependencies)
     validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs, val_mitochondrial_caller)
     validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge)
 
     //
     // Create channel from input file provided through val_input
     //
-    ch_samplesheet = channel
-        .fromList(
+    ch_samplesheet = channel.fromList(
             samplesheetToList(val_input, "${projectDir}/assets/schema_input.json")
         )
-        // add sample as groupTuple key
         .map { meta, reads ->
             [meta.id, meta, reads]
         }
-        // group by sample
         .groupTuple()
         .map { id_meta_reads ->
             validateUniqueFilenamesPerSample(id_meta_reads)
@@ -292,11 +293,8 @@ workflow PIPELINE_INITIALISATION {
         .map { sample, metas, reads ->
             [sample, metas[0] + [single_end: true], reads]
         }
-        .flatMap { _sample, meta, reads ->
-            reads.collect { read ->
-                return [meta, read]
-            }
-        }
+        .map { _sample, meta, reads -> tuple(meta, reads) }
+        .transpose()
         .map { meta, reads -> [meta.family_id, meta, reads] }
         .groupTuple()
         .map { _family, metas, reads ->
@@ -307,8 +305,23 @@ workflow PIPELINE_INITIALISATION {
     // Check that all families has at least one sample with affected phenotype if ranking is active
     validateAllFamiliesHasAffectedSamples(ch_samplesheet, val_skip_rank_variants)
 
+    // Check that methbat_regions is provided when methbat is active
+    if (!val_skip_methylation_calling && val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }.contains('methbat') && !val_methbat_regions) {
+        error("Error: --methbat_regions file must be provided when methbat is in --methylation_callers. Remove methbat from --methylation_callers or use --skip_methylation_calling to disable methylation calling.")
+    }
+
+    // Check that methbat is in --methylation_callers when methylation annotation is active
+    if (!val_skip_methylation_annotation && !val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }.contains('methbat')) {
+        error("Error: methbat must be in --methylation_callers when running without --skip_methylation_annotation. Add methbat to --methylation_callers or use --skip_methylation_annotation to disable methylation annotation.")
+    }
+
+    // Check that target_regions is provided when using the ONT_R10_AS preset
+    if (val_preset == 'ONT_R10_AS' && !val_target_regions) {
+        error("Error: --target_regions must be provided when using --preset ONT_R10_AS. The ONT_R10_AS preset is designed for adaptive sampling runs which require target regions for calling and QC.")
+    }
+
     // Check that sex check is not skipped if there are samples with unknown sex
-    validateRequiresSexCheck(ch_samplesheet, val_skip_sex_check, val_skip_snv_calling, val_skip_methylation_calling, val_run_methbat, val_skip_peddy, val_skip_prepare_gens_input, val_skip_repeat_calling, val_str_caller)
+    validateRequiresSexCheck(ch_samplesheet, val_skip_sex_check, val_skip_snv_calling, val_skip_methylation_calling, val_methylation_callers, val_skip_peddy, val_skip_prepare_gens_input, val_skip_repeat_calling, val_str_caller)
 
     // Check that there's no more than one project
     validateSingleProjectPerRun(ch_samplesheet)
@@ -322,6 +335,11 @@ workflow PIPELINE_INITIALISATION {
     // Check that the parents are present in the samplesheet
     validateParentExistsInFamily(ch_samplesheet)
 
+    // Check that the samplesheet does not contain FASTQs if --premapped is set
+    if (val_premapped) {
+        validateNoFastqInInput(ch_samplesheet)
+    }
+
     emit:
     samplesheet = ch_samplesheet
 }
@@ -334,12 +352,12 @@ workflow PIPELINE_INITIALISATION {
 
 workflow PIPELINE_COMPLETION {
     take:
-    email           //  string: email address
-    email_on_fail   //  string: email address sent on pipeline failure
+    email //  string: email address
+    email_on_fail //  string: email address sent on pipeline failure
     plaintext_email // boolean: Send plain-text email instead of HTML
-    outdir          //    path: Path to output directory where results will be published
+    outdir //    path: Path to output directory where results will be published
     monochrome_logs // boolean: Disable ANSI colour codes in log output
-    multiqc_report  //  string: Path to MultiQC report
+    multiqc_report //  string: Path to MultiQC report
 
     main:
     summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
@@ -377,8 +395,16 @@ workflow PIPELINE_COMPLETION {
 //
 // Check and validate pipeline parameters
 //
-def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDependencies, val_skip_methylation_calling, val_run_methbat, val_methbat_regions) {
-    validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies, val_skip_methylation_calling, val_run_methbat, val_methbat_regions)
+def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDependencies) {
+    validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies)
+}
+
+// Check that no FASTQs are in samplesheet if --premapped is set
+// Something would crash eventually if there were FASTQs, but this is a more user-friendly error message
+def validateNoFastqInInput(input) {
+    input
+        .filter { _meta, reads -> reads.name =~ 'f(ast)?q(\\.gz)?$' }
+        .map { _meta, _reads -> error("FASTQ files were found in the samplesheet, but --premapped was set. Please remove FASTQ files from the samplesheet or unset --premapped.") }
 }
 //
 // Validate channels from input samplesheet
@@ -457,7 +483,6 @@ def extractSoftwareFromTopics(topics_channel) {
     topics_channel.map { toolBlockText ->
         toolBlockText
             .readLines()
-            // Drop process name
             .drop(1)
             .collect { line -> line.trim().split(':')[0] }
     }
@@ -466,9 +491,7 @@ def extractSoftwareFromTopics(topics_channel) {
 def generateReferenceHTML(tool_list, description) {
     def items = tool_list
         .collect { citation -> citation.trim() }
-        // e.g. samtools and bcftools share citation
         .unique()
-        // some tools does not have a citation, e.g. awk, gunzip
         .findAll { citation -> citation != "" }
 
     if (description == 'citation') {
@@ -488,7 +511,6 @@ def citationBibliographyText(ch_topic_versions_string, references_yaml, descript
     def baseTools = channel.from(['nextflow', 'nf_core', 'bioconda', 'biocontainers', 'multiqc'])
 
     extractSoftwareFromTopics(ch_topic_versions_string)
-        // split multi-tool modules
         .flatten()
         .unique()
         .filter { tool -> !unwantedReferences.contains(tool) }
@@ -507,7 +529,7 @@ def citationBibliographyText(ch_topic_versions_string, references_yaml, descript
 //
 // Validate  workflow skip combinations
 //
-def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies, val_skip_methylation_calling, val_run_methbat, val_methbat_regions) {
+def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies) {
     // Array to store errors
     def errors = []
     // For each of the "workflow", "files"
@@ -526,17 +548,12 @@ def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, 
         def error_string = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" + "  " + errors.join("\n  ") + "\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         error(error_string)
     }
-    // Extra case for checking if methbat regions are provided when needed.
-    // The above error would suggest the opposite of the fix
-    if (!val_skip_methylation_calling && val_run_methbat && !val_methbat_regions) {
-        error("Error: --methbat_regions file must be provided when --run_methbat is set to true. Set --run_methbat=false or --skip_methylation_calling to disable MethBat.")
-    }
 }
 
 //
 // Lookup all workflows that needs to be active for another workflow
 //
-def checkWorkflowDependencies(String skip, Map combinationsMap, Map statusMap, Map workflowMap, List errors) {
+def checkWorkflowDependencies(skip: String, combinationsMap: Map, statusMap: Map, workflowMap: Map, errors: List) {
 
     // Lookup the workflow associated with the --skip_xxx parameter
     def currentWorkflow = workflowMap.find { _key, mapValue -> mapValue == skip }?.key
@@ -568,7 +585,7 @@ def checkWorkflowDependencies(String skip, Map combinationsMap, Map statusMap, M
 //
 // Lookup if a file is required by any workflows, and add to errors
 //
-def checkFileDependencies(String file, Map combinationsMap, Map statusMap, Map workflowMap, List errors) {
+def checkFileDependencies(file: String, combinationsMap: Map, statusMap: Map, workflowMap: Map, errors: List) {
     // Get all workflows required by a file
     def workflowThatRequiresFile = findKeysForValue(file, combinationsMap)
 
@@ -591,7 +608,7 @@ def checkFileDependencies(String file, Map combinationsMap, Map statusMap, Map w
 //
 // Find the workflow skips that are not currently active
 //
-def findRequiredSkips(paramType, Set<String> requiredWorkflows, Map statusMap, Map workflowMap) {
+def findRequiredSkips(paramType, requiredWorkflows: Set<String>, statusMap: Map, workflowMap: Map) {
 
     def requiredSkips = []
 
@@ -610,7 +627,7 @@ def findRequiredSkips(paramType, Set<String> requiredWorkflows, Map statusMap, M
     return requiredSkips
 }
 
-def findKeysForValue(def valueToFind, Map map) {
+def findKeysForValue(valueToFind, map: Map) {
 
     def keys = []
 
@@ -638,12 +655,12 @@ def createReferenceChannelFromSamplesheet(param, schema, defaultValue = '') {
 
 def validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs, val_mitochondrial_caller) {
     def pacbioTools = [
-        (val_phaser)              : 'HiPhase',
-        (val_str_caller)          : 'TRGT',
-        (val_sv_callers)          : 'Sawfish',
-        (val_sv_callers_to_run)   : 'Sawfish',
-        (val_sv_callers_to_merge) : 'Sawfish',
-        (!val_skip_call_paralogs) : 'Paraphase',
+        (val_phaser): 'HiPhase',
+        (val_str_caller): 'TRGT',
+        (val_sv_callers): 'Sawfish',
+        (val_sv_callers_to_run): 'Sawfish',
+        (val_sv_callers_to_merge): 'Sawfish',
+        (!val_skip_call_paralogs): 'Paraphase',
         (val_mitochondrial_caller): 'Mitorsaw',
     ].findAll { k, v -> (k instanceof Boolean) ? k : k.toString().contains(v.toLowerCase()) }.values() as List
 
@@ -682,7 +699,7 @@ def validateAllFamiliesHasAffectedSamples(ch_samplesheet, val_skip_rank_variants
 
 // SNV calling, methylation with MethBat, Peddy, prepare_gens_inputs and call_repeat_expansions with TRGT require known sex.
 // This is a convenience function to fail early if there are samples without known sex.
-def validateRequiresSexCheck(ch_samplesheet, val_skip_sex_check, val_skip_snv_calling, val_skip_methylation_calling, val_run_methbat, val_skip_peddy, val_skip_prepare_gens_input, val_skip_repeat_calling, val_str_caller) {
+def validateRequiresSexCheck(ch_samplesheet, val_skip_sex_check, val_skip_snv_calling, val_skip_methylation_calling, val_methylation_callers, val_skip_peddy, val_skip_prepare_gens_input, val_skip_repeat_calling, val_str_caller) {
 
     if (!val_skip_sex_check) {
         return null
@@ -696,7 +713,7 @@ def validateRequiresSexCheck(ch_samplesheet, val_skip_sex_check, val_skip_snv_ca
         .map { sample, _sex -> sample }
         .collect()
         .subscribe { sampleList ->
-            if (sampleList && (!val_skip_snv_calling || (!val_skip_methylation_calling && val_run_methbat == true) || !val_skip_peddy || !val_skip_prepare_gens_input || (!val_skip_repeat_calling && val_str_caller == 'trgt'))) {
+            if (sampleList && (!val_skip_snv_calling || (!val_skip_methylation_calling && val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }.contains('methbat')) || !val_skip_peddy || !val_skip_prepare_gens_input || (!val_skip_repeat_calling && val_str_caller == 'trgt'))) {
                 error("ERROR: Unknown sex for sample(s): ${sampleList.join(", ")} while pipeline requires known sex; --skip_sex_check cannot be active.")
             }
         }
@@ -881,6 +898,6 @@ def isParent(sample) {
     isMother(sample) || isFather(sample)
 }
 
-def boolean isNonZeroNonEmpty(value) {
+def isNonZeroNonEmpty(value) -> boolean {
     (value instanceof String && value != "" && value != "0") || (value instanceof Number && value != 0)
 }

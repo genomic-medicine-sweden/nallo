@@ -9,7 +9,7 @@ nextflow_pipeline {
     test("test profile") {
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/bcd63e7dc9025450aebbca7b859ba2dae1f5a3d3/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5c13b255beab25a536375fec42f9da3413fc65a5/'
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
                 alignment_output_format      = "cram"
@@ -33,13 +33,17 @@ nextflow_pipeline {
             def all_vcf_files    = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_incompatible_variants', include: ['**/*.vcf.gz'])
             // stable_vcf_files: Vcf files with stable variants - can be snapshot using variantsMD5
             def stable_vcf_files = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_unstable_variants', include: ['**/*.vcf.gz'])
+            def versions         = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
             assertAll(
                 { assert workflow.success },
+                { assert versions.containsKey('METHBAT_PROFILE') },    // methbat runs for revio
+                { assert !versions.containsKey('MODKIT_PILEUP') },      // modkit does not run for revio
+                { assert versions.containsKey('CSVTK_MUTATE2') },       // methylation annotation runs for revio
                 { assert snapshot(
                     // Number of successful tasks
                     workflow.trace.succeeded().size(),
                     // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
-                    removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml"),
+                    versions,
                     // All stable path name, with a relative path
                     stable_name,
                     // All files with stable contents

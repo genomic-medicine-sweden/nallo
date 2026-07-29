@@ -48,8 +48,10 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     ch_gens_coverage_bins
     ch_gens_panel_of_normals_female
     ch_gens_panel_of_normals_male
+    ch_glnexus_config
     ch_hgnc_ids
     ch_samplesheet
+    ch_cramino_regions
     ch_methbat_regions
     ch_modkit_call_regions
     ch_mosdepth_regions
@@ -74,9 +76,10 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     ch_vcfexpress_prelude
     ch_vep_cache_unprocessed
     ch_vep_plugin_files
-    cram_output
     val_alignment_processes
+    val_assembly_aligner
     val_bigwig_modcodes
+    val_cram_output
     val_create_hificnv_maf_track
     val_create_sawfish_maf_track
     val_echtvar_snv_databases
@@ -86,7 +89,10 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_filter_variants_hgnc_ids
     val_force_sawfish_joint_call_single_samples
     val_hifiasm_mode
+    val_methylation_callers
     val_mitochondrial_caller
+    val_mosdepth_regions
+    val_cramino_regions
     val_multiqc_config
     val_multiqc_logo
     val_multiqc_methods_description
@@ -97,8 +103,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_plot_chromograph_autozygosity
     val_plot_chromograph_coverage
     val_pre_vep_snv_filter_expression
-    val_run_methbat
-    val_run_modkit
+    val_premapped
+    val_read_aligner
     val_sentieon_tech
     val_skip_alignment
     val_skip_annotate_paralogs
@@ -114,6 +120,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_skip_rank_variants
     val_skip_repeat_annotation
     val_skip_repeat_calling
+    val_skip_mitochondrial_calling
     val_skip_sambamba_depth
     val_skip_sex_check
     val_skip_snv_annotation
@@ -154,8 +161,10 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         ch_gens_coverage_bins,
         ch_gens_panel_of_normals_female,
         ch_gens_panel_of_normals_male,
+        ch_glnexus_config,
         ch_hgnc_ids,
         ch_samplesheet,
+        ch_cramino_regions,
         ch_methbat_regions,
         ch_modkit_call_regions,
         ch_mosdepth_regions,
@@ -180,10 +189,11 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         ch_vcfexpress_prelude,
         ch_vep_cache_unprocessed,
         ch_vep_plugin_files,
-        cram_output,
         val_alignment_processes,
+        val_assembly_aligner,
         val_bigwig_modcodes,
-        val_skip_phasing && cram_output,
+        val_skip_phasing && val_cram_output,
+        val_cram_output,
         val_create_hificnv_maf_track,
         val_create_sawfish_maf_track,
         val_echtvar_snv_databases,
@@ -194,6 +204,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_force_sawfish_joint_call_single_samples,
         val_hifiasm_mode,
         val_mitochondrial_caller,
+        val_mosdepth_regions,
+        val_cramino_regions,
         val_multiqc_config,
         val_multiqc_logo,
         val_multiqc_methods_description,
@@ -204,21 +216,24 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_plot_chromograph_autozygosity,
         val_plot_chromograph_coverage,
         val_pre_vep_snv_filter_expression,
+        val_premapped,
+        val_read_aligner,
         val_sentieon_tech,
         val_skip_alignment,
         val_skip_annotate_paralogs,
         val_skip_call_paralogs,
         val_skip_chromograph,
         val_skip_genome_assembly,
-        (val_skip_methylation_calling || !val_run_methbat),
+        (val_skip_methylation_calling || !val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }.contains('methbat')),
         val_skip_methylation_annotation,
-        (val_skip_methylation_calling || !val_run_modkit),
+        (val_skip_methylation_calling || !val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }.contains('modkit')),
         val_skip_peddy,
         val_skip_phasing,
         val_skip_prepare_gens_input,
         val_skip_qc,
         val_skip_rank_variants,
         val_skip_repeat_annotation,
+        val_skip_mitochondrial_calling,
         val_skip_sambamba_depth,
         val_skip_sex_check,
         val_skip_snv_annotation,
@@ -283,8 +298,10 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     methylation_modkit_tbi              = NALLO.out.methylation_modkit_tbi // channel: [ val(meta), path(bed.gz.tbi) ]
     mosdepth_global_dist                = NALLO.out.mosdepth_global_dist // channel: [ val(meta), path(txt) ]
     mosdepth_per_base_d4                = NALLO.out.mosdepth_per_base_d4 // channel: [ val(meta), path(d4) ]
-    mosdepth_regions_bed                = NALLO.out.mosdepth_regions_bed // channel: [ val(meta), path(bed.gz) ]
+    mosdepth_regions_bed                = NALLO.out.mosdepth_regions_bed // channel: [ val(meta), path(bed.gz)     ]
     mosdepth_regions_csi                = NALLO.out.mosdepth_regions_csi // channel: [ val(meta), path(bed.gz.csi) ]
+    mosdepth_thresholds_bed             = NALLO.out.mosdepth_thresholds_bed // channel: [ val(meta), path(bed.gz)     ]
+    mosdepth_thresholds_csi             = NALLO.out.mosdepth_thresholds_csi // channel: [ val(meta), path(bed.gz.csi) ]
     mosdepth_regions_dist               = NALLO.out.mosdepth_regions_dist // channel: [ val(meta), path(txt) ]
     mosdepth_summary                    = NALLO.out.mosdepth_summary // channel: [ val(meta), path(txt) ]
     multiqc_data                        = NALLO.out.multiqc_data // channel: [ val(meta), path(*_data) ]
@@ -382,10 +399,12 @@ workflow {
         params.gens_panel_of_normals_male,
         params.input,
         params.methbat_regions,
+        params.methylation_callers,
         params.mitochondrial_caller,
         params.par_regions,
         params.phaser,
-        params.run_methbat,
+        params.premapped,
+        params.preset,
         params.sambamba_regions,
         params.skip_alignment,
         params.skip_annotate_paralogs,
@@ -394,6 +413,7 @@ workflow {
         params.skip_genome_assembly,
         params.skip_methylation_calling,
         params.skip_methylation_annotation,
+        params.skip_mitochondrial_calling,
         params.skip_peddy,
         params.skip_phasing,
         params.skip_prepare_gens_input,
@@ -418,6 +438,7 @@ workflow {
         params.sv_callers_merge_priority,
         params.sv_callers_to_merge,
         params.sv_callers_to_run,
+        params.target_regions,
         params.variant_consequences_snvs,
         params.variant_consequences_svs,
         params.vep_cache,
@@ -445,8 +466,10 @@ workflow {
         createReferenceChannelFromPath(params.gens_coverage_bins),
         createReferenceChannelFromPath(params.gens_panel_of_normals_female, '', 'female_pon'),
         createReferenceChannelFromPath(params.gens_panel_of_normals_male, '', 'male_pon'),
+        createReferenceChannelFromPath(params.glnexus_config, channel.value([[id: 'glnexus_config'], "${projectDir}/assets/glnexus_config_dp1.yml"])),
         createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', channel.value([])).map { hgnc_id_list -> hgnc_id_list[0].toString() }.collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true).map { file -> [[id: 'hgnc_ids'], file] }.collect(),
         PIPELINE_INITIALISATION.out.samplesheet,
+        createReferenceChannelFromPath(params.cramino_regions, channel.value([[], []])),
         createReferenceChannelFromPath(params.methbat_regions),
         createReferenceChannelFromPath(params.modkit_call_regions, channel.value([[], []])),
         createReferenceChannelFromPath(params.mosdepth_regions, channel.value([[], []])),
@@ -471,9 +494,10 @@ workflow {
         file("${projectDir}/assets/vcf_express_found_in_prelude.lua"),
         createReferenceChannelFromPath(params.vep_cache, channel.value([[], []])),
         createReferenceChannelFromSamplesheet(params.vep_plugin_files, 'assets/schema_vep_plugin_files.json', channel.value([])),
-        params.alignment_output_format == 'cram',
         params.alignment_processes,
+        params.assembly_aligner,
         params.bigwig_modcodes,
+        params.alignment_output_format == 'cram',
         params.create_hificnv_maf_track,
         params.create_sawfish_maf_track,
         params.echtvar_snv_databases,
@@ -483,7 +507,10 @@ workflow {
         params.filter_variants_hgnc_ids,
         params.force_sawfish_joint_call_single_samples,
         params.hifiasm_mode,
+        params.methylation_callers,
         params.mitochondrial_caller,
+        params.mosdepth_regions,
+        params.cramino_regions,
         params.multiqc_config,
         params.multiqc_logo,
         params.multiqc_methods_description,
@@ -494,8 +521,8 @@ workflow {
         params.plot_chromograph_autozygosity,
         params.plot_chromograph_coverage,
         params.pre_vep_snv_filter_expression,
-        params.run_methbat,
-        params.run_modkit,
+        params.premapped,
+        params.read_aligner,
         params.sentieon_tech,
         params.skip_alignment,
         params.skip_annotate_paralogs,
@@ -511,6 +538,7 @@ workflow {
         params.skip_rank_variants,
         params.skip_repeat_annotation,
         params.skip_repeat_calling,
+        params.skip_mitochondrial_calling,
         params.skip_sambamba_depth,
         params.skip_sex_check,
         params.skip_snv_annotation,
@@ -613,6 +641,8 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_per_base_d4)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_regions_bed)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_regions_csi)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_thresholds_bed)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.mosdepth_thresholds_csi)
 
     ch_qc_whatshap_stats = GENOMICMEDICINESWEDEN_NALLO.out.qc_whatshap_stats
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.phasing_blocks_gtf)

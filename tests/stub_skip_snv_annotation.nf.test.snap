@@ -1,13 +1,10 @@
 {
     "Test Chromograph works without SNV annotation": {
         "content": [
-            79,
+            71,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
-                },
-                "BCFTOOLS_MERGE": {
-                    "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_MULTISAMPLE": {
                     "bcftools": 1.22
@@ -28,9 +25,6 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_VIEW_MITO": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_SV": {
@@ -93,9 +87,6 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
-                },
-                "MITORSAW_HAPLOTYPE": {
-                    "mitorsaw": "0.2.9-0dc8e58"
                 },
                 "RELATE_INFER": {
                     "somalier": "0.2.18"
@@ -247,21 +238,18 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-06-12T09:56:08.97406136",
+        "timestamp": "2026-07-14T14:14:19.679829595",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.04.4"
         }
     },
     "Test Peddy without annotation": {
         "content": [
-            45,
+            37,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
-                },
-                "BCFTOOLS_MERGE": {
-                    "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_MULTISAMPLE": {
                     "bcftools": 1.22
@@ -276,9 +264,6 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_STATS": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_VIEW_MITO": {
                     "bcftools": 1.22
                 },
                 "BEDTOOLS_MERGE": {
@@ -313,9 +298,6 @@
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
-                },
-                "MITORSAW_HAPLOTYPE": {
-                    "mitorsaw": "0.2.9-0dc8e58"
                 },
                 "PEDDY": {
                     "peddy": "0.4.8"
@@ -404,10 +386,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-06-12T09:56:37.259290004",
+        "timestamp": "2026-07-14T13:54:11.226483415",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.04.4"
         }
     }
 }

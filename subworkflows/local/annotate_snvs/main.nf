@@ -1,23 +1,23 @@
 include { ANNOTATE_CADD                    } from '../annotate_cadd/main'
 include { BCFTOOLS_VIEW                    } from '../../../modules/nf-core/bcftools/view/main'
-include { ECHTVAR_ANNO                     } from '../../../modules/local/echtvar/anno/main'
+include { ECHTVAR_ANNO                     } from '../../../modules/nf-core/echtvar/anno/main'
 include { ENSEMBLVEP_VEP as ENSEMBLVEP_SNV } from '../../../modules/nf-core/ensemblvep/vep/main'
 
 workflow ANNOTATE_SNVS {
     take:
-    ch_vcf                   // channel: [mandatory] [ val(meta), path(vcf) ]
-    ch_echtvar_databases     // channel:  [optional] [ path(db) ]
-    ch_fasta                 // channel: [mandatory] [ val(meta), path(fasta) ]
-    ch_fai                   // channel: [mandatory] [ val(meta), path(fai) ]
-    ch_vep_cache             // channel: [mandatory] [ val(meta), path(cache) ]
-    val_vep_cache_version    //  string: [mandatory] default: 110
-    ch_vep_extra_files       // channel: [mandatory] [ path(files) ]
-    annotate_cadd            //    bool: [mandatory] should CADD be used to annotate indels
-    annotate_echtvar         //    bool: [mandatory] should echtvar be used to annotate variants
-    ch_cadd_header           // channel:  [optional] [ path(txt) ]
-    ch_cadd_resources        // channel:  [optional] [ val(meta), path(annotation) ]
+    ch_vcf // channel: [mandatory] [ val(meta), path(vcf) ]
+    ch_echtvar_databases // channel:  [optional] [ val(meta), path(db) ]
+    ch_fasta // channel: [mandatory] [ val(meta), path(fasta) ]
+    ch_fai // channel: [mandatory] [ val(meta), path(fai) ]
+    ch_vep_cache // channel: [mandatory] [ val(meta), path(cache) ]
+    val_vep_cache_version //  string: [mandatory] default: 110
+    ch_vep_extra_files // channel: [mandatory] [ path(files) ]
+    annotate_cadd //    bool: [mandatory] should CADD be used to annotate indels
+    annotate_echtvar //    bool: [mandatory] should echtvar be used to annotate variants
+    ch_cadd_header // channel:  [optional] [ path(txt) ]
+    ch_cadd_resources // channel:  [optional] [ val(meta), path(annotation) ]
     ch_cadd_prescored_indels // channel:  [optional] [ val(meta), path(prescored) ]
-    pre_vep_filter           //    bool: [mandatory] should filtering be done before annotating with CADD and VEP
+    pre_vep_filter //    bool: [mandatory] should filtering be done before annotating with CADD and VEP
 
     main:
     // Annotate with chosen databases
@@ -25,13 +25,13 @@ workflow ANNOTATE_SNVS {
         ECHTVAR_ANNO(
             ch_vcf,
             ch_echtvar_databases,
+            'bcf.gz',
         )
     }
 
     // Allows for filtering before annotating with VEP
     if (pre_vep_filter) {
-        ch_bcftools_view_input = (annotate_echtvar ? ECHTVAR_ANNO.out.bcf : ch_vcf)
-            .map { meta, vcf -> [meta, vcf, []] }
+        ch_bcftools_view_input = (annotate_echtvar ? ECHTVAR_ANNO.out.vcf : ch_vcf).map { meta, vcf -> [meta, vcf, []] }
 
         BCFTOOLS_VIEW(
             ch_bcftools_view_input,
@@ -48,7 +48,7 @@ workflow ANNOTATE_SNVS {
     if (annotate_cadd) {
         ANNOTATE_CADD(
             ch_fai,
-            pre_vep_filter ? BCFTOOLS_VIEW.out.vcf : annotate_echtvar ? ECHTVAR_ANNO.out.bcf : ch_vcf,
+            pre_vep_filter ? BCFTOOLS_VIEW.out.vcf : annotate_echtvar ? ECHTVAR_ANNO.out.vcf : ch_vcf,
             pre_vep_filter ? BCFTOOLS_VIEW.out.tbi : ch_vcf.map { meta, _vcf -> [meta, []] },
             ch_cadd_header,
             ch_cadd_resources,
@@ -56,8 +56,7 @@ workflow ANNOTATE_SNVS {
         )
     }
 
-    ch_vep_in = (annotate_cadd ? ANNOTATE_CADD.out.vcf : pre_vep_filter ? BCFTOOLS_VIEW.out.vcf : annotate_echtvar ? ECHTVAR_ANNO.out.bcf : ch_vcf)
-        .map { meta, vcf -> [meta, vcf, []] }
+    ch_vep_in = (annotate_cadd ? ANNOTATE_CADD.out.vcf : pre_vep_filter ? BCFTOOLS_VIEW.out.vcf : annotate_echtvar ? ECHTVAR_ANNO.out.vcf : ch_vcf).map { meta, vcf -> [meta, vcf, []] }
 
     // Always annotate with VEP
     ENSEMBLVEP_SNV(

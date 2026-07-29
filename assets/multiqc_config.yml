@@ -21,14 +21,14 @@ run_modules:
   - custom_content
 
 module_order:
+  - custom_content
   - fastqc
   - mosdepth:
-      name: "Mosdepth"
+      name: "mosdepth"
   - somalier
   - bcftools
   - whatshap
   - peddy:
       name: "Peddy"
-  - custom_content
 
 disable_version_detection: true

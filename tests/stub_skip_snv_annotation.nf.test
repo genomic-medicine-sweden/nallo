@@ -12,7 +12,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/eaabae15e3ee2b074057363a7467469b09f0957e/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5c13b255beab25a536375fec42f9da3413fc65a5/'
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
                 skip_annotate_paralogs       = true
@@ -29,6 +29,7 @@ nextflow_pipeline {
                 skip_methylation_calling     = true
                 skip_methylation_annotation  = true
                 skip_prepare_gens_input      = true
+                skip_mitochondrial_calling   = true
             }
         }
 
@@ -55,7 +56,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/eaabae15e3ee2b074057363a7467469b09f0957e/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5c13b255beab25a536375fec42f9da3413fc65a5/'
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
                 skip_annotate_paralogs       = true
@@ -73,6 +74,7 @@ nextflow_pipeline {
                 skip_methylation_calling     = true
                 skip_methylation_annotation  = true
                 skip_prepare_gens_input      = true
+                skip_mitochondrial_calling   = true
                 skip_genome_assembly         = true
             }
         }

@@ -7,9 +7,9 @@ include { VCFEXPRESS                                  } from '../../../modules/n
 //
 workflow VCF_CONCAT_NORM_VARIANTS {
     take:
-    ch_vcfs               // channel: [mandatory] [ val(meta), path(vcf) ]
-    ch_fasta              // channel: [mandatory] [ val(meta), path(fasta) ]
-    variant_caller        // string: variant caller to tag the variants with, e.g. "deepvariant"
+    ch_vcfs // channel: [mandatory] [ val(meta), path(vcf) ]
+    ch_fasta // channel: [mandatory] [ val(meta), path(fasta) ]
+    variant_caller // string: variant caller to tag the variants with, e.g. "deepvariant"
     ch_vcfexpress_prelude // path: [mandatory] lua file
 
     main:
@@ -18,9 +18,9 @@ workflow VCF_CONCAT_NORM_VARIANTS {
     )
 
     // Add caller information to meta so vcfexpress can add the FOUND_IN tag based on sv_caller
-    ch_vcfexpress_input = BCFTOOLS_CONCAT.out.vcf
-        .map { meta, vcf -> [ meta + [ sv_caller: variant_caller ] , vcf ]
-        }
+    ch_vcfexpress_input = BCFTOOLS_CONCAT.out.vcf.map { meta, vcf ->
+        [meta + [sv_caller: variant_caller], vcf]
+    }
 
     VCFEXPRESS(
         ch_vcfexpress_input,
@@ -28,9 +28,9 @@ workflow VCF_CONCAT_NORM_VARIANTS {
     )
 
     // Remove added caller information in meta
-    ch_bcftools_norm_input = VCFEXPRESS.out.vcf
-        .map { meta, vcf -> [ meta - meta.subMap('sv_caller'), vcf, [] ]
-        }
+    ch_bcftools_norm_input = VCFEXPRESS.out.vcf.map { meta, vcf ->
+        [meta - meta.subMap('sv_caller'), vcf, []]
+    }
 
     BCFTOOLS_NORM_SINGLESAMPLE(
         ch_bcftools_norm_input,
@@ -38,7 +38,7 @@ workflow VCF_CONCAT_NORM_VARIANTS {
     )
 
     emit:
-    vcf                 = BCFTOOLS_NORM_SINGLESAMPLE.out.vcf                                         // channel: [ val(meta), path(vcf) ]
+    vcf                 = BCFTOOLS_NORM_SINGLESAMPLE.out.vcf // channel: [ val(meta), path(vcf) ]
     index               = BCFTOOLS_NORM_SINGLESAMPLE.out.tbi.mix(BCFTOOLS_NORM_SINGLESAMPLE.out.csi) // channel: [ val(meta), path(tbi/csi) ]
-    bcftools_concat_vcf = BCFTOOLS_CONCAT.out.vcf                                                    // channel: [ val(meta), path(vcf) ]
+    bcftools_concat_vcf = BCFTOOLS_CONCAT.out.vcf // channel: [ val(meta), path(vcf) ]
 }

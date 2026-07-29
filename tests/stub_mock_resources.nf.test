@@ -12,7 +12,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/bcd63e7dc9025450aebbca7b859ba2dae1f5a3d3/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5c13b255beab25a536375fec42f9da3413fc65a5/'
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
                 // Mock inputs for CADD
@@ -34,6 +34,7 @@ nextflow_pipeline {
                 skip_methylation_calling     = true
                 skip_methylation_annotation  = true
                 skip_prepare_gens_input      = true
+                skip_mitochondrial_calling   = true
             }
         }
 
@@ -58,7 +59,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/bcd63e7dc9025450aebbca7b859ba2dae1f5a3d3/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5c13b255beab25a536375fec42f9da3413fc65a5/'
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
                 // Mock inputs for VEP
@@ -79,6 +80,7 @@ nextflow_pipeline {
                 skip_methylation_calling     = true
                 skip_methylation_annotation  = true
                 skip_prepare_gens_input      = true
+                skip_mitochondrial_calling   = true
             }
         }
 
@@ -104,7 +106,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/bcd63e7dc9025450aebbca7b859ba2dae1f5a3d3/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5c13b255beab25a536375fec42f9da3413fc65a5/'
                 input                        = "$projectDir/assets/samplesheet.csv"
                 outdir                       = "$outputDir"
                 snv_caller                   = "sentieon"
@@ -131,6 +133,7 @@ nextflow_pipeline {
                 skip_methylation_calling     = true
                 skip_methylation_annotation  = true
                 skip_prepare_gens_input      = true
+                skip_mitochondrial_calling   = true
             }
         }
 

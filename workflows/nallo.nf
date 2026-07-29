@@ -5,6 +5,7 @@ include { samplesheetToList                                      } from 'plugin/
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+include { ALIGN                                                  } from '../subworkflows/local/align'
 include { ALIGN_ASSEMBLIES                                       } from '../subworkflows/local/align_assemblies'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SNV                    } from '../subworkflows/local/annotate_consequence_pli'
 include { ANNOTATE_CSQ_PLI as ANN_CSQ_PLI_SVS                    } from '../subworkflows/local/annotate_consequence_pli'
@@ -93,8 +94,10 @@ workflow NALLO {
     ch_gens_coverage_bins
     ch_gens_panel_of_normals_female
     ch_gens_panel_of_normals_male
+    ch_glnexus_config
     ch_hgnc_ids
     ch_samplesheet
+    ch_cramino_regions
     ch_methbat_regions
     ch_modkit_call_regions
     ch_mosdepth_regions
@@ -119,10 +122,11 @@ workflow NALLO {
     ch_vcfexpress_prelude
     ch_vep_cache_unprocessed
     ch_vep_plugin_files
-    cram_output
     val_alignment_processes
+    val_assembly_aligner
     val_bigwig_modcodes
     val_convert_unphased_aligned_reads_to_cram
+    val_cram_output
     val_create_hificnv_maf_track
     val_create_sawfish_maf_track
     val_echtvar_snv_databases
@@ -133,6 +137,8 @@ workflow NALLO {
     val_force_sawfish_joint_call_single_samples
     val_hifiasm_mode
     val_mitochondrial_caller
+    val_mosdepth_regions
+    val_cramino_regions
     val_multiqc_config
     val_multiqc_logo
     val_multiqc_methods_description
@@ -143,6 +149,8 @@ workflow NALLO {
     val_plot_chromograph_autozygosity
     val_plot_chromograph_coverage
     val_pre_vep_snv_filter_expression
+    val_premapped
+    val_read_aligner
     val_sentieon_tech
     val_skip_alignment
     val_skip_annotate_paralogs
@@ -158,6 +166,7 @@ workflow NALLO {
     val_skip_qc
     val_skip_rank_variants
     val_skip_repeat_annotation
+    val_skip_mitochondrial_calling
     val_skip_sambamba_depth
     val_skip_sex_check
     val_skip_snv_annotation
@@ -201,143 +210,77 @@ workflow NALLO {
         ch_fai = PREPARE_REFERENCES.out.fai
     }
 
-    // Convert FASTQ to BAM only if alignment or should be done.
-    // Since we assume that the majority of pipeline runs will use BAM files as input,
-    // we start all files as BAMs for simplicity except for the assembly, which requires FASTQs.
-    if (!val_skip_alignment) {
-
-        CONVERT_INPUT_FASTQS(
-            ch_samplesheet,
-            false,
-            true,
-        )
-    }
-
-    // To speed up the alignement, we can split the BAM files into smaller chunks.
-    // We can also use the split BAM files for FASTQ conversion to the assembly workflow,
-    // instead of the original BAM files which should allow the assembly to start sooner.
-    //
-    // We could change the name of alignment processes to something more generic, like `--split_input_files`?
-    // If we start running more trios we also need to consider that the parents at the moment needs to be merged
-    // before YAK. So, we could consider adding some logic to handle that case,
-    // to avoid unneccessary splitting and merging just for a minor speedup in the conversion.
-    if (!val_skip_alignment && val_alignment_processes > 1) {
-
-        // contains all BAM files, including those not converted.
-        SPLITUBAM(
-            CONVERT_INPUT_FASTQS.out.bam
-        )
-    }
-
-    //
-    // Hifiasm assembly and alignment to reference genome
-    //
-    if (!val_skip_genome_assembly) {
-
-        // Now, if we started with BAM files, we do alignment and split the BAM files (this is the main case),
-        // then we converted any FASTQs to BAMs, the original BAMs will have been split, and we can convert those
-        // to FASTQs for the assembly.
-        //
-        // We could possibly implement something where we would check if the converted BAM had an original FASTQ,
-        // then we could use that FASTQ directly for the assembly. But since this is a rare case, it's not implemented.
-        //
-        // If we didn't split the files, there's currently no need to take the converted BAMs,
-        // so we take the original FASTQs instead if there are any, and also convert the original BAMs to FASTQs,
-        // so we can use those for the assembly.
-        //
-        // Since starting with FASTQs is a rare case, no splitting of FASTQs alone just for the assembly is implmenented
-
-        CONVERT_INPUT_BAMS(
-            !val_skip_alignment && val_alignment_processes > 1 ? SPLITUBAM.out.bam.transpose() : ch_samplesheet,
-            true,
-            false,
-        )
-
-        // contains all FASTQ files, including those not converted
-        ch_genome_assembly_input = CONVERT_INPUT_BAMS.out.fastq
-            .groupTuple()
-
-        // Hifiasm assembly
-        GENOME_ASSEMBLY(
-            ch_genome_assembly_input,
-            val_hifiasm_mode == "trio-binning",
-        )
-
-        ALIGN_ASSEMBLIES(
-            GENOME_ASSEMBLY.out.assembled_haplotypes,
-            ch_fasta,
-            ch_fai,
-            cram_output,
-        )
-    }
 
     /*
      * Map reads to reference
      */
     if (!val_skip_alignment) {
 
-        /*
-         * Ensure each BAM has a unique identify,
-         * enabling correct grouping and downstream merging.
-         */
-        ch_reads_for_alignment = (val_alignment_processes > 1
-            ? SPLITUBAM.out.bam.transpose()
-            : CONVERT_INPUT_FASTQS.out.bam).map { meta, bam -> [meta + [file: bam.name], bam] }
+        if (!val_premapped) {
 
-        /*
-         * Create a grouping key per sample that records the number of split files,
-         * allowing downstream merging to trigger as soon as all alignments of a sample are ready.
-         */
-        ch_reads_grouping_key = ch_reads_for_alignment
-            .map { meta, bam -> [meta - meta.subMap('file'), bam] }
-            .groupTuple()
-            .map { meta, files -> [meta + [n_files: files.size()]] }
+            CONVERT_INPUT_FASTQS(
+                ch_samplesheet,
+                false,
+                true,
+            )
 
-        /*
-         * Align reads independently per split (could be a split-align-merge subworkflow)
-         */
-        MINIMAP2_ALIGN(
-            ch_reads_for_alignment,
-            PREPARE_REFERENCES.out.mmi,
-            true,
-            'bai',
-            false,
-            false,
-        )
 
-        /*
-         * Re-attach grouping key so BAMs can be merged per group as soon as all alignments for one sample are ready
-         */
-        ch_bam_to_merge = MINIMAP2_ALIGN.out.bam
-            .join(MINIMAP2_ALIGN.out.index, failOnDuplicate: true, failOnMismatch: true)
-            .combine(ch_reads_grouping_key)
-            .filter { bam_meta, _bam, _bai, grouping_key_meta ->
-                bam_meta.id == grouping_key_meta.id
+
+            if (val_alignment_processes > 1) {
+                SPLITUBAM(CONVERT_INPUT_FASTQS.out.bam)
+                ch_unmapped = SPLITUBAM.out.bam.transpose()
             }
-            .map { bam_meta, bam, bai, grouping_key_meta ->
-                [bam_meta - bam_meta.subMap('file') + [n_files: grouping_key_meta.n_files], bam, bai]
+            else {
+                ch_unmapped = CONVERT_INPUT_FASTQS.out.bam
             }
-            .map { meta, bam, bai ->
-                [groupKey(meta, meta.n_files), bam, bai]
-            }
-            .groupTuple()
 
-        /*
-         * Always merge here even if there's only one file,
-         * because alignment runs without knowledge of group completeness (n_files),
-         * and we can't therefore output from the alignment step with correct naming.
-         */
+            /*
+             * Create a grouping key per sample that records the number of split files,
+             * allowing downstream merging to trigger as soon as all alignments of a sample are ready.
+             */
+            ch_reads_grouping_key = ch_unmapped
+                .groupTuple()
+                .map { meta, files -> tuple(meta.id, files.size()) }
+
+            // Add original file name to meta to join correct alignments and indexes
+            ch_align_in = ch_unmapped.map { meta, bam -> tuple(meta + [file: bam.name], bam) }
+
+            ALIGN(
+                ch_align_in,
+                ch_fasta,
+                ch_fai,
+                val_read_aligner,
+            )
+
+            ch_aligned_for_merge = ALIGN.out.bam
+                .join(ALIGN.out.index, failOnMismatch: true, failOnDuplicate: true)
+                .combine(ch_reads_grouping_key)
+                .filter { bam_meta, _bam, _bai, group_id, _group_size ->
+                    bam_meta.id == group_id
+                }
+                .map { bam_meta, bam, bai, _group_id, group_size ->
+                    tuple(groupKey(bam_meta - bam_meta.subMap('file'), group_size), bam, bai)
+                }
+                .groupTuple()
+                .map { key, bams, bais -> tuple(key.getGroupTarget(), bams, bais) }
+        }
+        else {
+
+            // If bams are premapped, just merge them (ONT machines output several BAMs per sample)
+            // SAMTOOLS_MERGE expects indexes in the input but is happy to merge them if the indexes are missing
+            ch_aligned_for_merge = ch_samplesheet
+                .groupTuple()
+                .map { meta, reads -> [meta, reads, []] }
+        }
+
         SAMTOOLS_MERGE(
-            ch_bam_to_merge,
+            ch_aligned_for_merge,
             [[], [], [], []],
         )
 
-        // Combine merged with unmerged bam files
-        ch_aligned_bam = SAMTOOLS_MERGE.out.bam
-            .join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true)
-            .map { meta, bam, bai -> [meta - meta.subMap('n_files'), bam, bai] }
+        ch_aligned_bam = SAMTOOLS_MERGE.out.bam.join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true)
 
-        // Convert alignments as CRAM if requested
+        // Publish alignments as CRAM if requested
         if (val_convert_unphased_aligned_reads_to_cram) {
             SAMTOOLS_CONVERT(
                 ch_aligned_bam,
@@ -354,8 +297,7 @@ workflow NALLO {
 
         SAMPLESHEET_PED(ch_samplesheet_ped_in)
 
-        ch_samplesheet_pedfile = SAMPLESHEET_PED.out.ped
-            .collect()
+        ch_samplesheet_pedfile = SAMPLESHEET_PED.out.ped.collect()
 
         if (!val_skip_sex_check) {
             //
@@ -389,6 +331,48 @@ workflow NALLO {
     }
 
     //
+    // Hifiasm assembly and alignment to reference genome
+    //
+    if (!val_skip_genome_assembly) {
+
+        // Now, if we started with BAM files, we do alignment and split the BAM files (this is the main case),
+        // then we converted any FASTQs to BAMs, the original BAMs will have been split, and we can convert those
+        // to FASTQs for the assembly.
+        //
+        // We could possibly implement something where we would check if the converted BAM had an original FASTQ,
+        // then we could use that FASTQ directly for the assembly. But since this is a rare case, it's not implemented.
+        //
+        // If we didn't split the files, there's currently no need to take the converted BAMs,
+        // so we take the original FASTQs instead if there are any, and also convert the original BAMs to FASTQs,
+        // so we can use those for the assembly.
+        //
+        // Since starting with FASTQs is a rare case, no splitting of FASTQs alone just for the assembly is implemented
+
+        CONVERT_INPUT_BAMS(
+            val_skip_alignment || val_premapped || (val_alignment_processes == 1) ? ch_samplesheet : SPLITUBAM.out.bam.transpose(),
+            true,
+            false,
+        )
+
+        // contains all FASTQ files, including those not converted
+        ch_genome_assembly_input = CONVERT_INPUT_BAMS.out.fastq.groupTuple()
+
+        // Hifiasm assembly
+        GENOME_ASSEMBLY(
+            ch_genome_assembly_input,
+            val_hifiasm_mode == "trio-binning",
+            false,
+        )
+
+        ALIGN_ASSEMBLIES(
+            GENOME_ASSEMBLY.out.assembled_haplotypes,
+            ch_fasta,
+            ch_fai,
+            val_cram_output,
+            val_assembly_aligner,
+        )
+    }
+    //
     // Run read QC with FastQC, mosdepth and cramino
     //
     if (!val_skip_qc) {
@@ -399,11 +383,16 @@ workflow NALLO {
             ch_mosdepth_regions,
             ch_sambamba_regions,
             !val_skip_sambamba_depth,
+            val_cramino_regions,
+            ch_cramino_regions,
         )
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.fastqc_zip.collect { _meta, metrics -> metrics }.ifEmpty([]))
         ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_summary.collect { _meta, metrics -> metrics })
-        ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_global_dist.collect { _meta, metrics -> metrics })
-        ch_multiqc_files = ch_multiqc_files.mix(QC_ALIGNED_READS.out.mosdepth_regions_dist.collect { _meta, metrics -> metrics }.ifEmpty([]))
+        ch_multiqc_files = ch_multiqc_files.mix(
+            (val_mosdepth_regions
+                ? QC_ALIGNED_READS.out.mosdepth_regions_dist
+                : QC_ALIGNED_READS.out.mosdepth_global_dist).collect { _meta, metrics -> metrics }
+        )
     }
 
     /*
@@ -414,7 +403,7 @@ workflow NALLO {
             ch_bam_bai,
             ch_fasta,
             ch_fai,
-            cram_output,
+            val_cram_output,
         )
     }
 
@@ -442,33 +431,40 @@ workflow NALLO {
             val_snv_calling_processes,
         )
 
-        ch_bed_intervals = SCATTER_GENOME.out.bed_nuclear_intervals
-            .map { meta, bed, num_intervals -> [meta + [caller: val_snv_caller], bed, num_intervals] }
-        ch_mitochondrial_bed = SCATTER_GENOME.out.bed_mitochondrial_intervals
-            .map { meta, bed, _num_intervals -> [meta, bed] }
+        ch_bed_intervals = SCATTER_GENOME.out.bed_nuclear_intervals.map { meta, bed, num_intervals -> [meta + [caller: val_snv_caller], bed, num_intervals] }
+        ch_mitochondrial_bed = SCATTER_GENOME.out.bed_mitochondrial_intervals.map { meta, bed, _num_intervals -> [meta, bed] }
 
-        CALL_MITOCHONDRIAL_VARIANTS(
-            ch_bam_bai,
-            ch_fasta,
-            ch_fai,
-            ch_par,
-            ch_mitochondrial_bed,
-            val_mitochondrial_caller,
-        )
-
-        /*
-         * The meta.caller is needed for GVCF_GLNEXUS_NORM_VARIANTS workflow to process the VCFs differently.
-         * the number of intervals is used in groupKey downstream, num_intervals should be the same in the nuclear and mitochondrial channels.
-         */
         def ch_num_intervals = ch_bed_intervals.map { _meta, _bed, num_intervals -> num_intervals }.first()
 
-        ch_mitochondrial = CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_vcf
-            .join(CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_tbi, failOnMismatch: true, failOnDuplicate: true)
-            .combine(ch_num_intervals)
-            .multiMap { meta, vcf, tbi, num_intervals ->
-                vcf: [meta + [caller: val_mitochondrial_caller, genome: 'mitochondrial', num_intervals: num_intervals + 1], vcf]
-                index: [meta + [caller: val_mitochondrial_caller, genome: 'mitochondrial', num_intervals: num_intervals + 1], tbi]
-            }
+        if (!val_skip_mitochondrial_calling) {
+            CALL_MITOCHONDRIAL_VARIANTS(
+                ch_bam_bai,
+                ch_fasta,
+                ch_fai,
+                ch_par,
+                ch_mitochondrial_bed,
+                val_mitochondrial_caller,
+            )
+
+            /*
+             * The meta.caller is needed for GVCF_GLNEXUS_NORM_VARIANTS workflow to process the VCFs differently.
+             * the number of intervals is used in groupKey downstream, num_intervals should be the same in the nuclear and mitochondrial channels.
+             */
+            ch_mitochondrial = CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_vcf
+                .join(CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_tbi, failOnMismatch: true, failOnDuplicate: true)
+                .combine(ch_num_intervals)
+                .multiMap { meta, vcf, tbi, num_intervals ->
+                    vcf: [meta + [caller: val_mitochondrial_caller, genome: 'mitochondrial', num_intervals: num_intervals + 1], vcf]
+                    index: [meta + [caller: val_mitochondrial_caller, genome: 'mitochondrial', num_intervals: num_intervals + 1], tbi]
+                }
+        }
+        else {
+            ch_mitochondrial = channel.empty()
+                .multiMap { it ->
+                    vcf: it
+                    index: it
+                }
+        }
 
         // Combine the BED intervals with BAM/BAI files to create a region-bam-bai for each sample.
         // This uses the whole BAM files for each region instead of splitting them.
@@ -500,12 +496,12 @@ workflow NALLO {
         def variants_to_merge_per_family = CALL_SNVS.out.gvcf
             .join(CALL_SNVS.out.gvcf_index, failOnMismatch: true, failOnDuplicate: true)
             .map { meta, gvcf, index ->
-                [[id: meta.region.name, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals + 1, caller: val_snv_caller], gvcf, index]
+                def num_intervals = val_skip_mitochondrial_calling ? meta.num_intervals : meta.num_intervals + 1
+                [[id: meta.region.name, family_id: meta.family_id, genome: meta.genome, num_intervals: num_intervals, caller: val_snv_caller], gvcf, index]
             }
-            .mix(ch_mitochondrial.vcf
-                    .join(ch_mitochondrial.index, failOnMismatch: true, failOnDuplicate: true)
-                    .map { meta, vcf, tbi ->
-                    [[id: meta.genome, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals , caller: meta.caller], vcf, tbi]
+            .mix(
+                ch_mitochondrial.vcf.join(ch_mitochondrial.index, failOnMismatch: true, failOnDuplicate: true).map { meta, vcf, tbi ->
+                    [[id: meta.genome, family_id: meta.family_id, genome: meta.genome, num_intervals: meta.num_intervals, caller: meta.caller], vcf, tbi]
                 }
             )
             .groupTuple()
@@ -522,6 +518,7 @@ workflow NALLO {
             ch_fasta,
             ch_fai,
             ch_vcfexpress_prelude,
+            ch_glnexus_config,
         )
 
         // Grouping VCF, containing one sample with all regions except chrM, as we do not want mitochondrial variants in the deepvariant report for now.
@@ -562,8 +559,7 @@ workflow NALLO {
         family_snv_vcf = GVCF_GLNEXUS_NORM_VARIANTS.out.vcf
         family_snv_index = GVCF_GLNEXUS_NORM_VARIANTS.out.index
 
-        ch_snvs_per_family_unannotated_vcf_tbi = family_snv_vcf
-            .join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
+        ch_snvs_per_family_unannotated_vcf_tbi = family_snv_vcf.join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
     }
 
     if (!val_skip_prepare_gens_input) {
@@ -579,8 +575,7 @@ workflow NALLO {
             ch_gvcfs
         )
 
-        ch_gvcf_tbi = CONCAT_SORT_GENS.out.vcf
-            .join(CONCAT_SORT_GENS.out.index)
+        ch_gvcf_tbi = CONCAT_SORT_GENS.out.vcf.join(CONCAT_SORT_GENS.out.index)
 
         PREPARE_GENS_INPUTS(
             ch_bam_bai,
@@ -637,7 +632,7 @@ workflow NALLO {
             .join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
             .filter { meta, _vcf, _tbi -> meta.genome == "nuclear" }
             .map { meta, vcf, tbi ->
-                def new_meta = [id: meta.family_id, num_intervals: meta.num_intervals - 1]
+                def new_meta = [id: meta.family_id, num_intervals: val_skip_mitochondrial_calling ? meta.num_intervals : meta.num_intervals - 1]
                 [groupKey(new_meta, new_meta.num_intervals), vcf, tbi]
             }
             .groupTuple()
@@ -654,8 +649,7 @@ workflow NALLO {
 
         // Provide a PED file to let whatshap activate pedigree phasing
         // Or pass 'empty_PED' if 'whatshap_pedigree_phasing==false'
-        ch_ped_family = SOMALIER_PED_FAMILY.out.ped
-            .map { meta, ped -> [[id: meta.id], val_whatshap_pedigree_phasing ? ped : []] }
+        ch_ped_family = SOMALIER_PED_FAMILY.out.ped.map { meta, ped -> [[id: meta.id], val_whatshap_pedigree_phasing ? ped : []] }
 
         // Input is one VCF per family with all the regions (except chrM) and all the samples in the family
         PHASING(
@@ -669,7 +663,7 @@ workflow NALLO {
             ch_fai,
             val_phaser,
             !val_skip_sv_calling,
-            cram_output,
+            val_cram_output,
             ch_ped_family,
         )
 
@@ -695,10 +689,9 @@ workflow NALLO {
         // Add +1 to the num_intervals of nuclear channel to account for mitochondrial region
         ch_snv_vcf_tbi_nuclear_for_annotation = BCFTOOLS_VIEW_PHASING.out.vcf
             .join(BCFTOOLS_VIEW_PHASING.out.tbi, failOnMismatch: true, failOnDuplicate: true)
-            .map { meta, vcf, tbi -> [meta + [num_intervals: meta.num_intervals + 1], vcf, tbi] }
+            .map { meta, vcf, tbi -> [meta + [num_intervals: val_skip_mitochondrial_calling ? meta.num_intervals : meta.num_intervals + 1], vcf, tbi] }
 
-        ch_snv_vcf_tbi_mitochondrial_for_annotation = ch_snvs_per_family_unannotated_vcf_tbi
-            .filter { meta, _vcf, _tbi -> meta.genome == "mitochondrial" }
+        ch_snv_vcf_tbi_mitochondrial_for_annotation = ch_snvs_per_family_unannotated_vcf_tbi.filter { meta, _vcf, _tbi -> meta.genome == "mitochondrial" }
 
         ch_snv_vcf_tbi_nuclear_mitochondrial_for_annotation = ch_snv_vcf_tbi_nuclear_for_annotation
             .mix(ch_snv_vcf_tbi_mitochondrial_for_annotation)
@@ -712,14 +705,14 @@ workflow NALLO {
         ch_sv_index_for_annotation = PHASING.out.phased_family_svs_tbi
     }
     else {
-        ch_snv_vcf_tbi_nuclear_mitochondrial_for_annotation   = val_skip_snv_calling ? channel.empty() : family_snv_vcf
-            .join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
-            .multiMap { meta, vcf, tbi ->
+        ch_snv_vcf_tbi_nuclear_mitochondrial_for_annotation = val_skip_snv_calling
+            ? channel.empty()
+            : family_snv_vcf.join(family_snv_index, failOnMismatch: true, failOnDuplicate: true).multiMap { meta, vcf, tbi ->
                 vcf: [meta, vcf]
                 index: [meta, tbi]
             }
-        ch_sv_vcf_for_annotation    = val_skip_sv_calling  ? channel.empty() : CALL_SVS.out.family_vcf
-        ch_sv_index_for_annotation  = val_skip_sv_calling  ? channel.empty() : CALL_SVS.out.family_tbi
+        ch_sv_vcf_for_annotation = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_vcf
+        ch_sv_index_for_annotation = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_tbi
     }
 
     // Annotate SNVs
@@ -728,7 +721,7 @@ workflow NALLO {
         // Annotates family VCFs per variant call region
         ANNOTATE_SNVS(
             ch_snv_vcf_tbi_nuclear_mitochondrial_for_annotation.vcf,
-            ch_echtvar_databases.map { _meta, databases -> databases }.collect(),
+            ch_echtvar_databases.map { _meta, databases -> databases }.collect().map { dbs -> [[id: 'echtvar_db'], dbs] },
             ch_fasta,
             ch_fai,
             PREPARE_REFERENCES.out.vep_resources,
@@ -742,11 +735,10 @@ workflow NALLO {
             val_pre_vep_snv_filter_expression != '',
         )
 
-        ch_clin_research_snvs_vcf = ANNOTATE_SNVS.out.vcf
-            .multiMap { meta, vcf ->
-                clinical: [meta + [set: "clinical"], vcf]
-                research: [meta + [set: "research"], vcf]
-            }
+        ch_clin_research_snvs_vcf = ANNOTATE_SNVS.out.vcf.multiMap { meta, vcf ->
+            clinical: [meta + [set: "clinical"], vcf]
+            research: [meta + [set: "research"], vcf]
+        }
 
         ch_ann_csq_pli_snv_in = ch_clin_research_snvs_vcf.research
 
@@ -768,8 +760,7 @@ workflow NALLO {
             ch_variant_consequences_snvs,
         )
 
-        ch_snvs_per_family_annotated_vcf_tbi = ANN_CSQ_PLI_SNV.out.vcf
-            .join(ANN_CSQ_PLI_SNV.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+        ch_snvs_per_family_annotated_vcf_tbi = ANN_CSQ_PLI_SNV.out.vcf.join(ANN_CSQ_PLI_SNV.out.tbi, failOnMismatch: true, failOnDuplicate: true)
     }
 
     //
@@ -822,8 +813,7 @@ workflow NALLO {
 
         if (!val_skip_snv_annotation) {
             // Use already concatenated VCFs
-            ch_peddy_in = CONCAT_SORT_ANNOTATED_SNVS.out.vcf
-                .join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch: true, failOnDuplicate: true)
+            ch_peddy_in = CONCAT_SORT_ANNOTATED_SNVS.out.vcf.join(CONCAT_SORT_ANNOTATED_SNVS.out.index, failOnMismatch: true, failOnDuplicate: true)
         }
         else {
             // If we did not annotate, we did not concatenate the VCFs before, so we need to do that here.
@@ -836,8 +826,7 @@ workflow NALLO {
                 ch_concat_sort_peddy_in
             )
 
-            ch_peddy_in = CONCAT_SORT_PEDDY.out.vcf
-                .join(CONCAT_SORT_PEDDY.out.index, failOnMismatch: true, failOnDuplicate: true)
+            ch_peddy_in = CONCAT_SORT_PEDDY.out.vcf.join(CONCAT_SORT_PEDDY.out.index, failOnMismatch: true, failOnDuplicate: true)
         }
 
         PEDDY(
@@ -879,11 +868,10 @@ workflow NALLO {
             ch_vep_plugin_files.collect(),
         )
 
-        ch_clin_research_svs_vcf = ANNOTATE_SVS.out.vcf
-            .multiMap { meta, vcf ->
-                clinical: [meta + [set: "clinical"], vcf]
-                research: [meta + [set: "research"], vcf]
-            }
+        ch_clin_research_svs_vcf = ANNOTATE_SVS.out.vcf.multiMap { meta, vcf ->
+            clinical: [meta + [set: "clinical"], vcf]
+            research: [meta + [set: "research"], vcf]
+        }
 
         ch_ann_csq_svs_in = ch_clin_research_svs_vcf.research
 
@@ -1018,7 +1006,7 @@ workflow NALLO {
         ch_methylation_profiles = CALL_METHYLATION_METHBAT.out.region_profile
     }
 
-    if (!val_skip_methylation_annotation) {
+    if (!val_skip_methylation_annotation && !val_skip_methbat) {
         ANNOTATE_METHYLATION(
             ch_methylation_profiles
         )
@@ -1033,7 +1021,7 @@ workflow NALLO {
             ch_fasta,
             ch_fai,
             ch_str_bed,
-            cram_output,
+            val_cram_output,
             ch_vcfexpress_prelude,
         )
 
@@ -1184,8 +1172,10 @@ workflow NALLO {
     methylation_modkit_tbi              = val_skip_modkit ? channel.empty() : CALL_METHYLATION_MODKIT.out.tbi // channel: [ val(meta), path(bed.gz.tbi) ]
     mosdepth_global_dist                = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_global_dist // channel: [ val(meta), path(txt) ]
     mosdepth_per_base_d4                = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_per_base_d4 // channel: [ val(meta), path(d4) ]
-    mosdepth_regions_bed                = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_regions_bed // channel: [ val(meta), path(bed.gz) ]
+    mosdepth_regions_bed                = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_regions_bed // channel: [ val(meta), path(bed.gz)     ]
     mosdepth_regions_csi                = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_regions_csi // channel: [ val(meta), path(bed.gz.csi) ]
+    mosdepth_thresholds_bed             = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_thresholds_bed // channel: [ val(meta), path(bed.gz)     ]
+    mosdepth_thresholds_csi             = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_thresholds_csi // channel: [ val(meta), path(bed.gz.csi) ]
     mosdepth_regions_dist               = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_regions_dist // channel: [ val(meta), path(txt) ]
     mosdepth_summary                    = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_summary // channel: [ val(meta), path(txt) ]
     multiqc_data                        = MULTIQC.out.data // channel: [ val(meta), path(*_data) ]
