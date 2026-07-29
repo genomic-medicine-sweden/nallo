@@ -128,7 +128,7 @@
     },
     "Test mitochondrial calling runs by default": {
         "content": [
-            40,
+            42,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -140,6 +140,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_REHEADER": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_SORT": {
@@ -167,6 +170,9 @@
                     "deepvariant": "1.10.0"
                 },
                 "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_STRIP_CONTIG_HEADER": {
                     "gawk": "5.3.1"
                 },
                 "GLNEXUS": {
@@ -256,10 +262,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-14T13:53:38.664579914",
+        "timestamp": "2026-07-29T12:31:58.922161185",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.07.0"
         }
     }
 }
