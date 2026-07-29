@@ -42,7 +42,7 @@ include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_RANKED_SNVS    } from '../subw
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_GENS           } from '../subworkflows/local/vcf_concat_sort_variants/main'
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_PEDDY          } from '../subworkflows/local/vcf_concat_sort_variants/main'
 include { ANNOTATE_METHYLATION                                   } from '../subworkflows/local/annotate_methylation'
-include { PORTELLO_ASSEMBLY                                      } from '../subworkflows/local/portello_assembly/main'
+include { PORTELLO                                               } from '../subworkflows/local/portello/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -342,14 +342,14 @@ workflow NALLO {
 
         if (!val_skip_portello) {
 
-            PORTELLO_ASSEMBLY(
+            PORTELLO(
                 ch_aligned_bam,
                 ch_assembly_bam_bai,
                 ch_fasta,
                 ch_fai,
             )
 
-            ch_aligned_bam = PORTELLO_ASSEMBLY.out.bam.join(PORTELLO_ASSEMBLY.out.bai, failOnMismatch: true, failOnDuplicate: true)
+            ch_aligned_bam = PORTELLO.out.bam.join(PORTELLO.out.bai, failOnMismatch: true, failOnDuplicate: true)
         }
 
         //
@@ -1155,8 +1155,8 @@ workflow NALLO {
     aligned_assemblies_bam              = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.bam // channel: [ val(meta), path(bam) ]
     aligned_assemblies_crai             = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.crai // channel: [ val(meta), path(crai) ]
     aligned_assemblies_cram             = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.cram // channel: [ val(meta), path(cram) ]
-    aligned_assemblies_remapped_bam     = val_skip_portello ? channel.empty() : PORTELLO_ASSEMBLY.out.bam // channel: [ val(meta), path(bam) ]
-    aligned_assemblies_remapped_bai     = val_skip_portello ? channel.empty() : PORTELLO_ASSEMBLY.out.bai // channel: [ val(meta), path(bai) ]
+    aligned_assemblies_remapped_bam     = val_skip_portello ? channel.empty() : PORTELLO.out.bam // channel: [ val(meta), path(bam) ]
+    aligned_assemblies_remapped_bai     = val_skip_portello ? channel.empty() : PORTELLO.out.bai // channel: [ val(meta), path(bai) ]
     aligned_haplotagged_reads_bai       = val_skip_phasing ? channel.empty() : PHASING.out.haplotagged_bam_bai.map { meta, _bam, bai -> [meta, bai] } // channel: [ val(meta), path(bai) ]
     aligned_haplotagged_reads_bam       = val_skip_phasing ? channel.empty() : PHASING.out.haplotagged_bam_bai.map { meta, bam, _bai -> [meta, bam] } // channel: [ val(meta), path(bam) ]
     aligned_haplotagged_reads_crai      = val_skip_phasing ? channel.empty() : PHASING.out.haplotagged_cram_crai.map { meta, _cram, crai -> [meta, crai] } // channel: [ val(meta), path(crai) ]
