@@ -70,9 +70,6 @@
                 "GAWK_EXTRACT_REGIONS": {
                     "gawk": "5.3.1"
                 },
-                "GAWK_STRIP_CONTIG_HEADER": {
-                    "gawk": "5.3.1"
-                },
                 "GLNEXUS": {
                     "glnexus": "1.4.3"
                 },
@@ -238,10 +235,10 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-07-14T14:14:19.679829595",
+        "timestamp": "2026-07-29T16:07:36.10567357",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.07.0"
         }
     },
     "Test Peddy without annotation": {
@@ -255,9 +252,6 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_REHEADER": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_SORT": {
@@ -282,9 +276,6 @@
                     "deepvariant": "1.10.0"
                 },
                 "GAWK_EXTRACT_REGIONS": {
-                    "gawk": "5.3.1"
-                },
-                "GAWK_STRIP_CONTIG_HEADER": {
                     "gawk": "5.3.1"
                 },
                 "GLNEXUS": {
@@ -386,10 +377,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-14T13:54:11.226483415",
+        "timestamp": "2026-07-29T16:08:02.439572266",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.07.0"
         }
     }
 }
