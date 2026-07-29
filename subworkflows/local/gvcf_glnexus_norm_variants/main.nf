@@ -6,8 +6,6 @@
 include { BCFTOOLS_PLUGINFIXPLOIDY                   } from '../../../modules/nf-core/bcftools/pluginfixploidy/main'
 include { BCFTOOLS_NORM as BCFTOOLS_NORM_MULTISAMPLE } from '../../../modules/nf-core/bcftools/norm/main'
 include { BCFTOOLS_MERGE                             } from '../../../modules/nf-core/bcftools/merge/main'
-// include { BCFTOOLS_REHEADER                          } from '../../../modules/nf-core/bcftools/reheader/main'
-// include { GAWK as GAWK_STRIP_CONTIG_HEADER           } from '../../../modules/nf-core/gawk/main'
 include { GLNEXUS                                    } from '../../../modules/nf-core/glnexus/main'
 include { SENTIEON_GVCFTYPER                         } from '../../../modules/nf-core/sentieon/gvcftyper/main'
 include { VCFEXPRESS                                 } from '../../../modules/nf-core/vcfexpress/main'

@@ -15,10 +15,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-02T15:09:07.154245893",
+        "timestamp": "2026-07-29T11:32:30.881953621",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.07.0"
         }
     },
     "2 samples - mitorsaw (Deepvariant/mitorsaw)": {
@@ -64,10 +64,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-01T13:39:42.079164079",
+        "timestamp": "2026-07-29T11:31:34.133809237",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.07.0"
         }
     },
     "2 sample - deepvariant (Deepvariant/Deepvariant) - with mitochondrial intervals": {
@@ -97,10 +97,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-02T14:51:14.315178928",
+        "timestamp": "2026-07-29T11:33:03.899492053",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.07.0"
         }
     },
     "1 sample - mitorsaw (Deepvariant/mitorsaw)": {
@@ -128,10 +128,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-01T13:29:25.281191111",
+        "timestamp": "2026-07-29T11:30:37.608389582",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.07.0"
         }
     },
     "1 sample - mitorsaw (Deepvariant/mitorsaw) - stub": {
@@ -225,10 +225,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-06-01T14:11:28.936169368",
+        "timestamp": "2026-07-29T11:32:02.08203904",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.07.0"
         }
     },
     "1 sample - deepvariant (Deepvariant/Deepvariant) - without chrM intervals": {
