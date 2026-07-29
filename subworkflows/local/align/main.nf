@@ -13,6 +13,7 @@ workflow ALIGN {
     ch_fai // channel: [mandatory] [ val(meta), path(fai) ]
     val_aligner // channel: [mandatory] [ val(aligner) ]
     val_skip_portello // boolean: [mandatory] [ true|false ]
+    add_md_tag // boolean: [mandatory] [ true|false ]
 
     main:
 
@@ -46,7 +47,7 @@ workflow ALIGN {
             ch_pbmm2_input.reference,
         )
 
-        if (val_skip_portello) {
+        if (add_md_tag) {
             // Add MD tag for sniffles
             SAMTOOLS_CALMD(
                 PBMM2_ALIGN.out.bam,

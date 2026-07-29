@@ -741,7 +741,7 @@ def validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, va
     }
 
     if (val_premapped && !val_skip_portello) {
-        error("ERROR: --premapped cannot be used together with Portello. Please run with --skip_portello if your data is premapped.")
+        error("ERROR: --premapped cannot be used together with Portello. Please run with --skip_portello if your data is already aligned.")
     }
 }
 

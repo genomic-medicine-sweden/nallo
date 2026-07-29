@@ -9,21 +9,21 @@ include { SAMTOOLS_CALMD           } from '../../../modules/nf-core/samtools/cal
 workflow PORTELLO {
     take:
     ch_reads_to_assembly_bam_bai // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
-    ch_assembly_to_ref_bam_bai // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
+    ch_assembly_to_reference_bam_bai // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
     ch_fasta // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fai // channel: [mandatory] [ val(meta), path(fai) ]
 
     main:
 
     RUN_PORTELLO(
-        ch_assembly_to_ref_bam_bai.join(ch_reads_to_assembly_bam_bai, failOnMismatch: true, failOnDuplicate: true).combine(ch_fasta.map { _meta, fasta -> fasta }).map { meta, asm_to_ref_bam, asm_to_ref_bai, read_to_asm_bam, read_to_asm_bai, ref_fasta ->
+        ch_assembly_to_reference_bam_bai.join(ch_reads_to_assembly_bam_bai, failOnMismatch: true, failOnDuplicate: true).combine(ch_fasta.map { _meta, fasta -> fasta }).map { meta, assembly_aligned_to_reference_bam, assembly_aligned_to_reference_bai, reads_aligned_to_assembly_bam, reads_aligned_to_assembly_bai, reference_fasta ->
             [
                 meta,
-                asm_to_ref_bam,
-                asm_to_ref_bai,
-                read_to_asm_bam,
-                read_to_asm_bai,
-                ref_fasta,
+                assembly_aligned_to_reference_bam,
+                assembly_aligned_to_reference_bai,
+                reads_aligned_to_assembly_bam,
+                reads_aligned_to_assembly_bai,
+                reference_fasta,
                 'partially-phased',
                 false,
             ]
