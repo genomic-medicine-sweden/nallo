@@ -302,6 +302,7 @@ workflow NALLO {
                 ch_fai,
                 val_read_aligner,
                 val_skip_portello,
+                val_skip_portello,
             )
 
             ch_aligned_for_merge = ALIGN.out.bam
