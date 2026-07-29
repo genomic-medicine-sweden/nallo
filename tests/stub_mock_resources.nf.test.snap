@@ -12,9 +12,6 @@
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
                     "bcftools": 1.22
                 },
-                "BCFTOOLS_REHEADER": {
-                    "bcftools": 1.22
-                },
                 "BCFTOOLS_SORT": {
                     "bcftools": 1.22
                 },
@@ -56,9 +53,6 @@
                     "tabix": 1.17
                 },
                 "GAWK_EXTRACT_REGIONS": {
-                    "gawk": "5.3.1"
-                },
-                "GAWK_STRIP_CONTIG_HEADER": {
                     "gawk": "5.3.1"
                 },
                 "GLNEXUS": {
@@ -151,10 +145,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-14T13:56:12.434829413",
+        "timestamp": "2026-07-29T14:27:41.233157605",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.07.0"
         }
     },
     "Test Sentieon SNV calling with mock resources": {
@@ -171,9 +165,6 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_PLUGINFIXPLOIDY": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_REHEADER": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_SORT": {
@@ -218,9 +209,6 @@
                     "tabix": 1.17
                 },
                 "GAWK_EXTRACT_REGIONS": {
-                    "gawk": "5.3.1"
-                },
-                "GAWK_STRIP_CONTIG_HEADER": {
                     "gawk": "5.3.1"
                 },
                 "GUNZIP_FASTA": {
@@ -313,10 +301,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-14T13:57:38.41736562",
+        "timestamp": "2026-07-29T14:28:06.825878477",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.07.0"
         }
     },
     "Test CADD with mock resources": {
@@ -333,9 +321,6 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_REHEADER": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_SORT": {
@@ -388,9 +373,6 @@
                     "tabix": 1.17
                 },
                 "GAWK_EXTRACT_REGIONS": {
-                    "gawk": "5.3.1"
-                },
-                "GAWK_STRIP_CONTIG_HEADER": {
                     "gawk": "5.3.1"
                 },
                 "GLNEXUS": {
@@ -495,10 +477,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-14T13:54:22.524719258",
+        "timestamp": "2026-07-29T14:27:12.7126682",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.07.0"
         }
     }
 }
