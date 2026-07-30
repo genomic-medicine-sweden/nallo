@@ -32,7 +32,7 @@ process SAMTOOLS_MERGE {
         --threads ${task.cpus - 1} \\
         ${args} \\
         ${reference} \\
-        ${prefix}.${file_type} \\
+        ${prefix}.${file_type}##idx##${prefix}.${file_type}.bai  \\
         ${input_files}
     """
 
