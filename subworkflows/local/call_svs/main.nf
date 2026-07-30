@@ -254,14 +254,14 @@ workflow CALL_SVS {
 
     emit:
     reheadered_vcf                     = BCFTOOLS_REHEADER.out.vcf
-    found_in_tag_no_reheader           = ch_found_in_tagged_vcf.no_reheader                                                                                                     // channel: [ val(meta), path(vcf) ]                                                                                                              // channel: [ val(meta), path(vcf) ]
-    hificnv_depth                      = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.depth : channel.empty()                                                            // channel: [ val(meta), path(bw) ]
-    hificnv_copynum                    = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.copynum : channel.empty()                                                          // channel: [ val(meta), path(bedgraph) ]
-    hificnv_maf                        = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.maf : channel.empty()                                                              // channel: [ val(meta), path(bw) ]
-    sawfish_depth_bw                   = sv_callers_to_run.contains('sawfish') ? addSampleIdFromSawfishPath(SAWFISH_JOINTCALL.out.depth_bw) : channel.empty()                   // channel: [ val(meta), path(bw) ]
-    sawfish_copynum_bedgraph           = sv_callers_to_run.contains('sawfish') ? addSampleIdFromSawfishPath(SAWFISH_JOINTCALL.out.copynum_bedgraph) : channel.empty()           // channel: [ val(meta), path(bedgraph) ]
+    found_in_tag_no_reheader           = ch_found_in_tagged_vcf.no_reheader // channel: [ val(meta), path(vcf) ]                                                                                                              // channel: [ val(meta), path(vcf) ]
+    hificnv_depth                      = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.depth : channel.empty() // channel: [ val(meta), path(bw) ]
+    hificnv_copynum                    = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.copynum : channel.empty() // channel: [ val(meta), path(bedgraph) ]
+    hificnv_maf                        = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.maf : channel.empty() // channel: [ val(meta), path(bw) ]
+    sawfish_depth_bw                   = sv_callers_to_run.contains('sawfish') ? addSampleIdFromSawfishPath(SAWFISH_JOINTCALL.out.depth_bw) : channel.empty() // channel: [ val(meta), path(bw) ]
+    sawfish_copynum_bedgraph           = sv_callers_to_run.contains('sawfish') ? addSampleIdFromSawfishPath(SAWFISH_JOINTCALL.out.copynum_bedgraph) : channel.empty() // channel: [ val(meta), path(bedgraph) ]
     sawfish_gc_bias_corrected_depth_bw = sv_callers_to_run.contains('sawfish') ? addSampleIdFromSawfishPath(SAWFISH_JOINTCALL.out.gc_bias_corrected_depth_bw) : channel.empty() // channel: [ val(meta), path(bw) ]
-    sawfish_maf_bw                     = sv_callers_to_run.contains('sawfish') ? addSampleIdFromSawfishPath(SAWFISH_JOINTCALL.out.maf_bw) : channel.empty()                     // channel: [ val(meta), path(bw) ]
+    sawfish_maf_bw                     = sv_callers_to_run.contains('sawfish') ? addSampleIdFromSawfishPath(SAWFISH_JOINTCALL.out.maf_bw) : channel.empty() // channel: [ val(meta), path(bw) ]
 }
 
 def addCallerToMeta(ch_caller_calls, sv_caller) {

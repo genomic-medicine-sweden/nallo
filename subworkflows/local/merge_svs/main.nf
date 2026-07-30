@@ -3,10 +3,10 @@ include { SVDB_MERGE as SVDB_MERGE_BY_FAMILY } from '../../../modules/nf-core/sv
 
 workflow MERGE_SVS {
     take:
-    ch_reheadered_vcf   // channel: [ val(meta), path(vcf) ]
-    ch_vcf              // channel: [ val(meta), path(vcf) ]
+    ch_reheadered_vcf // channel: [ val(meta), path(vcf) ]
+    ch_vcf // channel: [ val(meta), path(vcf) ]
     sv_callers_to_merge // List: [ 'caller1', 'caller2', 'caller3' ]
-    caller_priority     // List: [ 'caller3', 'caller1', 'caller2' ]
+    caller_priority // List: [ 'caller3', 'caller1', 'caller2' ]
 
     main:
     // Merge the reheadered SV calls with the ones that didn't need reheadering
