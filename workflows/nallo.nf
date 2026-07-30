@@ -301,8 +301,8 @@ workflow NALLO {
             ALIGN(
                 ch_align_in,
                 !val_skip_portello ? GENOME_ASSEMBLY.out.concatenated_haplotypes : ch_fasta,
-                ch_fai,
                 val_read_aligner,
+                val_skip_portello,
             )
 
             ch_aligned_for_merge = ALIGN.out.bam
@@ -347,7 +347,6 @@ workflow NALLO {
                 ch_aligned_bam,
                 ch_assembly_bam_bai,
                 ch_fasta,
-                ch_fai,
             )
 
             ch_aligned_bam = PORTELLO.out.bam.join(PORTELLO.out.bai, failOnMismatch: true, failOnDuplicate: true)
@@ -355,7 +354,7 @@ workflow NALLO {
 
         if (val_sv_callers_to_run.contains("sniffles") && val_read_aligner == "pbmm2") {
             SAMTOOLS_CALMD(
-                ALIGN.out.bam,
+                val_skip_portello ? SAMTOOLS_MERGE.out.bam : PORTELLO.out.bam,
                 ch_fasta.join(ch_fai).collect(),
             )
 

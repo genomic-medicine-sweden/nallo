@@ -30,7 +30,7 @@ process PBMM2_ALIGN {
         $fasta \\
         $bam \\
         ${prefix}.bam \\
-        --bam-index \\
+        --bam-index BAI \\
         --num-threads ${task.cpus}
     """
 
