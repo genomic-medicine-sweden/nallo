@@ -97,13 +97,11 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    workflow.out.family_caller_vcf
-                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
-                    workflow.out.family_vcf
-                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                    workflow.out.reheadered_vcf
+                        .collect { meta, vcf -> [ 'reheadered_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    workflow.out.found_in_tag_no_reheader
+                        .collect { meta, vcf -> [ 'found_in_tag_no_reheader:', meta, file(vcf).name ]
                     },
 
                 ).match() }
@@ -156,13 +154,11 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    workflow.out.family_caller_vcf
-                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
-                    workflow.out.family_vcf
-                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                    workflow.out.reheadered_vcf
+                        .collect { meta, vcf -> [ 'reheadered_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    workflow.out.found_in_tag_no_reheader
+                        .collect { meta, vcf -> [ 'found_in_tag_no_reheader:', meta, file(vcf).name ]
                     },
 
                 ).match() }
@@ -216,13 +212,11 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    workflow.out.family_caller_vcf
-                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
-                    workflow.out.family_vcf
-                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                    workflow.out.reheadered_vcf
+                        .collect { meta, vcf -> [ 'reheadered_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    workflow.out.found_in_tag_no_reheader
+                        .collect { meta, vcf -> [ 'found_in_tag_no_reheader:', meta, file(vcf).name ]
                     },
 
                 ).match() }
@@ -270,13 +264,11 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    workflow.out.family_caller_vcf
-                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
-                    workflow.out.family_vcf
-                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                    workflow.out.reheadered_vcf
+                        .collect { meta, vcf -> [ 'reheadered_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    workflow.out.found_in_tag_no_reheader
+                        .collect { meta, vcf -> [ 'found_in_tag_no_reheader:', meta, file(vcf).name ]
                     },
 
                 ).match() }
@@ -324,13 +316,11 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    workflow.out.family_caller_vcf
-                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
-                    workflow.out.family_vcf
-                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                    workflow.out.reheadered_vcf
+                        .collect { meta, vcf -> [ 'reheadered_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    workflow.out.found_in_tag_no_reheader
+                        .collect { meta, vcf -> [ 'found_in_tag_no_reheader:', meta, file(vcf).name ]
                     },
 
                 ).match() }
@@ -382,13 +372,11 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    workflow.out.family_caller_vcf
-                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
-                    workflow.out.family_vcf
-                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                    workflow.out.reheadered_vcf
+                        .collect { meta, vcf -> [ 'reheadered_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    workflow.out.found_in_tag_no_reheader
+                        .collect { meta, vcf -> [ 'found_in_tag_no_reheader:', meta, file(vcf).name ]
                     },
 
                 ).match() }
@@ -439,13 +427,11 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    workflow.out.family_caller_vcf
-                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
-                    workflow.out.family_vcf
-                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                    workflow.out.reheadered_vcf
+                        .collect { meta, vcf -> [ 'reheadered_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    workflow.out.found_in_tag_no_reheader
+                        .collect { meta, vcf -> [ 'found_in_tag_no_reheader:', meta, file(vcf).name ]
                     },
 
                 ).match() }

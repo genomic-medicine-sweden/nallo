@@ -1,0 +1,186 @@
+nextflow_workflow {
+
+    name "Test Workflow MERGE_SVS"
+    script "../main.nf"
+    config "./nextflow.config"
+    workflow "MERGE_SVS"
+
+    setup {
+        run("GUNZIP") {
+            script "../../../../modules/nf-core/gunzip/main.nf"
+            process {
+                """
+                input[0] = [
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
+                ]
+                """
+            }
+
+        }
+        run("SAMTOOLS_FAIDX") {
+            script "../../../../modules/nf-core/samtools/faidx/main.nf"
+            process {
+                """
+                input[0] = GUNZIP.out.gunzip.map { meta, fasta -> [meta, fasta, []] }
+                input[1] = false
+                """
+            }
+        }
+
+        run("MINIMAP2_ALIGN") {
+            script "../../../../modules/nf-core/minimap2/align/main.nf"
+            process {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id:'test_1', single_end:false, family_id: 'family', sex: 1 ], // meta map
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                    ],
+                    [
+                        [ id:'test_2', single_end:false, family_id: 'family', sex: 1 ], // meta map
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true)
+                    ]
+                )
+                input[1] = GUNZIP.out.gunzip
+                input[2] = true
+                input[3] = 'bai'
+                input[4] = false
+                input[5] = false
+                """
+            }
+        }
+        run("DEEPVARIANT_RUNDEEPVARIANT") {
+            script "../../../../modules/nf-core/deepvariant/rundeepvariant/main.nf"
+            process {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam
+                    .join(MINIMAP2_ALIGN.out.index)
+                    .map { meta, bam, bai -> [ meta, bam, bai, file(params.pipelines_testdata_base_path + 'reference/test_data.bed', checkIfExists: true) ] }
+                input[1] = GUNZIP.out.gunzip
+                input[2] = SAMTOOLS_FAIDX.out.fai
+                input[3] = [[],[]]
+                input[4] = [[],[]]
+                """
+            }
+        }
+
+        run("CALL_SVS") {
+            script "../../call_svs/main.nf"
+            process {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam
+                    .join(MINIMAP2_ALIGN.out.index)
+                input[1] = channel.of([
+                    [ id:'trf' ],
+                    file('https://github.com/fritzsedlazeck/Sniffles/raw/master/annotations/human_GRCh38_no_alt_analysis_set.trf.bed', checkIfExists: true)
+                ]).collect()
+                input[2] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
+                input[3] = GUNZIP.out.gunzip
+                input[4] = channel.of([
+                    [ id: 'xy_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XY.bed', checkIfExists: true)
+                ]).collect()
+                input[5] = channel.of([
+                    [ id: 'xx_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XX.bed', checkIfExists: true)
+                ]).collect()
+                input[6] = channel.of([
+                    [ id: 'exclude_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
+                ]).collect()
+                input[7] = ['sniffles', 'severus', 'hificnv', 'sawfish']
+                input[8] = [[],[]]
+                input[9] = false
+                input[10] = false
+                input[11] = true
+                input[12] = true
+                input[13] = file('../../../assets/vcf_express_found_in_prelude.lua')
+                """
+            }
+        }
+    }
+
+    test("1 family - merge sniffles") {
+
+        when {
+            workflow {
+                """
+                input[0] = CALL_SVS.out.reheadered_vcf
+                input[1] = CALL_SVS.out.found_in_tag_no_reheader
+                input[2] = ['sniffles']
+                input[3] = ['sniffles']
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
+                { assert snapshot(
+                    workflow.out.family_caller_vcf
+                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    workflow.out.family_vcf
+                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                    },
+
+                ).match() }
+            )
+        }
+    }
+
+    test("1 family - merge sniffles,severus,hificnv,sawfish") {
+
+        when {
+            workflow {
+                """
+                input[0] = CALL_SVS.out.reheadered_vcf
+                input[1] = CALL_SVS.out.found_in_tag_no_reheader
+                input[2] = ['sniffles', 'severus', 'hificnv', 'sawfish']
+                input[3] = ['sniffles', 'severus', 'hificnv', 'sawfish']
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
+                { assert snapshot(
+                    workflow.out.family_caller_vcf
+                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    workflow.out.family_vcf
+                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                    },
+
+                ).match() }
+            )
+        }
+    }
+
+    test("1 family - merge sniffles,severus,hificnv,sawfish -stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = CALL_SVS.out.reheadered_vcf
+                input[1] = CALL_SVS.out.found_in_tag_no_reheader
+                input[2] = ['sniffles', 'severus', 'hificnv', 'sawfish']
+                input[3] = ['sniffles', 'severus', 'hificnv', 'sawfish']
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+}
