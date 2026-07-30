@@ -12,42 +12,28 @@ workflow ALIGN {
     ch_fasta // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fai // channel: [mandatory] [ val(meta), path(fai) ]
     val_aligner // channel: [mandatory] [ val(aligner) ]
-    val_skip_portello // boolean: [mandatory] [ true|false ]
-    add_md_tag // boolean: [mandatory] [ true|false ]
+    use_genome_reference // boolean: [mandatory] [ true|false ]
+    val_add_md_tag // boolean: [mandatory] [ true|false ]
 
     main:
 
     if (val_aligner == 'pbmm2') {
 
-        if (!val_skip_portello) {
-            // Match BAM files and reference by sample ID for alignment with pbmm2
-            ch_ubam
-                .map { meta, bam -> [[id: meta.id], meta, bam] }
-                .combine(
-                    ch_fasta.map { meta, ref -> [[id: meta.id], ref] },
-                    by: 0
-                )
-                .multiMap { _id, meta, bam, ref ->
-                    reads: [meta, bam]
-                    reference: [meta, ref]
-                }
-                .set { ch_pbmm2_input }
-        }
-        else {
-            ch_pbmm2_input = ch_ubam
-                .combine(ch_fasta)
-                .multiMap { bam_meta, bam, _ref_meta, ref ->
-                    reads: [bam_meta, bam]
-                    reference: [bam_meta, ref]
-                }
-        }
+        ch_ubam
+            .combine(ch_fasta)
+            .filter { bam_meta, _bam, ref_meta, _ref -> use_genome_reference || bam_meta.id == ref_meta.id }
+            .multiMap { bam_meta, bam, _ref_meta, ref ->
+                reads: [bam_meta, bam]
+                reference: [bam_meta, ref]
+            }
+            .set { ch_pbmm2_input }
 
         PBMM2_ALIGN(
             ch_pbmm2_input.reads,
             ch_pbmm2_input.reference,
         )
 
-        if (add_md_tag) {
+        if (val_add_md_tag || use_genome_reference) {
             // Add MD tag for sniffles
             SAMTOOLS_CALMD(
                 PBMM2_ALIGN.out.bam,
