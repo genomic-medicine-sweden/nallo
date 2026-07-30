@@ -3,17 +3,13 @@ include { MINIMAP2_INDEX } from '../../../modules/nf-core/minimap2/index/main'
 include { MM2PLUS_ALIGN  } from '../../../modules/nf-core/mm2plus/align/main'
 include { MM2PLUS_INDEX  } from '../../../modules/nf-core/mm2plus/index/main'
 include { PBMM2_ALIGN    } from '../../../modules/nf-core/pbmm2/align/main'
-include { SAMTOOLS_INDEX } from '../../../modules/nf-core/samtools/index/main'
-include { SAMTOOLS_CALMD } from '../../../modules/nf-core/samtools/calmd/main'
 
 workflow ALIGN {
     take:
     ch_ubam // channel: [mandatory] [ val(meta), path(reads)]
     ch_fasta // channel: [mandatory] [ val(meta), path(fasta) ]
-    ch_fai // channel: [mandatory] [ val(meta), path(fai) ]
     val_aligner // channel: [mandatory] [ val(aligner) ]
     use_genome_reference // boolean: [mandatory] [ true|false ]
-    val_add_md_tag // boolean: [mandatory] [ true|false ]
 
     main:
 
@@ -33,22 +29,8 @@ workflow ALIGN {
             ch_pbmm2_input.reference,
         )
 
-        if (val_add_md_tag || use_genome_reference) {
-            // Add MD tag for sniffles
-            SAMTOOLS_CALMD(
-                PBMM2_ALIGN.out.bam,
-                ch_fasta.join(ch_fai).collect(),
-            )
-
-            ch_aligned_reads_bam = SAMTOOLS_CALMD.out.bam
-        }
-        else {
-            ch_aligned_reads_bam = PBMM2_ALIGN.out.bam
-        }
-
-        SAMTOOLS_INDEX(ch_aligned_reads_bam)
-
-        ch_aligned_reads_bai = SAMTOOLS_INDEX.out.index
+        ch_aligned_reads_bam = PBMM2_ALIGN.out.bam
+        ch_aligned_reads_bai = PBMM2_ALIGN.out.bai
     }
     if (val_aligner == 'mm2plus') {
 

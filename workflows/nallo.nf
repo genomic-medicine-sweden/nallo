@@ -61,6 +61,7 @@ include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CHROMOGRAPH             } from '../modu
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SV                      } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING                 } from '../modules/nf-core/bcftools/view/main'
 include { MINIMAP2_ALIGN                                         } from '../modules/nf-core/minimap2/align/main'
+include { SAMTOOLS_CALMD                                         } from '../modules/nf-core/samtools/calmd/main'
 include { SAMTOOLS_MERGE                                         } from '../modules/nf-core/samtools/merge/main'
 include { SAMTOOLS_CONVERT                                       } from '../modules/nf-core/samtools/convert/main'
 include { MULTIQC                                                } from '../modules/nf-core/multiqc/main'
@@ -71,6 +72,7 @@ include { paramsSummaryMultiqc                                   } from '../subw
 include { softwareVersionsToYAML                                 } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText                                 } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
 include { citationBibliographyText                               } from '../subworkflows/local/utils_nfcore_nallo_pipeline'
+include { SAMTOOLS_INDEX                                         } from '../modules/nf-core/samtools/index/main.nf'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -301,8 +303,6 @@ workflow NALLO {
                 !val_skip_portello ? GENOME_ASSEMBLY.out.concatenated_haplotypes : ch_fasta,
                 ch_fai,
                 val_read_aligner,
-                val_skip_portello,
-                val_skip_portello,
             )
 
             ch_aligned_for_merge = ALIGN.out.bam
@@ -351,6 +351,17 @@ workflow NALLO {
             )
 
             ch_aligned_bam = PORTELLO.out.bam.join(PORTELLO.out.bai, failOnMismatch: true, failOnDuplicate: true)
+        }
+
+        if (val_sv_callers_to_run.contains("sniffles") && val_read_aligner == "pbmm2") {
+            SAMTOOLS_CALMD(
+                ALIGN.out.bam,
+                ch_fasta.join(ch_fai).collect(),
+            )
+
+            SAMTOOLS_INDEX(SAMTOOLS_CALMD.out.bam)
+
+            ch_aligned_bam = SAMTOOLS_CALMD.out.bam.join(SAMTOOLS_INDEX.out.index, failOnMismatch: true, failOnDuplicate: true)
         }
 
         //

@@ -45,14 +45,8 @@ workflow PORTELLO {
         [[], [], [], []],
     )
 
-    // Add MD and NM tags for severus and sniffles
-    SAMTOOLS_CALMD(
-        SAMTOOLS_ADDREPLACERG.out.bam,
-        ch_fasta.join(ch_fai).collect(),
-    )
-
     GATK4_CLEANSAM(
-        SAMTOOLS_CALMD.out.bam,
+        SAMTOOLS_ADDREPLACERG.out.bam,
         [[], [], []],
     )
 
