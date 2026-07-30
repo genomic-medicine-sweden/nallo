@@ -88,10 +88,11 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
         ch_bcftools_merge_in,
         ch_fasta_fai.collect(),
     )
+    ch_merged_family_gvcf_bcftools = BCFTOOLS_MERGE.out.vcf
 
     ch_merged_family_gvcf = ch_merged_family_gvcf_glnexus
         .mix(ch_merged_family_gvcf_sentieon)
-        .mix(BCFTOOLS_MERGE.out.vcf)
+        .mix(ch_merged_family_gvcf_bcftools)
 
     // Add FOUND_IN tag with VCFEXPRESS using the meta.caller information
     VCFEXPRESS(
@@ -103,6 +104,7 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     ch_bcftools_norm_input = VCFEXPRESS.out.vcf.map { meta, vcf ->
         [meta - meta.subMap('caller'), vcf, []]
     }
+
 
     // Decompose and normalize variants
     BCFTOOLS_NORM_MULTISAMPLE(
