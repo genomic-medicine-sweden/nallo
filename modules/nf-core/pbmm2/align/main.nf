@@ -14,6 +14,7 @@ process PBMM2_ALIGN {
 
     output:
     tuple val(meta), path("*.bam"), emit: bam
+    tuple val(meta), path("*.bai"), emit: bai
     tuple val("${task.process}"), val('pbmm2'), eval("pbmm2 --version  | sed '1s/pbmm2 //;q'"), topic: versions, emit: versions_pbmm2
 
     when:
@@ -29,6 +30,7 @@ process PBMM2_ALIGN {
         $fasta \\
         $bam \\
         ${prefix}.bam \\
+        --bam-index \\
         --num-threads ${task.cpus}
     """
 
