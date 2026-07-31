@@ -84,7 +84,7 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SOMALIER_EXTRACT": {
                     "somalier": "0.2.18"
@@ -145,10 +145,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-14T13:56:12.434829413",
+        "timestamp": "2026-07-31T10:15:00.336755843",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.07.0"
         }
     },
     "Test Sentieon SNV calling with mock resources": {
@@ -237,7 +237,7 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SENTIEON_GVCFTYPER": {
                     "sentieon": 202503.02
@@ -301,10 +301,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-14T13:57:38.41736562",
+        "timestamp": "2026-07-31T10:15:24.795366403",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.07.0"
         }
     },
     "Test CADD with mock resources": {
@@ -410,7 +410,7 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SOMALIER_EXTRACT": {
                     "somalier": "0.2.18"
@@ -477,10 +477,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-14T13:54:22.524719258",
+        "timestamp": "2026-07-31T10:14:34.136598399",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.07.0"
         }
     }
 }

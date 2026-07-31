@@ -95,7 +95,7 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_VIEW": {
                     "samtools": 1.24
@@ -212,10 +212,10 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-07-14T13:53:20.310017465",
+        "timestamp": "2026-07-31T10:18:48.490206292",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.07.0"
         }
     }
 }

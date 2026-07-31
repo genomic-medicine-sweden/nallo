@@ -187,7 +187,7 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_VIEW": {
                     "samtools": 1.24
@@ -1138,7 +1138,7 @@
                 ],
                 [
                     "HG002_ONT_A_aligned_assembly.bam",
-                    "e5c3eae821381c03902eac099bb95943"
+                    "d96ca577446868c931767d0d0893f62a"
                 ],
                 [
                     "HG002_ONT_B_aligned_assembly.bam",
@@ -1146,7 +1146,7 @@
                 ],
                 [
                     "HG002_ONT_C_aligned_assembly.bam",
-                    "e5c3eae821381c03902eac099bb95943"
+                    "d96ca577446868c931767d0d0893f62a"
                 ]
             ],
             [
@@ -1230,10 +1230,10 @@
                 
             ]
         ],
-        "timestamp": "2026-07-23T13:29:42.719309187",
+        "timestamp": "2026-07-30T15:42:53.943681892",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.07.0"
         }
     }
 }
