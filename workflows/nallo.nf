@@ -62,7 +62,9 @@ include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SV                      } from '../modu
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING                 } from '../modules/nf-core/bcftools/view/main'
 include { MINIMAP2_ALIGN                                         } from '../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_MERGE                                         } from '../modules/nf-core/samtools/merge/main'
+include { SAMTOOLS_INDEX                                         } from '../modules/nf-core/samtools/index/main'
 include { SAMTOOLS_CONVERT                                       } from '../modules/nf-core/samtools/convert/main'
+include { SAMTOOLS_CALMD                                         } from '../modules/nf-core/samtools/calmd/main'
 include { MULTIQC                                                } from '../modules/nf-core/multiqc/main'
 include { PEDDY                                                  } from '../modules/nf-core/peddy/main'
 include { SPLITUBAM                                              } from '../modules/nf-core/splitubam/main'
@@ -299,9 +301,7 @@ workflow NALLO {
             ALIGN(
                 ch_align_in,
                 !val_skip_portello ? GENOME_ASSEMBLY.out.concatenated_haplotypes : ch_fasta,
-                ch_fai,
                 val_read_aligner,
-                val_skip_portello,
                 val_skip_portello,
             )
 
@@ -347,10 +347,20 @@ workflow NALLO {
                 ch_aligned_bam,
                 ch_assembly_bam_bai,
                 ch_fasta,
-                ch_fai,
             )
 
             ch_aligned_bam = PORTELLO.out.bam.join(PORTELLO.out.bai, failOnMismatch: true, failOnDuplicate: true)
+        }
+
+        if (val_sv_callers_to_run.contains("sniffles") && val_read_aligner == "pbmm2") {
+            SAMTOOLS_CALMD(
+                val_skip_portello ? SAMTOOLS_MERGE.out.bam : PORTELLO.out.bam,
+                ch_fasta.join(ch_fai).collect(),
+            )
+
+            SAMTOOLS_INDEX(SAMTOOLS_CALMD.out.bam)
+
+            ch_aligned_bam = SAMTOOLS_CALMD.out.bam.join(SAMTOOLS_INDEX.out.index, failOnMismatch: true, failOnDuplicate: true)
         }
 
         //

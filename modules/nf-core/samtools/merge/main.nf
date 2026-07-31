@@ -32,7 +32,7 @@ process SAMTOOLS_MERGE {
         --threads ${task.cpus - 1} \\
         ${args} \\
         ${reference} \\
-        ${prefix}.${file_type} \\
+        ${prefix}.${file_type}##idx##${prefix}.${file_type}.bai \\
         ${input_files}
     """
 
@@ -40,7 +40,7 @@ process SAMTOOLS_MERGE {
     def args = task.ext.args ?: ''
     prefix = task.ext.prefix ?: "${meta.id}"
     def file_type = input_files instanceof List ? input_files[0].getExtension() : input_files.getExtension()
-    def index_type = file_type == "bam" ? "csi" : "crai"
+    def index_type = file_type == "bam" ? "bai" : "crai"
     def index = args.contains("--write-index") ? "touch ${prefix}.${index_type}" : ""
     """
     touch ${prefix}.${file_type}

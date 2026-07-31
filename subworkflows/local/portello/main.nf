@@ -11,7 +11,6 @@ workflow PORTELLO {
     ch_reads_to_assembly_bam_bai // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
     ch_assembly_to_reference_bam_bai // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
     ch_fasta // channel: [mandatory] [ val(meta), path(fasta) ]
-    ch_fai // channel: [mandatory] [ val(meta), path(fai) ]
 
     main:
 
@@ -32,7 +31,7 @@ workflow PORTELLO {
 
     SAMTOOLS_SORT(
         RUN_PORTELLO.out.bam,
-        ch_fasta.join(ch_fai).collect(),
+        [[], [], []],
         "bai",
     )
 
@@ -45,14 +44,8 @@ workflow PORTELLO {
         [[], [], [], []],
     )
 
-    // Add MD and NM tags for severus and sniffles
-    SAMTOOLS_CALMD(
-        SAMTOOLS_ADDREPLACERG.out.bam,
-        ch_fasta.join(ch_fai).collect(),
-    )
-
     GATK4_CLEANSAM(
-        SAMTOOLS_CALMD.out.bam,
+        SAMTOOLS_ADDREPLACERG.out.bam,
         [[], [], []],
     )
 

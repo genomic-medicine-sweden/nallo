@@ -323,7 +323,7 @@
                     },
                     "pbmm2/align": {
                         "branch": "master",
-                        "git_sha": "4c0a7271c05babd2226ce94c502d75a73228aa06",
+                        "git_sha": "e6d1cb8b814c1d0deda51e3d317273901d7e975a",
                         "installed_by": ["modules"]
                     },
                     "peddy": {
