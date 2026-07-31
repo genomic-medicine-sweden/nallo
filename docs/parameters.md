@@ -75,11 +75,11 @@ Define where the pipeline should find input data and save output data.
 | `gens_panel_of_normals_male` | Panel of normals of male samples (HDF5) used to standardize coverage for Gens inputs (https://gatk.broadinstitute.org/hc/en-us/articles/360040510031-CreateReadCountPanelOfNormals). This can be generated using https://github.com/nf-core/createpanelrefs. For long reads we have used mosdepth to calculate coverage per-bin rather than counting reads per bin, and then created a panel of normals using the GATK command. | `string` |  |  |  |
 | `gens_coverage_bins` | Bed file with bins for which to calculate coverage. Typically 100bp bins across the genome is used in Gens. It should be the same as the one used to prepare the panel of normals. | `string` |  |  |  |
 | `strdrop_training_set_json` | A JSON file containing the training set for strdrop | `string` |  |  |  |
-| `paraphrase_output_format` | Output format for paralog annotation from Paraphrase. Either `tsv` or `json`. | `string` | tsv |  |  |
+| `paraphrase_output_format` | Output format for paralog annotation from Paraphrase. Either `tsv` or `json`. (accepted: `tsv`\|`json`) | `string` | tsv |  |  |
 | `paraphrase_rules` | A file path to a YAML file with rules for paraphrase to use when annotating paralogs. For an example, see: https://github.com/Clinical-Genomics/paraphrase/blob/main/test-data/rules.yaml. | `string` |  |  |  |
 | `peddy_sites` | A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data. | `string` |  |  |  |
 | `sambamba_regions` | A BED file with regions of interest used in sambamba depth. By default this is the same as `qc_regions`. | `string` |  |  |  |
-| `alignment_output_format` | Output format for alignment files. Either `bam` or `cram` | `string` | bam |  |  |
+| `alignment_output_format` | Output format for alignment files. Either `bam` or `cram` (accepted: `bam`\|`cram`) | `string` | bam |  |  |
 | `create_maf_track` | Whether to create a MAF track from SNV calls when calling SVs with HiFiCNV or Sawfish. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Defaults to `true` | `boolean` | True |  |  |
 | `create_hificnv_maf_track` | Whether to create a MAF track from SNV calls when calling CNVs with HiFiCNV. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Defaults to `create_maf_track` | `boolean` | True |  | True |
 | `create_sawfish_maf_track` | Whether to create a MAF track from SNV calls when calling SVs with Sawfish. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Defaults to `create_maf_track` | `boolean` | True |  | True |
@@ -115,7 +115,7 @@ Less common options for the pipeline, typically set in a config file.
 | Parameter | Description | Type | Default | Required | Hidden |
 |-----------|-----------|-----------|-----------|-----------|-----------|
 | `version` | Display version and exit. | `boolean` |  |  | True |
-| `publish_dir_mode` | Method used to save pipeline results to output directory. <details><summary>Help</summary><small>The Nextflow `publishDir` option specifies which intermediate files should be saved to the output directory. This option tells the pipeline what method should be used to move these files. See [Nextflow docs](https://www.nextflow.io/docs/latest/process.html#publishdir) for details.</small></details>| `string` | copy |  | True |
+| `publish_dir_mode` | Method used to save pipeline results to output directory. (accepted: `symlink`\|`rellink`\|`link`\|`copy`\|`copyNoFollow`\|`move`) <details><summary>Help</summary><small>The Nextflow `publishDir` option specifies which intermediate files should be saved to the output directory. This option tells the pipeline what method should be used to move these files. See [Nextflow docs](https://www.nextflow.io/docs/latest/process.html#publishdir) for details.</small></details>| `string` | copy |  | True |
 | `email_on_fail` | Email address for completion summary, only when pipeline fails. <details><summary>Help</summary><small>An email address to send a summary email to when the pipeline is completed - ONLY sent if the pipeline does not exit successfully.</small></details>| `string` |  |  | True |
 | `plaintext_email` | Send plain-text email instead of HTML. | `boolean` |  |  | True |
 | `max_multiqc_email_size` | File size limit when attaching MultiQC reports to summary emails. | `string` | 25.MB |  | True |
@@ -138,19 +138,19 @@ Workflow options specific to genomic-medicine-sweden/nallo
 |-----------|-----------|-----------|-----------|-----------|-----------|
 | `bcftools_roh_af_tag` | AF-tag that variants have been annotated with for use in the chromograph subworkflow. By default set to `--chromograph_af_tag`. | `string` |  |  |  |
 | `chromograph_af_tag` | AF-tag to use in the chromograph subworkflow to generate plots of autozygosity. SNVs need to be annotated with allele frequencies specified by this tag for autozygosity plotting to work. | `string` |  |  |  |
-| `preset` | Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`, `ONT_R10_AS`) | `string` | revio | True |  |
+| `preset` | Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`, `ONT_R10_AS`) (accepted: `revio`\|`pacbio`\|`ONT_R10`\|`ONT_R10_AS`) | `string` | revio | True |  |
 | `sv_callers` | Which SV callers to use. Several callers can be specified, separated by commas (e.g. sniffles,severus,hificnv,sawfish). The order of the SV callers in this list will determine the priority of the calls when merging them if not overwritten by `sv_caller_priority`. | `string` | sniffles,hificnv |  |  |
 | `sv_callers_merge_priority` | The order of the SV callers in this list will determine the priority of the calls when merging them. All callers that has been specified in `sv_callers` should also be specified here separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as `--sv_callers`. | `string` | sniffles,hificnv |  |  |
 | `sv_callers_to_run` | Which SV callers to run, separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as `--sv_callers` | `string` | sniffles,hificnv |  |  |
 | `sv_callers_to_merge` | Which SV callers to merge into family VCFs (that are also used for annotation and ranking), separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as `--sv_callers` | `string` | sniffles,hificnv |  |  |
-| `snv_caller` | Which short variant software to use (`deepvariant`) | `string` | deepvariant |  |  |
-| `str_caller` | Which caller to use for short tandem repeat expansions (TRGT or STRdust). | `string` | trgt |  |  |
+| `snv_caller` | Which short variant software to use (`deepvariant`) (accepted: `deepvariant`\|`sentieon`) | `string` | deepvariant |  |  |
+| `str_caller` | Which caller to use for short tandem repeat expansions (TRGT or STRdust). (accepted: `trgt`\|`strdust`) | `string` | trgt |  |  |
 | `paraphrase_genes` | An optional comma-separated list of genes to run Paraphrase on for paralog annotation. By default all genes called by paraphase are used. | `string` |  |  |  |
 | `paraphrase_skip_keys` | An optional comma-separated list of keys to skip when running Paraphrase. By default the default skip keys are determined by Paraphrase. | `string` |  |  |  |
-| `phaser` | Which phasing software to use (`longphase`, `whatshap`, `hiphase`) | `string` | longphase |  |  |
+| `phaser` | Which phasing software to use (`longphase`, `whatshap`, `hiphase`) (accepted: `longphase`\|`whatshap`\|`hiphase`) | `string` | longphase |  |  |
 | `whatshap_pedigree_phasing` | Enable/disable pedigree phasing when phasing with whatshap | `boolean` | True |  |  |
-| `hifiasm_mode` | Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`) | `string` | trio-binning |  |  |
-| `hifiasm_preset` | Hifiasm preset, is set to `--ont` when `--preset ONT_R10` is active. | `string` | None |  |  |
+| `hifiasm_mode` | Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`) (accepted: `hifi-only`\|`trio-binning`) | `string` | trio-binning |  |  |
+| `hifiasm_preset` | Hifiasm preset, is set to `--ont` when `--preset ONT_R10` is active. (accepted: ``\|`--ont`) | `string` | None |  |  |
 | `methylation_callers` | Which methylation callers to use. Several callers can be specified, separated by commas (e.g. methbat,modkit). Defaults to `methbat` when `--preset revio` is active and `modkit` when `--preset ONT_R10` is active. | `string` | methbat |  |  |
 | `methbat_male_label` | Label used for male samples in methbat profile. | `string` | MALE |  |  |
 | `methbat_female_label` | Label used for female samples in methbat profile. | `string` | FEMALE |  |  |
@@ -169,8 +169,8 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `filter_variants_hgnc_ids` | A tsv/csv file with a `hgnc_ids` column header, and then one numerical HGNC ID per row. E.g. `4281` or `HGNC:4281`. | `string` |  |  |  |
 | `filter_snvs_expression` | An expression that is passed to bcftools view to filter SNVs, e.g. --filter_snvs_expression "-e 'INFO/AQ>60'" | `string` | None |  |  |
 | `filter_svs_expression` | An expression that is passed to bcftools view to filter SVs, e.g. --filter_svs_expression "-e 'INFO/AQ>60'" | `string` | None |  |  |
-| `deepvariant_model_type` | Sets the model type used for DeepVariant. This is set automatically using `--preset` by default. | `string` | PACBIO |  | True |
-| `minimap2_read_mapping_preset` | Sets the minimap2-preset (-x) for read alignment. This is set automatically using the pipeline `--preset` by default. | `string` | map-hifi |  | True |
+| `deepvariant_model_type` | Sets the model type used for DeepVariant. This is set automatically using `--preset` by default. (accepted: `PACBIO`\|`ONT_R104`) | `string` | PACBIO |  | True |
+| `minimap2_read_mapping_preset` | Sets the minimap2-preset (-x) for read alignment. This is set automatically using the pipeline `--preset` by default. (accepted: `map-hifi`\|`map-ont`\|`lr:hq`\|`lr:hqae`) | `string` | map-hifi |  | True |
 | `extra_hifiasm_options` | Extra options to hifiasm, used for test profile. | `string` |  |  | True |
 | `extra_methbat_profile_options` | Extra options to methbat profile. | `string` |  |  | True |
 | `extra_modkit_options` | Extra options to modkit, used for test profile. | `string` |  |  | True |
@@ -199,7 +199,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `rhocallviz_min_qual` | Minimum quality for variants to be included in rhocall viz within the chromograph subworkflow. | `number` | 10.0 |  |  |
 | `tiddit_bin_size` | Bin size to use for TIDDIT coverage wig generation in the chromograph subworkflow. | `integer` | 500 |  |  |
 | `sentieon_model_bundle` | The location of the DNAscope model bundle. Model bundle files can be found in the sentieon-models Github repository. | `string` |  |  |  |
-| `sentieon_tech` | Sequencing technology used to generate the reads. Supported arguments are ONT or HiFi. | `string` | HiFi |  |  |
+| `sentieon_tech` | Sequencing technology used to generate the reads. Supported arguments are ONT or HiFi. (accepted: `HiFi`\|`ONT`) | `string` | HiFi |  |  |
 | `sentieon_male_haploid_bed` | Interval in the reference to restrict haploid variant calling for males, in BED file format. | `string` |  |  |  |
 | `sentieon_male_diploid_bed` | Interval in the reference to restrict diploid variant calling for males, in BED file format. | `string` |  |  |  |
 | `sentieon_female_diploid_bed` | Interval in the reference to restrict diploid variant calling for females, in BED file format. | `string` |  |  |  |
@@ -214,4 +214,4 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `read_aligner` | Which aligner to use for read alignment. Supported arguments are mm2plus, minimap2 or pbmm2. (accepted: `minimap2`\|`pbmm2`\|`mm2plus`) | `string` | pbmm2 |  |  |
 | `pbmm2_preset` | Preset to use for pbmm2. Supported arguments are HIFI, CCS, or SUBREAD. (accepted: `HIFI`\|`CCS`\|`SUBREAD`) | `string` | CCS |  |  |
 | `glnexus_config` | Glnexus config to use for merging gVCFs. If no file is provided, the default config `assets/glnexus_config_dp1.yml` will be used. | `string` | None |  |  |
-| `assembly_aligner` | Which aligner to use for assembly alignment. Supported arguments are mm2plus or minimap2. | `string` | minimap2 |  |  |
+| `assembly_aligner` | Which aligner to use for assembly alignment. Supported arguments are mm2plus or minimap2. (accepted: `mm2plus`\|`minimap2`) | `string` | minimap2 |  |  |
