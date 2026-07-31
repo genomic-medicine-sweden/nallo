@@ -128,7 +128,7 @@
     },
     "Test mitochondrial calling runs by default": {
         "content": [
-            40,
+            42,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -140,6 +140,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_REHEADER": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_SORT": {
@@ -167,6 +170,9 @@
                     "deepvariant": "1.10.0"
                 },
                 "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_STRIP_CONTIG_HEADER": {
                     "gawk": "5.3.1"
                 },
                 "GLNEXUS": {

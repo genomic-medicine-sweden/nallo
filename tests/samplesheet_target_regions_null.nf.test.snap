@@ -125,6 +125,9 @@
                 "GAWK_EXTRACT_REGIONS": {
                     "gawk": "5.3.1"
                 },
+                "GAWK_STRIP_CONTIG_HEADER": {
+                    "gawk": "5.3.1"
+                },
                 "GENMOD_ANNOTATE": {
                     "genmod": "3.12.0"
                 },

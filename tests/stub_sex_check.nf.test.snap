@@ -154,7 +154,7 @@
     },
     "Test skip sex check - multisample": {
         "content": [
-            153,
+            159,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -172,6 +172,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_REHEADER": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_SORT": {
@@ -223,6 +226,9 @@
                     "gatk4": "4.6.2.0"
                 },
                 "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_STRIP_CONTIG_HEADER": {
                     "gawk": "5.3.1"
                 },
                 "GLNEXUS": {
