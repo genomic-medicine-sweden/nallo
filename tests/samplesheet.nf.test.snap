@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            230,
+            232,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -123,6 +123,9 @@
                     "gawk": "5.3.1"
                 },
                 "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_STRIP_CONTIG_HEADER": {
                     "gawk": "5.3.1"
                 },
                 "GENMOD_ANNOTATE": {
@@ -788,7 +791,9 @@
                 "HG002_Revio_pbcpgtools.hap1.bw:md5,fe98da5500087326cace4262925b54b9",
                 "HG002_Revio_pbcpgtools.hap2.bw:md5,e452d2986e38ba275033e8e613183b8d"
             ],
-            [],
+            [
+                
+            ],
             [
                 [
                     "HG002_Revio_haplotagged.cram",
@@ -826,7 +831,7 @@
                 ],
                 [
                     "FAM_snvs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=141, phased=false, phasedAutodetect=true]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=141, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_Revio_deepvariant_snvs.vcf.gz",
@@ -841,12 +846,14 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=17, phased=false, phasedAutodetect=false]"
                 ]
             ],
-            []
+            [
+                
+            ]
         ],
-        "timestamp": "2026-07-17T13:28:43.528525388",
+        "timestamp": "2026-07-29T15:58:04.027904967",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.07.0"
         }
     }
 }
