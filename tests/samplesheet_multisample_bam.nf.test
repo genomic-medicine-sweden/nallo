@@ -19,6 +19,7 @@ nextflow_pipeline {
                 filter_svs_expression        = "-i 'FILTER=\"PASS\"'"
                 paraphrase_output_format     = 'json'
                 create_sawfish_maf_track     = false
+                skip_portello                = false
             }
         }
 
