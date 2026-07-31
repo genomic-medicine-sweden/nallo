@@ -1,7 +1,7 @@
 {
     "test profile | --target_regions null --alignment_output_format cram": {
         "content": [
-            221,
+            223,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -781,7 +781,7 @@
                 ],
                 [
                     "HG002_Revio_aligned_assembly.bam",
-                    "bb0797a883bb0532851980c737c0e22b"
+                    "2f1773961a831fa3e4fd0b2085f5df30"
                 ],
                 [
                     "HG002_Revio_spanning_trgt.bam",
@@ -814,7 +814,7 @@
                 ],
                 [
                     "FAM_snvs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=141, phased=false, phasedAutodetect=true]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=141, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_Revio_deepvariant_snvs.vcf.gz",
@@ -833,7 +833,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-31T11:24:03.964154276",
+        "timestamp": "2026-07-31T14:41:21.574225887",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
