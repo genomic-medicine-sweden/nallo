@@ -30,7 +30,7 @@ workflow ALIGN {
         )
 
         ch_aligned_reads_bam = PBMM2_ALIGN.out.bam
-        ch_aligned_reads_bai = PBMM2_ALIGN.out.bai
+        ch_aligned_reads_bai = PBMM2_ALIGN.out.index
     }
     if (val_aligner == 'mm2plus') {
 

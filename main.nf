@@ -749,28 +749,29 @@ output {
     }
     aligned_portello_reads_bam {
         path { meta, _file -> "aligned_reads/${meta.id}/" }
+        enabled params.skip_portello && params.skip_phasing
     }
     aligned_haplotagged_reads_bam {
         // HiPhase uses the input file (aligned reads) as template for naming output, so we need to remove the "_aligned" suffix here
         path { meta, file ->
-            file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_remapped_reads", "")}"
+            file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_aligned(_reads)*", "")}"
         }
         enabled params.alignment_output_format == 'bam'
     }
     aligned_haplotagged_reads_cram {
         // HiPhase uses the input file (aligned reads) as template for naming output, so we need to remove the "_aligned" suffix here
         path { meta, file ->
-            file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_remapped_reads", "")}"
+            file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_aligned(_reads)*", "")}"
         }
         enabled params.alignment_output_format == 'cram'
     }
     aligned_reads_bam {
         path { meta, _file -> "aligned_reads/${meta.id}/" }
-        enabled params.alignment_output_format == 'bam' && params.skip_phasing
+        enabled params.alignment_output_format == 'bam' && params.skip_phasing && params.skip_portello
     }
     aligned_reads_cram {
         path { meta, _file -> "aligned_reads/${meta.id}/" }
-        enabled params.alignment_output_format == 'cram' && params.skip_phasing
+        enabled params.alignment_output_format == 'cram' && params.skip_phasing && params.skip_portello
     }
     assembly_summary {
         path { meta, _assembly_summary -> "assembly/stats/${meta.id}/" }
