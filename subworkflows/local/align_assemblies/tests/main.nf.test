@@ -100,7 +100,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    bam(workflow.out.bam.get(0).get(1)).getReadsMD5(),
+                    bam(workflow.out.bam.get(0).get(1)).getStatistics(),
                     file(workflow.out.bai.get(0).get(1)).name
                 ).match() }
             )
