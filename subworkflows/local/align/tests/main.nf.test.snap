@@ -15,7 +15,7 @@
                         {
                             "id": "test"
                         },
-                        "test_aligned_reads_no_md.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_aligned_reads_no_md.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "bam": [
@@ -31,12 +31,12 @@
                         {
                             "id": "test"
                         },
-                        "test_aligned_reads_no_md.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_aligned_reads_no_md.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-07-28T11:47:45.221321589",
+        "timestamp": "2026-07-31T12:33:28.446919839",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -120,9 +120,9 @@
                 "duplicateReadCount": 0,
                 "sorted": false
             },
-            "test_aligned_reads.bam.bai"
+            "test_aligned_reads_no_md.bam.bai"
         ],
-        "timestamp": "2026-07-28T11:47:31.83244015",
+        "timestamp": "2026-07-31T12:33:15.486403876",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"

@@ -40,10 +40,8 @@ nextflow_workflow {
                     [ id: 'hg38'],
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
-                input[2] = [[],[]]
-                input[3] = 'minimap2'
-                input[4] = false
-                input[5] = false
+                input[2] = 'minimap2'
+                input[3] = true
                 """
             }
         }
@@ -71,10 +69,8 @@ nextflow_workflow {
                     [ id: 'hg38'],
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
-                input[2] = [[],[]]
-                input[3] = 'mm2plus'
-                input[4] = false
-                input[5] = false
+                input[2] = 'mm2plus'
+                input[3] = true
                 """
             }
         }
@@ -99,10 +95,8 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
                 ])
                 input[1] = GUNZIP.out.gunzip
-                input[2] = SAMTOOLS_FAIDX.out.fai
-                input[3] = 'pbmm2'
-                input[4] = true
-                input[5] = true
+                input[2] = 'pbmm2'
+                input[3] = false
                 """
             }
         }
@@ -132,10 +126,8 @@ nextflow_workflow {
                     [ id: 'hg38'],
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
-                input[2] = [[],[]]
-                input[3] = 'minimap2'
-                input[4] = false
-                input[5] = false
+                input[2] = 'minimap2'
+                input[3] = true
                 """
             }
         }
@@ -160,10 +152,8 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
                 ])
                 input[1] = GUNZIP.out.gunzip
-                input[2] = SAMTOOLS_FAIDX.out.fai
-                input[3] = 'pbmm2'
-                input[4] = false
-                input[5] = false
+                input[2] = 'pbmm2'
+                input[3] = false
                 """
             }
         }
@@ -191,10 +181,8 @@ nextflow_workflow {
                     [ id: 'hg38'],
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
-                input[2] = [[],[]]
-                input[3] = 'mm2plus'
-                input[4] = false
-                input[5] = false
+                input[2] = 'mm2plus'
+                input[3] = true
                 """
             }
         }
