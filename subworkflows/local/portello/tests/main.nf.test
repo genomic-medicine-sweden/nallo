@@ -41,7 +41,6 @@ nextflow_workflow {
                     file(params.modules_testdata_base_path + 'genomics/homo_sapiens/pacbio/bam/test_hifi_aligned_assembly.bam.bai'),
                 ])
                 input[2] = PREPARE_REFERENCES.out.fasta
-                input[3] = PREPARE_REFERENCES.out.fai
                 """
             }
         }
@@ -75,7 +74,6 @@ nextflow_workflow {
                     file(params.modules_testdata_base_path + 'genomics/homo_sapiens/pacbio/bam/test_hifi_aligned_assembly.bam.bai'),
                 ])
                 input[2] = PREPARE_REFERENCES.out.fasta
-                input[3] = PREPARE_REFERENCES.out.fai
                 """
             }
         }
