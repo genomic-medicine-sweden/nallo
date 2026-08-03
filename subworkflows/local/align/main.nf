@@ -14,7 +14,7 @@ workflow ALIGN {
     main:
 
     if (val_aligner == 'pbmm2') {
-
+        // Match BAM files and reference by sample ID if needed (for portello)
         ch_ubam
             .combine(ch_fasta)
             .filter { bam_meta, _bam, ref_meta, _ref -> use_genome_reference || bam_meta.id == ref_meta.id }
