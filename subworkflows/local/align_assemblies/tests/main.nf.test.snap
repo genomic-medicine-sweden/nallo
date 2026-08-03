@@ -88,10 +88,20 @@
     },
     "bam - mm2plus": {
         "content": [
-            "325890c8b996493bdb6fca0dccfa23e7",
+            {
+                "maxReadLength": 95503,
+                "minReadLength": 0,
+                "meanReadLength": 2062,
+                "maxQuality": 60,
+                "minQuality": 0,
+                "meanQuality": 23,
+                "readCount": 466,
+                "duplicateReadCount": 0,
+                "sorted": true
+            },
             "hg38_filtered.bam.bai"
         ],
-        "timestamp": "2026-07-31T15:39:27.161556908",
+        "timestamp": "2026-08-03T09:01:03.464843627",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
