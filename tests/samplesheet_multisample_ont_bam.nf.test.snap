@@ -1138,15 +1138,15 @@
                 ],
                 [
                     "HG002_ONT_A_aligned_assembly.bam",
-                    "82d23923d9bd2416c284ffe459bff3b6"
+                    "e5c3eae821381c03902eac099bb95943"
                 ],
                 [
                     "HG002_ONT_B_aligned_assembly.bam",
-                    "32835786f8b6511c9e9894442219a324"
+                    "f9f7e9b2b353e5bca51f28e7b46465fa"
                 ],
                 [
                     "HG002_ONT_C_aligned_assembly.bam",
-                    "82d23923d9bd2416c284ffe459bff3b6"
+                    "e5c3eae821381c03902eac099bb95943"
                 ]
             ],
             [
@@ -1230,7 +1230,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-31T14:42:10.298651216",
+        "timestamp": "2026-08-03T09:16:54.262032008",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
