@@ -1,0 +1,60 @@
+{
+    "vep_prep_sv - sniffles1 -stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_vep_prep.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        "VEP_PREP_SV",
+                        "python",
+                        "3.12.2"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_vep_prep.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_python": [
+                    [
+                        "VEP_PREP_SV",
+                        "python",
+                        "3.12.2"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-08-04T12:50:51.107218",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.4"
+        }
+    },
+    "vep_prep_sv - sniffles1": {
+        "content": [
+            [
+                [
+                    "VEP_PREP_SV",
+                    "python",
+                    "3.12.2"
+                ]
+            ],
+            "ed19f76e096724668dc971c1e3033af5"
+        ],
+        "timestamp": "2026-08-04T12:51:39.048717",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.4"
+        }
+    }
+}
