@@ -1247,11 +1247,11 @@
                 ],
                 [
                     "HG003_aligned_assembly.bam",
-                    "67ac41f0f17d61204bf8152c2cc2c95f"
+                    "c6212efee1cd13beb4c628d5a3078f36"
                 ],
                 [
                     "HG004_aligned_assembly.bam",
-                    "b708aa7f0dbb40c960e356c7a009a635"
+                    "ee430af552c4dd5fae7f01784d090b8b"
                 ],
                 [
                     "HG002_spanning_trgt.bam",
@@ -1343,7 +1343,7 @@
                 
             ]
         ],
-        "timestamp": "2026-08-03T13:32:15.843626443",
+        "timestamp": "2026-08-04T10:08:00.793323667",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"

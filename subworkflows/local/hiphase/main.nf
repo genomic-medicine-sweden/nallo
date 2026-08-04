@@ -52,6 +52,15 @@ workflow HIPHASE {
     // as to not lose information downstream processes might depend on.
     ch_haplotagged_bam_bai = RUN_HIPHASE.out.bams
         .join(RUN_HIPHASE.out.bams_indexes, failOnMismatch: true, failOnDuplicate: true)
+        .map { meta, bams, bais ->
+            // Keep BAM and BAI pairing while enforcing deterministic order.
+            def bam_bai_pairs = [bams, bais]
+                .transpose()
+                .sort { left, right ->
+                    left[0].getName() <=> right[0].getName()
+                }
+            [meta, bam_bai_pairs.collect { pair -> pair[0] }, bam_bai_pairs.collect { pair -> pair[1] }]
+        }
         .transpose()
         .combine(ch_bam_bai)
         .filter { _meta_phased, bam_phased, _bai_phased, meta_orig, _bam_orig, _bai_orig ->

@@ -88,20 +88,10 @@
     },
     "bam - mm2plus": {
         "content": [
-            {
-                "maxReadLength": 95503,
-                "minReadLength": 0,
-                "meanReadLength": 2062,
-                "maxQuality": 60,
-                "minQuality": 0,
-                "meanQuality": 23,
-                "readCount": 466,
-                "duplicateReadCount": 0,
-                "sorted": true
-            },
+            "49691621cdfd398fb5e7b29780c56d8f",
             "hg38_filtered.bam.bai"
         ],
-        "timestamp": "2026-08-03T09:01:03.464843627",
+        "timestamp": "2026-08-04T10:05:16.610011521",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -196,20 +186,10 @@
     },
     "bam - minimap2": {
         "content": [
-            {
-                "maxReadLength": 95503,
-                "minReadLength": 0,
-                "meanReadLength": 2065,
-                "maxQuality": 60,
-                "minQuality": 0,
-                "meanQuality": 23,
-                "readCount": 466,
-                "duplicateReadCount": 0,
-                "sorted": true
-            },
+            "43bb6ef7e9eccece743204535a3abbd6",
             "hg38_filtered.bam.bai"
         ],
-        "timestamp": "2026-07-31T15:39:18.11054896",
+        "timestamp": "2026-08-04T10:05:02.059364814",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
