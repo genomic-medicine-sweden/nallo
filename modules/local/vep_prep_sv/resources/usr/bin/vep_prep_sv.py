@@ -4,10 +4,12 @@ import argparse
 import re
 
 SVTYPE_REMAP = {
-    'DUP/INS':    'DUP',
-    'DEL/INV':    'DEL',
-    'INV/INVDUP': 'INV',
-    'INV/DEL':    'DEL',
+    'TRA':        'BND',  # observed: sniffles1, dysgu, debreak
+    'DUP/INS':    'DUP',  # observed: sniffles1
+    'DEL/INV':    'DEL',  # observed: sniffles1 (SVLEN negative → net deletion)
+    'INVDUP':     'DUP',  # observed: sniffles1 (original copy intact, second copy added)
+    'INV/DEL':    'DEL',  # defensive
+    'INV/INVDUP': 'DUP',  # defensive
 }
 
 
@@ -49,12 +51,14 @@ def main():
             print(line)
             continue
 
-        # Sniffles v1: strip synthetic END from INS/BND/DUP+INS records and SVLEN=1 from BND
+        # Sniffles v1: strip synthetic END from INS/BND/DUP+INS records
+        # (END on TRA is the CHR2 coordinate and is meaningful — do not strip)
         if args.caller == 'sniffles1':
             if 'SVTYPE=INS' in line or 'SVTYPE=BND' in line or 'SVTYPE=DUP/INS' in line:
                 parts = line.split(';END=')
                 line = parts[0] + parts[-1].lstrip('0123456789')
-            if 'SVTYPE=BND' in line:
+            # Strip synthetic SVLEN=1 from BND and TRA (interchromosomal events)
+            if 'SVTYPE=BND' in line or 'SVTYPE=TRA' in line:
                 parts = line.split(';SVLEN=1')
                 line = parts[0] + parts[-1]
 
