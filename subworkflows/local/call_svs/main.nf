@@ -1,20 +1,21 @@
-include { CLEAN_SNIFFLES                     } from '../../../modules/local/clean_sniffles/main'
-include { SVDB_MERGE as SVDB_MERGE_BY_CALLER } from '../../../modules/nf-core/svdb/merge/main'
-include { SVDB_MERGE as SVDB_MERGE_BY_FAMILY } from '../../../modules/nf-core/svdb/merge/main'
-include { BCFTOOLS_VIEW                      } from '../../../modules/nf-core/bcftools/view/main'
-include { BCFTOOLS_QUERY                     } from '../../../modules/nf-core/bcftools/query/main'
-include { BCFTOOLS_REHEADER                  } from '../../../modules/nf-core/bcftools/reheader/main'
-include { BCFTOOLS_SORT                      } from '../../../modules/nf-core/bcftools/sort/main'
-include { GAWK as CREATE_SAMPLES_FILE        } from '../../../modules/nf-core/gawk/main'
-include { HIFICNV                            } from '../../../modules/nf-core/hificnv/main'
-include { SAWFISH_DISCOVER                   } from '../../../modules/nf-core/sawfish/discover/main'
-include { SAWFISH_JOINTCALL                  } from '../../../modules/nf-core/sawfish/jointcall/main'
-include { SEVERUS                            } from '../../../modules/nf-core/severus/main'
-include { SNIFFLES                           } from '../../../modules/nf-core/sniffles/main'
-include { TABIX_TABIX as TABIX_HIFICNV       } from '../../../modules/nf-core/tabix/tabix/main'
-include { TABIX_TABIX as TABIX_VCFEXPRESS    } from '../../../modules/nf-core/tabix/tabix/main'
-include { TABIX_BGZIPTABIX as TABIX_SEVERUS  } from '../../../modules/nf-core/tabix/bgziptabix/main'
-include { VCFEXPRESS                         } from '../../../modules/nf-core/vcfexpress/main'
+include { VEP_PREP_SV as VEP_PREP_SV_SNIFFLES } from '../../../modules/local/vep_prep_sv/main'
+include { VEP_PREP_SV as VEP_PREP_SV_SEVERUS  } from '../../../modules/local/vep_prep_sv/main'
+include { SVDB_MERGE as SVDB_MERGE_BY_CALLER  } from '../../../modules/nf-core/svdb/merge/main'
+include { SVDB_MERGE as SVDB_MERGE_BY_FAMILY  } from '../../../modules/nf-core/svdb/merge/main'
+include { BCFTOOLS_VIEW                       } from '../../../modules/nf-core/bcftools/view/main'
+include { BCFTOOLS_QUERY                      } from '../../../modules/nf-core/bcftools/query/main'
+include { BCFTOOLS_REHEADER                   } from '../../../modules/nf-core/bcftools/reheader/main'
+include { BCFTOOLS_SORT                       } from '../../../modules/nf-core/bcftools/sort/main'
+include { GAWK as CREATE_SAMPLES_FILE         } from '../../../modules/nf-core/gawk/main'
+include { HIFICNV                             } from '../../../modules/nf-core/hificnv/main'
+include { SAWFISH_DISCOVER                    } from '../../../modules/nf-core/sawfish/discover/main'
+include { SAWFISH_JOINTCALL                   } from '../../../modules/nf-core/sawfish/jointcall/main'
+include { SEVERUS                             } from '../../../modules/nf-core/severus/main'
+include { SNIFFLES                            } from '../../../modules/nf-core/sniffles/main'
+include { TABIX_TABIX as TABIX_HIFICNV        } from '../../../modules/nf-core/tabix/tabix/main'
+include { TABIX_TABIX as TABIX_VCFEXPRESS     } from '../../../modules/nf-core/tabix/tabix/main'
+include { TABIX_BGZIPTABIX as TABIX_SEVERUS   } from '../../../modules/nf-core/tabix/bgziptabix/main'
+include { VCFEXPRESS                          } from '../../../modules/nf-core/vcfexpress/main'
 
 workflow CALL_SVS {
     take:
@@ -46,8 +47,12 @@ workflow CALL_SVS {
             ch_tandem_repeats,
         )
 
-        TABIX_SEVERUS(
+        VEP_PREP_SV_SEVERUS(
             SEVERUS.out.all_vcf
+        )
+
+        TABIX_SEVERUS(
+            VEP_PREP_SV_SEVERUS.out.vcf
         )
 
         ch_sv_calls = ch_sv_calls.mix(
@@ -67,12 +72,12 @@ workflow CALL_SVS {
             ch_bam_bai
         )
 
-        CLEAN_SNIFFLES(
+        VEP_PREP_SV_SNIFFLES(
             SNIFFLES.out.vcf
         )
 
         BCFTOOLS_SORT(
-            CLEAN_SNIFFLES.out.vcf
+            VEP_PREP_SV_SNIFFLES.out.vcf
         )
 
         ch_sv_calls = ch_sv_calls.mix(
