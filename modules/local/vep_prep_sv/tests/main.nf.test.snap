@@ -1,4 +1,38 @@
 {
+    "vep_prep_sv - generic TRA remap (no caller flag)": {
+        "content": [
+            "##fileformat=VCFv4.2\n##FILTER=<ID=PASS,Description=\"All filters passed\">\n##INFO=<ID=SVTYPE,Number=1,Type=String,Description=\"Type of structural variant\">\n##INFO=<ID=SVMETHOD,Number=1,Type=String,Description=\"Type of approach used to detect SV\">\n##INFO=<ID=END,Number=1,Type=Integer,Description=\"End position of the structural variant\">\n##INFO=<ID=SVLEN,Number=1,Type=String,Description=\"Length of the SV\">\n##INFO=<ID=CHR2,Number=1,Type=String,Description=\"Chromosome for END coordinate in case of a translocation\">\n##INFO=<ID=CHR2_POS,Number=1,Type=Integer,Description=\"Position on CHR2 for translocation\">\n##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n##INFO=<ID=ORIG_SVTYPE,Number=1,Type=String,Description=\"Original SVTYPE before VEP normalisation\">\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tSAMPLE\nchr1\t9060095\tDB281\tN\t<TRA>\t.\tPASS\tEND=70465105;CHR2=chr18;SVLEN=0;SVMETHOD=DeBreak;SVTYPE=BND;ORIG_SVTYPE=TRA\tGT\t0/1\nchr1\t23277352\tDY46190\tC\t<TRA>\t5\tPASS\tSVMETHOD=DYSGUv1.8.8;SVTYPE=BND;END=23277353;CHR2=chr20;CHR2_POS=56552039;SVLEN=.;ORIG_SVTYPE=TRA\tGT\t0/1",
+            [
+                [
+                    "VEP_PREP_SV",
+                    "python",
+                    "3.12.2"
+                ]
+            ]
+        ],
+        "timestamp": "2026-08-04T14:29:43.310296",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.4"
+        }
+    },
+    "vep_prep_sv - sniffles1 integration": {
+        "content": [
+            [
+                [
+                    "VEP_PREP_SV",
+                    "python",
+                    "3.12.2"
+                ]
+            ],
+            "ed19f76e096724668dc971c1e3033af5"
+        ],
+        "timestamp": "2026-08-04T14:29:53.636271",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.4"
+        }
+    },
     "vep_prep_sv - sniffles1 -stub": {
         "content": [
             {
@@ -40,18 +74,18 @@
             "nextflow": "26.04.4"
         }
     },
-    "vep_prep_sv - sniffles1": {
+    "vep_prep_sv - sniffles1 synthetic": {
         "content": [
+            "##fileformat=VCFv4.1\n##source=Sniffles\n##FILTER=<ID=STRANDBIAS,Description=\"Variant supported by reads from a single strand only\">\n##FILTER=<ID=PASS,Description=\"All filters passed\">\n##FILTER=<ID=UNRESOLVED,Description=\"An insertion that is longer than the read and thus we cannot predict the full size.\">\n##ALT=<ID=TRA,Description=\"Translocation\">\n##ALT=<ID=INVDUP,Description=\"InvertedDUP with unknown boundaries\">\n##INFO=<ID=SVMETHOD,Number=1,Type=String,Description=\"Type of approach used to detect SV\">\n##INFO=<ID=CHR2,Number=1,Type=String,Description=\"Chromosome for END coordinate in case of a translocation\">\n##INFO=<ID=END,Number=1,Type=Integer,Description=\"End position of the structural variant\">\n##INFO=<ID=SVLEN,Number=1,Type=Integer,Description=\"Length of the SV\">\n##INFO=<ID=SVTYPE,Number=1,Type=String,Description=\"Type of structural variant\">\n##INFO=<ID=SUPTYPE,Number=.,Type=String,Description=\"Type by which the variant is supported.(SR,AL,NR)\">\n##INFO=<ID=STRANDS,Number=A,Type=String,Description=\"Strand orientation\">\n##INFO=<ID=RE,Number=1,Type=Integer,Description=\"read support\">\n##INFO=<ID=AF,Number=A,Type=Float,Description=\"Allele Frequency\">\n##INFO=<ID=IMPRECISE,Number=0,Type=Flag,Description=\"Imprecise structural variation\">\n##INFO=<ID=PRECISE,Number=0,Type=Flag,Description=\"Precise structural variation\">\n##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n##FORMAT=<ID=DR,Number=1,Type=Integer,Description=\"# high-quality reference reads\">\n##FORMAT=<ID=DV,Number=1,Type=Integer,Description=\"# high-quality variant reads\">\n##INFO=<ID=ORIG_SVTYPE,Number=1,Type=String,Description=\"Original SVTYPE before VEP normalisation\">\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tSAMPLE\nchr1\t10001\tTRA_44535\tN\t<TRA>\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr4;END=190122450;SVTYPE=BND;SUPTYPE=SR;STRANDS=---;RE=3;AF=0.065;ORIG_SVTYPE=TRA\tGT:DR:DV\t0/1:43:3\nchr1\t10354\tDEL_0\tCCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCCTAACCCCTAACCCTAACCCTAACCCTAACCCT\tN\t.\tPASS\tPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr1;END=10426;SVTYPE=DEL;SVLEN=-72;SUPTYPE=AL;STRANDS=+-;RE=50;AF=0.301\tGT:DR:DV\t0/1:116:50\nchr1\t10398\tINS_1\tN\tCCTAACCCTAAACCTCACCCCCACCCCCACCCCCACCCCCACCCCAACCCCAA\t.\tSTRANDBIAS\tPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr1;SVTYPE=INS;SVLEN=53;SUPTYPE=AL;STRANDS=+-;RE=14;AF=0.109\tGT:DR:DV\t0/1:114:14\nchr1\t125029103\tDELINV_1505\tN\t<DEL/INV>\t.\tPASS\tPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr1;END=125029169;SVTYPE=DEL;SVLEN=-66;SUPTYPE=NR;STRANDS=+-;RE=112;AF=0.487;ORIG_SVTYPE=DEL/INV\tGT:DR:DV\t0/1:118:112\nchr2\t91411136\tINVDUP_4187\tN\t<INVDUP>\t.\tSTRANDBIAS\tPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr2;END=91416085;SVTYPE=DUP;SVLEN=4949;SUPTYPE=SR;STRANDS=++;RE=45;AF=0.176;ORIG_SVTYPE=INVDUP\tGT:DR:DV\t0/1:211:45\nchr3\t18788556\tDUPINS_6066\tN\tTATAATATATAATATAAAAATATATTATAATATAATATATAATATATTATATAAAAATATATTATAT\t.\tPASS\tIMPRECISE;SVMETHOD=Snifflesv1.0.12;CHR2=chr3;SVTYPE=DUP;SVLEN=176;SUPTYPE=AL,SR;STRANDS=+-;RE=3;AF=0.035;ORIG_SVTYPE=DUP/INS\tGT:DR:DV\t0/1:82:3",
             [
                 [
                     "VEP_PREP_SV",
                     "python",
                     "3.12.2"
                 ]
-            ],
-            "ed19f76e096724668dc971c1e3033af5"
+            ]
         ],
-        "timestamp": "2026-08-04T12:51:39.048717",
+        "timestamp": "2026-08-04T14:29:32.92874",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"
