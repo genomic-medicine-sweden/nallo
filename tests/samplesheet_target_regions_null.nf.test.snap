@@ -1,7 +1,7 @@
 {
     "test profile | --target_regions null --alignment_output_format cram": {
         "content": [
-            223,
+            226,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -65,9 +65,6 @@
                 },
                 "CAT_CAT": {
                     "pigz": 2.8
-                },
-                "CLEAN_SNIFFLES": {
-                    "clean_sniffles": 1.0
                 },
                 "CRAMINO": {
                     "cramino": "1.1.0"
@@ -307,6 +304,12 @@
                 },
                 "VCFEXPRESS": {
                     "vcfexpress": "0.3.4"
+                },
+                "VEP_PREP_SV_SEVERUS": {
+                    "python": "3.12.2"
+                },
+                "VEP_PREP_SV_SNIFFLES": {
+                    "python": "3.12.2"
                 },
                 "WHATSHAP_STATS": {
                     "whatshap": 2.8
@@ -833,10 +836,10 @@
                 
             ]
         ],
-        "timestamp": "2026-08-05T10:19:55.978738242",
+"timestamp": "2026-08-04T14:50:19.480678304",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     }
 }
