@@ -1158,10 +1158,10 @@
                 "whatshap-stats-table.txt:md5,75b348395a44d55fa4d178cdf393f65d",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002_cramino_aligned_phased.arrow:md5,3eb25deab87902671e92fa2b13a30c7b",
-                "HG003_cramino_aligned_phased.arrow:md5,69bce30cf8af95147d35164735e43e43",
+                "HG003_cramino_aligned_phased.arrow:md5,71b69e3126562e2ff2f4a341d632cfd0",
                 "HG004_cramino_aligned_phased.arrow:md5,4ec310cfba1ddb493ca5ff4ca0a36e9b",
                 "HG002_cramino_aligned.arrow:md5,3eb25deab87902671e92fa2b13a30c7b",
-                "HG003_cramino_aligned.arrow:md5,69bce30cf8af95147d35164735e43e43",
+                "HG003_cramino_aligned.arrow:md5,71b69e3126562e2ff2f4a341d632cfd0",
                 "HG004_cramino_aligned.arrow:md5,4ec310cfba1ddb493ca5ff4ca0a36e9b",
                 "HG002.mosdepth.global.dist.txt:md5,7595e2f7ac278f28335b6e5c0bce445d",
                 "HG002.mosdepth.region.dist.txt:md5,6678002e5033170c85d393b384165161",
@@ -1235,7 +1235,7 @@
                 ],
                 [
                     "HG003_haplotagged.bam",
-                    "ca9eadca737fddfbefeb355c033e313a"
+                    "24a870dfcc697058933e2260e25c4893"
                 ],
                 [
                     "HG004_haplotagged.bam",
@@ -1343,7 +1343,7 @@
                 
             ]
         ],
-        "timestamp": "2026-08-04T10:08:00.793323667",
+        "timestamp": "2026-08-04T12:24:59.897009595",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"

@@ -759,8 +759,8 @@
                 "whatshap-stats-table.txt:md5,c37f978ef46561ab4b195ebf10005b70",
                 "FAM_paraphase_annotated.tsv:md5,f95c3b89013784ed27feb71c46c09d85",
                 "FAM.ped:md5,bd5cec27ba7337a85cf98e787131e2b5",
-                "HG002_Revio_cramino_aligned_phased.arrow:md5,278e11e38257afe9eab275ed24f9f6b2",
-                "HG002_Revio_cramino_aligned.arrow:md5,278e11e38257afe9eab275ed24f9f6b2",
+                "HG002_Revio_cramino_aligned_phased.arrow:md5,59218ecb157374692c12a6ffc63ad0e0",
+                "HG002_Revio_cramino_aligned.arrow:md5,59218ecb157374692c12a6ffc63ad0e0",
                 "HG002_Revio.mosdepth.global.dist.txt:md5,e550f23c23fb25565de66e50d8cedf84",
                 "HG002_Revio.mosdepth.region.dist.txt:md5,37e272c54826150c8456c7859f3aae4f",
                 "HG002_Revio.mosdepth.summary.txt:md5,14abaad13cc529c1e93675d6b7f71acf",
@@ -797,7 +797,7 @@
             [
                 [
                     "HG002_Revio_haplotagged.cram",
-                    "96f84a92c231a626d7fb66d370065677"
+                    "f8c3b1118e5539d5593a03a469de541c"
                 ],
                 [
                     "HG002_Revio_aligned_assembly.cram",
@@ -850,7 +850,7 @@
                 
             ]
         ],
-        "timestamp": "2026-08-04T09:35:36.046227278",
+        "timestamp": "2026-08-04T12:09:18.27445478",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
