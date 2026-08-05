@@ -15,14 +15,13 @@ workflow ALIGN {
 
     if (val_aligner == 'pbmm2') {
         // Match BAM files and reference by sample ID if needed (for portello)
-        ch_ubam
+        ch_pbmm2_input = ch_ubam
             .combine(ch_fasta)
             .filter { bam_meta, _bam, ref_meta, _ref -> use_genome_reference || bam_meta.id == ref_meta.id }
             .multiMap { bam_meta, bam, _ref_meta, ref ->
                 reads: [bam_meta, bam]
                 reference: [bam_meta, ref]
             }
-            .set { ch_pbmm2_input }
 
         PBMM2_ALIGN(
             ch_pbmm2_input.reads,
