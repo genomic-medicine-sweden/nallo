@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1155](https://github.com/genomic-medicine-sweden/nallo/pull/1155) - Added Nallo paper to the README
 - [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added new `PORTELLO_ASSEMBLY` subworkflow
 - [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added remapped bam from portello output to pipeline outputs
-- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added force only one cpu for `portello` to test config in `nextflow.config` to fix unstable snapshots
+- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added force only one cpu for `portello` and read aligners to test config in `nextflow.config` to fix unstable snapshots
 - [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added sorting of bam files by name for the input of `SAMTOOLS_MERGE` in `nallo.nf` and in `ALIGN_ASSEMBLIES` to fix unstable snapshots
 - [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Moved `SAMTOOLS_CALMD` out of the subworkflows to have only one step adding MD tag in `nallo.nf`
 - [#1164](https://github.com/genomic-medicine-sweden/nallo/pull/1164) - Added `--skip_mitochondrial_calling` parameter to allow skipping mitochondrial variant calling
