@@ -316,6 +316,15 @@ workflow NALLO {
                 }
                 .groupTuple()
                 .map { key, bams, bais -> tuple(key.getGroupTarget(), bams, bais) }
+                .map { meta, bams, bais ->
+                    // Keep BAM and BAI pairing while enforcing deterministic order.
+                    def bam_bai_pairs = [bams, bais]
+                        .transpose()
+                        .sort { left, right ->
+                            left[0].getName() <=> right[0].getName()
+                        }
+                    [meta, bam_bai_pairs.collect { pair -> pair[0] }, bam_bai_pairs.collect { pair -> pair[1] }]
+                }
         }
         else {
 
