@@ -17,15 +17,6 @@ nextflow_workflow {
                 """
             }
         }
-        run("SAMTOOLS_FAIDX") {
-            script "../../../../modules/nf-core/samtools/faidx/main.nf"
-            process {
-                """
-                input[0] = GUNZIP.out.gunzip.map { meta, fasta -> [meta, fasta, []] }
-                input[1] = false
-                """
-            }
-        }
     }
 
     test("[bam, fasta] - minimap2") {
@@ -41,7 +32,7 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
                 input[2] = 'minimap2'
-                input[3] = true
+                input[3] = ''
                 """
             }
         }
@@ -70,7 +61,7 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
                 input[2] = 'mm2plus'
-                input[3] = true
+                input[3] = ''
                 """
             }
         }
@@ -86,7 +77,7 @@ nextflow_workflow {
         }
     }
 
-    test("[bam, fasta] - pbmm2 - skip portello") {
+    test("[bam, fasta] - pbmm2") {
         when {
             workflow {
                 """
@@ -96,7 +87,7 @@ nextflow_workflow {
                 ])
                 input[1] = GUNZIP.out.gunzip
                 input[2] = 'pbmm2'
-                input[3] = false
+                input[3] = true
                 """
             }
         }
@@ -127,7 +118,7 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
                 input[2] = 'minimap2'
-                input[3] = true
+                input[3] = ''
                 """
             }
         }
@@ -141,6 +132,32 @@ nextflow_workflow {
     }
 
         test("[bam, fasta] - pbmm2 - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                ])
+                input[1] = GUNZIP.out.gunzip
+                input[2] = 'pbmm2'
+                input[3] = true
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("[bam, fasta] - pbmm2 - use_genome_reference = false - stub") {
 
         options "-stub"
 
@@ -182,7 +199,7 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
                 input[2] = 'mm2plus'
-                input[3] = true
+                input[3] = ''
                 """
             }
         }
