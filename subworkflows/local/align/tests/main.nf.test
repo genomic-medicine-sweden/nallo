@@ -104,6 +104,33 @@ nextflow_workflow {
         }
     }
 
+    test("[bam, fasta] - pbmm - use_genome_reference = false") {
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                ])
+                input[1] = GUNZIP.out.gunzip
+                input[2] = 'pbmm2'
+                input[3] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    // read order in the bam can change between runs
+                    bam(workflow.out.bam.get(0).get(1)).getStatistics(),
+                    file(workflow.out.index.get(0).get(1)).name
+                ).match() }
+            )
+        }
+    }
+
     test("[fastq, fasta] - minimap2 - stub") {
         options "-stub"
         when {

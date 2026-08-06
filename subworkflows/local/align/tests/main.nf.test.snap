@@ -14,7 +14,7 @@
             },
             "test_aligned_reads_no_md.bam.bai"
         ],
-        "timestamp": "2026-08-05T16:06:18.558208402",
+        "timestamp": "2026-08-06T15:29:19.215085916",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -57,7 +57,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-08-05T16:17:28.148351998",
+        "timestamp": "2026-08-06T15:29:44.174241844",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -68,7 +68,28 @@
             "eeaeea791da897c73f888b97fd3ec04f",
             "HG002_PacBio_Revio.bam.bam.bai"
         ],
-        "timestamp": "2026-08-06T11:16:19.593186283",
+        "timestamp": "2026-08-06T15:28:49.584089143",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.07.0"
+        }
+    },
+    "[bam, fasta] - pbmm - use_genome_reference = false": {
+        "content": [
+            {
+                "maxReadLength": 33619,
+                "minReadLength": 1915,
+                "meanReadLength": 16960,
+                "maxQuality": 60,
+                "minQuality": 0,
+                "meanQuality": 53,
+                "readCount": 1223,
+                "duplicateReadCount": 0,
+                "sorted": false
+            },
+            "test_aligned_reads_no_md.bam.bai"
+        ],
+        "timestamp": "2026-08-06T15:29:31.729846625",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -111,7 +132,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-08-05T16:17:35.420795119",
+        "timestamp": "2026-08-06T15:29:50.260739016",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -154,7 +175,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-08-05T15:57:58.13304821",
+        "timestamp": "2026-08-06T15:29:56.66826993",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -165,7 +186,7 @@
             "8ae63fe5d3a9bf7a8f08c5266d729a05",
             "test.bam.bai"
         ],
-        "timestamp": "2026-08-06T11:16:46.13695616",
+        "timestamp": "2026-08-06T15:29:06.739928981",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -208,7 +229,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-08-05T15:57:30.060245382",
+        "timestamp": "2026-08-06T15:29:38.079271382",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
