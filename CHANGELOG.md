@@ -124,6 +124,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1125](https://github.com/genomic-medicine-sweden/nallo/pull/1125) - Removed `samplesheet_ont.csv` because it is unused.
 - [#1163](https://github.com/genomic-medicine-sweden/nallo/pull/1163) - Removed `--run_methbat` and `--run_modkit` parameters; use `--methylation_callers` instead
 - [#1205](https://github.com/genomic-medicine-sweden/nallo/pull/1205) - Removed use of 2 cpus for `GENMOD_MODELS` in `base.config` since the bug was fixed in v.3.12.0
+- [#1224](https://github.com/genomic-medicine-sweden/nallo/pull/1224) - Removed hardcoded memory use in config for `RANK_VARIANTS:BCFTOOLS_SORT` since it is already covered by `task.memory` in the module
 
 ### Fixed
 
