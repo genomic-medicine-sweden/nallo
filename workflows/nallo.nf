@@ -267,6 +267,7 @@ workflow NALLO {
         ch_genome_assembly_input = CONVERT_INPUT_BAMS.out.fastq.groupTuple()
 
         // Hifiasm assembly
+        // Concatenate haplotypes per sample if portello is not skipped so it can be used for reads-to-assembly alignment
         GENOME_ASSEMBLY(
             ch_genome_assembly_input,
             val_hifiasm_mode == "trio-binning",
@@ -298,6 +299,8 @@ workflow NALLO {
             // Add original file name to meta to join correct alignments and indexes
             ch_align_in = ch_unmapped.map { meta, bam -> tuple(meta + [file: bam.name], bam) }
 
+            // If portello is not skipped, we need to align the reads to the concatenated haplotypes from the assembly,
+            // otherwise we can align to the reference genome.
             ALIGN(
                 ch_align_in,
                 !val_skip_portello ? GENOME_ASSEMBLY.out.concatenated_haplotypes : ch_fasta,
