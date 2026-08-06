@@ -32,7 +32,7 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
                 input[2] = 'minimap2'
-                input[3] = ''
+                input[3] = true
                 """
             }
         }
@@ -61,7 +61,7 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
                 input[2] = 'mm2plus'
-                input[3] = ''
+                input[3] = true
                 """
             }
         }
@@ -118,7 +118,7 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
                 input[2] = 'minimap2'
-                input[3] = ''
+                input[3] = true
                 """
             }
         }
@@ -199,7 +199,7 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
                 input[2] = 'mm2plus'
-                input[3] = ''
+                input[3] = true
                 """
             }
         }
