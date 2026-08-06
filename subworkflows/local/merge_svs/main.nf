@@ -3,18 +3,11 @@ include { SVDB_MERGE as SVDB_MERGE_BY_FAMILY } from '../../../modules/nf-core/sv
 
 workflow MERGE_SVS {
     take:
-    ch_reheadered_vcf // channel: [ val(meta), path(vcf) ]
-    ch_vcf // channel: [ val(meta), path(vcf) ]
+    ch_vcf // channel: [ val(meta), [ path(vcf) ] ]
     sv_callers_to_merge // List: [ 'caller1', 'caller2', 'caller3' ]
     caller_priority // List: [ 'caller3', 'caller1', 'caller2' ]
 
     main:
-    // Merge the reheadered SV calls with the ones that didn't need reheadering
-    ch_svdb_merge_by_caller_input = ch_reheadered_vcf
-        .concat(ch_vcf)
-        .map { meta, vcf -> [['id': meta.family_id, 'sv_caller': meta.sv_caller], vcf] }
-        .groupTuple()
-
     /*
      * First merge SV calls from each caller into family VCFs
      * HiFiCNV has a different BND distance from the other callers,
@@ -22,7 +15,7 @@ workflow MERGE_SVS {
      * These options are set in the config
      */
     SVDB_MERGE_BY_CALLER(
-        ch_svdb_merge_by_caller_input,
+        ch_vcf,
         [],
         true,
     )

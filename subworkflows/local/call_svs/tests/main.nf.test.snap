@@ -3,106 +3,76 @@
         "content": [
             [
                 [
-                    "reheadered_vcf:",
+                    "vcf:",
                     {
-                        "id": "test_1",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
-                        "sv_caller": "severus"
-                    },
-                    "test_1_reheader.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]",
-                    "ae1e654608d3aa822ba69b57ce31a861"
-                ],
-                [
-                    "reheadered_vcf:",
-                    {
-                        "id": "test_1",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
-                        "sv_caller": "sniffles"
-                    },
-                    "test_1_reheader.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]",
-                    "1b214fb9e1e9bcc3d7719580c2a6bbc6"
-                ],
-                [
-                    "reheadered_vcf:",
-                    {
-                        "id": "test_2",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
-                        "sv_caller": "severus"
-                    },
-                    "test_2_reheader.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]",
-                    "ea83940547c0bc15eb6b4c9a59159406"
-                ],
-                [
-                    "reheadered_vcf:",
-                    {
-                        "id": "test_2",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
-                        "sv_caller": "sniffles"
-                    },
-                    "test_2_reheader.vcf.gz",
-                    "VcfFile [chromosomes=[], sampleCount=1, variantCount=0, phased=true, phasedAutodetect=true]",
-                    "d41d8cd98f00b204e9800998ecf8427e"
-                ]
-            ],
-            [
-                [
-                    "found_in_tag_no_reheader:",
-                    {
-                        "id": "test_1",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
+                        "id": "family",
                         "sv_caller": "hificnv"
                     },
-                    "test_1_hificnv_found_in.vcf.gz"
+                    [
+                        [
+                            "test_1_hificnv_found_in.vcf.gz"
+                        ],
+                        [
+                            "test_2_hificnv_found_in.vcf.gz"
+                        ]
+                    ]
                 ],
                 [
-                    "found_in_tag_no_reheader:",
+                    "vcf:",
                     {
-                        "id": "test_1",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
+                        "id": "family",
                         "sv_caller": "sawfish"
                     },
-                    "test_1_sawfish_found_in.vcf.gz"
+                    [
+                        [
+                            "test_1_sawfish_found_in.vcf.gz"
+                        ],
+                        [
+                            "test_2_sawfish_found_in.vcf.gz"
+                        ]
+                    ]
                 ],
                 [
-                    "found_in_tag_no_reheader:",
+                    "vcf:",
                     {
-                        "id": "test_2",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
-                        "sv_caller": "hificnv"
+                        "id": "family",
+                        "sv_caller": "severus"
                     },
-                    "test_2_hificnv_found_in.vcf.gz"
+                    [
+                        [
+                            "test_1_reheader.vcf.gz",
+                            "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]",
+                            "ae1e654608d3aa822ba69b57ce31a861"
+                        ],
+                        [
+                            "test_2_reheader.vcf.gz",
+                            "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]",
+                            "ea83940547c0bc15eb6b4c9a59159406"
+                        ]
+                    ]
                 ],
                 [
-                    "found_in_tag_no_reheader:",
+                    "vcf:",
                     {
-                        "id": "test_2",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
-                        "sv_caller": "sawfish"
+                        "id": "family",
+                        "sv_caller": "sniffles"
                     },
-                    "test_2_sawfish_found_in.vcf.gz"
+                    [
+                        [
+                            "test_1_reheader.vcf.gz",
+                            "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]",
+                            "1b214fb9e1e9bcc3d7719580c2a6bbc6"
+                        ],
+                        [
+                            "test_2_reheader.vcf.gz",
+                            "VcfFile [chromosomes=[], sampleCount=1, variantCount=0, phased=true, phasedAutodetect=true]",
+                            "d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
                 ]
             ]
         ],
-        "timestamp": "2026-07-30T14:01:54.459145867",
+        "timestamp": "2026-08-06T13:28:28.118590273",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -112,24 +82,22 @@
         "content": [
             [
                 [
-                    "reheadered_vcf:",
+                    "vcf:",
                     {
-                        "id": "test",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
+                        "id": "family",
                         "sv_caller": "sniffles"
                     },
-                    "test_reheader.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=1, variantCount=21, phased=false, phasedAutodetect=false]",
-                    "4ef4a55d60b44c349a56e1516ad2542a"
+                    [
+                        [
+                            "test_reheader.vcf.gz",
+                            "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=1, variantCount=21, phased=false, phasedAutodetect=false]",
+                            "4ef4a55d60b44c349a56e1516ad2542a"
+                        ]
+                    ]
                 ]
-            ],
-            [
-                
             ]
         ],
-        "timestamp": "2026-07-30T13:57:24.455534385",
+        "timestamp": "2026-08-06T13:24:00.599335125",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -138,21 +106,21 @@
     "1 sample, 1 family - sawfish": {
         "content": [
             [
-                
-            ],
-            [
                 [
-                    "found_in_tag_no_reheader:",
+                    "vcf:",
                     {
                         "id": "family",
-                        "family_id": "family",
                         "sv_caller": "sawfish"
                     },
-                    "family_sawfish_found_in.vcf.gz"
+                    [
+                        [
+                            "family_sawfish_found_in.vcf.gz"
+                        ]
+                    ]
                 ]
             ]
         ],
-        "timestamp": "2026-07-30T13:58:06.751434503",
+        "timestamp": "2026-08-06T13:24:41.564844587",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -161,43 +129,36 @@
     "2 samples, 1 family - hificnv,sawfish with trf bed, no MAF track": {
         "content": [
             [
-                
-            ],
-            [
                 [
-                    "found_in_tag_no_reheader:",
+                    "vcf:",
                     {
                         "id": "family",
-                        "family_id": "family",
+                        "sv_caller": "hificnv"
+                    },
+                    [
+                        [
+                            "test_1_hificnv_found_in.vcf.gz"
+                        ],
+                        [
+                            "test_2_hificnv_found_in.vcf.gz"
+                        ]
+                    ]
+                ],
+                [
+                    "vcf:",
+                    {
+                        "id": "family",
                         "sv_caller": "sawfish"
                     },
-                    "family_sawfish_found_in.vcf.gz"
-                ],
-                [
-                    "found_in_tag_no_reheader:",
-                    {
-                        "id": "test_1",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
-                        "sv_caller": "hificnv"
-                    },
-                    "test_1_hificnv_found_in.vcf.gz"
-                ],
-                [
-                    "found_in_tag_no_reheader:",
-                    {
-                        "id": "test_2",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
-                        "sv_caller": "hificnv"
-                    },
-                    "test_2_hificnv_found_in.vcf.gz"
+                    [
+                        [
+                            "family_sawfish_found_in.vcf.gz"
+                        ]
+                    ]
                 ]
             ]
         ],
-        "timestamp": "2026-07-30T14:00:15.889622925",
+        "timestamp": "2026-08-06T13:26:50.58963561",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -207,93 +168,73 @@
         "content": [
             [
                 [
-                    "reheadered_vcf:",
-                    {
-                        "id": "test_1",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
-                        "sv_caller": "severus"
-                    },
-                    "test_1_reheader.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=36, phased=false, phasedAutodetect=false]",
-                    "58ceb0e313053625db9972c69b144ad0"
-                ],
-                [
-                    "reheadered_vcf:",
-                    {
-                        "id": "test_1",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
-                        "sv_caller": "sniffles"
-                    },
-                    "test_1_reheader.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=1, variantCount=21, phased=false, phasedAutodetect=false]",
-                    "6027977b1608ebac435f587bf0ec2261"
-                ],
-                [
-                    "reheadered_vcf:",
-                    {
-                        "id": "test_2",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
-                        "sv_caller": "severus"
-                    },
-                    "test_2_reheader.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=31, phased=false, phasedAutodetect=false]",
-                    "681741ccb15d23e69a9d43e6ed7e6f72"
-                ],
-                [
-                    "reheadered_vcf:",
-                    {
-                        "id": "test_2",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
-                        "sv_caller": "sniffles"
-                    },
-                    "test_2_reheader.vcf.gz",
-                    "VcfFile [chromosomes=[chr16, chr17, chr20], sampleCount=1, variantCount=4, phased=false, phasedAutodetect=false]",
-                    "c6a5b93c6ba8b42a034f3c5b4ce003d"
-                ]
-            ],
-            [
-                [
-                    "found_in_tag_no_reheader:",
+                    "vcf:",
                     {
                         "id": "family",
-                        "family_id": "family",
+                        "sv_caller": "hificnv"
+                    },
+                    [
+                        [
+                            "test_1_hificnv_found_in.vcf.gz"
+                        ],
+                        [
+                            "test_2_hificnv_found_in.vcf.gz"
+                        ]
+                    ]
+                ],
+                [
+                    "vcf:",
+                    {
+                        "id": "family",
                         "sv_caller": "sawfish"
                     },
-                    "family_sawfish_found_in.vcf.gz"
+                    [
+                        [
+                            "family_sawfish_found_in.vcf.gz"
+                        ]
+                    ]
                 ],
                 [
-                    "found_in_tag_no_reheader:",
+                    "vcf:",
                     {
-                        "id": "test_1",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
-                        "sv_caller": "hificnv"
+                        "id": "family",
+                        "sv_caller": "severus"
                     },
-                    "test_1_hificnv_found_in.vcf.gz"
+                    [
+                        [
+                            "test_1_reheader.vcf.gz",
+                            "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=36, phased=false, phasedAutodetect=false]",
+                            "58ceb0e313053625db9972c69b144ad0"
+                        ],
+                        [
+                            "test_2_reheader.vcf.gz",
+                            "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=31, phased=false, phasedAutodetect=false]",
+                            "681741ccb15d23e69a9d43e6ed7e6f72"
+                        ]
+                    ]
                 ],
                 [
-                    "found_in_tag_no_reheader:",
+                    "vcf:",
                     {
-                        "id": "test_2",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
-                        "sv_caller": "hificnv"
+                        "id": "family",
+                        "sv_caller": "sniffles"
                     },
-                    "test_2_hificnv_found_in.vcf.gz"
+                    [
+                        [
+                            "test_1_reheader.vcf.gz",
+                            "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=1, variantCount=21, phased=false, phasedAutodetect=false]",
+                            "6027977b1608ebac435f587bf0ec2261"
+                        ],
+                        [
+                            "test_2_reheader.vcf.gz",
+                            "VcfFile [chromosomes=[chr16, chr17, chr20], sampleCount=1, variantCount=4, phased=false, phasedAutodetect=false]",
+                            "c6a5b93c6ba8b42a034f3c5b4ce003d"
+                        ]
+                    ]
                 ]
             ]
         ],
-        "timestamp": "2026-07-30T13:59:35.268796752",
+        "timestamp": "2026-08-06T13:26:09.378504416",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -302,182 +243,36 @@
     "2 samples, 1 family - sniffes,severus with trf bed, run all callers - stub": {
         "content": [
             {
-                "0": [
+                "vcf": [
                     [
                         {
-                            "id": "test_1",
-                            "single_end": false,
-                            "family_id": "family",
-                            "sex": 1,
+                            "id": "family",
+                            "sv_caller": "hificnv"
+                        },
+                        [
+                            "test_1_hificnv_found_in.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
+                            "test_2_hificnv_found_in.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        ]
+                    ],
+                    [
+                        {
+                            "id": "family",
                             "sv_caller": "severus"
                         },
-                        "test_1_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        [
+                            "test_1_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
+                            "test_2_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        ]
                     ],
                     [
                         {
-                            "id": "test_1",
-                            "single_end": false,
-                            "family_id": "family",
-                            "sex": 1,
+                            "id": "family",
                             "sv_caller": "sniffles"
                         },
-                        "test_1_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ],
-                    [
-                        {
-                            "id": "test_2",
-                            "single_end": false,
-                            "family_id": "family",
-                            "sex": 1,
-                            "sv_caller": "severus"
-                        },
-                        "test_2_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ],
-                    [
-                        {
-                            "id": "test_2",
-                            "single_end": false,
-                            "family_id": "family",
-                            "sex": 1,
-                            "sv_caller": "sniffles"
-                        },
-                        "test_2_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "id": "test_1",
-                            "single_end": false,
-                            "family_id": "family",
-                            "sex": 1,
-                            "sv_caller": "hificnv"
-                        },
-                        "test_1_hificnv_found_in.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ],
-                    [
-                        {
-                            "id": "test_2",
-                            "single_end": false,
-                            "family_id": "family",
-                            "sex": 1,
-                            "sv_caller": "hificnv"
-                        },
-                        "test_2_hificnv_found_in.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "2": [
-                    [
-                        {
-                            "id": "test_1",
-                            "single_end": false,
-                            "family_id": "family",
-                            "sex": 1
-                        },
-                        "test_1_hificnv.depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ],
-                    [
-                        {
-                            "id": "test_2",
-                            "single_end": false,
-                            "family_id": "family",
-                            "sex": 1
-                        },
-                        "test_2_hificnv.depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "3": [
-                    [
-                        {
-                            "id": "test_1",
-                            "single_end": false,
-                            "family_id": "family",
-                            "sex": 1
-                        },
-                        "test_1_hificnv.copynum.bedgraph:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ],
-                    [
-                        {
-                            "id": "test_2",
-                            "single_end": false,
-                            "family_id": "family",
-                            "sex": 1
-                        },
-                        "test_2_hificnv.copynum.bedgraph:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "4": [
-                    [
-                        {
-                            "id": "test_1",
-                            "single_end": false,
-                            "family_id": "family",
-                            "sex": 1
-                        },
-                        "test_1_hificnv.maf.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ],
-                    [
-                        {
-                            "id": "test_2",
-                            "single_end": false,
-                            "family_id": "family",
-                            "sex": 1
-                        },
-                        "test_2_hificnv.maf.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "5": [
-                    
-                ],
-                "6": [
-                    
-                ],
-                "7": [
-                    
-                ],
-                "8": [
-                    
-                ],
-                "found_in_tag_no_reheader": [
-                    [
-                        {
-                            "id": "test_1",
-                            "single_end": false,
-                            "family_id": "family",
-                            "sex": 1,
-                            "sv_caller": "hificnv"
-                        },
-                        "test_1_hificnv_found_in.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ],
-                    [
-                        {
-                            "id": "test_2",
-                            "single_end": false,
-                            "family_id": "family",
-                            "sex": 1,
-                            "sv_caller": "hificnv"
-                        },
-                        "test_2_hificnv_found_in.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "hificnv_copynum": [
-                    [
-                        {
-                            "id": "test_1",
-                            "single_end": false,
-                            "family_id": "family",
-                            "sex": 1
-                        },
-                        "test_1_hificnv.copynum.bedgraph:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ],
-                    [
-                        {
-                            "id": "test_2",
-                            "single_end": false,
-                            "family_id": "family",
-                            "sex": 1
-                        },
-                        "test_2_hificnv.copynum.bedgraph:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        [
+                            "test_1_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
+                            "test_2_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        ]
                     ]
                 ],
                 "hificnv_depth": [
@@ -500,6 +295,26 @@
                         "test_2_hificnv.depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
+                "hificnv_copynum": [
+                    [
+                        {
+                            "id": "test_1",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_1_hificnv.copynum.bedgraph:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "test_2",
+                            "single_end": false,
+                            "family_id": "family",
+                            "sex": 1
+                        },
+                        "test_2_hificnv.copynum.bedgraph:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
                 "hificnv_maf": [
                     [
                         {
@@ -520,52 +335,10 @@
                         "test_2_hificnv.maf.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "reheadered_vcf": [
-                    [
-                        {
-                            "id": "test_1",
-                            "single_end": false,
-                            "family_id": "family",
-                            "sex": 1,
-                            "sv_caller": "severus"
-                        },
-                        "test_1_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ],
-                    [
-                        {
-                            "id": "test_1",
-                            "single_end": false,
-                            "family_id": "family",
-                            "sex": 1,
-                            "sv_caller": "sniffles"
-                        },
-                        "test_1_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ],
-                    [
-                        {
-                            "id": "test_2",
-                            "single_end": false,
-                            "family_id": "family",
-                            "sex": 1,
-                            "sv_caller": "severus"
-                        },
-                        "test_2_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ],
-                    [
-                        {
-                            "id": "test_2",
-                            "single_end": false,
-                            "family_id": "family",
-                            "sex": 1,
-                            "sv_caller": "sniffles"
-                        },
-                        "test_2_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "sawfish_copynum_bedgraph": [
+                "sawfish_depth_bw": [
                     
                 ],
-                "sawfish_depth_bw": [
+                "sawfish_copynum_bedgraph": [
                     
                 ],
                 "sawfish_gc_bias_corrected_depth_bw": [
@@ -576,7 +349,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-30T14:02:11.92831304",
+        "timestamp": "2026-08-06T14:08:02.726073892",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -586,93 +359,73 @@
         "content": [
             [
                 [
-                    "reheadered_vcf:",
-                    {
-                        "id": "test_1",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
-                        "sv_caller": "severus"
-                    },
-                    "test_1_reheader.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]",
-                    "ae1e654608d3aa822ba69b57ce31a861"
-                ],
-                [
-                    "reheadered_vcf:",
-                    {
-                        "id": "test_1",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
-                        "sv_caller": "sniffles"
-                    },
-                    "test_1_reheader.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]",
-                    "1b214fb9e1e9bcc3d7719580c2a6bbc6"
-                ],
-                [
-                    "reheadered_vcf:",
-                    {
-                        "id": "test_2",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
-                        "sv_caller": "severus"
-                    },
-                    "test_2_reheader.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]",
-                    "ea83940547c0bc15eb6b4c9a59159406"
-                ],
-                [
-                    "reheadered_vcf:",
-                    {
-                        "id": "test_2",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
-                        "sv_caller": "sniffles"
-                    },
-                    "test_2_reheader.vcf.gz",
-                    "VcfFile [chromosomes=[], sampleCount=1, variantCount=0, phased=true, phasedAutodetect=true]",
-                    "d41d8cd98f00b204e9800998ecf8427e"
-                ]
-            ],
-            [
-                [
-                    "found_in_tag_no_reheader:",
+                    "vcf:",
                     {
                         "id": "family",
-                        "family_id": "family",
+                        "sv_caller": "hificnv"
+                    },
+                    [
+                        [
+                            "test_1_hificnv_found_in.vcf.gz"
+                        ],
+                        [
+                            "test_2_hificnv_found_in.vcf.gz"
+                        ]
+                    ]
+                ],
+                [
+                    "vcf:",
+                    {
+                        "id": "family",
                         "sv_caller": "sawfish"
                     },
-                    "family_sawfish_found_in.vcf.gz"
+                    [
+                        [
+                            "family_sawfish_found_in.vcf.gz"
+                        ]
+                    ]
                 ],
                 [
-                    "found_in_tag_no_reheader:",
+                    "vcf:",
                     {
-                        "id": "test_1",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
-                        "sv_caller": "hificnv"
+                        "id": "family",
+                        "sv_caller": "severus"
                     },
-                    "test_1_hificnv_found_in.vcf.gz"
+                    [
+                        [
+                            "test_1_reheader.vcf.gz",
+                            "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]",
+                            "ae1e654608d3aa822ba69b57ce31a861"
+                        ],
+                        [
+                            "test_2_reheader.vcf.gz",
+                            "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]",
+                            "ea83940547c0bc15eb6b4c9a59159406"
+                        ]
+                    ]
                 ],
                 [
-                    "found_in_tag_no_reheader:",
+                    "vcf:",
                     {
-                        "id": "test_2",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
-                        "sv_caller": "hificnv"
+                        "id": "family",
+                        "sv_caller": "sniffles"
                     },
-                    "test_2_hificnv_found_in.vcf.gz"
+                    [
+                        [
+                            "test_1_reheader.vcf.gz",
+                            "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]",
+                            "1b214fb9e1e9bcc3d7719580c2a6bbc6"
+                        ],
+                        [
+                            "test_2_reheader.vcf.gz",
+                            "VcfFile [chromosomes=[], sampleCount=1, variantCount=0, phased=true, phasedAutodetect=true]",
+                            "d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
                 ]
             ]
         ],
-        "timestamp": "2026-07-30T14:01:04.193248538",
+        "timestamp": "2026-08-06T13:27:40.497040066",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -681,23 +434,21 @@
     "1 sample, 1 family - sawfish, force_sawfish_joint_call_single_samples true": {
         "content": [
             [
-                
-            ],
-            [
                 [
-                    "found_in_tag_no_reheader:",
+                    "vcf:",
                     {
-                        "id": "test_1",
-                        "single_end": false,
-                        "family_id": "family",
-                        "sex": 1,
+                        "id": "family",
                         "sv_caller": "sawfish"
                     },
-                    "test_1_sawfish_found_in.vcf.gz"
+                    [
+                        [
+                            "test_1_sawfish_found_in.vcf.gz"
+                        ]
+                    ]
                 ]
             ]
         ],
-        "timestamp": "2026-07-30T13:58:46.753377258",
+        "timestamp": "2026-08-06T13:25:21.609114442",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -706,94 +457,25 @@
     "1 sample, 1 family - sawfish, force_sawfish_joint_call_single_samples true -stub": {
         "content": [
             {
-                "0": [
-                    
-                ],
-                "1": [
+                "vcf": [
                     [
                         {
                             "id": "family",
-                            "family_id": "family",
                             "sv_caller": "sawfish"
                         },
-                        "family_sawfish_found_in.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        [
+                            "family_sawfish_found_in.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        ]
                     ]
-                ],
-                "2": [
-                    
-                ],
-                "3": [
-                    
-                ],
-                "4": [
-                    
-                ],
-                "5": [
-                    [
-                        {
-                            "id": "test",
-                            "family_id": "family"
-                        },
-                        "depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "6": [
-                    [
-                        {
-                            "id": "test",
-                            "family_id": "family"
-                        },
-                        "copynum.bedgraph:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "7": [
-                    [
-                        {
-                            "id": "test",
-                            "family_id": "family"
-                        },
-                        "gc_bias_corrected_depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "8": [
-                    [
-                        {
-                            "id": "test",
-                            "family_id": "family"
-                        },
-                        "maf.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "found_in_tag_no_reheader": [
-                    [
-                        {
-                            "id": "family",
-                            "family_id": "family",
-                            "sv_caller": "sawfish"
-                        },
-                        "family_sawfish_found_in.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
-                    ]
-                ],
-                "hificnv_copynum": [
-                    
                 ],
                 "hificnv_depth": [
                     
                 ],
+                "hificnv_copynum": [
+                    
+                ],
                 "hificnv_maf": [
                     
-                ],
-                "reheadered_vcf": [
-                    
-                ],
-                "sawfish_copynum_bedgraph": [
-                    [
-                        {
-                            "id": "test",
-                            "family_id": "family"
-                        },
-                        "copynum.bedgraph:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
                 ],
                 "sawfish_depth_bw": [
                     [
@@ -802,6 +484,15 @@
                             "family_id": "family"
                         },
                         "depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "sawfish_copynum_bedgraph": [
+                    [
+                        {
+                            "id": "test",
+                            "family_id": "family"
+                        },
+                        "copynum.bedgraph:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "sawfish_gc_bias_corrected_depth_bw": [
@@ -824,7 +515,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-30T14:02:24.948508449",
+        "timestamp": "2026-08-06T14:08:19.012912595",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"

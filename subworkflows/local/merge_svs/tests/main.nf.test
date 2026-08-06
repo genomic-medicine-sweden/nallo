@@ -106,10 +106,9 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = CALL_SVS.out.reheadered_vcf
-                input[1] = CALL_SVS.out.found_in_tag_no_reheader
+                input[0] = CALL_SVS.out.vcf
+                input[1] = ['sniffles']
                 input[2] = ['sniffles']
-                input[3] = ['sniffles']
                 """
             }
         }
@@ -136,10 +135,9 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = CALL_SVS.out.reheadered_vcf
-                input[1] = CALL_SVS.out.found_in_tag_no_reheader
+                input[0] = CALL_SVS.out.vcf
+                input[1] = ['sniffles', 'severus', 'hificnv', 'sawfish']
                 input[2] = ['sniffles', 'severus', 'hificnv', 'sawfish']
-                input[3] = ['sniffles', 'severus', 'hificnv', 'sawfish']
                 """
             }
         }
@@ -168,10 +166,9 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = CALL_SVS.out.reheadered_vcf
-                input[1] = CALL_SVS.out.found_in_tag_no_reheader
+                input[0] = CALL_SVS.out.vcf
+                input[1] = ['sniffles', 'severus', 'hificnv', 'sawfish']
                 input[2] = ['sniffles', 'severus', 'hificnv', 'sawfish']
-                input[3] = ['sniffles', 'severus', 'hificnv', 'sawfish']
                 """
             }
         }

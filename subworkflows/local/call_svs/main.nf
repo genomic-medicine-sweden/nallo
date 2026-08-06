@@ -252,9 +252,14 @@ workflow CALL_SVS {
         [[], []],
     )
 
+    // Concat the reheadered VCFs with the ones that didn't need reheadering to merge later
+    ch_vcf = BCFTOOLS_REHEADER.out.vcf
+        .concat(ch_found_in_tagged_vcf.no_reheader)
+        .map { meta, vcf -> [['id': meta.family_id, 'sv_caller': meta.sv_caller], vcf] }
+        .groupTuple()
+
     emit:
-    reheadered_vcf                     = BCFTOOLS_REHEADER.out.vcf
-    found_in_tag_no_reheader           = ch_found_in_tagged_vcf.no_reheader // channel: [ val(meta), path(vcf) ]                                                                                                              // channel: [ val(meta), path(vcf) ]
+    vcf                                 = ch_vcf // channel: [ val(meta), [ path(vcf) ] ]
     hificnv_depth                      = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.depth : channel.empty() // channel: [ val(meta), path(bw) ]
     hificnv_copynum                    = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.copynum : channel.empty() // channel: [ val(meta), path(bedgraph) ]
     hificnv_maf                        = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.maf : channel.empty() // channel: [ val(meta), path(bw) ]

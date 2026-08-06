@@ -611,8 +611,7 @@ workflow NALLO {
         )
 
         MERGE_SVS(
-            CALL_SVS.out.reheadered_vcf,
-            CALL_SVS.out.found_in_tag_no_reheader,
+            CALL_SVS.out.vcf,
             val_sv_callers_to_merge.split(',').collect { caller -> caller.toLowerCase().trim() },
             val_sv_callers_merge_priority.split(',').collect { caller -> caller.toLowerCase().trim() },
         )
