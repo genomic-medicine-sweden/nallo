@@ -65,20 +65,10 @@
     },
     "[bam, fasta] - minimap2": {
         "content": [
-            {
-                "maxReadLength": 33619,
-                "minReadLength": 1915,
-                "meanReadLength": 16635,
-                "maxQuality": 60,
-                "minQuality": 1,
-                "meanQuality": 59,
-                "readCount": 1170,
-                "duplicateReadCount": 0,
-                "sorted": false
-            },
+            "eeaeea791da897c73f888b97fd3ec04f",
             "HG002_PacBio_Revio.bam.bam.bai"
         ],
-        "timestamp": "2026-08-06T09:57:57.840219365",
+        "timestamp": "2026-08-06T11:16:19.593186283",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -172,20 +162,10 @@
     },
     "[bam, fasta] - mm2plus": {
         "content": [
-            {
-                "maxReadLength": 33619,
-                "minReadLength": 0,
-                "meanReadLength": 13075,
-                "maxQuality": 60,
-                "minQuality": 0,
-                "meanQuality": 49,
-                "readCount": 1445,
-                "duplicateReadCount": 0,
-                "sorted": false
-            },
+            "8ae63fe5d3a9bf7a8f08c5266d729a05",
             "test.bam.bai"
         ],
-        "timestamp": "2026-08-06T09:58:14.85501771",
+        "timestamp": "2026-08-06T11:16:46.13695616",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
