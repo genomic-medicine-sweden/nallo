@@ -22,6 +22,7 @@ nextflow_pipeline {
                 gens_panel_of_normals_male   = null
                 // Skip steps irrelevant to methylation annotation
                 skip_genome_assembly         = true
+                skip_portello                = true
                 skip_annotate_paralogs       = true
                 skip_call_paralogs           = true
                 skip_chromograph             = true

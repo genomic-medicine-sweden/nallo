@@ -2,8 +2,10 @@
  * Workflow to call mitochondrial variants
  */
 
+include { BCFTOOLS_REHEADER                   } from '../../../modules/nf-core/bcftools/reheader/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_MITO } from '../../../modules/nf-core/bcftools/view/main'
 include { DEEPVARIANT_RUNDEEPVARIANT          } from '../../../modules/nf-core/deepvariant/rundeepvariant/main'
+include { GAWK as GAWK_STRIP_CONTIG_HEADER    } from '../../../modules/nf-core/gawk/main'
 include { MITORSAW_HAPLOTYPE                  } from '../../../modules/nf-core/mitorsaw/haplotype/main'
 
 workflow CALL_MITOCHONDRIAL_VARIANTS {
@@ -62,7 +64,25 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
      */
     if (mitochondrial_caller != "deepvariant") {
 
-        ch_mito_split_input = ch_vcf.flatMap { meta, vcf ->
+        /*
+        * Mitochondrial-specific callers produce VCFs with only ##contig=<ID=chrM> in the header.
+        * bcftools reheader --fai only appends missing contigs — it does not replace existing ones.
+        * So we first strip all ##contig lines with GAWK, then reheader FAI
+        * This ensures all contigs appear in reference order so the downstream sort places chrM correctly.
+        */
+
+        GAWK_STRIP_CONTIG_HEADER(
+            ch_vcf.map { meta, vcf -> [meta, [vcf]] },
+            [],
+            false,
+        )
+
+        BCFTOOLS_REHEADER(
+            GAWK_STRIP_CONTIG_HEADER.out.output.map { meta, vcf -> [meta, vcf, [], []] },
+            ch_fai.collect(),
+        )
+
+        ch_mito_split_input = BCFTOOLS_REHEADER.out.vcf.flatMap { meta, vcf ->
             [[meta + [variant_type: "snv"], vcf, []], [meta + [variant_type: "sv"], vcf, []]]
         }
 
@@ -77,6 +97,7 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
             snv: meta.variant_type == "snv"
             sv: meta.variant_type == "sv"
         }
+
 
         ch_snv_vcf = remove_variant_type_from_meta(ch_mito_vcf_split.snv)
         ch_snv_tbi = remove_variant_type_from_meta(ch_mito_tbi_split.snv)

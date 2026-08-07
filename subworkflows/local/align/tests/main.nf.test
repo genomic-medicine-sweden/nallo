@@ -11,18 +11,9 @@ nextflow_workflow {
             process {
                 """
                 input[0] = [
-                    [ id:'hg38' ],
+                    [ id:'test' ],
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ]
-                """
-            }
-        }
-        run("SAMTOOLS_FAIDX") {
-            script "../../../../modules/nf-core/samtools/faidx/main.nf"
-            process {
-                """
-                input[0] = GUNZIP.out.gunzip.map { meta, fasta -> [meta, fasta, []] }
-                input[1] = false
                 """
             }
         }
@@ -40,8 +31,8 @@ nextflow_workflow {
                     [ id: 'hg38'],
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
-                input[2] = [[],[]]
-                input[3] = 'minimap2'
+                input[2] = 'minimap2'
+                input[3] = true
                 """
             }
         }
@@ -69,8 +60,8 @@ nextflow_workflow {
                     [ id: 'hg38'],
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
-                input[2] = [[],[]]
-                input[3] = 'mm2plus'
+                input[2] = 'mm2plus'
+                input[3] = true
                 """
             }
         }
@@ -95,8 +86,35 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
                 ])
                 input[1] = GUNZIP.out.gunzip
-                input[2] = SAMTOOLS_FAIDX.out.fai
-                input[3] = 'pbmm2'
+                input[2] = 'pbmm2'
+                input[3] = true
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    // read order in the bam can change between runs
+                    bam(workflow.out.bam.get(0).get(1)).getStatistics(),
+                    file(workflow.out.index.get(0).get(1)).name
+                ).match() }
+            )
+        }
+    }
+
+    test("[bam, fasta] - pbmm - use_genome_reference = false") {
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                ])
+                input[1] = GUNZIP.out.gunzip
+                input[2] = 'pbmm2'
+                input[3] = false
                 """
             }
         }
@@ -126,8 +144,8 @@ nextflow_workflow {
                     [ id: 'hg38'],
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
-                input[2] = [[],[]]
-                input[3] = 'minimap2'
+                input[2] = 'minimap2'
+                input[3] = true
                 """
             }
         }
@@ -152,8 +170,34 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
                 ])
                 input[1] = GUNZIP.out.gunzip
-                input[2] = SAMTOOLS_FAIDX.out.fai
-                input[3] = 'pbmm2'
+                input[2] = 'pbmm2'
+                input[3] = true
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("[bam, fasta] - pbmm2 - use_genome_reference = false - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true)
+                ])
+                input[1] = GUNZIP.out.gunzip
+                input[2] = 'pbmm2'
+                input[3] = false
                 """
             }
         }
@@ -181,8 +225,8 @@ nextflow_workflow {
                     [ id: 'hg38'],
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
-                input[2] = [[],[]]
-                input[3] = 'mm2plus'
+                input[2] = 'mm2plus'
+                input[3] = true
                 """
             }
         }

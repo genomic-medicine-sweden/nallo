@@ -65,7 +65,7 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SOMALIER_EXTRACT": {
                     "somalier": "0.2.18"
@@ -120,15 +120,15 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-14T13:55:20.694142535",
+        "timestamp": "2026-07-31T10:20:40.41501554",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.07.0"
         }
     },
     "Test mitochondrial calling runs by default": {
         "content": [
-            40,
+            42,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -140,6 +140,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_REHEADER": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_SORT": {
@@ -167,6 +170,9 @@
                     "deepvariant": "1.10.0"
                 },
                 "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_STRIP_CONTIG_HEADER": {
                     "gawk": "5.3.1"
                 },
                 "GLNEXUS": {
@@ -201,7 +207,7 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SOMALIER_EXTRACT": {
                     "somalier": "0.2.18"
@@ -256,10 +262,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-14T13:53:38.664579914",
+        "timestamp": "2026-07-31T10:20:17.461695095",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.07.0"
         }
     }
 }

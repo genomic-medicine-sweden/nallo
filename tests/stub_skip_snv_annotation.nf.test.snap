@@ -105,7 +105,7 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SEVERUS": {
                     "severus": 1.7
@@ -235,10 +235,10 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-07-14T14:14:19.679829595",
+        "timestamp": "2026-07-31T10:21:11.071840901",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.07.0"
         }
     },
     "Test Peddy without annotation": {
@@ -310,7 +310,7 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SOMALIER_EXTRACT": {
                     "somalier": "0.2.18"
@@ -377,10 +377,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-14T13:54:11.226483415",
+        "timestamp": "2026-07-31T10:21:34.733652606",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.07.0"
         }
     }
 }

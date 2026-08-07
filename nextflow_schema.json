@@ -126,6 +126,11 @@
                     "type": "boolean",
                     "description": "Skip sex check",
                     "default": false
+                },
+                "skip_portello": {
+                    "type": "boolean",
+                    "description": "Skip Portello analysis",
+                    "default": false
                 }
             },
             "fa_icon": "fas fa-american-sign-language-interpreting"
@@ -1037,7 +1042,7 @@
                 },
                 "read_aligner": {
                     "type": "string",
-                    "default": "minimap2",
+                    "default": "pbmm2",
                     "description": "Which aligner to use for read alignment. Supported arguments are mm2plus, minimap2 or pbmm2.",
                     "enum": ["minimap2", "pbmm2", "mm2plus"]
                 },

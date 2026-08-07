@@ -1,7 +1,7 @@
 {
     "samplesheet_premapped | --premapped": {
         "content": [
-            352,
+            358,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -125,6 +125,9 @@
                 "GAWK_EXTRACT_REGIONS": {
                     "gawk": "5.3.1"
                 },
+                "GAWK_STRIP_CONTIG_HEADER": {
+                    "gawk": "5.3.1"
+                },
                 "GENMOD_ANNOTATE": {
                     "genmod": "3.12.0"
                 },
@@ -207,7 +210,7 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_SORT": {
                     "samtools": "1.23.1"
@@ -1156,7 +1159,9 @@
                     "c8334a968268bf92dff1e959db5d9ba"
                 ]
             ],
-            [],
+            [
+                
+            ],
             [
                 [
                     "FAM_paraphase_merged.vcf.gz",
@@ -1227,12 +1232,14 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=3, variantCount=38, phased=false, phasedAutodetect=false]"
                 ]
             ],
-            []
+            [
+                
+            ]
         ],
-        "timestamp": "2026-07-21T09:44:24.84204182",
+        "timestamp": "2026-07-30T15:49:53.265392526",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.06.0"
+            "nextflow": "26.07.0"
         }
     }
 }

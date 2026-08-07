@@ -115,6 +115,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_skip_methylation_annotation
     val_skip_peddy
     val_skip_phasing
+    val_skip_portello
     val_skip_prepare_gens_input
     val_skip_qc
     val_skip_rank_variants
@@ -229,6 +230,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         (val_skip_methylation_calling || !val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }.contains('modkit')),
         val_skip_peddy,
         val_skip_phasing,
+        val_skip_portello,
         val_skip_prepare_gens_input,
         val_skip_qc,
         val_skip_rank_variants,
@@ -259,6 +261,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     aligned_assemblies_bam              = NALLO.out.aligned_assemblies_bam // channel: [ val(meta), path(bam) ]
     aligned_assemblies_crai             = NALLO.out.aligned_assemblies_crai // channel: [ val(meta), path(crai) ]
     aligned_assemblies_cram             = NALLO.out.aligned_assemblies_cram // channel: [ val(meta), path(cram) ]
+    aligned_assemblies_remapped_bam     = NALLO.out.aligned_assemblies_remapped_bam // channel: [ val(meta), path(bam) ]
+    aligned_assemblies_remapped_bai     = NALLO.out.aligned_assemblies_remapped_bai // channel: [ val(meta), path(bai) ]
     aligned_haplotagged_reads_bai       = NALLO.out.aligned_haplotagged_reads_bai // channel: [ val(meta), path(bai) ]
     aligned_haplotagged_reads_bam       = NALLO.out.aligned_haplotagged_reads_bam // channel: [ val(meta), path(bam) ]
     aligned_haplotagged_reads_crai      = NALLO.out.aligned_haplotagged_reads_crai // channel: [ val(meta), path(crai) ]
@@ -416,6 +420,7 @@ workflow {
         params.skip_mitochondrial_calling,
         params.skip_peddy,
         params.skip_phasing,
+        params.skip_portello,
         params.skip_prepare_gens_input,
         params.skip_qc,
         params.skip_rank_variants,
@@ -533,6 +538,7 @@ workflow {
         params.skip_methylation_annotation,
         params.skip_peddy,
         params.skip_phasing,
+        params.skip_portello,
         params.skip_prepare_gens_input,
         params.skip_qc,
         params.skip_rank_variants,
@@ -577,6 +583,8 @@ workflow {
     ch_aligned_assemblies_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_bai)
 
     ch_aligned_assemblies_cram = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_cram.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_crai)
+
+    ch_aligned_assemblies_remapped = GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_remapped_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_assemblies_remapped_bai)
 
     ch_aligned_haplotagged_reads_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_haplotagged_reads_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_haplotagged_reads_bai)
 
@@ -689,6 +697,7 @@ workflow {
     publish:
     aligned_assemblies_bam         = ch_aligned_assemblies_bam // channel: [ val(meta), path(bam/bai) ]
     aligned_assemblies_cram        = ch_aligned_assemblies_cram // channel: [ val(meta), path(cram/crai) ]
+    aligned_portello_reads_bam     = ch_aligned_assemblies_remapped // channel: [ val(meta), path(bam/bai) ]
     aligned_haplotagged_reads_bam  = ch_aligned_haplotagged_reads_bam // channel: [ val(meta), path(bam/bai) ]
     aligned_haplotagged_reads_cram = ch_aligned_haplotagged_reads_cram // channel: [ val(meta), path(cram/crai) ]
     aligned_reads_bam              = ch_aligned_reads_bam // channel: [ val(meta), path(bam/bai) ]
@@ -738,27 +747,31 @@ output {
         path { meta, _file -> "assembly/sample/${meta.id}/" }
         enabled params.alignment_output_format == 'cram'
     }
+    aligned_portello_reads_bam {
+        path { meta, _file -> "aligned_reads/${meta.id}/" }
+        enabled params.skip_portello && params.skip_phasing
+    }
     aligned_haplotagged_reads_bam {
         // HiPhase uses the input file (aligned reads) as template for naming output, so we need to remove the "_aligned" suffix here
         path { meta, file ->
-            file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_aligned", "")}"
+            file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_aligned(_reads)*", "")}"
         }
         enabled params.alignment_output_format == 'bam'
     }
     aligned_haplotagged_reads_cram {
         // HiPhase uses the input file (aligned reads) as template for naming output, so we need to remove the "_aligned" suffix here
         path { meta, file ->
-            file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_aligned", "")}"
+            file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_aligned(_reads)*", "")}"
         }
         enabled params.alignment_output_format == 'cram'
     }
     aligned_reads_bam {
         path { meta, _file -> "aligned_reads/${meta.id}/" }
-        enabled params.alignment_output_format == 'bam' && params.skip_phasing
+        enabled params.alignment_output_format == 'bam' && params.skip_phasing && params.skip_portello
     }
     aligned_reads_cram {
         path { meta, _file -> "aligned_reads/${meta.id}/" }
-        enabled params.alignment_output_format == 'cram' && params.skip_phasing
+        enabled params.alignment_output_format == 'cram' && params.skip_phasing && params.skip_portello
     }
     assembly_summary {
         path { meta, _assembly_summary -> "assembly/stats/${meta.id}/" }

@@ -98,7 +98,7 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SOMALIER_EXTRACT": {
                     "somalier": "0.2.18"
@@ -135,10 +135,10 @@
                 }
             }
         ],
-        "timestamp": "2026-07-27T10:58:47.444208625",
+        "timestamp": "2026-07-30T15:55:36.958502612",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.07.0"
         }
     }
 }

@@ -33,6 +33,8 @@ nextflow_pipeline {
                 skip_sv_annotation           = true
                 skip_sv_calling              = true
                 skip_sex_check               = true
+                // skip_portello for fastq input
+                skip_portello                = true
             }
         }
 
@@ -73,6 +75,7 @@ nextflow_pipeline {
                 skip_call_paralogs           = true
                 skip_chromograph             = true
                 skip_genome_assembly         = true
+                skip_portello                = true
                 skip_qc                      = true
                 skip_rank_variants           = true
                 skip_repeat_annotation       = true
