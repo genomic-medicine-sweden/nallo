@@ -237,7 +237,7 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.24
                 },
                 "SAMTOOLS_SORT": {
                     "samtools": "1.23.1"
@@ -801,7 +801,7 @@
                 ],
                 [
                     "HG002_Revio_aligned_assembly.cram",
-                    "2f1773961a831fa3e4fd0b2085f5df30"
+                    "bb0797a883bb0532851980c737c0e22b"
                 ],
                 [
                     "HG002_Revio_spanning_trgt.cram",
@@ -850,7 +850,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-29T15:58:04.027904967",
+        "timestamp": "2026-08-04T12:09:18.27445478",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"

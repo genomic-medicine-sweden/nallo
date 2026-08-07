@@ -23,6 +23,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Added `call_mitochondrial_variants` subworkflow
 - [#1148](https://github.com/genomic-medicine-sweden/nallo/pull/1148) - Added tests for `annotate_consequence_pli`
 - [#1155](https://github.com/genomic-medicine-sweden/nallo/pull/1155) - Added Nallo paper to the README
+- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added new `PORTELLO_ASSEMBLY` subworkflow
+- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added remapped bam from portello output to pipeline outputs
+- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added force only one cpu for `portello` and read aligners to test config in `nextflow.config` to fix unstable snapshots
+- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Added sorting of bam files by name for the input of `SAMTOOLS_MERGE` in `nallo.nf` and in `ALIGN_ASSEMBLIES` to fix unstable snapshots
+- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Moved `SAMTOOLS_CALMD` out of the subworkflows to have only one step adding MD tag in `nallo.nf`
 - [#1164](https://github.com/genomic-medicine-sweden/nallo/pull/1164) - Added `--skip_mitochondrial_calling` parameter to allow skipping mitochondrial variant calling
 - [#1173](https://github.com/genomic-medicine-sweden/nallo/pull/1173) - Added formatting to pre-commit
 - [#1178](https://github.com/genomic-medicine-sweden/nallo/pull/1178) - Added nextflow lint -format CI check
@@ -98,6 +103,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1025](https://github.com/genomic-medicine-sweden/nallo/pull/1025) - Changed output of `SCATTER_GENOME` to output `bed_nuclear_intervals` and `mitochondrial_nuclear_intervals`
 - [#1145](https://github.com/genomic-medicine-sweden/nallo/pull/1145) - Replaced local hiphase module with nf-core one
 - [#1149](https://github.com/genomic-medicine-sweden/nallo/pull/1149) - Replaced local `echtvar/anno` module with nf-core one
+- [#1156](https://github.com/genomic-medicine-sweden/nallo/pull/1156) - Changed pbmm2 input in `ALIGN` subworkflow to match BAM files and reference by sample ID for alignment with pbmm2 if reference genome (e.g. hg38) is not used
 - [#1169](https://github.com/genomic-medicine-sweden/nallo/pull/1169) - Updated nf-dev guidelines sync config
 - [#1178](https://github.com/genomic-medicine-sweden/nallo/pull/1178) - Updated dataset with unmasked reference and only ML and MM tags in the fastq test file
 - [#1181](https://github.com/genomic-medicine-sweden/nallo/pull/1181) - Updated minimum nextflow version to 26.04.4
@@ -147,6 +153,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                                  | `--mitorsaw_minimum_read_count` |
 |                                  | `--mitorsaw_minimum_maf`        |
 | `--run_methbat` / `--run_modkit` | `--methylation_callers`         |
+|                                  | `--skip_portello`               |
 |                                  | `--read_aligner`                |
 |                                  | `--pbmm2_preset`                |
 |                                  | `--glnexus_config`              |
@@ -165,6 +172,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | sentieon-cli/dnascope-longread | 1.5.2       | 1.6.2       |
 | hiphase                        | 1.4.0       | 1.6.0       |
 | echtvar/anno                   | 0.2.2       | 0.2.4       |
+| portello                       |             | 0.7.0       |
+| samtools/addreplacerg          |             | 1.23.1      |
+| gatk4/cleansam                 |             | 4.6.2.0     |
 | find/concatenate               |             | 4.6.0       |
 | genmod/annotate                | 3.10.2      | 3.12.0      |
 | genmod/compound                | 3.10.2      | 3.12.0      |
@@ -175,6 +185,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | samtools/calmd                 |             | 1.24        |
 | samtools/view                  | 1.23.1      | 1.24        |
 | mm2plus                        |             | 1.3         |
+| samtools/merge                 | 1.23.1      | 1.24        |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

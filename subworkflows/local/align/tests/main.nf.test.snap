@@ -4,17 +4,17 @@
             {
                 "maxReadLength": 33619,
                 "minReadLength": 1915,
-                "meanReadLength": 16635,
+                "meanReadLength": 16960,
                 "maxQuality": 60,
-                "minQuality": 1,
-                "meanQuality": 59,
-                "readCount": 1170,
+                "minQuality": 0,
+                "meanQuality": 53,
+                "readCount": 1223,
                 "duplicateReadCount": 0,
                 "sorted": false
             },
-            "HG002_PacBio_Revio.bam.bam.bai"
+            "test_aligned_reads_no_md.bam.bai"
         ],
-        "timestamp": "2026-07-23T15:19:33.182708753",
+        "timestamp": "2026-08-06T15:29:19.215085916",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -28,7 +28,7 @@
                         {
                             "id": "test"
                         },
-                        "HG002_PacBio_Revio.bam.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_aligned_reads_no_md.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "1": [
@@ -36,7 +36,7 @@
                         {
                             "id": "test"
                         },
-                        "HG002_PacBio_Revio.bam.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_aligned_reads_no_md.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "bam": [
@@ -44,7 +44,7 @@
                         {
                             "id": "test"
                         },
-                        "HG002_PacBio_Revio.bam.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_aligned_reads_no_md.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "index": [
@@ -52,12 +52,12 @@
                         {
                             "id": "test"
                         },
-                        "HG002_PacBio_Revio.bam.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_aligned_reads_no_md.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-07-23T15:19:46.639962716",
+        "timestamp": "2026-08-06T15:29:44.174241844",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -68,10 +68,74 @@
             "eeaeea791da897c73f888b97fd3ec04f",
             "HG002_PacBio_Revio.bam.bam.bai"
         ],
-        "timestamp": "2026-07-17T16:19:18.734302777",
+        "timestamp": "2026-08-06T15:28:49.584089143",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.06.0"
+            "nextflow": "26.07.0"
+        }
+    },
+    "[bam, fasta] - pbmm - use_genome_reference = false": {
+        "content": [
+            {
+                "maxReadLength": 33619,
+                "minReadLength": 1915,
+                "meanReadLength": 16960,
+                "maxQuality": 60,
+                "minQuality": 0,
+                "meanQuality": 53,
+                "readCount": 1223,
+                "duplicateReadCount": 0,
+                "sorted": false
+            },
+            "test_aligned_reads_no_md.bam.bai"
+        ],
+        "timestamp": "2026-08-06T15:29:31.729846625",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.07.0"
+        }
+    },
+    "[bam, fasta] - pbmm2 - use_genome_reference = false - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_aligned_reads_no_md.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_aligned_reads_no_md.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "bam": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_aligned_reads_no_md.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "index": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_aligned_reads_no_md.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-08-06T15:29:50.260739016",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.07.0"
         }
     },
     "[bam, fasta] - mm2plus - stub": {
@@ -111,7 +175,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-23T15:21:52.320282535",
+        "timestamp": "2026-08-06T15:29:56.66826993",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -122,7 +186,7 @@
             "8ae63fe5d3a9bf7a8f08c5266d729a05",
             "test.bam.bai"
         ],
-        "timestamp": "2026-07-28T09:43:06.226881485",
+        "timestamp": "2026-08-06T15:29:06.739928981",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -165,10 +229,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-17T16:19:36.068394593",
+        "timestamp": "2026-08-06T15:29:38.079271382",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.06.0"
+            "nextflow": "26.07.0"
         }
     }
 }

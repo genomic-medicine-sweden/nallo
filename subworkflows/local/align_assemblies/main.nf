@@ -58,7 +58,11 @@ workflow ALIGN_ASSEMBLIES {
     ch_assemblies_per_sample = TAGBAM.out.bam
         .map { meta, bam -> [meta - meta.subMap('haplotype'), bam] }
         .groupTuple(size: 2)
-        .map { meta, bams -> [meta, bams, []] }
+        .map { meta, bams ->
+            // Keep a deterministic merge order for haplotype BAMs within each sample (unstable snapshots).
+            def sorted_bams = bams.sort { bam_file -> bam_file.getName() }
+            [meta, sorted_bams, []]
+        }
 
     SAMTOOLS_MERGE(
         ch_assemblies_per_sample,

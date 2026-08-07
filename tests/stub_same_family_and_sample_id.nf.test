@@ -16,6 +16,8 @@ nextflow_pipeline {
                 input                        = "$projectDir/assets/samplesheet_same_sample_and_family_id.csv"
                 outdir                       = "$outputDir"
                 skip_mitochondrial_calling   = true
+                // skip_portello for fastq input
+                skip_portello                = true
             }
         }
 

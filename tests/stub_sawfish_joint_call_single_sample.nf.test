@@ -33,6 +33,8 @@ nextflow_pipeline {
                 force_sawfish_joint_call_single_samples = true
                 skip_prepare_gens_input                 = true
                 skip_mitochondrial_calling              = true
+                // skip_portello for fastq input
+                skip_portello                           = true
             }
         }
 

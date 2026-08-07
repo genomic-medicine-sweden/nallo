@@ -42,6 +42,8 @@ include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_RANKED_SNVS    } from '../subw
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_GENS           } from '../subworkflows/local/vcf_concat_sort_variants/main'
 include { VCF_CONCAT_SORT_VARIANTS as CONCAT_SORT_PEDDY          } from '../subworkflows/local/vcf_concat_sort_variants/main'
 include { ANNOTATE_METHYLATION                                   } from '../subworkflows/local/annotate_methylation'
+include { PORTELLO                                               } from '../subworkflows/local/portello/main'
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT LOCAL/NF-CORE MODULES
@@ -60,7 +62,9 @@ include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SV                      } from '../modu
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING                 } from '../modules/nf-core/bcftools/view/main'
 include { MINIMAP2_ALIGN                                         } from '../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_MERGE                                         } from '../modules/nf-core/samtools/merge/main'
+include { SAMTOOLS_INDEX                                         } from '../modules/nf-core/samtools/index/main'
 include { SAMTOOLS_CONVERT                                       } from '../modules/nf-core/samtools/convert/main'
+include { SAMTOOLS_CALMD                                         } from '../modules/nf-core/samtools/calmd/main'
 include { MULTIQC                                                } from '../modules/nf-core/multiqc/main'
 include { PEDDY                                                  } from '../modules/nf-core/peddy/main'
 include { SPLITUBAM                                              } from '../modules/nf-core/splitubam/main'
@@ -162,6 +166,7 @@ workflow NALLO {
     val_skip_modkit
     val_skip_peddy
     val_skip_phasing
+    val_skip_portello
     val_skip_prepare_gens_input
     val_skip_qc
     val_skip_rank_variants
@@ -224,8 +229,6 @@ workflow NALLO {
                 true,
             )
 
-
-
             if (val_alignment_processes > 1) {
                 SPLITUBAM(CONVERT_INPUT_FASTQS.out.bam)
                 ch_unmapped = SPLITUBAM.out.bam.transpose()
@@ -233,7 +236,58 @@ workflow NALLO {
             else {
                 ch_unmapped = CONVERT_INPUT_FASTQS.out.bam
             }
+        }
+    }
 
+    //
+    // Hifiasm assembly and alignment to reference genome
+    //
+    if (!val_skip_genome_assembly) {
+
+        // Now, if we started with BAM files, we do alignment and split the BAM files (this is the main case),
+        // then we converted any FASTQs to BAMs, the original BAMs will have been split, and we can convert those
+        // to FASTQs for the assembly.
+        //
+        // We could possibly implement something where we would check if the converted BAM had an original FASTQ,
+        // then we could use that FASTQ directly for the assembly. But since this is a rare case, it's not implemented.
+        //
+        // If we didn't split the files, there's currently no need to take the converted BAMs,
+        // so we take the original FASTQs instead if there are any, and also convert the original BAMs to FASTQs,
+        // so we can use those for the assembly.
+        //
+        // Since starting with FASTQs is a rare case, no splitting of FASTQs alone just for the assembly is implemented
+
+        CONVERT_INPUT_BAMS(
+            val_skip_alignment || val_premapped || (val_alignment_processes == 1) ? ch_samplesheet : SPLITUBAM.out.bam.transpose(),
+            true,
+            false,
+        )
+
+        // contains all FASTQ files, including those not converted
+        ch_genome_assembly_input = CONVERT_INPUT_BAMS.out.fastq.groupTuple()
+
+        // Hifiasm assembly
+        // Concatenate haplotypes per sample if portello is not skipped so it can be used for reads-to-assembly alignment
+        GENOME_ASSEMBLY(
+            ch_genome_assembly_input,
+            val_hifiasm_mode == "trio-binning",
+            !val_skip_portello,
+        )
+
+        ALIGN_ASSEMBLIES(
+            GENOME_ASSEMBLY.out.assembled_haplotypes,
+            ch_fasta,
+            ch_fai,
+            val_cram_output,
+            val_assembly_aligner,
+        )
+
+        ch_assembly_bam_bai = ALIGN_ASSEMBLIES.out.unfiltered_bam.join(ALIGN_ASSEMBLIES.out.unfiltered_bai, failOnMismatch: true, failOnDuplicate: true)
+    }
+
+    if (!val_skip_alignment) {
+
+        if (!val_premapped) {
             /*
              * Create a grouping key per sample that records the number of split files,
              * allowing downstream merging to trigger as soon as all alignments of a sample are ready.
@@ -245,11 +299,13 @@ workflow NALLO {
             // Add original file name to meta to join correct alignments and indexes
             ch_align_in = ch_unmapped.map { meta, bam -> tuple(meta + [file: bam.name], bam) }
 
+            // If portello is not skipped, we need to align the reads to the concatenated haplotypes from the assembly,
+            // otherwise we can align to the reference genome.
             ALIGN(
                 ch_align_in,
-                ch_fasta,
-                ch_fai,
+                !val_skip_portello ? GENOME_ASSEMBLY.out.concatenated_haplotypes : ch_fasta,
                 val_read_aligner,
+                val_skip_portello,
             )
 
             ch_aligned_for_merge = ALIGN.out.bam
@@ -263,6 +319,15 @@ workflow NALLO {
                 }
                 .groupTuple()
                 .map { key, bams, bais -> tuple(key.getGroupTarget(), bams, bais) }
+                .map { meta, bams, bais ->
+                    // Keep BAM and BAI pairing while enforcing deterministic order.
+                    def bam_bai_pairs = [bams, bais]
+                        .transpose()
+                        .sort { left, right ->
+                            left[0].getName() <=> right[0].getName()
+                        }
+                    [meta, bam_bai_pairs.collect { pair -> pair[0] }, bam_bai_pairs.collect { pair -> pair[1] }]
+                }
         }
         else {
 
@@ -286,6 +351,28 @@ workflow NALLO {
                 ch_aligned_bam,
                 ch_fasta.join(ch_fai).collect(),
             )
+        }
+
+        if (!val_skip_portello) {
+
+            PORTELLO(
+                ch_aligned_bam,
+                ch_assembly_bam_bai,
+                ch_fasta,
+            )
+
+            ch_aligned_bam = PORTELLO.out.bam.join(PORTELLO.out.bai, failOnMismatch: true, failOnDuplicate: true)
+        }
+
+        if (val_sv_callers_to_run.contains("sniffles") && val_read_aligner == "pbmm2") {
+            SAMTOOLS_CALMD(
+                val_skip_portello ? SAMTOOLS_MERGE.out.bam : PORTELLO.out.bam,
+                ch_fasta.join(ch_fai).collect(),
+            )
+
+            SAMTOOLS_INDEX(SAMTOOLS_CALMD.out.bam)
+
+            ch_aligned_bam = SAMTOOLS_CALMD.out.bam.join(SAMTOOLS_INDEX.out.index, failOnMismatch: true, failOnDuplicate: true)
         }
 
         //
@@ -330,48 +417,6 @@ workflow NALLO {
         }
     }
 
-    //
-    // Hifiasm assembly and alignment to reference genome
-    //
-    if (!val_skip_genome_assembly) {
-
-        // Now, if we started with BAM files, we do alignment and split the BAM files (this is the main case),
-        // then we converted any FASTQs to BAMs, the original BAMs will have been split, and we can convert those
-        // to FASTQs for the assembly.
-        //
-        // We could possibly implement something where we would check if the converted BAM had an original FASTQ,
-        // then we could use that FASTQ directly for the assembly. But since this is a rare case, it's not implemented.
-        //
-        // If we didn't split the files, there's currently no need to take the converted BAMs,
-        // so we take the original FASTQs instead if there are any, and also convert the original BAMs to FASTQs,
-        // so we can use those for the assembly.
-        //
-        // Since starting with FASTQs is a rare case, no splitting of FASTQs alone just for the assembly is implemented
-
-        CONVERT_INPUT_BAMS(
-            val_skip_alignment || val_premapped || (val_alignment_processes == 1) ? ch_samplesheet : SPLITUBAM.out.bam.transpose(),
-            true,
-            false,
-        )
-
-        // contains all FASTQ files, including those not converted
-        ch_genome_assembly_input = CONVERT_INPUT_BAMS.out.fastq.groupTuple()
-
-        // Hifiasm assembly
-        GENOME_ASSEMBLY(
-            ch_genome_assembly_input,
-            val_hifiasm_mode == "trio-binning",
-            false,
-        )
-
-        ALIGN_ASSEMBLIES(
-            GENOME_ASSEMBLY.out.assembled_haplotypes,
-            ch_fasta,
-            ch_fai,
-            val_cram_output,
-            val_assembly_aligner,
-        )
-    }
     //
     // Run read QC with FastQC, mosdepth and cramino
     //
@@ -1133,6 +1178,8 @@ workflow NALLO {
     aligned_assemblies_bam              = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.bam // channel: [ val(meta), path(bam) ]
     aligned_assemblies_crai             = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.crai // channel: [ val(meta), path(crai) ]
     aligned_assemblies_cram             = val_skip_genome_assembly ? channel.empty() : ALIGN_ASSEMBLIES.out.cram // channel: [ val(meta), path(cram) ]
+    aligned_assemblies_remapped_bam     = val_skip_portello ? channel.empty() : PORTELLO.out.bam // channel: [ val(meta), path(bam) ]
+    aligned_assemblies_remapped_bai     = val_skip_portello ? channel.empty() : PORTELLO.out.bai // channel: [ val(meta), path(bai) ]
     aligned_haplotagged_reads_bai       = val_skip_phasing ? channel.empty() : PHASING.out.haplotagged_bam_bai.map { meta, _bam, bai -> [meta, bai] } // channel: [ val(meta), path(bai) ]
     aligned_haplotagged_reads_bam       = val_skip_phasing ? channel.empty() : PHASING.out.haplotagged_bam_bai.map { meta, bam, _bai -> [meta, bam] } // channel: [ val(meta), path(bam) ]
     aligned_haplotagged_reads_crai      = val_skip_phasing ? channel.empty() : PHASING.out.haplotagged_cram_crai.map { meta, _cram, crai -> [meta, crai] } // channel: [ val(meta), path(crai) ]

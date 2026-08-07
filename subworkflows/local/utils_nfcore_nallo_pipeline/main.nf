@@ -63,6 +63,7 @@ workflow PIPELINE_INITIALISATION {
     val_skip_mitochondrial_calling
     val_skip_peddy
     val_skip_phasing
+    val_skip_portello
     val_skip_prepare_gens_input
     val_skip_qc
     val_skip_rank_variants
@@ -176,6 +177,7 @@ workflow PIPELINE_INITIALISATION {
         qc: "skip_qc",
         gens: "skip_prepare_gens_input",
         sex_check: "skip_sex_check",
+        portello: "skip_portello",
     ]
 
     //
@@ -201,6 +203,7 @@ workflow PIPELINE_INITIALISATION {
         methylation_annotation: ["mapping", "snv_calling", "methylation"],
         mitochondrial: ["mapping"],
         gens: ["mapping", "snv_calling"],
+        portello: ["mapping", "assembly"],
     ]
 
 
@@ -244,6 +247,7 @@ workflow PIPELINE_INITIALISATION {
         skip_genome_assembly: val_skip_genome_assembly,
         skip_prepare_gens_input: val_skip_prepare_gens_input,
         skip_sex_check: val_skip_sex_check,
+        skip_portello: val_skip_portello,
     ], files: [
         par_regions: val_par_regions,
         echtvar_snv_databases: val_echtvar_snv_databases,
@@ -273,8 +277,8 @@ workflow PIPELINE_INITIALISATION {
     // Custom validation for pipeline parameters
     //
     validateInputParameters(parameterStatus, workflowSkips, workflowDependencies, fileDependencies)
-    validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs, val_mitochondrial_caller)
-    validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge)
+    validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs, val_mitochondrial_caller, val_skip_portello)
+    validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge, val_premapped, val_skip_portello)
 
     //
     // Create channel from input file provided through val_input
@@ -335,9 +339,12 @@ workflow PIPELINE_INITIALISATION {
     // Check that the parents are present in the samplesheet
     validateParentExistsInFamily(ch_samplesheet)
 
-    // Check that the samplesheet does not contain FASTQs if --premapped is set
+    // Check that the samplesheet does not contain FASTQs if --premapped is set or --skip_portello is not set
     if (val_premapped) {
-        validateNoFastqInInput(ch_samplesheet)
+        validateNoFastqInInput(ch_samplesheet, '--premapped', true)
+    }
+    if (!val_skip_portello) {
+        validateNoFastqInInput(ch_samplesheet, '--skip_portello', false)
     }
 
     emit:
@@ -401,10 +408,10 @@ def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDe
 
 // Check that no FASTQs are in samplesheet if --premapped is set
 // Something would crash eventually if there were FASTQs, but this is a more user-friendly error message
-def validateNoFastqInInput(input) {
+def validateNoFastqInInput(input, parameter, current_status) {
     input
         .filter { _meta, reads -> reads.name =~ 'f(ast)?q(\\.gz)?$' }
-        .map { _meta, _reads -> error("FASTQ files were found in the samplesheet, but --premapped was set. Please remove FASTQ files from the samplesheet or unset --premapped.") }
+        .map { _meta, _reads -> error("FASTQ files were found in the samplesheet, but ${parameter} was set to ${current_status}. Please remove FASTQ files from the samplesheet or set ${parameter} to ${!current_status}.") }
 }
 //
 // Validate channels from input samplesheet
@@ -653,7 +660,7 @@ def createReferenceChannelFromSamplesheet(param, schema, defaultValue = '') {
     return param ? channel.fromList(samplesheetToList(param, schema)) : defaultValue
 }
 
-def validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs, val_mitochondrial_caller) {
+def validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs, val_mitochondrial_caller, val_skip_portello) {
     def pacbioTools = [
         (val_phaser): 'HiPhase',
         (val_str_caller): 'TRGT',
@@ -662,6 +669,7 @@ def validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_cal
         (val_sv_callers_to_merge): 'Sawfish',
         (!val_skip_call_paralogs): 'Paraphase',
         (val_mitochondrial_caller): 'Mitorsaw',
+        (!val_skip_portello): 'Portello',
     ].findAll { k, v -> (k instanceof Boolean) ? k : k.toString().contains(v.toLowerCase()) }.values() as List
 
     if (!pacbioTools) {
@@ -731,7 +739,7 @@ def validateSingleProjectPerRun(ch_samplesheet) {
         }
 }
 
-def validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge) {
+def validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge, val_premapped, val_skip_portello) {
     if (val_str_caller.matches('strdust') && !val_skip_repeat_annotation) {
         error("ERROR: Repeat annotation is not supported for STRdust. Run with --skip_repeat_annotation if you want to use STRdust.")
     }
@@ -753,6 +761,10 @@ def validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, va
 
     if (!val_skip_phasing && !val_skip_sv_calling && val_phaser == 'hiphase' && val_sv_callers_to_merge != 'sawfish') {
         error("ERROR: HiPhase SV phasing only supports Sawfish at the moment. Set --sv_callers to 'sawfish' if you want to use HiPhase. You may run other SV callers without passing them to HiPhase using --sv_callers_to_run.")
+    }
+
+    if (val_premapped && !val_skip_portello) {
+        error("ERROR: --premapped cannot be used together with Portello. Please run with --skip_portello if your data is already aligned.")
     }
 }
 
