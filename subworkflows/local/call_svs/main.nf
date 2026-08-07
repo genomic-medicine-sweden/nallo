@@ -48,7 +48,7 @@ workflow CALL_SVS {
         )
 
         VEP_PREP_SV_SEVERUS(
-            SEVERUS.out.all_vcf
+            SEVERUS.out.all_vcf.map { meta, vcf -> [meta + [sv_caller: 'severus'], vcf] }
         )
 
         TABIX_SEVERUS(
@@ -73,7 +73,7 @@ workflow CALL_SVS {
         )
 
         VEP_PREP_SV_SNIFFLES(
-            SNIFFLES.out.vcf
+            SNIFFLES.out.vcf.map { meta, vcf -> [meta + [sv_caller: 'sniffles'], vcf] }
         )
 
         BCFTOOLS_SORT(
