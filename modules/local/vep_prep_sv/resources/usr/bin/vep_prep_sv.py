@@ -1,7 +1,19 @@
 #!/usr/bin/env python3
+"""
+Normalise an SV VCF before VEP annotation.
+
+Generic layer: remap non-canonical SVTYPEs (TRA, DUP/INS, DEL/INV, INVDUP)
+to VEP-recognised equivalents and record the original in ORIG_SVTYPE.
+
+Caller-specific layer (--caller sniffles1): inject missing STRANDBIAS FILTER
+header; strip synthetic END=POS on INS/BND records; strip synthetic SVLEN=1
+on BND/TRA records.
+"""
 
 import argparse
 import re
+
+__version__ = "1.0.0"
 
 SVTYPE_REMAP = {
     'TRA':        'BND',  # observed: sniffles1, dysgu, debreak
@@ -32,6 +44,7 @@ def main():
     )
     parser.add_argument('vcf', help='Input VCF file')
     parser.add_argument('--caller', default='', help='Caller identifier (e.g. sniffles1, sniffles2, severus)')
+    parser.add_argument('-v', '--version', action='version', version=__version__)
     args = parser.parse_args()
 
     strandbias_added = False
