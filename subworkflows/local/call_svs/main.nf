@@ -1,5 +1,3 @@
-include { VEP_PREP_SV as VEP_PREP_SV_SNIFFLES } from '../../../modules/local/vep_prep_sv/main'
-include { VEP_PREP_SV as VEP_PREP_SV_SEVERUS  } from '../../../modules/local/vep_prep_sv/main'
 include { SVDB_MERGE as SVDB_MERGE_BY_CALLER  } from '../../../modules/nf-core/svdb/merge/main'
 include { SVDB_MERGE as SVDB_MERGE_BY_FAMILY  } from '../../../modules/nf-core/svdb/merge/main'
 include { BCFTOOLS_VIEW                       } from '../../../modules/nf-core/bcftools/view/main'
@@ -16,6 +14,8 @@ include { TABIX_TABIX as TABIX_HIFICNV        } from '../../../modules/nf-core/t
 include { TABIX_TABIX as TABIX_VCFEXPRESS     } from '../../../modules/nf-core/tabix/tabix/main'
 include { TABIX_BGZIPTABIX as TABIX_SEVERUS   } from '../../../modules/nf-core/tabix/bgziptabix/main'
 include { VCFEXPRESS                          } from '../../../modules/nf-core/vcfexpress/main'
+include { VEP_PREP_SV as VEP_PREP_SV_SEVERUS  } from '../../../modules/local/vep_prep_sv/main'
+include { VEP_PREP_SV as VEP_PREP_SV_SNIFFLES } from '../../../modules/local/vep_prep_sv/main'
 
 workflow CALL_SVS {
     take:
