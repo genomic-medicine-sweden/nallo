@@ -259,7 +259,7 @@ workflow CALL_SVS {
         .groupTuple()
 
     emit:
-    vcf                                 = ch_vcf // channel: [ val(meta), [ path(vcf) ] ]
+    vcf                                = ch_vcf // channel: [ val(meta), [ path(vcf) ] ]
     hificnv_depth                      = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.depth : channel.empty() // channel: [ val(meta), path(bw) ]
     hificnv_copynum                    = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.copynum : channel.empty() // channel: [ val(meta), path(bedgraph) ]
     hificnv_maf                        = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.maf : channel.empty() // channel: [ val(meta), path(bw) ]
