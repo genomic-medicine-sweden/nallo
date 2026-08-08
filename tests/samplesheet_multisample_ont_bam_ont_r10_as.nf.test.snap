@@ -222,10 +222,10 @@
                     "vcfexpress": "0.3.4"
                 },
                 "VEP_PREP_SV_SEVERUS": {
-                    "python": "3.12.2"
+                    "vep_prep_sv": "1.0.0"
                 },
                 "VEP_PREP_SV_SNIFFLES": {
-                    "python": "3.12.2"
+                    "vep_prep_sv": "1.0.0"
                 },
                 "WHATSHAP_HAPLOTAG": {
                     "whatshap": 2.8

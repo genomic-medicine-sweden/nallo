@@ -151,10 +151,10 @@
                     "vcfexpress": "0.3.4"
                 },
                 "VEP_PREP_SV_SEVERUS": {
-                    "python": "3.12.2"
+                    "vep_prep_sv": "1.0.0"
                 },
                 "VEP_PREP_SV_SNIFFLES": {
-                    "python": "3.12.2"
+                    "vep_prep_sv": "1.0.0"
                 },
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.13.0dev"
@@ -238,10 +238,11 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
-"timestamp": "2026-08-04T14:55:33.583492977",
+        "timestamp": "2026-08-04T14:55:33.583492977",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"        }
+            "nextflow": "26.04.6"
+        }
     },
     "Test Peddy without annotation": {
         "content": [

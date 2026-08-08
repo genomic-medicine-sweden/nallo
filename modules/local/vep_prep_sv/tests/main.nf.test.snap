@@ -5,8 +5,8 @@
             [
                 [
                     "VEP_PREP_SV",
-                    "python",
-                    "3.12.2"
+                    "vep_prep_sv",
+                    "1.0.0"
                 ]
             ]
         ],
@@ -21,8 +21,8 @@
             [
                 [
                     "VEP_PREP_SV",
-                    "python",
-                    "3.12.2"
+                    "vep_prep_sv",
+                    "1.0.0"
                 ]
             ],
             "e815ead1b7ee38894b4a49b2a72fd802"
@@ -47,8 +47,8 @@
                 "1": [
                     [
                         "VEP_PREP_SV",
-                        "python",
-                        "3.12.2"
+                        "vep_prep_sv",
+                        "1.0.0"
                     ]
                 ],
                 "vcf": [
@@ -62,8 +62,8 @@
                 "versions_python": [
                     [
                         "VEP_PREP_SV",
-                        "python",
-                        "3.12.2"
+                        "vep_prep_sv",
+                        "1.0.0"
                     ]
                 ]
             }
@@ -80,8 +80,8 @@
             [
                 [
                     "VEP_PREP_SV",
-                    "python",
-                    "3.12.2"
+                    "vep_prep_sv",
+                    "1.0.0"
                 ]
             ]
         ],
