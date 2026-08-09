@@ -47,6 +47,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- [#588](https://github.com/genomic-medicine-sweden/nallo/issues/588) - Replaced `extra_vep_options` with separate `extra_vep_options_snv` and `extra_vep_options_sv` parameters, appended after the core VEP command for each variant type
+- [#588](https://github.com/genomic-medicine-sweden/nallo/issues/588) - Removed `--plugin pLI,pLI_values.txt` from the SV VEP core command and `--plugin LoFtool,LoFtool_scores.txt` and `--plugin pLI,pLI_values.txt` from the SNV VEP core command; pass these via `extra_vep_options_snv`/`extra_vep_options_sv` together with the required plugin files in `vep_plugin_files`
+- [#588](https://github.com/genomic-medicine-sweden/nallo/issues/588) - Removed `--polyphen p`, `--sift p`, and `--humdiv` from the SV VEP core command; these amino-acid substitution predictors produce no output for SVs
+- [#588](https://github.com/genomic-medicine-sweden/nallo/issues/588) - Made `vep_plugin_files` optional; it is no longer a required input for SNV or SV annotation
 - [#968](https://github.com/genomic-medicine-sweden/nallo/pull/968) - `whatshap` now use pedigree information to phase by default. Disable with `--whatshap_pedigree_phasing false`
 - [#1029](https://github.com/genomic-medicine-sweden/nallo/pull/1029) - Updated contribution guidelines
 - [#1040](https://github.com/genomic-medicine-sweden/nallo/pull/1040) - Changed `annotate_paralogs` to workflow outputs

@@ -803,7 +803,7 @@
                     "type": "string",
                     "mimetype": "text/csv",
                     "pattern": "^\\S+\\.(csv|tsv|json|ya?ml)$",
-                    "description": "Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required.",
+                    "description": "Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. Optional; only required when passing plugin flags via extra_vep_options_snv or extra_vep_options_sv.",
                     "schema": "assets/vep_plugin_files_schema.json"
                 },
                 "force_sawfish_joint_call_single_samples": {
@@ -867,10 +867,13 @@
                     "hidden": true,
                     "description": "Extra options to Sawfish, used for test profile."
                 },
-                "extra_vep_options": {
+                "extra_vep_options_snv": {
                     "type": "string",
-                    "hidden": true,
-                    "description": "Extra options to VEP, used for test profile."
+                    "description": "Extra options appended to the VEP command for SNV annotation, e.g. '--plugin LoFtool,LoFtool_scores.txt --plugin pLI,pLI_values.txt'."
+                },
+                "extra_vep_options_sv": {
+                    "type": "string",
+                    "description": "Extra options appended to the VEP command for SV annotation, e.g. '--plugin pLI,pLI_values.txt --plugin DosageSensitivity,DosageSensitivity.tsv.gz'."
                 },
                 "extra_yak_options": {
                     "type": "string",
