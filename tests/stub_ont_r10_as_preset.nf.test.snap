@@ -1,7 +1,7 @@
 {
     "ONT_R10_AS preset with target_regions filters reads to regions before cramino QC and applies correct preset defaults": {
         "content": [
-            188,
+            191,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -165,6 +165,9 @@
                 },
                 "VCFEXPRESS": {
                     "vcfexpress": "0.3.4"
+                },
+                "VEP_PREP_SV_SEVERUS": {
+                    "vep_prep_sv": "1.0.0"
                 },
                 "VEP_PREP_SV_SNIFFLES": {
                     "vep_prep_sv": "1.0.0"
