@@ -215,7 +215,7 @@ workflow PIPELINE_INITIALISATION {
         assembly: ["fasta"],
         sambamba_depth: ["sambamba_regions"],
         snv_calling: ["fasta", "par_regions"],
-        snv_annotation: ["vep_cache", "variant_consequences_snvs"],
+        snv_annotation: ["vep_cache", "vep_plugin_files", "variant_consequences_snvs"],
         sv_calling: ["fasta"],
         sv_annotation: ["svdb_sv_databases", "vep_cache", "variant_consequences_svs"],
         rank_variants: ["genmod_reduced_penetrance", "genmod_score_config_snvs", "genmod_score_config_svs"],

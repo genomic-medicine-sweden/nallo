@@ -803,7 +803,7 @@
                     "type": "string",
                     "mimetype": "text/csv",
                     "pattern": "^\\S+\\.(csv|tsv|json|ya?ml)$",
-                    "description": "Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. Optional; only required when passing plugin flags via extra_vep_options_snv or extra_vep_options_sv.",
+                    "description": "Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. pLI_values.txt is required for SNV annotation. For SV annotation, vep_plugin_files is optional and only needed when passing plugin flags via extra_vep_options_sv.",
                     "schema": "assets/vep_plugin_files_schema.json"
                 },
                 "force_sawfish_joint_call_single_samples": {
