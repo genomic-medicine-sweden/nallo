@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            232,
+            233,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -77,6 +77,9 @@
                 },
                 "CSVTK_CONCAT": {
                     "csvtk": "0.31.0"
+                },
+                "CSVTK_JOIN": {
+                    "csvtk": "0.37.0"
                 },
                 "CSVTK_MUTATE2": {
                     "csvtk": "0.31.0"
@@ -850,7 +853,7 @@
                 
             ]
         ],
-        "timestamp": "2026-08-04T12:09:18.27445478",
+        "timestamp": "2026-08-10T18:59:58.722525507",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"

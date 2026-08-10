@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            426,
+            429,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -77,6 +77,9 @@
                 },
                 "CSVTK_CONCAT": {
                     "csvtk": "0.31.0"
+                },
+                "CSVTK_JOIN": {
+                    "csvtk": "0.37.0"
                 },
                 "CSVTK_MUTATE2": {
                     "csvtk": "0.31.0"
@@ -1343,7 +1346,7 @@
                 
             ]
         ],
-        "timestamp": "2026-08-05T16:55:50.630246984",
+        "timestamp": "2026-08-10T19:03:39.008646497",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"

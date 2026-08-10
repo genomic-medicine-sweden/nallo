@@ -1,7 +1,7 @@
 {
     "samplesheet_premapped | --premapped": {
         "content": [
-            358,
+            361,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -77,6 +77,9 @@
                 },
                 "CSVTK_CONCAT": {
                     "csvtk": "0.31.0"
+                },
+                "CSVTK_JOIN": {
+                    "csvtk": "0.37.0"
                 },
                 "CSVTK_MUTATE2": {
                     "csvtk": "0.31.0"
@@ -1236,7 +1239,7 @@
                 
             ]
         ],
-        "timestamp": "2026-07-30T15:49:53.265392526",
+        "timestamp": "2026-08-10T19:15:21.358915073",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"

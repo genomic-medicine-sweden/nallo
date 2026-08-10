@@ -1,0 +1,28 @@
+chrom   start   end     cpg_label       sample_id       summary_label   compare_label   background_category     category_pop_count      category_pop_freq       asm_fishers_pvalue      mean_hap1_methyl
+        mean_hap2_methyl        mean_meth_delta mean_abs_meth_delta_zscore      mean_combined_methyl    mean_combined_methyl_delta      mean_combined_methyl_zscore     num_phased_cpgs num_partial_cpgs
+        num_unphased_cpgs       median_total_coverage   median_hap1_coverage    median_hap2_coverage
+chr6    144007487       144008719       nanoimprint_PLAGL1_HGNC:9046    ACC17426A1DS70GB        AlleleSpecificMethylation       Uncategorized   MALE    140     0.9090909090909091      0.0     0.024140839
+131351465    0.9667931688804541      0.9426523297491028      -0.3408495834474167     0.4814953547401362      -0.02519510725986379    -0.3239272885248355     124     0       0       34      17      17
+chr7    50782178        50783005        nanoimprint_GRB10_HGNC:4564     ACC17426A1DS70GB        AlleleSpecificMethylation       Uncategorized   MALE    124     0.8051948051948052      1.2046819548105546e
+-268 0.9228694714131606      0.055987055016181245    -0.8668824163969794     -0.9376469333802732     0.5414666239908958      0.03315234999089589     0.4707248630706029      103     0       0       14
+      8       5
+chr7    130490866       130493279       nanoimprint_MEST_HGNC:7028      ACC17426A1DS70GB        AlleleSpecificMethylation       Uncategorized   MALE    121     0.7857142857142857      0.0     0.056158796
+158796154    0.9883848133848134      0.9322260172260175      0.12300720386563958     0.4180603000397053      -0.10242467296029467    -1.5542282626245305     185     0       0       21      14      7
+chr11   1997761 2003229 nanoimprint_H19_HGNC:4713       ACC17426A1DS70GB        Uncategorized   Uncategorized   MALE    44      0.2857142857142857      4.557858146149584e-52   0.937719298245614       0.5
+210526315789473      -0.4166666666666667     -5.833065183828657      0.5647729680107335      0.0016791700107334773   0.01512592222511728     95      143     0       16      4       4
+chr11   2698767 2700902 nanoimprint_KCNQ1OT1_HGNC:6295  ACC17426A1DS70GB        AlleleSpecificMethylation       Uncategorized   MALE    132     0.8571428571428571      0.0     0.9862433862433861      0.0
+009219175885842553   -0.985321468654802      0.6489368188869191      0.38929738562091526     -0.13362854037908473    -1.391975359080385      189     0       0       17      5       12
+chr14   100809335       100811397       nanoimprint_MEG3_HGNC:14575     ACC17426A1DS70GB        Uncategorized   Uncategorized   MALE    38      0.24675324675324675     9.333268070011815e-38   0.900619834
+7107438      0.5399999999999998      -0.3606198347107439     -1.6772395963413285     0.7100883662023666      0.0560530232023666      0.6355749857796106      55      0       0       20      10      10
+chr14   100824187       100827641       nanoimprint_MEG3_HGNC:14575     ACC17426A1DS70GB        AlleleSpecificMethylation       Uncategorized   MALE    141     0.9155844155844156      0.0     0.942449763
+5933805      0.09248353596757851     -0.8499662276258021     -0.6510479294682697     0.5663915832290363      0.03170211422903624     0.4028988408564621      188     0       0       17      9       7
+chr14   100904568       100904952       nanoimprint_MEG8_HGNC:14574     ACC17426A1DS70GB        AlleleSpecificMethylation       Uncategorized   MALE    146     0.948051948051948       2.6846757006574586e
+-117 0.02764976958525345     0.8824884792626728      0.8548387096774194      -0.3330260071008289     0.595307917888563       0.05525081488856298     0.5730262476019644      31      0       0       21
+      7       14
+chr15   23647363        23648635        nanoimprint_MAGEL2_HGNC:6814    ACC17426A1DS70GB        AlleleSpecificMethylation       Uncategorized   MALE    139     0.9025974025974026      1.2531855689863757e
+-132 0.044444444444444446    0.9111111111111111      0.8666666666666667      -0.0493601474176049     0.4629629629629629      -0.03368669803703711    -0.3898998024457217     45      0       0       24
+      7       8
+chr15   24954857        24956829        nanoimprint_SNURF_HGNC:11171    ACC17426A1DS70GB        AlleleSpecificMethylation       Uncategorized   MALE    137     0.8896103896103896      0.0     0.966418650
+7936506      0.024107142857142858    -0.9423115079365078     0.10507883640648025     0.5045415893630177      -0.015449406636982244   -0.20930797047837138    112     0       0       22      9       9
+chr19   56837125        56841599        nanoimprint_PEG3_HGNC:8826      ACC17426A1DS70GB        AlleleSpecificMethylation       Uncategorized   MALE    135     0.8766233766233766      0.0     0.123499907
+33018254     0.9621639828061843      0.8386640754760023      -0.7964455791298914     0.5608576062213766      0.04533781822137661     0.5968547141927087      218     0       0       22      10      12

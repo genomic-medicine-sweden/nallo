@@ -1,7 +1,7 @@
 {
     "test profile | --target_regions null --alignment_output_format cram": {
         "content": [
-            223,
+            224,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -77,6 +77,9 @@
                 },
                 "CSVTK_CONCAT": {
                     "csvtk": "0.31.0"
+                },
+                "CSVTK_JOIN": {
+                    "csvtk": "0.37.0"
                 },
                 "CSVTK_MUTATE2": {
                     "csvtk": "0.31.0"
@@ -833,7 +836,7 @@
                 
             ]
         ],
-        "timestamp": "2026-08-05T10:19:55.978738242",
+        "timestamp": "2026-08-10T19:17:15.419691181",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"

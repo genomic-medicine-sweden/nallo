@@ -116,6 +116,11 @@
                         "git_sha": "cf6e217453911be4096c8921b1de63a72229b5c2",
                         "installed_by": ["modules"]
                     },
+                    "csvtk/join": {
+                        "branch": "master",
+                        "git_sha": "2f74af306499775ab48db1ed4077d2fa5aecf9c4",
+                        "installed_by": ["modules"]
+                    },
                     "csvtk/mutate2": {
                         "branch": "master",
                         "git_sha": "cf6e217453911be4096c8921b1de63a72229b5c2",

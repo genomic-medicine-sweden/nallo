@@ -154,7 +154,7 @@
     },
     "Test skip sex check - multisample": {
         "content": [
-            159,
+            162,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -209,6 +209,9 @@
                 },
                 "CSVTK_CONCAT": {
                     "csvtk": "0.31.0"
+                },
+                "CSVTK_JOIN": {
+                    "csvtk": "0.37.0"
                 },
                 "CSVTK_MUTATE2": {
                     "csvtk": "0.31.0"
@@ -493,7 +496,7 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-07-30T15:58:31.998698589",
+        "timestamp": "2026-08-10T19:23:57.187779956",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"

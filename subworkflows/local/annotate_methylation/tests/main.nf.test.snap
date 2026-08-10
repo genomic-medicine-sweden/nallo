@@ -7,7 +7,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_methbat_profile_annotated.tsv:md5,c9ae94bb0471e88a6d6c145001fb54fa"
+                        "FAM_methbat_profile_annotated.tsv:md5,bc46b6a1a4b024c5ed7a7d9b3b7d871e"
                     ]
                 ],
                 "methylation_annotation": [
@@ -15,15 +15,15 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_methbat_profile_annotated.tsv:md5,c9ae94bb0471e88a6d6c145001fb54fa"
+                        "FAM_methbat_profile_annotated.tsv:md5,bc46b6a1a4b024c5ed7a7d9b3b7d871e"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-07-20T16:10:23.281602858",
+        "timestamp": "2026-08-10T16:30:34.147280049",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.06.0"
+            "nextflow": "26.07.0"
         }
     },
     "2 samples": {
@@ -34,7 +34,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_methbat_profile_annotated.tsv:md5,2697ae1fe447653616f91676e23db35d"
+                        "FAM_methbat_profile_annotated.tsv:md5,6a2ae347e4a764b5f702fc7ba0deb8a8"
                     ]
                 ],
                 "methylation_annotation": [
@@ -42,15 +42,15 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_methbat_profile_annotated.tsv:md5,2697ae1fe447653616f91676e23db35d"
+                        "FAM_methbat_profile_annotated.tsv:md5,6a2ae347e4a764b5f702fc7ba0deb8a8"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-07-20T16:30:31.517611923",
+        "timestamp": "2026-08-10T16:30:40.601947421",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.06.0"
+            "nextflow": "26.07.0"
         }
     },
     "2 samples - stub": {
