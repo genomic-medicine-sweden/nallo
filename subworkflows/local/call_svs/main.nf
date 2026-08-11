@@ -72,7 +72,7 @@ workflow CALL_SVS {
             ch_bam_bai
         )
 
-        VEP_PREP_SV_SNIFFLES(
+        VEP_PREP_SV(
             SNIFFLES.out.vcf.map { meta, vcf -> [meta + [sv_caller: 'sniffles'], vcf] }
         )
 
