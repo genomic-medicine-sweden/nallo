@@ -52,7 +52,7 @@ workflow CALL_SVS {
         )
 
         TABIX_SEVERUS(
-            VEP_PREP_SV_SEVERUS.out.vcf
+            VEP_PREP_SV.out.vcf
         )
 
         ch_sv_calls = ch_sv_calls.mix(
