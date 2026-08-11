@@ -47,7 +47,7 @@ workflow CALL_SVS {
             ch_tandem_repeats,
         )
 
-        VEP_PREP_SV_SEVERUS(
+        VEP_PREP_SV(
             SEVERUS.out.all_vcf.map { meta, vcf -> [meta + [sv_caller: 'severus'], vcf] }
         )
 
