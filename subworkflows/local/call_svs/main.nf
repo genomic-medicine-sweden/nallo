@@ -77,7 +77,7 @@ workflow CALL_SVS {
         )
 
         BCFTOOLS_SORT(
-            VEP_PREP_SV_SNIFFLES.out.vcf
+            VEP_PREP_SV.out.vcf
         )
 
         ch_sv_calls = ch_sv_calls.mix(
