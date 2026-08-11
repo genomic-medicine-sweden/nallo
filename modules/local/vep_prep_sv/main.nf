@@ -11,7 +11,7 @@ process VEP_PREP_SV {
 
     output:
     tuple val(meta), path("*.vcf"), emit: vcf
-    tuple val("${task.process}"), val('vep_prep_sv'), eval("vep_prep_sv.py --version"), emit: versions_python, topic: versions
+    tuple val("${task.process}"), val('vep_prep_sv'), eval("vep_prep_sv.py --version"), emit: versions_vep_prep_sv, topic: versions
 
     when:
     task.ext.when == null || task.ext.when
