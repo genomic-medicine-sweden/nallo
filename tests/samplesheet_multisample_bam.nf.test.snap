@@ -1130,8 +1130,8 @@
                 "HG004_pbcpgtools.hap1.bed.gz.tbi:md5,024664fdd990e560c75996cbd7de4b5a",
                 "HG004_pbcpgtools.hap2.bed.gz:md5,06de0befc807d3107a47597f8a2984b6",
                 "HG004_pbcpgtools.hap2.bed.gz.tbi:md5,7590c937d683905d8f41d35758a3780e",
-                "bcftools-stats-subtypes.txt:md5,7ff0d336d225e77c4bc70d8c24a5eed1",
-                "bcftools_stats_indel-lengths.txt:md5,2947390673d791003d48a676e7095739",
+                "bcftools-stats-subtypes.txt:md5,fb23dc7e6352cb80cac687458c3b7eb6",
+                "bcftools_stats_indel-lengths.txt:md5,90119ecff77f267e56e987430aafcb4c",
                 "fastqc-status-check-heatmap.txt:md5,f67860347368dd43ec3be3a53e1085dc",
                 "fastqc_adapter_content_plot.txt:md5,977a14d0a229fb62fa79426bc8d79534",
                 "fastqc_overrepresented_sequences_plot.txt:md5,39f5feb1737b248e86b9b39a1d043879",
@@ -1148,10 +1148,10 @@
                 "mosdepth_cov_dist.txt:md5,89dfdf2287ed8e395284643954556cb1",
                 "mosdepth_cumcov_dist.txt:md5,89dfdf2287ed8e395284643954556cb1",
                 "mosdepth_perchrom.txt:md5,4890c63101272eb3ff304178a32a836a",
-                "multiqc_bcftools_stats.txt:md5,76f588ad3f387f15f8bb15301a16adf1",
+                "multiqc_bcftools_stats.txt:md5,6f45f8818c190b7d60ea602a1c1887de",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,ace1ff42b44a8ec24ede4837f85f65d8",
-                "multiqc_general_stats.txt:md5,ca0db4f26f60e74a2a6e854f092821ed",
+                "multiqc_general_stats.txt:md5,1291eea7b3e9725b9ea63db5e231baab",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,5367473f043564c1995035e669f25b76",
                 "peddy_relatedness_plot.txt:md5,38bbf220ffc042cfa5d4696fccda3f55",
                 "somalier_stats.txt:md5,a6119aecaa54536d9b358b7feba7841a",
@@ -1267,7 +1267,7 @@
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -1340,13 +1340,12 @@
                 ]
             ],
             [
-
+                
             ]
         ],
-        "timestamp": "2026-08-05T16:55:50.630246984",
+        "timestamp": "2026-08-12T11:50:39.555700642",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
             "nextflow": "26.07.0"
         }
     }

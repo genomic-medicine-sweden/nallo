@@ -1023,8 +1023,8 @@
                 "HG002_ONT_C_modkit_pileup_hp1.bed.gz.tbi:md5,64f5cfd6919e2302bfd311d09c98a58b",
                 "HG002_ONT_C_modkit_pileup_hp2.bed.gz:md5,da977fec1c09e4870eb91e260c3cc085",
                 "HG002_ONT_C_modkit_pileup_hp2.bed.gz.tbi:md5,da42a56d8b9b363c34cafa38dd42b313",
-                "bcftools-stats-subtypes.txt:md5,e2d573ed3796fce68c49eada50d7b8c2",
-                "bcftools_stats_indel-lengths.txt:md5,9936cc7db63b9d669b6308751f635aba",
+                "bcftools-stats-subtypes.txt:md5,f81ccaf1c17d78b51680366e935dd0c2",
+                "bcftools_stats_indel-lengths.txt:md5,110a020ff88a98450c422ab7c2c490e9",
                 "fastqc-status-check-heatmap.txt:md5,4ef2e67a5ed003db72cf8d4d86b01285",
                 "fastqc_adapter_content_plot.txt:md5,706344bf7a6f7c72ec278b44ccc1bf9a",
                 "fastqc_overrepresented_sequences_plot.txt:md5,4793807805fd02d81f49849ef493db14",
@@ -1041,10 +1041,10 @@
                 "mosdepth_cov_dist.txt:md5,34d42c2b23250d289ce2c0adf394891f",
                 "mosdepth_cumcov_dist.txt:md5,34d42c2b23250d289ce2c0adf394891f",
                 "mosdepth_perchrom.txt:md5,ca490536a8c80cf070199755d8c61eb0",
-                "multiqc_bcftools_stats.txt:md5,fba914d91a1df00b6fedab048a4c777a",
+                "multiqc_bcftools_stats.txt:md5,ad4f3c2407fcdbc530e64ebe402902a7",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,45c48809ef207ece2422fa33a86c30c7",
-                "multiqc_general_stats.txt:md5,dabec214578e7804b9af40ce65d78f37",
+                "multiqc_general_stats.txt:md5,aa04b8f4825dadb4206efb3d15463bf9",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,f644fc0ce39328719b84c83f9517f3b1",
                 "peddy_relatedness_plot.txt:md5,c180406a5f106d03fa7c96a3cf188a7d",
                 "somalier_stats.txt:md5,b169a23cecd1d3b1e79d0f615073c5dc",
@@ -1150,7 +1150,7 @@
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -1227,14 +1227,12 @@
                 ]
             ],
             [
-
-
+                
             ]
         ],
-        "timestamp": "2026-08-03T16:33:58.88976304",
+        "timestamp": "2026-08-12T11:55:16.032440508",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
             "nextflow": "26.07.0"
         }
     }
