@@ -1,7 +1,7 @@
 {
     "test profile | --target_regions null --alignment_output_format cram": {
         "content": [
-            226,
+            224,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -305,10 +305,7 @@
                 "VCFEXPRESS": {
                     "vcfexpress": "0.3.4"
                 },
-                "VEP_PREP_SV_SEVERUS": {
-                    "vep_prep_sv": "1.0.0"
-                },
-                "VEP_PREP_SV_SNIFFLES": {
+                "VEP_PREP_SV": {
                     "vep_prep_sv": "1.0.0"
                 },
                 "WHATSHAP_STATS": {
@@ -836,7 +833,7 @@
                 
             ]
         ],
-"timestamp": "2026-08-04T14:50:19.480678304",
+        "timestamp": "2026-08-12T14:46:18.231888845",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

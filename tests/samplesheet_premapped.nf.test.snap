@@ -275,10 +275,7 @@
                 "VCFEXPRESS": {
                     "vcfexpress": "0.3.4"
                 },
-                "VEP_PREP_SV_SEVERUS": {
-                    "vep_prep_sv": "1.0.0"
-                },
-                "VEP_PREP_SV_SNIFFLES": {
+                "VEP_PREP_SV": {
                     "vep_prep_sv": "1.0.0"
                 },
                 "WHATSHAP_STATS": {
@@ -1239,7 +1236,8 @@
                 
             ]
         ],
-"timestamp": "2026-08-04T14:45:46.951099935",        "meta": {
+        "timestamp": "2026-08-12T13:19:32.708344095",
+        "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
         }
