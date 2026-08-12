@@ -65,7 +65,7 @@ nextflow_process {
                 // DUP/INS → DUP: END=18788645 (source region) stripped
                 { assert vcf_lines.any { it.contains('SVTYPE=DUP') && it.contains('ORIG_SVTYPE=DUP/INS') &&
                                          !it.contains(';END=') } },
-                { assert snapshot(vcf_lines.join('\n'), process.out.versions_python).match() }
+                { assert snapshot(vcf_lines.join('\n'), process.out.versions_vep_prep_sv).match() }
             )
         }
     }
@@ -93,7 +93,7 @@ nextflow_process {
                 { assert !vcf_lines.any { it.startsWith('##FILTER=<ID=STRANDBIAS,') } },
                 // Debreak: SVLEN=0 is not stripped (only SVLEN=1 is sniffles1-specific)
                 { assert vcf_lines.any { it.contains('DB281') && it.contains('SVLEN=0') } },
-                { assert snapshot(vcf_lines.join('\n'), process.out.versions_python).match() }
+                { assert snapshot(vcf_lines.join('\n'), process.out.versions_vep_prep_sv).match() }
             )
         }
     }
@@ -115,7 +115,7 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert snapshot(
-                    process.out.versions_python,
+                    process.out.versions_vep_prep_sv,
                     // skip ##fileDate line (index 2) which changes each run
                     (path(process.out.vcf.get(0).get(1)).readLines()[0,1] + path(process.out.vcf.get(0).get(1)).readLines().drop(3)).join('\n').md5()
                 ).match() }

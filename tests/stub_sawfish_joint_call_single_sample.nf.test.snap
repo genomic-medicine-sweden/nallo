@@ -37,10 +37,10 @@
                     "cramino": "1.1.0"
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
-                    "deepvariant": "1.10.0"
+                    "deepvariant": null
                 },
                 "DEEPVARIANT_VCFSTATSREPORT": {
-                    "deepvariant": "1.10.0"
+                    "deepvariant": null
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -212,10 +212,10 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-07-31T10:18:48.490206292",
+        "timestamp": "2026-08-12T17:16:11.521676",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.4"
         }
     }
 }

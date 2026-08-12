@@ -1,5 +1,3 @@
-include { SVDB_MERGE as SVDB_MERGE_BY_CALLER  } from '../../../modules/nf-core/svdb/merge/main'
-include { SVDB_MERGE as SVDB_MERGE_BY_FAMILY  } from '../../../modules/nf-core/svdb/merge/main'
 include { BCFTOOLS_VIEW                       } from '../../../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_QUERY                      } from '../../../modules/nf-core/bcftools/query/main'
 include { BCFTOOLS_REHEADER                   } from '../../../modules/nf-core/bcftools/reheader/main'
