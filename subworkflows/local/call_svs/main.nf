@@ -14,8 +14,7 @@ include { TABIX_TABIX as TABIX_HIFICNV        } from '../../../modules/nf-core/t
 include { TABIX_TABIX as TABIX_VCFEXPRESS     } from '../../../modules/nf-core/tabix/tabix/main'
 include { TABIX_BGZIPTABIX as TABIX_SEVERUS   } from '../../../modules/nf-core/tabix/bgziptabix/main'
 include { VCFEXPRESS                          } from '../../../modules/nf-core/vcfexpress/main'
-include { VEP_PREP_SV as VEP_PREP_SV_SEVERUS  } from '../../../modules/local/vep_prep_sv/main'
-include { VEP_PREP_SV as VEP_PREP_SV_SNIFFLES } from '../../../modules/local/vep_prep_sv/main'
+include { VEP_PREP_SV                         } from '../../../modules/local/vep_prep_sv/main'
 
 workflow CALL_SVS {
     take:
@@ -36,6 +35,7 @@ workflow CALL_SVS {
 
     main:
     ch_sv_calls = channel.empty()
+    ch_for_vep_prep_sv = channel.empty()
 
     //
     // Call SVs with Severus
@@ -47,19 +47,8 @@ workflow CALL_SVS {
             ch_tandem_repeats,
         )
 
-        VEP_PREP_SV(
+        ch_for_vep_prep_sv = ch_for_vep_prep_sv.mix(
             SEVERUS.out.all_vcf.map { meta, vcf -> [meta + [sv_caller: 'severus'], vcf] }
-        )
-
-        TABIX_SEVERUS(
-            VEP_PREP_SV.out.vcf
-        )
-
-        ch_sv_calls = ch_sv_calls.mix(
-            addCallerToMeta(
-                TABIX_SEVERUS.out.gz_index,
-                'severus',
-            )
         )
     }
 
@@ -72,19 +61,33 @@ workflow CALL_SVS {
             ch_bam_bai
         )
 
-        VEP_PREP_SV(
+        ch_for_vep_prep_sv = ch_for_vep_prep_sv.mix(
             SNIFFLES.out.vcf.map { meta, vcf -> [meta + [sv_caller: 'sniffles'], vcf] }
         )
+    }
+
+    //
+    // Prepare SV VCFs for annotation
+    //
+    VEP_PREP_SV(ch_for_vep_prep_sv)
+
+    if (sv_callers_to_run.contains('severus')) {
+
+        TABIX_SEVERUS(
+            VEP_PREP_SV.out.vcf.filter { meta, _vcf -> meta.sv_caller == 'severus' }
+        )
+
+        ch_sv_calls = ch_sv_calls.mix(TABIX_SEVERUS.out.gz_index)
+    }
+
+    if (sv_callers_to_run.contains('sniffles')) {
 
         BCFTOOLS_SORT(
-            VEP_PREP_SV.out.vcf
+            VEP_PREP_SV.out.vcf.filter { meta, _vcf -> meta.sv_caller == 'sniffles' }
         )
 
         ch_sv_calls = ch_sv_calls.mix(
-            addCallerToMeta(
-                BCFTOOLS_SORT.out.vcf.join(BCFTOOLS_SORT.out.tbi, failOnMismatch: true, failOnDuplicate: true),
-                'sniffles',
-            )
+            BCFTOOLS_SORT.out.vcf.join(BCFTOOLS_SORT.out.tbi, failOnMismatch: true, failOnDuplicate: true)
         )
     }
 
