@@ -258,7 +258,7 @@
                     "whatshap": 2.8
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.12.1"
+                    "genomic-medicine-sweden/nallo": "v0.12.2"
                 }
             },
             [
@@ -1025,8 +1025,8 @@
                 "HG002_ONT_C_modkit_pileup_hp1.bed.gz.tbi:md5,bf3a570dfb81428630421f50ff37e75e",
                 "HG002_ONT_C_modkit_pileup_hp2.bed.gz:md5,9cdfd0d96b560acbc8435eb16bf684b3",
                 "HG002_ONT_C_modkit_pileup_hp2.bed.gz.tbi:md5,cd8bedc152f766d10317230b932837a8",
-                "bcftools-stats-subtypes.txt:md5,436d7936296e7e2114bd8c2ac940877e",
-                "bcftools_stats_indel-lengths.txt:md5,6af0861b3af00e8ecd8a4be59f2e59dc",
+                "bcftools-stats-subtypes.txt:md5,e9e9871a2d63bd1f3d7aaa2ca5f96877",
+                "bcftools_stats_indel-lengths.txt:md5,9e4bdaaf369e48b95ee444869e4917ba",
                 "fastqc-status-check-heatmap.txt:md5,4ef2e67a5ed003db72cf8d4d86b01285",
                 "fastqc_adapter_content_plot.txt:md5,946cd7b4fe9917de3ef1d94fb5c18b48",
                 "fastqc_overrepresented_sequences_plot.txt:md5,e224caa386bc0c234498ad60d4fd656e",
@@ -1043,10 +1043,10 @@
                 "mosdepth_cov_dist.txt:md5,8932f10175f28c6bb5f64a6c01eab46e",
                 "mosdepth_cumcov_dist.txt:md5,8932f10175f28c6bb5f64a6c01eab46e",
                 "mosdepth_perchrom.txt:md5,3058d5d2eebff6d22ec098f1505e9d31",
-                "multiqc_bcftools_stats.txt:md5,dcb842649576c771f30514443ca6fa6f",
+                "multiqc_bcftools_stats.txt:md5,b358f8ff0750cf7d73fa4982e5921b51",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,21238eb72dc8b2334fb1642109f8a802",
-                "multiqc_general_stats.txt:md5,8fc900a5aa6540f15e333434a303b09a",
+                "multiqc_general_stats.txt:md5,7f5d34acf5d7f9e74aef03747c44204f",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,30ed5fb9be837249e7590ba7fd74d615",
                 "peddy_relatedness_plot.txt:md5,c180406a5f106d03fa7c96a3cf188a7d",
                 "somalier_stats.txt:md5,8d4660a09e1919be266625331672c945",
@@ -1152,7 +1152,7 @@
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -1229,13 +1229,13 @@
                 ]
             ],
             [
-
+                
             ]
         ],
-        "timestamp": "2026-04-08T15:14:16.98293374",
+        "timestamp": "2026-08-11T14:00:35.899351775",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.1"
+            "nextflow": "26.07.0"
         }
     }
 }
