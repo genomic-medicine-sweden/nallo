@@ -1062,6 +1062,11 @@
                     "default": "minimap2",
                     "description": "Which aligner to use for assembly alignment. Supported arguments are mm2plus or minimap2.",
                     "enum": ["mm2plus", "minimap2"]
+                },
+                "methbat_map": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "Mapping file that can be used to filter and annotate the methbat output based on regions."
                 }
             },
             "required": ["preset"]

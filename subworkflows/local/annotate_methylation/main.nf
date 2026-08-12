@@ -16,7 +16,7 @@ workflow ANNOTATE_METHYLATION {
     )
 
     CSVTK_MUTATE2(
-        CSVTK_JOIN.out.csv,
+        CSVTK_JOIN.out.out_file,
         'tsv',
         'tsv',
     )

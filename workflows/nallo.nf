@@ -102,7 +102,7 @@ workflow NALLO {
     ch_hgnc_ids
     ch_samplesheet
     ch_cramino_regions
-    ch_map
+    ch_methbat_map
     ch_methbat_regions
     ch_modkit_call_regions
     ch_mosdepth_regions
@@ -194,8 +194,6 @@ workflow NALLO {
 
     main:
     ch_multiqc_files = channel.empty()
-
-    ch_map.view()
 
     //
     // Prepare references
@@ -1057,7 +1055,7 @@ workflow NALLO {
     if (!val_skip_methylation_annotation && !val_skip_methbat) {
         ANNOTATE_METHYLATION(
             ch_methylation_profiles,
-            ch_map,
+            ch_methbat_map,
         )
     }
 
