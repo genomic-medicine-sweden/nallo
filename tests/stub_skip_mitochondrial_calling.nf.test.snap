@@ -120,7 +120,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-08-13T10:53:28.685138583",
+        "timestamp": "2026-07-31T10:20:40.41501554",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -262,7 +262,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-08-13T10:53:04.633243277",
+        "timestamp": "2026-07-31T10:20:17.461695095",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
