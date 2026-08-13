@@ -164,7 +164,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `vep_cache_version` | VEP cache version | `integer` | 110 |  |  |
 | `vep_mitochondrial_genome_distance` | The distance parameter used in VEP for mitochondrial SNVs | `integer` | 0 |  |  |
 | `vep_nuclear_genome_distance` | The distance parameter used in VEP for nuclear SNVs | `integer` | 5000 |  |  |
-| `vep_plugin_files` | Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required. | `string` |  |  |  |
+| `vep_plugin_files` | Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. pLI_values.txt is required for SNV annotation. For SV annotation, vep_plugin_files is optional and only needed when passing plugin flags via extra_vep_options_sv. | `string` |  |  |  |
 | `force_sawfish_joint_call_single_samples` | Force sawfish to run joint-call on single samples instead of all samples from the same family. This effectively causes SVDB to merge the samples into family VCFs instead. | `boolean` |  |  |  |
 | `filter_variants_hgnc_ids` | A tsv/csv file with a `hgnc_ids` column header, and then one numerical HGNC ID per row. E.g. `4281` or `HGNC:4281`. | `string` |  |  |  |
 | `filter_snvs_expression` | An expression that is passed to bcftools view to filter SNVs, e.g. --filter_snvs_expression "-e 'INFO/AQ>60'" | `string` | None |  |  |
@@ -176,7 +176,8 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `extra_modkit_options` | Extra options to modkit, used for test profile. | `string` |  |  | True |
 | `extra_paraphase_options` | Extra options to Paraphase, used for test profile. | `string` |  |  | True |
 | `extra_sawfish_options` | Extra options to Sawfish, used for test profile. | `string` |  |  | True |
-| `extra_vep_options` | Extra options to VEP, used for test profile. | `string` |  |  | True |
+| `extra_vep_options_snv` | Extra options appended to the VEP command for SNV annotation, e.g. '--plugin LoFtool,LoFtool_scores.txt --plugin pLI,pLI_values.txt'. | `string` |  |  |  |
+| `extra_vep_options_sv` | Extra options appended to the VEP command for SV annotation, e.g. '--plugin pLI,pLI_values.txt --plugin DosageSensitivity,DosageSensitivity.tsv.gz'. | `string` |  |  |  |
 | `extra_yak_options` | Extra options to yak, used for test profile. | `string` |  |  | True |
 | `extra_somalier_relate_infer_options` | Extra options to somalier relate infer, used for test profile. | `string` |  |  | True |
 | `genmod_compound_snv_penalty` | Genmod compound penalty for SNVs. | `integer` | 6 |  |  |
