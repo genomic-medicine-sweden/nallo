@@ -124,8 +124,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1229](https://github.com/genomic-medicine-sweden/nallo/pull/1229) - Moved `VCFEXPRESS` (FOUND_IN tagging) from `CALL_SVS` to `MERGE_SVS`, running after `SVDB_MERGE_BY_CALLER`
 - [#588](https://github.com/genomic-medicine-sweden/nallo/issues/588) - Replaced `extra_vep_options` with separate `extra_vep_options_snv` and `extra_vep_options_sv` parameters, appended after the core VEP command for each variant type
 - [#588](https://github.com/genomic-medicine-sweden/nallo/issues/588) - Removed `--plugin LoFtool,LoFtool_scores.txt` from the SNV VEP core command; add it back via `extra_vep_options_snv` with the file path in `vep_plugin_files` if needed for ranking
-- [#588](https://github.com/genomic-medicine-sweden/nallo/issues/588) - Removed `--plugin pLI,pLI_values.txt` and `--polyphen p`, `--sift p`, `--humdiv` from the SV VEP core command; these are amino-acid substitution predictors and pLI annotations that produce no meaningful output for SVs
-- [#588](https://github.com/genomic-medicine-sweden/nallo/issues/588) - Made `vep_plugin_files` optional for SV annotation; `pLI_values.txt` is still required for SNV annotation (used by `CUSTOM_ADDMOSTSEVEREPLI`)
+- [#588](https://github.com/genomic-medicine-sweden/nallo/issues/588) - Removed `--polyphen p`, `--sift p`, `--humdiv` from the SV VEP core command; these amino-acid substitution predictors produce no meaningful output for SVs
 
 ### Removed
 
