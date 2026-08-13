@@ -1,17 +1,13 @@
-include { CLEAN_SNIFFLES                     } from '../../../modules/local/clean_sniffles/main'
-include { SVDB_MERGE as SVDB_MERGE_BY_CALLER } from '../../../modules/nf-core/svdb/merge/main'
-include { SVDB_MERGE as SVDB_MERGE_BY_FAMILY } from '../../../modules/nf-core/svdb/merge/main'
-include { BCFTOOLS_VIEW                      } from '../../../modules/nf-core/bcftools/view/main'
-include { BCFTOOLS_SORT                      } from '../../../modules/nf-core/bcftools/sort/main'
-include { HIFICNV                            } from '../../../modules/nf-core/hificnv/main'
-include { SAWFISH_DISCOVER                   } from '../../../modules/nf-core/sawfish/discover/main'
-include { SAWFISH_JOINTCALL                  } from '../../../modules/nf-core/sawfish/jointcall/main'
-include { SEVERUS                            } from '../../../modules/nf-core/severus/main'
-include { SNIFFLES                           } from '../../../modules/nf-core/sniffles/main'
-include { TABIX_TABIX as TABIX_HIFICNV       } from '../../../modules/nf-core/tabix/tabix/main'
-include { TABIX_TABIX as TABIX_VCFEXPRESS    } from '../../../modules/nf-core/tabix/tabix/main'
-include { TABIX_BGZIPTABIX as TABIX_SEVERUS  } from '../../../modules/nf-core/tabix/bgziptabix/main'
-include { VCFEXPRESS                         } from '../../../modules/nf-core/vcfexpress/main'
+include { BCFTOOLS_VIEW                     } from '../../../modules/nf-core/bcftools/view/main'
+include { BCFTOOLS_SORT                     } from '../../../modules/nf-core/bcftools/sort/main'
+include { HIFICNV                           } from '../../../modules/nf-core/hificnv/main'
+include { SAWFISH_DISCOVER                  } from '../../../modules/nf-core/sawfish/discover/main'
+include { SAWFISH_JOINTCALL                 } from '../../../modules/nf-core/sawfish/jointcall/main'
+include { SEVERUS                           } from '../../../modules/nf-core/severus/main'
+include { SNIFFLES                          } from '../../../modules/nf-core/sniffles/main'
+include { TABIX_TABIX as TABIX_HIFICNV      } from '../../../modules/nf-core/tabix/tabix/main'
+include { TABIX_BGZIPTABIX as TABIX_SEVERUS } from '../../../modules/nf-core/tabix/bgziptabix/main'
+include { VEP_PREP_SV                       } from '../../../modules/local/vep_prep_sv/main'
 
 workflow CALL_SVS {
     take:
@@ -28,11 +24,10 @@ workflow CALL_SVS {
     force_sawfish_joint_call_single_samples //    bool: Force joint-calling with Sawfish even for single samples
     create_hificnv_maf_track //    bool: Should we create a MAF track for HiFiCNV/Sawfish calls?
     create_sawfish_maf_track //    bool: Should we create a MAF track for HiFiCNV/Sawfish calls?
-    ch_vcfexpress_prelude // path: lua file
-
 
     main:
     ch_sv_calls = channel.empty()
+    ch_for_vep_prep_sv = channel.empty()
 
     //
     // Call SVs with Severus
@@ -44,15 +39,8 @@ workflow CALL_SVS {
             ch_tandem_repeats,
         )
 
-        TABIX_SEVERUS(
-            SEVERUS.out.all_vcf
-        )
-
-        ch_sv_calls = ch_sv_calls.mix(
-            addCallerToMeta(
-                TABIX_SEVERUS.out.gz_index,
-                'severus',
-            )
+        ch_for_vep_prep_sv = ch_for_vep_prep_sv.mix(
+            SEVERUS.out.all_vcf.map { meta, vcf -> [meta + [sv_caller: 'severus'], vcf] }
         )
     }
 
@@ -65,19 +53,33 @@ workflow CALL_SVS {
             ch_bam_bai
         )
 
-        CLEAN_SNIFFLES(
-            SNIFFLES.out.vcf
+        ch_for_vep_prep_sv = ch_for_vep_prep_sv.mix(
+            SNIFFLES.out.vcf.map { meta, vcf -> [meta + [sv_caller: 'sniffles'], vcf] }
+        )
+    }
+
+    //
+    // Prepare SV VCFs for annotation
+    //
+    VEP_PREP_SV(ch_for_vep_prep_sv)
+
+    if (sv_callers_to_run.contains('severus')) {
+
+        TABIX_SEVERUS(
+            VEP_PREP_SV.out.vcf.filter { meta, _vcf -> meta.sv_caller == 'severus' }
         )
 
+        ch_sv_calls = ch_sv_calls.mix(TABIX_SEVERUS.out.gz_index)
+    }
+
+    if (sv_callers_to_run.contains('sniffles')) {
+
         BCFTOOLS_SORT(
-            CLEAN_SNIFFLES.out.vcf
+            VEP_PREP_SV.out.vcf.filter { meta, _vcf -> meta.sv_caller == 'sniffles' }
         )
 
         ch_sv_calls = ch_sv_calls.mix(
-            addCallerToMeta(
-                BCFTOOLS_SORT.out.vcf.join(BCFTOOLS_SORT.out.tbi, failOnMismatch: true, failOnDuplicate: true),
-                'sniffles',
-            )
+            BCFTOOLS_SORT.out.vcf.join(BCFTOOLS_SORT.out.tbi, failOnMismatch: true, failOnDuplicate: true)
         )
     }
 
@@ -209,18 +211,8 @@ workflow CALL_SVS {
         ch_sv_calls_filtered = ch_sv_calls
     }
 
-    ch_vcfexpress_input = ch_sv_calls_filtered.multiMap { meta, vcf, _tbi ->
-        vcf: [meta, vcf]
-        sv_caller: meta.sv_caller
-    }
-
-    VCFEXPRESS(
-        ch_vcfexpress_input.vcf,
-        ch_vcfexpress_prelude,
-    )
-
     emit:
-    vcf                                = VCFEXPRESS.out.vcf // channel: [ val(meta), [ path(vcf) ] ]
+    vcf                                = ch_sv_calls_filtered // channel: [ val(meta), [ path(vcf) ] ]
     hificnv_depth                      = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.depth : channel.empty() // channel: [ val(meta), path(bw) ]
     hificnv_copynum                    = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.copynum : channel.empty() // channel: [ val(meta), path(bedgraph) ]
     hificnv_maf                        = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.maf : channel.empty() // channel: [ val(meta), path(bw) ]

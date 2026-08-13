@@ -18,6 +18,7 @@ nextflow_workflow {
                 )
                 input[1] = ['sniffles']
                 input[2] = ['sniffles']
+                input[3] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -52,6 +53,7 @@ nextflow_workflow {
                 )
                 input[1] = ['sniffles', 'severus', 'hificnv', 'sawfish']
                 input[2] = ['sniffles', 'severus', 'hificnv', 'sawfish']
+                input[3] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -88,6 +90,7 @@ nextflow_workflow {
                 )
                 input[1] = ['sniffles', 'severus', 'hificnv', 'sawfish']
                 input[2] = ['sniffles', 'severus', 'hificnv', 'sawfish']
+                input[3] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }

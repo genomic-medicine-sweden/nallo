@@ -43,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1159](https://github.com/genomic-medicine-sweden/nallo/pull/1159) - Added `ONT_R10_AS` preset for Oxford Nanopore adaptive sampling runs, with preset defaults: `sv_callers=sniffles`, `skip_mitochondrial_calling=true`, `skip_sex_check=true`, `skip_genome_assembly=true`
 - [#1159](https://github.com/genomic-medicine-sweden/nallo/pull/1159) - Added on-target read pre-filtering in `QC_ALIGNED_READS`: when `--target_regions` is set, reads are filtered with `SAMTOOLS_VIEW` to on-target regions before CRAMINO QC, ensuring QC metrics reflect only on-target data
 - [#1217](https://github.com/genomic-medicine-sweden/nallo/pull/1217) - Added `mm2plus` as an option to align reads to the reference and for assembly alignment
+- [#1222](https://github.com/genomic-medicine-sweden/nallo/pull/1222) - Added `VEP_PREP_SV` module: caller-agnostic SV VCF normalisation before VEP annotation. Remaps non-canonical SVTYPEs (`TRA→BND`, `DUP/INS→DUP`, `DEL/INV→DEL`, `INVDUP→DUP`) and records the original in `ORIG_SVTYPE`. Includes Sniffles v1-specific fixes: missing `STRANDBIAS` FILTER header injection and removal of synthetic `END=POS` and `SVLEN=1` values
 
 ### Changed
 
@@ -120,6 +121,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1218](https://github.com/genomic-medicine-sweden/nallo/pull/1218) - Changed default mitochondrial caller for the `ONT_R10` preset to `deepvariant`
 - [#1219](https://github.com/genomic-medicine-sweden/nallo/pull/1219) - Changed nf-test CI action to retry once on transient network/disk failures
 - [#1141](https://github.com/genomic-medicine-sweden/nallo/pull/1141) - Moved merging of vcfs out of `CALL_SVS` in new `MERGE_SVS` subworkflow
+- [#1229](https://github.com/genomic-medicine-sweden/nallo/pull/1229) - Moved `VCFEXPRESS` (FOUND_IN tagging) from `CALL_SVS` to `MERGE_SVS`, running after `SVDB_MERGE_BY_CALLER`
 
 ### Removed
 
@@ -131,6 +133,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1125](https://github.com/genomic-medicine-sweden/nallo/pull/1125) - Removed `samplesheet_ont.csv` because it is unused.
 - [#1163](https://github.com/genomic-medicine-sweden/nallo/pull/1163) - Removed `--run_methbat` and `--run_modkit` parameters; use `--methylation_callers` instead
 - [#1205](https://github.com/genomic-medicine-sweden/nallo/pull/1205) - Removed use of 2 cpus for `GENMOD_MODELS` in `base.config` since the bug was fixed in v.3.12.0
+- [#1222](https://github.com/genomic-medicine-sweden/nallo/pull/1222) - Removed `CLEAN_SNIFFLES` module (replaced by `VEP_PREP_SV`)
 - [#1224](https://github.com/genomic-medicine-sweden/nallo/pull/1224) - Removed hardcoded memory use in config for `RANK_VARIANTS:BCFTOOLS_SORT` since it is already covered by `task.memory` in the module
 
 ### Fixed
@@ -193,6 +196,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Version has been updated if both old and new version information is present.
 > Version has been added if just the new version information is present.
 > Version has been removed if new version information isn't present.
+
+## 0.12.2 - [2026-08-12]
+
+### `Changed`
+
+- [#1223](https://github.com/genomic-medicine-sweden/nallo/pull/1223) - Updated config for `bcftools stats` to use alts instead of all variants after request from customer
 
 ## 0.12.1 - [2026-07-22]
 
