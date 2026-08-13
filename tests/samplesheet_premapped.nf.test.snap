@@ -1,7 +1,7 @@
 {
     "samplesheet_premapped | --premapped": {
         "content": [
-            361,
+            364,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -1239,10 +1239,10 @@
                 
             ]
         ],
-        "timestamp": "2026-08-13T11:23:46.046706043",
+        "timestamp": "2026-08-13T14:21:26.873732809",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.07.0"
         }
     }
 }

@@ -1,7 +1,7 @@
 {
     "test profile | --target_regions null --alignment_output_format cram": {
         "content": [
-            224,
+            225,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -836,10 +836,10 @@
                 
             ]
         ],
-        "timestamp": "2026-08-13T10:45:55.028439679",
+        "timestamp": "2026-08-13T14:23:58.137882053",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.07.0"
         }
     }
 }

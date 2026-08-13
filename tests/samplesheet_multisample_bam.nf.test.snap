@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            429,
+            432,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -1346,10 +1346,10 @@
                 
             ]
         ],
-        "timestamp": "2026-08-13T10:34:48.342769385",
+        "timestamp": "2026-08-13T14:06:28.760242018",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.07.0"
         }
     }
 }
