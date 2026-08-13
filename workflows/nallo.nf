@@ -653,13 +653,13 @@ workflow NALLO {
             val_force_sawfish_joint_call_single_samples,
             val_create_hificnv_maf_track,
             val_create_sawfish_maf_track,
-            ch_vcfexpress_prelude,
         )
 
         MERGE_SVS(
             CALL_SVS.out.vcf,
             val_sv_callers_to_merge.split(',').collect { caller -> caller.toLowerCase().trim() },
             val_sv_callers_merge_priority.split(',').collect { caller -> caller.toLowerCase().trim() },
+            ch_vcfexpress_prelude,
         )
     }
 

@@ -10,10 +10,10 @@
                     },
                     [
                         [
-                            "test_1_hificnv_found_in.vcf.gz"
+                            "test_1_hificnv_filtered.vcf.gz"
                         ],
                         [
-                            "test_2_hificnv_found_in.vcf.gz"
+                            "test_2_hificnv_filtered.vcf.gz"
                         ]
                     ]
                 ],
@@ -25,10 +25,10 @@
                     },
                     [
                         [
-                            "test_1_sawfish_found_in.vcf.gz"
+                            "test_1_sawfish_filtered.vcf.gz"
                         ],
                         [
-                            "test_2_sawfish_found_in.vcf.gz"
+                            "test_2_sawfish_filtered.vcf.gz"
                         ]
                     ]
                 ],
@@ -42,12 +42,12 @@
                         [
                             "test_1_reheader.vcf.gz",
                             "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]",
-                            "ae1e654608d3aa822ba69b57ce31a861"
+                            "62cf182304490e1ecd958247dc8e8727"
                         ],
                         [
                             "test_2_reheader.vcf.gz",
                             "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]",
-                            "ea83940547c0bc15eb6b4c9a59159406"
+                            "582b249ead6e03350420af97130b92be"
                         ]
                     ]
                 ],
@@ -61,7 +61,7 @@
                         [
                             "test_1_reheader.vcf.gz",
                             "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]",
-                            "1b214fb9e1e9bcc3d7719580c2a6bbc6"
+                            "b5b3aad900660c9b5f9ea6d412e631ff"
                         ],
                         [
                             "test_2_reheader.vcf.gz",
@@ -72,10 +72,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-08-06T13:28:28.118590273",
+        "timestamp": "2026-08-13T09:16:45.784089999",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     },
     "1 sample, 1 family - sniffles": {
@@ -91,16 +91,16 @@
                         [
                             "test_reheader.vcf.gz",
                             "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=1, variantCount=21, phased=false, phasedAutodetect=false]",
-                            "4ef4a55d60b44c349a56e1516ad2542a"
+                            "9782117a680da92761a99064a57bbd82"
                         ]
                     ]
                 ]
             ]
         ],
-        "timestamp": "2026-08-06T13:24:00.599335125",
+        "timestamp": "2026-08-13T09:10:40.879992527",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     },
     "1 sample, 1 family - sawfish": {
@@ -114,16 +114,16 @@
                     },
                     [
                         [
-                            "family_sawfish_found_in.vcf.gz"
+                            "family_sawfish_jointcall_genotyped.sv.vcf.gz"
                         ]
                     ]
                 ]
             ]
         ],
-        "timestamp": "2026-08-06T13:24:41.564844587",
+        "timestamp": "2026-08-13T09:11:38.051364511",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     },
     "2 samples, 1 family - hificnv,sawfish with trf bed, no MAF track": {
@@ -137,10 +137,10 @@
                     },
                     [
                         [
-                            "test_1_hificnv_found_in.vcf.gz"
+                            "test_1_hificnv.test_1.vcf.gz"
                         ],
                         [
-                            "test_2_hificnv_found_in.vcf.gz"
+                            "test_2_hificnv.test_2.vcf.gz"
                         ]
                     ]
                 ],
@@ -152,16 +152,16 @@
                     },
                     [
                         [
-                            "family_sawfish_found_in.vcf.gz"
+                            "family_sawfish_jointcall_genotyped.sv.vcf.gz"
                         ]
                     ]
                 ]
             ]
         ],
-        "timestamp": "2026-08-06T13:26:50.58963561",
+        "timestamp": "2026-08-13T09:14:54.211268058",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     },
     "2 samples, 1 family - sniffes,severus,hificnv,sawfish with trf bed": {
@@ -175,10 +175,10 @@
                     },
                     [
                         [
-                            "test_1_hificnv_found_in.vcf.gz"
+                            "test_1_hificnv.test_1.vcf.gz"
                         ],
                         [
-                            "test_2_hificnv_found_in.vcf.gz"
+                            "test_2_hificnv.test_2.vcf.gz"
                         ]
                     ]
                 ],
@@ -190,7 +190,7 @@
                     },
                     [
                         [
-                            "family_sawfish_found_in.vcf.gz"
+                            "family_sawfish_jointcall_genotyped.sv.vcf.gz"
                         ]
                     ]
                 ],
@@ -204,12 +204,12 @@
                         [
                             "test_1_reheader.vcf.gz",
                             "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=36, phased=false, phasedAutodetect=false]",
-                            "58ceb0e313053625db9972c69b144ad0"
+                            "6725794c7b57e4a6fab095b38057be69"
                         ],
                         [
                             "test_2_reheader.vcf.gz",
                             "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=31, phased=false, phasedAutodetect=false]",
-                            "681741ccb15d23e69a9d43e6ed7e6f72"
+                            "89da55ac301e9ea86b07955924411ec6"
                         ]
                     ]
                 ],
@@ -223,21 +223,21 @@
                         [
                             "test_1_reheader.vcf.gz",
                             "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=1, variantCount=21, phased=false, phasedAutodetect=false]",
-                            "6027977b1608ebac435f587bf0ec2261"
+                            "16a6a94720e70c3b838d14d67d74029b"
                         ],
                         [
                             "test_2_reheader.vcf.gz",
                             "VcfFile [chromosomes=[chr16, chr17, chr20], sampleCount=1, variantCount=4, phased=false, phasedAutodetect=false]",
-                            "c6a5b93c6ba8b42a034f3c5b4ce003d"
+                            "20a871dd68d402735b2de3d8bd6f3fd"
                         ]
                     ]
                 ]
             ]
         ],
-        "timestamp": "2026-08-06T13:26:09.378504416",
+        "timestamp": "2026-08-13T09:13:40.950276745",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     },
     "2 samples, 1 family - sniffes,severus with trf bed, run all callers - stub": {
@@ -250,8 +250,8 @@
                             "sv_caller": "hificnv"
                         },
                         [
-                            "test_1_hificnv_found_in.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
-                            "test_2_hificnv_found_in.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                            "test_1_hificnv.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940",
+                            "test_2_hificnv.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                         ]
                     ],
                     [
@@ -349,10 +349,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-08-06T14:08:02.726073892",
+        "timestamp": "2026-08-13T09:17:07.14067252",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     },
     "2 samples, 1 family - merge sniffes,hificnv,severus,sawfish with trf bed, run all callers and filter": {
@@ -366,10 +366,10 @@
                     },
                     [
                         [
-                            "test_1_hificnv_found_in.vcf.gz"
+                            "test_1_hificnv_filtered.vcf.gz"
                         ],
                         [
-                            "test_2_hificnv_found_in.vcf.gz"
+                            "test_2_hificnv_filtered.vcf.gz"
                         ]
                     ]
                 ],
@@ -381,7 +381,7 @@
                     },
                     [
                         [
-                            "family_sawfish_found_in.vcf.gz"
+                            "family_sawfish_filtered.vcf.gz"
                         ]
                     ]
                 ],
@@ -395,12 +395,12 @@
                         [
                             "test_1_reheader.vcf.gz",
                             "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]",
-                            "ae1e654608d3aa822ba69b57ce31a861"
+                            "62cf182304490e1ecd958247dc8e8727"
                         ],
                         [
                             "test_2_reheader.vcf.gz",
                             "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]",
-                            "ea83940547c0bc15eb6b4c9a59159406"
+                            "582b249ead6e03350420af97130b92be"
                         ]
                     ]
                 ],
@@ -414,7 +414,7 @@
                         [
                             "test_1_reheader.vcf.gz",
                             "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]",
-                            "1b214fb9e1e9bcc3d7719580c2a6bbc6"
+                            "b5b3aad900660c9b5f9ea6d412e631ff"
                         ],
                         [
                             "test_2_reheader.vcf.gz",
@@ -425,10 +425,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-08-06T13:27:40.497040066",
+        "timestamp": "2026-08-13T09:15:56.648454674",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     },
     "1 sample, 1 family - sawfish, force_sawfish_joint_call_single_samples true": {
@@ -442,16 +442,16 @@
                     },
                     [
                         [
-                            "test_1_sawfish_found_in.vcf.gz"
+                            "test_1_sawfish_jointcall_genotyped.sv.vcf.gz"
                         ]
                     ]
                 ]
             ]
         ],
-        "timestamp": "2026-08-06T13:25:21.609114442",
+        "timestamp": "2026-08-13T09:12:44.88671821",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     },
     "1 sample, 1 family - sawfish, force_sawfish_joint_call_single_samples true -stub": {
@@ -464,7 +464,7 @@
                             "sv_caller": "sawfish"
                         },
                         [
-                            "family_sawfish_found_in.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                            "family_sawfish_jointcall_genotyped.sv.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                         ]
                     ]
                 ],
@@ -515,10 +515,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-08-06T14:08:19.012912595",
+        "timestamp": "2026-08-13T09:17:21.451845377",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     }
 }

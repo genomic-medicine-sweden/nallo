@@ -1,11 +1,13 @@
 include { SVDB_MERGE as SVDB_MERGE_BY_CALLER } from '../../../modules/nf-core/svdb/merge/main'
 include { SVDB_MERGE as SVDB_MERGE_BY_FAMILY } from '../../../modules/nf-core/svdb/merge/main'
+include { VCFEXPRESS                         } from '../../../modules/nf-core/vcfexpress/main'
 
 workflow MERGE_SVS {
     take:
     ch_vcf // channel: [ val(meta), [ path(vcf) ] ]
     sv_callers_to_merge // List: [ 'caller1', 'caller2', 'caller3' ]
     caller_priority // List: [ 'caller3', 'caller1', 'caller2' ]
+    ch_vcfexpress_prelude // path: lua file
 
     main:
     /*
@@ -20,12 +22,18 @@ workflow MERGE_SVS {
         true,
     )
 
+    // Add FOUND_IN INFO tag to each per-caller family VCF
+    VCFEXPRESS(
+        SVDB_MERGE_BY_CALLER.out.vcf,
+        ch_vcfexpress_prelude,
+    )
+
     /*
      * Then merge the family VCFs for each caller into a single family VCF.
      * First we need to filter the SV callers to merge,
      * Then we need to group by family (meta.id), and sort the VCFs by the caller priority for SVDB merge.
      */
-    ch_svdb_merge_by_family_input = SVDB_MERGE_BY_CALLER.out.vcf
+    ch_svdb_merge_by_family_input = VCFEXPRESS.out.vcf
         .filter { meta, _vcf ->
             sv_callers_to_merge.contains(meta.sv_caller)
         }

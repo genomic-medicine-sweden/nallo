@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10_AS --target_regions test_data.bed --phaser whatshap --alignment_processes 1 --snv_calling_processes 1": {
         "content": [
-            306,
+            303,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
