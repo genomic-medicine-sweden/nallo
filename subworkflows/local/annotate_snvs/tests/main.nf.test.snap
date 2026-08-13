@@ -24,16 +24,41 @@
             "nextflow": "26.03.4"
         }
     },
+    "bcf, db, vep_cache, '110', -stub with extra_vep_options_snv": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                ]
+            ]
+        ],
+        "timestamp": "2026-08-13T15:34:36.281142053",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
     "bcf, db, vep_cache, '110'": {
         "content": [
             "test.vcf.gz.tbi",
-            "79b414333f42bec2310aecf617bcfe9a",
+            "3c83c8106d6d4758d9d9d405c11aad77",
             "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=202, phased=false, phasedAutodetect=false]"
         ],
-        "timestamp": "2026-05-27T10:41:06.83978913",
+        "timestamp": "2026-08-13T15:33:49.15731091",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.04.6"
         }
     },
     "bcf, db, vep_cache, '110', -stub": {
@@ -64,37 +89,37 @@
     "bcf, [], vep_cache, '110' - no echtvar annotation - filter before vep": {
         "content": [
             "test.vcf.gz.tbi",
-            "b1f695b5afcd85feefe5a564bfbffacf",
+            "e09e112c627a86ab975b5176f26c853d",
             "VcfFile [chromosomes=[chr16], sampleCount=3, variantCount=2, phased=false, phasedAutodetect=false]"
         ],
-        "timestamp": "2026-05-27T10:41:33.025581764",
+        "timestamp": "2026-08-13T15:34:17.921035566",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.04.6"
         }
     },
     "bcf, db, vep_cache, '110', filter before vep": {
         "content": [
             "test.vcf.gz.tbi",
-            "c8a17d7a333d5fecc7da2dc3f2888cfa",
+            "2cb4271e68e0c1b1e44e44900cabba4b",
             "VcfFile [chromosomes=[chr16], sampleCount=3, variantCount=2, phased=false, phasedAutodetect=false]"
         ],
-        "timestamp": "2026-05-27T10:41:15.650909801",
+        "timestamp": "2026-08-13T15:33:59.187851619",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.04.6"
         }
     },
     "bcf, [], vep_cache, '110' - no echtvar annotation": {
         "content": [
             "test.vcf.gz.tbi",
-            "e469aa4912440eb7820188c58a7070a2",
+            "1cf6fe93c428ca7350ecf48b7d12001b",
             "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=202, phased=false, phasedAutodetect=false]"
         ],
-        "timestamp": "2026-05-27T10:41:24.173533042",
+        "timestamp": "2026-08-13T15:34:08.696425702",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.04.6"
         }
     }
 }
