@@ -655,6 +655,7 @@ workflow NALLO {
             val_create_sawfish_maf_track,
             ch_vcfexpress_prelude,
         )
+
         REHEADER_SV_VCF(
             CALL_SVS.out.vcf,
 

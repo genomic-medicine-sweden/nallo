@@ -1,0 +1,96 @@
+nextflow_workflow {
+
+    name "Test Workflow REHEADER_SV_VCF"
+    script "../main.nf"
+    config "./nextflow.config"
+    workflow "REHEADER_SV_VCF"
+
+    test("severus and sniffles VCFs are reheadered to meta.id") {
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'severus' ],
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/severus_test.vcf.gz', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sniffles' ],
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles_test.vcf.gz', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'hificnv' ],
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/hificnv_test.vcf.gz', checkIfExists: true)
+                    ]
+                )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.vcf_reheadered.size() == 3 },
+                { assert workflow.out.vcf_reheadered.every { meta, _vcfs -> meta.id == 'FAM' } },
+                { assert snapshot(
+                    workflow.out.vcf_reheadered
+                        .collect { meta, vcfs ->
+                            [
+                                'sv_vcf_output:',
+                                meta,
+                                file(vcfs[0]).name,
+                                path(vcfs[0]).vcf.summary,
+                                path(vcfs[0]).vcf.variantsMD5
+                            ]
+                        }.sort { it[1].sv_caller }
+                ).match() },
+                {
+                    def sampleByCaller = workflow.out.vcf_reheadered.collectEntries { meta, vcfs ->
+                        def sampleColumn = path(vcfs[0]).linesGzip
+                            .find { line -> line.startsWith('#CHROM') }
+                            .tokenize('\t')
+                            .last()
+                        [(meta.sv_caller): sampleColumn]
+                    }
+                    assert sampleByCaller.severus == 'HG002_Revio'
+                    assert sampleByCaller.sniffles == 'HG002_Revio'
+                    assert sampleByCaller.hificnv == 'HG002_Revio'
+                }
+            )
+        }
+    }
+
+    test("severus and sniffles VCFs are reheadered to meta.id - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'severus' ],
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/severus_test.vcf.gz', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sniffles' ],
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles_test.vcf.gz', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'hificnv' ],
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/hificnv_test.vcf.gz', checkIfExists: true)
+                    ]
+                )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+}

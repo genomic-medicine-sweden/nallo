@@ -1,0 +1,112 @@
+{
+    "severus and sniffles VCFs are reheadered to meta.id": {
+        "content": [
+            [
+                [
+                    "sv_vcf_output:",
+                    {
+                        "id": "FAM",
+                        "sv_caller": "hificnv"
+                    },
+                    "hificnv_test.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=7, phased=false, phasedAutodetect=false]",
+                    "c5f054e1e9cc9f554adc0eeda8b4e6ee"
+                ],
+                [
+                    "sv_vcf_output:",
+                    {
+                        "id": "FAM",
+                        "sv_caller": "severus"
+                    },
+                    "HG002_Revio_severus_reheader.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=3, phased=false, phasedAutodetect=false]",
+                    "f5e96ef1667d502fbfe2f02bde155cc3"
+                ],
+                [
+                    "sv_vcf_output:",
+                    {
+                        "id": "FAM",
+                        "sv_caller": "sniffles"
+                    },
+                    "HG002_Revio_sniffles_reheader.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=16, phased=false, phasedAutodetect=false]",
+                    "a5f7256c7be50ce38981c8586438c8c0"
+                ]
+            ]
+        ],
+        "timestamp": "2026-08-13T15:00:06.664276966",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.07.0"
+        }
+    },
+    "severus and sniffles VCFs are reheadered to meta.id - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "FAM",
+                            "sv_caller": "hificnv"
+                        },
+                        [
+                            "hificnv_test.vcf.gz:md5,abf39044be097c8c2806d180178f082a"
+                        ]
+                    ],
+                    [
+                        {
+                            "id": "FAM",
+                            "sv_caller": "severus"
+                        },
+                        [
+                            "HG002_Revio_severus_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        ]
+                    ],
+                    [
+                        {
+                            "id": "FAM",
+                            "sv_caller": "sniffles"
+                        },
+                        [
+                            "HG002_Revio_sniffles_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        ]
+                    ]
+                ],
+                "vcf_reheadered": [
+                    [
+                        {
+                            "id": "FAM",
+                            "sv_caller": "hificnv"
+                        },
+                        [
+                            "hificnv_test.vcf.gz:md5,abf39044be097c8c2806d180178f082a"
+                        ]
+                    ],
+                    [
+                        {
+                            "id": "FAM",
+                            "sv_caller": "severus"
+                        },
+                        [
+                            "HG002_Revio_severus_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        ]
+                    ],
+                    [
+                        {
+                            "id": "FAM",
+                            "sv_caller": "sniffles"
+                        },
+                        [
+                            "HG002_Revio_sniffles_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        ]
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-08-13T15:08:20.215416332",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.07.0"
+        }
+    }
+}
