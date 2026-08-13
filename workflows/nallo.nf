@@ -656,7 +656,7 @@ workflow NALLO {
         )
 
         REHEADER_SV_VCF(
-            CALL_SVS.out.vcf,
+            CALL_SVS.out.vcf.map { meta, vcf, _tbi -> [meta, vcf] },
 
     )
 
