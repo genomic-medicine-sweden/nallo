@@ -252,6 +252,53 @@ nextflow_workflow {
 
     }
 
+    test("bcf, db, vep_cache, '110', -stub with extra_vep_options_snv") {
+
+        options "-stub"
+
+        when {
+            params {
+                extra_vep_options_snv = '--buffer_size 10000'
+            }
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.vcf.gz', checkIfExists: true)
+                ])
+                input[1] = channel.value([
+                    [ id: 'db' ],
+                    [file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)]
+                ])
+                input[2] = GUNZIP.out.gunzip
+                input[3] = SAMTOOLS_FAIDX.out.fai
+                input[4] = UNTAR.out.untar
+                input[5] = channel.value('110')
+                input[6] = channel.of([
+                    file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
+                ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
+                input[7] = false
+                input[8] = true
+                input[9] = channel.value([])
+                input[10] = null
+                input[11] = null
+                input[12] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out.tbi,
+                    workflow.out.vcf
+                ).match() }
+            )
+        }
+
+    }
+
     test("bcf, db, vep_cache, '110', -stub with CADD") {
 
         options "-stub"
