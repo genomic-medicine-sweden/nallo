@@ -9,9 +9,7 @@ include { SAWFISH_JOINTCALL                 } from '../../../modules/nf-core/saw
 include { SEVERUS                           } from '../../../modules/nf-core/severus/main'
 include { SNIFFLES                          } from '../../../modules/nf-core/sniffles/main'
 include { TABIX_TABIX as TABIX_HIFICNV      } from '../../../modules/nf-core/tabix/tabix/main'
-include { TABIX_TABIX as TABIX_VCFEXPRESS   } from '../../../modules/nf-core/tabix/tabix/main'
 include { TABIX_BGZIPTABIX as TABIX_SEVERUS } from '../../../modules/nf-core/tabix/bgziptabix/main'
-include { VCFEXPRESS                        } from '../../../modules/nf-core/vcfexpress/main'
 include { VEP_PREP_SV                       } from '../../../modules/local/vep_prep_sv/main'
 
 workflow CALL_SVS {
@@ -29,7 +27,6 @@ workflow CALL_SVS {
     force_sawfish_joint_call_single_samples //    bool: Force joint-calling with Sawfish even for single samples
     create_hificnv_maf_track //    bool: Should we create a MAF track for HiFiCNV/Sawfish calls?
     create_sawfish_maf_track //    bool: Should we create a MAF track for HiFiCNV/Sawfish calls?
-    ch_vcfexpress_prelude // path: lua file
 
     main:
     ch_sv_calls = channel.empty()
@@ -217,26 +214,18 @@ workflow CALL_SVS {
         ch_sv_calls_filtered = ch_sv_calls
     }
 
-    ch_vcfexpress_input = ch_sv_calls_filtered.multiMap { meta, vcf, _tbi ->
-        vcf: [meta, vcf]
-        sv_caller: meta.sv_caller
-    }
-
-    VCFEXPRESS(
-        ch_vcfexpress_input.vcf,
-        ch_vcfexpress_prelude,
-    )
-
     // If Severus or Sniffles was used, we need to reheader the VCF
     // Since Sniffles hardcodes the sample name as SAMPLE, and Severus bases it on the file name.
     // HiFiCNV doesn't have this issue, so we filter it out here, and add it back later.
 
     // Starting with getting the sample name from the VCF
-    ch_found_in_tagged_vcf = VCFEXPRESS.out.vcf.branch { meta, _vcf ->
-        def callers_needing_reheader = ['severus', 'sniffles']
-        to_reheader: callers_needing_reheader.contains(meta.sv_caller)
-        no_reheader: !callers_needing_reheader.contains(meta.sv_caller)
-    }
+    ch_found_in_tagged_vcf = ch_sv_calls_filtered
+        .map { meta, vcf, _tbi -> [meta, vcf] }
+        .branch { meta, _vcf ->
+            def callers_needing_reheader = ['severus', 'sniffles']
+            to_reheader: callers_needing_reheader.contains(meta.sv_caller)
+            no_reheader: !callers_needing_reheader.contains(meta.sv_caller)
+        }
 
     BCFTOOLS_QUERY(
         ch_found_in_tagged_vcf.to_reheader.map { meta, vcf -> [meta, vcf, []] },
