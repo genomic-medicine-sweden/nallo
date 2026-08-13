@@ -1,7 +1,7 @@
 {
     "Test family id same as sample id": {
         "content": [
-            191,
+            192,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -62,9 +62,6 @@
                 },
                 "CAT_CAT": {
                     "pigz": 2.8
-                },
-                "CLEAN_SNIFFLES": {
-                    "clean_sniffles": 1.0
                 },
                 "CRAMINO": {
                     "cramino": "1.1.0"
@@ -296,6 +293,9 @@
                 "VCFEXPRESS": {
                     "vcfexpress": "0.3.4"
                 },
+                "VEP_PREP_SV": {
+                    "vep_prep_sv": "1.0.0"
+                },
                 "WHATSHAP_STATS": {
                     "whatshap": 2.8
                 },
@@ -513,10 +513,10 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-07-30T15:56:57.279362543",
+        "timestamp": "2026-08-12T16:05:29.073888457",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     }
 }
