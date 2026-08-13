@@ -9,7 +9,7 @@ workflow REHEADER_SV_VCF {
         ch_vcf // channel: [ val(meta), path(vcf) ]
 
     main:
-        ch_vcf = channel.empty()
+        ch_vcf_reheadered = channel.empty()
 
     // If Severus or Sniffles was used, we need to reheader the VCF
     // Since Sniffles hardcodes the sample name as SAMPLE, and Severus bases it on the file name.
@@ -28,7 +28,6 @@ workflow REHEADER_SV_VCF {
         [],
         [],
     )
-
     // Then create a "vcf_sample_name meta.id" file for bcftools reheader
     CREATE_SAMPLES_FILE(BCFTOOLS_QUERY.out.output, [], false)
 
@@ -43,12 +42,12 @@ workflow REHEADER_SV_VCF {
     )
 
     // Concat the reheadered VCFs with the ones that didn't need reheadering to merge later
-    ch_vcf = BCFTOOLS_REHEADER.out.vcf
+    ch_vcf_reheadered = BCFTOOLS_REHEADER.out.vcf
         .concat(ch_found_in_tagged_vcf.no_reheader)
         .map { meta, vcf -> [['id': meta.family_id, 'sv_caller': meta.sv_caller], vcf] }
         .groupTuple()
 
     emit:
-        vcf = ch_vcf // channel: [ val(meta), path(vcf) ]
+        vcf_reheadered = ch_vcf_reheadered // channel: [ val(meta), path(vcf) ]
 
 }
