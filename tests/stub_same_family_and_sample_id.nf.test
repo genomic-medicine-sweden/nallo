@@ -12,7 +12,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5c13b255beab25a536375fec42f9da3413fc65a5/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/f37b56b7bfcfb082395ed4b3d247155d3b6698ba/'
                 input                        = "$projectDir/assets/samplesheet_same_sample_and_family_id.csv"
                 outdir                       = "$outputDir"
                 skip_mitochondrial_calling   = true

@@ -11,13 +11,13 @@ nextflow_workflow {
                 """
                 input[0] = channel.of( [
                     [ id:'test', family_id:'FAM'],
-                    file(params.modules_testdata_base_path + 'generic/csv/test2.csv', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/charmedswan_methbat_profile.tsv', checkIfExists: true)
                 ]
                 )
                 input[1] = channel.of(
                     [
                         [ id:'test2'],
-                    file(params.modules_testdata_base_path + 'generic/csv/test3.csv', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_map.tsv', checkIfExists: true)
                     ]
                 )
                 """
@@ -39,17 +39,17 @@ nextflow_workflow {
                 input[0] = channel.of(
                     [
                         [ id:'test', family_id:'FAM' ],
-                    file(params.modules_testdata_base_path + 'generic/csv/test2.csv', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/charmedswan_methbat_profile.tsv', checkIfExists: true)
                     ],
                     [
                         [ id:'test2', family_id:'FAM' ],
-                    file(params.modules_testdata_base_path + 'generic/csv/test2.csv', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/charmedswan_methbat_profile.tsv', checkIfExists: true)
                     ]
                 )
                 input[1] = channel.of(
                     [
                         [ id:'test2'],
-                    file(params.modules_testdata_base_path + 'generic/csv/test3.csv', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_map.tsv', checkIfExists: true)
                     ]
                 )
                 """
@@ -73,13 +73,13 @@ nextflow_workflow {
                 """
                 input[0] =  channel.of([
                     [ id:'test', family_id:'FAM'],
-                    file(params.modules_testdata_base_path + 'generic/csv/test2.csv', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/charmedswan_methbat_profile.tsv', checkIfExists: true)
                 ]
                 )
                 input[1] = channel.of(
                     [
                         [ id:'test2'],
-                    file(params.modules_testdata_base_path + 'generic/csv/test3.csv', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_map.tsv', checkIfExists: true)
                     ]
                 )
                 """
@@ -104,17 +104,17 @@ nextflow_workflow {
                 input[0] = channel.of(
                     [
                         [ id:'test', family_id:'FAM' ],
-                    file(params.modules_testdata_base_path + 'generic/csv/test2.csv', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/charmedswan_methbat_profile.tsv', checkIfExists: true)
                     ],
                     [
                         [ id:'test2', family_id:'FAM' ],
-                    file(params.modules_testdata_base_path + 'generic/csv/test2.csv', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/charmedswan_methbat_profile.tsv', checkIfExists: true)
                     ]
                 )
                 input[1] = channel.of(
                     [
                         [ id:'test2'],
-                    file(params.modules_testdata_base_path + 'generic/csv/test3.csv', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_map.tsv', checkIfExists: true)
                     ]
                 )
                 """

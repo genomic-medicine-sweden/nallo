@@ -146,7 +146,7 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
-        "timestamp": "2026-07-31T10:19:08.002775971",
+        "timestamp": "2026-08-13T10:51:52.060428484",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -496,7 +496,7 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-08-10T19:23:57.187779956",
+        "timestamp": "2026-08-13T10:52:39.568794258",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
