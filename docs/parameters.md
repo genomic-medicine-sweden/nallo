@@ -176,7 +176,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `extra_modkit_options` | Extra options to modkit, used for test profile. | `string` |  |  | True |
 | `extra_paraphase_options` | Extra options to Paraphase, used for test profile. | `string` |  |  | True |
 | `extra_sawfish_options` | Extra options to Sawfish, used for test profile. | `string` |  |  | True |
-| `extra_vep_options_snv` | Extra options appended to the VEP command for SNV annotation, e.g. '--plugin LoFtool,LoFtool_scores.txt --plugin pLI,pLI_values.txt'. | `string` |  |  |  |
+| `extra_vep_options_snv` | Extra options appended to the VEP command for SNV annotation (applied to both nuclear and mitochondrial SNVs), e.g. '--plugin CADD,snv.tsv.gz --plugin SpliceAI,snv=spliceai_scores.vcf.gz'. | `string` |  |  |  |
 | `extra_vep_options_sv` | Extra options appended to the VEP command for SV annotation, e.g. '--plugin pLI,pLI_values.txt --plugin DosageSensitivity,DosageSensitivity.tsv.gz'. | `string` |  |  |  |
 | `extra_yak_options` | Extra options to yak, used for test profile. | `string` |  |  | True |
 | `extra_somalier_relate_infer_options` | Extra options to somalier relate infer, used for test profile. | `string` |  |  | True |
