@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            426,
+            429,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -65,9 +65,6 @@
                 },
                 "CAT_FASTQ": {
                     "cat": 9.5
-                },
-                "CLEAN_SNIFFLES": {
-                    "clean_sniffles": 1.0
                 },
                 "CRAMINO": {
                     "cramino": "1.1.0"
@@ -324,6 +321,9 @@
                 },
                 "VCFEXPRESS": {
                     "vcfexpress": "0.3.4"
+                },
+                "VEP_PREP_SV": {
+                    "vep_prep_sv": "1.0.0"
                 },
                 "WHATSHAP_STATS": {
                     "whatshap": 2.8
@@ -1343,10 +1343,10 @@
                 
             ]
         ],
-        "timestamp": "2026-08-05T16:55:50.630246984",
+        "timestamp": "2026-08-12T13:40:26.437573007",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     }
 }

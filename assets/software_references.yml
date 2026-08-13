@@ -42,8 +42,8 @@ tool:
     citation: "chromograph (Laaksonen et al. 2019)"
     bibliography: ""
 
-  clean_sniffles:
-    citation: "clean_sniffles (Eisfeldt 2024)"
+  vep_prep_sv:
+    citation: "vep_prep_sv"
     bibliography: ""
   cramino:
     citation: "cramino (De Coster & Rademakers 2023)"
