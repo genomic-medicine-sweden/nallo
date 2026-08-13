@@ -15,13 +15,14 @@ workflow REHEADER_SV_VCF {
     // Since Sniffles hardcodes the sample name as SAMPLE, and Severus bases it on the file name.
     // HiFiCNV doesn't have this issue, so we filter it out here, and add it back later.
 
-    // Starting with getting the sample name from the VCF
+    // Branching channel to get the VCFs that need reheadering and those that don't
     ch_found_in_tagged_vcf = ch_vcf.branch { meta, _vcf ->
         def callers_needing_reheader = ['severus', 'sniffles']
         to_reheader: callers_needing_reheader.contains(meta.sv_caller)
         no_reheader: !callers_needing_reheader.contains(meta.sv_caller)
     }
 
+    // Getting the sample name from the VCFs that need reheadering
     BCFTOOLS_QUERY(
         ch_found_in_tagged_vcf.to_reheader.map { meta, vcf -> [meta, vcf, []] },
         [],
