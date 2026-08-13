@@ -84,14 +84,12 @@ nextflow_workflow {
                 input[5] = [[],[]]
                 input[6] = [[],[]]
                 input[7] = ['sniffles']
-                input[8] = ['sniffles']
-                input[9] = ['sniffles']
-                input[10] = [[],[]]
-                input[11] = false
-                input[12] = false
-                input[13] = true
-                input[14] = true
-                input[15] = file('../../../assets/vcf_express_found_in_prelude.lua')
+                input[8] = [[],[]]
+                input[9] = false
+                input[10] = false
+                input[11] = true
+                input[12] = true
+                input[13] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -99,15 +97,19 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    workflow.out.family_caller_vcf
-                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
-                    workflow.out.family_vcf
-                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
-                    },
-
+                    workflow.out.vcf
+                        .collect { meta, vcfs -> [
+                            'vcf:',
+                            meta,
+                            // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for
+                            // HiFiCNV/Sawfish VCFs (VCFv4.4) here - just check the file name for those.
+                            vcfs.collect { vcf ->
+                                ['severus', 'sniffles'].contains(meta.sv_caller)
+                                    ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                                    : [ file(vcf).name ]
+                            }.sort { it[0] },
+                        ] }
                 ).match() }
             )
         }
@@ -141,18 +143,16 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
                 ]).collect()
                 input[7] = ['sawfish']
-                input[8] = ['sawfish']
-                input[9] = ['sawfish']
-                input[10] = channel.of('chr16\t160752\t160753')
+                input[8] = channel.of('chr16\t160752\t160753')
                     .collectFile(name: "one_variant.bed")
                     .map { file ->
                         [ [ id: 'one_variant' ], file ]
                     }.collect()
-                input[11] = false
-                input[12] = false
-                input[13] = true
-                input[14] = true
-                input[15] = file('../../../assets/vcf_express_found_in_prelude.lua')
+                input[9] = false
+                input[10] = false
+                input[11] = true
+                input[12] = true
+                input[13] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -160,15 +160,19 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    workflow.out.family_caller_vcf
-                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
-                    workflow.out.family_vcf
-                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
-                    },
-
+                    workflow.out.vcf
+                        .collect { meta, vcfs -> [
+                            'vcf:',
+                            meta,
+                            // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for
+                            // HiFiCNV/Sawfish VCFs (VCFv4.4) here - just check the file name for those.
+                            vcfs.collect { vcf ->
+                                ['severus', 'sniffles'].contains(meta.sv_caller)
+                                    ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                                    : [ file(vcf).name ]
+                            }.sort { it[0] },
+                        ] }
                 ).match() }
             )
         }
@@ -203,18 +207,16 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
                 ]).collect()
                 input[7] = ['sawfish']
-                input[8] = ['sawfish']
-                input[9] = ['sawfish']
-                input[10] = channel.of('chr16\t160752\t160753')
+                input[8] = channel.of('chr16\t160752\t160753')
                     .collectFile(name: "one_variant.bed")
                     .map { file ->
                         [ [ id: 'one_variant' ], file ]
                     }.collect()
-                input[11] = false
+                input[9] = false
+                input[10] = true
+                input[11] = true
                 input[12] = true
-                input[13] = true
-                input[14] = true
-                input[15] = file('../../../assets/vcf_express_found_in_prelude.lua')
+                input[13] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -222,15 +224,19 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    workflow.out.family_caller_vcf
-                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
-                    workflow.out.family_vcf
-                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
-                    },
-
+                    workflow.out.vcf
+                        .collect { meta, vcfs -> [
+                            'vcf:',
+                            meta,
+                            // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for
+                            // HiFiCNV/Sawfish VCFs (VCFv4.4) here - just check the file name for those.
+                            vcfs.collect { vcf ->
+                                ['severus', 'sniffles'].contains(meta.sv_caller)
+                                    ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                                    : [ file(vcf).name ]
+                            }.sort { it[0] },
+                        ] }
                 ).match() }
             )
         }
@@ -263,14 +269,12 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
                 ]).collect()
                 input[7] = ['sniffles', 'hificnv', 'severus', 'sawfish']
-                input[8] = ['sniffles', 'hificnv', 'severus', 'sawfish']
-                input[9] = ['sniffles', 'severus', 'hificnv', 'sawfish']
-                input[10] = [[],[]]
-                input[11] = false
-                input[12] = false
-                input[13] = true
-                input[14] = true
-                input[15] = file('../../../assets/vcf_express_found_in_prelude.lua')
+                input[8] = [[],[]]
+                input[9] = false
+                input[10] = false
+                input[11] = true
+                input[12] = true
+                input[13] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -278,15 +282,19 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    workflow.out.family_caller_vcf
-                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
-                    workflow.out.family_vcf
-                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
-                    },
-
+                    workflow.out.vcf
+                        .collect { meta, vcfs -> [
+                            'vcf:',
+                            meta,
+                            // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for
+                            // HiFiCNV/Sawfish VCFs (VCFv4.4) here - just check the file name for those.
+                            vcfs.collect { vcf ->
+                                ['severus', 'sniffles'].contains(meta.sv_caller)
+                                    ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                                    : [ file(vcf).name ]
+                            }.sort { it[0] },
+                        ] }
                 ).match() }
             )
         }
@@ -319,14 +327,12 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
                 ]).collect()
                 input[7] = ['hificnv', 'sawfish']
-                input[8] = ['hificnv', 'sawfish']
-                input[9] = ['hificnv', 'sawfish']
-                input[10] = [[],[]]
+                input[8] = [[],[]]
+                input[9] = false
+                input[10] = false
                 input[11] = false
                 input[12] = false
-                input[13] = false
-                input[14] = false
-                input[15] = file('../../../assets/vcf_express_found_in_prelude.lua')
+                input[13] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -334,15 +340,19 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    workflow.out.family_caller_vcf
-                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
-                    workflow.out.family_vcf
-                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
-                    },
-
+                    workflow.out.vcf
+                        .collect { meta, vcfs -> [
+                            'vcf:',
+                            meta,
+                            // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for
+                            // HiFiCNV/Sawfish VCFs (VCFv4.4) here - just check the file name for those.
+                            vcfs.collect { vcf ->
+                                ['severus', 'sniffles'].contains(meta.sv_caller)
+                                    ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                                    : [ file(vcf).name ]
+                            }.sort { it[0] },
+                        ] }
                 ).match() }
             )
         }
@@ -375,18 +385,16 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
                 ]).collect()
                 input[7] = ['sniffles', 'severus', 'hificnv', 'sawfish']
-                input[8] = ['sniffles', 'severus', 'hificnv', 'sawfish']
-                input[9] = ['sniffles', 'severus', 'hificnv', 'sawfish']
-                input[10] = channel.of('chr16\t160752\t160753')
+                input[8] = channel.of('chr16\t160752\t160753')
                     .collectFile(name: "one_variant.bed")
                     .map { file ->
                         [ [ id: 'one_variant' ], file ]
                     }.collect()
+                input[9] = true
+                input[10] = false
                 input[11] = true
-                input[12] = false
-                input[13] = true
-                input[14] = true
-                input[15] = file('../../../assets/vcf_express_found_in_prelude.lua')
+                input[12] = true
+                input[13] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -394,15 +402,19 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    workflow.out.family_caller_vcf
-                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
-                    workflow.out.family_vcf
-                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
-                    },
-
+                    workflow.out.vcf
+                        .collect { meta, vcfs -> [
+                            'vcf:',
+                            meta,
+                            // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for
+                            // HiFiCNV/Sawfish VCFs (VCFv4.4) here - just check the file name for those.
+                            vcfs.collect { vcf ->
+                                ['severus', 'sniffles'].contains(meta.sv_caller)
+                                    ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                                    : [ file(vcf).name ]
+                            }.sort { it[0] },
+                        ] }
                 ).match() }
             )
         }
@@ -434,18 +446,16 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
                 ]).collect()
                 input[7] = ['sniffles', 'severus', 'hificnv', 'sawfish']
-                input[8] = ['sniffles', 'severus', 'hificnv', 'sawfish']
-                input[9] = ['sniffles', 'severus', 'hificnv', 'sawfish']
-                input[10] = channel.of('chr16\t160752\t160753')
+                input[8] = channel.of('chr16\t160752\t160753')
                     .collectFile(name: "one_variant.bed")
                     .map { file ->
                         [ [ id: 'one_variant' ], file ]
                     }.collect()
+                input[9] = true
+                input[10] = true
                 input[11] = true
                 input[12] = true
-                input[13] = true
-                input[14] = true
-                input[15] = file('../../../assets/vcf_express_found_in_prelude.lua')
+                input[13] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -453,15 +463,19 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
-                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
-                    workflow.out.family_caller_vcf
-                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
-                    workflow.out.family_vcf
-                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
-                    },
-
+                    workflow.out.vcf
+                        .collect { meta, vcfs -> [
+                            'vcf:',
+                            meta,
+                            // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for
+                            // HiFiCNV/Sawfish VCFs (VCFv4.4) here - just check the file name for those.
+                            vcfs.collect { vcf ->
+                                ['severus', 'sniffles'].contains(meta.sv_caller)
+                                    ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                                    : [ file(vcf).name ]
+                            }.sort { it[0] },
+                        ] }
                 ).match() }
             )
         }
@@ -495,14 +509,12 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
                 ]).collect()
                 input[7] = ['sniffles', 'severus', 'hificnv']
-                input[8] = ['sniffles', 'severus']
-                input[9] = ['sniffles', 'severus']
-                input[10] = [[],[]]
-                input[11] = false
-                input[12] = false
-                input[13] = true
-                input[14] = true
-                input[15] = file('../../../assets/vcf_express_found_in_prelude.lua')
+                input[8] = [[],[]]
+                input[9] = false
+                input[10] = false
+                input[11] = true
+                input[12] = true
+                input[13] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -510,7 +522,18 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                    // groupTuple's order within workflow.out.vcf isn't guaranteed when multiple
+                    // samples' processes can finish in any order, so sort the grouped file names.
+                    vcf: workflow.out.vcf.collect { meta, vcfs -> [meta, vcfs.collect { vcf -> file(vcf) }.sort { it.name }] },
+                    hificnv_depth: workflow.out.hificnv_depth,
+                    hificnv_copynum: workflow.out.hificnv_copynum,
+                    hificnv_maf: workflow.out.hificnv_maf,
+                    sawfish_depth_bw: workflow.out.sawfish_depth_bw,
+                    sawfish_copynum_bedgraph: workflow.out.sawfish_copynum_bedgraph,
+                    sawfish_gc_bias_corrected_depth_bw: workflow.out.sawfish_gc_bias_corrected_depth_bw,
+                    sawfish_maf_bw: workflow.out.sawfish_maf_bw,
+                ).match() }
             )
         }
     }
@@ -545,18 +568,16 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
                 ]).collect()
                 input[7] = ['sawfish']
-                input[8] = ['sawfish']
-                input[9] = ['sawfish']
-                input[10] = channel.of('chr16\t160752\t160753')
+                input[8] = channel.of('chr16\t160752\t160753')
                     .collectFile(name: "one_variant.bed")
                     .map { file ->
                         [ [ id: 'one_variant' ], file ]
                     }.collect()
-                input[11] = false
-                input[12] = false
-                input[13] = true
-                input[14] = true
-                input[15] = file('../../../assets/vcf_express_found_in_prelude.lua')
+                input[9] = false
+                input[10] = false
+                input[11] = true
+                input[12] = true
+                input[13] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
         }
@@ -564,7 +585,18 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(workflow.out).match() }
+                { assert snapshot(
+                    // groupTuple's order within workflow.out.vcf isn't guaranteed when multiple
+                    // samples' processes can finish in any order, so sort the grouped file names.
+                    vcf: workflow.out.vcf.collect { meta, vcfs -> [meta, vcfs.collect { vcf -> file(vcf) }.sort { it.name }] },
+                    hificnv_depth: workflow.out.hificnv_depth,
+                    hificnv_copynum: workflow.out.hificnv_copynum,
+                    hificnv_maf: workflow.out.hificnv_maf,
+                    sawfish_depth_bw: workflow.out.sawfish_depth_bw,
+                    sawfish_copynum_bedgraph: workflow.out.sawfish_copynum_bedgraph,
+                    sawfish_gc_bias_corrected_depth_bw: workflow.out.sawfish_gc_bias_corrected_depth_bw,
+                    sawfish_maf_bw: workflow.out.sawfish_maf_bw,
+                ).match() }
             )
         }
     }

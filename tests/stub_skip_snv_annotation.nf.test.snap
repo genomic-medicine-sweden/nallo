@@ -1,7 +1,7 @@
 {
     "Test Chromograph works without SNV annotation": {
         "content": [
-            71,
+            72,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -38,9 +38,6 @@
                 },
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
-                },
-                "CLEAN_SNIFFLES": {
-                    "clean_sniffles": 1.0
                 },
                 "CREATE_SAMPLES_FILE": {
                     "gawk": "5.3.1"
@@ -153,6 +150,9 @@
                 "VCFEXPRESS": {
                     "vcfexpress": "0.3.4"
                 },
+                "VEP_PREP_SV": {
+                    "vep_prep_sv": "1.0.0"
+                },
                 "Workflow": {
                     "genomic-medicine-sweden/nallo": "v0.13.0dev"
                 }
@@ -238,7 +238,7 @@
         "timestamp": "2026-08-13T10:53:59.549879436",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     },
     "Test Peddy without annotation": {
@@ -380,7 +380,7 @@
         "timestamp": "2026-08-13T10:54:22.893014264",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     }
 }

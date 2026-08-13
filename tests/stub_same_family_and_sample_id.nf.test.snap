@@ -63,9 +63,6 @@
                 "CAT_CAT": {
                     "pigz": 2.8
                 },
-                "CLEAN_SNIFFLES": {
-                    "clean_sniffles": 1.0
-                },
                 "CRAMINO": {
                     "cramino": "1.1.0"
                 },
@@ -299,6 +296,9 @@
                 "VCFEXPRESS": {
                     "vcfexpress": "0.3.4"
                 },
+                "VEP_PREP_SV": {
+                    "vep_prep_sv": "1.0.0"
+                },
                 "WHATSHAP_STATS": {
                     "whatshap": 2.8
                 },
@@ -519,7 +519,7 @@
         "timestamp": "2026-08-13T10:51:03.930572878",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     }
 }

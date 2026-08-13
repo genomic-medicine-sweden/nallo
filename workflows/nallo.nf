@@ -27,6 +27,7 @@ include { GENOME_ASSEMBLY                                        } from '../subw
 include { GVCF_GLNEXUS_NORM_VARIANTS                             } from '../subworkflows/local/gvcf_glnexus_norm_variants'
 include { CALL_METHYLATION_MODKIT                                } from '../subworkflows/local/call_methylation_modkit'
 include { CALL_METHYLATION_METHBAT                               } from '../subworkflows/local/call_methylation_methbat'
+include { MERGE_SVS                                              } from '../subworkflows/local/merge_svs/main'
 include { PHASING                                                } from '../subworkflows/local/phasing'
 include { PREPARE_GENS_INPUTS                                    } from '../subworkflows/local/prepare_gens_inputs'
 include { PREPARE_REFERENCES                                     } from '../subworkflows/local/prepare_references'
@@ -647,14 +648,18 @@ workflow NALLO {
             ch_expected_xx_bed,
             ch_exclude_bed,
             val_sv_callers_to_run.split(',').collect { caller -> caller.toLowerCase().trim() },
-            val_sv_callers_to_merge.split(',').collect { caller -> caller.toLowerCase().trim() },
-            val_sv_callers_merge_priority.split(',').collect { caller -> caller.toLowerCase().trim() },
             ch_sv_call_regions,
             val_sv_call_regions,
             val_force_sawfish_joint_call_single_samples,
             val_create_hificnv_maf_track,
             val_create_sawfish_maf_track,
             ch_vcfexpress_prelude,
+        )
+
+        MERGE_SVS(
+            CALL_SVS.out.vcf,
+            val_sv_callers_to_merge.split(',').collect { caller -> caller.toLowerCase().trim() },
+            val_sv_callers_merge_priority.split(',').collect { caller -> caller.toLowerCase().trim() },
         )
     }
 
@@ -701,8 +706,8 @@ workflow NALLO {
         PHASING(
             BCFTOOLS_CONCAT_PHASING.out.vcf,
             BCFTOOLS_CONCAT_PHASING.out.tbi,
-            val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_vcf,
-            val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_tbi,
+            val_skip_sv_calling ? channel.empty() : MERGE_SVS.out.family_vcf,
+            val_skip_sv_calling ? channel.empty() : MERGE_SVS.out.family_tbi,
             ch_bam_bai,
             ch_family_to_samples,
             ch_fasta,
@@ -757,8 +762,8 @@ workflow NALLO {
                 vcf: [meta, vcf]
                 index: [meta, tbi]
             }
-        ch_sv_vcf_for_annotation = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_vcf
-        ch_sv_index_for_annotation = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_tbi
+        ch_sv_vcf_for_annotation = val_skip_sv_calling ? channel.empty() : MERGE_SVS.out.family_vcf
+        ch_sv_index_for_annotation = val_skip_sv_calling ? channel.empty() : MERGE_SVS.out.family_tbi
     }
 
     // Annotate SNVs
@@ -1283,8 +1288,8 @@ workflow NALLO {
     snvs_sample_vcf                     = val_skip_snv_calling ? channel.empty() : VCF_CONCAT_NORM_VARIANTS.out.vcf // channel: [ val(meta), path(vcf) ]
     snvs_family_tbi                     = val_skip_snv_calling ? channel.empty() : CONCAT_SORT_RANKED_SNVS.out.index // channel: [ val(meta), path(tbi) ]
     snvs_family_vcf                     = val_skip_snv_calling ? channel.empty() : CONCAT_SORT_RANKED_SNVS.out.vcf // channel: [ val(meta), path(vcf) ]
-    svs_per_family_and_caller_tbi       = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_caller_tbi // channel: [ val(meta), path(tbi) ]
-    svs_per_family_and_caller_vcf       = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.family_caller_vcf // channel: [ val(meta), path(vcf) ]
+    svs_per_family_and_caller_tbi       = val_skip_sv_calling ? channel.empty() : MERGE_SVS.out.family_caller_tbi // channel: [ val(meta), path(tbi) ]
+    svs_per_family_and_caller_vcf       = val_skip_sv_calling ? channel.empty() : MERGE_SVS.out.family_caller_vcf // channel: [ val(meta), path(vcf) ]
     svs_per_family_tbi                  = val_skip_sv_calling ? channel.empty() : BCFTOOLS_VIEW_SV.out.tbi // channel: [ val(meta), path(tbi) ]
     svs_per_family_vcf                  = val_skip_sv_calling ? channel.empty() : BCFTOOLS_VIEW_SV.out.vcf // channel: [ val(meta), path(vcf.gz) ]
 }
