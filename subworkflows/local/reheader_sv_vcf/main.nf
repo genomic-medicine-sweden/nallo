@@ -16,7 +16,7 @@ workflow REHEADER_SV_VCF {
     // HiFiCNV doesn't have this issue, so we filter it out here, and add it back later.
 
     // Branching channel to get the VCFs that need reheadering and those that don't
-    ch_found_in_tagged_vcf = ch_vcf.branch { meta, _vcf ->
+    ch_vcf_reheader = ch_vcf.branch { meta, _vcf ->
         def callers_needing_reheader = ['severus', 'sniffles']
         to_reheader: callers_needing_reheader.contains(meta.sv_caller)
         no_reheader: !callers_needing_reheader.contains(meta.sv_caller)
@@ -24,7 +24,7 @@ workflow REHEADER_SV_VCF {
 
     // Getting the sample name from the VCFs that need reheadering
     BCFTOOLS_QUERY(
-        ch_found_in_tagged_vcf.to_reheader.map { meta, vcf -> [meta, vcf, []] },
+        ch_vcf_reheader.to_reheader.map { meta, vcf -> [meta, vcf, []] },
         [],
         [],
         [],
@@ -32,7 +32,7 @@ workflow REHEADER_SV_VCF {
     // Then create a "vcf_sample_name meta.id" file for bcftools reheader
     CREATE_SAMPLES_FILE(BCFTOOLS_QUERY.out.output, [], false)
 
-    ch_bcftools_reheader_input = ch_found_in_tagged_vcf.to_reheader
+    ch_bcftools_reheader_input = ch_vcf_reheader.to_reheader
         .join(CREATE_SAMPLES_FILE.out.output, failOnMismatch: true, failOnDuplicate: true)
         .map { meta, vcf, samples -> [meta, vcf, [], samples] }
 
@@ -44,7 +44,7 @@ workflow REHEADER_SV_VCF {
 
     // Concat the reheadered VCFs with the ones that didn't need reheadering to merge later
     ch_vcf_reheadered = BCFTOOLS_REHEADER.out.vcf
-        .concat(ch_found_in_tagged_vcf.no_reheader)
+        .concat(ch_vcf_reheader.no_reheader)
         .map { meta, vcf -> [['id': meta.family_id, 'sv_caller': meta.sv_caller], vcf] }
         .groupTuple()
 
