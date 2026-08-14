@@ -91,7 +91,7 @@ nextflow_workflow {
 
         when {
             params {
-                extra_vep_options_sv = '--appris --biotype --buffer_size 100 --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --no_progress --numbers --per_gene --protein --regulatory --symbol --tsl --uniprot --no_stats'
+                extra_vep_options_sv = '--appris --biotype --buffer_size 100 --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --no_progress --numbers --protein --regulatory --symbol --tsl --uniprot --no_stats'
             }
             workflow {
                 """
