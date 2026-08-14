@@ -869,11 +869,13 @@
                 },
                 "extra_vep_options_snv": {
                     "type": "string",
-                    "description": "Extra options appended to the VEP command for SNV annotation (applied to both nuclear and mitochondrial SNVs), e.g. '--plugin CADD,snv.tsv.gz --plugin SpliceAI,snv=spliceai_scores.vcf.gz'."
+                    "default": "--buffer_size 20000 --max_sv_size 999999999 --appris --biotype --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --humdiv --no_progress --numbers --polyphen p --protein --regulatory --sift p --symbol --tsl --uniprot --no_stats",
+                    "description": "Options appended to the VEP core command for SNV annotation (applied to both nuclear and mitochondrial SNVs). The default enables standard enrichment annotations. To add plugins such as CADD or SpliceAI, supply the default flags plus your additions. Plugin files must be included in `vep_plugin_files`."
                 },
                 "extra_vep_options_sv": {
                     "type": "string",
-                    "description": "Extra options appended to the VEP command for SV annotation, e.g. '--plugin pLI,pLI_values.txt --plugin DosageSensitivity,DosageSensitivity.tsv.gz'."
+                    "default": "--appris --biotype --buffer_size 100 --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --no_progress --numbers --per_gene --protein --regulatory --symbol --tsl --uniprot --no_stats",
+                    "description": "Options appended to the VEP core command for SV annotation. The default enables standard enrichment annotations. To add plugins, supply the default flags plus your additions. Plugin files must be included in `vep_plugin_files`."
                 },
                 "extra_yak_options": {
                     "type": "string",

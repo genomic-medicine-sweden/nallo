@@ -123,6 +123,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1141](https://github.com/genomic-medicine-sweden/nallo/pull/1141) - Moved merging of vcfs out of `CALL_SVS` in new `MERGE_SVS` subworkflow
 - [#1229](https://github.com/genomic-medicine-sweden/nallo/pull/1229) - Moved `VCFEXPRESS` (FOUND_IN tagging) from `CALL_SVS` to `MERGE_SVS`, running after `SVDB_MERGE_BY_CALLER`
 - [#588](https://github.com/genomic-medicine-sweden/nallo/issues/588) - Replaced `extra_vep_options` with separate `extra_vep_options_snv` and `extra_vep_options_sv` parameters, appended after the core VEP command for each variant type
+- [#588](https://github.com/genomic-medicine-sweden/nallo/issues/588) - Moved enrichment VEP flags (`--appris`, `--biotype`, `--hgvs`, etc.) from the hardcoded core command to the default values of `extra_vep_options_snv` and `extra_vep_options_sv`; the core command now contains only pipeline-critical flags
 
 ### Removed
 

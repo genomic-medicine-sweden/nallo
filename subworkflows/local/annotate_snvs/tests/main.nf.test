@@ -43,6 +43,9 @@ nextflow_workflow {
     test("bcf, db, vep_cache, '110'") {
 
         when {
+            params {
+                extra_vep_options_snv = ''
+            }
             workflow {
                 """
                 input[0] = channel.of([
@@ -86,6 +89,9 @@ nextflow_workflow {
     test("bcf, db, vep_cache, '110', filter before vep") {
 
         when {
+            params {
+                extra_vep_options_snv = ''
+            }
             workflow {
                 """
                 input[0] = channel.of([
@@ -129,6 +135,9 @@ nextflow_workflow {
     test("bcf, [], vep_cache, '110' - no echtvar annotation") {
 
         when {
+            params {
+                extra_vep_options_snv = ''
+            }
             workflow {
                 """
                 input[0] = channel.of([
@@ -169,6 +178,9 @@ nextflow_workflow {
     test("bcf, [], vep_cache, '110' - no echtvar annotation - filter before vep") {
 
         when {
+            params {
+                extra_vep_options_snv = ''
+            }
             workflow {
                 """
                 input[0] = channel.of([
@@ -189,6 +201,52 @@ nextflow_workflow {
                 input[10] = null
                 input[11] = null
                 input[12] = true
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    file(workflow.out.tbi.get(0).get(1)).name,
+                    path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.vcf.get(0).get(1)).vcf.summary,
+                ).match() }
+            )
+        }
+
+    }
+
+    test("bcf, db, vep_cache, '110', with extra_vep_options_snv") {
+
+        when {
+            params {
+                extra_vep_options_snv = '--buffer_size 20000 --max_sv_size 999999999 --appris --biotype --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --humdiv --no_progress --numbers --polyphen p --protein --regulatory --sift p --symbol --tsl --uniprot --no_stats'
+            }
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.vcf.gz', checkIfExists: true)
+                ])
+                input[1] = channel.value([
+                    [ id: 'db' ],
+                    [file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)]
+                ])
+                input[2] = GUNZIP.out.gunzip
+                input[3] = SAMTOOLS_FAIDX.out.fai
+                input[4] = UNTAR.out.untar
+                input[5] = channel.value('110')
+                input[6] = channel.of([
+                    file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
+                ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
+                input[7] = false
+                input[8] = true
+                input[9] = channel.value([])
+                input[10] = null
+                input[11] = null
+                input[12] = false
                 """
             }
         }
