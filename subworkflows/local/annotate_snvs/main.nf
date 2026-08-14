@@ -2,6 +2,7 @@ include { ANNOTATE_CADD                    } from '../annotate_cadd/main'
 include { BCFTOOLS_VIEW                    } from '../../../modules/nf-core/bcftools/view/main'
 include { ECHTVAR_ANNO                     } from '../../../modules/nf-core/echtvar/anno/main'
 include { ENSEMBLVEP_VEP as ENSEMBLVEP_SNV } from '../../../modules/nf-core/ensemblvep/vep/main'
+include { TABIX_TABIX                      } from '../../../modules/nf-core/tabix/tabix/main'
 
 workflow ANNOTATE_SNVS {
     take:
@@ -28,6 +29,10 @@ workflow ANNOTATE_SNVS {
             'bcf.gz',
         )
     }
+
+    TABIX_TABIX(
+        annotate_echtvar ? ECHTVAR_ANNO.out.vcf : ch_vcf
+    )
 
     // Allows for filtering before annotating with VEP
     if (pre_vep_filter) {
@@ -70,6 +75,8 @@ workflow ANNOTATE_SNVS {
     )
 
     emit:
-    vcf = ENSEMBLVEP_SNV.out.vcf
-    tbi = ENSEMBLVEP_SNV.out.tbi
+    vcf            = ENSEMBLVEP_SNV.out.vcf
+    tbi            = ENSEMBLVEP_SNV.out.tbi
+    unfiltered_vcf = annotate_echtvar ? ECHTVAR_ANNO.out.vcf : ch_vcf
+    unfiltered_tbi = TABIX_TABIX.out.index
 }

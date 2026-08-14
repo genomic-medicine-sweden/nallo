@@ -820,8 +820,8 @@ workflow NALLO {
 
     if (split_family_vcf_for_chromograph || (!val_skip_peddy && !val_skip_snv_annotation)) {
 
-        ch_concat_sort_annotated_snvs_input = ANNOTATE_SNVS.out.vcf
-            .join(ANNOTATE_SNVS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+        ch_concat_sort_annotated_snvs_input = ANNOTATE_SNVS.out.unfiltered_vcf
+            .join(ANNOTATE_SNVS.out.unfiltered_tbi, failOnMismatch: true, failOnDuplicate: true)
             .map { meta, vcf, tbi ->
                 def new_meta = [id: meta.family_id, num_intervals: meta.num_intervals]
                 [groupKey(new_meta, new_meta.num_intervals), vcf, tbi]
