@@ -52,6 +52,9 @@ nextflow_workflow {
     test("severus, fasta, svdb, vep_cache, '110', vep_plugin_files") {
 
         when {
+            params {
+                extra_vep_options_sv = '--buffer_size 50'
+            }
             workflow {
                 """
                 input[0] = SEVERUS.out.all_vcf
