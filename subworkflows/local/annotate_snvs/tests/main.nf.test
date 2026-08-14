@@ -44,7 +44,7 @@ nextflow_workflow {
 
         when {
             params {
-                extra_vep_options_snv = '--buffer_size 10000'
+                extra_vep_options_snv = '--no_stats'
             }
             workflow {
                 """
