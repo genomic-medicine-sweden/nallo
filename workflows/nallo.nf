@@ -656,9 +656,8 @@ workflow NALLO {
         )
 
         REHEADER_SV_VCF(
-            CALL_SVS.out.vcf.map { meta, vcf, _tbi -> [meta, vcf] },
-
-    )
+            CALL_SVS.out.vcf.map { meta, vcf, _tbi -> [meta, vcf] }
+        )
 
         MERGE_SVS(
             REHEADER_SV_VCF.out.vcf_reheadered,

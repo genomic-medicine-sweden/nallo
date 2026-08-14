@@ -1,15 +1,14 @@
-include { BCFTOOLS_QUERY                     } from '../../../modules/nf-core/bcftools/query/main'
-include { BCFTOOLS_REHEADER                  } from '../../../modules/nf-core/bcftools/reheader/main'
-include { GAWK as CREATE_SAMPLES_FILE        } from '../../../modules/nf-core/gawk/main'
+include { BCFTOOLS_QUERY              } from '../../../modules/nf-core/bcftools/query/main'
+include { BCFTOOLS_REHEADER           } from '../../../modules/nf-core/bcftools/reheader/main'
+include { GAWK as CREATE_SAMPLES_FILE } from '../../../modules/nf-core/gawk/main'
 
 
 workflow REHEADER_SV_VCF {
-
     take:
-        ch_vcf // channel: [ val(meta), path(vcf) ]
+    ch_vcf // channel: [ val(meta), path(vcf) ]
 
     main:
-        ch_vcf_reheadered = channel.empty()
+    ch_vcf_reheadered = channel.empty()
 
     // If Severus or Sniffles was used, we need to reheader the VCF
     // Since Sniffles hardcodes the sample name as SAMPLE, and Severus bases it on the file name.
@@ -49,6 +48,5 @@ workflow REHEADER_SV_VCF {
         .groupTuple()
 
     emit:
-        vcf_reheadered = ch_vcf_reheadered // channel: [ val(meta), path(vcf) ]
-
+    vcf_reheadered = ch_vcf_reheadered // channel: [ val(meta), path(vcf) ]
 }
