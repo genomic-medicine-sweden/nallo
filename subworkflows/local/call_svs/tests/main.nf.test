@@ -98,16 +98,15 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out.vcf
-                        .collect { meta, vcfs -> [
+                        .collect { meta, vcf, tbi -> [
                             'vcf:',
                             meta,
                             // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for
                             // HiFiCNV/Sawfish VCFs (VCFv4.4) here - just check the file name for those.
-                            vcfs.collect { vcf ->
-                                ['severus', 'sniffles'].contains(meta.sv_caller)
-                                    ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
-                                    : [ file(vcf).name ]
-                            }.sort { it[0] },
+                            ['severus', 'sniffles'].contains(meta.sv_caller)
+                                ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                                : [ file(vcf).name ],
+                            file(tbi).name,
                         ] }
                 ).match() }
             )
@@ -160,16 +159,15 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out.vcf
-                        .collect { meta, vcfs -> [
+                        .collect { meta, vcf, tbi -> [
                             'vcf:',
                             meta,
                             // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for
                             // HiFiCNV/Sawfish VCFs (VCFv4.4) here - just check the file name for those.
-                            vcfs.collect { vcf ->
-                                ['severus', 'sniffles'].contains(meta.sv_caller)
-                                    ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
-                                    : [ file(vcf).name ]
-                            }.sort { it[0] },
+                            ['severus', 'sniffles'].contains(meta.sv_caller)
+                                ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                                : [ file(vcf).name ],
+                            file(tbi).name,
                         ] }
                 ).match() }
             )
@@ -223,16 +221,15 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out.vcf
-                        .collect { meta, vcfs -> [
+                        .collect { meta, vcf, tbi -> [
                             'vcf:',
                             meta,
                             // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for
                             // HiFiCNV/Sawfish VCFs (VCFv4.4) here - just check the file name for those.
-                            vcfs.collect { vcf ->
-                                ['severus', 'sniffles'].contains(meta.sv_caller)
-                                    ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
-                                    : [ file(vcf).name ]
-                            }.sort { it[0] },
+                            ['severus', 'sniffles'].contains(meta.sv_caller)
+                                ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                                : [ file(vcf).name ],
+                            file(tbi).name,
                         ] }
                 ).match() }
             )
@@ -280,16 +277,15 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out.vcf
-                        .collect { meta, vcfs -> [
+                        .collect { meta, vcf, tbi -> [
                             'vcf:',
                             meta,
                             // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for
                             // HiFiCNV/Sawfish VCFs (VCFv4.4) here - just check the file name for those.
-                            vcfs.collect { vcf ->
-                                ['severus', 'sniffles'].contains(meta.sv_caller)
-                                    ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
-                                    : [ file(vcf).name ]
-                            }.sort { it[0] },
+                            ['severus', 'sniffles'].contains(meta.sv_caller)
+                                ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                                : [ file(vcf).name ],
+                            file(tbi).name,
                         ] }
                 ).match() }
             )
@@ -337,16 +333,15 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out.vcf
-                        .collect { meta, vcfs -> [
+                        .collect { meta, vcf, tbi -> [
                             'vcf:',
                             meta,
                             // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for
                             // HiFiCNV/Sawfish VCFs (VCFv4.4) here - just check the file name for those.
-                            vcfs.collect { vcf ->
-                                ['severus', 'sniffles'].contains(meta.sv_caller)
-                                    ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
-                                    : [ file(vcf).name ]
-                            }.sort { it[0] },
+                            ['severus', 'sniffles'].contains(meta.sv_caller)
+                                ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                                : [ file(vcf).name ],
+                            file(tbi).name,
                         ] }
                 ).match() }
             )
@@ -398,16 +393,15 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out.vcf
-                        .collect { meta, vcfs -> [
+                        .collect { meta, vcf, tbi -> [
                             'vcf:',
                             meta,
                             // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for
                             // HiFiCNV/Sawfish VCFs (VCFv4.4) here - just check the file name for those.
-                            vcfs.collect { vcf ->
-                                ['severus', 'sniffles'].contains(meta.sv_caller)
-                                    ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
-                                    : [ file(vcf).name ]
-                            }.sort { it[0] },
+                            ['severus', 'sniffles'].contains(meta.sv_caller)
+                                ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                                : [ file(vcf).name ],
+                            file(tbi).name,
                         ] }
                 ).match() }
             )
@@ -458,16 +452,15 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     workflow.out.vcf
-                        .collect { meta, vcfs -> [
+                        .collect { meta, vcf, tbi -> [
                             'vcf:',
                             meta,
                             // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for
                             // HiFiCNV/Sawfish VCFs (VCFv4.4) here - just check the file name for those.
-                            vcfs.collect { vcf ->
-                                ['severus', 'sniffles'].contains(meta.sv_caller)
-                                    ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
-                                    : [ file(vcf).name ]
-                            }.sort { it[0] },
+                            ['severus', 'sniffles'].contains(meta.sv_caller)
+                                ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                                : [ file(vcf).name ],
+                            file(tbi).name,
                         ] }
                 ).match() }
             )
@@ -515,9 +508,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    // groupTuple's order within workflow.out.vcf isn't guaranteed when multiple
-                    // samples' processes can finish in any order, so sort the grouped file names.
-                    vcf: workflow.out.vcf.collect { meta, vcfs -> [meta, vcfs.collect { vcf -> file(vcf) }.sort { it.name }] },
+                    vcf: workflow.out.vcf.collect { meta, vcf, tbi -> [meta, file(vcf).name, file(tbi).name] },
                     hificnv_depth: workflow.out.hificnv_depth,
                     hificnv_copynum: workflow.out.hificnv_copynum,
                     hificnv_maf: workflow.out.hificnv_maf,
@@ -577,9 +568,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    // groupTuple's order within workflow.out.vcf isn't guaranteed when multiple
-                    // samples' processes can finish in any order, so sort the grouped file names.
-                    vcf: workflow.out.vcf.collect { meta, vcfs -> [meta, vcfs.collect { vcf -> file(vcf) }.sort { it.name }] },
+                    vcf: workflow.out.vcf.collect { meta, vcf, tbi -> [meta, file(vcf).name, file(tbi).name] },
                     hificnv_depth: workflow.out.hificnv_depth,
                     hificnv_copynum: workflow.out.hificnv_copynum,
                     hificnv_maf: workflow.out.hificnv_maf,
