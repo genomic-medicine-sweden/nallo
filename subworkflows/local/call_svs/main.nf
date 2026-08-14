@@ -212,7 +212,7 @@ workflow CALL_SVS {
     }
 
     emit:
-    vcf                                = ch_sv_calls_filtered // channel: [ val(meta), [ path(vcf) ] ]
+    vcf                                = ch_sv_calls_filtered // channel: [ val(meta),  path(vcf), path(tbi) ]
     hificnv_depth                      = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.depth : channel.empty() // channel: [ val(meta), path(bw) ]
     hificnv_copynum                    = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.copynum : channel.empty() // channel: [ val(meta), path(bedgraph) ]
     hificnv_maf                        = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.maf : channel.empty() // channel: [ val(meta), path(bw) ]
