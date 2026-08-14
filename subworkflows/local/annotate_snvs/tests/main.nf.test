@@ -43,9 +43,6 @@ nextflow_workflow {
     test("bcf, db, vep_cache, '110'") {
 
         when {
-            params {
-                extra_vep_options_snv = ''
-            }
             workflow {
                 """
                 input[0] = channel.of([
@@ -89,9 +86,6 @@ nextflow_workflow {
     test("bcf, db, vep_cache, '110', filter before vep") {
 
         when {
-            params {
-                extra_vep_options_snv = ''
-            }
             workflow {
                 """
                 input[0] = channel.of([
@@ -135,9 +129,6 @@ nextflow_workflow {
     test("bcf, [], vep_cache, '110' - no echtvar annotation") {
 
         when {
-            params {
-                extra_vep_options_snv = ''
-            }
             workflow {
                 """
                 input[0] = channel.of([
@@ -178,9 +169,6 @@ nextflow_workflow {
     test("bcf, [], vep_cache, '110' - no echtvar annotation - filter before vep") {
 
         when {
-            params {
-                extra_vep_options_snv = ''
-            }
             workflow {
                 """
                 input[0] = channel.of([

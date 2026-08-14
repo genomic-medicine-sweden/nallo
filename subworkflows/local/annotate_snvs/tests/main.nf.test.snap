@@ -86,6 +86,18 @@
             "nextflow": "26.03.4"
         }
     },
+    "bcf, db, vep_cache, '110', with extra_vep_options_snv": {
+        "content": [
+            "test.vcf.gz.tbi",
+            "a6df39f9ecc17803e3577dae5af887ac",
+            "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=202, phased=false, phasedAutodetect=false]"
+        ],
+        "timestamp": "2026-08-14T16:52:42.557761287",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
     "bcf, [], vep_cache, '110' - no echtvar annotation - filter before vep": {
         "content": [
             "test.vcf.gz.tbi",
