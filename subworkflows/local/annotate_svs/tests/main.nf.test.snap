@@ -50,6 +50,17 @@
             "nextflow": "26.04.6"
         }
     },
+    "severus, fasta, svdb, vep_cache, '110', vep_plugin_files, with extra_vep_options_sv": {
+        "content": [
+            "d4c3f4e0813221db330c9a93aa79f8f1",
+            "test.vcf.gz.tbi"
+        ],
+        "timestamp": "2026-08-14T17:44:17.371415041",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
     "severus, fasta, svdb, vep_cache, '110', vep_plugin_files": {
         "content": [
             "97b371e9ead544401c47225602ddb8ca",
