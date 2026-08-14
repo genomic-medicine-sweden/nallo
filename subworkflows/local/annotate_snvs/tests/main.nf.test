@@ -43,9 +43,6 @@ nextflow_workflow {
     test("bcf, db, vep_cache, '110'") {
 
         when {
-            params {
-                extra_vep_options_snv = '--no_stats'
-            }
             workflow {
                 """
                 input[0] = channel.of([
