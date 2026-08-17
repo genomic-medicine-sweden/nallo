@@ -74,9 +74,12 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    file(workflow.out.tbi.get(0).get(1)).name,
-                    path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.vcf.get(0).get(1)).vcf.summary,
+                    file(workflow.out.vep_annotated_tbi.get(0).get(1)).name,
+                    path(workflow.out.vep_annotated_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.vep_annotated_vcf.get(0).get(1)).vcf.summary,
+                    file(workflow.out.echtvar_annotated_tbi.get(0).get(1)).name,
+                    path(workflow.out.echtvar_annotated_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.echtvar_annotated_vcf.get(0).get(1)).vcf.summary,
                 ).match() }
             )
         }
@@ -117,9 +120,12 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    file(workflow.out.tbi.get(0).get(1)).name,
-                    path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.vcf.get(0).get(1)).vcf.summary,
+                    file(workflow.out.vep_annotated_tbi.get(0).get(1)).name,
+                    path(workflow.out.vep_annotated_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.vep_annotated_vcf.get(0).get(1)).vcf.summary,
+                    file(workflow.out.echtvar_annotated_tbi.get(0).get(1)).name,
+                    path(workflow.out.echtvar_annotated_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.echtvar_annotated_vcf.get(0).get(1)).vcf.summary,
                 ).match() }
             )
         }
@@ -157,9 +163,11 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    file(workflow.out.tbi.get(0).get(1)).name,
-                    path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.vcf.get(0).get(1)).vcf.summary,
+                    file(workflow.out.vep_annotated_tbi.get(0).get(1)).name,
+                    path(workflow.out.vep_annotated_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.vep_annotated_vcf.get(0).get(1)).vcf.summary,
+                    file(workflow.out.echtvar_annotated_tbi.get(0).get(1)).name,
+                    file(workflow.out.echtvar_annotated_vcf.get(0).get(1)).name,
                 ).match() }
             )
         }
@@ -197,9 +205,11 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    file(workflow.out.tbi.get(0).get(1)).name,
-                    path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.vcf.get(0).get(1)).vcf.summary,
+                    file(workflow.out.vep_annotated_tbi.get(0).get(1)).name,
+                    path(workflow.out.vep_annotated_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.vep_annotated_vcf.get(0).get(1)).vcf.summary,
+                    file(workflow.out.echtvar_annotated_tbi.get(0).get(1)).name,
+                    file(workflow.out.echtvar_annotated_vcf.get(0).get(1)).name,
                 ).match() }
             )
         }
@@ -243,10 +253,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(
-                    workflow.out.tbi,
-                    workflow.out.vcf
-                ).match() }
+                { assert snapshot(workflow.out).match() }
             )
         }
 
@@ -298,10 +305,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(
-                    workflow.out.tbi,
-                    workflow.out.vcf
-                ).match() }
+                { assert snapshot(workflow.out).match() }
             )
         }
 
