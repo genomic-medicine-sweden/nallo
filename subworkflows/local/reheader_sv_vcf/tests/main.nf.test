@@ -31,23 +31,33 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.vcf_reheadered.size() == 3 },
-                { assert workflow.out.vcf_reheadered.every { meta, _vcfs -> meta.id == 'FAM' } },
+                { assert workflow.out.vcf.size() == 3 },
+                { assert workflow.out.tbi.size() == 3 },
+                { assert workflow.out.vcf.every { meta, _vcf -> meta.id == 'HG002_Revio' } },
+                { assert workflow.out.tbi.every { meta, _tbi -> meta.id == 'HG002_Revio' } },
                 { assert snapshot(
-                    workflow.out.vcf_reheadered
-                        .collect { meta, vcfs ->
+                    workflow.out.vcf
+                        .collect { meta, vcf ->
                             [
                                 'sv_vcf_output:',
-                                meta,
-                                file(vcfs[0]).name,
-                                path(vcfs[0]).vcf.summary,
-                                path(vcfs[0]).vcf.variantsMD5
+                                [id: meta.id, sv_caller: meta.sv_caller],
+                                file(vcf).name,
+                                path(vcf).vcf.summary,
+                                path(vcf).vcf.variantsMD5
+                            ]
+                        }.sort { it[1].sv_caller },
+                    workflow.out.tbi
+                        .collect { meta, tbi ->
+                            [
+                                'sv_tbi_output:',
+                                [id: meta.id, sv_caller: meta.sv_caller],
+                                file(tbi).name
                             ]
                         }.sort { it[1].sv_caller }
                 ).match() },
                 {
-                    def sampleByCaller = workflow.out.vcf_reheadered.collectEntries { meta, vcfs ->
-                        def sampleColumn = path(vcfs[0]).linesGzip
+                    def sampleByCaller = workflow.out.vcf.collectEntries { meta, vcf ->
+                        def sampleColumn = path(vcf).linesGzip
                             .find { line -> line.startsWith('#CHROM') }
                             .tokenize('\t')
                             .last()
@@ -90,6 +100,30 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("unknown sv_caller should fail with clear error") {
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'unknown_caller' ],
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/hificnv_test.vcf.gz', checkIfExists: true)
+                    ]
+                )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.failed },
+                { assert workflow.errorMessage.contains("Unknown sv_caller 'unknown_caller' in REHEADER_SV_VCF.") },
+                { assert workflow.errorMessage.contains("Allowed values:") }
             )
         }
     }

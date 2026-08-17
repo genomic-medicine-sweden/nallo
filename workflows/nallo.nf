@@ -659,8 +659,12 @@ workflow NALLO {
             CALL_SVS.out.vcf.map { meta, vcf, _tbi -> [meta, vcf] }
         )
 
+        ch_merge_svs_in = REHEADER_SV_VCF.out.vcf
+            .map { meta, vcf -> [['id': meta.family_id, 'sv_caller': meta.sv_caller], vcf] }
+            .groupTuple()
+
         MERGE_SVS(
-            REHEADER_SV_VCF.out.vcf_reheadered,
+            ch_merge_svs_in,
             val_sv_callers_to_merge.split(',').collect { caller -> caller.toLowerCase().trim() },
             val_sv_callers_merge_priority.split(',').collect { caller -> caller.toLowerCase().trim() },
             ch_vcfexpress_prelude,
