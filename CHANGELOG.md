@@ -139,6 +139,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1222](https://github.com/genomic-medicine-sweden/nallo/pull/1222) - Removed `CLEAN_SNIFFLES` module (replaced by `VEP_PREP_SV`)
 - [#1224](https://github.com/genomic-medicine-sweden/nallo/pull/1224) - Removed hardcoded memory use in config for `RANK_VARIANTS:BCFTOOLS_SORT` since it is already covered by `task.memory` in the module
 - [#588](https://github.com/genomic-medicine-sweden/nallo/issues/588) - Removed `--polyphen p`, `--sift p`, `--humdiv` from the SV VEP core command; these amino-acid substitution predictors produce no meaningful output for SVs
+- [#1114](https://github.com/genomic-medicine-sweden/nallo/issues/1114) - Removed `BCFTOOLS_VIEW_SV` passthrough process; output naming moved to `main.nf` `path {}` closures
 
 ### Fixed
 
