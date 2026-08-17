@@ -40,7 +40,7 @@
                         "id": "HG002_Revio",
                         "sv_caller": "hificnv"
                     },
-                    "hificnv_test.vcf.gz.tbi"
+                    "hificnv_test.vcf.gz"
                 ],
                 [
                     "sv_tbi_output:",
@@ -60,7 +60,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-08-13T15:00:06.664276966",
+        "timestamp": "2026-08-17T09:48:57.425489758",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -102,7 +102,7 @@
                             "family_id": "FAM",
                             "sv_caller": "hificnv"
                         },
-                        "/home/eliott/nallo/subworkflows/local/reheader_sv_vcf/tests/testdata/hificnv_test.vcf.gz.tbi"
+                        "hificnv_test.vcf.gz:md5,abf39044be097c8c2806d180178f082a"
                     ],
                     [
                         {
@@ -128,7 +128,7 @@
                             "family_id": "FAM",
                             "sv_caller": "hificnv"
                         },
-                        "/home/eliott/nallo/subworkflows/local/reheader_sv_vcf/tests/testdata/hificnv_test.vcf.gz.tbi"
+                        "hificnv_test.vcf.gz:md5,abf39044be097c8c2806d180178f082a"
                     ],
                     [
                         {
@@ -175,7 +175,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-08-17T09:26:17.461095174",
+        "timestamp": "2026-08-17T09:49:05.320038806",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"

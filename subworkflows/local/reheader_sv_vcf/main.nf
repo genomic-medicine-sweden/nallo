@@ -54,7 +54,7 @@ workflow REHEADER_SV_VCF {
     // Concat the reheadered VCFs and indices with the ones that didn't need reheadering to merge later
     ch_vcf_reheadered = BCFTOOLS_REHEADER.out.vcf.concat(ch_vcf_reheader.no_reheader)
 
-    ch_tbi_reheadered = BCFTOOLS_REHEADER.out.index.concat(ch_vcf_reheader.no_reheader.map { meta, vcf -> [meta, vcf + '.tbi'] })
+    ch_tbi_reheadered = BCFTOOLS_REHEADER.out.index.concat(ch_vcf_reheader.no_reheader)
 
     emit:
     vcf = ch_vcf_reheadered // channel: [ val(meta), path(vcf) ]
