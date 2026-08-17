@@ -869,7 +869,7 @@
                 },
                 "extra_vep_options_snv": {
                     "type": "string",
-                    "default": "--buffer_size 20000 --max_sv_size 999999999 --appris --biotype --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --humdiv --no_progress --numbers --polyphen p --protein --regulatory --sift p --symbol --tsl --uniprot --no_stats",
+                    "default": "--buffer_size 20000 --appris --biotype --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --humdiv --no_progress --numbers --polyphen p --protein --regulatory --sift p --symbol --tsl --uniprot --no_stats",
                     "description": "Options appended to the VEP core command for SNV annotation (applied to both nuclear and mitochondrial SNVs). The default enables standard enrichment annotations. To add plugins such as CADD or SpliceAI, supply the default flags plus your additions. Plugin files must be included in `vep_plugin_files`."
                 },
                 "extra_vep_options_sv": {

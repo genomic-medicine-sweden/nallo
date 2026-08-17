@@ -210,7 +210,7 @@ nextflow_workflow {
 
         when {
             params {
-                extra_vep_options_snv = '--buffer_size 20000 --max_sv_size 999999999 --appris --biotype --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --humdiv --no_progress --numbers --polyphen p --protein --regulatory --sift p --symbol --tsl --uniprot --no_stats'
+                extra_vep_options_snv = '--buffer_size 20000 --appris --biotype --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --humdiv --no_progress --numbers --polyphen p --protein --regulatory --sift p --symbol --tsl --uniprot --no_stats'
             }
             workflow {
                 """
