@@ -304,7 +304,7 @@ nextflow_workflow {
 
         when {
             params {
-                extra_vep_options_snv = '--buffer_size 10000'
+                extra_vep_options_snv = '--buffer_size 20000 --appris --biotype --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --humdiv --no_progress --numbers --polyphen p --protein --regulatory --sift p --symbol --tsl --uniprot --no_stats'
             }
             workflow {
                 """
