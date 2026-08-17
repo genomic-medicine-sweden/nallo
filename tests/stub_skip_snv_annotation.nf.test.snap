@@ -27,9 +27,6 @@
                 "BCFTOOLS_VIEW": {
                     "bcftools": 1.22
                 },
-                "BCFTOOLS_VIEW_SV": {
-                    "bcftools": 1.22
-                },
                 "BEDTOOLS_MERGE": {
                     "bedtools": "2.31.1"
                 },
