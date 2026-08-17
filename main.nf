@@ -867,18 +867,9 @@ output {
     }
     svs_per_family {
         path { meta, file ->
-            def name = ["${meta.id}_svs"]
-            if (!params.skip_sv_annotation) {
-                name << "annotated"
-            }
-            if (!params.skip_rank_variants) {
-                name << "ranked"
-            }
-            if (meta?.containsKey('set')) {
-                name << "${meta.set}"
-            }
+            def name = "${meta.id}_svs${params.skip_sv_annotation ? '' : '_annotated'}${params.skip_rank_variants ? '' : '_ranked'}${meta?.containsKey('set') ? '_' + meta.set : ''}"
             def ext = file.name.endsWith('.vcf.gz.tbi') ? 'vcf.gz.tbi' : 'vcf.gz'
-            file >> "svs/family/${meta.id}/${name.join('_')}.${ext}"
+            "svs/family/${meta.id}/${name}.${ext}"
         }
     }
     svs_per_family_and_caller {
