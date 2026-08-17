@@ -803,7 +803,7 @@
                     "type": "string",
                     "mimetype": "text/csv",
                     "pattern": "^\\S+\\.(csv|tsv|json|ya?ml)$",
-                    "description": "Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. pLI_values.txt and LoFtool_scores.txt are required for SNV annotation; pLI_values.txt is required for SV annotation.",
+                    "description": "Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required for SNV annotation; only pLI_values.txt is required for SV annotation.",
                     "schema": "assets/vep_plugin_files_schema.json"
                 },
                 "force_sawfish_joint_call_single_samples": {
