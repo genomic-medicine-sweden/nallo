@@ -122,6 +122,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1219](https://github.com/genomic-medicine-sweden/nallo/pull/1219) - Changed nf-test CI action to retry once on transient network/disk failures
 - [#1141](https://github.com/genomic-medicine-sweden/nallo/pull/1141) - Moved merging of vcfs out of `CALL_SVS` in new `MERGE_SVS` subworkflow
 - [#1229](https://github.com/genomic-medicine-sweden/nallo/pull/1229) - Moved `VCFEXPRESS` (FOUND_IN tagging) from `CALL_SVS` to `MERGE_SVS`, running after `SVDB_MERGE_BY_CALLER`
+- [#1232](https://github.com/genomic-medicine-sweden/nallo/pull/1232) - Changed the re-headering of the SV VCFs, now part of a new subworkflow `REHEADER_SV_VCF`
 
 ### Removed
 
@@ -1069,7 +1070,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#580](https://github.com/genomic-medicine-sweden/nallo/pull/580) - Changed `CLEAN_SNIFFLES` to fix sniffles1 header and DUP/INV end position
 - [#583](https://github.com/genomic-medicine-sweden/nallo/pull/583) - Merged master back to dev
 - [#585](https://github.com/genomic-medicine-sweden/nallo/pull/585) - Updated version to 0.5.0
-- [#1232](https://github.com/genomic-medicine-sweden/nallo/pull/1232) - Changed the the re-headering of the SV VCFs, now part of a new subworkflow `REHEADER_SV_VCF`
 
 ### `Removed`
 
