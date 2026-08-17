@@ -785,7 +785,7 @@ workflow NALLO {
             val_pre_vep_snv_filter_expression != '',
         )
 
-        ch_clin_research_snvs_vcf = ANNOTATE_SNVS.out.vcf.multiMap { meta, vcf ->
+        ch_clin_research_snvs_vcf = ANNOTATE_SNVS.out.vep_annotated_vcf.multiMap { meta, vcf ->
             clinical: [meta + [set: "clinical"], vcf]
             research: [meta + [set: "research"], vcf]
         }
@@ -820,8 +820,9 @@ workflow NALLO {
 
     if (split_family_vcf_for_chromograph || (!val_skip_peddy && !val_skip_snv_annotation)) {
 
-        ch_concat_sort_annotated_snvs_input = ANNOTATE_SNVS.out.unfiltered_vcf
-            .join(ANNOTATE_SNVS.out.unfiltered_tbi, failOnMismatch: true, failOnDuplicate: true)
+        // use echtvar_annotated_vcf for chromograph and peddy, to use all variants, not just those that pass the pre-annotation filter
+        ch_concat_sort_annotated_snvs_input = ANNOTATE_SNVS.out.echtvar_annotated_vcf
+            .join(ANNOTATE_SNVS.out.echtvar_annotated_tbi, failOnMismatch: true, failOnDuplicate: true)
             .map { meta, vcf, tbi ->
                 def new_meta = [id: meta.family_id, num_intervals: meta.num_intervals]
                 [groupKey(new_meta, new_meta.num_intervals), vcf, tbi]

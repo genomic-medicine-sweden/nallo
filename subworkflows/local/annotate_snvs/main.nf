@@ -75,8 +75,8 @@ workflow ANNOTATE_SNVS {
     )
 
     emit:
-    vcf            = ENSEMBLVEP_SNV.out.vcf
-    tbi            = ENSEMBLVEP_SNV.out.tbi
-    unfiltered_vcf = annotate_echtvar ? ECHTVAR_ANNO.out.vcf : ch_vcf
-    unfiltered_tbi = TABIX_TABIX.out.index
+    vep_annotated_vcf     = ENSEMBLVEP_SNV.out.vcf
+    vep_annotated_tbi     = ENSEMBLVEP_SNV.out.tbi
+    echtvar_annotated_vcf = annotate_echtvar ? ECHTVAR_ANNO.out.vcf : ch_vcf
+    echtvar_annotated_tbi = TABIX_TABIX.out.index
 }
