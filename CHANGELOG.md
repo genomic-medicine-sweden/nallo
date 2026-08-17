@@ -122,6 +122,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1219](https://github.com/genomic-medicine-sweden/nallo/pull/1219) - Changed nf-test CI action to retry once on transient network/disk failures
 - [#1141](https://github.com/genomic-medicine-sweden/nallo/pull/1141) - Moved merging of vcfs out of `CALL_SVS` in new `MERGE_SVS` subworkflow
 - [#1229](https://github.com/genomic-medicine-sweden/nallo/pull/1229) - Moved `VCFEXPRESS` (FOUND_IN tagging) from `CALL_SVS` to `MERGE_SVS`, running after `SVDB_MERGE_BY_CALLER`
+- [#1234](https://github.com/genomic-medicine-sweden/nallo/pull/1234) - Changed input of `CHROMOGRAPH` to unfiltered snvs since it can currently be filtered by `pre_vep_snv_filter_expression`
 
 ### Removed
 
