@@ -1,5 +1,6 @@
 include { BCFTOOLS_VIEW                     } from '../../../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_SORT                     } from '../../../modules/nf-core/bcftools/sort/main'
+include { DEBREAK                           } from '../../../modules/local/debreak/main'
 include { HIFICNV                           } from '../../../modules/nf-core/hificnv/main'
 include { SAWFISH_DISCOVER                  } from '../../../modules/nf-core/sawfish/discover/main'
 include { SAWFISH_JOINTCALL                 } from '../../../modules/nf-core/sawfish/jointcall/main'
@@ -63,6 +64,21 @@ workflow CALL_SVS {
     }
 
     //
+    // Call SVs with DeBreak
+    //
+    if (sv_callers_to_run.contains('debreak')) {
+
+        DEBREAK(
+            ch_bam_bai,
+            ch_fasta,
+        )
+
+        ch_for_vep_prep_sv = ch_for_vep_prep_sv.mix(
+            DEBREAK.out.vcf.map { meta, vcf -> [meta + [sv_caller: 'debreak'], vcf] }
+        )
+    }
+
+    //
     // Prepare SV VCFs for annotation
     //
     VEP_PREP_SV(ch_for_vep_prep_sv)
@@ -76,10 +92,10 @@ workflow CALL_SVS {
         ch_sv_calls = ch_sv_calls.mix(TABIX_SEVERUS.out.gz_index)
     }
 
-    if (sv_callers_to_run.contains('sniffles')) {
+    if (sv_callers_to_run.contains('sniffles') || sv_callers_to_run.contains('debreak')) {
 
         BCFTOOLS_SORT(
-            VEP_PREP_SV.out.vcf.filter { meta, _vcf -> meta.sv_caller == 'sniffles' }
+            VEP_PREP_SV.out.vcf.filter { meta, _vcf -> meta.sv_caller in ['sniffles', 'debreak'] }
         )
 
         ch_sv_calls = ch_sv_calls.mix(
