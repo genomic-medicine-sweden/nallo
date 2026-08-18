@@ -1657,7 +1657,7 @@
 </tr>
 <tr>
 <td><code>vep_plugin_files</code></td>
-<td>Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required.</td>
+<td>Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required for SNV annotation; only pLI_values.txt is required for SV annotation.</td>
 <td><code>string</code></td>
 <td></td>
 <td></td>
@@ -1752,12 +1752,20 @@
 <td>True</td>
 </tr>
 <tr>
-<td><code>extra_vep_options</code></td>
-<td>Extra options to VEP, used for test profile.</td>
+<td><code>extra_vep_options_snv</code></td>
+<td>Options appended to the VEP core command for SNV annotation (applied to both nuclear and mitochondrial SNVs). The default enables standard enrichment annotations. To add plugins such as CADD or SpliceAI, supply the default flags plus your additions. Plugin files must be included in <code>vep_plugin_files</code>.</td>
 <td><code>string</code></td>
+<td>--buffer_size 20000 --appris --biotype --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --humdiv --no_progress --numbers --polyphen p --protein --regulatory --sift p --symbol --tsl --uniprot --no_stats</td>
 <td></td>
 <td></td>
-<td>True</td>
+</tr>
+<tr>
+<td><code>extra_vep_options_sv</code></td>
+<td>Options appended to the VEP core command for SV annotation. The default enables standard enrichment annotations. To add plugins, supply the default flags plus your additions. Plugin files must be included in <code>vep_plugin_files</code>.</td>
+<td><code>string</code></td>
+<td>--appris --biotype --buffer_size 100 --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --no_progress --numbers --protein --regulatory --symbol --tsl --uniprot --no_stats</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td><code>extra_yak_options</code></td>

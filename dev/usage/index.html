@@ -1568,7 +1568,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </ol>
 <h3 id="samplesheet">Samplesheet</h3>
 <p>First, you will need to create a samplesheet with information about the samples you would like to analyze before running the pipeline. Use this parameter to specify its location.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>--input<span class="w"> </span><span class="s1">&#39;[path to samplesheet file]&#39;</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>--input<span class="w"> </span><span class="s1">'[path to samplesheet file]'</span>
 </span></code></pre></div>
 <p>It has to be a comma-separated file with seven columns and a header row, as shown in the example below:</p>
 <div class="language-console highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">project,sample,file,family_id,paternal_id,maternal_id,sex,phenotype</span>
@@ -2070,6 +2070,10 @@ The phaser can be chosen using the <code>--phaser</code> argument. See the follo
 <td><strong>Optional</strong>: A CSV/TSV/JSON/YAML file with annotation databases from <a href="https://github.com/brentp/echtvar">echtvar encode</a> (e.g. <a href="https://surfdrive.surf.nl/files/index.php/s/LddbAYQAYPqtYu6/download"><code>gnomad.v3.1.2.echtvar.popmax.v2.zip</code></a>)</td>
 </tr>
 <tr>
+<td><code>extra_vep_options_snv</code></td>
+<td><strong>Optional</strong>: Options appended to the VEP core command for SNV annotation, applied to both nuclear and mitochondrial SNVs. Defaults to standard enrichment annotations. To add plugins (e.g. CADD, SpliceAI), supply the default flags plus your additions (e.g. <code>'--buffer_size 20000 ... --plugin CADD,snv.tsv.gz'</code>). Plugin files must be included in <code>vep_plugin_files</code>.</td>
+</tr>
+<tr>
 <td><code>variant_consequences_snvs</code></td>
 <td>A list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic and mitochondrial SNVs. Sample file <a href="https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt">here</a>. You can learn more about these terms <a href="https://ensembl.org/info/genome/variation/prediction/predicted_data.html">here</a></td>
 </tr>
@@ -2140,6 +2144,10 @@ The phaser can be chosen using the <code>--phaser</code> argument. See the follo
 <tr>
 <td><code>vep_plugin_files</code> <sup>2</sup></td>
 <td>A CSV/TSV/JSON/YAML file with VEP plugin files, pLI and LoFtool are required. Example provided below.</td>
+</tr>
+<tr>
+<td><code>extra_vep_options_sv</code></td>
+<td><strong>Optional</strong>: Options appended to the VEP core command for SV annotation. Defaults to standard enrichment annotations. To add plugins, supply the default flags plus your additions (e.g. <code>'--appris --biotype ... --plugin CADD,sv.tsv.gz'</code>). Plugin files must be included in <code>vep_plugin_files</code>.</td>
 </tr>
 <tr>
 <td><code>variant_consequences_svs</code></td>
@@ -2306,7 +2314,7 @@ Some HPC setups also allow you to run nextflow within a cluster job submitted yo
 <h2 id="nextflow-memory-requirements">Nextflow memory requirements</h2>
 <p>In some cases, the Nextflow Java virtual machines can start to request a large amount of memory.
 We recommend adding the following line to your environment to limit this (typically in <code>~/.bashrc</code> or <code>~./bash_profile</code>):</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">NXF_OPTS</span><span class="o">=</span><span class="s1">&#39;-Xms1g -Xmx4g&#39;</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">NXF_OPTS</span><span class="o">=</span><span class="s1">'-Xms1g -Xmx4g'</span>
 </span></code></pre></div>
 <h2 id="running-the-pipeline-without-internet-access">Running the pipeline without internet access</h2>
 <h3 id="download-pipeline-and-containers">Download pipeline and containers</h3>
