@@ -52,6 +52,9 @@ nextflow_workflow {
     test("severus, fasta, svdb, vep_cache, '110', vep_plugin_files") {
 
         when {
+            params {
+                extra_vep_options_sv = ''
+            }
             workflow {
                 """
                 input[0] = SEVERUS.out.all_vcf
@@ -79,6 +82,81 @@ nextflow_workflow {
                     path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
                     file(workflow.out.tbi.get(0).get(1)).name
                 ).match() }
+            )
+        }
+
+    }
+
+    test("severus, fasta, svdb, vep_cache, '110', vep_plugin_files, with extra_vep_options_sv") {
+
+        when {
+            params {
+                extra_vep_options_sv = '--appris --biotype --buffer_size 100 --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --no_progress --numbers --protein --regulatory --symbol --tsl --uniprot --no_stats'
+            }
+            workflow {
+                """
+                input[0] = SEVERUS.out.all_vcf
+                input[1] = GUNZIP.out.gunzip
+                input[2] = channel.of([
+                    'https://github.com/genomic-medicine-sweden/test-datasets/raw/b9ff54b59cdd39df5b6e278a30b08d94075a644c/reference/colorsdb.test_data.vcf.gz',
+                    'AF',
+                    'AC',
+                    'colorsdb_af',
+                    'colorsdb_ac'
+                ])
+                input[3] = UNTAR.out.untar
+                input[4] = channel.value('110')
+                input[5] = channel.of([
+                    file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
+                ])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
+                    file(workflow.out.tbi.get(0).get(1)).name
+                ).match() }
+            )
+        }
+
+    }
+
+    test("severus, fasta, svdb, vep_cache, '110', vep_plugin_files -stub with extra_vep_options_sv") {
+
+        options "-stub"
+
+        when {
+            params {
+                extra_vep_options_sv = '--buffer_size 50'
+            }
+            workflow {
+                """
+                input[0] = SEVERUS.out.all_vcf
+                input[1] = GUNZIP.out.gunzip
+                input[2] = channel.of([
+                    'https://github.com/genomic-medicine-sweden/test-datasets/raw/b9ff54b59cdd39df5b6e278a30b08d94075a644c/reference/colorsdb.test_data.vcf.gz',
+                    'AF',
+                    'AC',
+                    'colorsdb_af',
+                    'colorsdb_ac'
+                ])
+                input[3] = UNTAR.out.untar
+                input[4] = channel.value('110')
+                input[5] = channel.of([
+                    file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
+                ])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
             )
         }
 
