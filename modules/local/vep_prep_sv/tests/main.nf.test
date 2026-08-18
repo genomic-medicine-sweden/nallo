@@ -20,6 +20,10 @@ nextflow_process {
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ]
+                input[1] = [[],[]]
+                input[2] = [[],[]]
+                input[3] = true
+                input[4] = false
                 """
             }
         }
@@ -98,12 +102,9 @@ nextflow_process {
         }
     }
 
-    test("vep_prep_sv - sniffles1 integration") {
+    test("vep_prep_sv - sniffles2 integration") {
 
         when {
-            params {
-                caller = 'sniffles1'
-            }
             process {
                 """
                 input[0] = SNIFFLES.out.vcf
@@ -123,14 +124,11 @@ nextflow_process {
         }
     }
 
-    test("vep_prep_sv - sniffles1 -stub") {
+    test("vep_prep_sv - sniffles2 -stub") {
 
         options "-stub"
 
         when {
-            params {
-                caller = 'sniffles1'
-            }
             process {
                 """
                 input[0] = SNIFFLES.out.vcf
