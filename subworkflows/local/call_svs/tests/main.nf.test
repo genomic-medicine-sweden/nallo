@@ -393,7 +393,7 @@ nextflow_workflow {
 
     }
 
-    test("2 samples, 1 family - merge sniffes,hificnv,severus,sawfish with trf bed, run all callers and filter") {
+    test("2 samples, 1 family - merge sniffes,hificnv,severus,sawfish,debreak with trf bed, run all callers and filter") {
 
         when {
             workflow {
@@ -418,7 +418,7 @@ nextflow_workflow {
                     [ id: 'exclude_bed' ],
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
                 ]).collect()
-                input[7] = ['sniffles', 'severus', 'hificnv', 'sawfish']
+                input[7] = ['sniffles', 'severus', 'hificnv', 'sawfish', 'debreak']
                 input[8] = channel.of('chr16\t160752\t160753')
                     .collectFile(name: "one_variant.bed")
                     .map { file ->
@@ -452,7 +452,7 @@ nextflow_workflow {
         }
     }
 
-    test("2 samples, 1 family - merge sniffes,hificnv,severus,sawfish with trf bed, run all callers and filter, force sawfish single sample joint-call") {
+    test("2 samples, 1 family - merge sniffes,hificnv,severus,sawfish,debreak with trf bed, run all callers and filter, force sawfish single sample joint-call") {
 
         when {
             workflow {
@@ -477,7 +477,7 @@ nextflow_workflow {
                     [ id: 'exclude_bed' ],
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
                 ]).collect()
-                input[7] = ['sniffles', 'severus', 'hificnv', 'sawfish']
+                input[7] = ['sniffles', 'severus', 'hificnv', 'sawfish', 'debreak']
                 input[8] = channel.of('chr16\t160752\t160753')
                     .collectFile(name: "one_variant.bed")
                     .map { file ->
