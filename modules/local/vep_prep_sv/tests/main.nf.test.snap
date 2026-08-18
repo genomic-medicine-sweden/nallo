@@ -1,4 +1,21 @@
 {
+    "vep_prep_sv - sniffles2 integration": {
+        "content": [
+            [
+                [
+                    "VEP_PREP_SV",
+                    "vep_prep_sv",
+                    "1.0.0"
+                ]
+            ],
+            "6d67b44ba28864b3eebdfb82cf37aeab"
+        ],
+        "timestamp": "2026-08-18T13:54:38.808090113",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
     "vep_prep_sv - generic TRA remap (no caller flag)": {
         "content": [
             "##fileformat=VCFv4.2\n##FILTER=<ID=PASS,Description=\"All filters passed\">\n##INFO=<ID=SVTYPE,Number=1,Type=String,Description=\"Type of structural variant\">\n##INFO=<ID=SVMETHOD,Number=1,Type=String,Description=\"Type of approach used to detect SV\">\n##INFO=<ID=END,Number=1,Type=Integer,Description=\"End position of the structural variant\">\n##INFO=<ID=SVLEN,Number=1,Type=String,Description=\"Length of the SV\">\n##INFO=<ID=CHR2,Number=1,Type=String,Description=\"Chromosome for END coordinate in case of a translocation\">\n##INFO=<ID=CHR2_POS,Number=1,Type=Integer,Description=\"Position on CHR2 for translocation\">\n##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n##INFO=<ID=ORIG_SVTYPE,Number=1,Type=String,Description=\"Original SVTYPE before VEP normalisation\">\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tSAMPLE\nchr1\t9060095\tDB281\tN\t<TRA>\t.\tPASS\tEND=70465105;CHR2=chr18;SVLEN=0;SVMETHOD=DeBreak;SVTYPE=BND;ORIG_SVTYPE=TRA\tGT\t0/1\nchr1\t23277352\tDY46190\tC\t<TRA>\t5\tPASS\tSVMETHOD=DYSGUv1.8.8;SVTYPE=BND;END=23277353;CHR2=chr20;CHR2_POS=56552039;SVLEN=.;ORIG_SVTYPE=TRA\tGT\t0/1",
@@ -89,6 +106,47 @@
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.4"
+        }
+    },
+    "vep_prep_sv - sniffles2 -stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_vep_prep.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        "VEP_PREP_SV",
+                        "vep_prep_sv",
+                        "1.0.0"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "id": "HG002"
+                        },
+                        "HG002_vep_prep.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_vep_prep_sv": [
+                    [
+                        "VEP_PREP_SV",
+                        "vep_prep_sv",
+                        "1.0.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-08-18T13:54:48.633267797",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
         }
     }
 }
