@@ -866,7 +866,9 @@ output {
         path { meta, _file -> "qc/somalier/relate/${meta.id}/" }
     }
     svs_per_family {
-        path { meta, _file -> "svs/family/${meta.id}/" }
+        path { meta, file ->
+            file >> "svs/family/${meta.id}/" + "${meta.id}_svs" + "${params.skip_sv_annotation ? '' : '_annotated'}" + "${params.skip_rank_variants ? '' : '_ranked'}" + "${meta?.containsKey('set') ? '_' + meta.set : ''}" + ".${file.name.endsWith('.vcf.gz.tbi') ? 'vcf.gz.tbi' : 'vcf.gz'}"
+        }
     }
     svs_per_family_and_caller {
         path { meta, _file -> "svs/family/${meta.id}/" }

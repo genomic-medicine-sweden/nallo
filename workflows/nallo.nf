@@ -60,7 +60,6 @@ include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modu
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_PHASING             } from '../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_MITO_SNVS           } from '../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CHROMOGRAPH             } from '../modules/nf-core/bcftools/view/main'
-include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SV                      } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING                 } from '../modules/nf-core/bcftools/view/main'
 include { MINIMAP2_ALIGN                                         } from '../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_MERGE                                         } from '../modules/nf-core/samtools/merge/main'
@@ -1035,12 +1034,11 @@ workflow NALLO {
                 ? ANN_CSQ_PLI_SVS.out.vcf
                 : ch_ranked_variants.sv.map { meta, vcf, _tbi -> [meta, vcf] }
 
-        BCFTOOLS_VIEW_SV(
-            ch_collect_svs.map { meta, vcf -> [meta, vcf, []] },
-            [],
-            [],
-            [],
-        )
+        ch_collect_tbi = val_skip_sv_annotation
+            ? ch_sv_index_for_annotation
+            : val_skip_rank_variants
+                ? ANN_CSQ_PLI_SVS.out.tbi
+                : ch_ranked_variants.sv.map { meta, _vcf, tbi -> [meta, tbi] }
     }
 
     //
@@ -1297,8 +1295,8 @@ workflow NALLO {
     snvs_family_vcf                     = val_skip_snv_calling ? channel.empty() : CONCAT_SORT_RANKED_SNVS.out.vcf // channel: [ val(meta), path(vcf) ]
     svs_per_family_and_caller_tbi       = val_skip_sv_calling ? channel.empty() : MERGE_SVS.out.family_caller_tbi // channel: [ val(meta), path(tbi) ]
     svs_per_family_and_caller_vcf       = val_skip_sv_calling ? channel.empty() : MERGE_SVS.out.family_caller_vcf // channel: [ val(meta), path(vcf) ]
-    svs_per_family_tbi                  = val_skip_sv_calling ? channel.empty() : BCFTOOLS_VIEW_SV.out.tbi // channel: [ val(meta), path(tbi) ]
-    svs_per_family_vcf                  = val_skip_sv_calling ? channel.empty() : BCFTOOLS_VIEW_SV.out.vcf // channel: [ val(meta), path(vcf.gz) ]
+    svs_per_family_tbi                  = val_skip_sv_calling ? channel.empty() : ch_collect_tbi // channel: [ val(meta), path(tbi) ]
+    svs_per_family_vcf                  = val_skip_sv_calling ? channel.empty() : ch_collect_svs // channel: [ val(meta), path(vcf.gz) ]
 }
 
 /**
