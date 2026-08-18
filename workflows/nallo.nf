@@ -34,6 +34,7 @@ include { PREPARE_REFERENCES                                     } from '../subw
 include { QC_ALIGNED_READS                                       } from '../subworkflows/local/qc_aligned_reads'
 include { QC_SNVS                                                } from '../subworkflows/local/qc_snvs'
 include { RANK_VARIANTS                                          } from '../subworkflows/local/rank_variants'
+include { REHEADER_SV_VCF                                        } from '../subworkflows/local/reheader_sv_vcf'
 include { SCATTER_GENOME                                         } from '../subworkflows/local/scatter_genome'
 include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SNVS } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
 include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SVS  } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
@@ -654,8 +655,16 @@ workflow NALLO {
             val_create_sawfish_maf_track,
         )
 
+        REHEADER_SV_VCF(
+            CALL_SVS.out.vcf
+        )
+
+        ch_merge_svs_in = REHEADER_SV_VCF.out.vcf
+            .map { meta, vcf -> [['id': meta.family_id, 'sv_caller': meta.sv_caller], vcf] }
+            .groupTuple()
+
         MERGE_SVS(
-            CALL_SVS.out.vcf,
+            ch_merge_svs_in,
             val_sv_callers_to_merge.split(',').collect { caller -> caller.toLowerCase().trim() },
             val_sv_callers_merge_priority.split(',').collect { caller -> caller.toLowerCase().trim() },
             ch_vcfexpress_prelude,
