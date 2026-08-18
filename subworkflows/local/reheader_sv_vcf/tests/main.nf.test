@@ -1,0 +1,151 @@
+nextflow_workflow {
+
+    name "Test Workflow REHEADER_SV_VCF"
+    script "../main.nf"
+    config "./nextflow.config"
+    workflow "REHEADER_SV_VCF"
+
+    test("severus and sniffles VCFs are reheadered to meta.id") {
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'severus' ],
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/severus_test.vcf.gz', checkIfExists: true),
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/severus_test.vcf.gz.tbi', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sniffles' ],
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles_test.vcf.gz', checkIfExists: true),
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles_test.vcf.gz.tbi', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'hificnv' ],
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/hificnv_test.vcf.gz', checkIfExists: true),
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/hificnv_test.vcf.gz.tbi', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sawfish' ],
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sawfish_test.vcf.gz', checkIfExists: true),
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sawfish_test.vcf.gz.tbi', checkIfExists: true)
+                    ]
+                )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.vcf.size() == 4 },
+                { assert workflow.out.tbi.size() == 4 },
+                { assert workflow.out.vcf.every { meta, _vcf -> meta.id == 'HG002_Revio' } },
+                { assert workflow.out.tbi.every { meta, _tbi -> meta.id == 'HG002_Revio' } },
+                { assert snapshot(
+                    workflow.out.vcf
+                        // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for sawfish
+                        .findAll { meta, _vcf -> meta.sv_caller != 'sawfish' }
+                        .collect { meta, vcf ->
+                            [
+                                'sv_vcf_output:',
+                                [id: meta.id, sv_caller: meta.sv_caller],
+                                [vcf_sample_name: path(vcf).vcf.header.getSampleNamesInOrder()],
+                                [file_name: file(vcf).name],
+                                [summary: path(vcf).vcf.summary],
+                                [variants_md5:path(vcf).vcf.variantsMD5],
+                            ]
+                        }.sort { it[1].sv_caller },
+                    workflow.out.tbi
+                        .collect { meta, tbi ->
+                            [
+                                'sv_tbi_output:',
+                                [id: meta.id, sv_caller: meta.sv_caller],
+                                file(tbi).name
+                            ]
+                        }.sort { it[1].sv_caller },
+                    workflow.out.vcf
+                        .findAll { meta, _vcf -> meta.sv_caller == 'sawfish' }
+                        .collect { meta, vcf ->
+                            [
+                                'sv_vcf_output:',
+                                [id: meta.id, sv_caller: meta.sv_caller],
+                                file(vcf),
+                            ]
+                        }
+                ).match()
+            }
+
+            )
+        }
+    }
+
+    test("severus and sniffles VCFs are reheadered to meta.id - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'severus' ],
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/severus_test.vcf.gz', checkIfExists: true),
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/severus_test.vcf.gz.tbi', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sniffles' ],
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles_test.vcf.gz', checkIfExists: true),
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles_test.vcf.gz.tbi', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'hificnv' ],
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/hificnv_test.vcf.gz', checkIfExists: true),
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/hificnv_test.vcf.gz.tbi', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sawfish' ],
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sawfish_test.vcf.gz', checkIfExists: true),
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sawfish_test.vcf.gz.tbi', checkIfExists: true)
+                    ]
+                )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.vcf.size() == 4 },
+                { assert workflow.out.tbi.size() == 4 },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
+    test("unknown sv_caller should fail with clear error") {
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'unknown_caller' ],
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/hificnv_test.vcf.gz', checkIfExists: true),
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/hificnv_test.vcf.gz.tbi', checkIfExists: true)
+                    ]
+                )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.failed },
+                { assert workflow.errorMessage.contains("Unknown sv_caller 'unknown_caller' in REHEADER_SV_VCF.") },
+                { assert workflow.errorMessage.contains("Allowed values:") }
+            )
+        }
+    }
+}
