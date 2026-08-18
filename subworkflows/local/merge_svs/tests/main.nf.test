@@ -5,6 +5,42 @@ nextflow_workflow {
     config "./nextflow.config"
     workflow "MERGE_SVS"
 
+    test("1 family - merge debreak") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [ [ id:'family', sv_caller:'debreak' ],  [ file('../../../subworkflows/local/merge_svs/tests/testdata/test_1_debreak.vcf.gz'), file('../../../subworkflows/local/merge_svs/tests/testdata/test_2_debreak.vcf.gz') ] ],
+                    [ [ id:'family', sv_caller:'sniffles' ], [ file('../../../subworkflows/local/merge_svs/tests/testdata/test_1_sniffles.vcf.gz'), file('../../../subworkflows/local/merge_svs/tests/testdata/test_2_sniffles.vcf.gz') ] ],
+                    [ [ id:'family', sv_caller:'severus' ],  [ file('../../../subworkflows/local/merge_svs/tests/testdata/test_1_severus.vcf.gz'), file('../../../subworkflows/local/merge_svs/tests/testdata/test_2_severus.vcf.gz') ] ],
+                    [ [ id:'family', sv_caller:'hificnv' ],  [ file('../../../subworkflows/local/merge_svs/tests/testdata/test_1_hificnv.vcf.gz'), file('../../../subworkflows/local/merge_svs/tests/testdata/test_2_hificnv.vcf.gz') ] ],
+                    [ [ id:'family', sv_caller:'sawfish' ],  [ file('../../../subworkflows/local/merge_svs/tests/testdata/family_sawfish.vcf.gz') ] ],
+                )
+                input[1] = ['debreak']
+                input[2] = ['debreak']
+                input[3] = file('../../../assets/vcf_express_found_in_prelude.lua')
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
+                { assert snapshot(
+                    workflow.out.family_caller_vcf
+                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    workflow.out.family_vcf
+                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                    },
+
+                ).match() }
+            )
+        }
+    }
+
     test("1 family - merge sniffles") {
 
         when {
@@ -40,19 +76,20 @@ nextflow_workflow {
         }
     }
 
-    test("1 family - merge sniffles,severus,hificnv,sawfish") {
+    test("1 family - merge debreak,sniffles,severus,hificnv,sawfish") {
 
         when {
             workflow {
                 """
                 input[0] = Channel.of(
+                    [ [ id:'family', sv_caller:'debreak' ],  [ file('../../../subworkflows/local/merge_svs/tests/testdata/test_1_debreak.vcf.gz'), file('../../../subworkflows/local/merge_svs/tests/testdata/test_2_debreak.vcf.gz') ] ],
                     [ [ id:'family', sv_caller:'sniffles' ], [ file('../../../subworkflows/local/merge_svs/tests/testdata/test_1_sniffles.vcf.gz'), file('../../../subworkflows/local/merge_svs/tests/testdata/test_2_sniffles.vcf.gz') ] ],
                     [ [ id:'family', sv_caller:'severus' ],  [ file('../../../subworkflows/local/merge_svs/tests/testdata/test_1_severus.vcf.gz'), file('../../../subworkflows/local/merge_svs/tests/testdata/test_2_severus.vcf.gz') ] ],
                     [ [ id:'family', sv_caller:'hificnv' ],  [ file('../../../subworkflows/local/merge_svs/tests/testdata/test_1_hificnv.vcf.gz'), file('../../../subworkflows/local/merge_svs/tests/testdata/test_2_hificnv.vcf.gz') ] ],
                     [ [ id:'family', sv_caller:'sawfish' ],  [ file('../../../subworkflows/local/merge_svs/tests/testdata/family_sawfish.vcf.gz') ] ],
                 )
-                input[1] = ['sniffles', 'severus', 'hificnv', 'sawfish']
-                input[2] = ['sniffles', 'severus', 'hificnv', 'sawfish']
+                input[1] = ['debreak', 'sniffles', 'severus', 'hificnv', 'sawfish']
+                input[2] = ['debreak', 'sniffles', 'severus', 'hificnv', 'sawfish']
                 input[3] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
@@ -75,7 +112,7 @@ nextflow_workflow {
         }
     }
 
-    test("1 family - merge sniffles,severus,hificnv,sawfish -stub") {
+    test("1 family - merge debreak,sniffles,severus,hificnv,sawfish -stub") {
 
         options "-stub"
 
@@ -83,13 +120,14 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of(
+                    [ [ id:'family', sv_caller:'debreak' ],  [ file('../../../subworkflows/local/merge_svs/tests/testdata/test_1_debreak.vcf.gz'), file('../../../subworkflows/local/merge_svs/tests/testdata/test_2_debreak.vcf.gz') ] ],
                     [ [ id:'family', sv_caller:'sniffles' ], [ file('../../../subworkflows/local/merge_svs/tests/testdata/test_1_sniffles.vcf.gz'), file('../../../subworkflows/local/merge_svs/tests/testdata/test_2_sniffles.vcf.gz') ] ],
                     [ [ id:'family', sv_caller:'severus' ],  [ file('../../../subworkflows/local/merge_svs/tests/testdata/test_1_severus.vcf.gz'), file('../../../subworkflows/local/merge_svs/tests/testdata/test_2_severus.vcf.gz') ] ],
                     [ [ id:'family', sv_caller:'hificnv' ],  [ file('../../../subworkflows/local/merge_svs/tests/testdata/test_1_hificnv.vcf.gz'), file('../../../subworkflows/local/merge_svs/tests/testdata/test_2_hificnv.vcf.gz') ] ],
                     [ [ id:'family', sv_caller:'sawfish' ],  [ file('../../../subworkflows/local/merge_svs/tests/testdata/family_sawfish.vcf.gz') ] ],
                 )
-                input[1] = ['sniffles', 'severus', 'hificnv', 'sawfish']
-                input[2] = ['sniffles', 'severus', 'hificnv', 'sawfish']
+                input[1] = ['debreak', 'sniffles', 'severus', 'hificnv', 'sawfish']
+                input[2] = ['debreak', 'sniffles', 'severus', 'hificnv', 'sawfish']
                 input[3] = file('../../../assets/vcf_express_found_in_prelude.lua')
                 """
             }
