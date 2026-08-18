@@ -1,7 +1,7 @@
 {
     "samplesheet_premapped | --premapped": {
         "content": [
-            355,
+            353,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -46,9 +46,6 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_PHASING": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_VIEW_SV": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_UNCOMPRESS": {
@@ -1236,7 +1233,7 @@
                 
             ]
         ],
-        "timestamp": "2026-08-13T12:04:49.776486434",
+        "timestamp": "2026-08-18T09:45:32.877063658",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

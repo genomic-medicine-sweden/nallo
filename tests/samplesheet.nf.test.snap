@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            233,
+            231,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -46,9 +46,6 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_PHASING": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_VIEW_SV": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_UNCOMPRESS": {
@@ -850,7 +847,7 @@
                 
             ]
         ],
-        "timestamp": "2026-08-12T11:47:04.494404668",
+        "timestamp": "2026-08-18T09:25:17.056768518",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
