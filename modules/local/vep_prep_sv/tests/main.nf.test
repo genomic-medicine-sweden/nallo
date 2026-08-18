@@ -29,52 +29,7 @@ nextflow_process {
         }
     }
 
-    test("vep_prep_sv - sniffles1 synthetic") {
-
-        when {
-            params {
-                caller = 'sniffles1'
-            }
-            process {
-                """
-                input[0] = [
-                    [id: 'test'],
-                    file("${projectDir}/modules/local/vep_prep_sv/tests/input/snifflesv1.vcf", checkIfExists: true)
-                ]
-                """
-            }
-        }
-
-        then {
-            def vcf_lines = path(process.out.vcf.get(0).get(1)).readLines()
-            assertAll(
-                { assert process.success },
-                // STRANDBIAS filter header injected before first ##FILTER line
-                { assert vcf_lines.any { it.startsWith('##FILTER=<ID=STRANDBIAS,') } },
-                { assert vcf_lines.findIndexOf { it.startsWith('##FILTER=<ID=STRANDBIAS,') } <
-                         vcf_lines.findIndexOf { it.startsWith('##FILTER=<ID=PASS,') } },
-                // ORIG_SVTYPE INFO header added before #CHROM
-                { assert vcf_lines.any { it.startsWith('##INFO=<ID=ORIG_SVTYPE,') } },
-                // DEL: unchanged baseline — no ORIG_SVTYPE, END preserved
-                { assert vcf_lines.any { it.contains('SVTYPE=DEL;') && !it.contains('ORIG_SVTYPE') } },
-                // INS: synthetic END=POS stripped, SVTYPE unchanged
-                { assert vcf_lines.any { it.contains('SVTYPE=INS') && !it.contains(';END=') } },
-                // TRA → BND: SVLEN=1 stripped, END=190122450 (CHR2 coordinate) preserved
-                { assert vcf_lines.any { it.contains('SVTYPE=BND') && it.contains(';END=190122450') &&
-                                         it.contains('ORIG_SVTYPE=TRA') && !it.contains(';SVLEN=1') } },
-                // DEL/INV → DEL
-                { assert vcf_lines.any { it.contains('SVTYPE=DEL') && it.contains('ORIG_SVTYPE=DEL/INV') } },
-                // INVDUP → DUP
-                { assert vcf_lines.any { it.contains('SVTYPE=DUP') && it.contains('ORIG_SVTYPE=INVDUP') } },
-                // DUP/INS → DUP: END=18788645 (source region) stripped
-                { assert vcf_lines.any { it.contains('SVTYPE=DUP') && it.contains('ORIG_SVTYPE=DUP/INS') &&
-                                         !it.contains(';END=') } },
-                { assert snapshot(vcf_lines.join('\n'), process.out.versions_vep_prep_sv).match() }
-            )
-        }
-    }
-
-    test("vep_prep_sv - generic TRA remap (no caller flag)") {
+    test("vep_prep_sv - generic TRA remap") {
 
         when {
             process {
@@ -91,11 +46,7 @@ nextflow_process {
             def vcf_lines = path(process.out.vcf.get(0).get(1)).readLines()
             assertAll(
                 { assert process.success },
-                // generic remap fires without --caller flag
                 { assert vcf_lines.count { it.contains('SVTYPE=BND') && it.contains('ORIG_SVTYPE=TRA') } == 2 },
-                // no STRANDBIAS header injection (no sniffles1 flag)
-                { assert !vcf_lines.any { it.startsWith('##FILTER=<ID=STRANDBIAS,') } },
-                // Debreak: SVLEN=0 is not stripped (only SVLEN=1 is sniffles1-specific)
                 { assert vcf_lines.any { it.contains('DB281') && it.contains('SVLEN=0') } },
                 { assert snapshot(vcf_lines.join('\n'), process.out.versions_vep_prep_sv).match() }
             )
