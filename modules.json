@@ -425,9 +425,8 @@
                     },
                     "sniffles": {
                         "branch": "master",
-                        "git_sha": "e9ada3f5b55b43c0da9ad4882b86aaaa0c5e6ebf",
-                        "installed_by": ["modules"],
-                        "patch": "modules/nf-core/sniffles/sniffles.diff"
+                        "git_sha": "6d46786420b4a5cd7fa2a55fc37eed3e3bd9e2f8",
+                        "installed_by": ["modules"]
                     },
                     "somalier/extract": {
                         "branch": "master",
