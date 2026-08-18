@@ -50,7 +50,11 @@ workflow CALL_SVS {
     if (sv_callers_to_run.contains('sniffles')) {
 
         SNIFFLES(
-            ch_bam_bai
+            ch_bam_bai,
+            ch_fasta,
+            ch_tandem_repeats,
+            true,
+            false,
         )
 
         ch_for_vep_prep_sv = ch_for_vep_prep_sv.mix(
