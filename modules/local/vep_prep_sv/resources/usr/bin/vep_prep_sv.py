@@ -11,6 +11,7 @@ on BND/TRA records.
 """
 
 import argparse
+import gzip
 import re
 
 __version__ = "1.0.0"
@@ -51,7 +52,8 @@ def main():
     strandbias_added = False
     orig_svtype_header_added = False
 
-    for line in open(args.vcf):
+    opener = gzip.open(args.vcf, 'rt') if args.vcf.endswith('.gz') else open(args.vcf)
+    for line in opener:
         line = line.rstrip('\n')
 
         if line.startswith('#'):
