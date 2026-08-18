@@ -1,7 +1,7 @@
 {
     "Test family id same as sample id": {
         "content": [
-            192,
+            190,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -510,7 +510,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-08-12T16:05:29.073888457",
+        "timestamp": "2026-08-18T09:14:28.725651157",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
