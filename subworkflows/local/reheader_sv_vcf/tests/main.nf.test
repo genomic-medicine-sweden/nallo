@@ -5,21 +5,16 @@ nextflow_workflow {
     config "./nextflow.config"
     workflow "REHEADER_SV_VCF"
 
-    test("severus and sniffles VCFs are reheadered to meta.id") {
+    test("severus, sniffles, and debreak VCFs are reheadered to meta.id") {
 
         when {
             workflow {
                 """
                 input[0] = channel.of(
                     [
-                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'severus' ],
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/severus_test.vcf.gz', checkIfExists: true),
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/severus_test.vcf.gz.tbi', checkIfExists: true)
-                    ],
-                    [
-                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sniffles' ],
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles_test.vcf.gz', checkIfExists: true),
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles_test.vcf.gz.tbi', checkIfExists: true)
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'debreak' ],
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/debreak_test.vcf.gz', checkIfExists: true),
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/debreak_test.vcf.gz.tbi', checkIfExists: true)
                     ],
                     [
                         [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'hificnv' ],
@@ -30,6 +25,16 @@ nextflow_workflow {
                         [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sawfish' ],
                         file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sawfish_test.vcf.gz', checkIfExists: true),
                         file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sawfish_test.vcf.gz.tbi', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'severus' ],
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/severus_test.vcf.gz', checkIfExists: true),
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/severus_test.vcf.gz.tbi', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sniffles' ],
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles_test.vcf.gz', checkIfExists: true),
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles_test.vcf.gz.tbi', checkIfExists: true)
                     ]
                 )
                 """
@@ -39,8 +44,8 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.vcf.size() == 4 },
-                { assert workflow.out.tbi.size() == 4 },
+                { assert workflow.out.vcf.size() == 5 },
+                { assert workflow.out.tbi.size() == 5 },
                 { assert workflow.out.vcf.every { meta, _vcf -> meta.id == 'HG002_Revio' } },
                 { assert workflow.out.tbi.every { meta, _tbi -> meta.id == 'HG002_Revio' } },
                 { assert snapshot(
@@ -81,7 +86,7 @@ nextflow_workflow {
         }
     }
 
-    test("severus and sniffles VCFs are reheadered to meta.id - stub") {
+    test("severus, sniffles, and debreak VCFs are reheadered to meta.id - stub") {
 
         options "-stub"
 
@@ -90,14 +95,9 @@ nextflow_workflow {
                 """
                 input[0] = channel.of(
                     [
-                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'severus' ],
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/severus_test.vcf.gz', checkIfExists: true),
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/severus_test.vcf.gz.tbi', checkIfExists: true)
-                    ],
-                    [
-                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sniffles' ],
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles_test.vcf.gz', checkIfExists: true),
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles_test.vcf.gz.tbi', checkIfExists: true)
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'debreak' ],
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/debreak_test.vcf.gz', checkIfExists: true),
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/debreak_test.vcf.gz.tbi', checkIfExists: true)
                     ],
                     [
                         [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'hificnv' ],
@@ -108,6 +108,16 @@ nextflow_workflow {
                         [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sawfish' ],
                         file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sawfish_test.vcf.gz', checkIfExists: true),
                         file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sawfish_test.vcf.gz.tbi', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'severus' ],
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/severus_test.vcf.gz', checkIfExists: true),
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/severus_test.vcf.gz.tbi', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sniffles' ],
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles_test.vcf.gz', checkIfExists: true),
+                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles_test.vcf.gz.tbi', checkIfExists: true)
                     ]
                 )
                 """
@@ -117,8 +127,8 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.out.vcf.size() == 4 },
-                { assert workflow.out.tbi.size() == 4 },
+                { assert workflow.out.vcf.size() == 5 },
+                { assert workflow.out.tbi.size() == 5 },
                 { assert snapshot(workflow.out).match() }
             )
         }
