@@ -29,14 +29,14 @@ nextflow_process {
         }
     }
 
-    test("vep_prep_sv - generic TRA remap") {
+    test("vep_prep_sv - debreak synthetic") {
 
         when {
             process {
                 """
                 input[0] = [
                     [id: 'test'],
-                    file("${projectDir}/modules/local/vep_prep_sv/tests/input/generic_tra.vcf", checkIfExists: true)
+                    file("${projectDir}/modules/local/vep_prep_sv/tests/input/debreak.vcf", checkIfExists: true)
                 ]
                 """
             }
@@ -46,8 +46,39 @@ nextflow_process {
             def vcf_lines = path(process.out.vcf.get(0).get(1)).readLines()
             assertAll(
                 { assert process.success },
-                { assert vcf_lines.count { it.contains('SVTYPE=BND') && it.contains('ORIG_SVTYPE=TRA') } == 2 },
+                { assert vcf_lines.any { it.startsWith('##INFO=<ID=ORIG_SVTYPE,') } },
+                // TRA → BND with ORIG_SVTYPE preserved
+                { assert vcf_lines.any { it.contains('DB281') && it.contains('SVTYPE=BND') && it.contains('ORIG_SVTYPE=TRA') } },
+                // SVLEN=0 on TRA not stripped (debreak uses 0 for interchromosomal events)
                 { assert vcf_lines.any { it.contains('DB281') && it.contains('SVLEN=0') } },
+                // DEL passes through unchanged
+                { assert vcf_lines.any { it.contains('DB3') && it.contains('SVTYPE=DEL') && !it.contains('ORIG_SVTYPE') } },
+                { assert snapshot(vcf_lines.join('\n'), process.out.versions_vep_prep_sv).match() }
+            )
+        }
+    }
+
+    test("vep_prep_sv - sniffles2 synthetic") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [id: 'test'],
+                    file("${projectDir}/modules/local/vep_prep_sv/tests/input/sniffles2.vcf.gz", checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            def vcf_lines = path(process.out.vcf.get(0).get(1)).readLines()
+            assertAll(
+                { assert process.success },
+                { assert vcf_lines.any { it.startsWith('##INFO=<ID=ORIG_SVTYPE,') } },
+                // standard SVTYPEs pass through without remapping
+                { assert vcf_lines.any { it.contains('SVTYPE=DEL') && !it.contains('ORIG_SVTYPE') } },
+                { assert vcf_lines.any { it.contains('SVTYPE=INS') && !it.contains('ORIG_SVTYPE') } },
                 { assert snapshot(vcf_lines.join('\n'), process.out.versions_vep_prep_sv).match() }
             )
         }
