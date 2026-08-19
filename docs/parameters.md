@@ -210,6 +210,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `sniffles_min_support_reads` | Minimum number of reads to support a SV in Sniffles. | `number` | 3 |  |  |
 | `sniffles_min_segment_length` | Discard a read if none of its segment is larger than this in Sniffles. | `number` | 500 |  |  |
 | `sniffles_min_sv_size` | Minimum length of SV to be reported in Sniffles. | `number` | 50 |  |  |
+| `sniffles_min_heterozygous_allele_frequency` | Threshold on heterozygous allele frequency in Sniffles v1 (`--sv_callers sniffles1`). Has no effect when using Sniffles v2. | `number` | 0 |  |  |
 | `sawfish_min_sv_size` | Co-linear SVs must have either an insertion or deletion of this size or greater to be included in the output in Sawfish. All other SV evidence patterns such as those consistent with duplications, inversions and translocations will always be included in the output. | `number` | 50 |  |  |
 | `read_aligner` | Which aligner to use for read alignment. Supported arguments are mm2plus, minimap2 or pbmm2. (accepted: `minimap2`\|`pbmm2`\|`mm2plus`) | `string` | pbmm2 |  |  |
 | `pbmm2_preset` | Preset to use for pbmm2. Supported arguments are HIFI, CCS, or SUBREAD. (accepted: `HIFI`\|`CCS`\|`SUBREAD`) | `string` | CCS |  |  |

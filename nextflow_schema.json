@@ -663,25 +663,25 @@
                     "type": "string",
                     "description": "Which SV callers to use. Several callers can be specified, separated by commas (e.g. sniffles,severus,hificnv,sawfish). The order of the SV callers in this list will determine the priority of the calls when merging them if not overwritten by `sv_caller_priority`.",
                     "default": "sniffles,hificnv",
-                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus|debreak)(,(sniffles|hificnv|sawfish|severus|debreak))*$"
+                    "pattern": "(?i)^(sniffles|sniffles1|hificnv|sawfish|severus|debreak)(,(sniffles|sniffles1|hificnv|sawfish|severus|debreak))*$"
                 },
                 "sv_callers_merge_priority": {
                     "type": "string",
                     "description": "The order of the SV callers in this list will determine the priority of the calls when merging them. All callers that has been specified in `sv_callers` should also be specified here separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as `--sv_callers`.",
                     "default": "sniffles,hificnv",
-                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus|debreak)(,(sniffles|hificnv|sawfish|severus|debreak))*$"
+                    "pattern": "(?i)^(sniffles|sniffles1|hificnv|sawfish|severus|debreak)(,(sniffles|sniffles1|hificnv|sawfish|severus|debreak))*$"
                 },
                 "sv_callers_to_run": {
                     "type": "string",
                     "description": "Which SV callers to run, separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as `--sv_callers`",
                     "default": "sniffles,hificnv",
-                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus|debreak)(,(sniffles|hificnv|sawfish|severus|debreak))*$"
+                    "pattern": "(?i)^(sniffles|sniffles1|hificnv|sawfish|severus|debreak)(,(sniffles|sniffles1|hificnv|sawfish|severus|debreak))*$"
                 },
                 "sv_callers_to_merge": {
                     "type": "string",
                     "description": "Which SV callers to merge into family VCFs (that are also used for annotation and ranking), separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as `--sv_callers`",
                     "default": "sniffles,hificnv",
-                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus|debreak)(,(sniffles|hificnv|sawfish|severus|debreak))*$"
+                    "pattern": "(?i)^(sniffles|sniffles1|hificnv|sawfish|severus|debreak)(,(sniffles|sniffles1|hificnv|sawfish|severus|debreak))*$"
                 },
                 "snv_caller": {
                     "type": "string",
@@ -1034,6 +1034,11 @@
                     "type": "number",
                     "default": 50,
                     "description": "Minimum length of SV to be reported in Sniffles."
+                },
+                "sniffles_min_heterozygous_allele_frequency": {
+                    "type": "number",
+                    "default": 0,
+                    "description": "Threshold on heterozygous allele frequency in Sniffles v1 (`--sv_callers sniffles1`). Has no effect when using Sniffles v2."
                 },
                 "sawfish_min_sv_size": {
                     "type": "number",
