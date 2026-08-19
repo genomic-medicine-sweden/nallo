@@ -1030,11 +1030,6 @@
                     "default": 500,
                     "description": "Discard a read if none of its segment is larger than this in Sniffles."
                 },
-                "sniffles_min_heterozygous_allele_frequency": {
-                    "type": "number",
-                    "default": 0,
-                    "description": "Threshold on heterozygous allele frequency in Sniffles (0-1)."
-                },
                 "sniffles_min_sv_size": {
                     "type": "number",
                     "default": 50,
