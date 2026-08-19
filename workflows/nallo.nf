@@ -829,12 +829,12 @@ workflow NALLO {
     if (split_family_vcf_for_chromograph || (!val_skip_peddy && !val_skip_snv_annotation)) {
 
         // use echtvar_annotated_vcf for chromograph and peddy, to use all variants, not just those that pass the pre-annotation filter
-        // if echvar annotation is skipped, use the unannotated VCFs instead
+        // if echtvar annotation is skipped, use the unannotated VCFs instead
         ch_unfiltered_vcf = val_echtvar_snv_databases ? ANNOTATE_SNVS.out.echtvar_annotated_vcf : ch_snv_vcf_tbi_nuclear_mitochondrial_for_annotation.vcf
         ch_unfiltered_tbi = val_echtvar_snv_databases ? ANNOTATE_SNVS.out.echtvar_annotated_tbi : ch_snv_vcf_tbi_nuclear_mitochondrial_for_annotation.tbi
 
         ch_concat_sort_annotated_snvs_input = ch_unfiltered_vcf
-            .join(ch_unfiltered_tbi.map { meta, vcf -> vcf.replaceAll(/\.vcf$/, '.tbi') }, failOnMismatch: true, failOnDuplicate: true)
+            .join(ch_unfiltered_tbi, failOnMismatch: true, failOnDuplicate: true)
             .map { meta, vcf, tbi ->
                 def new_meta = [id: meta.family_id, num_intervals: meta.num_intervals]
                 [groupKey(new_meta, new_meta.num_intervals), vcf, tbi]
