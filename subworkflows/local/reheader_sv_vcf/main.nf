@@ -17,6 +17,7 @@ workflow REHEADER_SV_VCF {
         'sawfish': false,
         'severus': true,
         'sniffles': true,
+        'sniffles1': true,
     ]
 
     // Branching channel to get the VCFs that need reheadering and those that don't. If the sv caller is not in the map keyset, throw an error.
