@@ -76,6 +76,41 @@ nextflow_workflow {
         }
     }
 
+    test("1 family - merge sniffles1") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of(
+                    [ [ id:'family', sv_caller:'sniffles1' ], [ file('../../../subworkflows/local/merge_svs/tests/testdata/test_1_sniffles1.vcf.gz'), file('../../../subworkflows/local/merge_svs/tests/testdata/test_2_sniffles1.vcf.gz') ] ],
+                    [ [ id:'family', sv_caller:'severus' ],  [ file('../../../subworkflows/local/merge_svs/tests/testdata/test_1_severus.vcf.gz'), file('../../../subworkflows/local/merge_svs/tests/testdata/test_2_severus.vcf.gz') ] ],
+                    [ [ id:'family', sv_caller:'hificnv' ],  [ file('../../../subworkflows/local/merge_svs/tests/testdata/test_1_hificnv.vcf.gz'), file('../../../subworkflows/local/merge_svs/tests/testdata/test_2_hificnv.vcf.gz') ] ],
+                    [ [ id:'family', sv_caller:'sawfish' ],  [ file('../../../subworkflows/local/merge_svs/tests/testdata/family_sawfish.vcf.gz') ] ],
+                )
+                input[1] = ['sniffles1']
+                input[2] = ['sniffles1']
+                input[3] = file('../../../assets/vcf_express_found_in_prelude.lua')
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.family_caller_tbi.get(0).get(1).endsWith("tbi") },
+                { assert snapshot(
+                    workflow.out.family_caller_vcf
+                        .collect { meta, vcf -> [ 'family_caller_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ] },
+                    workflow.out.family_vcf
+                        .collect { meta, vcf -> [ 'family_vcf:', meta, file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
+                    },
+
+                ).match() }
+            )
+        }
+    }
+
     test("1 family - merge debreak,sniffles,severus,hificnv,sawfish") {
 
         when {
