@@ -63,7 +63,7 @@ nextflow_workflow {
     }
 
     test("two familes, multiple sampels - json format - no rules") {
-
+        tag: "test_json_stability"
         when {
             workflow {
                 """
