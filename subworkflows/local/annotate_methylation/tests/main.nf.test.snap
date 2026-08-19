@@ -7,7 +7,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_methbat_profile_annotated.tsv:md5,86b62739081749955c63e48e5f479bff"
+                        "FAM_methbat_profile_annotated.tsv:md5,2c99c6eea578beb85531ce45e462e27b"
                     ]
                 ],
                 "methylation_annotation": [
@@ -15,12 +15,12 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_methbat_profile_annotated.tsv:md5,86b62739081749955c63e48e5f479bff"
+                        "FAM_methbat_profile_annotated.tsv:md5,2c99c6eea578beb85531ce45e462e27b"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-08-14T15:07:31.225576354",
+        "timestamp": "2026-08-19T15:04:53.168072233",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -34,7 +34,7 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_methbat_profile_annotated.tsv:md5,2f1619b39925f01d865e801488306993"
+                        "FAM_methbat_profile_annotated.tsv:md5,1192f62102da58e3814030b260fadc52"
                     ]
                 ],
                 "methylation_annotation": [
@@ -42,12 +42,12 @@
                         {
                             "id": "FAM"
                         },
-                        "FAM_methbat_profile_annotated.tsv:md5,2f1619b39925f01d865e801488306993"
+                        "FAM_methbat_profile_annotated.tsv:md5,1192f62102da58e3814030b260fadc52"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-08-14T15:07:37.73428214",
+        "timestamp": "2026-08-19T15:04:59.707659347",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
