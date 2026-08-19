@@ -28,13 +28,11 @@ workflow ANNOTATE_SNVS {
             ch_echtvar_databases,
             'bcf.gz',
         )
+
+        TABIX_TABIX(
+            ECHTVAR_ANNO.out.vcf
+        )
     }
-
-    ch_echtvar_anno_vcf = annotate_echtvar ? ECHTVAR_ANNO.out.vcf : ch_vcf
-
-    TABIX_TABIX(
-        ch_echtvar_anno_vcf
-    )
 
     // Allows for filtering before annotating with VEP
     if (pre_vep_filter) {
@@ -79,6 +77,6 @@ workflow ANNOTATE_SNVS {
     emit:
     vep_annotated_vcf     = ENSEMBLVEP_SNV.out.vcf
     vep_annotated_tbi     = ENSEMBLVEP_SNV.out.tbi
-    echtvar_annotated_vcf = ch_echtvar_anno_vcf
-    echtvar_annotated_tbi = TABIX_TABIX.out.index
+    echtvar_annotated_vcf = annotate_echtvar ? ECHTVAR_ANNO.out.vcf : channel.empty()
+    echtvar_annotated_tbi = annotate_echtvar ? TABIX_TABIX.out.index : channel.empty()
 }

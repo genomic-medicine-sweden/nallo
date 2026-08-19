@@ -259,10 +259,10 @@
             "test.vcf.gz.tbi",
             "e09e112c627a86ab975b5176f26c853d",
             "VcfFile [chromosomes=[chr16], sampleCount=3, variantCount=2, phased=false, phasedAutodetect=false]",
-            "NIST_deepvariant_norm.vcf.gz.tbi",
-            "NIST_deepvariant_norm.vcf.gz"
+            true,
+            true
         ],
-        "timestamp": "2026-08-18T11:16:23.594210303",
+        "timestamp": "2026-08-19T13:48:37.28756397",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -288,10 +288,10 @@
             "test.vcf.gz.tbi",
             "1cf6fe93c428ca7350ecf48b7d12001b",
             "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=202, phased=false, phasedAutodetect=false]",
-            "NIST_deepvariant_norm.vcf.gz.tbi",
-            "NIST_deepvariant_norm.vcf.gz"
+            true,
+            true
         ],
-        "timestamp": "2026-08-18T11:16:13.200955461",
+        "timestamp": "2026-08-19T13:47:29.282112647",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
