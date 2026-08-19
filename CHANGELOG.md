@@ -122,7 +122,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1219](https://github.com/genomic-medicine-sweden/nallo/pull/1219) - Changed nf-test CI action to retry once on transient network/disk failures
 - [#1141](https://github.com/genomic-medicine-sweden/nallo/pull/1141) - Moved merging of vcfs out of `CALL_SVS` in new `MERGE_SVS` subworkflow
 - [#1229](https://github.com/genomic-medicine-sweden/nallo/pull/1229) - Moved `VCFEXPRESS` (FOUND_IN tagging) from `CALL_SVS` to `MERGE_SVS`, running after `SVDB_MERGE_BY_CALLER`
-- [#1234](https://github.com/genomic-medicine-sweden/nallo/pull/1234) - Changed input of `CHROMOGRAPH` to unfiltered snvs since it can currently be filtered by `pre_vep_snv_filter_expression`
+- [#1234](https://github.com/genomic-medicine-sweden/nallo/pull/1234) - Changed input of `CHROMOGRAPH` and `PEDDY` to unfiltered snvs since it can currently be filtered by `pre_vep_snv_filter_expression`
 - [#1232](https://github.com/genomic-medicine-sweden/nallo/pull/1232) - Changed the re-headering of the SV VCFs, now part of a new subworkflow `REHEADER_SV_VCF`
 - [#1225](https://github.com/genomic-medicine-sweden/nallo/pull/1225) - Replaced `extra_vep_options` with separate `extra_vep_options_snv` and `extra_vep_options_sv` parameters, appended after the core VEP command for each variant type
 - [#1225](https://github.com/genomic-medicine-sweden/nallo/pull/1225) - Moved enrichment VEP flags (`--appris`, `--biotype`, `--hgvs`, etc.) from the hardcoded core command to the default values of `extra_vep_options_snv` and `extra_vep_options_sv`; the core command now contains only pipeline-critical flags
