@@ -130,8 +130,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1225](https://github.com/genomic-medicine-sweden/nallo/pull/1225) - Replaced `extra_vep_options` with separate `extra_vep_options_snv` and `extra_vep_options_sv` parameters, appended after the core VEP command for each variant type
 - [#1225](https://github.com/genomic-medicine-sweden/nallo/pull/1225) - Moved enrichment VEP flags (`--appris`, `--biotype`, `--hgvs`, etc.) from the hardcoded core command to the default values of `extra_vep_options_snv` and `extra_vep_options_sv`; the core command now contains only pipeline-critical flags
 - [#1244](https://github.com/genomic-medicine-sweden/nallo/pull/1244) - Updated `hiphase` module to fix typo in `hiphase` command
-- [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Upgraded Sniffles from v1 to v2.7.3; removed `--minhetsupport` from `ext.args` (het SVs in v2 are handled automatically via coverage-based thresholds and tagged with `SUPPORT_MIN` FILTER)
-- [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Updated `VEP_PREP_SV` to remove Sniffles v1-specific post-processing (STRANDBIAS FILTER header injection, synthetic `END=POS`/`SVLEN=1` removal); SVTYPE remapping is now fully generic
+- [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Upgraded nf-core `sniffles` module to v2.7.3 and migrated Sniffles v1.0.12 to local module `SNIFFLES1` (`--sv_callers sniffles1`, mutually exclusive with `sniffles` v2); `--sniffles_min_heterozygous_allele_frequency` applies to `SNIFFLES1` only (Sniffles v2 uses coverage-based het filtering via `SUPPORT_MIN` FILTER, making `--minhetsupport` redundant)
+- [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Updated `VEP_PREP_SV` to apply Sniffles v1-specific caller fixes (STRANDBIAS FILTER header injection, synthetic `END=POS`/`SVLEN=1` removal) only when processing `SNIFFLES1` output; SVTYPE remapping applies to all callers
 - [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - `REHEADER_SV_VCF` now passes the reference FAI to `BCFTOOLS_REHEADER`, ensuring all reference `##contig` lines are present in per-caller VCFs before SVDB merge
 
 ### Removed
@@ -148,7 +148,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1224](https://github.com/genomic-medicine-sweden/nallo/pull/1224) - Removed hardcoded memory use in config for `RANK_VARIANTS:BCFTOOLS_SORT` since it is already covered by `task.memory` in the module
 - [#1225](https://github.com/genomic-medicine-sweden/nallo/pull/1225) - Removed `--polyphen p`, `--sift p`, `--humdiv` from the SV VEP core command; these amino-acid substitution predictors produce no meaningful output for SVs
 - [#1236](https://github.com/genomic-medicine-sweden/nallo/pull/1236) - Removed `BCFTOOLS_VIEW_SV` passthrough process; output naming moved to `main.nf` `path {}` closures
-- [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Removed `--sniffles_min_heterozygous_allele_frequency` parameter (no equivalent in Sniffles v2; het SV filtering is automatic)
 
 ### Fixed
 
@@ -168,20 +167,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter                                  | New parameter                   |
-| ---------------------------------------------- | ------------------------------- |
-|                                                | `--mitochondrial_sv_min_size`   |
-|                                                | `--mitorsaw_minimum_read_count` |
-|                                                | `--mitorsaw_minimum_maf`        |
-| `--run_methbat` / `--run_modkit`               | `--methylation_callers`         |
-|                                                | `--skip_portello`               |
-|                                                | `--read_aligner`                |
-|                                                | `--pbmm2_preset`                |
-|                                                | `--glnexus_config`              |
-|                                                | `--preset ONT_R10_AS`           |
-|                                                | `--assembly_aligner`            |
-|                                                | `--methbat_map`                 |
-| `--sniffles_min_heterozygous_allele_frequency` |                                 |
+| Old parameter                    | New parameter                   |
+| -------------------------------- | ------------------------------- |
+|                                  | `--mitochondrial_sv_min_size`   |
+|                                  | `--mitorsaw_minimum_read_count` |
+|                                  | `--mitorsaw_minimum_maf`        |
+| `--run_methbat` / `--run_modkit` | `--methylation_callers`         |
+|                                  | `--skip_portello`               |
+|                                  | `--read_aligner`                |
+|                                  | `--pbmm2_preset`                |
+|                                  | `--glnexus_config`              |
+|                                  | `--preset ONT_R10_AS`           |
+|                                  | `--assembly_aligner`            |
+|                                  | `--methbat_map`                 |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -211,6 +209,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | samtools/merge                 | 1.23.1      | 1.24        |
 | csvtk/join                     |             | 0.37.0      |
 | sniffles                       | 1.0.12      | 2.7.3       |
+| sniffles1 (local)              |             | 1.0.12      |
 | debreak                        |             | 1.3         |
 
 > [!NOTE]
