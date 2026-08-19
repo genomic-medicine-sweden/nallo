@@ -245,9 +245,10 @@
             "a6df39f9ecc17803e3577dae5af887ac",
             "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=202, phased=false, phasedAutodetect=false]",
             "test_anno.bcf.gz.tbi",
-            "test_anno.bcf.gz"
+            "19b1cf61ee8306c4d6f34084cbd3fcd7",
+            "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=3, variantCount=214, phased=false, phasedAutodetect=false]"
         ],
-        "timestamp": "2026-08-18T11:21:41.846275212",
+        "timestamp": "2026-08-19T09:54:24.601356166",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"

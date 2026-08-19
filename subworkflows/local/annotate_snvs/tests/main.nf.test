@@ -257,7 +257,8 @@ nextflow_workflow {
                     path(workflow.out.vep_annotated_vcf.get(0).get(1)).vcf.variantsMD5,
                     path(workflow.out.vep_annotated_vcf.get(0).get(1)).vcf.summary,
                     file(workflow.out.echtvar_annotated_tbi.get(0).get(1)).name,
-                    file(workflow.out.echtvar_annotated_vcf.get(0).get(1)).name,
+                    path(workflow.out.echtvar_annotated_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.echtvar_annotated_vcf.get(0).get(1)).vcf.summary,
                 ).match() }
             )
         }
