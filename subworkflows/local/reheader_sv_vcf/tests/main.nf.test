@@ -37,6 +37,7 @@ nextflow_workflow {
                         file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles_test.vcf.gz.tbi', checkIfExists: true)
                     ]
                 )
+                input[1] = channel.of([[], []])
                 """
             }
         }
@@ -120,6 +121,7 @@ nextflow_workflow {
                         file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles_test.vcf.gz.tbi', checkIfExists: true)
                     ]
                 )
+                input[1] = channel.of([[], []])
                 """
             }
         }
@@ -146,6 +148,7 @@ nextflow_workflow {
                         file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/hificnv_test.vcf.gz.tbi', checkIfExists: true)
                     ]
                 )
+                input[1] = channel.of([[], []])
                 """
             }
         }
