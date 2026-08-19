@@ -46,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1222](https://github.com/genomic-medicine-sweden/nallo/pull/1222) - Added `VEP_PREP_SV` module: caller-agnostic SV VCF normalisation before VEP annotation. Remaps non-canonical SVTYPEs (`TRA→BND`, `DUP/INS→DUP`, `DEL/INV→DEL`, `INVDUP→DUP`) and records the original in `ORIG_SVTYPE`. Includes Sniffles v1-specific fixes: missing `STRANDBIAS` FILTER header injection and removal of synthetic `END=POS` and `SVLEN=1` values
 - [#1226](https://github.com/genomic-medicine-sweden/nallo/pull/1226) - Added addition of column for `hgnc_id` and `region_type` to methbat profile with new `csvtk/join` module
 - [#1226](https://github.com/genomic-medicine-sweden/nallo/pull/1226) - Added filtering step with `gawk` to `annotate_methylation`, removing variants with `NA` in the `cpg_label`
+- [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Added DeBreak as a new SV caller option (`--sv_callers debreak`), using a local module pending nf-core/modules#12742
 
 ### Changed
 
@@ -129,6 +130,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1225](https://github.com/genomic-medicine-sweden/nallo/pull/1225) - Replaced `extra_vep_options` with separate `extra_vep_options_snv` and `extra_vep_options_sv` parameters, appended after the core VEP command for each variant type
 - [#1225](https://github.com/genomic-medicine-sweden/nallo/pull/1225) - Moved enrichment VEP flags (`--appris`, `--biotype`, `--hgvs`, etc.) from the hardcoded core command to the default values of `extra_vep_options_snv` and `extra_vep_options_sv`; the core command now contains only pipeline-critical flags
 - [#1244](https://github.com/genomic-medicine-sweden/nallo/pull/1244) - Updated `hiphase` module to fix typo in `hiphase` command
+- [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Upgraded Sniffles from v1 to v2.7.3; removed `--minhetsupport` from `ext.args` (het SVs in v2 are handled automatically via coverage-based thresholds and tagged with `SUPPORT_MIN` FILTER)
+- [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Updated `VEP_PREP_SV` to remove Sniffles v1-specific post-processing (STRANDBIAS FILTER header injection, synthetic `END=POS`/`SVLEN=1` removal); SVTYPE remapping is now fully generic
+- [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - `REHEADER_SV_VCF` now passes the reference FAI to `BCFTOOLS_REHEADER`, ensuring all reference `##contig` lines are present in per-caller VCFs before SVDB merge
 
 ### Removed
 
@@ -144,6 +148,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1224](https://github.com/genomic-medicine-sweden/nallo/pull/1224) - Removed hardcoded memory use in config for `RANK_VARIANTS:BCFTOOLS_SORT` since it is already covered by `task.memory` in the module
 - [#1225](https://github.com/genomic-medicine-sweden/nallo/pull/1225) - Removed `--polyphen p`, `--sift p`, `--humdiv` from the SV VEP core command; these amino-acid substitution predictors produce no meaningful output for SVs
 - [#1236](https://github.com/genomic-medicine-sweden/nallo/pull/1236) - Removed `BCFTOOLS_VIEW_SV` passthrough process; output naming moved to `main.nf` `path {}` closures
+- [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Removed `--sniffles_min_heterozygous_allele_frequency` parameter (no equivalent in Sniffles v2; het SV filtering is automatic)
 
 ### Fixed
 
@@ -159,22 +164,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1201](https://github.com/genomic-medicine-sweden/nallo/pull/1201) - Fixed nf-test not triggering on configuration file changes
 - [#1140](https://github.com/genomic-medicine-sweden/nallo/pull/1140) - Fixed sorting of mitochondrial vcf
 - [#1250](https://github.com/genomic-medicine-sweden/nallo/pull/1250) - Fixed missing validation for `--methbat_map` causing a cryptic combine error when the parameter is not provided and methylation annotation is active
+- [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Fixed missing `##contig=<ID=chrM>` in the merged SV VCF: Sniffles v2 only writes `##contig` lines for chromosomes where SVs were called; when HiFiCNV called CNVs at chrM the merged VCF had chrM records but no chrM contig definition, causing `bcftools view --samples` and `bcftools sort` to fail
 
 ### Parameters
 
-| Old parameter                    | New parameter                   |
-| -------------------------------- | ------------------------------- |
-|                                  | `--mitochondrial_sv_min_size`   |
-|                                  | `--mitorsaw_minimum_read_count` |
-|                                  | `--mitorsaw_minimum_maf`        |
-| `--run_methbat` / `--run_modkit` | `--methylation_callers`         |
-|                                  | `--skip_portello`               |
-|                                  | `--read_aligner`                |
-|                                  | `--pbmm2_preset`                |
-|                                  | `--glnexus_config`              |
-|                                  | `--preset ONT_R10_AS`           |
-|                                  | `--assembly_aligner`            |
-|                                  | `--methbat_map`                 |
+| Old parameter                                  | New parameter                   |
+| ---------------------------------------------- | ------------------------------- |
+|                                                | `--mitochondrial_sv_min_size`   |
+|                                                | `--mitorsaw_minimum_read_count` |
+|                                                | `--mitorsaw_minimum_maf`        |
+| `--run_methbat` / `--run_modkit`               | `--methylation_callers`         |
+|                                                | `--skip_portello`               |
+|                                                | `--read_aligner`                |
+|                                                | `--pbmm2_preset`                |
+|                                                | `--glnexus_config`              |
+|                                                | `--preset ONT_R10_AS`           |
+|                                                | `--assembly_aligner`            |
+|                                                | `--methbat_map`                 |
+| `--sniffles_min_heterozygous_allele_frequency` |                                 |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -203,6 +210,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | mm2plus                        |             | 1.3         |
 | samtools/merge                 | 1.23.1      | 1.24        |
 | csvtk/join                     |             | 0.37.0      |
+| sniffles                       | 1.0.12      | 2.7.3       |
+| debreak                        |             | 1.3         |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

@@ -6,7 +6,7 @@ include { GAWK as CREATE_SAMPLES_FILE } from '../../../modules/nf-core/gawk/main
 workflow REHEADER_SV_VCF {
     take:
     ch_vcf_tbi // channel: [ val(meta), path(vcf), path(tbi) ]
-    ch_fai     // channel: [ val(meta), path(fai) ]
+    ch_fai // channel: [ val(meta), path(fai) ]
 
     main:
     // Sniffles hardcodes the sample name as SAMPLE, and Severus bases it on the file name,
