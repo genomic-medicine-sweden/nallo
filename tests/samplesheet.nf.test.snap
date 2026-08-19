@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            236,
+            231,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -71,9 +71,6 @@
                 },
                 "CSVTK_CONCAT": {
                     "csvtk": "0.31.0"
-                },
-                "CSVTK_JOIN": {
-                    "csvtk": "0.37.0"
                 },
                 "CSVTK_MUTATE2": {
                     "csvtk": "0.31.0"
@@ -252,7 +249,7 @@
                     "severus": 1.7
                 },
                 "SNIFFLES": {
-                    "sniffles": "1.0.12"
+                    "sniffles": "2.7.3"
                 },
                 "SOMALIER_EXTRACT": {
                     "somalier": "0.2.18"
@@ -688,7 +685,7 @@
                 "HG002_Revio_chromograph_autozyg_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_Revio_chromograph_autozyg_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_Revio_chromograph_autozyg_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "HG002_Revio_chromograph_autozyg_chr20.png:md5,071e3da255e5a830b546bc4dbdee5e2a",
+                "HG002_Revio_chromograph_autozyg_chr20.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_Revio_chromograph_autozyg_chr21.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_Revio_chromograph_autozyg_chr22.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_Revio_chromograph_autozyg_chr3.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -850,10 +847,10 @@
                 
             ]
         ],
-        "timestamp": "2026-08-20T16:53:58.362194144",
+        "timestamp": "2026-08-19T12:53:37.426515411",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     }
 }
