@@ -1026,6 +1026,33 @@
             "nextflow": "26.04.6"
         }
     },
+    "1 sample, 1 family - sniffles1": {
+        "content": [
+            [
+                [
+                    "vcf:",
+                    {
+                        "id": "test",
+                        "single_end": false,
+                        "family_id": "family",
+                        "sex": 1,
+                        "sv_caller": "sniffles1"
+                    },
+                    [
+                        "test.vcf.gz",
+                        "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=1, variantCount=21, phased=false, phasedAutodetect=false]",
+                        "972a9b6e47e354a674b1d8eb1cd90a4c"
+                    ],
+                    "test.vcf.gz.tbi"
+                ]
+            ]
+        ],
+        "timestamp": "2026-08-19T16:31:06.891548792",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
     "2 samples, 1 family - merge sniffes,hificnv,severus,sawfish,debreak with trf bed, run all callers and filter, force sawfish single sample joint-call": {
         "content": [
             [

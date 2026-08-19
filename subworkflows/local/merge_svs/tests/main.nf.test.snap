@@ -190,6 +190,68 @@
             "nextflow": "26.04.6"
         }
     },
+    "1 family - merge sniffles1": {
+        "content": [
+            [
+                [
+                    "family_caller_vcf:",
+                    {
+                        "id": "family",
+                        "sv_caller": "hificnv"
+                    },
+                    "hificnv_svdb_merge_by_caller.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=2, variantCount=53, phased=false, phasedAutodetect=false]",
+                    "f277731b644714f79125f134c31ed766"
+                ],
+                [
+                    "family_caller_vcf:",
+                    {
+                        "id": "family",
+                        "sv_caller": "sawfish"
+                    },
+                    "sawfish_svdb_merge_by_caller.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=2, variantCount=63, phased=false, phasedAutodetect=false]",
+                    "f47661e7b9a0105614f188892a8582e2"
+                ],
+                [
+                    "family_caller_vcf:",
+                    {
+                        "id": "family",
+                        "sv_caller": "severus"
+                    },
+                    "severus_svdb_merge_by_caller.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=48, phased=false, phasedAutodetect=false]",
+                    "983bbeaca66cfd3fb2f72b81bd605c1c"
+                ],
+                [
+                    "family_caller_vcf:",
+                    {
+                        "id": "family",
+                        "sv_caller": "sniffles1"
+                    },
+                    "sniffles1_svdb_merge_by_caller.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=2, variantCount=22, phased=false, phasedAutodetect=false]",
+                    "b8739d55efd6ba2c5b08a2a5d270f364"
+                ]
+            ],
+            [
+                [
+                    "family_vcf:",
+                    {
+                        "id": "family"
+                    },
+                    "family_svdb_merge_by_family.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=2, variantCount=22, phased=false, phasedAutodetect=false]",
+                    "aaa0b389b556a08b83c6acc907de9e28"
+                ]
+            ]
+        ],
+        "timestamp": "2026-08-19T16:37:14.167816081",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
     "1 family - merge debreak,sniffles,severus,hificnv,sawfish": {
         "content": [
             [
