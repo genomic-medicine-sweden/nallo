@@ -42,9 +42,6 @@
                 "BCFTOOLS_VIEW_PHASING": {
                     "bcftools": 1.22
                 },
-                "BCFTOOLS_VIEW_SV": {
-                    "bcftools": 1.22
-                },
                 "BCFTOOLS_VIEW_UNCOMPRESS": {
                     "bcftools": 1.22
                 },

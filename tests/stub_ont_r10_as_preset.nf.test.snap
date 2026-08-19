@@ -1,7 +1,7 @@
 {
     "ONT_R10_AS preset with target_regions filters reads to regions before cramino QC and applies correct preset defaults": {
         "content": [
-            188,
+            186,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -37,9 +37,6 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_PHASING": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_VIEW_SV": {
                     "bcftools": 1.22
                 },
                 "BEDTOOLS_MERGE": {
@@ -433,7 +430,7 @@
                 "visualization_tracks/HG002_ONT_C/HG002_ONT_C_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-08-13T10:12:25.46521397",
+        "timestamp": "2026-08-18T09:11:35.211168901",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
