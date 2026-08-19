@@ -6,6 +6,7 @@ include { SAWFISH_DISCOVER                  } from '../../../modules/nf-core/saw
 include { SAWFISH_JOINTCALL                 } from '../../../modules/nf-core/sawfish/jointcall/main'
 include { SEVERUS                           } from '../../../modules/nf-core/severus/main'
 include { SNIFFLES                          } from '../../../modules/nf-core/sniffles/main'
+include { SNIFFLES1                         } from '../../../modules/local/sniffles1/main'
 include { TABIX_TABIX as TABIX_HIFICNV      } from '../../../modules/nf-core/tabix/tabix/main'
 include { TABIX_BGZIPTABIX as TABIX_SEVERUS } from '../../../modules/nf-core/tabix/bgziptabix/main'
 include { VEP_PREP_SV                       } from '../../../modules/local/vep_prep_sv/main'
@@ -64,6 +65,20 @@ workflow CALL_SVS {
     }
 
     //
+    // Call SVs with Sniffles v1
+    //
+    if (sv_callers_to_run.contains('sniffles1')) {
+
+        SNIFFLES1(
+            ch_bam_bai
+        )
+
+        ch_for_vep_prep_sv = ch_for_vep_prep_sv.mix(
+            SNIFFLES1.out.vcf.map { meta, vcf -> [meta + [sv_caller: 'sniffles1'], vcf] }
+        )
+    }
+
+    //
     // Call SVs with DeBreak
     //
     if (sv_callers_to_run.contains('debreak')) {
@@ -92,10 +107,10 @@ workflow CALL_SVS {
         ch_sv_calls = ch_sv_calls.mix(TABIX_SEVERUS.out.gz_index)
     }
 
-    if (sv_callers_to_run.contains('sniffles') || sv_callers_to_run.contains('debreak')) {
+    if (sv_callers_to_run.contains('sniffles') || sv_callers_to_run.contains('sniffles1') || sv_callers_to_run.contains('debreak')) {
 
         BCFTOOLS_SORT(
-            VEP_PREP_SV.out.vcf.filter { meta, _vcf -> meta.sv_caller in ['sniffles', 'debreak'] }
+            VEP_PREP_SV.out.vcf.filter { meta, _vcf -> meta.sv_caller in ['sniffles', 'sniffles1', 'debreak'] }
         )
 
         ch_sv_calls = ch_sv_calls.mix(
