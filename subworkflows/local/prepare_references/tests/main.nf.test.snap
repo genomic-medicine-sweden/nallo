@@ -364,7 +364,7 @@
                         },
                         [
                             [
-                                
+
                             ]
                         ]
                     ]
@@ -392,7 +392,7 @@
                         },
                         [
                             [
-                                
+
                             ]
                         ]
                     ]
@@ -421,7 +421,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/f37b56b7bfcfb082395ed4b3d247155d3b6698ba/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/1e84555134bb9638ad0dde49afd895e3192de3f0/reference/hg38.test.fa"
                     ]
                 ],
                 "2": [
@@ -448,7 +448,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/f37b56b7bfcfb082395ed4b3d247155d3b6698ba/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/1e84555134bb9638ad0dde49afd895e3192de3f0/reference/hg38.test.fa"
                     ]
                 ],
                 "vep_resources": [
@@ -486,7 +486,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/f37b56b7bfcfb082395ed4b3d247155d3b6698ba/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/1e84555134bb9638ad0dde49afd895e3192de3f0/reference/hg38.test.fa"
                     ]
                 ],
                 "2": [
@@ -537,7 +537,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/f37b56b7bfcfb082395ed4b3d247155d3b6698ba/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/1e84555134bb9638ad0dde49afd895e3192de3f0/reference/hg38.test.fa"
                     ]
                 ],
                 "vep_resources": [
