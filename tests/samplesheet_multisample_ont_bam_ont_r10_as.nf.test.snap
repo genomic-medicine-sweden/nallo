@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10_AS --target_regions test_data.bed --phaser whatshap --alignment_processes 1 --snv_calling_processes 1": {
         "content": [
-            305,
+            301,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -174,7 +174,7 @@
                     "severus": 1.7
                 },
                 "SNIFFLES": {
-                    "sniffles": "1.0.12"
+                    "sniffles": "2.7.3"
                 },
                 "SOMALIER_PED_FAMILY": {
                     "create_pedigree_file": 1.0,
@@ -794,7 +794,7 @@
                 "HG002_ONT_A_chromograph_autozyg_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_A_chromograph_autozyg_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_A_chromograph_autozyg_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "HG002_ONT_A_chromograph_autozyg_chr20.png:md5,071e3da255e5a830b546bc4dbdee5e2a",
+                "HG002_ONT_A_chromograph_autozyg_chr20.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_A_chromograph_autozyg_chr21.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_A_chromograph_autozyg_chr22.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_A_chromograph_autozyg_chr3.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -844,7 +844,7 @@
                 "HG002_ONT_B_chromograph_autozyg_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_B_chromograph_autozyg_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_B_chromograph_autozyg_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "HG002_ONT_B_chromograph_autozyg_chr20.png:md5,071e3da255e5a830b546bc4dbdee5e2a",
+                "HG002_ONT_B_chromograph_autozyg_chr20.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_B_chromograph_autozyg_chr21.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_B_chromograph_autozyg_chr22.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_B_chromograph_autozyg_chr3.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -894,7 +894,7 @@
                 "HG002_ONT_C_chromograph_autozyg_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_C_chromograph_autozyg_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_C_chromograph_autozyg_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "HG002_ONT_C_chromograph_autozyg_chr20.png:md5,071e3da255e5a830b546bc4dbdee5e2a",
+                "HG002_ONT_C_chromograph_autozyg_chr20.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_C_chromograph_autozyg_chr21.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_C_chromograph_autozyg_chr22.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_C_chromograph_autozyg_chr3.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -1123,11 +1123,11 @@
                 ],
                 [
                     "FAM_sniffles_svs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=2, variantCount=7, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=6, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_svs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=2, variantCount=7, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=6, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM2_hificnv_svs.vcf.gz",
@@ -1139,21 +1139,21 @@
                 ],
                 [
                     "FAM2_sniffles_svs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=7, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=6, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM2_svs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=7, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=6, phased=false, phasedAutodetect=false]"
                 ]
             ],
             [
                 
             ]
         ],
-        "timestamp": "2026-08-19T09:10:16.325816698",
+        "timestamp": "2026-08-20T06:21:52.629955624",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     }
 }
