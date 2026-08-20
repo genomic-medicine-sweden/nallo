@@ -1,6 +1,6 @@
 include { BCFTOOLS_VIEW                     } from '../../../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_SORT                     } from '../../../modules/nf-core/bcftools/sort/main'
-include { DEBREAK                           } from '../../../modules/local/debreak/main'
+include { DEBREAK                           } from '../../../modules/nf-core/debreak/main'
 include { HIFICNV                           } from '../../../modules/nf-core/hificnv/main'
 include { SAWFISH_DISCOVER                  } from '../../../modules/nf-core/sawfish/discover/main'
 include { SAWFISH_JOINTCALL                 } from '../../../modules/nf-core/sawfish/jointcall/main'
