@@ -2,6 +2,7 @@ include { CSVTK_CONCAT  } from '../../../modules/nf-core/csvtk/concat/main'
 include { CSVTK_JOIN    } from '../../../modules/nf-core/csvtk/join/main'
 include { CSVTK_MUTATE2 } from '../../../modules/nf-core/csvtk/mutate2/main'
 include { CSVTK_SORT    } from '../../../modules/nf-core/csvtk/sort/main'
+include { GAWK          } from '../../../modules/nf-core/gawk/main'
 
 workflow ANNOTATE_METHYLATION {
     take:
@@ -9,8 +10,14 @@ workflow ANNOTATE_METHYLATION {
     ch_map // channel: [ val(meta), path(tsv) ]
 
     main:
+    GAWK(
+        ch_region_profile,
+        [],
+        false,
+    )
+
     CSVTK_JOIN(
-        ch_region_profile.combine(ch_map).map { meta, region_profile, _meta_map, map ->
+        GAWK.out.output.combine(ch_map).map { meta, region_profile, _meta_map, map ->
             [meta, [region_profile, map]]
         }
     )

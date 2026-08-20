@@ -154,7 +154,7 @@
     },
     "Test skip sex check - multisample": {
         "content": [
-            162,
+            165,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -227,6 +227,9 @@
                 },
                 "GATK4_DENOISEREADCOUNTS": {
                     "gatk4": "4.6.2.0"
+                },
+                "GAWK": {
+                    "gawk": "5.3.1"
                 },
                 "GAWK_EXTRACT_REGIONS": {
                     "gawk": "5.3.1"
@@ -496,7 +499,7 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-08-13T10:52:39.568794258",
+        "timestamp": "2026-08-20T17:18:00.199958439",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"

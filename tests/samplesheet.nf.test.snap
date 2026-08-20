@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            234,
+            236,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -850,7 +850,7 @@
                 
             ]
         ],
-        "timestamp": "2026-08-19T08:57:50.74128307",
+        "timestamp": "2026-08-20T16:53:58.362194144",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
