@@ -72,6 +72,7 @@ workflow ANNOTATE_SNVS {
         ch_vep_cache,
         ch_fasta,
         ch_vep_extra_files,
+        [[], []],
     )
 
     emit:

@@ -38,6 +38,7 @@ workflow ANNOTATE_SVS {
         ch_vep_cache,
         ch_fasta,
         ch_vep_extra_files,
+        [[], []],
     )
 
     emit:
