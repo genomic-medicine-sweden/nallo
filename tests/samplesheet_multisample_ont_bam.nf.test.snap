@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ont_bam | --preset ONT_R10 --phaser whatshap --alignment_processes 1 --snv_calling_processes 1 --sv_caller sniffles --publish_unannotated_family_svs": {
         "content": [
-            337,
+            341,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -864,7 +864,7 @@
                 "HG002_ONT_A_chromograph_autozyg_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_A_chromograph_autozyg_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_A_chromograph_autozyg_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "HG002_ONT_A_chromograph_autozyg_chr20.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_ONT_A_chromograph_autozyg_chr20.png:md5,071e3da255e5a830b546bc4dbdee5e2a",
                 "HG002_ONT_A_chromograph_autozyg_chr21.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_A_chromograph_autozyg_chr22.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_A_chromograph_autozyg_chr3.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -914,7 +914,7 @@
                 "HG002_ONT_B_chromograph_autozyg_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_B_chromograph_autozyg_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_B_chromograph_autozyg_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "HG002_ONT_B_chromograph_autozyg_chr20.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_ONT_B_chromograph_autozyg_chr20.png:md5,071e3da255e5a830b546bc4dbdee5e2a",
                 "HG002_ONT_B_chromograph_autozyg_chr21.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_B_chromograph_autozyg_chr22.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_B_chromograph_autozyg_chr3.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -964,7 +964,7 @@
                 "HG002_ONT_C_chromograph_autozyg_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_C_chromograph_autozyg_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_C_chromograph_autozyg_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "HG002_ONT_C_chromograph_autozyg_chr20.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_ONT_C_chromograph_autozyg_chr20.png:md5,071e3da255e5a830b546bc4dbdee5e2a",
                 "HG002_ONT_C_chromograph_autozyg_chr21.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_C_chromograph_autozyg_chr22.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_ONT_C_chromograph_autozyg_chr3.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -1227,10 +1227,10 @@
                 
             ]
         ],
-        "timestamp": "2026-08-18T09:35:06.708541244",
+        "timestamp": "2026-08-19T09:06:15.590774901",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.07.0"
         }
     }
 }

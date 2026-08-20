@@ -69,8 +69,8 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[1] = ANNOTATE_SNVS.out.vcf
-                input[2] = ANNOTATE_SNVS.out.tbi
+                input[1] = ANNOTATE_SNVS.out.echtvar_annotated_vcf
+                input[2] = ANNOTATE_SNVS.out.echtvar_annotated_tbi
                 input[3] = true
                 input[4] = true
                 """
@@ -98,8 +98,8 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[1] = ANNOTATE_SNVS.out.vcf
-                input[2] = ANNOTATE_SNVS.out.tbi
+                input[1] = ANNOTATE_SNVS.out.echtvar_annotated_vcf
+                input[2] = ANNOTATE_SNVS.out.echtvar_annotated_tbi
                 input[3] = true
                 input[4] = false
                 """
@@ -128,8 +128,8 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[1] = ANNOTATE_SNVS.out.vcf
-                input[2] = ANNOTATE_SNVS.out.tbi
+                input[1] = ANNOTATE_SNVS.out.echtvar_annotated_vcf
+                input[2] = ANNOTATE_SNVS.out.echtvar_annotated_tbi
                 input[3] = false
                 input[4] = true
                 """
@@ -157,8 +157,8 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[1] = ANNOTATE_SNVS.out.vcf
-                input[2] = ANNOTATE_SNVS.out.tbi
+                input[1] = ANNOTATE_SNVS.out.echtvar_annotated_vcf
+                input[2] = ANNOTATE_SNVS.out.echtvar_annotated_tbi
                 input[3] = false
                 input[4] = false
                 """
@@ -188,8 +188,8 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[1] = ANNOTATE_SNVS.out.vcf
-                input[2] = ANNOTATE_SNVS.out.tbi
+                input[1] = ANNOTATE_SNVS.out.echtvar_annotated_vcf
+                input[2] = ANNOTATE_SNVS.out.echtvar_annotated_tbi
                 input[3] = true
                 input[4] = true
                 """
@@ -219,8 +219,8 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[1] = ANNOTATE_SNVS.out.vcf
-                input[2] = ANNOTATE_SNVS.out.tbi
+                input[1] = ANNOTATE_SNVS.out.echtvar_annotated_vcf
+                input[2] = ANNOTATE_SNVS.out.echtvar_annotated_tbi
                 input[3] = true
                 input[4] = false
                 """
@@ -251,8 +251,8 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[1] = ANNOTATE_SNVS.out.vcf
-                input[2] = ANNOTATE_SNVS.out.tbi
+                input[1] = ANNOTATE_SNVS.out.echtvar_annotated_vcf
+                input[2] = ANNOTATE_SNVS.out.echtvar_annotated_tbi
                 input[3] = false
                 input[4] = true
                 """
@@ -282,8 +282,8 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[1] = ANNOTATE_SNVS.out.vcf
-                input[2] = ANNOTATE_SNVS.out.tbi
+                input[1] = ANNOTATE_SNVS.out.echtvar_annotated_vcf
+                input[2] = ANNOTATE_SNVS.out.echtvar_annotated_tbi
                 input[3] = false
                 input[4] = false
                 """
