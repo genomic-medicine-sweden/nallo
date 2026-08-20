@@ -1,7 +1,7 @@
 {
     "Test Chromograph works without SNV annotation": {
         "content": [
-            72,
+            70,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -25,9 +25,6 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_VIEW_SV": {
                     "bcftools": 1.22
                 },
                 "BEDTOOLS_MERGE": {

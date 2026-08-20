@@ -34,6 +34,7 @@ include { PREPARE_REFERENCES                                     } from '../subw
 include { QC_ALIGNED_READS                                       } from '../subworkflows/local/qc_aligned_reads'
 include { QC_SNVS                                                } from '../subworkflows/local/qc_snvs'
 include { RANK_VARIANTS                                          } from '../subworkflows/local/rank_variants'
+include { REHEADER_SV_VCF                                        } from '../subworkflows/local/reheader_sv_vcf'
 include { SCATTER_GENOME                                         } from '../subworkflows/local/scatter_genome'
 include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SNVS } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
 include { VCF_FILTER_BCFTOOLS_ENSEMBLVEP as FILTER_VARIANTS_SVS  } from '../subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main'
@@ -59,7 +60,6 @@ include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modu
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_PHASING             } from '../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_MITO_SNVS           } from '../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CHROMOGRAPH             } from '../modules/nf-core/bcftools/view/main'
-include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SV                      } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING                 } from '../modules/nf-core/bcftools/view/main'
 include { MINIMAP2_ALIGN                                         } from '../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_MERGE                                         } from '../modules/nf-core/samtools/merge/main'
@@ -655,8 +655,16 @@ workflow NALLO {
             val_create_sawfish_maf_track,
         )
 
+        REHEADER_SV_VCF(
+            CALL_SVS.out.vcf
+        )
+
+        ch_merge_svs_in = REHEADER_SV_VCF.out.vcf
+            .map { meta, vcf -> [['id': meta.family_id, 'sv_caller': meta.sv_caller], vcf] }
+            .groupTuple()
+
         MERGE_SVS(
-            CALL_SVS.out.vcf,
+            ch_merge_svs_in,
             val_sv_callers_to_merge.split(',').collect { caller -> caller.toLowerCase().trim() },
             val_sv_callers_merge_priority.split(',').collect { caller -> caller.toLowerCase().trim() },
             ch_vcfexpress_prelude,
@@ -1027,12 +1035,11 @@ workflow NALLO {
                 ? ANN_CSQ_PLI_SVS.out.vcf
                 : ch_ranked_variants.sv.map { meta, vcf, _tbi -> [meta, vcf] }
 
-        BCFTOOLS_VIEW_SV(
-            ch_collect_svs.map { meta, vcf -> [meta, vcf, []] },
-            [],
-            [],
-            [],
-        )
+        ch_collect_tbi = val_skip_sv_annotation
+            ? ch_sv_index_for_annotation
+            : val_skip_rank_variants
+                ? ANN_CSQ_PLI_SVS.out.tbi
+                : ch_ranked_variants.sv.map { meta, _vcf, tbi -> [meta, tbi] }
     }
 
     //
@@ -1290,8 +1297,8 @@ workflow NALLO {
     snvs_family_vcf                     = val_skip_snv_calling ? channel.empty() : CONCAT_SORT_RANKED_SNVS.out.vcf // channel: [ val(meta), path(vcf) ]
     svs_per_family_and_caller_tbi       = val_skip_sv_calling ? channel.empty() : MERGE_SVS.out.family_caller_tbi // channel: [ val(meta), path(tbi) ]
     svs_per_family_and_caller_vcf       = val_skip_sv_calling ? channel.empty() : MERGE_SVS.out.family_caller_vcf // channel: [ val(meta), path(vcf) ]
-    svs_per_family_tbi                  = val_skip_sv_calling ? channel.empty() : BCFTOOLS_VIEW_SV.out.tbi // channel: [ val(meta), path(tbi) ]
-    svs_per_family_vcf                  = val_skip_sv_calling ? channel.empty() : BCFTOOLS_VIEW_SV.out.vcf // channel: [ val(meta), path(vcf.gz) ]
+    svs_per_family_tbi                  = val_skip_sv_calling ? channel.empty() : ch_collect_tbi // channel: [ val(meta), path(tbi) ]
+    svs_per_family_vcf                  = val_skip_sv_calling ? channel.empty() : ch_collect_svs // channel: [ val(meta), path(vcf.gz) ]
 }
 
 /**
