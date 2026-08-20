@@ -888,7 +888,7 @@
                 "HG002_chromograph_autozyg_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_autozyg_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_autozyg_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "HG002_chromograph_autozyg_chr20.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chr20.png:md5,071e3da255e5a830b546bc4dbdee5e2a",
                 "HG002_chromograph_autozyg_chr21.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_autozyg_chr22.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_autozyg_chr3.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -938,7 +938,7 @@
                 "HG003_chromograph_autozyg_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG003_chromograph_autozyg_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG003_chromograph_autozyg_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "HG003_chromograph_autozyg_chr20.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chr20.png:md5,071e3da255e5a830b546bc4dbdee5e2a",
                 "HG003_chromograph_autozyg_chr21.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG003_chromograph_autozyg_chr22.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG003_chromograph_autozyg_chr3.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -1236,7 +1236,7 @@
                 
             ]
         ],
-        "timestamp": "2026-08-20T10:33:54.05774282",
+        "timestamp": "2026-08-19T09:13:20.862204791",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"

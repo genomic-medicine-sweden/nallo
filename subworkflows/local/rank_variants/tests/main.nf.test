@@ -57,7 +57,7 @@ nextflow_workflow {
             script "../../annotate_consequence_pli/main.nf"
             process {
                 """
-                input[0] = ANNOTATE_SNVS.out.vcf
+                input[0] = ANNOTATE_SNVS.out.vep_annotated_vcf
                 input[1] = [
                     [ id: 'variant_consequences' ],
                     [ file(params.pipelines_testdata_base_path + 'reference/variant_consequences_v2.txt', checkIfExists: true) ]
