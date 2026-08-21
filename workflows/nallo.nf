@@ -103,6 +103,7 @@ workflow NALLO {
     ch_hgnc_ids
     ch_samplesheet
     ch_cramino_regions
+    ch_methbat_map
     ch_methbat_regions
     ch_modkit_call_regions
     ch_mosdepth_regions
@@ -1070,7 +1071,8 @@ workflow NALLO {
 
     if (!val_skip_methylation_annotation && !val_skip_methbat) {
         ANNOTATE_METHYLATION(
-            ch_methylation_profiles
+            ch_methylation_profiles,
+            ch_methbat_map,
         )
     }
 

@@ -1,14 +1,30 @@
-include { CSVTK_MUTATE2 } from '../../../modules/nf-core/csvtk/mutate2/main'
 include { CSVTK_CONCAT  } from '../../../modules/nf-core/csvtk/concat/main'
+include { CSVTK_JOIN    } from '../../../modules/nf-core/csvtk/join/main'
+include { CSVTK_MUTATE2 } from '../../../modules/nf-core/csvtk/mutate2/main'
 include { CSVTK_SORT    } from '../../../modules/nf-core/csvtk/sort/main'
+include { GAWK          } from '../../../modules/nf-core/gawk/main'
 
 workflow ANNOTATE_METHYLATION {
     take:
     ch_region_profile // channel: [ val(meta), path(tsv) ]
+    ch_map // channel: [ val(meta), path(tsv) ]
 
     main:
-    CSVTK_MUTATE2(
+    // GAWK is used to filter out rows with NA in the cpg_label column, as they are not approved HGNC genes
+    GAWK(
         ch_region_profile,
+        [],
+        false,
+    )
+
+    CSVTK_JOIN(
+        GAWK.out.output.combine(ch_map).map { meta, region_profile, _meta_map, map ->
+            [meta, [region_profile, map]]
+        }
+    )
+
+    CSVTK_MUTATE2(
+        CSVTK_JOIN.out.out_file,
         'tsv',
         'tsv',
     )

@@ -44,6 +44,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1159](https://github.com/genomic-medicine-sweden/nallo/pull/1159) - Added on-target read pre-filtering in `QC_ALIGNED_READS`: when `--target_regions` is set, reads are filtered with `SAMTOOLS_VIEW` to on-target regions before CRAMINO QC, ensuring QC metrics reflect only on-target data
 - [#1217](https://github.com/genomic-medicine-sweden/nallo/pull/1217) - Added `mm2plus` as an option to align reads to the reference and for assembly alignment
 - [#1222](https://github.com/genomic-medicine-sweden/nallo/pull/1222) - Added `VEP_PREP_SV` module: caller-agnostic SV VCF normalisation before VEP annotation. Remaps non-canonical SVTYPEs (`TRA→BND`, `DUP/INS→DUP`, `DEL/INV→DEL`, `INVDUP→DUP`) and records the original in `ORIG_SVTYPE`. Includes Sniffles v1-specific fixes: missing `STRANDBIAS` FILTER header injection and removal of synthetic `END=POS` and `SVLEN=1` values
+- [#1226](https://github.com/genomic-medicine-sweden/nallo/pull/1226) - Added addition of column for `hgnc_id` and `region_type` to methbat profile with new `csvtk/join` module
+- [#1226](https://github.com/genomic-medicine-sweden/nallo/pull/1226) - Added filtering step with `gawk` to `annotate_methylation`, removing variants with `NA` in the `cpg_label`
 
 ### Changed
 
@@ -171,6 +173,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                                  | `--glnexus_config`              |
 |                                  | `--preset ONT_R10_AS`           |
 |                                  | `--assembly_aligner`            |
+|                                  | `--methbat_map`                 |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -198,6 +201,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | samtools/view                  | 1.23.1      | 1.24        |
 | mm2plus                        |             | 1.3         |
 | samtools/merge                 | 1.23.1      | 1.24        |
+| csvtk/join                     |             | 0.37.0      |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

@@ -146,7 +146,7 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
-        "timestamp": "2026-07-31T10:19:08.002775971",
+        "timestamp": "2026-08-13T10:51:52.060428484",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -154,7 +154,7 @@
     },
     "Test skip sex check - multisample": {
         "content": [
-            159,
+            165,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -210,6 +210,9 @@
                 "CSVTK_CONCAT": {
                     "csvtk": "0.31.0"
                 },
+                "CSVTK_JOIN": {
+                    "csvtk": "0.37.0"
+                },
                 "CSVTK_MUTATE2": {
                     "csvtk": "0.31.0"
                 },
@@ -224,6 +227,9 @@
                 },
                 "GATK4_DENOISEREADCOUNTS": {
                     "gatk4": "4.6.2.0"
+                },
+                "GAWK": {
+                    "gawk": "5.3.1"
                 },
                 "GAWK_EXTRACT_REGIONS": {
                     "gawk": "5.3.1"
@@ -493,7 +499,7 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-07-30T15:58:31.998698589",
+        "timestamp": "2026-08-20T17:18:00.199958439",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"

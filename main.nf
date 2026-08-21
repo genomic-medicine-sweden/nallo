@@ -52,6 +52,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     ch_hgnc_ids
     ch_samplesheet
     ch_cramino_regions
+    ch_methbat_map
     ch_methbat_regions
     ch_modkit_call_regions
     ch_mosdepth_regions
@@ -166,6 +167,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         ch_hgnc_ids,
         ch_samplesheet,
         ch_cramino_regions,
+        ch_methbat_map,
         ch_methbat_regions,
         ch_modkit_call_regions,
         ch_mosdepth_regions,
@@ -475,6 +477,7 @@ workflow {
         createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', channel.value([])).map { hgnc_id_list -> hgnc_id_list[0].toString() }.collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true).map { file -> [[id: 'hgnc_ids'], file] }.collect(),
         PIPELINE_INITIALISATION.out.samplesheet,
         createReferenceChannelFromPath(params.cramino_regions, channel.value([[], []])),
+        createReferenceChannelFromPath(params.methbat_map),
         createReferenceChannelFromPath(params.methbat_regions),
         createReferenceChannelFromPath(params.modkit_call_regions, channel.value([[], []])),
         createReferenceChannelFromPath(params.mosdepth_regions, channel.value([[], []])),

@@ -124,7 +124,7 @@ Less common options for the pipeline, typically set in a config file.
 | `multiqc_logo` | Custom logo file to supply to MultiQC. File name must also be set in the MultiQC config file | `string` |  |  | True |
 | `multiqc_methods_description` | Custom MultiQC yaml file containing HTML including a methods description. | `string` |  |  |  |
 | `validate_params` | Boolean whether to validate parameters against the schema at runtime | `boolean` | True |  | True |
-| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/5c13b255beab25a536375fec42f9da3413fc65a5/ |  | True |
+| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/1e84555134bb9638ad0dde49afd895e3192de3f0/ |  | True |
 | `trace_report_suffix` | Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss. | `string` |  |  | True |
 | `help` | Display the help message. | `['boolean', 'string']` |  |  |  |
 | `help_full` | Display the full detailed help message. | `boolean` |  |  |  |
@@ -216,3 +216,4 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `pbmm2_preset` | Preset to use for pbmm2. Supported arguments are HIFI, CCS, or SUBREAD. (accepted: `HIFI`\|`CCS`\|`SUBREAD`) | `string` | CCS |  |  |
 | `glnexus_config` | Glnexus config to use for merging gVCFs. If no file is provided, the default config `assets/glnexus_config_dp1.yml` will be used. | `string` | None |  |  |
 | `assembly_aligner` | Which aligner to use for assembly alignment. Supported arguments are mm2plus or minimap2. (accepted: `mm2plus`\|`minimap2`) | `string` | minimap2 |  |  |
+| `methbat_map` | Mapping file that can be used to filter and annotate the methbat output based on regions. | `string` |  |  |  |
