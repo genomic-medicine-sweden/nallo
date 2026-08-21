@@ -11,7 +11,7 @@ workflow ANNOTATE_SNVS {
     ch_fasta // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fai // channel: [mandatory] [ val(meta), path(fai) ]
     ch_vep_cache // channel: [mandatory] [ val(meta), path(cache) ]
-    val_vep_cache_version //  string: [mandatory] default: 110
+    val_vep_cache_version //  string: [mandatory] default: 116
     ch_vep_extra_files // channel: [mandatory] [ path(files) ]
     annotate_cadd //    bool: [mandatory] should CADD be used to annotate indels
     annotate_echtvar //    bool: [mandatory] should echtvar be used to annotate variants

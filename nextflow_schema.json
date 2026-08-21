@@ -786,7 +786,7 @@
                 },
                 "vep_cache_version": {
                     "type": "integer",
-                    "default": 110,
+                    "default": 116,
                     "description": "VEP cache version"
                 },
                 "vep_mitochondrial_genome_distance": {
