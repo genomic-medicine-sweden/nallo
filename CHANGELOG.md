@@ -46,7 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1222](https://github.com/genomic-medicine-sweden/nallo/pull/1222) - Added `VEP_PREP_SV` module: caller-agnostic SV VCF normalisation before VEP annotation. Remaps non-canonical SVTYPEs (`TRA→BND`, `DUP/INS→DUP`, `DEL/INV→DEL`, `INVDUP→DUP`) and records the original in `ORIG_SVTYPE`. Includes Sniffles v1-specific fixes: missing `STRANDBIAS` FILTER header injection and removal of synthetic `END=POS` and `SVLEN=1` values
 - [#1226](https://github.com/genomic-medicine-sweden/nallo/pull/1226) - Added addition of column for `hgnc_id` and `region_type` to methbat profile with new `csvtk/join` module
 - [#1226](https://github.com/genomic-medicine-sweden/nallo/pull/1226) - Added filtering step with `gawk` to `annotate_methylation`, removing variants with `NA` in the `cpg_label`
-- [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Added DeBreak as a new SV caller option (`--sv_callers debreak`), using a local module pending nf-core/modules#12742
+- [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Added DeBreak as a new SV caller option (`--sv_callers debreak`)
 
 ### Changed
 
