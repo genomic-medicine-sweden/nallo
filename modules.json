@@ -248,7 +248,7 @@
                     },
                     "hiphase": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "32d9d7b17b837f68b7f3916f53bfa90d1b434fdd",
                         "installed_by": ["modules"]
                     },
                     "longphase/haplotag": {

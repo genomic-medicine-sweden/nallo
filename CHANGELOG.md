@@ -127,6 +127,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1232](https://github.com/genomic-medicine-sweden/nallo/pull/1232) - Changed the re-headering of the SV VCFs, now part of a new subworkflow `REHEADER_SV_VCF`
 - [#1225](https://github.com/genomic-medicine-sweden/nallo/pull/1225) - Replaced `extra_vep_options` with separate `extra_vep_options_snv` and `extra_vep_options_sv` parameters, appended after the core VEP command for each variant type
 - [#1225](https://github.com/genomic-medicine-sweden/nallo/pull/1225) - Moved enrichment VEP flags (`--appris`, `--biotype`, `--hgvs`, etc.) from the hardcoded core command to the default values of `extra_vep_options_snv` and `extra_vep_options_sv`; the core command now contains only pipeline-critical flags
+- [#1244](https://github.com/genomic-medicine-sweden/nallo/pull/1244) - Updated `hiphase` module to fix typo in `hiphase` command
 
 ### Removed
 
