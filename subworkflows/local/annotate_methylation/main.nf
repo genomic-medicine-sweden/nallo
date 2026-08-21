@@ -10,6 +10,7 @@ workflow ANNOTATE_METHYLATION {
     ch_map // channel: [ val(meta), path(tsv) ]
 
     main:
+    // GAWK is used to filter out rows with NA in the cpg_label column, as they are not approved HGNC genes
     GAWK(
         ch_region_profile,
         [],
