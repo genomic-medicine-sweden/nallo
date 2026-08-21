@@ -209,8 +209,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | samtools/merge                 | 1.23.1      | 1.24        |
 | csvtk/join                     |             | 0.37.0      |
 | sniffles                       | 1.0.12      | 2.7.3       |
-| sniffles1 (local)              |             | 1.0.12      |
-| debreak (nf-core)              |             | 1.3         |
+| debreak                        |             | 1.3         |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
