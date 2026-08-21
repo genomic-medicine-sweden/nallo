@@ -154,6 +154,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1196](https://github.com/genomic-medicine-sweden/nallo/pull/1196) - Fixed SVDB merge reordering priorities on retries
 - [#1201](https://github.com/genomic-medicine-sweden/nallo/pull/1201) - Fixed nf-test not triggering on configuration file changes
 - [#1140](https://github.com/genomic-medicine-sweden/nallo/pull/1140) - Fixed sorting of mitochondrial vcf
+- [#1243](https://github.com/genomic-medicine-sweden/nallo/pull/1243) - Fixed invalid syntax in `call_methylation_modkit` that prevents module compilation
 
 ### Parameters
 
