@@ -4,7 +4,7 @@ nextflow_pipeline {
     script "../main.nf"
     tag "PIPELINE"
 
-    test("samplesheet_multisample_bam | --sv_callers sniffles,debreak") {
+    test("samplesheet_multisample_bam | --sv_callers sniffles1,debreak") {
         tag "samplesheet_multisample_bam_debreak"
 
         when {
@@ -13,8 +13,8 @@ nextflow_pipeline {
                 input                        = "$projectDir/assets/samplesheet_multisample_bam.csv"
                 outdir                       = "$outputDir"
                 phaser                       = "hiphase"
-                sv_callers                   = "sniffles,debreak"
-                sv_callers_to_run            = "sniffles,debreak"
+                sv_callers                   = "sniffles1,debreak"
+                sv_callers_to_run            = "sniffles1,debreak"
             }
         }
 
