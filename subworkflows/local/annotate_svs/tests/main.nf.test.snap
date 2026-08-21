@@ -1,5 +1,5 @@
 {
-    "severus, fasta, svdb, vep_cache, '110', vep_plugin_files -stub with extra_vep_options_sv": {
+    "severus, fasta, svdb, vep_cache, '116', vep_plugin_files -stub with extra_vep_options_sv": {
         "content": [
             {
                 "0": [
@@ -50,7 +50,7 @@
             "nextflow": "26.04.6"
         }
     },
-    "severus, fasta, svdb, vep_cache, '110', vep_plugin_files, with extra_vep_options_sv": {
+    "severus, fasta, svdb, vep_cache, '116', vep_plugin_files, with extra_vep_options_sv": {
         "content": [
             "d4c3f4e0813221db330c9a93aa79f8f1",
             "test.vcf.gz.tbi"
@@ -61,7 +61,7 @@
             "nextflow": "26.04.6"
         }
     },
-    "severus, fasta, svdb, vep_cache, '110', vep_plugin_files": {
+    "severus, fasta, svdb, vep_cache, '116', vep_plugin_files": {
         "content": [
             "97b371e9ead544401c47225602ddb8ca",
             "test.vcf.gz.tbi"
@@ -72,7 +72,7 @@
             "nextflow": "26.04.4"
         }
     },
-    "severus, fasta, svdb, vep_cache, '110', vep_plugin_files -stub": {
+    "severus, fasta, svdb, vep_cache, '116', vep_plugin_files -stub": {
         "content": [
             {
                 "0": [

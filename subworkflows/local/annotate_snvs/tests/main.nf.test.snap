@@ -1,5 +1,5 @@
 {
-    "bcf, db, vep_cache, '110', -stub with CADD": {
+    "bcf, db, vep_cache, '116', -stub with CADD": {
         "content": [
             {
                 "0": [
@@ -74,7 +74,7 @@
             "nextflow": "26.07.0"
         }
     },
-    "bcf, db, vep_cache, '110', -stub with extra_vep_options_snv": {
+    "bcf, db, vep_cache, '116', -stub with extra_vep_options_snv": {
         "content": [
             {
                 "0": [
@@ -149,7 +149,7 @@
             "nextflow": "26.07.0"
         }
     },
-    "bcf, db, vep_cache, '110'": {
+    "bcf, db, vep_cache, '116'": {
         "content": [
             "test.vcf.gz.tbi",
             "3c83c8106d6d4758d9d9d405c11aad77",
@@ -164,7 +164,7 @@
             "nextflow": "26.07.0"
         }
     },
-    "bcf, db, vep_cache, '110', -stub": {
+    "bcf, db, vep_cache, '116', -stub": {
         "content": [
             {
                 "0": [
@@ -239,7 +239,7 @@
             "nextflow": "26.07.0"
         }
     },
-    "bcf, db, vep_cache, '110', with extra_vep_options_snv": {
+    "bcf, db, vep_cache, '116', with extra_vep_options_snv": {
         "content": [
             "test.vcf.gz.tbi",
             "a6df39f9ecc17803e3577dae5af887ac",
@@ -254,7 +254,7 @@
             "nextflow": "26.07.0"
         }
     },
-    "bcf, [], vep_cache, '110' - no echtvar annotation - filter before vep": {
+    "bcf, [], vep_cache, '116' - no echtvar annotation - filter before vep": {
         "content": [
             "test.vcf.gz.tbi",
             "e09e112c627a86ab975b5176f26c853d",
@@ -268,7 +268,7 @@
             "nextflow": "26.07.0"
         }
     },
-    "bcf, db, vep_cache, '110', filter before vep": {
+    "bcf, db, vep_cache, '116', filter before vep": {
         "content": [
             "test.vcf.gz.tbi",
             "2cb4271e68e0c1b1e44e44900cabba4b",
@@ -283,7 +283,7 @@
             "nextflow": "26.07.0"
         }
     },
-    "bcf, [], vep_cache, '110' - no echtvar annotation": {
+    "bcf, [], vep_cache, '116' - no echtvar annotation": {
         "content": [
             "test.vcf.gz.tbi",
             "1cf6fe93c428ca7350ecf48b7d12001b",
