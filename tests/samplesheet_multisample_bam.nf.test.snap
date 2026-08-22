@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_bam": {
         "content": [
-            421,
+            430,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -71,6 +71,9 @@
                 },
                 "CSVTK_CONCAT": {
                     "csvtk": "0.31.0"
+                },
+                "CSVTK_JOIN": {
+                    "csvtk": "0.37.0"
                 },
                 "CSVTK_MUTATE2": {
                     "csvtk": "0.31.0"
@@ -971,7 +974,7 @@
                 "HG002_chromograph_autozyg_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_autozyg_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_autozyg_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "HG002_chromograph_autozyg_chr20.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chr20.png:md5,071e3da255e5a830b546bc4dbdee5e2a",
                 "HG002_chromograph_autozyg_chr21.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_autozyg_chr22.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG002_chromograph_autozyg_chr3.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -1021,7 +1024,7 @@
                 "HG003_chromograph_autozyg_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG003_chromograph_autozyg_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG003_chromograph_autozyg_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "HG003_chromograph_autozyg_chr20.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chr20.png:md5,071e3da255e5a830b546bc4dbdee5e2a",
                 "HG003_chromograph_autozyg_chr21.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG003_chromograph_autozyg_chr22.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG003_chromograph_autozyg_chr3.png:md5,33d95212be5bf91fbea53500bcbba19c",
@@ -1340,7 +1343,7 @@
                 
             ]
         ],
-        "timestamp": "2026-08-19T12:57:08.101343307",
+        "timestamp": "2026-08-22T09:53:26.131032241",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
@@ -2458,7 +2461,7 @@
                 "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
                 "somalier_stats.txt:md5,bfc85f681fb57c1025c7791c5b0e970a",
                 "whatshap-stats-table.txt:md5,14acf9cce13f1732ee00e93438bbe989",
-                "FAM_paraphase_annotated.tsv:md5,78412bb3754f909c1e4443a3d62145a7",
+                "FAM_paraphase_annotated.tsv:md5,a2cc0ab6a272c1c2347baf66abe927bb",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002_cramino_aligned_phased.arrow:md5,796ee4e79b13531dae09e445164e5fe0",
                 "HG003_cramino_aligned_phased.arrow:md5,bb4d7ef993c11ad68987f07abcfde486",
@@ -2628,7 +2631,7 @@
                 
             ]
         ],
-        "timestamp": "2026-08-22T09:11:14.044785562",
+        "timestamp": "2026-08-22T09:49:49.427913061",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
