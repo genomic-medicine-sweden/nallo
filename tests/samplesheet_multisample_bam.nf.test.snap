@@ -1345,5 +1345,1293 @@
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
         }
+    },
+    "samplesheet_multisample_bam | --sv_callers sniffles1,debreak --phaser whatshap": {
+        "content": [
+            395,
+            {
+                "BCFTOOLS_CONCAT": {
+                    "bcftools": 1.21
+                },
+                "BCFTOOLS_CONCAT_PHASING": {
+                    "bcftools": 1.21
+                },
+                "BCFTOOLS_MERGE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_NORM_MULTISAMPLE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_NORM_SINGLESAMPLE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_QUERY": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_REHEADER": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_ROH": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_SORT": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_STATS": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_CHROMOGRAPH": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_MITO": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_PHASING": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_UNCOMPRESS": {
+                    "bcftools": 1.22
+                },
+                "BEDTOOLS_MERGE": {
+                    "bedtools": "2.31.1"
+                },
+                "BEDTOOLS_SORT": {
+                    "bedtools": "2.31.1"
+                },
+                "BEDTOOLS_SPLIT": {
+                    "bedtools": "2.31.1"
+                },
+                "CAT_CAT": {
+                    "pigz": 2.8
+                },
+                "CAT_FASTQ": {
+                    "cat": 9.5
+                },
+                "CRAMINO": {
+                    "cramino": "1.1.0"
+                },
+                "CREATE_SAMPLES_FILE": {
+                    "gawk": "5.3.1"
+                },
+                "CSVTK_CONCAT": {
+                    "csvtk": "0.31.0"
+                },
+                "CSVTK_JOIN": {
+                    "csvtk": "0.37.0"
+                },
+                "CSVTK_MUTATE2": {
+                    "csvtk": "0.31.0"
+                },
+                "CSVTK_SORT": {
+                    "csvtk": "0.31.0"
+                },
+                "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
+                    "addmostsevereconsequence": "1.2.0",
+                    "bgzip": 1.21
+                },
+                "CUSTOM_ADDMOSTSEVEREPLI": {
+                    "addmostseverepli": "1.2.0",
+                    "bgzip": 1.21
+                },
+                "DEBREAK": {
+                    "debreak": 1.3
+                },
+                "DEEPVARIANT_RUNDEEPVARIANT": {
+                    "deepvariant": "1.10.0"
+                },
+                "DEEPVARIANT_VCFSTATSREPORT": {
+                    "deepvariant": "1.10.0"
+                },
+                "ECHTVAR_ANNO": {
+                    "echtvar": "0.2.4"
+                },
+                "ENSEMBLVEP_FILTERVEP": {
+                    "ensemblvep": 115.2,
+                    "perl-math-cdf": 0.1
+                },
+                "ENSEMBLVEP_SNV": {
+                    "ensemblvep": 110.0,
+                    "tabix": 1.17
+                },
+                "ENSEMBLVEP_SV": {
+                    "ensemblvep": 110.0,
+                    "tabix": 1.17
+                },
+                "FASTQC": {
+                    "fastqc": "0.12.1"
+                },
+                "GATK4_DENOISEREADCOUNTS": {
+                    "gatk4": "4.6.2.0"
+                },
+                "GAWK": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_STRIP_CONTIG_HEADER": {
+                    "gawk": "5.3.1"
+                },
+                "GENMOD_ANNOTATE": {
+                    "genmod": "3.12.0"
+                },
+                "GENMOD_COMPOUND": {
+                    "genmod": "3.12.0"
+                },
+                "GENMOD_MODELS": {
+                    "genmod": "3.12.0"
+                },
+                "GENMOD_SCORE": {
+                    "genmod": "3.12.0"
+                },
+                "GFASTATS": {
+                    "gfastats": "1.3.11"
+                },
+                "GLNEXUS": {
+                    "glnexus": "1.4.3"
+                },
+                "GUNZIP_FASTA": {
+                    "gunzip": 1.13
+                },
+                "HIFIASM_ASSEMBLY": {
+                    "hifiasm": "0.25.0-r726"
+                },
+                "HIFIASM_BINS": {
+                    "hifiasm": "0.25.0-r726"
+                },
+                "METHBAT_PROFILE": {
+                    "methbat": "0.17.0-7c5e249"
+                },
+                "MINIMAP2_ALIGN": {
+                    "minimap2": "2.29-r1283"
+                },
+                "MINIMAP2_INDEX": {
+                    "minimap2": "2.29-r1283"
+                },
+                "MITORSAW_HAPLOTYPE": {
+                    "mitorsaw": "0.2.9-0dc8e58"
+                },
+                "MOSDEPTH": {
+                    "mosdepth": "0.3.11"
+                },
+                "MOSDEPTH_GATK_FORMAT": {
+                    "gawk": "5.3.1"
+                },
+                "MOSDEPTH_GATK_HEADER": {
+                    "gawk": "5.3.1"
+                },
+                "PARAPHASE": {
+                    "minimap2": "2.30-r1287",
+                    "paraphase": "3.5.0",
+                    "samtools": 1.23
+                },
+                "PARAPHRASE": {
+                    "paraphrase": "0.2.0"
+                },
+                "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
+                    "pbcpgtools": "3.0.0"
+                },
+                "PBMM2_ALIGN": {
+                    "pbmm2": "26.2.0"
+                },
+                "PEDDY": {
+                    "peddy": "0.4.8"
+                },
+                "PREPARECOVANDBAF": {
+                    "preparecovandbaf": "1.1.5"
+                },
+                "RELATE_RELATE": {
+                    "somalier": "0.2.18"
+                },
+                "RHOCALL_VIZ": {
+                    "rhocall": "0.5.1"
+                },
+                "RUN_CHROMOGRAPH": {
+                    "chromograph": "1.3.1"
+                },
+                "SAMBAMBA_DEPTH": {
+                    "sambamba": "1.0.1"
+                },
+                "SAMPLESHEET_PED": {
+                    "create_pedigree_file": 1.0,
+                    "python": "3.8.3"
+                },
+                "SAMTOOLS_CALMD": {
+                    "samtools": 1.24
+                },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_FASTQ": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_INDEX": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_MERGE": {
+                    "samtools": 1.24
+                },
+                "SAMTOOLS_SORT": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_VIEW": {
+                    "samtools": 1.24
+                },
+                "SNIFFLES1": {
+                    "sniffles": "1.0.12"
+                },
+                "SOMALIER_EXTRACT": {
+                    "somalier": "0.2.18"
+                },
+                "SOMALIER_PED_FAMILY": {
+                    "create_pedigree_file": 1.0,
+                    "python": "3.8.3"
+                },
+                "SPLITUBAM": {
+                    "splitubam": "0.1.1"
+                },
+                "STRANGER": {
+                    "stranger": "0.10.2",
+                    "tabix": "1.23.1"
+                },
+                "STRDROP_CALL": {
+                    "strdrop": "0.3.1"
+                },
+                "SVDB_MERGE_BY_CALLER": {
+                    "bcftools": 1.23,
+                    "svdb": "2.8.4"
+                },
+                "SVDB_MERGE_BY_FAMILY": {
+                    "bcftools": 1.23,
+                    "svdb": "2.8.4"
+                },
+                "SVDB_QUERY": {
+                    "svdb": "2.8.4"
+                },
+                "TABIX_BGZIPTABIX": {
+                    "bgzip": 1.21,
+                    "tabix": 1.21
+                },
+                "TABIX_TABIX": {
+                    "tabix": 1.21
+                },
+                "TAGBAM": {
+                    "tagbam": "0.1.0"
+                },
+                "TIDDIT_COV": {
+                    "tiddit": "3.9.4"
+                },
+                "TRGT_GENOTYPE": {
+                    "trgt": "5.0.0-e9acee0"
+                },
+                "TRGT_MERGE": {
+                    "trgt": "5.0.0-e9acee0"
+                },
+                "UNTAR_VEP_CACHE": {
+                    "untar": 1.34
+                },
+                "VCFEXPRESS": {
+                    "vcfexpress": "0.3.4"
+                },
+                "VEP_PREP_SV": {
+                    "vep_prep_sv": "1.0.0"
+                },
+                "WHATSHAP_HAPLOTAG": {
+                    "whatshap": 2.8
+                },
+                "WHATSHAP_PHASE": {
+                    "whatshap": 2.8
+                },
+                "WHATSHAP_STATS": {
+                    "whatshap": 2.8
+                },
+                "Workflow": {
+                    "genomic-medicine-sweden/nallo": "v0.13.0dev"
+                },
+                "YAK_COUNT": {
+                    "yak": "0.1-r69-dirty"
+                }
+            },
+            [
+                "aligned_reads",
+                "aligned_reads/HG002",
+                "aligned_reads/HG002/HG002_haplotagged.bam",
+                "aligned_reads/HG002/HG002_haplotagged.bam.bai",
+                "aligned_reads/HG003",
+                "aligned_reads/HG003/HG003_haplotagged.bam",
+                "aligned_reads/HG003/HG003_haplotagged.bam.bai",
+                "aligned_reads/HG004",
+                "aligned_reads/HG004/HG004_haplotagged.bam",
+                "aligned_reads/HG004/HG004_haplotagged.bam.bai",
+                "assembly",
+                "assembly/sample",
+                "assembly/sample/HG002",
+                "assembly/sample/HG002/HG002_aligned_assembly.bam",
+                "assembly/sample/HG002/HG002_aligned_assembly.bam.bai",
+                "assembly/sample/HG003",
+                "assembly/sample/HG003/HG003_aligned_assembly.bam",
+                "assembly/sample/HG003/HG003_aligned_assembly.bam.bai",
+                "assembly/sample/HG004",
+                "assembly/sample/HG004/HG004_aligned_assembly.bam",
+                "assembly/sample/HG004/HG004_aligned_assembly.bam.bai",
+                "assembly/stats",
+                "assembly/stats/HG002",
+                "assembly/stats/HG002/HG002_haplotype_1.assembly_summary",
+                "assembly/stats/HG002/HG002_haplotype_2.assembly_summary",
+                "assembly/stats/HG003",
+                "assembly/stats/HG003/HG003_haplotype_1.assembly_summary",
+                "assembly/stats/HG003/HG003_haplotype_2.assembly_summary",
+                "assembly/stats/HG004",
+                "assembly/stats/HG004/HG004_haplotype_1.assembly_summary",
+                "assembly/stats/HG004/HG004_haplotype_2.assembly_summary",
+                "gens",
+                "gens/HG002",
+                "gens/HG002/HG002.baf.bed.gz",
+                "gens/HG002/HG002.baf.bed.gz.tbi",
+                "gens/HG002/HG002.cov.bed.gz",
+                "gens/HG002/HG002.cov.bed.gz.tbi",
+                "gens/HG003",
+                "gens/HG003/HG003.baf.bed.gz",
+                "gens/HG003/HG003.baf.bed.gz.tbi",
+                "gens/HG003/HG003.cov.bed.gz",
+                "gens/HG003/HG003.cov.bed.gz.tbi",
+                "gens/HG004",
+                "gens/HG004/HG004.baf.bed.gz",
+                "gens/HG004/HG004.baf.bed.gz.tbi",
+                "gens/HG004/HG004.cov.bed.gz",
+                "gens/HG004/HG004.cov.bed.gz.tbi",
+                "images",
+                "images/chromograph",
+                "images/chromograph/sample",
+                "images/chromograph/sample/HG002",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chr1.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chr10.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chr11.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chr12.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chr13.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chr14.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chr15.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chr16.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chr17.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chr18.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chr19.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chr2.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chr20.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chr21.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chr22.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chr3.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chr4.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chr5.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chr6.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chr7.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chr8.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chr9.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chrM.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chrX.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_autozyg_chrY.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chr1.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chr10.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chr11.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chr12.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chr13.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chr14.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chr15.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chr16.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chr17.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chr18.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chr19.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chr2.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chr20.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chr21.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chr22.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chr3.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chr4.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chr5.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chr6.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chr7.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chr8.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chr9.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chrM.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chrX.png",
+                "images/chromograph/sample/HG002/HG002_chromograph_coverage_chrY.png",
+                "images/chromograph/sample/HG003",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chr1.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chr10.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chr11.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chr12.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chr13.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chr14.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chr15.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chr16.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chr17.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chr18.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chr19.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chr2.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chr20.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chr21.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chr22.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chr3.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chr4.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chr5.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chr6.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chr7.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chr8.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chr9.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chrM.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chrX.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_autozyg_chrY.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chr1.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chr10.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chr11.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chr12.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chr13.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chr14.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chr15.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chr16.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chr17.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chr18.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chr19.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chr2.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chr20.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chr21.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chr22.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chr3.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chr4.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chr5.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chr6.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chr7.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chr8.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chr9.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chrM.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chrX.png",
+                "images/chromograph/sample/HG003/HG003_chromograph_coverage_chrY.png",
+                "images/chromograph/sample/HG004",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chr1.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chr10.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chr11.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chr12.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chr13.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chr14.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chr15.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chr16.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chr17.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chr18.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chr19.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chr2.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chr20.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chr21.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chr22.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chr3.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chr4.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chr5.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chr6.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chr7.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chr8.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chr9.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chrM.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chrX.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_autozyg_chrY.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chr1.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chr10.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chr11.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chr12.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chr13.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chr14.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chr15.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chr16.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chr17.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chr18.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chr19.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chr2.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chr20.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chr21.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chr22.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chr3.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chr4.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chr5.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chr6.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chr7.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chr8.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chr9.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chrM.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chrX.png",
+                "images/chromograph/sample/HG004/HG004_chromograph_coverage_chrY.png",
+                "methylation",
+                "methylation/pileup",
+                "methylation/pileup/HG002",
+                "methylation/pileup/HG002/HG002_pbcpgtools.combined.bed.gz",
+                "methylation/pileup/HG002/HG002_pbcpgtools.combined.bed.gz.tbi",
+                "methylation/pileup/HG002/HG002_pbcpgtools.hap1.bed.gz",
+                "methylation/pileup/HG002/HG002_pbcpgtools.hap1.bed.gz.tbi",
+                "methylation/pileup/HG002/HG002_pbcpgtools.hap2.bed.gz",
+                "methylation/pileup/HG002/HG002_pbcpgtools.hap2.bed.gz.tbi",
+                "methylation/pileup/HG003",
+                "methylation/pileup/HG003/HG003_pbcpgtools.combined.bed.gz",
+                "methylation/pileup/HG003/HG003_pbcpgtools.combined.bed.gz.tbi",
+                "methylation/pileup/HG003/HG003_pbcpgtools.hap1.bed.gz",
+                "methylation/pileup/HG003/HG003_pbcpgtools.hap1.bed.gz.tbi",
+                "methylation/pileup/HG003/HG003_pbcpgtools.hap2.bed.gz",
+                "methylation/pileup/HG003/HG003_pbcpgtools.hap2.bed.gz.tbi",
+                "methylation/pileup/HG004",
+                "methylation/pileup/HG004/HG004_pbcpgtools.combined.bed.gz",
+                "methylation/pileup/HG004/HG004_pbcpgtools.combined.bed.gz.tbi",
+                "methylation/pileup/HG004/HG004_pbcpgtools.hap1.bed.gz",
+                "methylation/pileup/HG004/HG004_pbcpgtools.hap1.bed.gz.tbi",
+                "methylation/pileup/HG004/HG004_pbcpgtools.hap2.bed.gz",
+                "methylation/pileup/HG004/HG004_pbcpgtools.hap2.bed.gz.tbi",
+                "methylation/profile",
+                "methylation/profile/family",
+                "methylation/profile/family/FAM",
+                "methylation/profile/family/FAM/FAM_methbat_profile_annotated.tsv",
+                "methylation/profile/sample",
+                "methylation/profile/sample/HG002",
+                "methylation/profile/sample/HG002/HG002_methbat_profile.tsv",
+                "methylation/profile/sample/HG003",
+                "methylation/profile/sample/HG003/HG003_methbat_profile.tsv",
+                "methylation/profile/sample/HG004",
+                "methylation/profile/sample/HG004/HG004_methbat_profile.tsv",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_data/bcftools-stats-subtypes.txt",
+                "multiqc/multiqc_data/bcftools_stats_indel-lengths.txt",
+                "multiqc/multiqc_data/bcftools_stats_vqc_Count_Indels.txt",
+                "multiqc/multiqc_data/bcftools_stats_vqc_Count_SNP.txt",
+                "multiqc/multiqc_data/bcftools_stats_vqc_Count_Transitions.txt",
+                "multiqc/multiqc_data/bcftools_stats_vqc_Count_Transversions.txt",
+                "multiqc/multiqc_data/fastqc-status-check-heatmap.txt",
+                "multiqc/multiqc_data/fastqc_adapter_content_plot.txt",
+                "multiqc/multiqc_data/fastqc_overrepresented_sequences_plot.txt",
+                "multiqc/multiqc_data/fastqc_per_base_n_content_plot.txt",
+                "multiqc/multiqc_data/fastqc_per_base_sequence_quality_plot.txt",
+                "multiqc/multiqc_data/fastqc_per_sequence_gc_content_plot_Counts.txt",
+                "multiqc/multiqc_data/fastqc_per_sequence_gc_content_plot_Percentages.txt",
+                "multiqc/multiqc_data/fastqc_per_sequence_quality_scores_plot.txt",
+                "multiqc/multiqc_data/fastqc_sequence_counts_plot.txt",
+                "multiqc/multiqc_data/fastqc_sequence_duplication_levels_plot.txt",
+                "multiqc/multiqc_data/fastqc_sequence_length_distribution_plot.txt",
+                "multiqc/multiqc_data/fastqc_top_overrepresented_sequences_table.txt",
+                "multiqc/multiqc_data/llms-full.txt",
+                "multiqc/multiqc_data/mosdepth-coverage-per-contig-multi.txt",
+                "multiqc/multiqc_data/mosdepth-cumcoverage-dist-id.txt",
+                "multiqc/multiqc_data/mosdepth_cov_dist.txt",
+                "multiqc/multiqc_data/mosdepth_cumcov_dist.txt",
+                "multiqc/multiqc_data/mosdepth_perchrom.txt",
+                "multiqc/multiqc_data/multiqc.log",
+                "multiqc/multiqc_data/multiqc.parquet",
+                "multiqc/multiqc_data/multiqc_bcftools_stats.txt",
+                "multiqc/multiqc_data/multiqc_citations.txt",
+                "multiqc/multiqc_data/multiqc_data.json",
+                "multiqc/multiqc_data/multiqc_fastqc.txt",
+                "multiqc/multiqc_data/multiqc_general_stats.txt",
+                "multiqc/multiqc_data/multiqc_peddy.txt",
+                "multiqc/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/multiqc_data/multiqc_somalier.txt",
+                "multiqc/multiqc_data/multiqc_sources.txt",
+                "multiqc/multiqc_data/multiqc_whatshap_phased_bp_plot.txt",
+                "multiqc/multiqc_data/multiqc_whatshap_stats.txt",
+                "multiqc/multiqc_data/peddy_het_check_plot.txt",
+                "multiqc/multiqc_data/peddy_relatedness_plot.txt",
+                "multiqc/multiqc_data/somalier_het_check_plot.txt",
+                "multiqc/multiqc_data/somalier_relatedness_heatmap_plot.txt",
+                "multiqc/multiqc_data/somalier_relatedness_plot.txt",
+                "multiqc/multiqc_data/somalier_sex_check_plot.txt",
+                "multiqc/multiqc_data/somalier_stats.txt",
+                "multiqc/multiqc_data/whatshap-stats-table.txt",
+                "multiqc/multiqc_plots",
+                "multiqc/multiqc_plots/pdf",
+                "multiqc/multiqc_plots/pdf/bcftools-stats-subtypes-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/bcftools-stats-subtypes-pct.pdf",
+                "multiqc/multiqc_plots/pdf/bcftools_stats_indel-lengths-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/bcftools_stats_indel-lengths-log.pdf",
+                "multiqc/multiqc_plots/pdf/bcftools_stats_vqc_Count_Indels.pdf",
+                "multiqc/multiqc_plots/pdf/bcftools_stats_vqc_Count_SNP.pdf",
+                "multiqc/multiqc_plots/pdf/bcftools_stats_vqc_Count_Transitions.pdf",
+                "multiqc/multiqc_plots/pdf/bcftools_stats_vqc_Count_Transversions.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc-status-check-heatmap.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_adapter_content_plot.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_overrepresented_sequences_plot.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_per_base_n_content_plot.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_per_base_sequence_quality_plot.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_per_sequence_gc_content_plot_Counts.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_per_sequence_gc_content_plot_Percentages.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_per_sequence_quality_scores_plot.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_sequence_counts_plot-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_sequence_counts_plot-pct.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_sequence_duplication_levels_plot.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_sequence_length_distribution_plot.pdf",
+                "multiqc/multiqc_plots/pdf/fastqc_top_overrepresented_sequences_table.pdf",
+                "multiqc/multiqc_plots/pdf/mosdepth-coverage-per-contig-multi-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/mosdepth-coverage-per-contig-multi-log.pdf",
+                "multiqc/multiqc_plots/pdf/mosdepth-cumcoverage-dist-id.pdf",
+                "multiqc/multiqc_plots/pdf/multiqc_whatshap_phased_bp_plot.pdf",
+                "multiqc/multiqc_plots/pdf/peddy_het_check_plot.pdf",
+                "multiqc/multiqc_plots/pdf/peddy_relatedness_plot.pdf",
+                "multiqc/multiqc_plots/pdf/somalier_het_check_plot.pdf",
+                "multiqc/multiqc_plots/pdf/somalier_relatedness_heatmap_plot.pdf",
+                "multiqc/multiqc_plots/pdf/somalier_relatedness_plot.pdf",
+                "multiqc/multiqc_plots/pdf/somalier_sex_check_plot.pdf",
+                "multiqc/multiqc_plots/pdf/somalier_stats.pdf",
+                "multiqc/multiqc_plots/pdf/whatshap-stats-table.pdf",
+                "multiqc/multiqc_plots/png",
+                "multiqc/multiqc_plots/png/bcftools-stats-subtypes-cnt.png",
+                "multiqc/multiqc_plots/png/bcftools-stats-subtypes-pct.png",
+                "multiqc/multiqc_plots/png/bcftools_stats_indel-lengths-cnt.png",
+                "multiqc/multiqc_plots/png/bcftools_stats_indel-lengths-log.png",
+                "multiqc/multiqc_plots/png/bcftools_stats_vqc_Count_Indels.png",
+                "multiqc/multiqc_plots/png/bcftools_stats_vqc_Count_SNP.png",
+                "multiqc/multiqc_plots/png/bcftools_stats_vqc_Count_Transitions.png",
+                "multiqc/multiqc_plots/png/bcftools_stats_vqc_Count_Transversions.png",
+                "multiqc/multiqc_plots/png/fastqc-status-check-heatmap.png",
+                "multiqc/multiqc_plots/png/fastqc_adapter_content_plot.png",
+                "multiqc/multiqc_plots/png/fastqc_overrepresented_sequences_plot.png",
+                "multiqc/multiqc_plots/png/fastqc_per_base_n_content_plot.png",
+                "multiqc/multiqc_plots/png/fastqc_per_base_sequence_quality_plot.png",
+                "multiqc/multiqc_plots/png/fastqc_per_sequence_gc_content_plot_Counts.png",
+                "multiqc/multiqc_plots/png/fastqc_per_sequence_gc_content_plot_Percentages.png",
+                "multiqc/multiqc_plots/png/fastqc_per_sequence_quality_scores_plot.png",
+                "multiqc/multiqc_plots/png/fastqc_sequence_counts_plot-cnt.png",
+                "multiqc/multiqc_plots/png/fastqc_sequence_counts_plot-pct.png",
+                "multiqc/multiqc_plots/png/fastqc_sequence_duplication_levels_plot.png",
+                "multiqc/multiqc_plots/png/fastqc_sequence_length_distribution_plot.png",
+                "multiqc/multiqc_plots/png/fastqc_top_overrepresented_sequences_table.png",
+                "multiqc/multiqc_plots/png/mosdepth-coverage-per-contig-multi-cnt.png",
+                "multiqc/multiqc_plots/png/mosdepth-coverage-per-contig-multi-log.png",
+                "multiqc/multiqc_plots/png/mosdepth-cumcoverage-dist-id.png",
+                "multiqc/multiqc_plots/png/multiqc_whatshap_phased_bp_plot.png",
+                "multiqc/multiqc_plots/png/peddy_het_check_plot.png",
+                "multiqc/multiqc_plots/png/peddy_relatedness_plot.png",
+                "multiqc/multiqc_plots/png/somalier_het_check_plot.png",
+                "multiqc/multiqc_plots/png/somalier_relatedness_heatmap_plot.png",
+                "multiqc/multiqc_plots/png/somalier_relatedness_plot.png",
+                "multiqc/multiqc_plots/png/somalier_sex_check_plot.png",
+                "multiqc/multiqc_plots/png/somalier_stats.png",
+                "multiqc/multiqc_plots/png/whatshap-stats-table.png",
+                "multiqc/multiqc_plots/svg",
+                "multiqc/multiqc_plots/svg/bcftools-stats-subtypes-cnt.svg",
+                "multiqc/multiqc_plots/svg/bcftools-stats-subtypes-pct.svg",
+                "multiqc/multiqc_plots/svg/bcftools_stats_indel-lengths-cnt.svg",
+                "multiqc/multiqc_plots/svg/bcftools_stats_indel-lengths-log.svg",
+                "multiqc/multiqc_plots/svg/bcftools_stats_vqc_Count_Indels.svg",
+                "multiqc/multiqc_plots/svg/bcftools_stats_vqc_Count_SNP.svg",
+                "multiqc/multiqc_plots/svg/bcftools_stats_vqc_Count_Transitions.svg",
+                "multiqc/multiqc_plots/svg/bcftools_stats_vqc_Count_Transversions.svg",
+                "multiqc/multiqc_plots/svg/fastqc-status-check-heatmap.svg",
+                "multiqc/multiqc_plots/svg/fastqc_adapter_content_plot.svg",
+                "multiqc/multiqc_plots/svg/fastqc_overrepresented_sequences_plot.svg",
+                "multiqc/multiqc_plots/svg/fastqc_per_base_n_content_plot.svg",
+                "multiqc/multiqc_plots/svg/fastqc_per_base_sequence_quality_plot.svg",
+                "multiqc/multiqc_plots/svg/fastqc_per_sequence_gc_content_plot_Counts.svg",
+                "multiqc/multiqc_plots/svg/fastqc_per_sequence_gc_content_plot_Percentages.svg",
+                "multiqc/multiqc_plots/svg/fastqc_per_sequence_quality_scores_plot.svg",
+                "multiqc/multiqc_plots/svg/fastqc_sequence_counts_plot-cnt.svg",
+                "multiqc/multiqc_plots/svg/fastqc_sequence_counts_plot-pct.svg",
+                "multiqc/multiqc_plots/svg/fastqc_sequence_duplication_levels_plot.svg",
+                "multiqc/multiqc_plots/svg/fastqc_sequence_length_distribution_plot.svg",
+                "multiqc/multiqc_plots/svg/fastqc_top_overrepresented_sequences_table.svg",
+                "multiqc/multiqc_plots/svg/mosdepth-coverage-per-contig-multi-cnt.svg",
+                "multiqc/multiqc_plots/svg/mosdepth-coverage-per-contig-multi-log.svg",
+                "multiqc/multiqc_plots/svg/mosdepth-cumcoverage-dist-id.svg",
+                "multiqc/multiqc_plots/svg/multiqc_whatshap_phased_bp_plot.svg",
+                "multiqc/multiqc_plots/svg/peddy_het_check_plot.svg",
+                "multiqc/multiqc_plots/svg/peddy_relatedness_plot.svg",
+                "multiqc/multiqc_plots/svg/somalier_het_check_plot.svg",
+                "multiqc/multiqc_plots/svg/somalier_relatedness_heatmap_plot.svg",
+                "multiqc/multiqc_plots/svg/somalier_relatedness_plot.svg",
+                "multiqc/multiqc_plots/svg/somalier_sex_check_plot.svg",
+                "multiqc/multiqc_plots/svg/somalier_stats.svg",
+                "multiqc/multiqc_plots/svg/whatshap-stats-table.svg",
+                "multiqc/multiqc_report.html",
+                "paraphase",
+                "paraphase/family",
+                "paraphase/family/FAM",
+                "paraphase/family/FAM/FAM_paraphase_annotated.tsv",
+                "paraphase/family/FAM/FAM_paraphase_merged.vcf.gz",
+                "paraphase/family/FAM/FAM_paraphase_merged.vcf.gz.tbi",
+                "paraphase/sample",
+                "paraphase/sample/HG002",
+                "paraphase/sample/HG002/HG002.paraphase.bam",
+                "paraphase/sample/HG002/HG002.paraphase.bam.bai",
+                "paraphase/sample/HG002/HG002.paraphase.json",
+                "paraphase/sample/HG002/HG002_paraphase_vcfs",
+                "paraphase/sample/HG002/HG002_paraphase_vcfs/HG002_OR1D5.vcf.gz",
+                "paraphase/sample/HG002/HG002_paraphase_vcfs/HG002_OR1D5.vcf.gz.tbi",
+                "paraphase/sample/HG002/HG002_paraphase_vcfs/HG002_hba.vcf.gz",
+                "paraphase/sample/HG002/HG002_paraphase_vcfs/HG002_hba.vcf.gz.tbi",
+                "paraphase/sample/HG003",
+                "paraphase/sample/HG003/HG003.paraphase.bam",
+                "paraphase/sample/HG003/HG003.paraphase.bam.bai",
+                "paraphase/sample/HG003/HG003.paraphase.json",
+                "paraphase/sample/HG003/HG003_paraphase_vcfs",
+                "paraphase/sample/HG003/HG003_paraphase_vcfs/HG003_OR1D5.vcf.gz",
+                "paraphase/sample/HG003/HG003_paraphase_vcfs/HG003_OR1D5.vcf.gz.tbi",
+                "paraphase/sample/HG003/HG003_paraphase_vcfs/HG003_hba.vcf.gz",
+                "paraphase/sample/HG003/HG003_paraphase_vcfs/HG003_hba.vcf.gz.tbi",
+                "paraphase/sample/HG004",
+                "paraphase/sample/HG004/HG004.paraphase.bam",
+                "paraphase/sample/HG004/HG004.paraphase.bam.bai",
+                "paraphase/sample/HG004/HG004.paraphase.json",
+                "paraphase/sample/HG004/HG004_paraphase_vcfs",
+                "paraphase/sample/HG004/HG004_paraphase_vcfs/HG004_OR1D5.vcf.gz",
+                "paraphase/sample/HG004/HG004_paraphase_vcfs/HG004_OR1D5.vcf.gz.tbi",
+                "paraphase/sample/HG004/HG004_paraphase_vcfs/HG004_hba.vcf.gz",
+                "paraphase/sample/HG004/HG004_paraphase_vcfs/HG004_hba.vcf.gz.tbi",
+                "pedigree",
+                "pedigree/family",
+                "pedigree/family/FAM.ped",
+                "pipeline_info",
+                "pipeline_info/nallo_software_mqc_versions.yml",
+                "qc",
+                "qc/bcftools_stats",
+                "qc/bcftools_stats/HG002",
+                "qc/bcftools_stats/HG002/HG002.bcftools_stats.txt",
+                "qc/bcftools_stats/HG003",
+                "qc/bcftools_stats/HG003/HG003.bcftools_stats.txt",
+                "qc/bcftools_stats/HG004",
+                "qc/bcftools_stats/HG004/HG004.bcftools_stats.txt",
+                "qc/cramino",
+                "qc/cramino/phased",
+                "qc/cramino/phased/HG002",
+                "qc/cramino/phased/HG002/HG002_cramino_aligned_phased.arrow",
+                "qc/cramino/phased/HG002/HG002_cramino_aligned_phased.txt",
+                "qc/cramino/phased/HG003",
+                "qc/cramino/phased/HG003/HG003_cramino_aligned_phased.arrow",
+                "qc/cramino/phased/HG003/HG003_cramino_aligned_phased.txt",
+                "qc/cramino/phased/HG004",
+                "qc/cramino/phased/HG004/HG004_cramino_aligned_phased.arrow",
+                "qc/cramino/phased/HG004/HG004_cramino_aligned_phased.txt",
+                "qc/cramino/unphased",
+                "qc/cramino/unphased/HG002",
+                "qc/cramino/unphased/HG002/HG002_cramino_aligned.arrow",
+                "qc/cramino/unphased/HG002/HG002_cramino_aligned.txt",
+                "qc/cramino/unphased/HG003",
+                "qc/cramino/unphased/HG003/HG003_cramino_aligned.arrow",
+                "qc/cramino/unphased/HG003/HG003_cramino_aligned.txt",
+                "qc/cramino/unphased/HG004",
+                "qc/cramino/unphased/HG004/HG004_cramino_aligned.arrow",
+                "qc/cramino/unphased/HG004/HG004_cramino_aligned.txt",
+                "qc/deepvariant_vcfstatsreport",
+                "qc/deepvariant_vcfstatsreport/HG002",
+                "qc/deepvariant_vcfstatsreport/HG002/HG002.visual_report.html",
+                "qc/deepvariant_vcfstatsreport/HG003",
+                "qc/deepvariant_vcfstatsreport/HG003/HG003.visual_report.html",
+                "qc/deepvariant_vcfstatsreport/HG004",
+                "qc/deepvariant_vcfstatsreport/HG004/HG004.visual_report.html",
+                "qc/fastqc",
+                "qc/fastqc/HG002",
+                "qc/fastqc/HG002/HG002_fastqc.html",
+                "qc/fastqc/HG002/HG002_fastqc.zip",
+                "qc/fastqc/HG003",
+                "qc/fastqc/HG003/HG003_fastqc.html",
+                "qc/fastqc/HG003/HG003_fastqc.zip",
+                "qc/fastqc/HG004",
+                "qc/fastqc/HG004/HG004_fastqc.html",
+                "qc/fastqc/HG004/HG004_fastqc.zip",
+                "qc/mosdepth",
+                "qc/mosdepth/HG002",
+                "qc/mosdepth/HG002/HG002.mosdepth.global.dist.txt",
+                "qc/mosdepth/HG002/HG002.mosdepth.region.dist.txt",
+                "qc/mosdepth/HG002/HG002.mosdepth.summary.txt",
+                "qc/mosdepth/HG002/HG002.regions.bed.gz",
+                "qc/mosdepth/HG002/HG002.regions.bed.gz.csi",
+                "qc/mosdepth/HG003",
+                "qc/mosdepth/HG003/HG003.mosdepth.global.dist.txt",
+                "qc/mosdepth/HG003/HG003.mosdepth.region.dist.txt",
+                "qc/mosdepth/HG003/HG003.mosdepth.summary.txt",
+                "qc/mosdepth/HG003/HG003.regions.bed.gz",
+                "qc/mosdepth/HG003/HG003.regions.bed.gz.csi",
+                "qc/mosdepth/HG004",
+                "qc/mosdepth/HG004/HG004.mosdepth.global.dist.txt",
+                "qc/mosdepth/HG004/HG004.mosdepth.region.dist.txt",
+                "qc/mosdepth/HG004/HG004.mosdepth.summary.txt",
+                "qc/mosdepth/HG004/HG004.regions.bed.gz",
+                "qc/mosdepth/HG004/HG004.regions.bed.gz.csi",
+                "qc/peddy",
+                "qc/peddy/FAM",
+                "qc/peddy/FAM/FAM.het_check.csv",
+                "qc/peddy/FAM/FAM.het_check.png",
+                "qc/peddy/FAM/FAM.html",
+                "qc/peddy/FAM/FAM.ped_check.csv",
+                "qc/peddy/FAM/FAM.ped_check.png",
+                "qc/peddy/FAM/FAM.ped_check.rel-difference.csv",
+                "qc/peddy/FAM/FAM.peddy.ped",
+                "qc/peddy/FAM/FAM.sex_check.csv",
+                "qc/peddy/FAM/FAM.sex_check.png",
+                "qc/peddy/FAM/FAM.vs.html",
+                "qc/phasing_stats",
+                "qc/phasing_stats/HG002",
+                "qc/phasing_stats/HG002/HG002_whatshap_stats.gtf.gz",
+                "qc/phasing_stats/HG002/HG002_whatshap_stats.gtf.gz.tbi",
+                "qc/phasing_stats/HG002/HG002_whatshap_stats.tsv",
+                "qc/phasing_stats/HG003",
+                "qc/phasing_stats/HG003/HG003_whatshap_stats.gtf.gz",
+                "qc/phasing_stats/HG003/HG003_whatshap_stats.gtf.gz.tbi",
+                "qc/phasing_stats/HG003/HG003_whatshap_stats.tsv",
+                "qc/phasing_stats/HG004",
+                "qc/phasing_stats/HG004/HG004_whatshap_stats.gtf.gz",
+                "qc/phasing_stats/HG004/HG004_whatshap_stats.gtf.gz.tbi",
+                "qc/phasing_stats/HG004/HG004_whatshap_stats.tsv",
+                "qc/sambamba_depth",
+                "qc/sambamba_depth/HG002",
+                "qc/sambamba_depth/HG002/HG002_sambamba_depth.bed",
+                "qc/sambamba_depth/HG003",
+                "qc/sambamba_depth/HG003/HG003_sambamba_depth.bed",
+                "qc/sambamba_depth/HG004",
+                "qc/sambamba_depth/HG004/HG004_sambamba_depth.bed",
+                "qc/somalier",
+                "qc/somalier/relate",
+                "qc/somalier/relate/test",
+                "qc/somalier/relate/test/test.html",
+                "qc/somalier/relate/test/test.pairs.tsv",
+                "qc/somalier/relate/test/test.samples.tsv",
+                "repeats",
+                "repeats/family",
+                "repeats/family/FAM",
+                "repeats/family/FAM/FAM_repeats_annotated.vcf.gz",
+                "repeats/family/FAM/FAM_repeats_annotated.vcf.gz.tbi",
+                "repeats/sample",
+                "repeats/sample/HG002",
+                "repeats/sample/HG002/HG002_spanning_trgt.bam",
+                "repeats/sample/HG002/HG002_spanning_trgt.bam.bai",
+                "repeats/sample/HG002/HG002_trgt.vcf.gz",
+                "repeats/sample/HG002/HG002_trgt.vcf.gz.tbi",
+                "repeats/sample/HG003",
+                "repeats/sample/HG003/HG003_spanning_trgt.bam",
+                "repeats/sample/HG003/HG003_spanning_trgt.bam.bai",
+                "repeats/sample/HG003/HG003_trgt.vcf.gz",
+                "repeats/sample/HG003/HG003_trgt.vcf.gz.tbi",
+                "repeats/sample/HG004",
+                "repeats/sample/HG004/HG004_spanning_trgt.bam",
+                "repeats/sample/HG004/HG004_spanning_trgt.bam.bai",
+                "repeats/sample/HG004/HG004_trgt.vcf.gz",
+                "repeats/sample/HG004/HG004_trgt.vcf.gz.tbi",
+                "snvs",
+                "snvs/family",
+                "snvs/family/FAM",
+                "snvs/family/FAM/FAM_snvs_annotated_ranked_clinical.vcf.gz",
+                "snvs/family/FAM/FAM_snvs_annotated_ranked_clinical.vcf.gz.tbi",
+                "snvs/family/FAM/FAM_snvs_annotated_ranked_research.vcf.gz",
+                "snvs/family/FAM/FAM_snvs_annotated_ranked_research.vcf.gz.tbi",
+                "snvs/sample",
+                "snvs/sample/HG002",
+                "snvs/sample/HG002/HG002_deepvariant_snvs.vcf.gz",
+                "snvs/sample/HG002/HG002_deepvariant_snvs.vcf.gz.tbi",
+                "snvs/sample/HG003",
+                "snvs/sample/HG003/HG003_deepvariant_snvs.vcf.gz",
+                "snvs/sample/HG003/HG003_deepvariant_snvs.vcf.gz.tbi",
+                "snvs/sample/HG004",
+                "snvs/sample/HG004/HG004_deepvariant_snvs.vcf.gz",
+                "snvs/sample/HG004/HG004_deepvariant_snvs.vcf.gz.tbi",
+                "svs",
+                "svs/family",
+                "svs/family/FAM",
+                "svs/family/FAM/FAM_svs_annotated_ranked_clinical.vcf.gz",
+                "svs/family/FAM/FAM_svs_annotated_ranked_clinical.vcf.gz.tbi",
+                "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz",
+                "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz.tbi",
+                "visualization_tracks",
+                "visualization_tracks/HG002",
+                "visualization_tracks/HG002/HG002_pbcpgtools.combined.bw",
+                "visualization_tracks/HG002/HG002_pbcpgtools.hap1.bw",
+                "visualization_tracks/HG002/HG002_pbcpgtools.hap2.bw",
+                "visualization_tracks/HG003",
+                "visualization_tracks/HG003/HG003_pbcpgtools.combined.bw",
+                "visualization_tracks/HG003/HG003_pbcpgtools.hap1.bw",
+                "visualization_tracks/HG003/HG003_pbcpgtools.hap2.bw",
+                "visualization_tracks/HG004",
+                "visualization_tracks/HG004/HG004_pbcpgtools.combined.bw",
+                "visualization_tracks/HG004/HG004_pbcpgtools.hap1.bw",
+                "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
+            ],
+            [
+                "HG002_haplotype_1.assembly_summary:md5,a6ad30c5ee5267ca1b283564f1e5d129",
+                "HG002_haplotype_2.assembly_summary:md5,b99223d6c7d9ac989c98ec6b419d91e1",
+                "HG003_haplotype_1.assembly_summary:md5,13dee2d12769dd9f9ba6f4e490e385b3",
+                "HG003_haplotype_2.assembly_summary:md5,750e1bf8191b520ff6afc302987cbc35",
+                "HG004_haplotype_1.assembly_summary:md5,d77dc8fbbb8a6dce71c9640d6a6be355",
+                "HG004_haplotype_2.assembly_summary:md5,adc271665fb11761203e53773de1215f",
+                "HG002.baf.bed.gz:md5,6665b135f673d204ec030883683605ea",
+                "HG002.baf.bed.gz.tbi:md5,3e21a7933ca52383f0b8ccf221b05fc7",
+                "HG002.cov.bed.gz:md5,d50e57182d3454de56f8850bc2abf5fa",
+                "HG002.cov.bed.gz.tbi:md5,fa544346640ab3cf94b6cff49d4dcd73",
+                "HG003.baf.bed.gz:md5,6a75cd454070deb5cde78e194a6c4c76",
+                "HG003.baf.bed.gz.tbi:md5,825fca58be4323609111fe55f3a12406",
+                "HG003.cov.bed.gz:md5,91f04b7986cb3311edab0e7eef884855",
+                "HG003.cov.bed.gz.tbi:md5,f0082fd272c96fbd029126195a48d3d4",
+                "HG004.baf.bed.gz:md5,976de8a89dfd60aeb1b5808c72c95cde",
+                "HG004.baf.bed.gz.tbi:md5,31b704ffb584ba8e7930e72f0075468d",
+                "HG004.cov.bed.gz:md5,31e792cf46e788151039d8e80b38281a",
+                "HG004.cov.bed.gz.tbi:md5,df42c20dd3e94a348810934585367f90",
+                "HG002_chromograph_autozyg_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chr10.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chr11.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chr12.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chr13.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chr14.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chr15.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chr16.png:md5,317660db61eb374167d8680568c847a7",
+                "HG002_chromograph_autozyg_chr17.png:md5,a895e584fec5c4211d8c6a63b3263b3a",
+                "HG002_chromograph_autozyg_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chr20.png:md5,071e3da255e5a830b546bc4dbdee5e2a",
+                "HG002_chromograph_autozyg_chr21.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chr22.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chr3.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chr4.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chr5.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chr6.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chr7.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chr8.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chr9.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chrX.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_autozyg_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG002_chromograph_coverage_chr1.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_chromograph_coverage_chr10.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_chromograph_coverage_chr11.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_chromograph_coverage_chr12.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_chromograph_coverage_chr13.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_chromograph_coverage_chr14.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_chromograph_coverage_chr15.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_chromograph_coverage_chr16.png:md5,9029e4fdc5572dbc05a0a17bc22e5ffc",
+                "HG002_chromograph_coverage_chr17.png:md5,63547940f0a147d31264af22a4c062eb",
+                "HG002_chromograph_coverage_chr18.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_chromograph_coverage_chr19.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_chromograph_coverage_chr2.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_chromograph_coverage_chr20.png:md5,23bf486d6602868cb1eb10ff13387cdc",
+                "HG002_chromograph_coverage_chr21.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_chromograph_coverage_chr22.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_chromograph_coverage_chr3.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_chromograph_coverage_chr4.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_chromograph_coverage_chr5.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_chromograph_coverage_chr6.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_chromograph_coverage_chr7.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_chromograph_coverage_chr8.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_chromograph_coverage_chr9.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_chromograph_coverage_chrM.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_chromograph_coverage_chrX.png:md5,8d0dedb1662755d4154e619af247d761",
+                "HG002_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG003_chromograph_autozyg_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chr10.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chr11.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chr12.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chr13.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chr14.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chr15.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chr16.png:md5,317660db61eb374167d8680568c847a7",
+                "HG003_chromograph_autozyg_chr17.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chr20.png:md5,071e3da255e5a830b546bc4dbdee5e2a",
+                "HG003_chromograph_autozyg_chr21.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chr22.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chr3.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chr4.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chr5.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chr6.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chr7.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chr8.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chr9.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chrX.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_autozyg_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG003_chromograph_coverage_chr1.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG003_chromograph_coverage_chr10.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG003_chromograph_coverage_chr11.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG003_chromograph_coverage_chr12.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG003_chromograph_coverage_chr13.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG003_chromograph_coverage_chr14.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG003_chromograph_coverage_chr15.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG003_chromograph_coverage_chr16.png:md5,2f8b552e53bb27778a43319f9de9f1b6",
+                "HG003_chromograph_coverage_chr17.png:md5,782667e96c9bcfcf43f89329580c307d",
+                "HG003_chromograph_coverage_chr18.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG003_chromograph_coverage_chr19.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG003_chromograph_coverage_chr2.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG003_chromograph_coverage_chr20.png:md5,19532c6f5ae654832e75e8be3b45a8b8",
+                "HG003_chromograph_coverage_chr21.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG003_chromograph_coverage_chr22.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG003_chromograph_coverage_chr3.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG003_chromograph_coverage_chr4.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG003_chromograph_coverage_chr5.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG003_chromograph_coverage_chr6.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG003_chromograph_coverage_chr7.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG003_chromograph_coverage_chr8.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG003_chromograph_coverage_chr9.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG003_chromograph_coverage_chrM.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG003_chromograph_coverage_chrX.png:md5,2648a931b50a790c5b776e1f7980fc1d",
+                "HG003_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG004_chromograph_autozyg_chr1.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_autozyg_chr10.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_autozyg_chr11.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_autozyg_chr12.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_autozyg_chr13.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_autozyg_chr14.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_autozyg_chr15.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_autozyg_chr16.png:md5,317660db61eb374167d8680568c847a7",
+                "HG004_chromograph_autozyg_chr17.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_autozyg_chr18.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_autozyg_chr19.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_autozyg_chr2.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_autozyg_chr20.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_autozyg_chr21.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_autozyg_chr22.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_autozyg_chr3.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_autozyg_chr4.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_autozyg_chr5.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_autozyg_chr6.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_autozyg_chr7.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_autozyg_chr8.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_autozyg_chr9.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_autozyg_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_autozyg_chrX.png:md5,4043f9dd0efed4d0dcc3fdc92678d2e8",
+                "HG004_chromograph_autozyg_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c",
+                "HG004_chromograph_coverage_chr1.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG004_chromograph_coverage_chr10.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG004_chromograph_coverage_chr11.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG004_chromograph_coverage_chr12.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG004_chromograph_coverage_chr13.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG004_chromograph_coverage_chr14.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG004_chromograph_coverage_chr15.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG004_chromograph_coverage_chr16.png:md5,dbf0f1ad73ce5052f44b7a6d97aae303",
+                "HG004_chromograph_coverage_chr17.png:md5,c5bf628f014066defdbc39a66baa8934",
+                "HG004_chromograph_coverage_chr18.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG004_chromograph_coverage_chr19.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG004_chromograph_coverage_chr2.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG004_chromograph_coverage_chr20.png:md5,15b70ba619916e3b6fe9f6dfde8e6597",
+                "HG004_chromograph_coverage_chr21.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG004_chromograph_coverage_chr22.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG004_chromograph_coverage_chr3.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG004_chromograph_coverage_chr4.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG004_chromograph_coverage_chr5.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG004_chromograph_coverage_chr6.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG004_chromograph_coverage_chr7.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG004_chromograph_coverage_chr8.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG004_chromograph_coverage_chr9.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG004_chromograph_coverage_chrM.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG004_chromograph_coverage_chrX.png:md5,5474c0ec4a1b264b50eb61e8ce1ec937",
+                "HG004_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_pbcpgtools.combined.bed.gz:md5,2335e1849d645cb082ff993ec001ef31",
+                "HG002_pbcpgtools.combined.bed.gz.tbi:md5,be19f72778ce254ab11ef922617679d6",
+                "HG002_pbcpgtools.hap1.bed.gz:md5,5dd84d48cb1d13a6095c0d0b1677860c",
+                "HG002_pbcpgtools.hap1.bed.gz.tbi:md5,04310a449e1fc90d8d2bd42b65bd7395",
+                "HG002_pbcpgtools.hap2.bed.gz:md5,20c969fade105ac8b612e5e620d55db8",
+                "HG002_pbcpgtools.hap2.bed.gz.tbi:md5,0564c5c999780dae5f44334160de0e8d",
+                "HG003_pbcpgtools.combined.bed.gz:md5,549b39b7cb0cedf3d916812a5b4b204a",
+                "HG003_pbcpgtools.combined.bed.gz.tbi:md5,7dd15438ca431a28e26d5bdbe7eb353d",
+                "HG003_pbcpgtools.hap1.bed.gz:md5,8f3eeae89d07d6a331713bd07aa90d67",
+                "HG003_pbcpgtools.hap1.bed.gz.tbi:md5,5dd06f401bf97c20952bdb02bec96d4b",
+                "HG003_pbcpgtools.hap2.bed.gz:md5,056ce2c5158d50bd75ea6eb515106bf3",
+                "HG003_pbcpgtools.hap2.bed.gz.tbi:md5,c04f7ef500977ff92345b6d07ead645d",
+                "HG004_pbcpgtools.combined.bed.gz:md5,26546f684ab9d596dfbf91f394e07463",
+                "HG004_pbcpgtools.combined.bed.gz.tbi:md5,949aa2d7564e8f6c510ddccf547fe72f",
+                "HG004_pbcpgtools.hap1.bed.gz:md5,531a7cc7e5d9b219552618c9cd2c9fd3",
+                "HG004_pbcpgtools.hap1.bed.gz.tbi:md5,ba818fac7a21855788f4a7bb9a60bfe4",
+                "HG004_pbcpgtools.hap2.bed.gz:md5,b847ca9dad4a6950e9a2cd339d666166",
+                "HG004_pbcpgtools.hap2.bed.gz.tbi:md5,5ae454d73053f167d67a9ac3da16111f",
+                "bcftools-stats-subtypes.txt:md5,9a5918630790359c9f56c583b6cf0c9a",
+                "bcftools_stats_indel-lengths.txt:md5,21bf893e05994cd3f7d0a3480c8ed23c",
+                "fastqc-status-check-heatmap.txt:md5,f67860347368dd43ec3be3a53e1085dc",
+                "fastqc_adapter_content_plot.txt:md5,e97d2bb5c25dfe407492d13c960b8357",
+                "fastqc_overrepresented_sequences_plot.txt:md5,d9f27acdb23d104c8c3332ceb2e7d9a7",
+                "fastqc_per_base_n_content_plot.txt:md5,a1b9be680733df6b9dda4c1f43ce0460",
+                "fastqc_per_base_sequence_quality_plot.txt:md5,186c589d4efcd86c2f3eae5e0f093439",
+                "fastqc_per_sequence_gc_content_plot_Counts.txt:md5,e8b25d1c17843d46bb57a56e9e7d8a4a",
+                "fastqc_per_sequence_gc_content_plot_Percentages.txt:md5,8a38a6372f6073cee59c90896a56e923",
+                "fastqc_per_sequence_quality_scores_plot.txt:md5,bcba2ba5f3f1be46e1c84e9f7b7942ca",
+                "fastqc_sequence_counts_plot.txt:md5,6ecf7d7cf3972ca74cabb9a6847eafa6",
+                "fastqc_sequence_duplication_levels_plot.txt:md5,41fe32ceded66a5f745aab4217b9b202",
+                "fastqc_sequence_length_distribution_plot.txt:md5,a98e9f8067914675c8eba08b9bbfe19f",
+                "mosdepth-coverage-per-contig-multi.txt:md5,532b9beacc50b1629eafa36906e2ccda",
+                "mosdepth-cumcoverage-dist-id.txt:md5,141ef74238cd6f5232424bf1ba4e0430",
+                "mosdepth_cov_dist.txt:md5,0ae1ebbc400706c24de331d98a6b405b",
+                "mosdepth_cumcov_dist.txt:md5,0ae1ebbc400706c24de331d98a6b405b",
+                "mosdepth_perchrom.txt:md5,ed46fe6c0b5c2ea17947408d01467cef",
+                "multiqc_bcftools_stats.txt:md5,f720b61387be08ae143b19804ed99941",
+                "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
+                "multiqc_fastqc.txt:md5,1c32fe4465e16dbefe723043585d81e5",
+                "multiqc_general_stats.txt:md5,f9fb9bc7c632e4f9c089d00edbddea5b",
+                "multiqc_whatshap_phased_bp_plot.txt:md5,9fe95252b660470d6e26b1e227705ce6",
+                "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
+                "somalier_stats.txt:md5,bfc85f681fb57c1025c7791c5b0e970a",
+                "whatshap-stats-table.txt:md5,14acf9cce13f1732ee00e93438bbe989",
+                "FAM_paraphase_annotated.tsv:md5,78412bb3754f909c1e4443a3d62145a7",
+                "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
+                "HG002_cramino_aligned_phased.arrow:md5,796ee4e79b13531dae09e445164e5fe0",
+                "HG003_cramino_aligned_phased.arrow:md5,bb4d7ef993c11ad68987f07abcfde486",
+                "HG004_cramino_aligned_phased.arrow:md5,28abee78738c978558a3924f87f42747",
+                "HG002_cramino_aligned.arrow:md5,796ee4e79b13531dae09e445164e5fe0",
+                "HG003_cramino_aligned.arrow:md5,bb4d7ef993c11ad68987f07abcfde486",
+                "HG004_cramino_aligned.arrow:md5,28abee78738c978558a3924f87f42747",
+                "HG002.mosdepth.global.dist.txt:md5,c5a7cc978eb4b40cf0a85de301d24ae0",
+                "HG002.mosdepth.region.dist.txt:md5,8b663d5d44b8892a431fd61eee060e36",
+                "HG002.mosdepth.summary.txt:md5,cf9cd0041be64c348100a07070f6be2e",
+                "HG002.regions.bed.gz:md5,34d207abe34e9c9edf4f2c90456f9666",
+                "HG002.regions.bed.gz.csi:md5,214f348bc69eb7065afde9a18467a200",
+                "HG003.mosdepth.global.dist.txt:md5,3dd90f0fe9aa0c756bcb8b2313b58338",
+                "HG003.mosdepth.region.dist.txt:md5,d4cbdb5d6e6f18e53299ff59626e9984",
+                "HG003.mosdepth.summary.txt:md5,ae9cac0d8868cf89fbeb8f52768f6ae0",
+                "HG003.regions.bed.gz:md5,d6d3fe3cc0906c32dea9b96a1d439f3e",
+                "HG003.regions.bed.gz.csi:md5,a1ebe4e38173dd6862607c2235c03ea0",
+                "HG004.mosdepth.global.dist.txt:md5,7409f9c16d0c161987ac49ea9ae3483f",
+                "HG004.mosdepth.region.dist.txt:md5,06729b0a6375a942e7efd16356276609",
+                "HG004.mosdepth.summary.txt:md5,615c72cdc681451cbba9b129ec24eec8",
+                "HG004.regions.bed.gz:md5,f58c1ac8e542963ffebf9fb0bb454d1d",
+                "HG004.regions.bed.gz.csi:md5,6145a25fe8831e35dae93b9d162d4e2e",
+                "FAM.het_check.csv:md5,c4afd920dfd8971189cea135eccf1677",
+                "FAM.het_check.png:md5,602f8c358d20c6321ba9f96f61625724",
+                "FAM.html:md5,aed38838f8094ebb476c926afbd5b85f",
+                "FAM.ped_check.csv:md5,66e03006f5157982833510e5b93fe048",
+                "FAM.ped_check.png:md5,80e3b2fd72b40fcf0efa5e1e6fbccd28",
+                "FAM.ped_check.rel-difference.csv:md5,b7f4daf0366fe93f4d8e9708b52a2436",
+                "FAM.peddy.ped:md5,7f5c88175bc6116934e6fe68c6a550fd",
+                "FAM.sex_check.csv:md5,e82ac26951416b738db777730e0ced59",
+                "FAM.sex_check.png:md5,b972b8629706cb367a5c1f72434434c6",
+                "FAM.vs.html:md5,d5231a6c1f32ad5eb149d5dadadfa35a",
+                "HG002_whatshap_stats.gtf.gz:md5,a5b2250694fc2ba2a01037024ee88c8f",
+                "HG002_whatshap_stats.gtf.gz.tbi:md5,e3e12a1b05765f933a441fb659b08244",
+                "HG002_whatshap_stats.tsv:md5,9a08a517e7b32ec58f225358e7b4d268",
+                "HG003_whatshap_stats.gtf.gz:md5,e427487cad14b1d5ce8e1c8352dec177",
+                "HG003_whatshap_stats.gtf.gz.tbi:md5,72f211922657d7f0a4190f0fa5c18ff9",
+                "HG003_whatshap_stats.tsv:md5,09490592ee8505a10da7e5f6ec6754c7",
+                "HG004_whatshap_stats.gtf.gz:md5,4515cc7a2f4175389f0b0414d6403506",
+                "HG004_whatshap_stats.gtf.gz.tbi:md5,57ef2082ccd23fb10eb6191013ecc989",
+                "HG004_whatshap_stats.tsv:md5,a4db669f7341f5687a850d36470228d4",
+                "HG002_sambamba_depth.bed:md5,b9da900fd570eae10eb16b0f8c1ae712",
+                "HG003_sambamba_depth.bed:md5,c70c035b19d0518486d705db7274cff1",
+                "HG004_sambamba_depth.bed:md5,568050c98709e2e939478ed17f0a9268",
+                "HG002_pbcpgtools.combined.bw:md5,fa63414f5c650d2023663ba907463b8b",
+                "HG002_pbcpgtools.hap1.bw:md5,6090eeec84e22ede1079137bf04ff676",
+                "HG002_pbcpgtools.hap2.bw:md5,badea3d6da0cc0c9d7d40e7d333fbfe1",
+                "HG003_pbcpgtools.combined.bw:md5,968efcd5c19c6938fd1c907a4001c5d9",
+                "HG003_pbcpgtools.hap1.bw:md5,276b161c4cb56ee0d376e64e7b871c3e",
+                "HG003_pbcpgtools.hap2.bw:md5,91fdac7492a5d417488150fa9ed5e78e",
+                "HG004_pbcpgtools.combined.bw:md5,982fe3165ee8b0d33cce41815bcbe98e",
+                "HG004_pbcpgtools.hap1.bw:md5,06c7d259130bde8d9fccef2974bd22aa",
+                "HG004_pbcpgtools.hap2.bw:md5,cb7e074d191d58f481ce728b6c4014b4"
+            ],
+            [
+                [
+                    "HG002_haplotagged.bam",
+                    "26139675ef0611861265196192e2b224"
+                ],
+                [
+                    "HG003_haplotagged.bam",
+                    "9f8e69ecd37ab42252eaa0411f27f710"
+                ],
+                [
+                    "HG004_haplotagged.bam",
+                    "7bd8482da26f3972827874383a233dd2"
+                ],
+                [
+                    "HG002_aligned_assembly.bam",
+                    "744af813396a9a2ddaf7a0f15389e0ee"
+                ],
+                [
+                    "HG003_aligned_assembly.bam",
+                    "c6212efee1cd13beb4c628d5a3078f36"
+                ],
+                [
+                    "HG004_aligned_assembly.bam",
+                    "ee430af552c4dd5fae7f01784d090b8b"
+                ],
+                [
+                    "HG002_spanning_trgt.bam",
+                    "30ba267e3b89ce97d0df96640b22d265"
+                ],
+                [
+                    "HG003_spanning_trgt.bam",
+                    "bc2fd60ca1a340543dd66e5775644f97"
+                ],
+                [
+                    "HG004_spanning_trgt.bam",
+                    "c8334a968268bf92dff1e959db5d9ba"
+                ]
+            ],
+            [
+                
+            ],
+            [
+                [
+                    "FAM_paraphase_merged.vcf.gz",
+                    "VcfFile [chromosomes=[chr16, chr17], sampleCount=21, variantCount=335, phased=true, phasedAutodetect=false]"
+                ],
+                [
+                    "HG002_OR1D5.vcf.gz",
+                    "VcfFile [chromosomes=[chr17], sampleCount=2, variantCount=12, phased=true, phasedAutodetect=false]"
+                ],
+                [
+                    "HG002_hba.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=277, phased=true, phasedAutodetect=false]"
+                ],
+                [
+                    "HG003_OR1D5.vcf.gz",
+                    "VcfFile [chromosomes=[chr17], sampleCount=2, variantCount=15, phased=true, phasedAutodetect=true]"
+                ],
+                [
+                    "HG003_hba.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=278, phased=true, phasedAutodetect=false]"
+                ],
+                [
+                    "HG004_OR1D5.vcf.gz",
+                    "VcfFile [chromosomes=[chr17], sampleCount=2, variantCount=49, phased=true, phasedAutodetect=true]"
+                ],
+                [
+                    "HG004_hba.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=5, variantCount=275, phased=true, phasedAutodetect=false]"
+                ],
+                [
+                    "HG002_trgt.vcf.gz",
+                    "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=false]"
+                ],
+                [
+                    "HG003_trgt.vcf.gz",
+                    "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=false]"
+                ],
+                [
+                    "HG004_trgt.vcf.gz",
+                    "VcfFile [chromosomes=[chr20], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "FAM_snvs_annotated_ranked_clinical.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=3, variantCount=89, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "FAM_snvs_annotated_ranked_research.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=205, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "HG002_deepvariant_snvs.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=175, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "HG003_deepvariant_snvs.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=152, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "HG004_deepvariant_snvs.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=278, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "FAM_svs_annotated_ranked_clinical.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=3, variantCount=7, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "FAM_svs_annotated_ranked_research.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=11, phased=false, phasedAutodetect=false]"
+                ]
+            ],
+            [
+                
+            ]
+        ],
+        "timestamp": "2026-08-22T09:11:14.044785562",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
     }
 }
