@@ -133,6 +133,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Upgraded nf-core `sniffles` module to v2.7.3 and migrated Sniffles v1.0.12 to local module `SNIFFLES1` (`--sv_callers sniffles1`, mutually exclusive with `sniffles` v2); `--sniffles_min_heterozygous_allele_frequency` applies to `SNIFFLES1` only (Sniffles v2 uses coverage-based het filtering via `SUPPORT_MIN` FILTER, making `--minhetsupport` redundant)
 - [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Updated `VEP_PREP_SV` to apply Sniffles v1-specific caller fixes (STRANDBIAS FILTER header injection, synthetic `END=POS`/`SVLEN=1` removal) only when processing `SNIFFLES1` output; SVTYPE remapping applies to all callers
 - [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - `REHEADER_SV_VCF` now passes the reference FAI to `BCFTOOLS_REHEADER`, ensuring all reference `##contig` lines are present in per-caller VCFs before SVDB merge
+- [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Bumped nf-core `sniffles` module from v2.7.3 to v2.8.0 ([nf-core/modules #12776](https://github.com/nf-core/modules/pull/12776))
 
 ### Removed
 

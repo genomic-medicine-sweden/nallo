@@ -281,7 +281,7 @@
                     [
                         "test_1_sniffles_filtered.vcf.gz",
                         "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]",
-                        "bbb7a1db0a4860027c06088f1b93ef9a"
+                        "b20d2887a1a09fd42c207ccd50a66e1e"
                     ],
                     "test_1_sniffles_filtered.vcf.gz.tbi"
                 ],
@@ -349,7 +349,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-08-18T13:52:25.202947185",
+        "timestamp": "2026-08-24T12:16:23.261338726",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
@@ -875,14 +875,14 @@
                     },
                     [
                         "test.vcf.gz",
-                        "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=59, phased=false, phasedAutodetect=false]",
-                        "e5dd19d172b10c2d83af2111babf1c70"
+                        "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=58, phased=false, phasedAutodetect=false]",
+                        "611527b4fd78d41346151505c279b083"
                     ],
                     "test.vcf.gz.tbi"
                 ]
             ]
         ],
-        "timestamp": "2026-08-18T13:47:55.377780821",
+        "timestamp": "2026-08-24T12:02:17.418862344",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
@@ -967,8 +967,8 @@
                     },
                     [
                         "test_1.vcf.gz",
-                        "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=56, phased=false, phasedAutodetect=false]",
-                        "4d811644bc7a218ef3e7370078eb801"
+                        "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=55, phased=false, phasedAutodetect=false]",
+                        "c7a0bf14f01fb4f3ae02da9ea91b302c"
                     ],
                     "test_1.vcf.gz.tbi"
                 ],
@@ -1014,13 +1014,13 @@
                     [
                         "test_2.vcf.gz",
                         "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=32, phased=false, phasedAutodetect=false]",
-                        "dec337dfd6f078092d8bb36301520b1f"
+                        "dfdd0773975fdbb8c6dad32170ef650e"
                     ],
                     "test_2.vcf.gz.tbi"
                 ]
             ]
         ],
-        "timestamp": "2026-08-18T13:50:50.176911552",
+        "timestamp": "2026-08-24T12:12:25.837157816",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
@@ -1128,7 +1128,7 @@
                     [
                         "test_1_sniffles_filtered.vcf.gz",
                         "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]",
-                        "bbb7a1db0a4860027c06088f1b93ef9a"
+                        "b20d2887a1a09fd42c207ccd50a66e1e"
                     ],
                     "test_1_sniffles_filtered.vcf.gz.tbi"
                 ],
@@ -1210,7 +1210,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-08-18T13:53:12.681592577",
+        "timestamp": "2026-08-24T12:18:54.843449582",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
