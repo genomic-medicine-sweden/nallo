@@ -430,7 +430,7 @@
                     },
                     "sniffles": {
                         "branch": "master",
-                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "git_sha": "337dbbd59c07df52d92beec8db0e7c7f630aa7b8",
                         "installed_by": ["modules"]
                     },
                     "somalier/extract": {
