@@ -105,7 +105,7 @@
                     "severus": 1.7
                 },
                 "SNIFFLES": {
-                    "sniffles": "2.7.3"
+                    "sniffles": "2.8.0"
                 },
                 "SOMALIER_EXTRACT": {
                     "somalier": "0.2.18"
@@ -232,7 +232,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-08-18T14:20:44.53186985",
+        "timestamp": "2026-08-24T11:14:43.94849221",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

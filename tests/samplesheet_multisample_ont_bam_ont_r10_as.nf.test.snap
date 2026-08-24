@@ -174,7 +174,7 @@
                     "severus": 1.7
                 },
                 "SNIFFLES": {
-                    "sniffles": "2.7.3"
+                    "sniffles": "2.8.0"
                 },
                 "SOMALIER_PED_FAMILY": {
                     "create_pedigree_file": 1.0,
@@ -1150,7 +1150,7 @@
                 
             ]
         ],
-        "timestamp": "2026-08-22T10:02:51.354856266",
+        "timestamp": "2026-08-24T11:02:34.200963434",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

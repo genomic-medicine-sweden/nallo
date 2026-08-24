@@ -119,7 +119,7 @@
                     "severus": 1.7
                 },
                 "SNIFFLES": {
-                    "sniffles": "2.7.3"
+                    "sniffles": "2.8.0"
                 },
                 "SOMALIER_PED_FAMILY": {
                     "create_pedigree_file": 1.0,
@@ -430,7 +430,7 @@
                 "visualization_tracks/HG002_ONT_C/HG002_ONT_C_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-08-18T14:10:13.214393353",
+        "timestamp": "2026-08-24T11:10:20.132920837",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

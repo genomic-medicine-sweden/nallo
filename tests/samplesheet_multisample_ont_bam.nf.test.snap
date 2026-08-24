@@ -187,7 +187,7 @@
                     "samtools": 1.24
                 },
                 "SNIFFLES": {
-                    "sniffles": "2.7.3"
+                    "sniffles": "2.8.0"
                 },
                 "SOMALIER_EXTRACT": {
                     "somalier": "0.2.18"
@@ -1187,7 +1187,7 @@
                 
             ]
         ],
-        "timestamp": "2026-08-21T15:31:22.809797489",
+        "timestamp": "2026-08-24T10:56:10.959830039",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
@@ -1384,7 +1384,7 @@
                     "severus": 1.7
                 },
                 "SNIFFLES": {
-                    "sniffles": "2.7.3"
+                    "sniffles": "2.8.0"
                 },
                 "SOMALIER_EXTRACT": {
                     "somalier": "0.2.18"
@@ -2421,7 +2421,7 @@
                 
             ]
         ],
-        "timestamp": "2026-08-22T09:59:43.39630532",
+        "timestamp": "2026-08-24T10:59:26.062268258",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

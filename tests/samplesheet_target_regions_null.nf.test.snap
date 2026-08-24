@@ -243,7 +243,7 @@
                     "severus": 1.7
                 },
                 "SNIFFLES": {
-                    "sniffles": "2.7.3"
+                    "sniffles": "2.8.0"
                 },
                 "SOMALIER_EXTRACT": {
                     "somalier": "0.2.18"
@@ -833,7 +833,7 @@
                 
             ]
         ],
-        "timestamp": "2026-08-22T10:08:28.852702146",
+        "timestamp": "2026-08-24T11:08:12.891940705",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
