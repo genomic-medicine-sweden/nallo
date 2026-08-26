@@ -107,16 +107,13 @@ workflow CALL_SVS {
         ch_sv_calls = ch_sv_calls.mix(TABIX_SEVERUS.out.gz_index)
     }
 
-    if (sv_callers_to_run.contains('sniffles') || sv_callers_to_run.contains('sniffles1') || sv_callers_to_run.contains('debreak')) {
+    BCFTOOLS_SORT(
+        VEP_PREP_SV.out.vcf.filter { meta, _vcf -> meta.sv_caller in ['sniffles', 'sniffles1', 'debreak'] }
+    )
 
-        BCFTOOLS_SORT(
-            VEP_PREP_SV.out.vcf.filter { meta, _vcf -> meta.sv_caller in ['sniffles', 'sniffles1', 'debreak'] }
-        )
-
-        ch_sv_calls = ch_sv_calls.mix(
-            BCFTOOLS_SORT.out.vcf.join(BCFTOOLS_SORT.out.tbi, failOnMismatch: true, failOnDuplicate: true)
-        )
-    }
+    ch_sv_calls = ch_sv_calls.mix(
+        BCFTOOLS_SORT.out.vcf.join(BCFTOOLS_SORT.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+    )
 
     //
     // Call CNVs with HiFiCNV
