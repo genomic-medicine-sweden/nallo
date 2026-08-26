@@ -24,18 +24,19 @@ SVTYPE_REMAP = {
     'INV/INVDUP': 'DUP',  # defensive
 }
 
+_SVTYPE_RE = re.compile(r'SVTYPE=([^;]+)')
+
 
 def remap_svtype(info):
-    m = re.search(r'SVTYPE=([^;]+)', info)
+    m = _SVTYPE_RE.search(info)
     if not m:
         return info
     svtype = m.group(1)
     canonical = SVTYPE_REMAP.get(svtype)
     if canonical is None:
         return info
-    info = re.sub(r'SVTYPE=[^;]+', f'SVTYPE={canonical}', info)
-    info = info + f';ORIG_SVTYPE={svtype}'
-    return info
+    info = _SVTYPE_RE.sub(f'SVTYPE={canonical}', info, count=1)
+    return info + f';ORIG_SVTYPE={svtype}'
 
 
 def main():
