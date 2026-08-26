@@ -272,7 +272,7 @@ When `--skip_prepare_gens_input` is disabled, the pipeline prepares coverage and
 
 ### SVs (and CNVs)
 
-[Severus](https://github.com/KolmogorovLab/Severus), [Sniffles](https://github.com/fritzsedlazeck/Sniffles) (v2 or v1 via `--sv_callers sniffles1`) or [DeBreak](https://github.com/Maggi-Chen/DeBreak) are used to call structural variants, while [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs. HiFiCNV also produces copy number, depth, and MAF [visualization tracks](#visualization-tracks). [Sawfish](https://github.com/PacificBiosciences/sawfish) calls both SVs and CNVs by default.
+[Severus](https://github.com/KolmogorovLab/Severus), [Sniffles](https://github.com/fritzsedlazeck/Sniffles) (v2 or v1) or [DeBreak](https://github.com/Maggi-Chen/DeBreak) are used to call structural variants, while [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs. HiFiCNV also produces copy number, depth, and MAF [visualization tracks](#visualization-tracks). [Sawfish](https://github.com/PacificBiosciences/sawfish) calls both SVs and CNVs by default.
 
 !!!tip "Family-level VCFs per caller"
 
