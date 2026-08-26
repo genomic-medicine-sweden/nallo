@@ -28,6 +28,7 @@ _SVTYPE_RE = re.compile(r'SVTYPE=([^;]+)')
 
 
 def remap_svtype(info):
+    """Remap non-canonical SVTYPE in an INFO field string (tab-delimited VCF column 8)."""
     m = _SVTYPE_RE.search(info)
     if not m:
         return info
@@ -35,8 +36,7 @@ def remap_svtype(info):
     canonical = SVTYPE_REMAP.get(svtype)
     if canonical is None:
         return info
-    info = _SVTYPE_RE.sub(f'SVTYPE={canonical}', info, count=1)
-    return info + f';ORIG_SVTYPE={svtype}'
+    return info[: m.start()] + f'SVTYPE={canonical}' + info[m.end() :] + f';ORIG_SVTYPE={svtype}'
 
 
 def main():
