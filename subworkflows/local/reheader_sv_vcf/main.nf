@@ -48,9 +48,11 @@ workflow REHEADER_SV_VCF {
         .join(CREATE_SAMPLES_FILE.out.output, failOnMismatch: true, failOnDuplicate: true)
         .map { meta, vcf, _tbi, samples -> [meta, vcf, [], samples] }
 
-    // Finally, reheader the VCF with meta.id as the sample name,
-    // and supply the FAI so bcftools adds any missing ##contig lines
-    // (e.g. chrM, which sniffles v2 omits when no SVs are called there).
+    /*
+     * Finally, reheader the VCF with meta.id as the sample name,
+     * and supply the FAI so bcftools adds any missing ##contig lines
+     * (e.g. chrM, which sniffles v2 omits when no SVs are called there).
+     */
     BCFTOOLS_REHEADER(
         ch_bcftools_reheader_input,
         ch_fai.collect(),
