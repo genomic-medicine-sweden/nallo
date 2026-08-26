@@ -144,10 +144,7 @@ nextflow_process {
                 { assert process.success },
                 { assert snapshot(
                     process.out.versions_vep_prep_sv,
-                    // skip ##fileDate and ##command lines which change each run
-                    path(process.out.vcf.get(0).get(1)).readLines()
-                        .findAll { !it.startsWith('##fileDate') && !it.startsWith('##command') }
-                        .join('\n').md5()
+                    path(process.out.vcf.get(0).get(1)).vcf.variantsMD5
                 ).match() }
             )
         }
