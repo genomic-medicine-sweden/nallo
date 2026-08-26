@@ -21,7 +21,10 @@ nextflow_pipeline {
                 sv_callers_to_run              = "sniffles1"
                 publish_unannotated_family_svs = true
                 filter_variants_hgnc_ids       = null
+                skip_genome_assembly           = true
                 skip_methylation_annotation    = true
+                skip_peddy                     = true
+                skip_prepare_gens_input        = true
                 methbat_map                    = null
                 read_aligner                   = 'mm2plus'
                 assembly_aligner               = 'mm2plus'
