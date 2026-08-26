@@ -146,7 +146,7 @@ tool:
     bibliography: "Christopher T Saunders, James M Holt, Daniel N Baker, Juniper A Lake, Jonathan R Belyeu, Zev Kronenberg, William J Rowell, Michael A Eberle, Sawfish: improving long-read structural variant discovery and genotyping with local haplotype modeling, Bioinformatics, Volume 41, Issue 4, April 2025, btaf136, https://doi.org/10.1093/bioinformatics/btaf136"
   debreak:
     citation: "DeBreak (Jiang et al. 2023)"
-    bibliography: "Jiang, T., Liu, B., Jiang, W. et al. Long-read sequencing-based structural variation detection with debreak. Nat Commun 14, 7658 (2023). https://doi.org/10.1038/s41467-023-43612-3"
+    bibliography: "Jiang, T., Liu, B., Jiang, W. et al. Long-read sequencing-based structural variation detection with debreak. Nat Commun 14, 7658 (2023). https://doi.org/10.1038/s41467-023-35996-1"
   sniffles:
     citation: "Sniffles (Sedlazeck et al. 2018; Smolka et al. 2024)"
     bibliography: "Sedlazeck, F.J., Rescheneder, P., Smolka, M. et al. Accurate detection of complex structural variations using single-molecule sequencing. Nat Methods 15, 461-468 (2018). https://doi.org/10.1038/s41592-018-0001-7; Smolka, M., Paulin, L.F., Grochowski, C.M. et al. Detection of mosaic and population-level structural variants with Sniffles2. Nat Biotechnol 42, 1571-1580 (2024). https://doi.org/10.1038/s41587-023-02024-y"
