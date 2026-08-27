@@ -39,7 +39,7 @@ nextflow_process {
                 """
                 input[0] = [
                     [id: 'test'],
-                    file("${projectDir}/modules/local/vep_prep_sv/tests/input/snifflesv1.vcf", checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/snifflesv1.vcf', checkIfExists: true)
                 ]
                 """
             }
@@ -81,7 +81,7 @@ nextflow_process {
                 """
                 input[0] = [
                     [id: 'test'],
-                    file("${projectDir}/modules/local/vep_prep_sv/tests/input/debreak.vcf", checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/debreak.vcf', checkIfExists: true)
                 ]
                 """
             }
@@ -110,7 +110,7 @@ nextflow_process {
                 """
                 input[0] = [
                     [id: 'test'],
-                    file("${projectDir}/modules/local/vep_prep_sv/tests/input/sniffles2.vcf.gz", checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/sniffles2.vcf.gz', checkIfExists: true)
                 ]
                 """
             }

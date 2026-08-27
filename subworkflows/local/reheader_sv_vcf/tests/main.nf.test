@@ -13,33 +13,33 @@ nextflow_workflow {
                 input[0] = channel.of(
                     [
                         [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'debreak' ],
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/debreak_test.vcf.gz', checkIfExists: true),
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/debreak_test.vcf.gz.tbi', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/debreak_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/debreak_test.vcf.gz.tbi', checkIfExists: true)
                     ],
                     [
                         [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'hificnv' ],
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/hificnv_test.vcf.gz', checkIfExists: true),
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/hificnv_test.vcf.gz.tbi', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/hificnv_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/hificnv_test.vcf.gz.tbi', checkIfExists: true)
                     ],
                     [
                         [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sawfish' ],
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sawfish_test.vcf.gz', checkIfExists: true),
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sawfish_test.vcf.gz.tbi', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/sawfish_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/sawfish_test.vcf.gz.tbi', checkIfExists: true)
                     ],
                     [
                         [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'severus' ],
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/severus_test.vcf.gz', checkIfExists: true),
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/severus_test.vcf.gz.tbi', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/severus_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/severus_test.vcf.gz.tbi', checkIfExists: true)
                     ],
                     [
                         [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sniffles' ],
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles_test.vcf.gz', checkIfExists: true),
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles_test.vcf.gz.tbi', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/sniffles_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/sniffles_test.vcf.gz.tbi', checkIfExists: true)
                     ],
                     [
                         [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sniffles1' ],
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles1_test.vcf.gz', checkIfExists: true),
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles1_test.vcf.gz.tbi', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/sniffles1_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/sniffles1_test.vcf.gz.tbi', checkIfExists: true)
                     ]
                 )
                 input[1] = channel.of([[], []])
@@ -102,33 +102,33 @@ nextflow_workflow {
                 input[0] = channel.of(
                     [
                         [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'debreak' ],
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/debreak_test.vcf.gz', checkIfExists: true),
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/debreak_test.vcf.gz.tbi', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/debreak_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/debreak_test.vcf.gz.tbi', checkIfExists: true)
                     ],
                     [
                         [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'hificnv' ],
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/hificnv_test.vcf.gz', checkIfExists: true),
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/hificnv_test.vcf.gz.tbi', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/hificnv_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/hificnv_test.vcf.gz.tbi', checkIfExists: true)
                     ],
                     [
                         [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sawfish' ],
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sawfish_test.vcf.gz', checkIfExists: true),
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sawfish_test.vcf.gz.tbi', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/sawfish_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/sawfish_test.vcf.gz.tbi', checkIfExists: true)
                     ],
                     [
                         [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'severus' ],
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/severus_test.vcf.gz', checkIfExists: true),
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/severus_test.vcf.gz.tbi', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/severus_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/severus_test.vcf.gz.tbi', checkIfExists: true)
                     ],
                     [
                         [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sniffles' ],
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles_test.vcf.gz', checkIfExists: true),
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles_test.vcf.gz.tbi', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/sniffles_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/sniffles_test.vcf.gz.tbi', checkIfExists: true)
                     ],
                     [
                         [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sniffles1' ],
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles1_test.vcf.gz', checkIfExists: true),
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/sniffles1_test.vcf.gz.tbi', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/sniffles1_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/sniffles1_test.vcf.gz.tbi', checkIfExists: true)
                     ]
                 )
                 input[1] = channel.of([[], []])
@@ -154,8 +154,8 @@ nextflow_workflow {
                 input[0] = channel.of(
                     [
                         [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'unknown_caller' ],
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/hificnv_test.vcf.gz', checkIfExists: true),
-                        file('../../../subworkflows/local/reheader_sv_vcf/tests/testdata/hificnv_test.vcf.gz.tbi', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/hificnv_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/hificnv_test.vcf.gz.tbi', checkIfExists: true)
                     ]
                 )
                 input[1] = channel.of([[], []])
