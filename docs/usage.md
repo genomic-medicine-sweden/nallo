@@ -294,11 +294,12 @@ Turned off with `--skip_phasing`.
 
 This subworkflow relies on alignment and short variant calling subworkflows, but requires no additional files. By default, modkit is run when `--preset ONT_R10` is active, while methbat is run when `--preset revio` is active.
 
-If MethBat is used, it requires the following file:
+If MethBat is used, the following files are required:
 
 | Parameter         | Description                                                                                                                                                                                                                                                                                                                  |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `methbat_regions` | A tsv file with only regions of interest ([example](https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv)), or with both regions and background cohort values ([example](https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv)), made with methbat build |
+| `methbat_map`     | A tsv file mapping genomic regions to HGNC gene names and region types (e.g. imprinted regions, promoters), used to annotate methbat output. Required when `--skip_methylation_annotation` is not set.                                                                                                                       |
 
 If modkit is used, the following optional parameter can be provided:
 
