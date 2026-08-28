@@ -1898,7 +1898,7 @@ The phaser can be chosen using the <code>--phaser</code> argument. See the follo
 <p>Turned off with <code>--skip_phasing</code>.</p>
 <h4 id="methylation-calling">Methylation calling</h4>
 <p>This subworkflow relies on alignment and short variant calling subworkflows, but requires no additional files. By default, modkit is run when <code>--preset ONT_R10</code> is active, while methbat is run when <code>--preset revio</code> is active.</p>
-<p>If MethBat is used, it requires the following file:</p>
+<p>If MethBat is used, the following files are required:</p>
 <table>
 <thead>
 <tr>
@@ -1910,6 +1910,10 @@ The phaser can be chosen using the <code>--phaser</code> argument. See the follo
 <tr>
 <td><code>methbat_regions</code></td>
 <td>A tsv file with only regions of interest (<a href="https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv">example</a>), or with both regions and background cohort values (<a href="https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv">example</a>), made with methbat build</td>
+</tr>
+<tr>
+<td><code>methbat_map</code></td>
+<td>A tsv file mapping genomic regions to HGNC gene names and region types (e.g. imprinted regions, promoters), used to annotate methbat output. Required when <code>--skip_methylation_annotation</code> is not set.</td>
 </tr>
 </tbody>
 </table>
