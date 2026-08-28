@@ -404,6 +404,7 @@ workflow {
         params.gens_panel_of_normals_female,
         params.gens_panel_of_normals_male,
         params.input,
+        params.methbat_map,
         params.methbat_regions,
         params.methylation_callers,
         params.mitochondrial_caller,

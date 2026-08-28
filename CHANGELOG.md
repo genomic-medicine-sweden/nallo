@@ -158,6 +158,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1196](https://github.com/genomic-medicine-sweden/nallo/pull/1196) - Fixed SVDB merge reordering priorities on retries
 - [#1201](https://github.com/genomic-medicine-sweden/nallo/pull/1201) - Fixed nf-test not triggering on configuration file changes
 - [#1140](https://github.com/genomic-medicine-sweden/nallo/pull/1140) - Fixed sorting of mitochondrial vcf
+- [#1250](https://github.com/genomic-medicine-sweden/nallo/pull/1250) - Fixed missing validation for `--methbat_map` causing a cryptic combine error when the parameter is not provided and methylation annotation is active
 
 ### Parameters
 

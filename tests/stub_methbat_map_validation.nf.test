@@ -1,0 +1,56 @@
+nextflow_pipeline {
+
+    name "Test pipeline GENOMICMEDICINESWEDEN_NALLO — Stub test for methbat_map validation"
+    script "../main.nf"
+    tag "PIPELINE"
+    tag "stub_methbat_map_validation"
+    config "./nextflow.config"
+
+    test("revio preset with skip_methylation_annotation succeeds without methbat_map") {
+        options "-stub"
+
+        when {
+            params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/1e84555134bb9638ad0dde49afd895e3192de3f0/'
+                input                        = "$projectDir/assets/samplesheet_multisample_bam.csv"
+                outdir                       = "$outputDir"
+                preset                       = "revio"
+                methbat_map                  = null
+                skip_methylation_annotation  = true
+            }
+        }
+
+        then {
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.trace.succeeded().size(),
+                    versions
+                ).match() }
+            )
+        }
+    }
+
+    test("revio preset without methbat_map fails with informative error") {
+        options "-stub"
+
+        when {
+            params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/1e84555134bb9638ad0dde49afd895e3192de3f0/'
+                input                        = "$projectDir/assets/samplesheet_multisample_bam.csv"
+                outdir                       = "$outputDir"
+                preset                       = "revio"
+                methbat_map                  = null
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.failed },
+                { assert workflow.stdout.any { it.contains("--methbat_map must be provided when running without --skip_methylation_annotation") } }
+            )
+        }
+    }
+
+}
