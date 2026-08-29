@@ -56,8 +56,9 @@ nextflow_workflow {
                 { assert workflow.out.tbi.every { meta, _tbi -> meta.id == 'HG002_Revio' } },
                 { assert snapshot(
                     workflow.out.vcf
-                        // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for sawfish
-                        .findAll { meta, _vcf -> meta.sv_caller != 'sawfish' }
+                        // Only inspect reheadered callers — hificnv and sawfish pass through without any
+                        // process, so their remote input files are never staged to a local path.
+                        .findAll { meta, _vcf -> meta.sv_caller in ['debreak', 'severus', 'sniffles', 'sniffles1'] }
                         .collect { meta, vcf ->
                             [
                                 'sv_vcf_output:',
@@ -68,6 +69,15 @@ nextflow_workflow {
                                 [variants_md5:path(vcf).vcf.variantsMD5],
                             ]
                         }.sort { it[1].sv_caller },
+                    workflow.out.vcf
+                        .findAll { meta, _vcf -> meta.sv_caller in ['hificnv', 'sawfish'] }
+                        .collect { meta, vcf ->
+                            [
+                                'sv_vcf_output:',
+                                [id: meta.id, sv_caller: meta.sv_caller],
+                                [file_name: file(vcf).name],
+                            ]
+                        }.sort { it[1].sv_caller },
                     workflow.out.tbi
                         .collect { meta, tbi ->
                             [
@@ -76,15 +86,6 @@ nextflow_workflow {
                                 file(tbi).name
                             ]
                         }.sort { it[1].sv_caller },
-                    workflow.out.vcf
-                        .findAll { meta, _vcf -> meta.sv_caller == 'sawfish' }
-                        .collect { meta, vcf ->
-                            [
-                                'sv_vcf_output:',
-                                [id: meta.id, sv_caller: meta.sv_caller],
-                                file(vcf),
-                            ]
-                        }
                 ).match()
             }
 
