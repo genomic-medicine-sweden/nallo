@@ -1776,6 +1776,10 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <p>Which callers to run and merge into family VCFs that are used for subsequent annotation and ranking is determined by the <code>--sv_callers</code> parameter, e.g. <code>--sv_callers sniffles,hificnv</code>. The priority of the merging in SVDB is set by the order of the callers. This can be overwritten with the <code>--sv_callers_merge_priority</code> parameter.</p>
 <p>Sometimes you might want to run more callers than you use for merging, this can be controlled with the <code>--sv_callers_to_run</code> and <code>--sv_callers_to_merge</code> parameters. By default these are the same as <code>--sv_callers</code> but can be overwritten.</p>
 <div class="admonition info">
+<p class="admonition-title">Choosing a Sniffles version</p>
+<p>Two versions of Sniffles are available: <code>sniffles</code> (v2) and <code>sniffles1</code> (v1.0.12). Only one can be active at a time - specifying both will cause the pipeline to exit with an error.</p>
+</div>
+<div class="admonition info">
 <p class="admonition-title">Variant merging strategies</p>
 <p>Variant calls from samples within the same family are first merged into one family-level VCF per caller. Then, the family-caller files are merged into a final family file, which can then be annotated, ranked and filtered. The merging is done in this order so that different callers can have different merge parameters.</p>
 <p>Sniffles, Severus and HiFiCNV uses SVDB for both merging steps. Sawfish however, has a built in joint-calling step which always needs to be run, and is used by default instead of SVDB in the first merging step. To force the joint-calling step to only run on one indivdual at a time (and use SVDB to merge into the Sawfish family-level VCF), one can run with <code>--force_sawfish_joint_call_single_samples</code>.</p>
