@@ -272,18 +272,18 @@ When `--skip_prepare_gens_input` is disabled, the pipeline prepares coverage and
 
 ### SVs (and CNVs)
 
-[Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles](https://github.com/fritzsedlazeck/Sniffles) are used to call structural variants, while [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs. HiFiCNV also produces copy number, depth, and MAF [visualization tracks](#visualization-tracks). [Sawfish](https://github.com/PacificBiosciences/sawfish) calls both SVs and CNVs by default.
+[Severus](https://github.com/KolmogorovLab/Severus), [Sniffles](https://github.com/fritzsedlazeck/Sniffles) (v2 or v1) or [DeBreak](https://github.com/Maggi-Chen/DeBreak) are used to call structural variants, while [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs. HiFiCNV also produces copy number, depth, and MAF [visualization tracks](#visualization-tracks). [Sawfish](https://github.com/PacificBiosciences/sawfish) calls both SVs and CNVs by default.
 
 !!!tip "Family-level VCFs per caller"
 
     Unannotated family-level VCFs per caller can be output with --publish_unannotated_family_svs.
 
-| Path                                                                                   | Description                                        | Call SVs           | `--publish_unannotated_family_svs` |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------- | ------------------ | ---------------------------------- |
-| `svs/family/{family_id}/{family_id}_{hificnv,sawfish,severus,sniffles}_svs.vcf.gz`     | VCF file with merged SVs/CNVs by family and caller |                    | :white_check_mark:                 |
-| `svs/family/{family_id}/{family_id}_{hificnv,sawfish,severus,sniffles}_svs.vcf.gz.tbi` | Index of the merged VCF file                       |                    | :white_check_mark:                 |
-| `svs/family/{family_id}/{family_id}_svs.vcf.gz`                                        | VCF file with merged SVs/CNVs by family            | :white_check_mark: |                                    |
-| `svs/family/{family_id}/{family_id}_svs.vcf.gz.tbi`                                    | Index of the merged VCF file                       | :white_check_mark: |                                    |
+| Path                                                                                                     | Description                                        | Call SVs           | `--publish_unannotated_family_svs` |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------- | ------------------ | ---------------------------------- |
+| `svs/family/{family_id}/{family_id}_{debreak,hificnv,sawfish,severus,sniffles,sniffles1}_svs.vcf.gz`     | VCF file with merged SVs/CNVs by family and caller |                    | :white_check_mark:                 |
+| `svs/family/{family_id}/{family_id}_{debreak,hificnv,sawfish,severus,sniffles,sniffles1}_svs.vcf.gz.tbi` | Index of the merged VCF file                       |                    | :white_check_mark:                 |
+| `svs/family/{family_id}/{family_id}_svs.vcf.gz`                                                          | VCF file with merged SVs/CNVs by family            | :white_check_mark: |                                    |
+| `svs/family/{family_id}/{family_id}_svs.vcf.gz.tbi`                                                      | Index of the merged VCF file                       | :white_check_mark: |                                    |
 
 #### Annotation
 

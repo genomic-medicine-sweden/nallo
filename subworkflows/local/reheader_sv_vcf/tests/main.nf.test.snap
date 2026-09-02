@@ -1,7 +1,195 @@
 {
-    "severus and sniffles VCFs are reheadered to meta.id": {
+    "severus, sniffles, sniffles1, and debreak VCFs are reheadered to meta.id": {
         "content": [
             [
+                [
+                    "sv_vcf_output:",
+                    {
+                        "id": "HG002_Revio",
+                        "sv_caller": "debreak"
+                    },
+                    {
+                        "vcf_sample_name": [
+                            "HG002_Revio"
+                        ]
+                    },
+                    {
+                        "file_name": "HG002_Revio_debreak_reheader.vcf.gz"
+                    },
+                    {
+                        "summary": "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=10, phased=false, phasedAutodetect=false]"
+                    },
+                    {
+                        "variants_md5": "7ed30048f41ebbf91568a5a1577d939e"
+                    }
+                ],
+                [
+                    "sv_vcf_output:",
+                    {
+                        "id": "HG002_Revio",
+                        "sv_caller": "severus"
+                    },
+                    {
+                        "vcf_sample_name": [
+                            "HG002_Revio"
+                        ]
+                    },
+                    {
+                        "file_name": "HG002_Revio_severus_reheader.vcf.gz"
+                    },
+                    {
+                        "summary": "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=3, phased=false, phasedAutodetect=false]"
+                    },
+                    {
+                        "variants_md5": "f5e96ef1667d502fbfe2f02bde155cc3"
+                    }
+                ],
+                [
+                    "sv_vcf_output:",
+                    {
+                        "id": "HG002_Revio",
+                        "sv_caller": "sniffles"
+                    },
+                    {
+                        "vcf_sample_name": [
+                            "HG002_Revio"
+                        ]
+                    },
+                    {
+                        "file_name": "HG002_Revio_sniffles_reheader.vcf.gz"
+                    },
+                    {
+                        "summary": "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=32, phased=false, phasedAutodetect=false]"
+                    },
+                    {
+                        "variants_md5": "dec337dfd6f078092d8bb36301520b1f"
+                    }
+                ],
+                [
+                    "sv_vcf_output:",
+                    {
+                        "id": "HG002_Revio",
+                        "sv_caller": "sniffles1"
+                    },
+                    {
+                        "vcf_sample_name": [
+                            "HG002_Revio"
+                        ]
+                    },
+                    {
+                        "file_name": "HG002_Revio_sniffles1_reheader.vcf.gz"
+                    },
+                    {
+                        "summary": "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=16, phased=false, phasedAutodetect=false]"
+                    },
+                    {
+                        "variants_md5": "a5f7256c7be50ce38981c8586438c8c0"
+                    }
+                ]
+            ],
+            [
+                [
+                    "sv_vcf_output:",
+                    {
+                        "id": "HG002_Revio",
+                        "sv_caller": "hificnv"
+                    },
+                    {
+                        "file_name": "hificnv_test.vcf.gz"
+                    }
+                ],
+                [
+                    "sv_vcf_output:",
+                    {
+                        "id": "HG002_Revio",
+                        "sv_caller": "sawfish"
+                    },
+                    {
+                        "file_name": "sawfish_test.vcf.gz"
+                    }
+                ]
+            ],
+            [
+                [
+                    "sv_tbi_output:",
+                    {
+                        "id": "HG002_Revio",
+                        "sv_caller": "debreak"
+                    },
+                    "HG002_Revio_debreak_reheader.vcf.gz.tbi"
+                ],
+                [
+                    "sv_tbi_output:",
+                    {
+                        "id": "HG002_Revio",
+                        "sv_caller": "hificnv"
+                    },
+                    "hificnv_test.vcf.gz.tbi"
+                ],
+                [
+                    "sv_tbi_output:",
+                    {
+                        "id": "HG002_Revio",
+                        "sv_caller": "sawfish"
+                    },
+                    "sawfish_test.vcf.gz.tbi"
+                ],
+                [
+                    "sv_tbi_output:",
+                    {
+                        "id": "HG002_Revio",
+                        "sv_caller": "severus"
+                    },
+                    "HG002_Revio_severus_reheader.vcf.gz.tbi"
+                ],
+                [
+                    "sv_tbi_output:",
+                    {
+                        "id": "HG002_Revio",
+                        "sv_caller": "sniffles"
+                    },
+                    "HG002_Revio_sniffles_reheader.vcf.gz.tbi"
+                ],
+                [
+                    "sv_tbi_output:",
+                    {
+                        "id": "HG002_Revio",
+                        "sv_caller": "sniffles1"
+                    },
+                    "HG002_Revio_sniffles1_reheader.vcf.gz.tbi"
+                ]
+            ]
+        ],
+        "timestamp": "2026-08-29T15:18:55.975832499",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
+    "severus, sniffles, and debreak VCFs are reheadered to meta.id": {
+        "content": [
+            [
+                [
+                    "sv_vcf_output:",
+                    {
+                        "id": "HG002_Revio",
+                        "sv_caller": "debreak"
+                    },
+                    {
+                        "vcf_sample_name": [
+                            "HG002_Revio"
+                        ]
+                    },
+                    {
+                        "file_name": "HG002_Revio_debreak_reheader.vcf.gz"
+                    },
+                    {
+                        "summary": "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=10, phased=false, phasedAutodetect=false]"
+                    },
+                    {
+                        "variants_md5": "7ed30048f41ebbf91568a5a1577d939e"
+                    }
+                ],
                 [
                     "sv_vcf_output:",
                     {
@@ -59,14 +247,22 @@
                         "file_name": "HG002_Revio_sniffles_reheader.vcf.gz"
                     },
                     {
-                        "summary": "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=16, phased=false, phasedAutodetect=false]"
+                        "summary": "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=32, phased=false, phasedAutodetect=false]"
                     },
                     {
-                        "variants_md5": "a5f7256c7be50ce38981c8586438c8c0"
+                        "variants_md5": "dec337dfd6f078092d8bb36301520b1f"
                     }
                 ]
             ],
             [
+                [
+                    "sv_tbi_output:",
+                    {
+                        "id": "HG002_Revio",
+                        "sv_caller": "debreak"
+                    },
+                    "HG002_Revio_debreak_reheader.vcf.gz.tbi"
+                ],
                 [
                     "sv_tbi_output:",
                     {
@@ -111,16 +307,24 @@
                 ]
             ]
         ],
-        "timestamp": "2026-08-18T09:53:05.984641124",
+        "timestamp": "2026-08-18T18:57:39.235446138",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     },
-    "severus and sniffles VCFs are reheadered to meta.id - stub": {
+    "severus, sniffles, and debreak VCFs are reheadered to meta.id - stub": {
         "content": [
             {
                 "0": [
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "debreak"
+                        },
+                        "HG002_Revio_debreak_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
                     [
                         {
                             "id": "HG002_Revio",
@@ -159,6 +363,14 @@
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
+                            "sv_caller": "debreak"
+                        },
+                        "HG002_Revio_debreak_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
                             "sv_caller": "hificnv"
                         },
                         "hificnv_test.vcf.gz.tbi:md5,0f0b178bafa7040e0fe27d339a4ecf47"
@@ -189,6 +401,14 @@
                     ]
                 ],
                 "tbi": [
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "debreak"
+                        },
+                        "HG002_Revio_debreak_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
                     [
                         {
                             "id": "HG002_Revio",
@@ -227,6 +447,14 @@
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
+                            "sv_caller": "debreak"
+                        },
+                        "HG002_Revio_debreak_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
                             "sv_caller": "hificnv"
                         },
                         "hificnv_test.vcf.gz:md5,abf39044be097c8c2806d180178f082a"
@@ -258,10 +486,221 @@
                 ]
             }
         ],
-        "timestamp": "2026-08-18T08:32:11.455093305",
+        "timestamp": "2026-08-18T18:57:47.758707948",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
+        }
+    },
+    "severus, sniffles, sniffles1, and debreak VCFs are reheadered to meta.id - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "debreak"
+                        },
+                        "HG002_Revio_debreak_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "hificnv"
+                        },
+                        "/genomic-medicine-sweden/test-datasets/2ba60bccd754946c69718972b91a457a2bacd809/testdata/hificnv_test.vcf.gz"
+                    ],
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "sawfish"
+                        },
+                        "/genomic-medicine-sweden/test-datasets/2ba60bccd754946c69718972b91a457a2bacd809/testdata/sawfish_test.vcf.gz"
+                    ],
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "severus"
+                        },
+                        "HG002_Revio_severus_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "sniffles1"
+                        },
+                        "HG002_Revio_sniffles1_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "sniffles"
+                        },
+                        "HG002_Revio_sniffles_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "debreak"
+                        },
+                        "HG002_Revio_debreak_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "hificnv"
+                        },
+                        "/genomic-medicine-sweden/test-datasets/2ba60bccd754946c69718972b91a457a2bacd809/testdata/hificnv_test.vcf.gz.tbi"
+                    ],
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "sawfish"
+                        },
+                        "/genomic-medicine-sweden/test-datasets/2ba60bccd754946c69718972b91a457a2bacd809/testdata/sawfish_test.vcf.gz.tbi"
+                    ],
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "severus"
+                        },
+                        "HG002_Revio_severus_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "sniffles1"
+                        },
+                        "HG002_Revio_sniffles1_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "sniffles"
+                        },
+                        "HG002_Revio_sniffles_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "tbi": [
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "debreak"
+                        },
+                        "HG002_Revio_debreak_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "hificnv"
+                        },
+                        "/genomic-medicine-sweden/test-datasets/2ba60bccd754946c69718972b91a457a2bacd809/testdata/hificnv_test.vcf.gz.tbi"
+                    ],
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "sawfish"
+                        },
+                        "/genomic-medicine-sweden/test-datasets/2ba60bccd754946c69718972b91a457a2bacd809/testdata/sawfish_test.vcf.gz.tbi"
+                    ],
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "severus"
+                        },
+                        "HG002_Revio_severus_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "sniffles1"
+                        },
+                        "HG002_Revio_sniffles1_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "sniffles"
+                        },
+                        "HG002_Revio_sniffles_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "debreak"
+                        },
+                        "HG002_Revio_debreak_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "hificnv"
+                        },
+                        "/genomic-medicine-sweden/test-datasets/2ba60bccd754946c69718972b91a457a2bacd809/testdata/hificnv_test.vcf.gz"
+                    ],
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "sawfish"
+                        },
+                        "/genomic-medicine-sweden/test-datasets/2ba60bccd754946c69718972b91a457a2bacd809/testdata/sawfish_test.vcf.gz"
+                    ],
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "severus"
+                        },
+                        "HG002_Revio_severus_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "sniffles1"
+                        },
+                        "HG002_Revio_sniffles1_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sv_caller": "sniffles"
+                        },
+                        "HG002_Revio_sniffles_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-08-29T15:19:06.525944236",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
         }
     }
 }

@@ -174,7 +174,7 @@
                     "severus": 1.7
                 },
                 "SNIFFLES": {
-                    "sniffles": "1.0.12"
+                    "sniffles": "2.8.0"
                 },
                 "SOMALIER_PED_FAMILY": {
                     "create_pedigree_file": 1.0,
@@ -1123,11 +1123,11 @@
                 ],
                 [
                     "FAM_sniffles_svs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=2, variantCount=7, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=6, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_svs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=2, variantCount=7, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=2, variantCount=6, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM2_hificnv_svs.vcf.gz",
@@ -1139,21 +1139,21 @@
                 ],
                 [
                     "FAM2_sniffles_svs.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=7, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=6, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM2_svs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=1, variantCount=7, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=6, phased=false, phasedAutodetect=false]"
                 ]
             ],
             [
                 
             ]
         ],
-        "timestamp": "2026-08-19T09:10:16.325816698",
+        "timestamp": "2026-08-24T11:02:34.200963434",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     }
 }

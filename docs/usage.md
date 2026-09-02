@@ -230,6 +230,10 @@ Which callers to run and merge into family VCFs that are used for subsequent ann
 
 Sometimes you might want to run more callers than you use for merging, this can be controlled with the `--sv_callers_to_run` and `--sv_callers_to_merge` parameters. By default these are the same as `--sv_callers` but can be overwritten.
 
+!!!info "Choosing a Sniffles version"
+
+    Two versions of Sniffles are available: `sniffles` (v2) and `sniffles1` (v1.0.12). Only one can be active at a time - specifying both will cause the pipeline to exit with an error.
+
 !!!info "Variant merging strategies"
 
     Variant calls from samples within the same family are first merged into one family-level VCF per caller. Then, the family-caller files are merged into a final family file, which can then be annotated, ranked and filtered. The merging is done in this order so that different callers can have different merge parameters.

@@ -781,6 +781,10 @@ def validateSVCallingParameters(val_sv_callers_to_merge, val_sv_callers_merge_pr
     if (sv_callers.toSet() != sv_caller_priority.toSet()) {
         error("ERROR: The --sv_callers_merge_priority list must contain the same items as --sv_callers_to_merge (order may differ).")
     }
+
+    if (sv_callers.contains('sniffles') && sv_callers.contains('sniffles1')) {
+        error("ERROR: --sv_callers cannot contain both 'sniffles' (v2) and 'sniffles1' (v1). Choose one Sniffles version.")
+    }
 }
 
 //

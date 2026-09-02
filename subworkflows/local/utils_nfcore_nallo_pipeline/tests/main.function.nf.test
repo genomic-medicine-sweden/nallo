@@ -284,4 +284,56 @@ nextflow_function {
             )
         }
     }
+
+    test("test function validateSVCallingParameters fails with both sniffles and sniffles1") {
+        function "validateSVCallingParameters"
+        when {
+            function {
+                """
+                input[0] = 'sniffles,sniffles1'
+                input[1] = 'sniffles,sniffles1'
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert function.failed },
+                { assert function.stdout.any { it.contains("ERROR") } }
+            )
+        }
+    }
+
+    test("test function validateSVCallingParameters succeeds with sniffles only") {
+        function "validateSVCallingParameters"
+        when {
+            function {
+                """
+                input[0] = 'sniffles'
+                input[1] = 'sniffles'
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert function.success }
+            )
+        }
+    }
+
+    test("test function validateSVCallingParameters succeeds with sniffles1 only") {
+        function "validateSVCallingParameters"
+        when {
+            function {
+                """
+                input[0] = 'sniffles1'
+                input[1] = 'sniffles1'
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert function.success }
+            )
+        }
+    }
 }

@@ -656,7 +656,8 @@ workflow NALLO {
         )
 
         REHEADER_SV_VCF(
-            CALL_SVS.out.vcf
+            CALL_SVS.out.vcf,
+            ch_fai,
         )
 
         ch_merge_svs_in = REHEADER_SV_VCF.out.vcf

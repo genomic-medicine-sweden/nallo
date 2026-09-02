@@ -1,10 +1,12 @@
 include { BCFTOOLS_VIEW                     } from '../../../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_SORT                     } from '../../../modules/nf-core/bcftools/sort/main'
+include { DEBREAK                           } from '../../../modules/nf-core/debreak/main'
 include { HIFICNV                           } from '../../../modules/nf-core/hificnv/main'
 include { SAWFISH_DISCOVER                  } from '../../../modules/nf-core/sawfish/discover/main'
 include { SAWFISH_JOINTCALL                 } from '../../../modules/nf-core/sawfish/jointcall/main'
 include { SEVERUS                           } from '../../../modules/nf-core/severus/main'
 include { SNIFFLES                          } from '../../../modules/nf-core/sniffles/main'
+include { SNIFFLES1                         } from '../../../modules/local/sniffles1/main'
 include { TABIX_TABIX as TABIX_HIFICNV      } from '../../../modules/nf-core/tabix/tabix/main'
 include { TABIX_BGZIPTABIX as TABIX_SEVERUS } from '../../../modules/nf-core/tabix/bgziptabix/main'
 include { VEP_PREP_SV                       } from '../../../modules/local/vep_prep_sv/main'
@@ -50,11 +52,44 @@ workflow CALL_SVS {
     if (sv_callers_to_run.contains('sniffles')) {
 
         SNIFFLES(
-            ch_bam_bai
+            ch_bam_bai,
+            ch_fasta,
+            ch_tandem_repeats,
+            true,
+            false,
         )
 
         ch_for_vep_prep_sv = ch_for_vep_prep_sv.mix(
             SNIFFLES.out.vcf.map { meta, vcf -> [meta + [sv_caller: 'sniffles'], vcf] }
+        )
+    }
+
+    //
+    // Call SVs with Sniffles v1
+    //
+    if (sv_callers_to_run.contains('sniffles1')) {
+
+        SNIFFLES1(
+            ch_bam_bai
+        )
+
+        ch_for_vep_prep_sv = ch_for_vep_prep_sv.mix(
+            SNIFFLES1.out.vcf.map { meta, vcf -> [meta + [sv_caller: 'sniffles1'], vcf] }
+        )
+    }
+
+    //
+    // Call SVs with DeBreak
+    //
+    if (sv_callers_to_run.contains('debreak')) {
+
+        DEBREAK(
+            ch_bam_bai,
+            ch_fasta,
+        )
+
+        ch_for_vep_prep_sv = ch_for_vep_prep_sv.mix(
+            DEBREAK.out.vcf.map { meta, vcf -> [meta + [sv_caller: 'debreak'], vcf] }
         )
     }
 
@@ -72,16 +107,13 @@ workflow CALL_SVS {
         ch_sv_calls = ch_sv_calls.mix(TABIX_SEVERUS.out.gz_index)
     }
 
-    if (sv_callers_to_run.contains('sniffles')) {
+    BCFTOOLS_SORT(
+        VEP_PREP_SV.out.vcf.filter { meta, _vcf -> meta.sv_caller in ['sniffles', 'sniffles1', 'debreak'] }
+    )
 
-        BCFTOOLS_SORT(
-            VEP_PREP_SV.out.vcf.filter { meta, _vcf -> meta.sv_caller == 'sniffles' }
-        )
-
-        ch_sv_calls = ch_sv_calls.mix(
-            BCFTOOLS_SORT.out.vcf.join(BCFTOOLS_SORT.out.tbi, failOnMismatch: true, failOnDuplicate: true)
-        )
-    }
+    ch_sv_calls = ch_sv_calls.mix(
+        BCFTOOLS_SORT.out.vcf.join(BCFTOOLS_SORT.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+    )
 
     //
     // Call CNVs with HiFiCNV
