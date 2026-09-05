@@ -510,7 +510,7 @@
                             "family_id": "FAM",
                             "sv_caller": "hificnv"
                         },
-                        "/genomic-medicine-sweden/test-datasets/2ba60bccd754946c69718972b91a457a2bacd809/testdata/hificnv_test.vcf.gz"
+                        "/genomic-medicine-sweden/test-datasets/3b9b2ac66c9946e86814bda73e705a3c85c602a8/testdata/hificnv_test.vcf.gz"
                     ],
                     [
                         {
@@ -518,7 +518,7 @@
                             "family_id": "FAM",
                             "sv_caller": "sawfish"
                         },
-                        "/genomic-medicine-sweden/test-datasets/2ba60bccd754946c69718972b91a457a2bacd809/testdata/sawfish_test.vcf.gz"
+                        "/genomic-medicine-sweden/test-datasets/3b9b2ac66c9946e86814bda73e705a3c85c602a8/testdata/sawfish_test.vcf.gz"
                     ],
                     [
                         {
@@ -560,7 +560,7 @@
                             "family_id": "FAM",
                             "sv_caller": "hificnv"
                         },
-                        "/genomic-medicine-sweden/test-datasets/2ba60bccd754946c69718972b91a457a2bacd809/testdata/hificnv_test.vcf.gz.tbi"
+                        "/genomic-medicine-sweden/test-datasets/3b9b2ac66c9946e86814bda73e705a3c85c602a8/testdata/hificnv_test.vcf.gz.tbi"
                     ],
                     [
                         {
@@ -568,7 +568,7 @@
                             "family_id": "FAM",
                             "sv_caller": "sawfish"
                         },
-                        "/genomic-medicine-sweden/test-datasets/2ba60bccd754946c69718972b91a457a2bacd809/testdata/sawfish_test.vcf.gz.tbi"
+                        "/genomic-medicine-sweden/test-datasets/3b9b2ac66c9946e86814bda73e705a3c85c602a8/testdata/sawfish_test.vcf.gz.tbi"
                     ],
                     [
                         {
@@ -610,7 +610,7 @@
                             "family_id": "FAM",
                             "sv_caller": "hificnv"
                         },
-                        "/genomic-medicine-sweden/test-datasets/2ba60bccd754946c69718972b91a457a2bacd809/testdata/hificnv_test.vcf.gz.tbi"
+                        "/genomic-medicine-sweden/test-datasets/3b9b2ac66c9946e86814bda73e705a3c85c602a8/testdata/hificnv_test.vcf.gz.tbi"
                     ],
                     [
                         {
@@ -618,7 +618,7 @@
                             "family_id": "FAM",
                             "sv_caller": "sawfish"
                         },
-                        "/genomic-medicine-sweden/test-datasets/2ba60bccd754946c69718972b91a457a2bacd809/testdata/sawfish_test.vcf.gz.tbi"
+                        "/genomic-medicine-sweden/test-datasets/3b9b2ac66c9946e86814bda73e705a3c85c602a8/testdata/sawfish_test.vcf.gz.tbi"
                     ],
                     [
                         {
@@ -660,7 +660,7 @@
                             "family_id": "FAM",
                             "sv_caller": "hificnv"
                         },
-                        "/genomic-medicine-sweden/test-datasets/2ba60bccd754946c69718972b91a457a2bacd809/testdata/hificnv_test.vcf.gz"
+                        "/genomic-medicine-sweden/test-datasets/3b9b2ac66c9946e86814bda73e705a3c85c602a8/testdata/hificnv_test.vcf.gz"
                     ],
                     [
                         {
@@ -668,7 +668,7 @@
                             "family_id": "FAM",
                             "sv_caller": "sawfish"
                         },
-                        "/genomic-medicine-sweden/test-datasets/2ba60bccd754946c69718972b91a457a2bacd809/testdata/sawfish_test.vcf.gz"
+                        "/genomic-medicine-sweden/test-datasets/3b9b2ac66c9946e86814bda73e705a3c85c602a8/testdata/sawfish_test.vcf.gz"
                     ],
                     [
                         {

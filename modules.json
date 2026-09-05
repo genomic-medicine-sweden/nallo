@@ -170,9 +170,8 @@
                     },
                     "ensemblvep/vep": {
                         "branch": "master",
-                        "git_sha": "890fdcff71928fc1470d3e669d4c430c8c770297",
-                        "installed_by": ["modules"],
-                        "patch": "modules/nf-core/ensemblvep/vep/ensemblvep-vep.diff"
+                        "git_sha": "7047ebe92547d7f029fa6e71d2c893d5fb131938",
+                        "installed_by": ["modules"]
                     },
                     "fastqc": {
                         "branch": "master",
