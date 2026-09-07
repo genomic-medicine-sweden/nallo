@@ -58,8 +58,9 @@
                     "perl-math-cdf": 0.1
                 },
                 "ENSEMBLVEP_SV": {
-                    "ensemblvep": 110.0,
-                    "tabix": 1.17
+                    "ensemblvep": 116.1,
+                    "perl-math-cdf": 0.1,
+                    "tabix": "1.23.1"
                 },
                 "GAWK_EXTRACT_REGIONS": {
                     "gawk": "5.3.1"
@@ -232,7 +233,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-08-24T11:14:43.94849221",
+        "timestamp": "2026-09-05T09:40:32.35674586",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

@@ -2,13 +2,13 @@
     "bcf, db, vep_cache, '116'": {
         "content": [
             "test.vcf.gz.tbi",
-            "914b5ed81cf2a02ecf53f409b72cffdf",
-            "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=202, phased=false, phasedAutodetect=false]",
+            "30e608ce78efe44c1d38067b0f89763c",
+            "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=3, variantCount=214, phased=false, phasedAutodetect=false]",
             "test_anno.bcf.gz.tbi",
             "19b1cf61ee8306c4d6f34084cbd3fcd7",
             "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=3, variantCount=214, phased=false, phasedAutodetect=false]"
         ],
-        "timestamp": "2026-08-23T08:32:01.390055452",
+        "timestamp": "2026-09-05T08:54:46.932442918",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
@@ -182,12 +182,12 @@
     "bcf, [], vep_cache, '116' - no echtvar annotation": {
         "content": [
             "test.vcf.gz.tbi",
-            "872c4f2da2e372d464584c5d838b5cdd",
-            "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=202, phased=false, phasedAutodetect=false]",
+            "2782a5502cd74fb53216333856ed0405",
+            "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=3, variantCount=214, phased=false, phasedAutodetect=false]",
             true,
             true
         ],
-        "timestamp": "2026-08-23T08:32:26.177925012",
+        "timestamp": "2026-09-05T08:55:13.69331682",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
@@ -285,13 +285,13 @@
     "bcf, db, vep_cache, '116', with extra_vep_options_snv": {
         "content": [
             "test.vcf.gz.tbi",
-            "f46b211312e453d749e8b5d5562ce6ab",
-            "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=202, phased=false, phasedAutodetect=false]",
+            "bfcc90be7db3e9c3313da8c480107b73",
+            "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=3, variantCount=214, phased=false, phasedAutodetect=false]",
             "test_anno.bcf.gz.tbi",
             "19b1cf61ee8306c4d6f34084cbd3fcd7",
             "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=3, variantCount=214, phased=false, phasedAutodetect=false]"
         ],
-        "timestamp": "2026-08-23T08:32:44.952097537",
+        "timestamp": "2026-09-05T08:55:34.801746065",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
