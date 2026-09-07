@@ -1456,12 +1456,14 @@
                     "perl-math-cdf": 0.1
                 },
                 "ENSEMBLVEP_SNV": {
-                    "ensemblvep": 110.0,
-                    "tabix": 1.17
+                    "ensemblvep": 116.1,
+                    "perl-math-cdf": 0.1,
+                    "tabix": "1.23.1"
                 },
                 "ENSEMBLVEP_SV": {
-                    "ensemblvep": 110.0,
-                    "tabix": 1.17
+                    "ensemblvep": 116.1,
+                    "perl-math-cdf": 0.1,
+                    "tabix": "1.23.1"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -2604,7 +2606,7 @@
                 ],
                 [
                     "FAM_snvs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=205, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=3, variantCount=217, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_deepvariant_snvs.vcf.gz",
@@ -2631,7 +2633,7 @@
                 
             ]
         ],
-        "timestamp": "2026-08-22T09:49:49.427913061",
+        "timestamp": "2026-09-07T07:34:35.85817025",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

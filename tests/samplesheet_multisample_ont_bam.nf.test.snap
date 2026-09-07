@@ -75,12 +75,14 @@
                     "echtvar": "0.2.4"
                 },
                 "ENSEMBLVEP_SNV": {
-                    "ensemblvep": 110.0,
-                    "tabix": 1.17
+                    "ensemblvep": 116.1,
+                    "perl-math-cdf": 0.1,
+                    "tabix": "1.23.1"
                 },
                 "ENSEMBLVEP_SV": {
-                    "ensemblvep": 110.0,
-                    "tabix": 1.17
+                    "ensemblvep": 116.1,
+                    "perl-math-cdf": 0.1,
+                    "tabix": "1.23.1"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -977,11 +979,11 @@
                 ],
                 [
                     "FAM_snvs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=2, variantCount=127, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=2, variantCount=135, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM2_snvs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=126, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=1, variantCount=134, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_ONT_A_deepvariant_snvs.vcf.gz",
@@ -1016,7 +1018,7 @@
                 
             ]
         ],
-        "timestamp": "2026-08-27T10:48:36.966163695",
+        "timestamp": "2026-09-07T07:42:54.349895185",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
@@ -1104,12 +1106,14 @@
                     "echtvar": "0.2.4"
                 },
                 "ENSEMBLVEP_SNV": {
-                    "ensemblvep": 110.0,
-                    "tabix": 1.17
+                    "ensemblvep": 116.1,
+                    "perl-math-cdf": 0.1,
+                    "tabix": "1.23.1"
                 },
                 "ENSEMBLVEP_SV": {
-                    "ensemblvep": 110.0,
-                    "tabix": 1.17
+                    "ensemblvep": 116.1,
+                    "perl-math-cdf": 0.1,
+                    "tabix": "1.23.1"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -2163,11 +2167,11 @@
                 ],
                 [
                     "FAM_snvs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=2, variantCount=127, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=2, variantCount=135, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM2_snvs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=1, variantCount=126, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=1, variantCount=134, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_ONT_A_deepvariant_snvs.vcf.gz",
@@ -2210,7 +2214,7 @@
                 
             ]
         ],
-        "timestamp": "2026-08-24T10:56:10.959830039",
+        "timestamp": "2026-09-07T07:38:40.804755307",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
