@@ -99,16 +99,18 @@
                     "echtvar": "0.2.4"
                 },
                 "ENSEMBLVEP_FILTERVEP": {
-                    "ensemblvep": 115.2,
+                    "ensemblvep": 116.1,
                     "perl-math-cdf": 0.1
                 },
                 "ENSEMBLVEP_SNV": {
-                    "ensemblvep": 110.0,
-                    "tabix": 1.17
+                    "ensemblvep": 116.1,
+                    "perl-math-cdf": 0.1,
+                    "tabix": "1.23.1"
                 },
                 "ENSEMBLVEP_SV": {
-                    "ensemblvep": 110.0,
-                    "tabix": 1.17
+                    "ensemblvep": 116.1,
+                    "perl-math-cdf": 0.1,
+                    "tabix": "1.23.1"
                 },
                 "FASTQC": {
                     "fastqc": "0.12.1"
@@ -1316,7 +1318,7 @@
                 ],
                 [
                     "FAM_snvs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=210, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=3, variantCount=222, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "HG002_deepvariant_snvs.vcf.gz",
@@ -1336,14 +1338,14 @@
                 ],
                 [
                     "FAM_svs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=3, variantCount=44, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=3, variantCount=45, phased=false, phasedAutodetect=false]"
                 ]
             ],
             [
                 
             ]
         ],
-        "timestamp": "2026-08-24T10:52:59.154574483",
+        "timestamp": "2026-09-07T11:41:23.627140556",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
@@ -1452,7 +1454,7 @@
                     "echtvar": "0.2.4"
                 },
                 "ENSEMBLVEP_FILTERVEP": {
-                    "ensemblvep": 115.2,
+                    "ensemblvep": 116.1,
                     "perl-math-cdf": 0.1
                 },
                 "ENSEMBLVEP_SNV": {
@@ -2463,7 +2465,7 @@
                 "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
                 "somalier_stats.txt:md5,bfc85f681fb57c1025c7791c5b0e970a",
                 "whatshap-stats-table.txt:md5,14acf9cce13f1732ee00e93438bbe989",
-                "FAM_paraphase_annotated.tsv:md5,a2cc0ab6a272c1c2347baf66abe927bb",
+                "FAM_paraphase_annotated.tsv:md5,78412bb3754f909c1e4443a3d62145a7",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002_cramino_aligned_phased.arrow:md5,796ee4e79b13531dae09e445164e5fe0",
                 "HG003_cramino_aligned_phased.arrow:md5,bb4d7ef993c11ad68987f07abcfde486",
@@ -2633,7 +2635,7 @@
                 
             ]
         ],
-        "timestamp": "2026-09-07T07:34:35.85817025",
+        "timestamp": "2026-09-07T11:22:25.073803642",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
