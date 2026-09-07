@@ -96,7 +96,7 @@
                     "echtvar": "0.2.4"
                 },
                 "ENSEMBLVEP_FILTERVEP": {
-                    "ensemblvep": 115.2,
+                    "ensemblvep": 116.1,
                     "perl-math-cdf": 0.1
                 },
                 "ENSEMBLVEP_SNV": {
@@ -515,7 +515,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-09-05T09:39:38.15781973",
+        "timestamp": "2026-09-07T13:26:04.433766506",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

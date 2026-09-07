@@ -54,7 +54,7 @@
                     "deepvariant": "1.10.0"
                 },
                 "ENSEMBLVEP_FILTERVEP": {
-                    "ensemblvep": 115.2,
+                    "ensemblvep": 116.1,
                     "perl-math-cdf": 0.1
                 },
                 "ENSEMBLVEP_SV": {
@@ -233,7 +233,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-09-05T09:40:32.35674586",
+        "timestamp": "2026-09-07T13:10:51.397181869",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

@@ -90,7 +90,7 @@
                     "echtvar": "0.2.4"
                 },
                 "ENSEMBLVEP_FILTERVEP": {
-                    "ensemblvep": 115.2,
+                    "ensemblvep": 116.1,
                     "perl-math-cdf": 0.1
                 },
                 "ENSEMBLVEP_SNV": {
@@ -312,7 +312,7 @@
                 }
             }
         ],
-        "timestamp": "2026-09-05T09:28:23.866256193",
+        "timestamp": "2026-09-07T13:16:10.404839307",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
