@@ -39,6 +39,7 @@ workflow PIPELINE_INITIALISATION {
     val_fasta
     val_genmod_reduced_penetrance
     val_genmod_score_config_snvs
+    val_genmod_score_config_snvs_mito
     val_genmod_score_config_svs
     val_gens_baf_positions
     val_gens_coverage_bins
@@ -219,7 +220,7 @@ workflow PIPELINE_INITIALISATION {
         snv_annotation: ["vep_cache", "vep_plugin_files", "variant_consequences_snvs"],
         sv_calling: ["fasta"],
         sv_annotation: ["svdb_sv_databases", "vep_cache", "vep_plugin_files", "variant_consequences_svs"],
-        rank_variants: ["genmod_reduced_penetrance", "genmod_score_config_snvs", "genmod_score_config_svs"],
+        rank_variants: ["genmod_reduced_penetrance", "genmod_score_config_snvs", "genmod_score_config_snvs_mito", "genmod_score_config_svs"],
         repeat_calling: ["str_bed"],
         repeat_annotation: ["stranger_repeat_catalog"],
         gens: ["gens_baf_positions", "gens_panel_of_normals_female", "gens_panel_of_normals_male", "gens_coverage_bins"],
@@ -264,6 +265,7 @@ workflow PIPELINE_INITIALISATION {
         stranger_repeat_catalog: val_stranger_repeat_catalog,
         genmod_reduced_penetrance: val_genmod_reduced_penetrance,
         genmod_score_config_snvs: val_genmod_score_config_snvs,
+        genmod_score_config_snvs_mito: val_genmod_score_config_snvs_mito,
         genmod_score_config_svs: val_genmod_score_config_svs,
         variant_consequences_snvs: val_variant_consequences_snvs,
         variant_consequences_svs: val_variant_consequences_svs,

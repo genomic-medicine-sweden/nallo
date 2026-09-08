@@ -43,6 +43,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     ch_fai
     ch_genmod_reduced_penetrance
     ch_genmod_score_config_snvs
+    ch_genmod_score_config_snvs_mito
     ch_genmod_score_config_svs
     ch_gens_baf_positions
     ch_gens_coverage_bins
@@ -158,6 +159,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         ch_fai,
         ch_genmod_reduced_penetrance,
         ch_genmod_score_config_snvs,
+        ch_genmod_score_config_snvs_mito,
         ch_genmod_score_config_svs,
         ch_gens_baf_positions,
         ch_gens_coverage_bins,
@@ -398,6 +400,7 @@ workflow {
         params.fasta,
         params.genmod_reduced_penetrance,
         params.genmod_score_config_snvs,
+        params.genmod_score_config_snvs_mito,
         params.genmod_score_config_svs,
         params.gens_baf_positions,
         params.gens_coverage_bins,
@@ -469,6 +472,7 @@ workflow {
         createReferenceChannelFromPath(params.fai),
         createReferenceChannelFromPath(params.genmod_reduced_penetrance),
         createReferenceChannelFromPath(params.genmod_score_config_snvs),
+        createReferenceChannelFromPath(params.genmod_score_config_snvs_mito),
         createReferenceChannelFromPath(params.genmod_score_config_svs),
         createReferenceChannelFromPath(params.gens_baf_positions),
         createReferenceChannelFromPath(params.gens_coverage_bins),

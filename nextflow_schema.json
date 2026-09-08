@@ -352,7 +352,14 @@
                     "exists": true,
                     "format": "path",
                     "fa_icon": "fas fa-file",
-                    "description": "A SNV rank model config file for genmod."
+                    "description": "A rank model config file for genmod, used for nuclear SNV scoring."
+                },
+                "genmod_score_config_snvs_mito": {
+                    "type": "string",
+                    "exists": true,
+                    "format": "path",
+                    "fa_icon": "fas fa-file",
+                    "description": "A rank model config file for genmod, used for mitochondrial SNV scoring. Should reference only fields produced by the MT VEP command."
                 },
                 "genmod_score_config_svs": {
                     "type": "string",
