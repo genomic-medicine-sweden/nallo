@@ -73,6 +73,6 @@
                 "meta": ["project"]
             }
         },
-        "required": ["sample", "file", "family_id", "paternal_id", "maternal_id", "sex", "phenotype", "project"]
+        "required": ["sample", "file", "family_id", "paternal_id", "maternal_id", "phenotype", "project"]
     }
 }
