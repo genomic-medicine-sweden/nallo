@@ -47,6 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1226](https://github.com/genomic-medicine-sweden/nallo/pull/1226) - Added addition of column for `hgnc_id` and `region_type` to methbat profile with new `csvtk/join` module
 - [#1226](https://github.com/genomic-medicine-sweden/nallo/pull/1226) - Added filtering step with `gawk` to `annotate_methylation`, removing variants with `NA` in the `cpg_label`
 - [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Added DeBreak as a new SV caller option (`--sv_callers debreak`)
+- [#1252](https://github.com/genomic-medicine-sweden/nallo/pull/1252) - Added `--extra_vep_options_snv_mito` param for MT-specific VEP annotation (excludes nuclear-only flags `--sift`, `--polyphen`, `--humdiv`) and `--genmod_score_config_snvs_mito` param to route mitochondrial SNVs to a dedicated rank model
 
 ### Changed
 
