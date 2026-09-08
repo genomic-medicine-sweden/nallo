@@ -970,7 +970,7 @@ workflow NALLO {
     if (!val_skip_rank_variants) {
 
         ch_snvs_vcf_nuclear = ANN_CSQ_PLI_SNV.out.vcf.filter { meta, _vcf -> meta.genome != 'mitochondrial' }
-        ch_snvs_vcf_mito    = ANN_CSQ_PLI_SNV.out.vcf.filter { meta, _vcf -> meta.genome == 'mitochondrial' }
+        ch_snvs_vcf_mito = ANN_CSQ_PLI_SNV.out.vcf.filter { meta, _vcf -> meta.genome == 'mitochondrial' }
 
         ch_snvs_to_rank = buildRankVariantsInputChannel(
             ch_snvs_vcf_nuclear,
@@ -978,13 +978,15 @@ workflow NALLO {
             'snv',
             ch_genmod_score_config_snvs,
             ch_samplesheet,
-        ).mix(buildRankVariantsInputChannel(
-            ch_snvs_vcf_mito,
-            SOMALIER_PED_FAMILY.out.ped,
-            'snv',
-            ch_genmod_score_config_snvs_mito,
-            ch_samplesheet,
-        ))
+        ).mix(
+            buildRankVariantsInputChannel(
+                ch_snvs_vcf_mito,
+                SOMALIER_PED_FAMILY.out.ped,
+                'snv',
+                ch_genmod_score_config_snvs_mito,
+                ch_samplesheet,
+            )
+        )
 
         ch_svs_to_rank = buildRankVariantsInputChannel(
             ANN_CSQ_PLI_SVS.out.vcf.map { meta, vcf -> [meta + [family_id: meta.id], vcf] },
