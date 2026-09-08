@@ -165,9 +165,8 @@
                     },
                     "ensemblvep/filtervep": {
                         "branch": "master",
-                        "git_sha": "890fdcff71928fc1470d3e669d4c430c8c770297",
-                        "installed_by": ["vcf_filter_bcftools_ensemblvep"],
-                        "patch": "modules/nf-core/ensemblvep/filtervep/ensemblvep-filtervep.diff"
+                        "git_sha": "7047ebe92547d7f029fa6e71d2c893d5fb131938",
+                        "installed_by": ["vcf_filter_bcftools_ensemblvep"]
                     },
                     "ensemblvep/vep": {
                         "branch": "master",
