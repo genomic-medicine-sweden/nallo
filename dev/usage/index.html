@@ -2079,7 +2079,11 @@ The phaser can be chosen using the <code>--phaser</code> argument. See the follo
 </tr>
 <tr>
 <td><code>extra_vep_options_snv</code></td>
-<td><strong>Optional</strong>: Options appended to the VEP core command for SNV annotation, applied to both nuclear and mitochondrial SNVs. Defaults to standard enrichment annotations. To add plugins (e.g. CADD, SpliceAI), supply the default flags plus your additions (e.g. <code>'--buffer_size 20000 ... --plugin CADD,snv.tsv.gz'</code>). Plugin files must be included in <code>vep_plugin_files</code>.</td>
+<td><strong>Optional</strong>: Options appended to the VEP core command for nuclear SNV annotation. Defaults to standard enrichment annotations including SIFT and PolyPhen. To add plugins (e.g. CADD, SpliceAI), supply the default flags plus your additions (e.g. <code>'--buffer_size 20000 ... --plugin CADD,snv.tsv.gz'</code>). Plugin files must be included in <code>vep_plugin_files</code>.</td>
+</tr>
+<tr>
+<td><code>extra_vep_options_snv_mito</code></td>
+<td><strong>Optional</strong>: Options appended to the VEP core command for mitochondrial SNV annotation. Defaults to the same enrichment annotations as <code>extra_vep_options_snv</code> minus nuclear-only flags (<code>--sift</code>, <code>--polyphen</code>, <code>--humdiv</code>). To add MT-specific plugins (e.g. <code>gnomADMt</code> for heteroplasmy-aware allele frequencies), supply the default flags plus your additions. Plugin files must be included in <code>vep_plugin_files</code>.</td>
 </tr>
 <tr>
 <td><code>variant_consequences_snvs</code></td>
@@ -2121,7 +2125,11 @@ The phaser can be chosen using the <code>--phaser</code> argument. See the follo
 <tbody>
 <tr>
 <td><code>genmod_score_config_snvs</code></td>
-<td> Used by GENMOD when ranking variants. Sample file <a href="https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini">here</a></td>
+<td>Used by GENMOD when ranking nuclear SNVs. Sample file <a href="https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini">here</a></td>
+</tr>
+<tr>
+<td><code>genmod_score_config_snvs_mito</code></td>
+<td><strong>Optional</strong>: Used by GENMOD when ranking mitochondrial SNVs. Should reference only fields produced by the MT VEP command (i.e. exclude nuclear-only annotations such as SIFT, PolyPhen, SpliceAI, LoFtool). If not provided, mitochondrial SNVs are not ranked.</td>
 </tr>
 <tr>
 <td><code>genmod_reduced_penetrance</code></td>
