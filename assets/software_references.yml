@@ -96,6 +96,9 @@ tool:
   hiphase:
     citation: "HiPhase (Holt et al. 2024)"
     bibliography: "James M Holt, Christopher T Saunders, William J Rowell, Zev Kronenberg, Aaron M Wenger, Michael Eberle, HiPhase: jointly phasing small, structural, and tandem repeat variants from HiFi sequencing, Bioinformatics, Volume 40, Issue 2, February 2024, btae042, https://doi.org/10.1093/bioinformatics/btae042"
+  htslib:
+    citation: "HTSlib (Bonfield et al. 2021)"
+    bibliography: "Bonfield JK, Marshall J, Danecek P, et al. HTSlib: C library for reading/writing high-throughput sequencing data. Gigascience. 2021;10(2):giab007. doi:10.1093/gigascience/giab007"
   longphase:
     citation: "LongPhase (Lin et al. 2024)"
     bibliography: "Jyun-Hong Lin, Liang-Chi Chen, Shu-Chi Yu, Yao-Ting Huang, LongPhase: an ultra-fast chromosome-scale phasing algorithm for small and large variants, Bioinformatics, Volume 38, Issue 7, March 2022, Pages 1816–1822, https://doi.org/10.1093/bioinformatics/btac058"
@@ -189,6 +192,9 @@ tool:
   vcfexpress:
     citation: "Vcfexpress (Pedersen & Quinlan 2020)"
     bibliography: "Pedersen BS, Quinlan AR. Vcfexpress: a high-performance variant manipulation tool. Bioinformatics. 2020;36(1):259-260. doi:10.1093/bioinformatics/btz483"
+  xz:
+    citation: "XZ Utils"
+    bibliography: ""
   yak:
     citation: "yak"
     bibliography: ""
