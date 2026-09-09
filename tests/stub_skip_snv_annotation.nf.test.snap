@@ -74,6 +74,10 @@
                 "HIFICNV": {
                     "hificnv": "1.0.0-36e6461"
                 },
+                "HTSLIB_BGZIPTABIX": {
+                    "htslib": 1.24,
+                    "xz": "5.8.3"
+                },
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283"
                 },
@@ -124,10 +128,6 @@
                 },
                 "SVDB_QUERY": {
                     "svdb": "2.8.4"
-                },
-                "TABIX_BGZIPTABIX": {
-                    "bgzip": 1.21,
-                    "tabix": 1.21
                 },
                 "TABIX_HIFICNV": {
                     "tabix": 1.21
@@ -233,7 +233,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-09-07T13:10:51.397181869",
+        "timestamp": "2026-09-09T07:57:01.396754774",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
