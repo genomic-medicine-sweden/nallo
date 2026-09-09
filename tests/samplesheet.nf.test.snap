@@ -157,6 +157,10 @@
                 "HIFICNV": {
                     "hificnv": "1.0.0-36e6461"
                 },
+                "HTSLIB_BGZIPTABIX": {
+                    "htslib": 1.24,
+                    "xz": "5.8.3"
+                },
                 "LONGPHASE_HAPLOTAG": {
                     "longphase": "2.0.1"
                 },
@@ -852,7 +856,7 @@
                 
             ]
         ],
-        "timestamp": "2026-09-07T13:33:47.326074372",
+        "timestamp": "2026-09-09T08:03:22.985099468",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
