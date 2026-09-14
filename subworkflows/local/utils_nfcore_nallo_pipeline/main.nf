@@ -4,9 +4,9 @@
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS
+IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+ */
 
 include { UTILS_NFSCHEMA_PLUGIN   } from '../../nf-core/utils_nfschema_plugin'
 include { paramsSummaryMap        } from 'plugin/nf-schema'
@@ -19,9 +19,9 @@ include { UTILS_NEXTFLOW_PIPELINE } from '../../nf-core/utils_nextflow_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    SUBWORKFLOW TO INITIALISE PIPELINE
+SUBWORKFLOW TO INITIALISE PIPELINE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+ */
 
 workflow PIPELINE_INITIALISATION {
     take:
@@ -359,9 +359,9 @@ workflow PIPELINE_INITIALISATION {
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    SUBWORKFLOW FOR PIPELINE COMPLETION
+SUBWORKFLOW FOR PIPELINE COMPLETION
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+ */
 
 workflow PIPELINE_COMPLETION {
     take:
@@ -402,9 +402,9 @@ workflow PIPELINE_COMPLETION {
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    FUNCTIONS
+FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+ */
 //
 // Check and validate pipeline parameters
 //
@@ -566,7 +566,7 @@ def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, 
 //
 // Lookup all workflows that needs to be active for another workflow
 //
-def checkWorkflowDependencies(skip: String, combinationsMap: Map, statusMap: Map, workflowMap: Map, errors: List) {
+def checkWorkflowDependencies(skip, combinationsMap, statusMap, workflowMap, errors) {
 
     // Lookup the workflow associated with the --skip_xxx parameter
     def currentWorkflow = workflowMap.find { _key, mapValue -> mapValue == skip }?.key
@@ -598,7 +598,7 @@ def checkWorkflowDependencies(skip: String, combinationsMap: Map, statusMap: Map
 //
 // Lookup if a file is required by any workflows, and add to errors
 //
-def checkFileDependencies(file: String, combinationsMap: Map, statusMap: Map, workflowMap: Map, errors: List) {
+def checkFileDependencies(file, combinationsMap, statusMap, workflowMap, errors) {
     // Get all workflows required by a file
     def workflowThatRequiresFile = findKeysForValue(file, combinationsMap)
 
@@ -621,7 +621,7 @@ def checkFileDependencies(file: String, combinationsMap: Map, statusMap: Map, wo
 //
 // Find the workflow skips that are not currently active
 //
-def findRequiredSkips(paramType, requiredWorkflows: Set<String>, statusMap: Map, workflowMap: Map) {
+def findRequiredSkips(paramType, requiredWorkflows, statusMap, workflowMap) {
 
     def requiredSkips = []
 
@@ -640,7 +640,7 @@ def findRequiredSkips(paramType, requiredWorkflows: Set<String>, statusMap: Map,
     return requiredSkips
 }
 
-def findKeysForValue(valueToFind, map: Map) {
+def findKeysForValue(valueToFind, map) {
 
     def keys = []
 
@@ -916,6 +916,6 @@ def isParent(sample) {
     isMother(sample) || isFather(sample)
 }
 
-def isNonZeroNonEmpty(value) -> boolean {
-    (value instanceof String && value != "" && value != "0") || (value instanceof Number && value != 0)
+def isNonZeroNonEmpty(value) {
+    return (value instanceof String && value != "" && value != "0") || (value instanceof Number && value != 0)
 }
