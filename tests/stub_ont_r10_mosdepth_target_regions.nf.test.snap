@@ -280,6 +280,15 @@
                 "repeats/sample/HG002_ONT_C/HG002_ONT_C_strdust.vcf.gz",
                 "repeats/sample/HG002_ONT_C/HG002_ONT_C_strdust.vcf.gz.tbi",
                 "snvs",
+                "snvs/family",
+                "snvs/family/FAM",
+                "snvs/family/FAM/precalled_input",
+                "snvs/family/FAM/precalled_input/FAM_concat.vcf.gz",
+                "snvs/family/FAM/precalled_input/FAM_concat.vcf.gz.tbi",
+                "snvs/family/FAM2",
+                "snvs/family/FAM2/precalled_input",
+                "snvs/family/FAM2/precalled_input/FAM2_concat.vcf.gz",
+                "snvs/family/FAM2/precalled_input/FAM2_concat.vcf.gz.tbi",
                 "snvs/sample",
                 "snvs/sample/HG002_ONT_A",
                 "snvs/sample/HG002_ONT_A/HG002_ONT_A_deepvariant_snvs.vcf.gz",
@@ -292,10 +301,10 @@
                 "snvs/sample/HG002_ONT_C/HG002_ONT_C_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-30T15:56:10.482056827",
+        "timestamp": "2026-09-11T16:30:46.610403251",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     }
 }

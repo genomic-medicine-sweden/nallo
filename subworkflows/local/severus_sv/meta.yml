@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "severus_sv"
+description: Call structural variants using Severus
+keywords:
+  - sv calling
+  - severus
+  - long-read sequencing
+components:
+  - severus
+input:
+  - ch_bam_bai:
+      type: file
+      description: |
+        Channel containing sample information (meta), BAM and BAI files
+        Structure: [ val(meta), path(bam), path(bai) ]
+      pattern: "*.{bam,cram}"
+  - ch_tandem_repeats:
+      type: file
+      description: |
+        Channel containing sample information (meta) and tandem repeat BED file (optional)
+        Structure: [ val(meta), path(bed) ]
+      pattern: "*.bed"
+output:
+  - vcf:
+      type: file
+      description: |
+        Channel containing sample information (meta, with sv_caller, needs_reheader, skip_vep_prep stamped)
+        and raw VCF file
+        Structure: [ val(meta), path(vcf) ]
+      pattern: "*.vcf.gz"
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+authors:
+  - "@aksenia"
+maintainers:
+  - "@aksenia"

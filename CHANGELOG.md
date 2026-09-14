@@ -48,6 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1226](https://github.com/genomic-medicine-sweden/nallo/pull/1226) - Added filtering step with `gawk` to `annotate_methylation`, removing variants with `NA` in the `cpg_label`
 - [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Added DeBreak as a new SV caller option (`--sv_callers debreak`)
 - [#1252](https://github.com/genomic-medicine-sweden/nallo/pull/1252) - Added `--extra_vep_options_snv_mito` param for MT-specific VEP annotation (excludes nuclear-only flags `--sift`, `--polyphen`, `--humdiv`) and `--genmod_score_config_snvs_mito` param to route mitochondrial SNVs to a dedicated rank model
+- [#1255](https://github.com/genomic-medicine-sweden/nallo/pull/1255) - Added `--precalled` mode: supply pre-called family SNV and SV VCFs via new samplesheet columns (`snv_vcf`, `snv_vcf_tbi`, `sv_vcf`, `sv_vcf_tbi`) to skip variant calling and re-run phasing and annotation only. The `snvs/family/<id>/precalled_input/` and `svs/family/<id>/precalled_input/` output directories publish the pre-phasing VCFs for future `--precalled` re-runs
 
 ### Changed
 
@@ -134,6 +135,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Upgraded `sniffles` to v2.8.0 and migrated Sniffles v1.0.12 to local module `SNIFFLES1` (`--sv_callers sniffles1`, mutually exclusive with `sniffles` v2); `--sniffles_min_heterozygous_allele_frequency` applies to `SNIFFLES1` only (Sniffles v2 uses coverage-based het filtering via `SUPPORT_MIN` FILTER, making `--minhetsupport` redundant)
 - [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Updated `VEP_PREP_SV` to apply Sniffles v1-specific caller fixes (STRANDBIAS FILTER header injection, synthetic `END=POS`/`SVLEN=1` removal) only when processing `SNIFFLES1` output; SVTYPE remapping applies to all callers
 - [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - `REHEADER_SV_VCF` now passes the reference FAI to `BCFTOOLS_REHEADER`, ensuring all reference `##contig` lines are present in per-caller VCFs before SVDB merge
+- [#1253](https://github.com/genomic-medicine-sweden/nallo/pull/1253) - Refactored `CALL_SVS` into per-caller subworkflows (`SNIFFLES_SV`, `SNIFFLES1_SV`, `SEVERUS_SV`, `DEBREAK_SV`, `HIFICNV_SV`, `SAWFISH_SV`); `CALL_SVS` now emits a single `sv_calls` channel (3-tuple `[meta, vcf, tbi]`, where `tbi` is `[]` for callers that do not pre-index); `nallo.nf` branches on `meta.skip_vep_prep` to route calls through `VEP_PREP_SV` + `BCFTOOLS_SORT` or bypass it, then rejoins before the optional region filter and reheader step; `needs_reheader` and `skip_vep_prep` flags stamped on `meta` by each per-caller subworkflow
 
 ### Removed
 

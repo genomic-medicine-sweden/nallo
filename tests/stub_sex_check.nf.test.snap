@@ -474,6 +474,9 @@
                 "snvs/family/FAM",
                 "snvs/family/FAM/FAM_snvs.vcf.gz",
                 "snvs/family/FAM/FAM_snvs.vcf.gz.tbi",
+                "snvs/family/FAM/precalled_input",
+                "snvs/family/FAM/precalled_input/FAM_concat.vcf.gz",
+                "snvs/family/FAM/precalled_input/FAM_concat.vcf.gz.tbi",
                 "snvs/sample",
                 "snvs/sample/HG002",
                 "snvs/sample/HG002/HG002_deepvariant_snvs.vcf.gz",
@@ -499,10 +502,10 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-08-20T17:18:00.199958439",
+        "timestamp": "2026-09-11T17:42:38.275990054",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     }
 }

@@ -84,11 +84,9 @@ nextflow_workflow {
                 input[5] = [[],[]]
                 input[6] = [[],[]]
                 input[7] = ['sniffles']
-                input[8] = [[],[]]
-                input[9] = false
-                input[10] = false
-                input[11] = true
-                input[12] = true
+                input[8] = false
+                input[9] = true
+                input[10] = true
                 """
             }
         }
@@ -97,16 +95,12 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.vcf
-                        .collect { meta, vcf, tbi -> [
-                            'vcf:',
+                    workflow.out.sv_calls
+                        .findAll { meta, _vcf, _tbi -> !meta.skip_vep_prep }
+                        .collect { meta, vcf, _tbi -> [
+                            'sv_calls_raw:',
                             meta,
-                            // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for
-                            // HiFiCNV/Sawfish VCFs (VCFv4.4) here - just check the file name for those.
-                            ['severus', 'sniffles', 'debreak'].contains(meta.sv_caller)
-                                ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
-                                : [ file(vcf).name ],
-                            file(tbi).name,
+                            [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ],
                         ] }
                 ).match() }
             )
@@ -130,11 +124,9 @@ nextflow_workflow {
                 input[5] = [[],[]]
                 input[6] = [[],[]]
                 input[7] = ['sniffles1']
-                input[8] = [[],[]]
-                input[9] = false
-                input[10] = false
-                input[11] = true
-                input[12] = true
+                input[8] = false
+                input[9] = true
+                input[10] = true
                 """
             }
         }
@@ -143,12 +135,12 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.vcf
-                        .collect { meta, vcf, tbi -> [
-                            'vcf:',
+                    workflow.out.sv_calls
+                        .findAll { meta, _vcf, _tbi -> !meta.skip_vep_prep }
+                        .collect { meta, vcf, _tbi -> [
+                            'sv_calls_raw:',
                             meta,
                             [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ],
-                            file(tbi).name,
                         ] }
                 ).match() }
             )
@@ -172,11 +164,9 @@ nextflow_workflow {
                 input[5] = [[],[]]
                 input[6] = [[],[]]
                 input[7] = ['debreak']
-                input[8] = [[],[]]
-                input[9] = false
-                input[10] = false
-                input[11] = true
-                input[12] = true
+                input[8] = false
+                input[9] = true
+                input[10] = true
                 """
             }
         }
@@ -185,14 +175,12 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.vcf
-                        .collect { meta, vcf, tbi -> [
-                            'vcf:',
+                    workflow.out.sv_calls
+                        .findAll { meta, _vcf, _tbi -> !meta.skip_vep_prep }
+                        .collect { meta, vcf, _tbi -> [
+                            'sv_calls_raw:',
                             meta,
-                            ['severus', 'sniffles', 'debreak'].contains(meta.sv_caller)
-                                ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
-                                : [ file(vcf).name ],
-                            file(tbi).name,
+                            [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ],
                         ] }
                 ).match() }
             )
@@ -227,15 +215,9 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
                 ]).collect()
                 input[7] = ['sawfish']
-                input[8] = channel.of('chr16\t160752\t160753')
-                    .collectFile(name: "one_variant.bed")
-                    .map { file ->
-                        [ [ id: 'one_variant' ], file ]
-                    }.collect()
-                input[9] = false
-                input[10] = false
-                input[11] = true
-                input[12] = true
+                input[8] = false
+                input[9] = true
+                input[10] = true
                 """
             }
         }
@@ -244,15 +226,14 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.vcf
+                    workflow.out.sv_calls
+                        .findAll { meta, _vcf, _tbi -> meta.skip_vep_prep }
                         .collect { meta, vcf, tbi -> [
-                            'vcf:',
+                            'sv_calls_indexed:',
                             meta,
                             // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for
-                            // HiFiCNV/Sawfish VCFs (VCFv4.4) here - just check the file name for those.
-                            ['severus', 'sniffles', 'debreak'].contains(meta.sv_caller)
-                                ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
-                                : [ file(vcf).name ],
+                            // Sawfish VCFs (VCFv4.4) here - just check the file name.
+                            [ file(vcf).name ],
                             file(tbi).name,
                         ] }
                 ).match() }
@@ -289,15 +270,9 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
                 ]).collect()
                 input[7] = ['sawfish']
-                input[8] = channel.of('chr16\t160752\t160753')
-                    .collectFile(name: "one_variant.bed")
-                    .map { file ->
-                        [ [ id: 'one_variant' ], file ]
-                    }.collect()
-                input[9] = false
+                input[8] = true
+                input[9] = true
                 input[10] = true
-                input[11] = true
-                input[12] = true
                 """
             }
         }
@@ -306,15 +281,14 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.vcf
+                    workflow.out.sv_calls
+                        .findAll { meta, _vcf, _tbi -> meta.skip_vep_prep }
                         .collect { meta, vcf, tbi -> [
-                            'vcf:',
+                            'sv_calls_indexed:',
                             meta,
                             // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for
-                            // HiFiCNV/Sawfish VCFs (VCFv4.4) here - just check the file name for those.
-                            ['severus', 'sniffles', 'debreak'].contains(meta.sv_caller)
-                                ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
-                                : [ file(vcf).name ],
+                            // Sawfish VCFs (VCFv4.4) here - just check the file name.
+                            [ file(vcf).name ],
                             file(tbi).name,
                         ] }
                 ).match() }
@@ -349,11 +323,9 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
                 ]).collect()
                 input[7] = ['sniffles', 'hificnv', 'severus', 'sawfish']
-                input[8] = [[],[]]
-                input[9] = false
-                input[10] = false
-                input[11] = true
-                input[12] = true
+                input[8] = false
+                input[9] = true
+                input[10] = true
                 """
             }
         }
@@ -362,15 +334,21 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.vcf
+                    workflow.out.sv_calls
+                        .findAll { meta, _vcf, _tbi -> !meta.skip_vep_prep }
+                        .collect { meta, vcf, _tbi -> [
+                            'sv_calls_raw:',
+                            meta,
+                            [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ],
+                        ] },
+                    workflow.out.sv_calls
+                        .findAll { meta, _vcf, _tbi -> meta.skip_vep_prep }
                         .collect { meta, vcf, tbi -> [
-                            'vcf:',
+                            'sv_calls_indexed:',
                             meta,
                             // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for
                             // HiFiCNV/Sawfish VCFs (VCFv4.4) here - just check the file name for those.
-                            ['severus', 'sniffles', 'debreak'].contains(meta.sv_caller)
-                                ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
-                                : [ file(vcf).name ],
+                            [ file(vcf).name ],
                             file(tbi).name,
                         ] }
                 ).match() }
@@ -405,11 +383,9 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
                 ]).collect()
                 input[7] = ['hificnv', 'sawfish']
-                input[8] = [[],[]]
+                input[8] = false
                 input[9] = false
                 input[10] = false
-                input[11] = false
-                input[12] = false
                 """
             }
         }
@@ -418,15 +394,14 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.vcf
+                    workflow.out.sv_calls
+                        .findAll { meta, _vcf, _tbi -> meta.skip_vep_prep }
                         .collect { meta, vcf, tbi -> [
-                            'vcf:',
+                            'sv_calls_indexed:',
                             meta,
                             // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for
                             // HiFiCNV/Sawfish VCFs (VCFv4.4) here - just check the file name for those.
-                            ['severus', 'sniffles', 'debreak'].contains(meta.sv_caller)
-                                ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
-                                : [ file(vcf).name ],
+                            [ file(vcf).name ],
                             file(tbi).name,
                         ] }
                 ).match() }
@@ -435,7 +410,7 @@ nextflow_workflow {
 
     }
 
-    test("2 samples, 1 family - merge sniffes,hificnv,severus,sawfish,debreak with trf bed, run all callers and filter") {
+    test("2 samples, 1 family - sniffles,hificnv,severus,sawfish,debreak with trf bed, run all callers") {
 
         when {
             workflow {
@@ -461,74 +436,9 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
                 ]).collect()
                 input[7] = ['sniffles', 'severus', 'hificnv', 'sawfish', 'debreak']
-                input[8] = channel.of('chr16\t160752\t160753')
-                    .collectFile(name: "one_variant.bed")
-                    .map { file ->
-                        [ [ id: 'one_variant' ], file ]
-                    }.collect()
-                input[9] = true
-                input[10] = false
-                input[11] = true
-                input[12] = true
-                """
-            }
-        }
-
-        then {
-            assertAll(
-                { assert workflow.success },
-                { assert snapshot(
-                    workflow.out.vcf
-                        .collect { meta, vcf, tbi -> [
-                            'vcf:',
-                            meta,
-                            // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for
-                            // HiFiCNV/Sawfish VCFs (VCFv4.4) here - just check the file name for those.
-                            ['severus', 'sniffles', 'debreak'].contains(meta.sv_caller)
-                                ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
-                                : [ file(vcf).name ],
-                            file(tbi).name,
-                        ] }
-                ).match() }
-            )
-        }
-    }
-
-    test("2 samples, 1 family - merge sniffes,hificnv,severus,sawfish,debreak with trf bed, run all callers and filter, force sawfish single sample joint-call") {
-
-        when {
-            workflow {
-                """
-                input[0] = MINIMAP2_ALIGN.out.bam
-                    .join(MINIMAP2_ALIGN.out.index)
-                input[1] = channel.of([
-                    [ id:'trf' ],
-                    file('https://github.com/fritzsedlazeck/Sniffles/raw/master/annotations/human_GRCh38_no_alt_analysis_set.trf.bed', checkIfExists: true)
-                ]).collect()
-                input[2] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
-                input[3] = GUNZIP.out.gunzip
-                input[4] = channel.of([
-                    [ id: 'xy_bed' ],
-                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XY.bed', checkIfExists: true)
-                ]).collect()
-                input[5] = channel.of([
-                    [ id: 'xx_bed' ],
-                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XX.bed', checkIfExists: true)
-                ]).collect()
-                input[6] = channel.of([
-                    [ id: 'exclude_bed' ],
-                    file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
-                ]).collect()
-                input[7] = ['sniffles', 'severus', 'hificnv', 'sawfish', 'debreak']
-                input[8] = channel.of('chr16\t160752\t160753')
-                    .collectFile(name: "one_variant.bed")
-                    .map { file ->
-                        [ [ id: 'one_variant' ], file ]
-                    }.collect()
+                input[8] = false
                 input[9] = true
                 input[10] = true
-                input[11] = true
-                input[12] = true
                 """
             }
         }
@@ -537,15 +447,80 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.vcf
+                    workflow.out.sv_calls
+                        .findAll { meta, _vcf, _tbi -> !meta.skip_vep_prep }
+                        .collect { meta, vcf, _tbi -> [
+                            'sv_calls_raw:',
+                            meta,
+                            [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ],
+                        ] },
+                    workflow.out.sv_calls
+                        .findAll { meta, _vcf, _tbi -> meta.skip_vep_prep }
                         .collect { meta, vcf, tbi -> [
-                            'vcf:',
+                            'sv_calls_indexed:',
                             meta,
                             // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for
                             // HiFiCNV/Sawfish VCFs (VCFv4.4) here - just check the file name for those.
-                            ['severus', 'sniffles', 'debreak'].contains(meta.sv_caller)
-                                ? [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ]
-                                : [ file(vcf).name ],
+                            [ file(vcf).name ],
+                            file(tbi).name,
+                        ] }
+                ).match() }
+            )
+        }
+    }
+
+    test("2 samples, 1 family - sniffles,hificnv,severus,sawfish,debreak with trf bed, run all callers, force sawfish single sample joint-call") {
+
+        when {
+            workflow {
+                """
+                input[0] = MINIMAP2_ALIGN.out.bam
+                    .join(MINIMAP2_ALIGN.out.index)
+                input[1] = channel.of([
+                    [ id:'trf' ],
+                    file('https://github.com/fritzsedlazeck/Sniffles/raw/master/annotations/human_GRCh38_no_alt_analysis_set.trf.bed', checkIfExists: true)
+                ]).collect()
+                input[2] = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
+                input[3] = GUNZIP.out.gunzip
+                input[4] = channel.of([
+                    [ id: 'xy_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XY.bed', checkIfExists: true)
+                ]).collect()
+                input[5] = channel.of([
+                    [ id: 'xx_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XX.bed', checkIfExists: true)
+                ]).collect()
+                input[6] = channel.of([
+                    [ id: 'exclude_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
+                ]).collect()
+                input[7] = ['sniffles', 'severus', 'hificnv', 'sawfish', 'debreak']
+                input[8] = true
+                input[9] = true
+                input[10] = true
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out.sv_calls
+                        .findAll { meta, _vcf, _tbi -> !meta.skip_vep_prep }
+                        .collect { meta, vcf, _tbi -> [
+                            'sv_calls_raw:',
+                            meta,
+                            [ file(vcf).name, path(vcf).vcf.summary, path(vcf).vcf.variantsMD5 ],
+                        ] },
+                    workflow.out.sv_calls
+                        .findAll { meta, _vcf, _tbi -> meta.skip_vep_prep }
+                        .collect { meta, vcf, tbi -> [
+                            'sv_calls_indexed:',
+                            meta,
+                            // nft-vcf's codec only supports up to VCFv4.3, so we can't inspect variants for
+                            // HiFiCNV/Sawfish VCFs (VCFv4.4) here - just check the file name for those.
+                            [ file(vcf).name ],
                             file(tbi).name,
                         ] }
                 ).match() }
@@ -581,11 +556,9 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
                 ]).collect()
                 input[7] = ['sniffles', 'severus', 'hificnv', 'debreak']
-                input[8] = [[],[]]
-                input[9] = false
-                input[10] = false
-                input[11] = true
-                input[12] = true
+                input[8] = false
+                input[9] = true
+                input[10] = true
                 """
             }
         }
@@ -594,7 +567,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    vcf: workflow.out.vcf.collect { meta, vcf, tbi -> [meta, file(vcf).name, file(tbi).name] },
+                    sv_calls: workflow.out.sv_calls.collect { meta, vcf, tbi -> [meta, file(vcf).name, tbi instanceof List ? tbi : file(tbi).name] },
                     hificnv_depth: workflow.out.hificnv_depth,
                     hificnv_copynum: workflow.out.hificnv_copynum,
                     hificnv_maf: workflow.out.hificnv_maf,
@@ -637,15 +610,9 @@ nextflow_workflow {
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
                 ]).collect()
                 input[7] = ['sawfish']
-                input[8] = channel.of('chr16\t160752\t160753')
-                    .collectFile(name: "one_variant.bed")
-                    .map { file ->
-                        [ [ id: 'one_variant' ], file ]
-                    }.collect()
-                input[9] = false
-                input[10] = false
-                input[11] = true
-                input[12] = true
+                input[8] = false
+                input[9] = true
+                input[10] = true
                 """
             }
         }
@@ -654,7 +621,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    vcf: workflow.out.vcf.collect { meta, vcf, tbi -> [meta, file(vcf).name, file(tbi).name] },
+                    sv_calls: workflow.out.sv_calls.collect { meta, vcf, tbi -> [meta, file(vcf).name, tbi instanceof List ? tbi : file(tbi).name] },
                     hificnv_depth: workflow.out.hificnv_depth,
                     hificnv_copynum: workflow.out.hificnv_copynum,
                     hificnv_maf: workflow.out.hificnv_maf,

@@ -33,6 +33,9 @@
                 "BCFTOOLS_SORT": {
                     "bcftools": 1.22
                 },
+                "BCFTOOLS_SORT_SVS": {
+                    "bcftools": 1.22
+                },
                 "BCFTOOLS_STATS": {
                     "bcftools": 1.22
                 },
@@ -46,6 +49,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_PHASING": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_SVS": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_UNCOMPRESS": {
@@ -145,9 +151,6 @@
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
                 },
-                "HIFICNV": {
-                    "hificnv": "1.0.0-36e6461"
-                },
                 "HTSLIB_BGZIPTABIX": {
                     "htslib": 1.24,
                     "xz": "5.8.3"
@@ -199,6 +202,15 @@
                 "RUN_CHROMOGRAPH": {
                     "chromograph": "1.3.1"
                 },
+                "RUN_HIFICNV": {
+                    "hificnv": "1.0.0-36e6461"
+                },
+                "RUN_SEVERUS": {
+                    "severus": 1.7
+                },
+                "RUN_SNIFFLES": {
+                    "sniffles": "2.8.0"
+                },
                 "SAMBAMBA_DEPTH": {
                     "sambamba": "1.0.1"
                 },
@@ -220,12 +232,6 @@
                 },
                 "SAMTOOLS_VIEW": {
                     "samtools": 1.24
-                },
-                "SEVERUS": {
-                    "severus": 1.7
-                },
-                "SNIFFLES": {
-                    "sniffles": "2.8.0"
                 },
                 "SOMALIER_EXTRACT": {
                     "somalier": "0.2.18"
@@ -257,10 +263,6 @@
                     "tabix": 1.21
                 },
                 "TABIX_HIFICNV": {
-                    "tabix": 1.21
-                },
-                "TABIX_SEVERUS": {
-                    "bgzip": 1.21,
                     "tabix": 1.21
                 },
                 "TABIX_TABIX": {
@@ -829,6 +831,9 @@
                 "snvs/family/FAM/FAM_snvs_annotated_ranked_clinical.vcf.gz.tbi",
                 "snvs/family/FAM/FAM_snvs_annotated_ranked_research.vcf.gz",
                 "snvs/family/FAM/FAM_snvs_annotated_ranked_research.vcf.gz.tbi",
+                "snvs/family/FAM/precalled_input",
+                "snvs/family/FAM/precalled_input/FAM_concat.vcf.gz",
+                "snvs/family/FAM/precalled_input/FAM_concat.vcf.gz.tbi",
                 "snvs/sample",
                 "snvs/sample/HG002",
                 "snvs/sample/HG002/HG002_deepvariant_snvs.vcf.gz",
@@ -846,6 +851,9 @@
                 "svs/family/FAM/FAM_svs_annotated_ranked_clinical.vcf.gz.tbi",
                 "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz",
                 "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz.tbi",
+                "svs/family/FAM/precalled_input",
+                "svs/family/FAM/precalled_input/FAM_svdb_merge_by_family.vcf.gz",
+                "svs/family/FAM/precalled_input/FAM_svdb_merge_by_family.vcf.gz.tbi",
                 "visualization_tracks",
                 "visualization_tracks/HG002",
                 "visualization_tracks/HG002/HG002_hificnv.copynum.bedgraph",
@@ -1218,6 +1226,10 @@
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=3, variantCount=261, phased=false, phasedAutodetect=false]"
                 ],
                 [
+                    "FAM_concat.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=3, variantCount=217, phased=false, phasedAutodetect=false]"
+                ],
+                [
                     "HG002_deepvariant_snvs.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=175, phased=false, phasedAutodetect=false]"
                 ],
@@ -1236,13 +1248,17 @@
                 [
                     "FAM_svs_annotated_ranked_research.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=3, variantCount=38, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "FAM_svdb_merge_by_family.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM], sampleCount=3, variantCount=38, phased=false, phasedAutodetect=false]"
                 ]
             ],
             [
                 
             ]
         ],
-        "timestamp": "2026-09-09T08:06:36.437977919",
+        "timestamp": "2026-09-11T17:33:02.47908492",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

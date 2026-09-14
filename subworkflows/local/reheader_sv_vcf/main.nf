@@ -9,28 +9,11 @@ workflow REHEADER_SV_VCF {
     ch_fai // channel: [ val(meta), path(fai) ]
 
     main:
-    // Sniffles hardcodes the sample name as SAMPLE, and Severus bases it on the file name,
-    // so those need reheadering. HiFiCNV and sawfish don't have this issue.
-    def caller_needs_reheader = [
-        'debreak': true,
-        'hificnv': false,
-        'sawfish': false,
-        'severus': true,
-        'sniffles': true,
-        'sniffles1': true,
-    ]
-
-    // Branching channel to get the VCFs that need reheadering and those that don't. If the sv caller is not in the map keyset, throw an error.
+    // Whether a caller needs reheadering is signalled via meta.needs_reheader,
+    // stamped by each per-caller subworkflow (SNIFFLES_SV, SEVERUS_SV, etc.).
     ch_vcf_reheader = ch_vcf_tbi.branch { meta, _vcf, _tbi ->
-        if (!(meta.sv_caller in caller_needs_reheader.keySet())) {
-            error(
-                "Unknown sv_caller '${meta.sv_caller}' in REHEADER_SV_VCF. " + "Allowed values: ${caller_needs_reheader.keySet().sort()}."
-            )
-        }
-
-        def needs_reheader = caller_needs_reheader[meta.sv_caller]
-        reheader: needs_reheader
-        no_reheader: !needs_reheader
+        reheader: meta.needs_reheader
+        no_reheader: !meta.needs_reheader
     }
 
     // Getting the sample name from the VCFs that need reheadering

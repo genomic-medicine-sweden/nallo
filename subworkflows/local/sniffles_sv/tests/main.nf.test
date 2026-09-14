@@ -1,0 +1,39 @@
+nextflow_workflow {
+
+    name "Test Workflow SNIFFLES_SV"
+    script "../main.nf"
+    config "./nextflow.config"
+    workflow "SNIFFLES_SV"
+
+    test("1 sample - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id: 'HG002_Revio', family_id: 'FAM', sex: 1 ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[1] = channel.of([
+                    [ id: 'genome' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa', checkIfExists: true)
+                ])
+                input[2] = [[],[]]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out.vcf.collect { meta, vcf -> [meta, file(vcf).name] }
+                ).match() }
+            )
+        }
+    }
+
+}

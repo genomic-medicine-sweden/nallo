@@ -1,0 +1,112 @@
+nextflow_pipeline {
+
+    name "Test pipeline GENOMICMEDICINESWEDEN_NALLO — Stub tests for --precalled validation"
+    script "../main.nf"
+    tag "PIPELINE"
+    tag "pipeline_stub"
+    tag "stub_precalled_validation"
+    config "./nextflow.config"
+
+    test("--precalled with samplesheet containing snv_vcf and sv_vcf columns succeeds") {
+        options "-stub"
+
+        when {
+            params {
+                def vcfSnv    = "${projectDir}/assets/precalled_input/revio/FAM_concat.vcf.gz"
+                def vcfSnvTbi = "${projectDir}/assets/precalled_input/revio/FAM_concat.vcf.gz.tbi"
+                def vcfSv     = "${projectDir}/assets/precalled_input/revio/FAM_svdb_merge_by_family.vcf.gz"
+                def vcfSvTbi  = "${projectDir}/assets/precalled_input/revio/FAM_svdb_merge_by_family.vcf.gz.tbi"
+                def bamBase   = "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/1e84555134bb9638ad0dde49afd895e3192de3f0/testdata"
+                def ss = File.createTempFile("samplesheet_precalled_stub", ".csv")
+                ss.deleteOnExit()
+                ss.text = [
+                    "project,sample,file,family_id,paternal_id,maternal_id,sex,phenotype,snv_vcf,snv_vcf_tbi,sv_vcf,sv_vcf_tbi",
+                    "test,HG003,${bamBase}/HG003_PacBio_Revio.bam,FAM,0,0,1,1,${vcfSnv},${vcfSnvTbi},${vcfSv},${vcfSvTbi}",
+                    "test,HG002,${bamBase}/HG002_PacBio_Revio.bam,FAM,HG003,HG004,1,2,${vcfSnv},${vcfSnvTbi},${vcfSv},${vcfSvTbi}",
+                    "test,HG004,${bamBase}/HG004_PacBio_Revio.bam,FAM,0,0,2,1,${vcfSnv},${vcfSnvTbi},${vcfSv},${vcfSvTbi}",
+                ].join("\n")
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/'
+                input                        = ss.absolutePath
+                outdir                       = "$outputDir"
+                premapped                    = true
+                precalled                    = true
+                skip_genome_assembly         = true
+                skip_portello                = true
+            }
+        }
+
+        then {
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.trace.succeeded().size(),
+                    versions
+                ).match() }
+            )
+        }
+    }
+
+    test("--precalled with --skip_phasing fails with informative error") {
+        options "-stub"
+
+        when {
+            params {
+                def vcfSnv    = "${projectDir}/assets/precalled_input/revio/FAM_concat.vcf.gz"
+                def vcfSnvTbi = "${projectDir}/assets/precalled_input/revio/FAM_concat.vcf.gz.tbi"
+                def vcfSv     = "${projectDir}/assets/precalled_input/revio/FAM_svdb_merge_by_family.vcf.gz"
+                def vcfSvTbi  = "${projectDir}/assets/precalled_input/revio/FAM_svdb_merge_by_family.vcf.gz.tbi"
+                def bamBase   = "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/1e84555134bb9638ad0dde49afd895e3192de3f0/testdata"
+                def ss = File.createTempFile("samplesheet_precalled_skip_phasing", ".csv")
+                ss.deleteOnExit()
+                ss.text = [
+                    "project,sample,file,family_id,paternal_id,maternal_id,sex,phenotype,snv_vcf,snv_vcf_tbi,sv_vcf,sv_vcf_tbi",
+                    "test,HG003,${bamBase}/HG003_PacBio_Revio.bam,FAM,0,0,1,1,${vcfSnv},${vcfSnvTbi},${vcfSv},${vcfSvTbi}",
+                    "test,HG002,${bamBase}/HG002_PacBio_Revio.bam,FAM,HG003,HG004,1,2,${vcfSnv},${vcfSnvTbi},${vcfSv},${vcfSvTbi}",
+                    "test,HG004,${bamBase}/HG004_PacBio_Revio.bam,FAM,0,0,2,1,${vcfSnv},${vcfSnvTbi},${vcfSv},${vcfSvTbi}",
+                ].join("\n")
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/'
+                input                        = ss.absolutePath
+                outdir                       = "$outputDir"
+                premapped                    = true
+                precalled                    = true
+                skip_phasing                 = true
+                skip_repeat_calling          = true
+                skip_repeat_annotation       = true
+                skip_genome_assembly         = true
+                skip_portello                = true
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.failed },
+                { assert workflow.stdout.any { it.contains("--precalled cannot be combined with --skip_phasing") } }
+            )
+        }
+    }
+
+    test("--precalled without snv_vcf/sv_vcf columns in samplesheet fails with informative error") {
+        options "-stub"
+
+        when {
+            params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/'
+                input                        = "$projectDir/assets/samplesheet_multisample_bam.csv"
+                outdir                       = "$outputDir"
+                premapped                    = true
+                precalled                    = true
+                skip_genome_assembly         = true
+                skip_portello                = true
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.failed },
+                { assert workflow.stdout.any { it.contains("--precalled requires snv_vcf and snv_vcf_tbi columns") } }
+            )
+        }
+    }
+
+}

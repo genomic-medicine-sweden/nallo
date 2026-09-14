@@ -27,7 +27,7 @@
                 "BCFTOOLS_REHEADER": {
                     "bcftools": 1.22
                 },
-                "BCFTOOLS_SORT": {
+                "BCFTOOLS_SORT_SVS": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_STATS": {
@@ -72,9 +72,6 @@
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
                 },
-                "HIFICNV": {
-                    "hificnv": "1.0.0-36e6461"
-                },
                 "LONGPHASE_HAPLOTAG": {
                     "longphase": "2.0.1"
                 },
@@ -96,6 +93,15 @@
                 "RUN_CHROMOGRAPH": {
                     "chromograph": "1.3.1"
                 },
+                "RUN_HIFICNV": {
+                    "hificnv": "1.0.0-36e6461"
+                },
+                "RUN_SEVERUS": {
+                    "severus": 1.7
+                },
+                "RUN_SNIFFLES": {
+                    "sniffles": "2.8.0"
+                },
                 "SAMBAMBA_DEPTH": {
                     "sambamba": "1.0.1"
                 },
@@ -114,12 +120,6 @@
                 },
                 "SAMTOOLS_VIEW": {
                     "samtools": 1.24
-                },
-                "SEVERUS": {
-                    "severus": 1.7
-                },
-                "SNIFFLES": {
-                    "sniffles": "2.8.0"
                 },
                 "SOMALIER_PED_FAMILY": {
                     "create_pedigree_file": 1.0,
@@ -145,10 +145,6 @@
                     "tabix": 1.21
                 },
                 "TABIX_HIFICNV": {
-                    "tabix": 1.21
-                },
-                "TABIX_SEVERUS": {
-                    "bgzip": 1.21,
                     "tabix": 1.21
                 },
                 "TABIX_TABIX": {
@@ -397,6 +393,15 @@
                 "repeats/sample/HG002_ONT_C/HG002_ONT_C_strdust.vcf.gz",
                 "repeats/sample/HG002_ONT_C/HG002_ONT_C_strdust.vcf.gz.tbi",
                 "snvs",
+                "snvs/family",
+                "snvs/family/FAM",
+                "snvs/family/FAM/precalled_input",
+                "snvs/family/FAM/precalled_input/FAM_concat.vcf.gz",
+                "snvs/family/FAM/precalled_input/FAM_concat.vcf.gz.tbi",
+                "snvs/family/FAM2",
+                "snvs/family/FAM2/precalled_input",
+                "snvs/family/FAM2/precalled_input/FAM2_concat.vcf.gz",
+                "snvs/family/FAM2/precalled_input/FAM2_concat.vcf.gz.tbi",
                 "snvs/sample",
                 "snvs/sample/HG002_ONT_A",
                 "snvs/sample/HG002_ONT_A/HG002_ONT_A_deepvariant_snvs.vcf.gz",
@@ -412,9 +417,15 @@
                 "svs/family/FAM",
                 "svs/family/FAM/FAM_svs.vcf.gz",
                 "svs/family/FAM/FAM_svs.vcf.gz.tbi",
+                "svs/family/FAM/precalled_input",
+                "svs/family/FAM/precalled_input/FAM_svdb_merge_by_family.vcf.gz",
+                "svs/family/FAM/precalled_input/FAM_svdb_merge_by_family.vcf.gz.tbi",
                 "svs/family/FAM2",
                 "svs/family/FAM2/FAM2_svs.vcf.gz",
                 "svs/family/FAM2/FAM2_svs.vcf.gz.tbi",
+                "svs/family/FAM2/precalled_input",
+                "svs/family/FAM2/precalled_input/FAM2_svdb_merge_by_family.vcf.gz",
+                "svs/family/FAM2/precalled_input/FAM2_svdb_merge_by_family.vcf.gz.tbi",
                 "visualization_tracks",
                 "visualization_tracks/HG002_ONT_A",
                 "visualization_tracks/HG002_ONT_A/HG002_ONT_A_hificnv.copynum.bedgraph",
@@ -430,7 +441,7 @@
                 "visualization_tracks/HG002_ONT_C/HG002_ONT_C_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-08-24T11:10:20.132920837",
+        "timestamp": "2026-09-11T17:35:59.649589183",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

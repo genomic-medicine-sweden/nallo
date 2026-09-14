@@ -500,7 +500,8 @@
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "debreak"
+                            "sv_caller": "debreak",
+                            "needs_reheader": true
                         },
                         "HG002_Revio_debreak_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ],
@@ -508,7 +509,8 @@
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "hificnv"
+                            "sv_caller": "hificnv",
+                            "needs_reheader": false
                         },
                         "/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/testdata/hificnv_test.vcf.gz"
                     ],
@@ -516,7 +518,8 @@
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "sawfish"
+                            "sv_caller": "sawfish",
+                            "needs_reheader": false
                         },
                         "/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/testdata/sawfish_test.vcf.gz"
                     ],
@@ -524,7 +527,8 @@
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "severus"
+                            "sv_caller": "severus",
+                            "needs_reheader": true
                         },
                         "HG002_Revio_severus_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ],
@@ -532,17 +536,19 @@
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "sniffles1"
+                            "sv_caller": "sniffles",
+                            "needs_reheader": true
                         },
-                        "HG002_Revio_sniffles1_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_Revio_sniffles_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ],
                     [
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "sniffles"
+                            "sv_caller": "sniffles1",
+                            "needs_reheader": true
                         },
-                        "HG002_Revio_sniffles_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_Revio_sniffles1_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "1": [
@@ -550,7 +556,8 @@
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "debreak"
+                            "sv_caller": "debreak",
+                            "needs_reheader": true
                         },
                         "HG002_Revio_debreak_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
@@ -558,7 +565,8 @@
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "hificnv"
+                            "sv_caller": "hificnv",
+                            "needs_reheader": false
                         },
                         "/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/testdata/hificnv_test.vcf.gz.tbi"
                     ],
@@ -566,7 +574,8 @@
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "sawfish"
+                            "sv_caller": "sawfish",
+                            "needs_reheader": false
                         },
                         "/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/testdata/sawfish_test.vcf.gz.tbi"
                     ],
@@ -574,7 +583,8 @@
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "severus"
+                            "sv_caller": "severus",
+                            "needs_reheader": true
                         },
                         "HG002_Revio_severus_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
@@ -582,17 +592,19 @@
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "sniffles1"
+                            "sv_caller": "sniffles",
+                            "needs_reheader": true
                         },
-                        "HG002_Revio_sniffles1_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_Revio_sniffles_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "sniffles"
+                            "sv_caller": "sniffles1",
+                            "needs_reheader": true
                         },
-                        "HG002_Revio_sniffles_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_Revio_sniffles1_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "tbi": [
@@ -600,7 +612,8 @@
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "debreak"
+                            "sv_caller": "debreak",
+                            "needs_reheader": true
                         },
                         "HG002_Revio_debreak_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
@@ -608,7 +621,8 @@
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "hificnv"
+                            "sv_caller": "hificnv",
+                            "needs_reheader": false
                         },
                         "/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/testdata/hificnv_test.vcf.gz.tbi"
                     ],
@@ -616,7 +630,8 @@
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "sawfish"
+                            "sv_caller": "sawfish",
+                            "needs_reheader": false
                         },
                         "/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/testdata/sawfish_test.vcf.gz.tbi"
                     ],
@@ -624,7 +639,8 @@
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "severus"
+                            "sv_caller": "severus",
+                            "needs_reheader": true
                         },
                         "HG002_Revio_severus_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
@@ -632,17 +648,19 @@
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "sniffles1"
+                            "sv_caller": "sniffles",
+                            "needs_reheader": true
                         },
-                        "HG002_Revio_sniffles1_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_Revio_sniffles_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "sniffles"
+                            "sv_caller": "sniffles1",
+                            "needs_reheader": true
                         },
-                        "HG002_Revio_sniffles_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_Revio_sniffles1_reheader.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "vcf": [
@@ -650,7 +668,8 @@
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "debreak"
+                            "sv_caller": "debreak",
+                            "needs_reheader": true
                         },
                         "HG002_Revio_debreak_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ],
@@ -658,7 +677,8 @@
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "hificnv"
+                            "sv_caller": "hificnv",
+                            "needs_reheader": false
                         },
                         "/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/testdata/hificnv_test.vcf.gz"
                     ],
@@ -666,7 +686,8 @@
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "sawfish"
+                            "sv_caller": "sawfish",
+                            "needs_reheader": false
                         },
                         "/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/testdata/sawfish_test.vcf.gz"
                     ],
@@ -674,7 +695,8 @@
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "severus"
+                            "sv_caller": "severus",
+                            "needs_reheader": true
                         },
                         "HG002_Revio_severus_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ],
@@ -682,22 +704,24 @@
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "sniffles1"
+                            "sv_caller": "sniffles",
+                            "needs_reheader": true
                         },
-                        "HG002_Revio_sniffles1_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_Revio_sniffles_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ],
                     [
                         {
                             "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sv_caller": "sniffles"
+                            "sv_caller": "sniffles1",
+                            "needs_reheader": true
                         },
-                        "HG002_Revio_sniffles_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_Revio_sniffles1_reheader.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-08-29T15:19:06.525944236",
+        "timestamp": "2026-09-10T14:02:41.179554887",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

@@ -1,0 +1,90 @@
+nextflow_pipeline {
+
+    name "Test pipeline GENOMICMEDICINESWEDEN_NALLO"
+    script "../main.nf"
+    tag "PIPELINE"
+
+    test("samplesheet_precalled | --precalled --premapped") {
+        tag "samplesheet_precalled"
+
+        when {
+            params {
+                // VCFs are temporarily in assets/precalled_input/revio/ until moved to test-datasets.
+                // The samplesheet is built here (inside params{}) with absolute projectDir paths
+                // because nf-test runs Nextflow from an isolated sandbox and relative paths in a
+                // static CSV would not resolve to the real project files.
+                def vcfSnv    = "${projectDir}/assets/precalled_input/revio/FAM_concat.vcf.gz"
+                def vcfSnvTbi = "${projectDir}/assets/precalled_input/revio/FAM_concat.vcf.gz.tbi"
+                def vcfSv     = "${projectDir}/assets/precalled_input/revio/FAM_svdb_merge_by_family.vcf.gz"
+                def vcfSvTbi  = "${projectDir}/assets/precalled_input/revio/FAM_svdb_merge_by_family.vcf.gz.tbi"
+                def bamBase   = "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/1e84555134bb9638ad0dde49afd895e3192de3f0/testdata"
+                def ss = File.createTempFile("samplesheet_precalled", ".csv")
+                ss.deleteOnExit()
+                ss.text = [
+                    "project,sample,file,family_id,paternal_id,maternal_id,sex,phenotype,snv_vcf,snv_vcf_tbi,sv_vcf,sv_vcf_tbi",
+                    "test,HG003,${bamBase}/HG003_PacBio_Revio.bam,FAM,0,0,1,1,${vcfSnv},${vcfSnvTbi},${vcfSv},${vcfSvTbi}",
+                    "test,HG002,${bamBase}/HG002_PacBio_Revio.bam,FAM,HG003,HG004,1,2,${vcfSnv},${vcfSnvTbi},${vcfSv},${vcfSvTbi}",
+                    "test,HG002,${bamBase}/HG002_PacBio_Revio_copy.bam,FAM,HG003,HG004,1,2,${vcfSnv},${vcfSnvTbi},${vcfSv},${vcfSvTbi}",
+                    "test,HG004,${bamBase}/HG004_PacBio_Revio.bam,FAM,0,0,2,1,${vcfSnv},${vcfSnvTbi},${vcfSv},${vcfSvTbi}",
+                ].join("\n")
+
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/'
+                input                        = ss.absolutePath
+                outdir                       = "$outputDir"
+                premapped                    = true
+                precalled                    = true
+                paraphrase_output_format     = 'json'
+                skip_genome_assembly         = true
+                skip_portello                = true
+            }
+        }
+
+        then {
+            // stable_name: All files + folders in ${params.outdir}/ with a stable name
+            def stable_name      = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            // stable_path: All files in ${params.outdir}/ with stable content
+            def stable_path      = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
+            // bam_files: Stable bam files
+            def bam_files        = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_unstable_alignments', include: ['**/*.bam'])
+            // Reference (needed for CRAM inspection)
+            def fasta = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
+            // cram_files: Stable cram files
+            def cram_files       = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_unstable_alignments', include: ['**/*.cram'])
+            // all_vcf_files: All vcf files - can have unstable variants and/or unstable headers
+            def all_vcf_files    = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_incompatible_variants', include: ['**/*.vcf.gz'])
+            // stable_vcf_files: Vcf files with stable variants - can be snapshot using variantsMD5
+            def stable_vcf_files = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_unstable_variants', include: ['**/*.vcf.gz'])
+            // software versions
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
+            assertAll(
+                { assert workflow.success },
+                // Verify that variant calling tools are not invoked when --precalled is set
+                { assert !versions.containsKey('DEEPVARIANT_RUNDEEPVARIANT') },
+                { assert !versions.containsKey('GLNEXUS') },
+                { assert !versions.containsKey('RUN_SNIFFLES') },
+                { assert !versions.containsKey('SVDB_MERGE_BY_FAMILY') },
+                // Verify that phasing ran (PacBio Revio preset uses LongPhase)
+                { assert versions.containsKey('LONGPHASE_PHASE') },
+                { assert snapshot(
+                    // Number of successful tasks
+                    workflow.trace.succeeded().size(),
+                    // pipeline versions.yml file for multiqc from which Nextflow version is removed because we tests pipelines on multiple Nextflow versions
+                    versions,
+                    // All stable path name, with a relative path
+                    stable_name,
+                    // All files with stable contents
+                    stable_path,
+                    // All bam files
+                    bam_files.collect{ file -> [ file.getName(), bam(file.toString(), stringency: 'silent').getReadsMD5() ] },
+                    // All cram files
+                    cram_files.collect{ file -> [ file.getName(), cram(file.toString(), fasta, stringency: 'silent').getReadsMD5() ] },
+                    // All vcf files
+                    all_vcf_files.collect{ file -> [ file.getName(), path(file.toString()).vcf.summary ] },
+                    // Stable vcf files
+                    stable_vcf_files.collect{ file -> [ file.getName(), path(file.toString()).vcf.variantsMD5 ] }
+                ).match() }
+            )
+        }
+    }
+
+}

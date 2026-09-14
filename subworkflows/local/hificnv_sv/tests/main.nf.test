@@ -1,0 +1,50 @@
+nextflow_workflow {
+
+    name "Test Workflow HIFICNV_SV"
+    script "../main.nf"
+    config "./nextflow.config"
+    workflow "HIFICNV_SV"
+
+    test("1 sample, no MAF track - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id: 'HG002_Revio', family_id: 'FAM', sex: 1 ],
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                    file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[1] = channel.empty()
+                input[2] = channel.of([
+                    [ id: 'genome' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa', checkIfExists: true)
+                ])
+                input[3] = channel.of([
+                    [ id: 'xy_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XY.bed', checkIfExists: true)
+                ]).collect()
+                input[4] = channel.of([
+                    [ id: 'xx_bed' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XX.bed', checkIfExists: true)
+                ]).collect()
+                input[5] = [[],[]]
+                input[6] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out.vcf.collect { meta, vcf -> [meta, file(vcf).name] },
+                    workflow.out.tbi.collect { meta, tbi -> [meta, file(tbi).name] },
+                ).match() }
+            )
+        }
+    }
+
+}

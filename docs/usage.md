@@ -499,6 +499,38 @@ Filtering of variants only happens if any of these three parameters is active.
 
     The `pre_vep_snv_filter_expression` parameter can be used to filter SNVs earlier, during the annotation step. Note that this filter applies to _both_ the research and clinical VCFs.
 
+### Re-running phasing and annotation with pre-called VCFs (`--precalled`)
+
+When you have already run nallo and want to re-run only phasing and annotation — for example after updating annotation databases or rank models — you can skip the computationally intensive variant calling steps by providing pre-called VCFs directly in the samplesheet.
+
+#### Required samplesheet columns
+
+Add four new columns to the samplesheet CSV alongside the existing `file` column (aligned BAM):
+
+| Column        | Description                                                                                                                                       |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `snv_vcf`     | Path to the pre-called family SNV VCF (bgzipped `.vcf.gz`). Use the `snvs/family/<id>/precalled_input/*.vcf.gz` output from a previous nallo run. |
+| `snv_vcf_tbi` | Tabix index for `snv_vcf` (`.vcf.gz.tbi`).                                                                                                        |
+| `sv_vcf`      | Path to the pre-called family SV VCF (bgzipped `.vcf.gz`). Use the `svs/family/<id>/precalled_input/*.vcf.gz` output from a previous nallo run.   |
+| `sv_vcf_tbi`  | Tabix index for `sv_vcf` (`.vcf.gz.tbi`).                                                                                                         |
+
+All four columns are required for every sample row when `--precalled` is set. All samples in the same family should point to the same family-level VCF files.
+
+#### Behaviour when `--precalled` is set
+
+- The `file` column must be an aligned BAM (same as `--premapped`). FASTQs are not accepted.
+- Variant calling (CALL_SNVS, GVCF_GLNEXUS, CALL_SVS, MERGE_SVS) is skipped.
+- The pre-called VCFs are fed directly into phasing, then annotation, ranking and filtering run as normal.
+- Mitochondrial calling is skipped (no fresh mito variants are added).
+- `--skip_phasing` is incompatible with `--precalled`.
+
+#### Getting the pre-phasing VCF outputs from a full run
+
+A full nallo run (without `--precalled`) now publishes two new output directories:
+
+- `snvs/family/<id>/precalled_input/` — the whole-genome concatenated family SNV VCF before phasing. Pass these files as `snv_vcf`/`snv_vcf_tbi` in the samplesheet.
+- `svs/family/<id>/precalled_input/` — the cross-caller merged family SV VCF before phasing. Pass these files as `sv_vcf`/`sv_vcf_tbi` in the samplesheet.
+
 ### Target regions
 
 The `--target_regions` parameter can be used to limit parts of the analysis to interesting regions: `--snv_call_regions` and `--sv_call_regions` which limits the SNV and SV calling, `--qc_regions` which is passed on to `--mosdepth_regions` (mosdepth) and `--sambamba_regions` (sambamba depth), and `--modkit_call_regions` which limits the methylation pileup regions. These four parameters are set to the same as `--target_regions` by default, but can also be set independently.

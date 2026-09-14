@@ -1,0 +1,24 @@
+{
+    "1 sample - stub": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "HG002_Revio",
+                        "family_id": "FAM",
+                        "sex": 1,
+                        "sv_caller": "debreak",
+                        "needs_reheader": true,
+                        "skip_vep_prep": false
+                    },
+                    "HG002_Revio_debreak_for_reheader.vcf"
+                ]
+            ]
+        ],
+        "timestamp": "2026-09-11T07:10:05.539567089",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    }
+}

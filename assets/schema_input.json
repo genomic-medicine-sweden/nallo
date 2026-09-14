@@ -71,6 +71,34 @@
                 "pattern": "^\\S+$",
                 "errorMessage": "Project name must be provided and cannot contain spaces, needs to be the same for all samples",
                 "meta": ["project"]
+            },
+            "snv_vcf": {
+                "type": "string",
+                "format": "file-path",
+                "pattern": "^\\S+\\.vcf\\.gz$",
+                "errorMessage": "Pre-called family SNV VCF (bgzipped) — required when running with --precalled",
+                "meta": ["snv_vcf"]
+            },
+            "snv_vcf_tbi": {
+                "type": "string",
+                "format": "file-path",
+                "pattern": "^\\S+\\.vcf\\.gz\\.tbi$",
+                "errorMessage": "Index for pre-called family SNV VCF — required when running with --precalled",
+                "meta": ["snv_vcf_tbi"]
+            },
+            "sv_vcf": {
+                "type": "string",
+                "format": "file-path",
+                "pattern": "^\\S+\\.vcf\\.gz$",
+                "errorMessage": "Pre-called family SV VCF (bgzipped) — required when running with --precalled",
+                "meta": ["sv_vcf"]
+            },
+            "sv_vcf_tbi": {
+                "type": "string",
+                "format": "file-path",
+                "pattern": "^\\S+\\.vcf\\.gz\\.tbi$",
+                "errorMessage": "Index for pre-called family SV VCF — required when running with --precalled",
+                "meta": ["sv_vcf_tbi"]
             }
         },
         "required": ["sample", "file", "family_id", "paternal_id", "maternal_id", "sex", "phenotype", "project"]

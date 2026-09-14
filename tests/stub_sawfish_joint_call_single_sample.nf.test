@@ -45,8 +45,8 @@ nextflow_pipeline {
             assertAll(
                 { assert workflow.success },
                 { assert versions.containsKey('SVDB_MERGE_BY_FAMILY') },
-                { assert versions.containsKey('SAWFISH_DISCOVER') },
-                { assert versions.containsKey('SAWFISH_JOINTCALL') },
+                { assert versions.containsKey('RUN_SAWFISH_DISCOVER') },
+                { assert versions.containsKey('RUN_SAWFISH_JOINTCALL') },
                 { assert snapshot(
                     workflow.trace.succeeded().size(),
                     versions,

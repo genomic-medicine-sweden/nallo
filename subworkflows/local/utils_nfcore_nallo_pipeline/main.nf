@@ -52,6 +52,7 @@ workflow PIPELINE_INITIALISATION {
     val_mitochondrial_caller
     val_par_regions
     val_phaser
+    val_precalled
     val_premapped
     val_preset
     val_sambamba_regions
@@ -353,6 +354,22 @@ workflow PIPELINE_INITIALISATION {
     }
     if (!val_skip_portello) {
         validateNoFastqInInput(ch_samplesheet, '--skip_portello', false)
+    }
+
+    // Validate --precalled constraints
+    if (val_precalled) {
+        validateNoFastqInInput(ch_samplesheet, '--precalled', true)
+        if (val_skip_phasing) {
+            error("Error: --precalled cannot be combined with --skip_phasing. Phasing is required to integrate pre-called VCFs into the annotation pipeline.")
+        }
+        ch_samplesheet.map { meta, _reads ->
+            if (!meta.snv_vcf || !meta.snv_vcf_tbi) {
+                error("Error: --precalled requires snv_vcf and snv_vcf_tbi columns in the samplesheet for sample '${meta.id}'.")
+            }
+            if (!meta.sv_vcf || !meta.sv_vcf_tbi) {
+                error("Error: --precalled requires sv_vcf and sv_vcf_tbi columns in the samplesheet for sample '${meta.id}'.")
+            }
+        }
     }
 
     emit:

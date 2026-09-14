@@ -177,6 +177,12 @@
                     "fa_icon": "fas fa-fast-forward",
                     "default": false
                 },
+                "precalled": {
+                    "type": "boolean",
+                    "description": "Use pre-called VCFs from the samplesheet (snv_vcf, sv_vcf columns) to skip variant calling and re-run phasing and annotation only. The samplesheet file column must contain an aligned BAM; implies --premapped behaviour.",
+                    "fa_icon": "fas fa-fast-forward",
+                    "default": false
+                },
                 "cadd_prescored_indels": {
                     "type": "string",
                     "exists": true,

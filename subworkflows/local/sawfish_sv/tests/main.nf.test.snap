@@ -1,0 +1,35 @@
+{
+    "1 sample, no MAF track - stub": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "FAM",
+                        "family_id": "FAM",
+                        "sv_caller": "sawfish",
+                        "needs_reheader": false,
+                        "skip_vep_prep": true
+                    },
+                    "FAM_sawfish_sv_genotyped.sv.vcf.gz"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "FAM",
+                        "family_id": "FAM",
+                        "sv_caller": "sawfish",
+                        "needs_reheader": false,
+                        "skip_vep_prep": true
+                    },
+                    "FAM_sawfish_sv_genotyped.sv.vcf.gz.tbi"
+                ]
+            ]
+        ],
+        "timestamp": "2026-09-11T07:10:31.69461854",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    }
+}
