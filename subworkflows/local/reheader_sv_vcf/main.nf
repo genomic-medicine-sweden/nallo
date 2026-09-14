@@ -6,15 +6,18 @@ include { GAWK as CREATE_SAMPLES_FILE } from '../../../modules/nf-core/gawk/main
 workflow REHEADER_SV_VCF {
     take:
     ch_vcf_tbi // channel: [ val(meta), path(vcf), path(tbi) ]
+    ch_fai // channel: [ val(meta), path(fai) ]
 
     main:
     // Sniffles hardcodes the sample name as SAMPLE, and Severus bases it on the file name,
     // so those need reheadering. HiFiCNV and sawfish don't have this issue.
     def caller_needs_reheader = [
-        'severus': true,
-        'sniffles': true,
+        'debreak': true,
         'hificnv': false,
         'sawfish': false,
+        'severus': true,
+        'sniffles': true,
+        'sniffles1': true,
     ]
 
     // Branching channel to get the VCFs that need reheadering and those that don't. If the sv caller is not in the map keyset, throw an error.
@@ -45,10 +48,14 @@ workflow REHEADER_SV_VCF {
         .join(CREATE_SAMPLES_FILE.out.output, failOnMismatch: true, failOnDuplicate: true)
         .map { meta, vcf, _tbi, samples -> [meta, vcf, [], samples] }
 
-    // Finally, reheader the VCF with meta.id as the sample name
+    /*
+     * Finally, reheader the VCF with meta.id as the sample name,
+     * and supply the FAI so bcftools adds any missing ##contig lines
+     * (e.g. chrM, which sniffles v2 omits when no SVs are called there).
+     */
     BCFTOOLS_REHEADER(
         ch_bcftools_reheader_input,
-        [[], []],
+        ch_fai.collect(),
     )
 
     // Concat the reheadered VCFs and indices with the ones that didn't need reheadering to merge later

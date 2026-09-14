@@ -49,7 +49,7 @@ nextflow_workflow {
 
     }
 
-    test("severus, fasta, svdb, vep_cache, '110', vep_plugin_files") {
+    test("severus, fasta, svdb, vep_cache, '116', vep_plugin_files") {
 
         when {
             params {
@@ -67,7 +67,7 @@ nextflow_workflow {
                     'colorsdb_ac'
                 ])
                 input[3] = UNTAR.out.untar
-                input[4] = channel.value('110')
+                input[4] = channel.value(params.vep_cache_version as String)
                 input[5] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
                 ])
@@ -87,7 +87,7 @@ nextflow_workflow {
 
     }
 
-    test("severus, fasta, svdb, vep_cache, '110', vep_plugin_files, with extra_vep_options_sv") {
+    test("severus, fasta, svdb, vep_cache, '116', vep_plugin_files, with extra_vep_options_sv") {
 
         when {
             params {
@@ -105,7 +105,7 @@ nextflow_workflow {
                     'colorsdb_ac'
                 ])
                 input[3] = UNTAR.out.untar
-                input[4] = channel.value('110')
+                input[4] = channel.value(params.vep_cache_version as String)
                 input[5] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
                 ])
@@ -125,7 +125,7 @@ nextflow_workflow {
 
     }
 
-    test("severus, fasta, svdb, vep_cache, '110', vep_plugin_files -stub with extra_vep_options_sv") {
+    test("severus, fasta, svdb, vep_cache, '116', vep_plugin_files -stub with extra_vep_options_sv") {
 
         options "-stub"
 
@@ -145,7 +145,7 @@ nextflow_workflow {
                     'colorsdb_ac'
                 ])
                 input[3] = UNTAR.out.untar
-                input[4] = channel.value('110')
+                input[4] = channel.value(params.vep_cache_version as String)
                 input[5] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
                 ])
@@ -162,7 +162,7 @@ nextflow_workflow {
 
     }
 
-    test("severus, fasta, svdb, vep_cache, '110', vep_plugin_files -stub") {
+    test("severus, fasta, svdb, vep_cache, '116', vep_plugin_files -stub") {
 
         options "-stub"
 
@@ -179,7 +179,7 @@ nextflow_workflow {
                     'colorsdb_ac'
                 ])
                 input[3] = UNTAR.out.untar
-                input[4] = channel.value('110')
+                input[4] = channel.value(params.vep_cache_version as String)
                 input[5] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
                 ])

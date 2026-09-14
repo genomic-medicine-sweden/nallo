@@ -352,7 +352,14 @@
                     "exists": true,
                     "format": "path",
                     "fa_icon": "fas fa-file",
-                    "description": "A SNV rank model config file for genmod."
+                    "description": "A rank model config file for genmod, used for nuclear SNV scoring."
+                },
+                "genmod_score_config_snvs_mito": {
+                    "type": "string",
+                    "exists": true,
+                    "format": "path",
+                    "fa_icon": "fas fa-file",
+                    "description": "A rank model config file for genmod, used for mitochondrial SNV scoring. Should reference only fields produced by the MT VEP command."
                 },
                 "genmod_score_config_svs": {
                     "type": "string",
@@ -663,25 +670,25 @@
                     "type": "string",
                     "description": "Which SV callers to use. Several callers can be specified, separated by commas (e.g. sniffles,severus,hificnv,sawfish). The order of the SV callers in this list will determine the priority of the calls when merging them if not overwritten by `sv_caller_priority`.",
                     "default": "sniffles,hificnv",
-                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus)(,(sniffles|hificnv|sawfish|severus))*$"
+                    "pattern": "(?i)^(sniffles|sniffles1|hificnv|sawfish|severus|debreak)(,(sniffles|sniffles1|hificnv|sawfish|severus|debreak))*$"
                 },
                 "sv_callers_merge_priority": {
                     "type": "string",
                     "description": "The order of the SV callers in this list will determine the priority of the calls when merging them. All callers that has been specified in `sv_callers` should also be specified here separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as `--sv_callers`.",
                     "default": "sniffles,hificnv",
-                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus)(,(sniffles|hificnv|sawfish|severus))*$"
+                    "pattern": "(?i)^(sniffles|sniffles1|hificnv|sawfish|severus|debreak)(,(sniffles|sniffles1|hificnv|sawfish|severus|debreak))*$"
                 },
                 "sv_callers_to_run": {
                     "type": "string",
                     "description": "Which SV callers to run, separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as `--sv_callers`",
                     "default": "sniffles,hificnv",
-                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus)(,(sniffles|hificnv|sawfish|severus))*$"
+                    "pattern": "(?i)^(sniffles|sniffles1|hificnv|sawfish|severus|debreak)(,(sniffles|sniffles1|hificnv|sawfish|severus|debreak))*$"
                 },
                 "sv_callers_to_merge": {
                     "type": "string",
                     "description": "Which SV callers to merge into family VCFs (that are also used for annotation and ranking), separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as `--sv_callers`",
                     "default": "sniffles,hificnv",
-                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus)(,(sniffles|hificnv|sawfish|severus))*$"
+                    "pattern": "(?i)^(sniffles|sniffles1|hificnv|sawfish|severus|debreak)(,(sniffles|sniffles1|hificnv|sawfish|severus|debreak))*$"
                 },
                 "snv_caller": {
                     "type": "string",
@@ -786,7 +793,7 @@
                 },
                 "vep_cache_version": {
                     "type": "integer",
-                    "default": 110,
+                    "default": 116,
                     "description": "VEP cache version"
                 },
                 "vep_mitochondrial_genome_distance": {
@@ -870,7 +877,12 @@
                 "extra_vep_options_snv": {
                     "type": "string",
                     "default": "--buffer_size 20000 --appris --biotype --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --humdiv --no_progress --numbers --polyphen p --protein --regulatory --sift p --symbol --tsl --uniprot --no_stats",
-                    "description": "Options appended to the VEP core command for SNV annotation (applied to both nuclear and mitochondrial SNVs). The default enables standard enrichment annotations. To add plugins such as CADD or SpliceAI, supply the default flags plus your additions. Plugin files must be included in `vep_plugin_files`."
+                    "description": "Options appended to the VEP core command for nuclear SNV annotation. The default enables standard enrichment annotations. To add plugins such as CADD or SpliceAI, supply the default flags plus your additions. Plugin files must be included in `vep_plugin_files`."
+                },
+                "extra_vep_options_snv_mito": {
+                    "type": "string",
+                    "default": "--appris --biotype --buffer_size 20000 --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --no_progress --numbers --protein --regulatory --symbol --tsl --uniprot --no_stats",
+                    "description": "Options appended to the VEP core command for mitochondrial SNV annotation. Nuclear-specific flags (--sift, --polyphen, --humdiv) are excluded. To add MT-specific plugins such as gnomADMt, supply the default flags plus your additions. Plugin files must be included in `vep_plugin_files`."
                 },
                 "extra_vep_options_sv": {
                     "type": "string",
@@ -1030,15 +1042,15 @@
                     "default": 500,
                     "description": "Discard a read if none of its segment is larger than this in Sniffles."
                 },
-                "sniffles_min_heterozygous_allele_frequency": {
-                    "type": "number",
-                    "default": 0,
-                    "description": "Threshold on heterozygous allele frequency in Sniffles (0-1)."
-                },
                 "sniffles_min_sv_size": {
                     "type": "number",
                     "default": 50,
                     "description": "Minimum length of SV to be reported in Sniffles."
+                },
+                "sniffles_min_heterozygous_allele_frequency": {
+                    "type": "number",
+                    "default": 0,
+                    "description": "Threshold on heterozygous allele frequency in Sniffles v1 (`--sv_callers sniffles1`). Has no effect when using Sniffles v2."
                 },
                 "sawfish_min_sv_size": {
                     "type": "number",

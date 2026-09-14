@@ -45,12 +45,13 @@
                     "echtvar": "0.2.4"
                 },
                 "ENSEMBLVEP_FILTERVEP": {
-                    "ensemblvep": 115.2,
+                    "ensemblvep": 116.1,
                     "perl-math-cdf": 0.1
                 },
                 "ENSEMBLVEP_SNV": {
-                    "ensemblvep": 110.0,
-                    "tabix": 1.17
+                    "ensemblvep": 116.1,
+                    "perl-math-cdf": 0.1,
+                    "tabix": "1.23.1"
                 },
                 "GAWK_EXTRACT_REGIONS": {
                     "gawk": "5.3.1"
@@ -60,6 +61,10 @@
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
+                },
+                "HTSLIB_BGZIPTABIX": {
+                    "htslib": 1.24,
+                    "xz": "5.8.3"
                 },
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283"
@@ -91,10 +96,6 @@
                 },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
-                },
-                "TABIX_BGZIPTABIX": {
-                    "bgzip": 1.21,
-                    "tabix": 1.21
                 },
                 "TABIX_TABIX": {
                     "tabix": 1.21
@@ -145,10 +146,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-08-14T17:11:34.996403368",
+        "timestamp": "2026-09-09T07:54:00.753952759",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     },
     "Test Sentieon SNV calling with mock resources": {
@@ -201,18 +202,23 @@
                     "echtvar": "0.2.4"
                 },
                 "ENSEMBLVEP_FILTERVEP": {
-                    "ensemblvep": 115.2,
+                    "ensemblvep": 116.1,
                     "perl-math-cdf": 0.1
                 },
                 "ENSEMBLVEP_SNV": {
-                    "ensemblvep": 110.0,
-                    "tabix": 1.17
+                    "ensemblvep": 116.1,
+                    "perl-math-cdf": 0.1,
+                    "tabix": "1.23.1"
                 },
                 "GAWK_EXTRACT_REGIONS": {
                     "gawk": "5.3.1"
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
+                },
+                "HTSLIB_BGZIPTABIX": {
+                    "htslib": 1.24,
+                    "xz": "5.8.3"
                 },
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283"
@@ -247,10 +253,6 @@
                 },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
-                },
-                "TABIX_BGZIPTABIX": {
-                    "bgzip": 1.21,
-                    "tabix": 1.21
                 },
                 "TABIX_TABIX": {
                     "tabix": 1.21
@@ -301,10 +303,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-08-14T17:11:59.756606899",
+        "timestamp": "2026-09-09T07:54:38.79458826",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     },
     "Test CADD with mock resources": {
@@ -365,12 +367,13 @@
                     "echtvar": "0.2.4"
                 },
                 "ENSEMBLVEP_FILTERVEP": {
-                    "ensemblvep": 115.2,
+                    "ensemblvep": 116.1,
                     "perl-math-cdf": 0.1
                 },
                 "ENSEMBLVEP_SNV": {
-                    "ensemblvep": 110.0,
-                    "tabix": 1.17
+                    "ensemblvep": 116.1,
+                    "perl-math-cdf": 0.1,
+                    "tabix": "1.23.1"
                 },
                 "GAWK_EXTRACT_REGIONS": {
                     "gawk": "5.3.1"
@@ -380,6 +383,10 @@
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
+                },
+                "HTSLIB_BGZIPTABIX": {
+                    "htslib": 1.24,
+                    "xz": "5.8.3"
                 },
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283"
@@ -417,10 +424,6 @@
                 },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
-                },
-                "TABIX_BGZIPTABIX": {
-                    "bgzip": 1.21,
-                    "tabix": 1.21
                 },
                 "TABIX_CADD": {
                     "tabix": 1.21
@@ -477,10 +480,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-08-14T17:11:08.216116509",
+        "timestamp": "2026-09-09T07:53:17.521538365",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     }
 }

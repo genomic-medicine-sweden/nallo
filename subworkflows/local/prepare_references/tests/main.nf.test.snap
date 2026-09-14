@@ -27,27 +27,29 @@
                             [
                                 [
                                     [
-                                        "1-1000000.gz:md5,f87d70049f19c7b7c19dee85499287f4",
-                                        "1-1000000_reg.gz:md5,761c580dbb84ba81535ebc996af9c47f",
-                                        "1-1000000_var.gz:md5,9c7c5960f7f87846083b39727a30b548"
+                                        "1-1000000.gz:md5,534516494471d0368d5b9b2d37a5d8e5",
+                                        "1-1000000_reg.gz:md5,54d5ab3be8ba077b06d688d9a0d8b96c"
                                     ],
                                     [
-                                        "3000001-4000000.gz:md5,35abc3e1f0b356e88e4b674f54deddf3",
-                                        "3000001-4000000_reg.gz:md5,2e75f25e392622b9be69bc24465a651c"
+                                        "3000001-4000000.gz:md5,9d2e6170e41c28de098bd0f02e8c34ea",
+                                        "3000001-4000000_reg.gz:md5,ab7812ab88c1edd8b9b814c07a58031a"
                                     ],
                                     [
-                                        "1-1000000.gz:md5,f125049dd99e1be06e9de07eeedd5fbb",
-                                        "1-1000000_reg.gz:md5,a774233304f72832896de2e9227221b0",
-                                        "all_vars.gz:md5,04873c84d0e2e580220e9fd1c6090ad9",
-                                        "all_vars.gz.csi:md5,3713f21493293889dbc64184a915a514"
+                                        "2000001-3000000.gz:md5,11e4e39904fa38781bc342fa2ee016dc",
+                                        "2000001-3000000_reg.gz:md5,1af3742d25afa588161e7ad2d54a0b12"
                                     ],
                                     [
-                                        "140000001-141000000.gz:md5,d0bbdc9fd851d90cde9de7f4ffa7a38b",
-                                        "140000001-141000000_reg.gz:md5,2fdef236fbb852e8ea155836e20ce994",
-                                        "140000001-141000000_var.gz:md5,7d8ea7ee33e425cd4c1515a850e2b663"
+                                        "1-1000000.gz:md5,4dd230148a929a051486b5408fa8cb9c",
+                                        "1-1000000_reg.gz:md5,961fc868c482033b650adda7ae07abc0",
+                                        "all_vars.gz:md5,6c039fa4c9082f3aff9fec7f44e952c1",
+                                        "all_vars.gz.csi:md5,8c0c3b8afc4ffc9b4dc3c9517d9bfbee"
                                     ],
-                                    "chr_synonyms.txt:md5,11e02fc243659e6ad768d6b78284ec98",
-                                    "info.txt:md5,0602ec9c683f5de9b058d9959ae31d18"
+                                    [
+                                        "140000001-141000000.gz:md5,20e5b11c4b387c09c25c2c7d748af662",
+                                        "140000001-141000000_reg.gz:md5,eabca6925905f911ddeeaf8fdca3136c"
+                                    ],
+                                    "chr_synonyms.txt:md5,794969cec0b613f7ddd62cc0815040eb",
+                                    "info.txt:md5,a419f102db4346d22aaf491817764776"
                                 ]
                             ]
                         ]
@@ -78,27 +80,29 @@
                             [
                                 [
                                     [
-                                        "1-1000000.gz:md5,f87d70049f19c7b7c19dee85499287f4",
-                                        "1-1000000_reg.gz:md5,761c580dbb84ba81535ebc996af9c47f",
-                                        "1-1000000_var.gz:md5,9c7c5960f7f87846083b39727a30b548"
+                                        "1-1000000.gz:md5,534516494471d0368d5b9b2d37a5d8e5",
+                                        "1-1000000_reg.gz:md5,54d5ab3be8ba077b06d688d9a0d8b96c"
                                     ],
                                     [
-                                        "3000001-4000000.gz:md5,35abc3e1f0b356e88e4b674f54deddf3",
-                                        "3000001-4000000_reg.gz:md5,2e75f25e392622b9be69bc24465a651c"
+                                        "3000001-4000000.gz:md5,9d2e6170e41c28de098bd0f02e8c34ea",
+                                        "3000001-4000000_reg.gz:md5,ab7812ab88c1edd8b9b814c07a58031a"
                                     ],
                                     [
-                                        "1-1000000.gz:md5,f125049dd99e1be06e9de07eeedd5fbb",
-                                        "1-1000000_reg.gz:md5,a774233304f72832896de2e9227221b0",
-                                        "all_vars.gz:md5,04873c84d0e2e580220e9fd1c6090ad9",
-                                        "all_vars.gz.csi:md5,3713f21493293889dbc64184a915a514"
+                                        "2000001-3000000.gz:md5,11e4e39904fa38781bc342fa2ee016dc",
+                                        "2000001-3000000_reg.gz:md5,1af3742d25afa588161e7ad2d54a0b12"
                                     ],
                                     [
-                                        "140000001-141000000.gz:md5,d0bbdc9fd851d90cde9de7f4ffa7a38b",
-                                        "140000001-141000000_reg.gz:md5,2fdef236fbb852e8ea155836e20ce994",
-                                        "140000001-141000000_var.gz:md5,7d8ea7ee33e425cd4c1515a850e2b663"
+                                        "1-1000000.gz:md5,4dd230148a929a051486b5408fa8cb9c",
+                                        "1-1000000_reg.gz:md5,961fc868c482033b650adda7ae07abc0",
+                                        "all_vars.gz:md5,6c039fa4c9082f3aff9fec7f44e952c1",
+                                        "all_vars.gz.csi:md5,8c0c3b8afc4ffc9b4dc3c9517d9bfbee"
                                     ],
-                                    "chr_synonyms.txt:md5,11e02fc243659e6ad768d6b78284ec98",
-                                    "info.txt:md5,0602ec9c683f5de9b058d9959ae31d18"
+                                    [
+                                        "140000001-141000000.gz:md5,20e5b11c4b387c09c25c2c7d748af662",
+                                        "140000001-141000000_reg.gz:md5,eabca6925905f911ddeeaf8fdca3136c"
+                                    ],
+                                    "chr_synonyms.txt:md5,794969cec0b613f7ddd62cc0815040eb",
+                                    "info.txt:md5,a419f102db4346d22aaf491817764776"
                                 ]
                             ]
                         ]
@@ -106,10 +110,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-09T13:45:49.041716006",
+        "timestamp": "2026-09-09T13:48:34.663679396",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.04.6"
         }
     },
     "unzip fasta, fai, untar vep cache": {
@@ -140,27 +144,29 @@
                             [
                                 [
                                     [
-                                        "1-1000000.gz:md5,f87d70049f19c7b7c19dee85499287f4",
-                                        "1-1000000_reg.gz:md5,761c580dbb84ba81535ebc996af9c47f",
-                                        "1-1000000_var.gz:md5,9c7c5960f7f87846083b39727a30b548"
+                                        "1-1000000.gz:md5,534516494471d0368d5b9b2d37a5d8e5",
+                                        "1-1000000_reg.gz:md5,54d5ab3be8ba077b06d688d9a0d8b96c"
                                     ],
                                     [
-                                        "3000001-4000000.gz:md5,35abc3e1f0b356e88e4b674f54deddf3",
-                                        "3000001-4000000_reg.gz:md5,2e75f25e392622b9be69bc24465a651c"
+                                        "3000001-4000000.gz:md5,9d2e6170e41c28de098bd0f02e8c34ea",
+                                        "3000001-4000000_reg.gz:md5,ab7812ab88c1edd8b9b814c07a58031a"
                                     ],
                                     [
-                                        "1-1000000.gz:md5,f125049dd99e1be06e9de07eeedd5fbb",
-                                        "1-1000000_reg.gz:md5,a774233304f72832896de2e9227221b0",
-                                        "all_vars.gz:md5,04873c84d0e2e580220e9fd1c6090ad9",
-                                        "all_vars.gz.csi:md5,3713f21493293889dbc64184a915a514"
+                                        "2000001-3000000.gz:md5,11e4e39904fa38781bc342fa2ee016dc",
+                                        "2000001-3000000_reg.gz:md5,1af3742d25afa588161e7ad2d54a0b12"
                                     ],
                                     [
-                                        "140000001-141000000.gz:md5,d0bbdc9fd851d90cde9de7f4ffa7a38b",
-                                        "140000001-141000000_reg.gz:md5,2fdef236fbb852e8ea155836e20ce994",
-                                        "140000001-141000000_var.gz:md5,7d8ea7ee33e425cd4c1515a850e2b663"
+                                        "1-1000000.gz:md5,4dd230148a929a051486b5408fa8cb9c",
+                                        "1-1000000_reg.gz:md5,961fc868c482033b650adda7ae07abc0",
+                                        "all_vars.gz:md5,6c039fa4c9082f3aff9fec7f44e952c1",
+                                        "all_vars.gz.csi:md5,8c0c3b8afc4ffc9b4dc3c9517d9bfbee"
                                     ],
-                                    "chr_synonyms.txt:md5,11e02fc243659e6ad768d6b78284ec98",
-                                    "info.txt:md5,0602ec9c683f5de9b058d9959ae31d18"
+                                    [
+                                        "140000001-141000000.gz:md5,20e5b11c4b387c09c25c2c7d748af662",
+                                        "140000001-141000000_reg.gz:md5,eabca6925905f911ddeeaf8fdca3136c"
+                                    ],
+                                    "chr_synonyms.txt:md5,794969cec0b613f7ddd62cc0815040eb",
+                                    "info.txt:md5,a419f102db4346d22aaf491817764776"
                                 ]
                             ]
                         ]
@@ -191,27 +197,29 @@
                             [
                                 [
                                     [
-                                        "1-1000000.gz:md5,f87d70049f19c7b7c19dee85499287f4",
-                                        "1-1000000_reg.gz:md5,761c580dbb84ba81535ebc996af9c47f",
-                                        "1-1000000_var.gz:md5,9c7c5960f7f87846083b39727a30b548"
+                                        "1-1000000.gz:md5,534516494471d0368d5b9b2d37a5d8e5",
+                                        "1-1000000_reg.gz:md5,54d5ab3be8ba077b06d688d9a0d8b96c"
                                     ],
                                     [
-                                        "3000001-4000000.gz:md5,35abc3e1f0b356e88e4b674f54deddf3",
-                                        "3000001-4000000_reg.gz:md5,2e75f25e392622b9be69bc24465a651c"
+                                        "3000001-4000000.gz:md5,9d2e6170e41c28de098bd0f02e8c34ea",
+                                        "3000001-4000000_reg.gz:md5,ab7812ab88c1edd8b9b814c07a58031a"
                                     ],
                                     [
-                                        "1-1000000.gz:md5,f125049dd99e1be06e9de07eeedd5fbb",
-                                        "1-1000000_reg.gz:md5,a774233304f72832896de2e9227221b0",
-                                        "all_vars.gz:md5,04873c84d0e2e580220e9fd1c6090ad9",
-                                        "all_vars.gz.csi:md5,3713f21493293889dbc64184a915a514"
+                                        "2000001-3000000.gz:md5,11e4e39904fa38781bc342fa2ee016dc",
+                                        "2000001-3000000_reg.gz:md5,1af3742d25afa588161e7ad2d54a0b12"
                                     ],
                                     [
-                                        "140000001-141000000.gz:md5,d0bbdc9fd851d90cde9de7f4ffa7a38b",
-                                        "140000001-141000000_reg.gz:md5,2fdef236fbb852e8ea155836e20ce994",
-                                        "140000001-141000000_var.gz:md5,7d8ea7ee33e425cd4c1515a850e2b663"
+                                        "1-1000000.gz:md5,4dd230148a929a051486b5408fa8cb9c",
+                                        "1-1000000_reg.gz:md5,961fc868c482033b650adda7ae07abc0",
+                                        "all_vars.gz:md5,6c039fa4c9082f3aff9fec7f44e952c1",
+                                        "all_vars.gz.csi:md5,8c0c3b8afc4ffc9b4dc3c9517d9bfbee"
                                     ],
-                                    "chr_synonyms.txt:md5,11e02fc243659e6ad768d6b78284ec98",
-                                    "info.txt:md5,0602ec9c683f5de9b058d9959ae31d18"
+                                    [
+                                        "140000001-141000000.gz:md5,20e5b11c4b387c09c25c2c7d748af662",
+                                        "140000001-141000000_reg.gz:md5,eabca6925905f911ddeeaf8fdca3136c"
+                                    ],
+                                    "chr_synonyms.txt:md5,794969cec0b613f7ddd62cc0815040eb",
+                                    "info.txt:md5,a419f102db4346d22aaf491817764776"
                                 ]
                             ]
                         ]
@@ -219,10 +227,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-09T13:46:07.333977354",
+        "timestamp": "2026-09-09T13:48:48.089794534",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.04.6"
         }
     },
     "unzip fasta, fai, untar vep cache -stub": {
@@ -253,27 +261,29 @@
                             [
                                 [
                                     [
-                                        "1-1000000.gz:md5,f87d70049f19c7b7c19dee85499287f4",
-                                        "1-1000000_reg.gz:md5,761c580dbb84ba81535ebc996af9c47f",
-                                        "1-1000000_var.gz:md5,9c7c5960f7f87846083b39727a30b548"
+                                        "1-1000000.gz:md5,534516494471d0368d5b9b2d37a5d8e5",
+                                        "1-1000000_reg.gz:md5,54d5ab3be8ba077b06d688d9a0d8b96c"
                                     ],
                                     [
-                                        "3000001-4000000.gz:md5,35abc3e1f0b356e88e4b674f54deddf3",
-                                        "3000001-4000000_reg.gz:md5,2e75f25e392622b9be69bc24465a651c"
+                                        "3000001-4000000.gz:md5,9d2e6170e41c28de098bd0f02e8c34ea",
+                                        "3000001-4000000_reg.gz:md5,ab7812ab88c1edd8b9b814c07a58031a"
                                     ],
                                     [
-                                        "1-1000000.gz:md5,f125049dd99e1be06e9de07eeedd5fbb",
-                                        "1-1000000_reg.gz:md5,a774233304f72832896de2e9227221b0",
-                                        "all_vars.gz:md5,04873c84d0e2e580220e9fd1c6090ad9",
-                                        "all_vars.gz.csi:md5,3713f21493293889dbc64184a915a514"
+                                        "2000001-3000000.gz:md5,11e4e39904fa38781bc342fa2ee016dc",
+                                        "2000001-3000000_reg.gz:md5,1af3742d25afa588161e7ad2d54a0b12"
                                     ],
                                     [
-                                        "140000001-141000000.gz:md5,d0bbdc9fd851d90cde9de7f4ffa7a38b",
-                                        "140000001-141000000_reg.gz:md5,2fdef236fbb852e8ea155836e20ce994",
-                                        "140000001-141000000_var.gz:md5,7d8ea7ee33e425cd4c1515a850e2b663"
+                                        "1-1000000.gz:md5,4dd230148a929a051486b5408fa8cb9c",
+                                        "1-1000000_reg.gz:md5,961fc868c482033b650adda7ae07abc0",
+                                        "all_vars.gz:md5,6c039fa4c9082f3aff9fec7f44e952c1",
+                                        "all_vars.gz.csi:md5,8c0c3b8afc4ffc9b4dc3c9517d9bfbee"
                                     ],
-                                    "chr_synonyms.txt:md5,11e02fc243659e6ad768d6b78284ec98",
-                                    "info.txt:md5,0602ec9c683f5de9b058d9959ae31d18"
+                                    [
+                                        "140000001-141000000.gz:md5,20e5b11c4b387c09c25c2c7d748af662",
+                                        "140000001-141000000_reg.gz:md5,eabca6925905f911ddeeaf8fdca3136c"
+                                    ],
+                                    "chr_synonyms.txt:md5,794969cec0b613f7ddd62cc0815040eb",
+                                    "info.txt:md5,a419f102db4346d22aaf491817764776"
                                 ]
                             ]
                         ]
@@ -304,27 +314,29 @@
                             [
                                 [
                                     [
-                                        "1-1000000.gz:md5,f87d70049f19c7b7c19dee85499287f4",
-                                        "1-1000000_reg.gz:md5,761c580dbb84ba81535ebc996af9c47f",
-                                        "1-1000000_var.gz:md5,9c7c5960f7f87846083b39727a30b548"
+                                        "1-1000000.gz:md5,534516494471d0368d5b9b2d37a5d8e5",
+                                        "1-1000000_reg.gz:md5,54d5ab3be8ba077b06d688d9a0d8b96c"
                                     ],
                                     [
-                                        "3000001-4000000.gz:md5,35abc3e1f0b356e88e4b674f54deddf3",
-                                        "3000001-4000000_reg.gz:md5,2e75f25e392622b9be69bc24465a651c"
+                                        "3000001-4000000.gz:md5,9d2e6170e41c28de098bd0f02e8c34ea",
+                                        "3000001-4000000_reg.gz:md5,ab7812ab88c1edd8b9b814c07a58031a"
                                     ],
                                     [
-                                        "1-1000000.gz:md5,f125049dd99e1be06e9de07eeedd5fbb",
-                                        "1-1000000_reg.gz:md5,a774233304f72832896de2e9227221b0",
-                                        "all_vars.gz:md5,04873c84d0e2e580220e9fd1c6090ad9",
-                                        "all_vars.gz.csi:md5,3713f21493293889dbc64184a915a514"
+                                        "2000001-3000000.gz:md5,11e4e39904fa38781bc342fa2ee016dc",
+                                        "2000001-3000000_reg.gz:md5,1af3742d25afa588161e7ad2d54a0b12"
                                     ],
                                     [
-                                        "140000001-141000000.gz:md5,d0bbdc9fd851d90cde9de7f4ffa7a38b",
-                                        "140000001-141000000_reg.gz:md5,2fdef236fbb852e8ea155836e20ce994",
-                                        "140000001-141000000_var.gz:md5,7d8ea7ee33e425cd4c1515a850e2b663"
+                                        "1-1000000.gz:md5,4dd230148a929a051486b5408fa8cb9c",
+                                        "1-1000000_reg.gz:md5,961fc868c482033b650adda7ae07abc0",
+                                        "all_vars.gz:md5,6c039fa4c9082f3aff9fec7f44e952c1",
+                                        "all_vars.gz.csi:md5,8c0c3b8afc4ffc9b4dc3c9517d9bfbee"
                                     ],
-                                    "chr_synonyms.txt:md5,11e02fc243659e6ad768d6b78284ec98",
-                                    "info.txt:md5,0602ec9c683f5de9b058d9959ae31d18"
+                                    [
+                                        "140000001-141000000.gz:md5,20e5b11c4b387c09c25c2c7d748af662",
+                                        "140000001-141000000_reg.gz:md5,eabca6925905f911ddeeaf8fdca3136c"
+                                    ],
+                                    "chr_synonyms.txt:md5,794969cec0b613f7ddd62cc0815040eb",
+                                    "info.txt:md5,a419f102db4346d22aaf491817764776"
                                 ]
                             ]
                         ]
@@ -332,10 +344,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-09T13:47:14.176700066",
+        "timestamp": "2026-09-09T13:50:15.223681416",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.04.6"
         }
     },
     "unzip fasta, untar vep cache -stub": {
@@ -364,7 +376,7 @@
                         },
                         [
                             [
-
+                                
                             ]
                         ]
                     ]
@@ -392,7 +404,7 @@
                         },
                         [
                             [
-
+                                
                             ]
                         ]
                     ]
@@ -421,7 +433,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/1e84555134bb9638ad0dde49afd895e3192de3f0/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/reference/hg38.test.fa"
                     ]
                 ],
                 "2": [
@@ -448,7 +460,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/1e84555134bb9638ad0dde49afd895e3192de3f0/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/reference/hg38.test.fa"
                     ]
                 ],
                 "vep_resources": [
@@ -486,7 +498,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/1e84555134bb9638ad0dde49afd895e3192de3f0/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/reference/hg38.test.fa"
                     ]
                 ],
                 "2": [
@@ -498,27 +510,29 @@
                             [
                                 [
                                     [
-                                        "1-1000000.gz:md5,f87d70049f19c7b7c19dee85499287f4",
-                                        "1-1000000_reg.gz:md5,761c580dbb84ba81535ebc996af9c47f",
-                                        "1-1000000_var.gz:md5,9c7c5960f7f87846083b39727a30b548"
+                                        "1-1000000.gz:md5,534516494471d0368d5b9b2d37a5d8e5",
+                                        "1-1000000_reg.gz:md5,54d5ab3be8ba077b06d688d9a0d8b96c"
                                     ],
                                     [
-                                        "3000001-4000000.gz:md5,35abc3e1f0b356e88e4b674f54deddf3",
-                                        "3000001-4000000_reg.gz:md5,2e75f25e392622b9be69bc24465a651c"
+                                        "3000001-4000000.gz:md5,9d2e6170e41c28de098bd0f02e8c34ea",
+                                        "3000001-4000000_reg.gz:md5,ab7812ab88c1edd8b9b814c07a58031a"
                                     ],
                                     [
-                                        "1-1000000.gz:md5,f125049dd99e1be06e9de07eeedd5fbb",
-                                        "1-1000000_reg.gz:md5,a774233304f72832896de2e9227221b0",
-                                        "all_vars.gz:md5,04873c84d0e2e580220e9fd1c6090ad9",
-                                        "all_vars.gz.csi:md5,3713f21493293889dbc64184a915a514"
+                                        "2000001-3000000.gz:md5,11e4e39904fa38781bc342fa2ee016dc",
+                                        "2000001-3000000_reg.gz:md5,1af3742d25afa588161e7ad2d54a0b12"
                                     ],
                                     [
-                                        "140000001-141000000.gz:md5,d0bbdc9fd851d90cde9de7f4ffa7a38b",
-                                        "140000001-141000000_reg.gz:md5,2fdef236fbb852e8ea155836e20ce994",
-                                        "140000001-141000000_var.gz:md5,7d8ea7ee33e425cd4c1515a850e2b663"
+                                        "1-1000000.gz:md5,4dd230148a929a051486b5408fa8cb9c",
+                                        "1-1000000_reg.gz:md5,961fc868c482033b650adda7ae07abc0",
+                                        "all_vars.gz:md5,6c039fa4c9082f3aff9fec7f44e952c1",
+                                        "all_vars.gz.csi:md5,8c0c3b8afc4ffc9b4dc3c9517d9bfbee"
                                     ],
-                                    "chr_synonyms.txt:md5,11e02fc243659e6ad768d6b78284ec98",
-                                    "info.txt:md5,0602ec9c683f5de9b058d9959ae31d18"
+                                    [
+                                        "140000001-141000000.gz:md5,20e5b11c4b387c09c25c2c7d748af662",
+                                        "140000001-141000000_reg.gz:md5,eabca6925905f911ddeeaf8fdca3136c"
+                                    ],
+                                    "chr_synonyms.txt:md5,794969cec0b613f7ddd62cc0815040eb",
+                                    "info.txt:md5,a419f102db4346d22aaf491817764776"
                                 ]
                             ]
                         ]
@@ -537,7 +551,7 @@
                         {
                             "id": "hg38"
                         },
-                        "/genomic-medicine-sweden/test-datasets/1e84555134bb9638ad0dde49afd895e3192de3f0/reference/hg38.test.fa"
+                        "/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/reference/hg38.test.fa"
                     ]
                 ],
                 "vep_resources": [
@@ -549,27 +563,29 @@
                             [
                                 [
                                     [
-                                        "1-1000000.gz:md5,f87d70049f19c7b7c19dee85499287f4",
-                                        "1-1000000_reg.gz:md5,761c580dbb84ba81535ebc996af9c47f",
-                                        "1-1000000_var.gz:md5,9c7c5960f7f87846083b39727a30b548"
+                                        "1-1000000.gz:md5,534516494471d0368d5b9b2d37a5d8e5",
+                                        "1-1000000_reg.gz:md5,54d5ab3be8ba077b06d688d9a0d8b96c"
                                     ],
                                     [
-                                        "3000001-4000000.gz:md5,35abc3e1f0b356e88e4b674f54deddf3",
-                                        "3000001-4000000_reg.gz:md5,2e75f25e392622b9be69bc24465a651c"
+                                        "3000001-4000000.gz:md5,9d2e6170e41c28de098bd0f02e8c34ea",
+                                        "3000001-4000000_reg.gz:md5,ab7812ab88c1edd8b9b814c07a58031a"
                                     ],
                                     [
-                                        "1-1000000.gz:md5,f125049dd99e1be06e9de07eeedd5fbb",
-                                        "1-1000000_reg.gz:md5,a774233304f72832896de2e9227221b0",
-                                        "all_vars.gz:md5,04873c84d0e2e580220e9fd1c6090ad9",
-                                        "all_vars.gz.csi:md5,3713f21493293889dbc64184a915a514"
+                                        "2000001-3000000.gz:md5,11e4e39904fa38781bc342fa2ee016dc",
+                                        "2000001-3000000_reg.gz:md5,1af3742d25afa588161e7ad2d54a0b12"
                                     ],
                                     [
-                                        "140000001-141000000.gz:md5,d0bbdc9fd851d90cde9de7f4ffa7a38b",
-                                        "140000001-141000000_reg.gz:md5,2fdef236fbb852e8ea155836e20ce994",
-                                        "140000001-141000000_var.gz:md5,7d8ea7ee33e425cd4c1515a850e2b663"
+                                        "1-1000000.gz:md5,4dd230148a929a051486b5408fa8cb9c",
+                                        "1-1000000_reg.gz:md5,961fc868c482033b650adda7ae07abc0",
+                                        "all_vars.gz:md5,6c039fa4c9082f3aff9fec7f44e952c1",
+                                        "all_vars.gz.csi:md5,8c0c3b8afc4ffc9b4dc3c9517d9bfbee"
                                     ],
-                                    "chr_synonyms.txt:md5,11e02fc243659e6ad768d6b78284ec98",
-                                    "info.txt:md5,0602ec9c683f5de9b058d9959ae31d18"
+                                    [
+                                        "140000001-141000000.gz:md5,20e5b11c4b387c09c25c2c7d748af662",
+                                        "140000001-141000000_reg.gz:md5,eabca6925905f911ddeeaf8fdca3136c"
+                                    ],
+                                    "chr_synonyms.txt:md5,794969cec0b613f7ddd62cc0815040eb",
+                                    "info.txt:md5,a419f102db4346d22aaf491817764776"
                                 ]
                             ]
                         ]
@@ -577,10 +593,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-08-13T14:42:49.359137424",
+        "timestamp": "2026-09-09T13:49:21.349964311",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     }
 }

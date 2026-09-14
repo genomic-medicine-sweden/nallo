@@ -67,7 +67,8 @@ Define where the pipeline should find input data and save output data.
 | `cnv_expected_xx_cn` | A BED file containing expected copy number regions for XX samples. | `string` |  |  |  |
 | `cnv_excluded_regions` | A BED file specifying regions to exclude with HiFiCNV or Sawfish, such as centromeres. | `string` |  |  |  |
 | `genmod_reduced_penetrance` | A file with gene ids that have reduced penetrance. For use with genmod. | `string` |  |  |  |
-| `genmod_score_config_snvs` | A SNV rank model config file for genmod. | `string` |  |  |  |
+| `genmod_score_config_snvs` | A rank model config file for genmod, used for nuclear SNV scoring. | `string` |  |  |  |
+| `genmod_score_config_snvs_mito` | A rank model config file for genmod, used for mitochondrial SNV scoring. Should reference only fields produced by the MT VEP command. | `string` |  |  |  |
 | `genmod_score_config_svs` | A SV rank model config file for genmod. | `string` |  |  |  |
 | `somalier_sites` | A VCF of known polymorphic sites for somalier | `string` |  |  |  |
 | `gens_baf_positions` | Tab-delimited file with variant positions used to calculate B-allele frequencies for Gens inputs. | `string` |  |  |  |
@@ -161,7 +162,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `mitochondrial_sv_min_size` | Minimum allele length difference (abs(strlen(REF)-strlen(ALT))) to classify a mitochondrial variant as an SV rather than a SNV/small indel. | `integer` | 50 |  |  |
 | `alignment_processes` | If alignment_processes is bigger than 1, input files will be split and aligned in parallel to reduce processing time. | `integer` | 8 |  |  |
 | `snv_calling_processes` | If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time. Must be `1` when `--snv_caller sentieon` is used. | `integer` | 13 |  |  |
-| `vep_cache_version` | VEP cache version | `integer` | 110 |  |  |
+| `vep_cache_version` | VEP cache version | `integer` | 116 |  |  |
 | `vep_mitochondrial_genome_distance` | The distance parameter used in VEP for mitochondrial SNVs | `integer` | 0 |  |  |
 | `vep_nuclear_genome_distance` | The distance parameter used in VEP for nuclear SNVs | `integer` | 5000 |  |  |
 | `vep_plugin_files` | Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required for SNV annotation; only pLI_values.txt is required for SV annotation. | `string` |  |  |  |
@@ -176,7 +177,8 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `extra_modkit_options` | Extra options to modkit, used for test profile. | `string` |  |  | True |
 | `extra_paraphase_options` | Extra options to Paraphase, used for test profile. | `string` |  |  | True |
 | `extra_sawfish_options` | Extra options to Sawfish, used for test profile. | `string` |  |  | True |
-| `extra_vep_options_snv` | Options appended to the VEP core command for SNV annotation (applied to both nuclear and mitochondrial SNVs). The default enables standard enrichment annotations. To add plugins such as CADD or SpliceAI, supply the default flags plus your additions. Plugin files must be included in `vep_plugin_files`. | `string` | --buffer_size 20000 --appris --biotype --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --humdiv --no_progress --numbers --polyphen p --protein --regulatory --sift p --symbol --tsl --uniprot --no_stats |  |  |
+| `extra_vep_options_snv` | Options appended to the VEP core command for nuclear SNV annotation. The default enables standard enrichment annotations. To add plugins such as CADD or SpliceAI, supply the default flags plus your additions. Plugin files must be included in `vep_plugin_files`. | `string` | --buffer_size 20000 --appris --biotype --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --humdiv --no_progress --numbers --polyphen p --protein --regulatory --sift p --symbol --tsl --uniprot --no_stats |  |  |
+| `extra_vep_options_snv_mito` | Options appended to the VEP core command for mitochondrial SNV annotation. Nuclear-specific flags (--sift, --polyphen, --humdiv) are excluded. To add MT-specific plugins such as gnomADMt, supply the default flags plus your additions. Plugin files must be included in `vep_plugin_files`. | `string` | --appris --biotype --buffer_size 20000 --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --no_progress --numbers --protein --regulatory --symbol --tsl --uniprot --no_stats |  |  |
 | `extra_vep_options_sv` | Options appended to the VEP core command for SV annotation. The default enables standard enrichment annotations. To add plugins, supply the default flags plus your additions. Plugin files must be included in `vep_plugin_files`. | `string` | --appris --biotype --buffer_size 100 --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --no_progress --numbers --protein --regulatory --symbol --tsl --uniprot --no_stats |  |  |
 | `extra_yak_options` | Extra options to yak, used for test profile. | `string` |  |  | True |
 | `extra_somalier_relate_infer_options` | Extra options to somalier relate infer, used for test profile. | `string` |  |  | True |
@@ -209,8 +211,8 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `strdrop_edit` | Allele similarity Levenshtein edit distance ratio cutoff in strdrop. | `number` | 0.9 |  |  |
 | `sniffles_min_support_reads` | Minimum number of reads to support a SV in Sniffles. | `number` | 3 |  |  |
 | `sniffles_min_segment_length` | Discard a read if none of its segment is larger than this in Sniffles. | `number` | 500 |  |  |
-| `sniffles_min_heterozygous_allele_frequency` | Threshold on heterozygous allele frequency in Sniffles (0-1). | `number` | 0 |  |  |
 | `sniffles_min_sv_size` | Minimum length of SV to be reported in Sniffles. | `number` | 50 |  |  |
+| `sniffles_min_heterozygous_allele_frequency` | Threshold on heterozygous allele frequency in Sniffles v1 (`--sv_callers sniffles1`). Has no effect when using Sniffles v2. | `number` | 0 |  |  |
 | `sawfish_min_sv_size` | Co-linear SVs must have either an insertion or deletion of this size or greater to be included in the output in Sawfish. All other SV evidence patterns such as those consistent with duplications, inversions and translocations will always be included in the output. | `number` | 50 |  |  |
 | `read_aligner` | Which aligner to use for read alignment. Supported arguments are mm2plus, minimap2 or pbmm2. (accepted: `minimap2`\|`pbmm2`\|`mm2plus`) | `string` | pbmm2 |  |  |
 | `pbmm2_preset` | Preset to use for pbmm2. Supported arguments are HIFI, CCS, or SUBREAD. (accepted: `HIFI`\|`CCS`\|`SUBREAD`) | `string` | CCS |  |  |

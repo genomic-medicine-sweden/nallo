@@ -20,6 +20,10 @@ nextflow_process {
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ]
+                input[1] = [[],[]]
+                input[2] = [[],[]]
+                input[3] = true
+                input[4] = false
                 """
             }
         }
@@ -35,7 +39,7 @@ nextflow_process {
                 """
                 input[0] = [
                     [id: 'test'],
-                    file("${projectDir}/modules/local/vep_prep_sv/tests/input/snifflesv1.vcf", checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/sniffles1_minimal_test.vcf.gz', checkIfExists: true)
                 ]
                 """
             }
@@ -62,7 +66,7 @@ nextflow_process {
                 { assert vcf_lines.any { it.contains('SVTYPE=DEL') && it.contains('ORIG_SVTYPE=DEL/INV') } },
                 // INVDUP → DUP
                 { assert vcf_lines.any { it.contains('SVTYPE=DUP') && it.contains('ORIG_SVTYPE=INVDUP') } },
-                // DUP/INS → DUP: END=18788645 (source region) stripped
+                // DUP/INS → DUP: synthetic END stripped
                 { assert vcf_lines.any { it.contains('SVTYPE=DUP') && it.contains('ORIG_SVTYPE=DUP/INS') &&
                                          !it.contains(';END=') } },
                 { assert snapshot(vcf_lines.join('\n'), process.out.versions_vep_prep_sv).match() }
@@ -70,14 +74,14 @@ nextflow_process {
         }
     }
 
-    test("vep_prep_sv - generic TRA remap (no caller flag)") {
+    test("vep_prep_sv - debreak synthetic") {
 
         when {
             process {
                 """
                 input[0] = [
                     [id: 'test'],
-                    file("${projectDir}/modules/local/vep_prep_sv/tests/input/generic_tra.vcf", checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/debreak_minimal_test.vcf.gz', checkIfExists: true)
                 ]
                 """
             }
@@ -87,23 +91,47 @@ nextflow_process {
             def vcf_lines = path(process.out.vcf.get(0).get(1)).readLines()
             assertAll(
                 { assert process.success },
-                // generic remap fires without --caller flag
-                { assert vcf_lines.count { it.contains('SVTYPE=BND') && it.contains('ORIG_SVTYPE=TRA') } == 2 },
-                // no STRANDBIAS header injection (no sniffles1 flag)
-                { assert !vcf_lines.any { it.startsWith('##FILTER=<ID=STRANDBIAS,') } },
-                // Debreak: SVLEN=0 is not stripped (only SVLEN=1 is sniffles1-specific)
+                { assert vcf_lines.any { it.startsWith('##INFO=<ID=ORIG_SVTYPE,') } },
+                // TRA → BND with ORIG_SVTYPE preserved
+                { assert vcf_lines.any { it.contains('DB281') && it.contains('SVTYPE=BND') && it.contains('ORIG_SVTYPE=TRA') } },
+                // SVLEN=0 on TRA not stripped (debreak uses 0 for interchromosomal events)
                 { assert vcf_lines.any { it.contains('DB281') && it.contains('SVLEN=0') } },
+                // DEL passes through unchanged
+                { assert vcf_lines.any { it.contains('DB3') && it.contains('SVTYPE=DEL') && !it.contains('ORIG_SVTYPE') } },
                 { assert snapshot(vcf_lines.join('\n'), process.out.versions_vep_prep_sv).match() }
             )
         }
     }
 
-    test("vep_prep_sv - sniffles1 integration") {
+    test("vep_prep_sv - sniffles2 synthetic") {
 
         when {
-            params {
-                caller = 'sniffles1'
+            process {
+                """
+                input[0] = [
+                    [id: 'test'],
+                    file(params.pipelines_testdata_base_path + 'testdata/sniffles2_minimal_test.vcf.gz', checkIfExists: true)
+                ]
+                """
             }
+        }
+
+        then {
+            def vcf_lines = path(process.out.vcf.get(0).get(1)).readLines()
+            assertAll(
+                { assert process.success },
+                { assert vcf_lines.any { it.startsWith('##INFO=<ID=ORIG_SVTYPE,') } },
+                // standard SVTYPEs pass through without remapping
+                { assert vcf_lines.any { it.contains('SVTYPE=DEL') && !it.contains('ORIG_SVTYPE') } },
+                { assert vcf_lines.any { it.contains('SVTYPE=INS') && !it.contains('ORIG_SVTYPE') } },
+                { assert snapshot(vcf_lines.join('\n'), process.out.versions_vep_prep_sv).match() }
+            )
+        }
+    }
+
+    test("vep_prep_sv - sniffles2 integration") {
+
+        when {
             process {
                 """
                 input[0] = SNIFFLES.out.vcf
@@ -116,21 +144,17 @@ nextflow_process {
                 { assert process.success },
                 { assert snapshot(
                     process.out.versions_vep_prep_sv,
-                    // skip ##fileDate line (index 2) which changes each run
-                    (path(process.out.vcf.get(0).get(1)).readLines()[0,1] + path(process.out.vcf.get(0).get(1)).readLines().drop(3)).join('\n').md5()
+                    path(process.out.vcf.get(0).get(1)).vcf.variantsMD5
                 ).match() }
             )
         }
     }
 
-    test("vep_prep_sv - sniffles1 -stub") {
+    test("vep_prep_sv - sniffles2 -stub") {
 
         options "-stub"
 
         when {
-            params {
-                caller = 'sniffles1'
-            }
             process {
                 """
                 input[0] = SNIFFLES.out.vcf

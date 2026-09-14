@@ -143,6 +143,11 @@
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/custom/addmostseverepli/custom-addmostseverepli.diff"
                     },
+                    "debreak": {
+                        "branch": "master",
+                        "git_sha": "0c18e8d1894d478108eb61f2627a5587901464d8",
+                        "installed_by": ["modules"]
+                    },
                     "deepvariant/rundeepvariant": {
                         "branch": "master",
                         "git_sha": "ff05d8eb10c1191d87119ff6cfcbbc8ef110afdf",
@@ -160,14 +165,13 @@
                     },
                     "ensemblvep/filtervep": {
                         "branch": "master",
-                        "git_sha": "890fdcff71928fc1470d3e669d4c430c8c770297",
+                        "git_sha": "7047ebe92547d7f029fa6e71d2c893d5fb131938",
                         "installed_by": ["vcf_filter_bcftools_ensemblvep"]
                     },
                     "ensemblvep/vep": {
                         "branch": "master",
-                        "git_sha": "890fdcff71928fc1470d3e669d4c430c8c770297",
-                        "installed_by": ["modules"],
-                        "patch": "modules/nf-core/ensemblvep/vep/ensemblvep-vep.diff"
+                        "git_sha": "7047ebe92547d7f029fa6e71d2c893d5fb131938",
+                        "installed_by": ["modules"]
                     },
                     "fastqc": {
                         "branch": "master",
@@ -249,6 +253,11 @@
                     "hiphase": {
                         "branch": "master",
                         "git_sha": "32d9d7b17b837f68b7f3916f53bfa90d1b434fdd",
+                        "installed_by": ["modules"]
+                    },
+                    "htslib/bgziptabix": {
+                        "branch": "master",
+                        "git_sha": "37f69c8ca3eb3d038a5d44f33a329e49f44bd4f2",
                         "installed_by": ["modules"]
                     },
                     "longphase/haplotag": {
@@ -425,9 +434,8 @@
                     },
                     "sniffles": {
                         "branch": "master",
-                        "git_sha": "e9ada3f5b55b43c0da9ad4882b86aaaa0c5e6ebf",
-                        "installed_by": ["modules"],
-                        "patch": "modules/nf-core/sniffles/sniffles.diff"
+                        "git_sha": "337dbbd59c07df52d92beec8db0e7c7f630aa7b8",
+                        "installed_by": ["modules"]
                     },
                     "somalier/extract": {
                         "branch": "master",
@@ -554,7 +562,7 @@
                     },
                     "vcf_filter_bcftools_ensemblvep": {
                         "branch": "master",
-                        "git_sha": "95518d261ec0561b3dffb332944bebc5ef85efcf",
+                        "git_sha": "7b581d0afbf489e9a04cc54bb739445ecf316e96",
                         "installed_by": ["subworkflows"]
                     }
                 }
