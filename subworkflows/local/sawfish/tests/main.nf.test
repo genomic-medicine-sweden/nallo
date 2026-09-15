@@ -40,10 +40,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(
-                    workflow.out.vcf.collect { meta, vcf -> [meta, file(vcf).name] },
-                    workflow.out.tbi.collect { meta, tbi -> [meta, file(tbi).name] },
-                ).match() }
+                { assert snapshot(sanitizeOutput(workflow.out)).match() }
             )
         }
     }
@@ -81,7 +78,14 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(sanitizeOutput(workflow.out)).match() }
+                { assert snapshot(
+                    workflow.out.vcf.collect { meta, vcf -> [meta, path(vcf).vcf.variantsMD5] },
+                    workflow.out.tbi.collect { meta, tbi -> [meta, file(tbi).name] },
+                    workflow.out.depth_bw,
+                    workflow.out.copynum_bedgraph,
+                    workflow.out.gc_bias_corrected_depth_bw,
+                    workflow.out.maf_bw,
+                ).match() }
             )
         }
     }

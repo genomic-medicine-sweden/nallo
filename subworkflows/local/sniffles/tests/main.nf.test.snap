@@ -1,28 +1,4 @@
 {
-    "1 sample": {
-        "content": [
-            {
-                "vcf": [
-                    [
-                        {
-                            "family_id": "FAM",
-                            "id": "HG002_Revio",
-                            "needs_reheader": true,
-                            "sex": 1,
-                            "skip_vep_prep": false,
-                            "sv_caller": "sniffles"
-                        },
-                        "HG002_Revio_sniffles_for_reheader.vcf.gz:md5,33cba8be816f61966752bcd5ce6b38af"
-                    ]
-                ]
-            }
-        ],
-        "timestamp": "2026-09-15T16:36:28.471436337",
-        "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
-        }
-    },
     "1 sample - stub": {
         "content": [
             [

@@ -58,7 +58,9 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(sanitizeOutput(workflow.out)).match() }
+                { assert snapshot(
+                    workflow.out.vcf.collect { meta, vcf -> [meta, path(vcf).vcf.variantsMD5] }
+                ).match() }
             )
         }
     }
