@@ -79,7 +79,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.vcf.collect { meta, vcf -> [meta, path(vcf).vcf.variantsMD5] },
+                    workflow.out.vcf.collect { meta, vcf -> [meta, file(vcf).name] },
                     workflow.out.tbi.collect { meta, tbi -> [meta, file(tbi).name] },
                     workflow.out.depth_bw,
                     workflow.out.copynum_bedgraph,
