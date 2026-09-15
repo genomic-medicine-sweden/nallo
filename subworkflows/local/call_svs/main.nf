@@ -23,34 +23,63 @@ workflow CALL_SVS {
     ch_sv_calls = channel.empty()
 
     if (sv_callers_to_run.contains('sniffles')) {
-        SNIFFLES(ch_bam_bai, ch_fasta, ch_tandem_repeats)
+        SNIFFLES(
+            ch_bam_bai,
+            ch_fasta,
+            ch_tandem_repeats,
+        )
         ch_sv_calls = ch_sv_calls.mix(SNIFFLES.out.vcf.map { meta, vcf -> [meta, vcf, []] })
     }
 
     if (sv_callers_to_run.contains('sniffles1')) {
-        SNIFFLES1(ch_bam_bai)
+        SNIFFLES1(
+            ch_bam_bai
+        )
         ch_sv_calls = ch_sv_calls.mix(SNIFFLES1.out.vcf.map { meta, vcf -> [meta, vcf, []] })
     }
 
     if (sv_callers_to_run.contains('severus')) {
-        SEVERUS(ch_bam_bai, ch_tandem_repeats)
+        SEVERUS(
+            ch_bam_bai,
+            ch_tandem_repeats,
+        )
         ch_sv_calls = ch_sv_calls.mix(SEVERUS.out.vcf.map { meta, vcf -> [meta, vcf, []] })
     }
 
     if (sv_callers_to_run.contains('debreak')) {
-        DEBREAK(ch_bam_bai, ch_fasta)
+        DEBREAK(
+            ch_bam_bai,
+            ch_fasta,
+        )
         ch_sv_calls = ch_sv_calls.mix(DEBREAK.out.vcf.map { meta, vcf -> [meta, vcf, []] })
     }
 
     if (sv_callers_to_run.contains('hificnv')) {
-        HIFICNV(ch_bam_bai, ch_snvs, ch_fasta, ch_expected_xy_bed, ch_expected_xx_bed, ch_exclude_bed, create_hificnv_maf_track)
+        HIFICNV(
+            ch_bam_bai,
+            ch_snvs,
+            ch_fasta,
+            ch_expected_xy_bed,
+            ch_expected_xx_bed,
+            ch_exclude_bed,
+            create_hificnv_maf_track,
+        )
         ch_sv_calls = ch_sv_calls.mix(
             HIFICNV.out.vcf.join(HIFICNV.out.tbi, failOnMismatch: true, failOnDuplicate: true)
         )
     }
 
     if (sv_callers_to_run.contains('sawfish')) {
-        SAWFISH(ch_bam_bai, ch_snvs, ch_fasta, ch_expected_xy_bed, ch_expected_xx_bed, ch_exclude_bed, create_sawfish_maf_track, force_sawfish_joint_call_single_samples)
+        SAWFISH(
+            ch_bam_bai,
+            ch_snvs,
+            ch_fasta,
+            ch_expected_xy_bed,
+            ch_expected_xx_bed,
+            ch_exclude_bed,
+            create_sawfish_maf_track,
+            force_sawfish_joint_call_single_samples,
+        )
         ch_sv_calls = ch_sv_calls.mix(
             SAWFISH.out.vcf.join(SAWFISH.out.tbi, failOnMismatch: true, failOnDuplicate: true)
         )
