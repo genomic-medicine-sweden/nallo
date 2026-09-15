@@ -2,35 +2,22 @@
     "1 sample": {
         "content": [
             {
-                "0": [
-                    [
-                        {
-                            "id": "HG002_Revio",
-                            "family_id": "FAM",
-                            "sex": 1,
-                            "sv_caller": "sniffles",
-                            "needs_reheader": true,
-                            "skip_vep_prep": false
-                        },
-                        "HG002_Revio_sniffles_for_reheader.vcf.gz:md5,71b79b76150c37761bd9680b90467c8d"
-                    ]
-                ],
                 "vcf": [
                     [
                         {
-                            "id": "HG002_Revio",
                             "family_id": "FAM",
-                            "sex": 1,
-                            "sv_caller": "sniffles",
+                            "id": "HG002_Revio",
                             "needs_reheader": true,
-                            "skip_vep_prep": false
+                            "sex": 1,
+                            "skip_vep_prep": false,
+                            "sv_caller": "sniffles"
                         },
-                        "HG002_Revio_sniffles_for_reheader.vcf.gz:md5,71b79b76150c37761bd9680b90467c8d"
+                        "HG002_Revio_sniffles_for_reheader.vcf.gz:md5,33cba8be816f61966752bcd5ce6b38af"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-09-15T16:29:22.743158089",
+        "timestamp": "2026-09-15T16:36:28.471436337",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
