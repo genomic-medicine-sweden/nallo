@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
-name: "sawfish_sv"
+name: "sawfish"
 description: Call structural variants and produce depth tracks using Sawfish
 keywords:
   - sv calling
