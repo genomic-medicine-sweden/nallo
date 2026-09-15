@@ -1,4 +1,41 @@
 {
+    "1 sample": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sex": 1,
+                            "sv_caller": "severus",
+                            "needs_reheader": true,
+                            "skip_vep_prep": false
+                        },
+                        "severus_all.vcf:md5,53cf1f6efa951a70f8b9d5eaee0356f4"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sex": 1,
+                            "sv_caller": "severus",
+                            "needs_reheader": true,
+                            "skip_vep_prep": false
+                        },
+                        "severus_all.vcf:md5,53cf1f6efa951a70f8b9d5eaee0356f4"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-09-15T16:28:58.260928176",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
     "1 sample - stub": {
         "content": [
             [
