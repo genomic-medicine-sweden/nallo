@@ -1,9 +1,9 @@
 nextflow_workflow {
 
-    name "Test Workflow SEVERUS_SV"
+    name "Test Workflow SEVERUS"
     script "../main.nf"
     config "./nextflow.config"
-    workflow "SEVERUS_SV"
+    workflow "SEVERUS"
 
     test("1 sample - stub") {
 

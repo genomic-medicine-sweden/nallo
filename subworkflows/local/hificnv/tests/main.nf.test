@@ -1,9 +1,9 @@
 nextflow_workflow {
 
-    name "Test Workflow HIFICNV_SV"
+    name "Test Workflow HIFICNV"
     script "../main.nf"
     config "./nextflow.config"
-    workflow "HIFICNV_SV"
+    workflow "HIFICNV"
 
     test("1 sample, no MAF track - stub") {
 

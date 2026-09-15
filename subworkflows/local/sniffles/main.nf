@@ -1,6 +1,6 @@
 include { SNIFFLES as RUN_SNIFFLES } from '../../../modules/nf-core/sniffles/main'
 
-workflow SNIFFLES_SV {
+workflow SNIFFLES {
     take:
     ch_bam_bai // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
     ch_fasta // channel: [mandatory] [ val(meta), path(fasta) ]

@@ -1,9 +1,9 @@
 nextflow_workflow {
 
-    name "Test Workflow SNIFFLES1_SV"
+    name "Test Workflow DEBREAK"
     script "../main.nf"
     config "./nextflow.config"
-    workflow "SNIFFLES1_SV"
+    workflow "DEBREAK"
 
     test("1 sample - stub") {
 
@@ -16,6 +16,10 @@ nextflow_workflow {
                     [ id: 'HG002_Revio', family_id: 'FAM', sex: 1 ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                ])
+                input[1] = channel.of([
+                    [ id: 'genome' ],
+                    file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa', checkIfExists: true)
                 ])
                 """
             }

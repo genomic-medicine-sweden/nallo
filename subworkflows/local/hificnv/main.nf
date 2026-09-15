@@ -1,7 +1,7 @@
 include { HIFICNV as RUN_HIFICNV       } from '../../../modules/nf-core/hificnv/main'
 include { TABIX_TABIX as TABIX_HIFICNV } from '../../../modules/nf-core/tabix/tabix/main'
 
-workflow HIFICNV_SV {
+workflow HIFICNV {
     take:
     ch_bam_bai // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
     ch_snvs // channel:  [optional] [ val(meta), path(vcf) ]

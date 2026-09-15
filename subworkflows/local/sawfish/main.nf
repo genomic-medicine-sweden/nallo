@@ -1,7 +1,7 @@
 include { SAWFISH_DISCOVER as RUN_SAWFISH_DISCOVER   } from '../../../modules/nf-core/sawfish/discover/main'
 include { SAWFISH_JOINTCALL as RUN_SAWFISH_JOINTCALL } from '../../../modules/nf-core/sawfish/jointcall/main'
 
-workflow SAWFISH_SV {
+workflow SAWFISH {
     take:
     ch_bam_bai // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
     ch_snvs // channel:  [optional] [ val(meta), path(vcf) ]

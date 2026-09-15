@@ -10,7 +10,7 @@ workflow REHEADER_SV_VCF {
 
     main:
     // Whether a caller needs reheadering is signalled via meta.needs_reheader,
-    // stamped by each per-caller subworkflow (SNIFFLES_SV, SEVERUS_SV, etc.).
+    // stamped by each per-caller subworkflow (SNIFFLES, SEVERUS, etc.).
     ch_vcf_reheader = ch_vcf_tbi.branch { meta, _vcf, _tbi ->
         reheader: meta.needs_reheader
         no_reheader: !meta.needs_reheader

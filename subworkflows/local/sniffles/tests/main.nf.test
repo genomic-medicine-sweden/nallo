@@ -1,9 +1,9 @@
 nextflow_workflow {
 
-    name "Test Workflow DEBREAK_SV"
+    name "Test Workflow SNIFFLES"
     script "../main.nf"
     config "./nextflow.config"
-    workflow "DEBREAK_SV"
+    workflow "SNIFFLES"
 
     test("1 sample - stub") {
 
@@ -21,6 +21,7 @@ nextflow_workflow {
                     [ id: 'genome' ],
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa', checkIfExists: true)
                 ])
+                input[2] = [[],[]]
                 """
             }
         }

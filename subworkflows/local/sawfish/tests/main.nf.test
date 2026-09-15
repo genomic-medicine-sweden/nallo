@@ -1,9 +1,9 @@
 nextflow_workflow {
 
-    name "Test Workflow SAWFISH_SV"
+    name "Test Workflow SAWFISH"
     script "../main.nf"
     config "./nextflow.config"
-    workflow "SAWFISH_SV"
+    workflow "SAWFISH"
 
     test("1 sample, no MAF track - stub") {
 

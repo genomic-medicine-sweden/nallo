@@ -1,6 +1,6 @@
 include { SNIFFLES1 as RUN_SNIFFLES1 } from '../../../modules/local/sniffles1/main'
 
-workflow SNIFFLES1_SV {
+workflow SNIFFLES1 {
     take:
     ch_bam_bai // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
 

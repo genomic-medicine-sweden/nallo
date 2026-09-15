@@ -1,6 +1,6 @@
 include { DEBREAK as RUN_DEBREAK } from '../../../modules/nf-core/debreak/main'
 
-workflow DEBREAK_SV {
+workflow DEBREAK {
     take:
     ch_bam_bai // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
     ch_fasta // channel: [mandatory] [ val(meta), path(fasta) ]

@@ -1,9 +1,9 @@
-include { DEBREAK_SV   } from '../debreak_sv/main'
-include { HIFICNV_SV   } from '../hificnv_sv/main'
-include { SAWFISH_SV   } from '../sawfish_sv/main'
-include { SEVERUS_SV   } from '../severus_sv/main'
-include { SNIFFLES1_SV } from '../sniffles1_sv/main'
-include { SNIFFLES_SV  } from '../sniffles_sv/main'
+include { DEBREAK   } from '../debreak/main'
+include { HIFICNV   } from '../hificnv/main'
+include { SAWFISH   } from '../sawfish/main'
+include { SEVERUS   } from '../severus/main'
+include { SNIFFLES1 } from '../sniffles1/main'
+include { SNIFFLES  } from '../sniffles/main'
 
 workflow CALL_SVS {
     take:
@@ -23,46 +23,46 @@ workflow CALL_SVS {
     ch_sv_calls = channel.empty()
 
     if (sv_callers_to_run.contains('sniffles')) {
-        SNIFFLES_SV(ch_bam_bai, ch_fasta, ch_tandem_repeats)
-        ch_sv_calls = ch_sv_calls.mix(SNIFFLES_SV.out.vcf.map { meta, vcf -> [meta, vcf, []] })
+        SNIFFLES(ch_bam_bai, ch_fasta, ch_tandem_repeats)
+        ch_sv_calls = ch_sv_calls.mix(SNIFFLES.out.vcf.map { meta, vcf -> [meta, vcf, []] })
     }
 
     if (sv_callers_to_run.contains('sniffles1')) {
-        SNIFFLES1_SV(ch_bam_bai)
-        ch_sv_calls = ch_sv_calls.mix(SNIFFLES1_SV.out.vcf.map { meta, vcf -> [meta, vcf, []] })
+        SNIFFLES1(ch_bam_bai)
+        ch_sv_calls = ch_sv_calls.mix(SNIFFLES1.out.vcf.map { meta, vcf -> [meta, vcf, []] })
     }
 
     if (sv_callers_to_run.contains('severus')) {
-        SEVERUS_SV(ch_bam_bai, ch_tandem_repeats)
-        ch_sv_calls = ch_sv_calls.mix(SEVERUS_SV.out.vcf.map { meta, vcf -> [meta, vcf, []] })
+        SEVERUS(ch_bam_bai, ch_tandem_repeats)
+        ch_sv_calls = ch_sv_calls.mix(SEVERUS.out.vcf.map { meta, vcf -> [meta, vcf, []] })
     }
 
     if (sv_callers_to_run.contains('debreak')) {
-        DEBREAK_SV(ch_bam_bai, ch_fasta)
-        ch_sv_calls = ch_sv_calls.mix(DEBREAK_SV.out.vcf.map { meta, vcf -> [meta, vcf, []] })
+        DEBREAK(ch_bam_bai, ch_fasta)
+        ch_sv_calls = ch_sv_calls.mix(DEBREAK.out.vcf.map { meta, vcf -> [meta, vcf, []] })
     }
 
     if (sv_callers_to_run.contains('hificnv')) {
-        HIFICNV_SV(ch_bam_bai, ch_snvs, ch_fasta, ch_expected_xy_bed, ch_expected_xx_bed, ch_exclude_bed, create_hificnv_maf_track)
+        HIFICNV(ch_bam_bai, ch_snvs, ch_fasta, ch_expected_xy_bed, ch_expected_xx_bed, ch_exclude_bed, create_hificnv_maf_track)
         ch_sv_calls = ch_sv_calls.mix(
-            HIFICNV_SV.out.vcf.join(HIFICNV_SV.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+            HIFICNV.out.vcf.join(HIFICNV.out.tbi, failOnMismatch: true, failOnDuplicate: true)
         )
     }
 
     if (sv_callers_to_run.contains('sawfish')) {
-        SAWFISH_SV(ch_bam_bai, ch_snvs, ch_fasta, ch_expected_xy_bed, ch_expected_xx_bed, ch_exclude_bed, create_sawfish_maf_track, force_sawfish_joint_call_single_samples)
+        SAWFISH(ch_bam_bai, ch_snvs, ch_fasta, ch_expected_xy_bed, ch_expected_xx_bed, ch_exclude_bed, create_sawfish_maf_track, force_sawfish_joint_call_single_samples)
         ch_sv_calls = ch_sv_calls.mix(
-            SAWFISH_SV.out.vcf.join(SAWFISH_SV.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+            SAWFISH.out.vcf.join(SAWFISH.out.tbi, failOnMismatch: true, failOnDuplicate: true)
         )
     }
 
     emit:
     sv_calls                           = ch_sv_calls // channel: [ val(meta), path(vcf), path(tbi) ] — tbi is [] for callers with skip_vep_prep: false
-    hificnv_depth                      = sv_callers_to_run.contains('hificnv') ? HIFICNV_SV.out.depth : channel.empty() // channel: [ val(meta), path(bw) ]
-    hificnv_copynum                    = sv_callers_to_run.contains('hificnv') ? HIFICNV_SV.out.copynum : channel.empty() // channel: [ val(meta), path(bedgraph) ]
-    hificnv_maf                        = sv_callers_to_run.contains('hificnv') ? HIFICNV_SV.out.maf : channel.empty() // channel: [ val(meta), path(bw) ]
-    sawfish_depth_bw                   = sv_callers_to_run.contains('sawfish') ? SAWFISH_SV.out.depth_bw : channel.empty() // channel: [ val(meta), path(bw) ]
-    sawfish_copynum_bedgraph           = sv_callers_to_run.contains('sawfish') ? SAWFISH_SV.out.copynum_bedgraph : channel.empty() // channel: [ val(meta), path(bedgraph) ]
-    sawfish_gc_bias_corrected_depth_bw = sv_callers_to_run.contains('sawfish') ? SAWFISH_SV.out.gc_bias_corrected_depth_bw : channel.empty() // channel: [ val(meta), path(bw) ]
-    sawfish_maf_bw                     = sv_callers_to_run.contains('sawfish') ? SAWFISH_SV.out.maf_bw : channel.empty() // channel: [ val(meta), path(bw) ]
+    hificnv_depth                      = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.depth : channel.empty() // channel: [ val(meta), path(bw) ]
+    hificnv_copynum                    = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.copynum : channel.empty() // channel: [ val(meta), path(bedgraph) ]
+    hificnv_maf                        = sv_callers_to_run.contains('hificnv') ? HIFICNV.out.maf : channel.empty() // channel: [ val(meta), path(bw) ]
+    sawfish_depth_bw                   = sv_callers_to_run.contains('sawfish') ? SAWFISH.out.depth_bw : channel.empty() // channel: [ val(meta), path(bw) ]
+    sawfish_copynum_bedgraph           = sv_callers_to_run.contains('sawfish') ? SAWFISH.out.copynum_bedgraph : channel.empty() // channel: [ val(meta), path(bedgraph) ]
+    sawfish_gc_bias_corrected_depth_bw = sv_callers_to_run.contains('sawfish') ? SAWFISH.out.gc_bias_corrected_depth_bw : channel.empty() // channel: [ val(meta), path(bw) ]
+    sawfish_maf_bw                     = sv_callers_to_run.contains('sawfish') ? SAWFISH.out.maf_bw : channel.empty() // channel: [ val(meta), path(bw) ]
 }
