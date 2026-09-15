@@ -33,5 +33,114 @@
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
         }
+    },
+    "1 sample, no MAF track": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sex": 1,
+                            "sv_caller": "hificnv",
+                            "needs_reheader": false,
+                            "skip_vep_prep": true
+                        },
+                        "HG002_Revio_hificnv.HG002.vcf.gz:md5,1ed8e101f35e348d72e15a96bdc637c8"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sex": 1,
+                            "sv_caller": "hificnv",
+                            "needs_reheader": false,
+                            "skip_vep_prep": true
+                        },
+                        "HG002_Revio_hificnv.HG002.vcf.gz.tbi:md5,dbf008c47939a8eb75598bd1f48137e7"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sex": 1
+                        },
+                        "HG002_Revio_hificnv.HG002.depth.bw:md5,73951a6eb4f47f0f5f3c89a9243bbbcf"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sex": 1
+                        },
+                        "HG002_Revio_hificnv.HG002.copynum.bedgraph:md5,d9f899d17bebcbb6e1b3e4a593ece3d8"
+                    ]
+                ],
+                "4": [
+                    
+                ],
+                "copynum": [
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sex": 1
+                        },
+                        "HG002_Revio_hificnv.HG002.copynum.bedgraph:md5,d9f899d17bebcbb6e1b3e4a593ece3d8"
+                    ]
+                ],
+                "depth": [
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sex": 1
+                        },
+                        "HG002_Revio_hificnv.HG002.depth.bw:md5,73951a6eb4f47f0f5f3c89a9243bbbcf"
+                    ]
+                ],
+                "maf": [
+                    
+                ],
+                "tbi": [
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sex": 1,
+                            "sv_caller": "hificnv",
+                            "needs_reheader": false,
+                            "skip_vep_prep": true
+                        },
+                        "HG002_Revio_hificnv.HG002.vcf.gz.tbi:md5,dbf008c47939a8eb75598bd1f48137e7"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "id": "HG002_Revio",
+                            "family_id": "FAM",
+                            "sex": 1,
+                            "sv_caller": "hificnv",
+                            "needs_reheader": false,
+                            "skip_vep_prep": true
+                        },
+                        "HG002_Revio_hificnv.HG002.vcf.gz:md5,1ed8e101f35e348d72e15a96bdc637c8"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-09-15T11:46:58.656680311",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
     }
 }
