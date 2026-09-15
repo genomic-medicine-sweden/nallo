@@ -1,4 +1,26 @@
 {
+    "1 sample": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "HG002_Revio",
+                        "family_id": "FAM",
+                        "sex": 1,
+                        "sv_caller": "sniffles",
+                        "needs_reheader": true,
+                        "skip_vep_prep": false
+                    },
+                    "bd120e44912730fa1581764a2b055bf8"
+                ]
+            ]
+        ],
+        "timestamp": "2026-09-15T17:01:10.197623089",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
     "1 sample - stub": {
         "content": [
             [
