@@ -5,6 +5,8 @@ nextflow_workflow {
     config "./nextflow.config"
     workflow "SNIFFLES1"
 
+    tag "subworkflows_sniffles1"
+
     test("1 sample - stub") {
 
         options "-stub"
