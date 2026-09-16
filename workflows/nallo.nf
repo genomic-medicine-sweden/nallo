@@ -55,12 +55,15 @@ include { PORTELLO                                               } from '../subw
 // local
 include { CREATE_PEDIGREE_FILE as SAMPLESHEET_PED                } from '../modules/local/create_pedigree_file/main'
 include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modules/local/create_pedigree_file/main'
+include { VEP_PREP_SV                                            } from '../modules/local/vep_prep_sv/main'
 
 // nf-core
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_PHASING             } from '../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_MITO_SNVS           } from '../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_SORT as BCFTOOLS_SORT_SVS                     } from '../modules/nf-core/bcftools/sort/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CHROMOGRAPH             } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING                 } from '../modules/nf-core/bcftools/view/main'
+include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SVS                     } from '../modules/nf-core/bcftools/view/main'
 include { MINIMAP2_ALIGN                                         } from '../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_MERGE                                         } from '../modules/nf-core/samtools/merge/main'
 include { SAMTOOLS_INDEX                                         } from '../modules/nf-core/samtools/index/main'
@@ -649,15 +652,43 @@ workflow NALLO {
             ch_expected_xx_bed,
             ch_exclude_bed,
             val_sv_callers_to_run.split(',').collect { caller -> caller.toLowerCase().trim() },
-            ch_sv_call_regions,
-            val_sv_call_regions,
             val_force_sawfish_joint_call_single_samples,
             val_create_hificnv_maf_track,
             val_create_sawfish_maf_track,
         )
 
+        // Branch on meta.skip_vep_prep: callers that need VEP normalisation go through
+        // VEP_PREP_SV + BCFTOOLS_SORT; callers that are already sorted and indexed bypass both.
+        ch_sv_calls_branched = CALL_SVS.out.sv_calls.branch { meta, _vcf, _tbi ->
+            vep_prep: !meta.skip_vep_prep
+            no_vep_prep: meta.skip_vep_prep
+        }
+
+        VEP_PREP_SV(ch_sv_calls_branched.vep_prep.map { meta, vcf, _tbi -> [meta, vcf] })
+
+        BCFTOOLS_SORT_SVS(VEP_PREP_SV.out.vcf)
+
+        ch_sv_calls_all = BCFTOOLS_SORT_SVS.out.vcf
+            .join(BCFTOOLS_SORT_SVS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+            .mix(ch_sv_calls_branched.no_vep_prep)
+
+        // Optionally filter to call regions
+        ch_sv_calls_filtered = channel.empty()
+        if (val_sv_call_regions) {
+            BCFTOOLS_VIEW_SVS(
+                ch_sv_calls_all,
+                ch_sv_call_regions.map { _meta, bed -> bed },
+                [],
+                [],
+            )
+            ch_sv_calls_filtered = BCFTOOLS_VIEW_SVS.out.vcf.join(BCFTOOLS_VIEW_SVS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+        }
+        else {
+            ch_sv_calls_filtered = ch_sv_calls_all
+        }
+
         REHEADER_SV_VCF(
-            CALL_SVS.out.vcf,
+            ch_sv_calls_filtered,
             ch_fai,
         )
 

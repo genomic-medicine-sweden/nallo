@@ -182,8 +182,8 @@ nextflow_pipeline {
             assertAll(
                 { assert workflow.success },
                 { assert !versions.containsKey('SPLITUBAM') },
-                { assert versions.containsKey('SNIFFLES1') },
-                { assert !versions.containsKey('SNIFFLES') },
+                { assert versions.containsKey('RUN_SNIFFLES1') },
+                { assert !versions.containsKey('RUN_SNIFFLES') },
                 { assert snapshot(
                     // Number of successful tasks
                     workflow.trace.succeeded().size(),

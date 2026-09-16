@@ -21,10 +21,13 @@
                 "BCFTOOLS_SORT": {
                     "bcftools": 1.22
                 },
+                "BCFTOOLS_SORT_SVS": {
+                    "bcftools": 1.22
+                },
                 "BCFTOOLS_STATS": {
                     "bcftools": 1.22
                 },
-                "BCFTOOLS_VIEW": {
+                "BCFTOOLS_VIEW_SVS": {
                     "bcftools": 1.22
                 },
                 "BEDTOOLS_MERGE": {
@@ -71,9 +74,6 @@
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
                 },
-                "HIFICNV": {
-                    "hificnv": "1.0.0-36e6461"
-                },
                 "HTSLIB_BGZIPTABIX": {
                     "htslib": 1.24,
                     "xz": "5.8.3"
@@ -93,6 +93,15 @@
                 "RUN_CHROMOGRAPH": {
                     "chromograph": "1.3.1"
                 },
+                "RUN_HIFICNV": {
+                    "hificnv": "1.0.0-36e6461"
+                },
+                "RUN_SEVERUS": {
+                    "severus": 1.7
+                },
+                "RUN_SNIFFLES": {
+                    "sniffles": "2.8.0"
+                },
                 "SAMPLESHEET_PED": {
                     "create_pedigree_file": 1.0,
                     "python": "3.8.3"
@@ -105,12 +114,6 @@
                 },
                 "SAMTOOLS_MERGE": {
                     "samtools": 1.24
-                },
-                "SEVERUS": {
-                    "severus": 1.7
-                },
-                "SNIFFLES": {
-                    "sniffles": "2.8.0"
                 },
                 "SOMALIER_EXTRACT": {
                     "somalier": "0.2.18"
@@ -130,10 +133,6 @@
                     "svdb": "2.8.4"
                 },
                 "TABIX_HIFICNV": {
-                    "tabix": 1.21
-                },
-                "TABIX_SEVERUS": {
-                    "bgzip": 1.21,
                     "tabix": 1.21
                 },
                 "TABIX_TABIX": {
@@ -233,7 +232,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-09-09T07:57:01.396754774",
+        "timestamp": "2026-09-10T17:05:07.662628989",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

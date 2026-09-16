@@ -18,7 +18,7 @@
                 "BCFTOOLS_STATS": {
                     "bcftools": 1.22
                 },
-                "BCFTOOLS_VIEW": {
+                "BCFTOOLS_VIEW_SVS": {
                     "bcftools": 1.22
                 },
                 "BEDTOOLS_MERGE": {
@@ -75,6 +75,12 @@
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
                 },
+                "RUN_SAWFISH_DISCOVER": {
+                    "sawfish": "2.2.0"
+                },
+                "RUN_SAWFISH_JOINTCALL": {
+                    "sawfish": "2.2.0"
+                },
                 "SAMBAMBA_DEPTH": {
                     "sambamba": "1.0.1"
                 },
@@ -96,12 +102,6 @@
                 },
                 "SAMTOOLS_VIEW": {
                     "samtools": 1.24
-                },
-                "SAWFISH_DISCOVER": {
-                    "sawfish": "2.2.0"
-                },
-                "SAWFISH_JOINTCALL": {
-                    "sawfish": "2.2.0"
                 },
                 "SOMALIER_EXTRACT": {
                     "somalier": "0.2.18"
@@ -209,10 +209,10 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-07-31T10:18:48.490206292",
+        "timestamp": "2026-09-10T17:04:13.567233568",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     }
 }
