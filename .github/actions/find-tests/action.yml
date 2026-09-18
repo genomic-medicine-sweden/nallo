@@ -34,7 +34,7 @@ runs:
           # If this basename appears more than once, qualify it with the top-level dir
           if [ "${basename_count[$module_name]}" -gt 1 ]; then
             top_level=$(echo "$td" | cut -d/ -f1)
-            module_name="${top_level}_${module_name}"
+            module_name="${module_name}_${top_level}"
           fi
 
           if [ "$first" = true ]; then
