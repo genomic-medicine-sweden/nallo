@@ -484,6 +484,12 @@ workflow NALLO {
 
         ch_bed_intervals = SCATTER_GENOME.out.bed_nuclear_intervals.map { meta, bed, num_intervals -> [meta + [caller: val_snv_caller], bed, num_intervals] }
         ch_mitochondrial_bed = SCATTER_GENOME.out.bed_mitochondrial_intervals.map { meta, bed, _num_intervals -> [meta, bed] }
+        // Single broadcast boolean: mito BED is non-empty. Same for all families (one genome).
+        // call_mitochondrial_variants filters bed.size() > 0 internally — this mirrors that check so
+        // groupKey at CONCAT_SORT_RANKED_SNVS does not expect a mito VCF that will never arrive.
+        ch_mito_nonempty = SCATTER_GENOME.out.bed_mitochondrial_intervals
+            .map { _meta, bed, _num_intervals -> bed.size() > 0 }
+            .first()
 
         def ch_num_intervals = ch_bed_intervals.map { _meta, _bed, num_intervals -> num_intervals }.first()
 
@@ -778,10 +784,16 @@ workflow NALLO {
             [],
         )
         // Add the mitochondrial VCF after phasing SNVs.
-        // Add +1 to the num_intervals of nuclear channel to account for mitochondrial region
+        // Add +1 to num_intervals only when a mito VCF will actually arrive (non-empty mito BED).
+        // Targeted runs whose capture does not cover chrM produce an empty mito BED; call_mitochondrial_variants
+        // skips those families, so without this check groupKey would wait for N+1 items and hang.
         ch_snv_vcf_tbi_nuclear_for_annotation = BCFTOOLS_VIEW_PHASING.out.vcf
             .join(BCFTOOLS_VIEW_PHASING.out.tbi, failOnMismatch: true, failOnDuplicate: true)
-            .map { meta, vcf, tbi -> [meta + [num_intervals: val_skip_mitochondrial_calling ? meta.num_intervals : meta.num_intervals + 1], vcf, tbi] }
+            .combine(ch_mito_nonempty)
+            .map { meta, vcf, tbi, mito_nonempty ->
+                def add_mito = !val_skip_mitochondrial_calling && mito_nonempty
+                [meta + [num_intervals: add_mito ? meta.num_intervals + 1 : meta.num_intervals], vcf, tbi]
+            }
 
         ch_snv_vcf_tbi_mitochondrial_for_annotation = ch_snvs_per_family_unannotated_vcf_tbi.filter { meta, _vcf, _tbi -> meta.genome == "mitochondrial" }
 
