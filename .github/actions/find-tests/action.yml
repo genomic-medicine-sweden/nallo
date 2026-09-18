@@ -20,9 +20,22 @@ runs:
         # Find all 'tests' dirs anywhere under modules/local and subworkflows
         tests_dirs=$(find modules/local subworkflows -type d -name tests)
 
+        # First pass: detect basename collisions
+        declare -A basename_count
+        for td in $tests_dirs; do
+          module_name=$(basename "$(dirname "$td")")
+          basename_count[$module_name]=$(( ${basename_count[$module_name]:-0} + 1 ))
+        done
+
         for td in $tests_dirs; do
           module_dir=$(dirname "$td")
           module_name=$(basename "$module_dir")
+
+          # If this basename appears more than once, qualify it with the top-level dir
+          if [ "${basename_count[$module_name]}" -gt 1 ]; then
+            top_level=$(echo "$td" | cut -d/ -f1)
+            module_name="${module_name}_${top_level}"
+          fi
 
           if [ "$first" = true ]; then
             first=false
