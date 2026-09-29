@@ -52,7 +52,6 @@ workflow PIPELINE_INITIALISATION {
     val_mitochondrial_caller
     val_par_regions
     val_phaser
-    val_premapped
     val_preset
     val_sambamba_regions
     val_skip_alignment
@@ -281,7 +280,7 @@ workflow PIPELINE_INITIALISATION {
     //
     validateInputParameters(parameterStatus, workflowSkips, workflowDependencies, fileDependencies)
     validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs, val_mitochondrial_caller, val_skip_portello)
-    validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge, val_premapped, val_skip_portello)
+    validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge, val_skip_portello)
 
     //
     // Create channel from input file provided through val_input
@@ -308,6 +307,26 @@ workflow PIPELINE_INITIALISATION {
             [addRelationshipsToMeta(metas), reads]
         }
         .transpose()
+        .map { meta, reads ->
+            // Derive entry_point from which column carries the input file (not from extension:
+            // uBAM and aligned BAM share ".bam"; column position is the only signal).
+            def aligned_bam = meta.aligned_bam
+            def snv = meta.snv_vcf
+            def sv = meta.sv_vcf
+            def entry_point
+            if (aligned_bam && aligned_bam != "0") {
+                entry_point = (snv && snv != "0" && sv && sv != "0") ? "vcf" : "bam"
+            }
+            else if (reads.name =~ /\.bam$/) {
+                entry_point = "ubam"
+            }
+            else {
+                entry_point = "fastq"
+            }
+            [meta + [entry_point: entry_point], reads]
+        }
+
+    validateEntryPointConsistency(ch_samplesheet)
 
     // Check that all families has at least one sample with affected phenotype if ranking is active
     validateAllFamiliesHasAffectedSamples(ch_samplesheet, val_skip_rank_variants)
@@ -347,13 +366,9 @@ workflow PIPELINE_INITIALISATION {
     // Check that the parents are present in the samplesheet
     validateParentExistsInFamily(ch_samplesheet)
 
-    // Check that the samplesheet does not contain FASTQs if --premapped is set or --skip_portello is not set
-    if (val_premapped) {
-        validateNoFastqInInput(ch_samplesheet, '--premapped', true)
-    }
-    if (!val_skip_portello) {
-        validateNoFastqInInput(ch_samplesheet, '--skip_portello', false)
-    }
+    validatePortelloEntryPoint(ch_samplesheet, val_skip_portello)
+    validateVcfEntryPointColumns(ch_samplesheet)
+    validateVcfEntryPointRequiresPhasing(ch_samplesheet, val_skip_phasing)
 
     emit:
     samplesheet = ch_samplesheet
@@ -414,13 +429,6 @@ def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDe
     validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies)
 }
 
-// Check that no FASTQs are in samplesheet if --premapped is set
-// Something would crash eventually if there were FASTQs, but this is a more user-friendly error message
-def validateNoFastqInInput(input, parameter, current_status) {
-    input
-        .filter { _meta, reads -> reads.name =~ 'f(ast)?q(\\.gz)?$' }
-        .map { _meta, _reads -> error("FASTQ files were found in the samplesheet, but ${parameter} was set to ${current_status}. Please remove FASTQ files from the samplesheet or set ${parameter} to ${!current_status}.") }
-}
 //
 // Validate channels from input samplesheet
 //
@@ -747,7 +755,7 @@ def validateSingleProjectPerRun(ch_samplesheet) {
         }
 }
 
-def validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge, val_premapped, val_skip_portello) {
+def validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge, val_skip_portello) {
     if (val_str_caller.matches('strdust') && !val_skip_repeat_annotation) {
         error("ERROR: Repeat annotation is not supported for STRdust. Run with --skip_repeat_annotation if you want to use STRdust.")
     }
@@ -770,10 +778,64 @@ def validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, va
     if (!val_skip_phasing && !val_skip_sv_calling && val_phaser == 'hiphase' && val_sv_callers_to_merge != 'sawfish') {
         error("ERROR: HiPhase SV phasing only supports Sawfish at the moment. Set --sv_callers to 'sawfish' if you want to use HiPhase. You may run other SV callers without passing them to HiPhase using --sv_callers_to_run.")
     }
+}
 
-    if (val_premapped && !val_skip_portello) {
-        error("ERROR: --premapped cannot be used together with Portello. Please run with --skip_portello if your data is already aligned.")
+def validatePortelloEntryPoint(input, val_skip_portello) {
+    if (!val_skip_portello) {
+        input
+            .filter { meta, _reads -> meta.entry_point != 'ubam' }
+            .map { meta, _reads ->
+                error("Sample '${meta.id}' uses ${meta.entry_point} entry_point but --skip_portello is not set. Portello requires uBAM input. Run with --skip_portello or provide uBAM input.")
+            }
     }
+}
+
+def validateVcfEntryPointColumns(input) {
+    // snv_vcf or sv_vcf without aligned_bam is not a valid combination
+    input
+        .filter { meta, _reads ->
+            def snvSet = meta.snv_vcf && meta.snv_vcf != "0"
+            def svSet = meta.sv_vcf && meta.sv_vcf != "0"
+            def bamSet = meta.aligned_bam && meta.aligned_bam != "0"
+            (snvSet || svSet) && !bamSet
+        }
+        .map { meta, _reads ->
+            error("Sample '${meta.id}': snv_vcf or sv_vcf provided without aligned_bam. The vcf entry_point requires aligned_bam for QC and phasing.")
+        }
+
+    // Only one of snv_vcf/sv_vcf provided — both or neither
+    input
+        .filter { meta, _reads ->
+            def snvSet = meta.snv_vcf && meta.snv_vcf != "0"
+            def svSet = meta.sv_vcf && meta.sv_vcf != "0"
+            snvSet != svSet
+        }
+        .map { meta, _reads ->
+            error("Sample '${meta.id}': only one of snv_vcf/sv_vcf is set. Both must be provided together for vcf entry_point.")
+        }
+}
+
+def validateVcfEntryPointRequiresPhasing(input, val_skip_phasing) {
+    if (val_skip_phasing) {
+        input
+            .filter { meta, _reads -> meta.entry_point == 'vcf' }
+            .map { meta, _reads ->
+                error("Sample '${meta.id}' uses vcf entry_point but --skip_phasing is set. Phasing is required to integrate vcf entry_point VCFs into the annotation pipeline.")
+            }
+    }
+}
+
+def validateEntryPointConsistency(input) {
+    input
+        .map { meta, _reads -> [meta.family_id, meta.entry_point, meta.id] }
+        .groupTuple()
+        .map { family_id, entry_points, sample_ids ->
+            def unique_entrypoints = entry_points.unique()
+            if (unique_entrypoints.size() > 1) {
+                def detail = [entry_points, sample_ids].transpose().collect { entrypoint, sample_id -> "${sample_id}=${entrypoint}" }.join(', ')
+                error("Error: All samples in family '${family_id}' must use the same entry point (file, aligned_bam, or vcf entry_point columns). Found: ${detail}")
+            }
+        }
 }
 
 def validateSVCallingParameters(val_sv_callers_to_merge, val_sv_callers_merge_priority) {

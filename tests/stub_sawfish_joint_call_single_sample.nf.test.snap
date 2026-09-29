@@ -201,6 +201,8 @@
                 "svs/family/FAM",
                 "svs/family/FAM/FAM_svs.vcf.gz",
                 "svs/family/FAM/FAM_svs.vcf.gz.tbi",
+                "svs/family/FAM/FAM_svs_unphased.vcf.gz",
+                "svs/family/FAM/FAM_svs_unphased.vcf.gz.tbi",
                 "visualization_tracks",
                 "visualization_tracks/test",
                 "visualization_tracks/test/test_copynum_sawfish.bedgraph",
@@ -209,7 +211,7 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-09-10T17:04:13.567233568",
+        "timestamp": "2026-09-21T17:30:35.826261206",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

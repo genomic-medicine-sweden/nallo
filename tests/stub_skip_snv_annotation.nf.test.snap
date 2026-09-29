@@ -225,6 +225,8 @@
                 "svs/family/FAM/FAM_svs_annotated_clinical.vcf.gz.tbi",
                 "svs/family/FAM/FAM_svs_annotated_research.vcf.gz",
                 "svs/family/FAM/FAM_svs_annotated_research.vcf.gz.tbi",
+                "svs/family/FAM/FAM_svs_unphased.vcf.gz",
+                "svs/family/FAM/FAM_svs_unphased.vcf.gz.tbi",
                 "visualization_tracks",
                 "visualization_tracks/HG002_Revio",
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.copynum.bedgraph",
@@ -232,7 +234,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-09-10T17:05:07.662628989",
+        "timestamp": "2026-09-21T17:34:44.687464759",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

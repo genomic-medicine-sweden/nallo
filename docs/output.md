@@ -229,6 +229,8 @@ In general, annotated variant calls are output per family while unannotated call
 | `snvs/sample/{sample}/{sample}_deepvariant_snvs.vcf.gz.tbi`           | Index of the corresponding VCF file                             | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
 | `snvs/family/{family}/{family}_snvs.vcf.gz`                           | VCF file containing called variants for all samples in a family | :white_check_mark: |                      |                              |
 | `snvs/family/{family}/{family}_snvs.vcf.gz.tbi`                       | Index of the corresponding VCF file                             | :white_check_mark: |                      |                              |
+| `snvs/family/{family}/{family}_snvs_unphased.vcf.gz`                  | Pre-phasing joint family SNV VCF (vcf entry point input)        | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
+| `snvs/family/{family}/{family}_snvs_unphased.vcf.gz.tbi`              | Index of the pre-phasing SNV VCF                                | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
 
 #### Annotation
 
@@ -278,12 +280,14 @@ When `--skip_prepare_gens_input` is disabled, the pipeline prepares coverage and
 
     Unannotated family-level VCFs per caller can be output with --publish_unannotated_family_svs.
 
-| Path                                                                                                     | Description                                        | Call SVs           | `--publish_unannotated_family_svs` |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------- | ------------------ | ---------------------------------- |
-| `svs/family/{family_id}/{family_id}_{debreak,hificnv,sawfish,severus,sniffles,sniffles1}_svs.vcf.gz`     | VCF file with merged SVs/CNVs by family and caller |                    | :white_check_mark:                 |
-| `svs/family/{family_id}/{family_id}_{debreak,hificnv,sawfish,severus,sniffles,sniffles1}_svs.vcf.gz.tbi` | Index of the merged VCF file                       |                    | :white_check_mark:                 |
-| `svs/family/{family_id}/{family_id}_svs.vcf.gz`                                                          | VCF file with merged SVs/CNVs by family            | :white_check_mark: |                                    |
-| `svs/family/{family_id}/{family_id}_svs.vcf.gz.tbi`                                                      | Index of the merged VCF file                       | :white_check_mark: |                                    |
+| Path                                                                                                     | Description                                                   | Call SVs           | `--publish_unannotated_family_svs` |
+| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------ | ---------------------------------- |
+| `svs/family/{family_id}/{family_id}_{debreak,hificnv,sawfish,severus,sniffles,sniffles1}_svs.vcf.gz`     | VCF file with merged SVs/CNVs by family and caller            |                    | :white_check_mark:                 |
+| `svs/family/{family_id}/{family_id}_{debreak,hificnv,sawfish,severus,sniffles,sniffles1}_svs.vcf.gz.tbi` | Index of the merged VCF file                                  |                    | :white_check_mark:                 |
+| `svs/family/{family_id}/{family_id}_svs.vcf.gz`                                                          | VCF file with merged SVs/CNVs by family                       | :white_check_mark: |                                    |
+| `svs/family/{family_id}/{family_id}_svs.vcf.gz.tbi`                                                      | Index of the merged VCF file                                  | :white_check_mark: |                                    |
+| `svs/family/{family_id}/{family_id}_svs_unphased.vcf.gz`                                                 | Pre-phasing SVDB-merged family SV VCF (vcf entry point input) | :white_check_mark: |                                    |
+| `svs/family/{family_id}/{family_id}_svs_unphased.vcf.gz.tbi`                                             | Index of the pre-phasing SV VCF                               | :white_check_mark: |                                    |
 
 #### Annotation
 

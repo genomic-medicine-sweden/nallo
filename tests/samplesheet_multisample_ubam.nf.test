@@ -4,13 +4,13 @@ nextflow_pipeline {
     script "../main.nf"
     tag "PIPELINE"
 
-    test("samplesheet_multisample_bam | --sv_callers sniffles1,debreak --phaser whatshap") {
-        tag "samplesheet_multisample_bam_debreak"
+    test("samplesheet_multisample_ubam | --sv_callers sniffles1,debreak --phaser whatshap") {
+        tag "samplesheet_multisample_ubam_debreak"
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/'
-                input                        = "$projectDir/assets/samplesheet_multisample_bam.csv"
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8a22201fc4c3e1026eace0a680cb2757dd4fc7c2/'
+                input                        = "$projectDir/assets/samplesheet_multisample_ubam.csv"
                 outdir                       = "$outputDir"
                 phaser                       = "whatshap"
                 sv_callers                   = "sniffles1,debreak"
@@ -57,13 +57,13 @@ nextflow_pipeline {
         }
     }
 
-    test("samplesheet_multisample_bam") {
-        tag "samplesheet_multisample_bam"
+    test("samplesheet_multisample_ubam") {
+        tag "samplesheet_multisample_ubam"
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/'
-                input                        = "$projectDir/assets/samplesheet_multisample_bam.csv"
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8a22201fc4c3e1026eace0a680cb2757dd4fc7c2/'
+                input                        = "$projectDir/assets/samplesheet_multisample_ubam.csv"
                 outdir                       = "$outputDir"
                 phaser                       = "hiphase"
                 sv_callers                   = "sawfish"

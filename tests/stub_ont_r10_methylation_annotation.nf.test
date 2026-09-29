@@ -12,8 +12,8 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/'
-                input                        = "$projectDir/assets/samplesheet_multisample_ont_bam.csv"
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8a22201fc4c3e1026eace0a680cb2757dd4fc7c2/'
+                input                        = "$projectDir/assets/samplesheet_multisample_ont_ubam.csv"
                 outdir                       = "$outputDir"
                 preset                       = "ONT_R10"
                 // Null out params with exists:true that are not needed for this test

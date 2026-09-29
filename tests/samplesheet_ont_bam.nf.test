@@ -4,22 +4,22 @@ nextflow_pipeline {
     script "../main.nf"
     tag "PIPELINE"
 
-    test("samplesheet_multisample_ont_bam | --preset ONT_R10_AS --target_regions test_data.bed --phaser whatshap --alignment_processes 1 --snv_calling_processes 1") {
-        tag "samplesheet_multisample_ont_bam_ont_r10_as"
+    test("samplesheet_ont_bam | bam entry_point | ONT singleton") {
+        tag "samplesheet_ont_bam"
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/'
-                input                        = "$projectDir/assets/samplesheet_multisample_ont_bam.csv"
-                outdir                       = "$outputDir"
-                preset                       = "ONT_R10_AS"
-                target_regions               = params.pipelines_testdata_base_path + 'reference/test_data.bed'
-                alignment_processes          = 1
-                snv_calling_processes        = 1
-                phaser                       = "whatshap"
-                publish_unannotated_family_svs = true
-                filter_variants_hgnc_ids     = null
-                skip_methylation_annotation  = true
+                pipelines_testdata_base_path   = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8a22201fc4c3e1026eace0a680cb2757dd4fc7c2/'
+                input                          = "$projectDir/assets/samplesheet_ont_bam.csv"
+                outdir                         = "$outputDir"
+                preset                         = 'ONT_R10'
+                snv_calling_processes          = 1
+                phaser                         = 'whatshap'
+                skip_methylation_annotation    = true
+                sv_callers                     = 'sniffles,debreak'
+                sv_callers_to_run              = 'sniffles,debreak'
+                skip_genome_assembly           = true
+                skip_portello                  = true
             }
         }
 
@@ -42,9 +42,16 @@ nextflow_pipeline {
             def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
             assertAll(
                 { assert workflow.success },
+                // Alignment must not run for bam entry_point
+                { assert !versions.containsKey('MINIMAP2_ALIGN') },
                 { assert !versions.containsKey('SPLITUBAM') },
-                { assert !versions.containsKey('MITORSAW_HAPLOTYPE') },  // skip_mitochondrial_calling=true in ONT_R10_AS
-                { assert versions.containsKey('SAMTOOLS_VIEW') },         // on-target read filtering ran
+                // SNV and SV calling must run
+                { assert versions.containsKey('DEEPVARIANT_RUNDEEPVARIANT') },
+                { assert versions.containsKey('GLNEXUS') },
+                { assert versions.containsKey('RUN_SNIFFLES') },
+                { assert versions.containsKey('RUN_DEBREAK') || versions.containsKey('DEBREAK') },
+                // Phasing must run (ONT_R10 preset with --phaser whatshap uses WhatsHap)
+                { assert versions.containsKey('WHATSHAP_PHASE') },
                 { assert snapshot(
                     // Number of successful tasks
                     workflow.trace.succeeded().size(),

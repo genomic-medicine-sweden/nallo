@@ -12,8 +12,8 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/'
-                input                        = "$projectDir/assets/samplesheet.csv"
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8a22201fc4c3e1026eace0a680cb2757dd4fc7c2/'
+                input                        = "$projectDir/assets/samplesheet_fastq.csv"
                 outdir                       = "$outputDir"
                 skip_annotate_paralogs       = true
                 skip_call_paralogs           = true
@@ -57,8 +57,8 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/'
-                input                        = "$projectDir/assets/samplesheet.csv"
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8a22201fc4c3e1026eace0a680cb2757dd4fc7c2/'
+                input                        = "$projectDir/assets/samplesheet_fastq.csv"
                 outdir                       = "$outputDir"
                 skip_annotate_paralogs       = true
                 skip_call_paralogs           = true

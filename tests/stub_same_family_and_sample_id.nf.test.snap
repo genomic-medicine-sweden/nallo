@@ -500,6 +500,8 @@
                 "snvs/family/HG002_Revio/HG002_Revio_snvs_annotated_ranked_clinical.vcf.gz.tbi",
                 "snvs/family/HG002_Revio/HG002_Revio_snvs_annotated_ranked_research.vcf.gz",
                 "snvs/family/HG002_Revio/HG002_Revio_snvs_annotated_ranked_research.vcf.gz.tbi",
+                "snvs/family/HG002_Revio/HG002_Revio_snvs_unphased.vcf.gz",
+                "snvs/family/HG002_Revio/HG002_Revio_snvs_unphased.vcf.gz.tbi",
                 "snvs/sample",
                 "snvs/sample/HG002_Revio",
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz",
@@ -511,6 +513,8 @@
                 "svs/family/HG002_Revio/HG002_Revio_svs_annotated_ranked_clinical.vcf.gz.tbi",
                 "svs/family/HG002_Revio/HG002_Revio_svs_annotated_ranked_research.vcf.gz",
                 "svs/family/HG002_Revio/HG002_Revio_svs_annotated_ranked_research.vcf.gz.tbi",
+                "svs/family/HG002_Revio/HG002_Revio_svs_unphased.vcf.gz",
+                "svs/family/HG002_Revio/HG002_Revio_svs_unphased.vcf.gz.tbi",
                 "visualization_tracks",
                 "visualization_tracks/HG002_Revio",
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.copynum.bedgraph",
@@ -521,7 +525,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-09-10T17:03:27.156786623",
+        "timestamp": "2026-09-21T17:29:50.862312247",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

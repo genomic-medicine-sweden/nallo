@@ -3,20 +3,20 @@ nextflow_pipeline {
     name "Test pipeline GENOMICMEDICINESWEDEN_NALLO"
     script "../main.nf"
     tag "PIPELINE"
-    tag "samplesheet"
-    config "./nextflow.config"
 
-    test("test profile") {
+    test("samplesheet_ont_vcf | vcf entry_point | ONT singleton") {
+        tag "samplesheet_ont_vcf"
+
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/'
-                input                        = "$projectDir/assets/samplesheet.csv"
-                outdir                       = "$outputDir"
-                alignment_output_format      = "cram"
-                sv_callers                   = "sawfish,severus,hificnv"
-                sv_callers_to_run            = "sawfish,severus,hificnv,sniffles"
-                // skip_portello for fastq input
-                skip_portello                = true
+                pipelines_testdata_base_path   = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8a22201fc4c3e1026eace0a680cb2757dd4fc7c2/'
+                input                          = "$projectDir/assets/samplesheet_ont_vcf.csv"
+                outdir                         = "$outputDir"
+                preset                         = 'ONT_R10'
+                phaser                         = 'whatshap'
+                skip_methylation_annotation    = true
+                skip_genome_assembly           = true
+                skip_portello                  = true
             }
         }
 
@@ -35,12 +35,17 @@ nextflow_pipeline {
             def all_vcf_files    = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_incompatible_variants', include: ['**/*.vcf.gz'])
             // stable_vcf_files: Vcf files with stable variants - can be snapshot using variantsMD5
             def stable_vcf_files = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_unstable_variants', include: ['**/*.vcf.gz'])
-            def versions         = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
+            // software versions
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
             assertAll(
                 { assert workflow.success },
-                { assert versions.containsKey('METHBAT_PROFILE') },    // methbat runs for revio
-                { assert !versions.containsKey('MODKIT_PILEUP') },      // modkit does not run for revio
-                { assert versions.containsKey('CSVTK_MUTATE2') },       // methylation annotation runs for revio
+                // SNV and SV calling must not run for vcf entry_point
+                { assert !versions.containsKey('DEEPVARIANT_RUNDEEPVARIANT') },
+                { assert !versions.containsKey('GLNEXUS') },
+                { assert !versions.containsKey('RUN_SNIFFLES') },
+                { assert !versions.containsKey('SVDB_MERGE_BY_FAMILY') },
+                // Phasing must run (ONT_R10 preset with --phaser whatshap uses WhatsHap)
+                { assert versions.containsKey('WHATSHAP_PHASE') },
                 { assert snapshot(
                     // Number of successful tasks
                     workflow.trace.succeeded().size(),
@@ -62,4 +67,5 @@ nextflow_pipeline {
             )
         }
     }
+
 }

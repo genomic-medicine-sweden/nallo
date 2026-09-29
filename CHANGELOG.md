@@ -48,6 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1226](https://github.com/genomic-medicine-sweden/nallo/pull/1226) - Added filtering step with `gawk` to `annotate_methylation`, removing variants with `NA` in the `cpg_label`
 - [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Added DeBreak as a new SV caller option (`--sv_callers debreak`)
 - [#1252](https://github.com/genomic-medicine-sweden/nallo/pull/1252) - Added `--extra_vep_options_snv_mito` param for MT-specific VEP annotation (excludes nuclear-only flags `--sift`, `--polyphen`, `--humdiv`) and `--genmod_score_config_snvs_mito` param to route mitochondrial SNVs to a dedicated rank model
+- [#1260](https://github.com/genomic-medicine-sweden/nallo/pull/1260) - Added samplesheet-based entry point routing: three new columns (`aligned_bam`, `snv_vcf`, `sv_vcf`) allow providing pre-aligned BAMs or pre-called VCFs directly in the samplesheet. The pipeline derives `meta.entry_point` (`fastq`/`ubam`/`bam`/`vcf`) at parse time and routes samples channel-based accordingly. Pre-phasing family VCFs are now published to `unphased/` on every run.
 
 ### Changed
 
@@ -152,6 +153,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1236](https://github.com/genomic-medicine-sweden/nallo/pull/1236) - Removed `BCFTOOLS_VIEW_SV` passthrough process; output naming moved to `main.nf` `path {}` closures
 - [#1245](https://github.com/genomic-medicine-sweden/nallo/pull/1245) - Updated VEP from 110 to 116.1; removed the local downgrade patch; updated default `vep_cache_version` to 116
 - [#1245](https://github.com/genomic-medicine-sweden/nallo/pull/1245) - Updated `ensemblvep/filtervep` and `vcf_filter_bcftools_ensemblvep` to current nf-core/modules versions; `vcf_filter_bcftools_ensemblvep` now uses `htslib/bgziptabix` instead of `tabix/bgziptabix`
+- [#1260](https://github.com/genomic-medicine-sweden/nallo/pull/1260) - Removed `--premapped` parameter; use the `aligned_bam` samplesheet column instead
 
 ### Fixed
 

@@ -1,32 +1,36 @@
 nextflow_pipeline {
 
-    name "Test pipeline GENOMICMEDICINESWEDEN_NALLO — Stub tests for samplesheet with family id identical to sample id"
+    name "Test pipeline GENOMICMEDICINESWEDEN_NALLO — Stub tests for bam entry_point"
     script "../main.nf"
     tag "PIPELINE"
     tag "pipeline_stub"
-    tag "stub_same_family_and_sample_id"
+    tag "stub_bam_entry"
     config "./nextflow.config"
 
-    test("Test family id same as sample id") {
+    test("stub | bam entry_point | Revio trio") {
         options "-stub"
 
         when {
             params {
                 pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8a22201fc4c3e1026eace0a680cb2757dd4fc7c2/'
-                input                        = "$projectDir/assets/samplesheet_same_sample_and_family_id.csv"
+                input                        = "$projectDir/assets/samplesheet_bam.csv"
                 outdir                       = "$outputDir"
-                skip_mitochondrial_calling   = true
-                // skip_portello for fastq input
+                skip_genome_assembly         = true
                 skip_portello                = true
             }
         }
 
         then {
-            // stable_name: All files + folders in ${params.outdir}/ with a stable name
             def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
             def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
             assertAll(
                 { assert workflow.success },
+                // Alignment must not run for bam entry_point
+                { assert !versions.containsKey('MINIMAP2_ALIGN') },
+                { assert !versions.containsKey('SPLITUBAM') },
+                // SNV and SV calling must run
+                { assert versions.containsKey('DEEPVARIANT_RUNDEEPVARIANT') },
+                { assert versions.containsKey('RUN_SNIFFLES') || versions.containsKey('RUN_SEVERUS') },
                 { assert snapshot(
                     workflow.trace.succeeded().size(),
                     versions,
@@ -35,4 +39,5 @@ nextflow_pipeline {
             )
         }
     }
+
 }
