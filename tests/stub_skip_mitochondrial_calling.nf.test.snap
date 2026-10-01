@@ -151,7 +151,10 @@
                 "BCFTOOLS_STATS": {
                     "bcftools": 1.22
                 },
-                "BCFTOOLS_VIEW_MITO": {
+                "BCFTOOLS_VIEW_MITO_SNV": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_MITO_SV": {
                     "bcftools": 1.22
                 },
                 "BEDTOOLS_MERGE": {
@@ -262,10 +265,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-31T10:20:17.461695095",
+        "timestamp": "2026-10-01T15:40:32.192844279",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.08.0"
         }
     }
 }
