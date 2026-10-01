@@ -2,11 +2,12 @@
  * Workflow to call mitochondrial variants
  */
 
-include { BCFTOOLS_REHEADER                   } from '../../../modules/nf-core/bcftools/reheader/main'
-include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_MITO } from '../../../modules/nf-core/bcftools/view/main'
-include { DEEPVARIANT_RUNDEEPVARIANT          } from '../../../modules/nf-core/deepvariant/rundeepvariant/main'
-include { GAWK as GAWK_STRIP_CONTIG_HEADER    } from '../../../modules/nf-core/gawk/main'
-include { MITORSAW_HAPLOTYPE                  } from '../../../modules/nf-core/mitorsaw/haplotype/main'
+include { BCFTOOLS_REHEADER                       } from '../../../modules/nf-core/bcftools/reheader/main'
+include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_MITO_SNV } from '../../../modules/nf-core/bcftools/view/main'
+include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_MITO_SV  } from '../../../modules/nf-core/bcftools/view/main'
+include { DEEPVARIANT_RUNDEEPVARIANT              } from '../../../modules/nf-core/deepvariant/rundeepvariant/main'
+include { GAWK as GAWK_STRIP_CONTIG_HEADER        } from '../../../modules/nf-core/gawk/main'
+include { MITORSAW_HAPLOTYPE                      } from '../../../modules/nf-core/mitorsaw/haplotype/main'
 
 workflow CALL_MITOCHONDRIAL_VARIANTS {
     take:
@@ -15,6 +16,8 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
     ch_fai // channel: [val(meta), path(fai)]
     ch_par_bed // channel: [val(meta), path(bed)]  – PAR regions (deepvariant)
     ch_mitochondrial_bed // channel: [val(meta), path(bed)]  – mitochondrial interval (deepvariant)
+    ch_snv_call_regions // channel: [val(meta), path(bed)]  – SNV call regions
+    ch_sv_call_regions // channel: [val(meta), path(bed)]  – structural variant call regions
     mitochondrial_caller // string
 
     main:
@@ -36,9 +39,9 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
     else if (mitochondrial_caller == "deepvariant") {
 
         /*
-     * Add the mitochondrial BED to every sample, skip if BED is empty. We do not want to run Deepvariant with an empty bed.
-     * The BED can be empty if there is no chrM region in the original BED processed in SCATTER_GENOME
-     */
+         * Add the mitochondrial BED to every sample, skip if BED is empty. We do not want to run Deepvariant with an empty bed.
+         * The BED can be empty if there is no chrM region in the original BED processed in SCATTER_GENOME
+         */
         ch_deepvariant_in = ch_bam_bai
             .combine(ch_mitochondrial_bed)
             .filter { _bam_meta, _bam, _bai, _mitochondrial_meta, bed -> bed.size() > 0 }
@@ -65,11 +68,11 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
     if (mitochondrial_caller != "deepvariant") {
 
         /*
-        * Mitochondrial-specific callers produce VCFs with only ##contig=<ID=chrM> in the header.
-        * bcftools reheader --fai only appends missing contigs — it does not replace existing ones.
-        * So we first strip all ##contig lines with GAWK, then reheader FAI
-        * This ensures all contigs appear in reference order so the downstream sort places chrM correctly.
-        */
+         * Mitochondrial-specific callers produce VCFs with only ##contig=<ID=chrM> in the header.
+         * bcftools reheader --fai only appends missing contigs — it does not replace existing ones.
+         * So we first strip all ##contig lines with GAWK, then reheader FAI
+         * This ensures all contigs appear in reference order so the downstream sort places chrM correctly.
+         */
 
         GAWK_STRIP_CONTIG_HEADER(
             ch_vcf.map { meta, vcf -> [meta, [vcf]] },
@@ -82,27 +85,17 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
             ch_fai.collect(),
         )
 
-        ch_mito_split_input = BCFTOOLS_REHEADER.out.vcf.flatMap { meta, vcf ->
-            [[meta + [variant_type: "snv"], vcf, []], [meta + [variant_type: "sv"], vcf, []]]
-        }
+        // ch_snv/sv_call_regions filter mitorsaw's SNV/SV output directly via bcftools view --regions-file
+        // ch_mito_vcf_tbi = BCFTOOLS_REHEADER.out.vcf.map { meta, vcf -> [meta, vcf, []] }
+        ch_mito_vcf_tbi = BCFTOOLS_REHEADER.out.vcf.join(BCFTOOLS_REHEADER.out.index)
 
-        BCFTOOLS_VIEW_MITO(ch_mito_split_input, [], [], [])
+        BCFTOOLS_VIEW_MITO_SNV(ch_mito_vcf_tbi, ch_snv_call_regions.map { _meta, bed -> bed }, [], [])
+        BCFTOOLS_VIEW_MITO_SV(ch_mito_vcf_tbi, ch_sv_call_regions.map { _meta, bed -> bed }, [], [])
 
-        ch_mito_vcf_split = BCFTOOLS_VIEW_MITO.out.vcf.branch { meta, _vcf ->
-            snv: meta.variant_type == "snv"
-            sv: meta.variant_type == "sv"
-        }
-
-        ch_mito_tbi_split = BCFTOOLS_VIEW_MITO.out.tbi.branch { meta, _tbi ->
-            snv: meta.variant_type == "snv"
-            sv: meta.variant_type == "sv"
-        }
-
-
-        ch_snv_vcf = remove_variant_type_from_meta(ch_mito_vcf_split.snv)
-        ch_snv_tbi = remove_variant_type_from_meta(ch_mito_tbi_split.snv)
-        ch_sv_vcf = remove_variant_type_from_meta(ch_mito_vcf_split.sv)
-        ch_sv_tbi = remove_variant_type_from_meta(ch_mito_tbi_split.sv)
+        ch_snv_vcf = BCFTOOLS_VIEW_MITO_SNV.out.vcf
+        ch_snv_tbi = BCFTOOLS_VIEW_MITO_SNV.out.tbi
+        ch_sv_vcf = BCFTOOLS_VIEW_MITO_SV.out.vcf
+        ch_sv_tbi = BCFTOOLS_VIEW_MITO_SV.out.tbi
     }
     else {
         ch_snv_vcf = ch_vcf
@@ -116,7 +109,4 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
     mitochondrial_snv_tbi = ch_snv_tbi // channel: [val(meta), path(tbi)]
     mitochondrial_sv_vcf  = ch_sv_vcf // channel: [val(meta), path(vcf)]
     mitochondrial_sv_tbi  = ch_sv_tbi // channel: [val(meta), path(tbi)]
-}
-def remove_variant_type_from_meta(channel) {
-    channel.map { meta, file -> [meta - meta.subMap('variant_type'), file] }
 }
