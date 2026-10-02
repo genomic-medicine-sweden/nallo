@@ -29,7 +29,7 @@
                     {
                         "id": "test_sample1"
                     },
-                    "test_sample1_mitochondrial_snv.vcf.gz",
+                    "test_sample1_mitochondrial_snv_mitorsaw.vcf.gz",
                     "VcfFile [chromosomes=[chrM], sampleCount=1, variantCount=18, phased=true, phasedAutodetect=true]",
                     "a94e33d65e5f349ac825fbaeba434ee4"
                 ],
@@ -38,7 +38,7 @@
                     {
                         "id": "test_sample2"
                     },
-                    "test_sample2_mitochondrial_snv.vcf.gz",
+                    "test_sample2_mitochondrial_snv_mitorsaw.vcf.gz",
                     "VcfFile [chromosomes=[chrM], sampleCount=1, variantCount=32, phased=true, phasedAutodetect=true]",
                     "4e15cdd4ede932e8b6fc88e39313a463"
                 ]
@@ -49,7 +49,7 @@
                     {
                         "id": "test_sample1"
                     },
-                    "test_sample1_mitochondrial_sv.vcf.gz",
+                    "test_sample1_mitochondrial_sv_mitorsaw.vcf.gz",
                     "VcfFile [chromosomes=[chrM], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=false]",
                     "3564d26b4d771126a7aa64eacb4ed8b8"
                 ],
@@ -58,16 +58,16 @@
                     {
                         "id": "test_sample2"
                     },
-                    "test_sample2_mitochondrial_sv.vcf.gz",
+                    "test_sample2_mitochondrial_sv_mitorsaw.vcf.gz",
                     "VcfFile [chromosomes=[], sampleCount=1, variantCount=0, phased=true, phasedAutodetect=true]",
                     "d41d8cd98f00b204e9800998ecf8427e"
                 ]
             ]
         ],
-        "timestamp": "2026-07-29T11:31:34.133809237",
+        "timestamp": "2026-10-02T15:40:17.48188184",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.08.0"
         }
     },
     "2 sample - deepvariant (Deepvariant/Deepvariant) - with mitochondrial intervals": {
@@ -111,7 +111,7 @@
                     {
                         "id": "test"
                     },
-                    "test_mitochondrial_snv.vcf.gz",
+                    "test_mitochondrial_snv_mitorsaw.vcf.gz",
                     "VcfFile [chromosomes=[chrM], sampleCount=1, variantCount=18, phased=true, phasedAutodetect=true]",
                     "a94e33d65e5f349ac825fbaeba434ee4"
                 ]
@@ -122,16 +122,16 @@
                     {
                         "id": "test"
                     },
-                    "test_mitochondrial_sv.vcf.gz",
+                    "test_mitochondrial_sv_mitorsaw.vcf.gz",
                     "VcfFile [chromosomes=[chrM], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=false]",
                     "3564d26b4d771126a7aa64eacb4ed8b8"
                 ]
             ]
         ],
-        "timestamp": "2026-07-29T11:30:37.608389582",
+        "timestamp": "2026-10-02T15:39:36.03982803",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.08.0"
         }
     },
     "1 sample - mitorsaw (Deepvariant/mitorsaw) - stub": {
@@ -142,7 +142,7 @@
                         {
                             "id": "test"
                         },
-                        "test_mitochondrial_snv.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_mitochondrial_snv_mitorsaw.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "1": [
@@ -150,7 +150,7 @@
                         {
                             "id": "test"
                         },
-                        "test_mitochondrial_snv.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_mitochondrial_snv_mitorsaw.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
@@ -158,7 +158,7 @@
                         {
                             "id": "test"
                         },
-                        "test_mitochondrial_sv.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_mitochondrial_sv_mitorsaw.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "3": [
@@ -166,7 +166,7 @@
                         {
                             "id": "test"
                         },
-                        "test_mitochondrial_sv.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_mitochondrial_sv_mitorsaw.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "mitochondrial_snv_tbi": [
@@ -174,7 +174,7 @@
                         {
                             "id": "test"
                         },
-                        "test_mitochondrial_snv.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_mitochondrial_snv_mitorsaw.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "mitochondrial_snv_vcf": [
@@ -182,7 +182,7 @@
                         {
                             "id": "test"
                         },
-                        "test_mitochondrial_snv.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_mitochondrial_snv_mitorsaw.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "mitochondrial_sv_tbi": [
@@ -190,7 +190,7 @@
                         {
                             "id": "test"
                         },
-                        "test_mitochondrial_sv.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_mitochondrial_sv_mitorsaw.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "mitochondrial_sv_vcf": [
@@ -198,15 +198,15 @@
                         {
                             "id": "test"
                         },
-                        "test_mitochondrial_sv.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_mitochondrial_sv_mitorsaw.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-06-01T14:17:58.278807032",
+        "timestamp": "2026-10-02T15:39:45.842821895",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.08.0"
         }
     },
     "1 sample - deepvariant (Deepvariant/Deepvariant) - with mitochondrial intervals": {

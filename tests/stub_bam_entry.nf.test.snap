@@ -45,10 +45,7 @@
                 "BCFTOOLS_VIEW_CHROMOGRAPH": {
                     "bcftools": 1.22
                 },
-                "BCFTOOLS_VIEW_MITO_SNV": {
-                    "bcftools": 1.22
-                },
-                "BCFTOOLS_VIEW_MITO_SV": {
+                "BCFTOOLS_VIEW_MITO": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_PHASING": {
@@ -740,10 +737,10 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-10-01T15:29:11.228579258",
+        "timestamp": "2026-09-21T17:10:28.849911278",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.08.0"
+            "nextflow": "26.04.6"
         }
     }
 }

@@ -2,12 +2,11 @@
  * Workflow to call mitochondrial variants
  */
 
-include { BCFTOOLS_REHEADER                       } from '../../../modules/nf-core/bcftools/reheader/main'
-include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_MITO_SNV } from '../../../modules/nf-core/bcftools/view/main'
-include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_MITO_SV  } from '../../../modules/nf-core/bcftools/view/main'
-include { DEEPVARIANT_RUNDEEPVARIANT              } from '../../../modules/nf-core/deepvariant/rundeepvariant/main'
-include { GAWK as GAWK_STRIP_CONTIG_HEADER        } from '../../../modules/nf-core/gawk/main'
-include { MITORSAW_HAPLOTYPE                      } from '../../../modules/nf-core/mitorsaw/haplotype/main'
+include { BCFTOOLS_REHEADER                   } from '../../../modules/nf-core/bcftools/reheader/main'
+include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_MITO } from '../../../modules/nf-core/bcftools/view/main'
+include { DEEPVARIANT_RUNDEEPVARIANT          } from '../../../modules/nf-core/deepvariant/rundeepvariant/main'
+include { GAWK as GAWK_STRIP_CONTIG_HEADER    } from '../../../modules/nf-core/gawk/main'
+include { MITORSAW_HAPLOTYPE                  } from '../../../modules/nf-core/mitorsaw/haplotype/main'
 
 workflow CALL_MITOCHONDRIAL_VARIANTS {
     take:
@@ -85,17 +84,48 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
             ch_fai.collect(),
         )
 
-        // ch_snv/sv_call_regions filter mitorsaw's SNV/SV output directly via bcftools view --regions-file
-        // ch_mito_vcf_tbi = BCFTOOLS_REHEADER.out.vcf.map { meta, vcf -> [meta, vcf, []] }
-        ch_mito_vcf_tbi = BCFTOOLS_REHEADER.out.vcf.join(BCFTOOLS_REHEADER.out.index)
+        /*
+         * Use ch_snv/sv_call_regions to filter the mitochondrial caller's SNV/SV output directly via
+         * bcftools view --regions-file
+         */
+        ch_call_regions = ch_snv_call_regions
+            .map { _meta, bed -> ['snv', bed] }
+            .mix(ch_sv_call_regions.map { _meta, bed -> ['sv', bed] })
 
-        BCFTOOLS_VIEW_MITO_SNV(ch_mito_vcf_tbi, ch_snv_call_regions.map { _meta, bed -> bed }, [], [])
-        BCFTOOLS_VIEW_MITO_SV(ch_mito_vcf_tbi, ch_sv_call_regions.map { _meta, bed -> bed }, [], [])
+        ch_mito_vcf_tbi_bed = BCFTOOLS_REHEADER.out.vcf
+            .join(BCFTOOLS_REHEADER.out.index)
+            .flatMap { meta, vcf, tbi ->
+                [
+                    ['snv', meta + [variant_type: "snv"], vcf, tbi],
+                    ['sv', meta + [variant_type: "sv"], vcf, tbi],
+                ]
+            }
+            .combine(ch_call_regions, by: 0)
+            .map { _type, meta, vcf, tbi, bed ->
+                [meta, vcf, tbi, bed]
+            }
 
-        ch_snv_vcf = BCFTOOLS_VIEW_MITO_SNV.out.vcf
-        ch_snv_tbi = BCFTOOLS_VIEW_MITO_SNV.out.tbi
-        ch_sv_vcf = BCFTOOLS_VIEW_MITO_SV.out.vcf
-        ch_sv_tbi = BCFTOOLS_VIEW_MITO_SV.out.tbi
+        BCFTOOLS_VIEW_MITO(
+            ch_mito_vcf_tbi_bed.map { meta, vcf, tbi, _bed -> [meta, vcf, tbi] },
+            ch_mito_vcf_tbi_bed.map { _meta, _vcf, _tbi, bed -> bed },
+            [],
+            [],
+        )
+
+        ch_mito_vcf_split = BCFTOOLS_VIEW_MITO.out.vcf.branch { meta, _vcf ->
+            snv: meta.variant_type == "snv"
+            sv: meta.variant_type == "sv"
+        }
+
+        ch_mito_tbi_split = BCFTOOLS_VIEW_MITO.out.tbi.branch { meta, _tbi ->
+            snv: meta.variant_type == "snv"
+            sv: meta.variant_type == "sv"
+        }
+
+        ch_snv_vcf = remove_variant_type_from_meta(ch_mito_vcf_split.snv)
+        ch_snv_tbi = remove_variant_type_from_meta(ch_mito_tbi_split.snv)
+        ch_sv_vcf = remove_variant_type_from_meta(ch_mito_vcf_split.sv)
+        ch_sv_tbi = remove_variant_type_from_meta(ch_mito_tbi_split.sv)
     }
     else {
         ch_snv_vcf = ch_vcf
@@ -109,4 +139,8 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
     mitochondrial_snv_tbi = ch_snv_tbi // channel: [val(meta), path(tbi)]
     mitochondrial_sv_vcf  = ch_sv_vcf // channel: [val(meta), path(vcf)]
     mitochondrial_sv_tbi  = ch_sv_tbi // channel: [val(meta), path(tbi)]
+}
+
+def remove_variant_type_from_meta(channel) {
+    channel.map { meta, file -> [meta - meta.subMap('variant_type'), file] }
 }
