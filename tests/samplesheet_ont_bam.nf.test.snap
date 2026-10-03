@@ -696,22 +696,22 @@
                 ],
                 [
                     "hg002_svs_annotated_ranked_clinical.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=8, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=7, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "hg002_svs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=8, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=7, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "hg002_svs_unphased.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=8, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=7, phased=false, phasedAutodetect=false]"
                 ]
             ],
             [
                 
             ]
         ],
-        "timestamp": "2026-10-02T17:52:06.861680394",
+        "timestamp": "2026-10-03T09:39:05.131425515",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
