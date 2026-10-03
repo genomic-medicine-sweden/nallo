@@ -251,15 +251,15 @@
                     "strdrop": "0.3.1"
                 },
                 "SVDB_MERGE_BY_CALLER": {
-                    "bcftools": 1.23,
-                    "svdb": "2.8.4"
+                    "bcftools": 1.24,
+                    "svdb": "2.12.0"
                 },
                 "SVDB_MERGE_BY_FAMILY": {
-                    "bcftools": 1.23,
-                    "svdb": "2.8.4"
+                    "bcftools": 1.24,
+                    "svdb": "2.12.0"
                 },
                 "SVDB_QUERY": {
-                    "svdb": "2.8.4"
+                    "svdb": "2.12.0"
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
@@ -1041,12 +1041,12 @@
                 "HG004_chromograph_coverage_chrM.png:md5,90de157b814be5dbca58b7719572192a",
                 "HG004_chromograph_coverage_chrX.png:md5,1b98fd0d646c6fa24a923eeebab1c19f",
                 "HG004_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
-                "HG002_pbcpgtools.combined.bed.gz:md5,510566dfac748bb6ba8eae0d8b8416a8",
-                "HG002_pbcpgtools.combined.bed.gz.tbi:md5,90ae4eebbc401d6c3630bc04b0965e87",
-                "HG002_pbcpgtools.hap1.bed.gz:md5,23c944121757e96e697e4af83059ebca",
-                "HG002_pbcpgtools.hap1.bed.gz.tbi:md5,75984e5d2fb5932c07f2313a42401814",
-                "HG002_pbcpgtools.hap2.bed.gz:md5,25d776bf2ecda21f476a2d6d0fa61360",
-                "HG002_pbcpgtools.hap2.bed.gz.tbi:md5,d01cfdb2bef072e5af86be65a21def45",
+                "HG002_pbcpgtools.combined.bed.gz:md5,a60d4a767f7cdcb09e3a3d27e22fe81d",
+                "HG002_pbcpgtools.combined.bed.gz.tbi:md5,bd3dcc4a4bb7698dbd4dff9d5c06344e",
+                "HG002_pbcpgtools.hap1.bed.gz:md5,3dbe67bb34fb5cd2d114a3f384409604",
+                "HG002_pbcpgtools.hap1.bed.gz.tbi:md5,636b8541bcea8576c67b0c14d03363af",
+                "HG002_pbcpgtools.hap2.bed.gz:md5,cbfb9c29743e1918c21f2f688cd3e883",
+                "HG002_pbcpgtools.hap2.bed.gz.tbi:md5,86a1b18846f32470c03b36ec50562e97",
                 "HG003_pbcpgtools.combined.bed.gz:md5,15c43e701e4ef4e134a54e83fc99d8ff",
                 "HG003_pbcpgtools.combined.bed.gz.tbi:md5,b08932c1b729c5344b9614fbf8900799",
                 "HG003_pbcpgtools.hap1.bed.gz:md5,9a9001948f797a0c0b87e809173b8fc2",
@@ -1080,11 +1080,11 @@
                 "multiqc_bcftools_stats.txt:md5,bde59835db1cd3f3282d0e3c128dba2c",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,ded82be2d5363bef79652ecf4bf24ea4",
-                "multiqc_general_stats.txt:md5,6ff9445f7e3c5635cc87cba7ecaacbe4",
-                "multiqc_whatshap_phased_bp_plot.txt:md5,84b18ab73d2569912d69a20b3b2bf869",
+                "multiqc_general_stats.txt:md5,739d4d69708d60f3c0301b8dfa6f12ad",
+                "multiqc_whatshap_phased_bp_plot.txt:md5,96f21f631d1a6c03b06ebf24f9fe6590",
                 "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
                 "somalier_stats.txt:md5,2087a0114648e698a828f29eac18f5e4",
-                "whatshap-stats-table.txt:md5,a1106b186a72a87be2bea69d4e5ef4d4",
+                "whatshap-stats-table.txt:md5,2c4969132eebc8157c846a866dbbc372",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002_cramino_aligned_phased.arrow:md5,59218ecb157374692c12a6ffc63ad0e0",
                 "HG003_cramino_aligned_phased.arrow:md5,3dbdcb3873a561fc10192f5c4326d4d5",
@@ -1117,24 +1117,24 @@
                 "FAM.sex_check.csv:md5,e82ac26951416b738db777730e0ced59",
                 "FAM.sex_check.png:md5,b972b8629706cb367a5c1f72434434c6",
                 "FAM.vs.html:md5,d5231a6c1f32ad5eb149d5dadadfa35a",
-                "HG002_whatshap_stats.gtf.gz:md5,c190bf878ed9b0a434e40ad46b820677",
-                "HG002_whatshap_stats.gtf.gz.tbi:md5,28ba5f31c3b148837eb1f1dfb1c17b56",
-                "HG002_whatshap_stats.tsv:md5,76284430c32327decbd2a59e1959093f",
+                "HG002_whatshap_stats.gtf.gz:md5,722b3c6b1d1ad4ce53e2b016facb6614",
+                "HG002_whatshap_stats.gtf.gz.tbi:md5,3b51c8960b5d227d0375867205ef28f7",
+                "HG002_whatshap_stats.tsv:md5,785dccd488ff51900201cbc9b140a048",
                 "HG003_whatshap_stats.gtf.gz:md5,3ac719a2f40a1cea540123454c081fd5",
                 "HG003_whatshap_stats.gtf.gz.tbi:md5,e6ea891c3185bfbc9850f6f16de0aa89",
                 "HG003_whatshap_stats.tsv:md5,1d96ac97202c49ad98d7c0ab498bde48",
-                "HG004_whatshap_stats.gtf.gz:md5,bbe8ad019edcf079d26f1645c79fe2c5",
+                "HG004_whatshap_stats.gtf.gz:md5,286d5d619552e6f5cb5ea85b5ab8d28a",
                 "HG004_whatshap_stats.gtf.gz.tbi:md5,de03190e068e222d46a3fb2749af7f27",
-                "HG004_whatshap_stats.tsv:md5,6e6d05553bccd870a2c234f6587e7c77",
+                "HG004_whatshap_stats.tsv:md5,b747f9e95675be6022d38d8c6c92a87e",
                 "HG002_sambamba_depth.bed:md5,7acdc503fab76e33fa6b00446a82971c",
                 "HG003_sambamba_depth.bed:md5,6b87e82e7624db10f2d15a890bcfe6cf",
                 "HG004_sambamba_depth.bed:md5,ad9af0d845359cfd0ee86e478e5960d7",
                 "HG002_hificnv.copynum.bedgraph:md5,d9f899d17bebcbb6e1b3e4a593ece3d8",
                 "HG002_hificnv.depth.bw:md5,73951a6eb4f47f0f5f3c89a9243bbbcf",
                 "HG002_hificnv.maf.bw:md5,c56d5595cc537591a4bda214715ef223",
-                "HG002_pbcpgtools.combined.bw:md5,364560bf139066bba4500dcc9dd63297",
-                "HG002_pbcpgtools.hap1.bw:md5,9bc2fde6a47087e8ee3f433422228375",
-                "HG002_pbcpgtools.hap2.bw:md5,e744626ec53bab864676d2b6f9191d0b",
+                "HG002_pbcpgtools.combined.bw:md5,bef1af91d2c127058aadfee3dd94bc06",
+                "HG002_pbcpgtools.hap1.bw:md5,3f8120f7980f960e5ca82cdb89a42808",
+                "HG002_pbcpgtools.hap2.bw:md5,fa5da7d84d25c2b38255c92b13454089",
                 "HG003_hificnv.copynum.bedgraph:md5,ae903b00036ac3a24be0e3e4abff3594",
                 "HG003_hificnv.depth.bw:md5,6c28b05317e277eba3b4ffefb443ae62",
                 "HG003_hificnv.maf.bw:md5,f89f151bd6fcefde976c2c8574caff23",
@@ -1259,7 +1259,7 @@
                 
             ]
         ],
-        "timestamp": "2026-09-21T16:39:29.340639203",
+        "timestamp": "2026-10-03T08:23:28.964002203",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

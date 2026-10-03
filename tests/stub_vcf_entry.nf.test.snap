@@ -140,7 +140,7 @@
                     "python": "3.8.3"
                 },
                 "SVDB_QUERY": {
-                    "svdb": "2.8.4"
+                    "svdb": "2.12.0"
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
@@ -304,7 +304,7 @@
                 "svs/family/hg002/hg002_svs_annotated_ranked_research.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-09-22T19:24:14.406936953",
+        "timestamp": "2026-10-02T18:19:11.31766953",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
@@ -468,7 +468,7 @@
                     "python": "3.8.3"
                 },
                 "SVDB_QUERY": {
-                    "svdb": "2.8.4"
+                    "svdb": "2.12.0"
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
@@ -816,7 +816,7 @@
                 "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-09-21T17:36:48.048225949",
+        "timestamp": "2026-10-02T18:17:33.989424682",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
