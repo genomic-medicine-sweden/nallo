@@ -92,7 +92,7 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
             .map { _meta, bed -> ['snv', bed] }
             .mix(ch_sv_call_regions.map { _meta, bed -> ['sv', bed] })
 
-        ch_mito_vcf_tbi_bed = BCFTOOLS_REHEADER.out.vcf
+        ch_bcftools_view_input = BCFTOOLS_REHEADER.out.vcf
             .join(BCFTOOLS_REHEADER.out.index)
             .flatMap { meta, vcf, tbi ->
                 [
@@ -101,13 +101,14 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
                 ]
             }
             .combine(ch_call_regions, by: 0)
-            .map { _type, meta, vcf, tbi, bed ->
-                [meta, vcf, tbi, bed]
+            .multiMap { _type, meta, vcf, tbi, bed ->
+                vcf_tbi: [meta, vcf, tbi]
+                bed: bed
             }
 
         BCFTOOLS_VIEW_MITO(
-            ch_mito_vcf_tbi_bed.map { meta, vcf, tbi, _bed -> [meta, vcf, tbi] },
-            ch_mito_vcf_tbi_bed.map { _meta, _vcf, _tbi, bed -> bed },
+            ch_bcftools_view_input.vcf_tbi,
+            ch_bcftools_view_input.bed,
             [],
             [],
         )
