@@ -136,7 +136,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Updated `VEP_PREP_SV` to apply Sniffles v1-specific caller fixes (STRANDBIAS FILTER header injection, synthetic `END=POS`/`SVLEN=1` removal) only when processing `SNIFFLES1` output; SVTYPE remapping applies to all callers
 - [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - `REHEADER_SV_VCF` now passes the reference FAI to `BCFTOOLS_REHEADER`, ensuring all reference `##contig` lines are present in per-caller VCFs before SVDB merge
 - [#1253](https://github.com/genomic-medicine-sweden/nallo/pull/1253) - Refactored `CALL_SVS` into per-caller subworkflows (`SNIFFLES_SV`, `SNIFFLES1_SV`, `SEVERUS_SV`, `DEBREAK_SV`, `HIFICNV_SV`, `SAWFISH_SV`); `CALL_SVS` now emits a single `sv_calls` channel (3-tuple `[meta, vcf, tbi]`, where `tbi` is `[]` for callers that do not pre-index); `nallo.nf` branches on `meta.skip_vep_prep` to route calls through `VEP_PREP_SV` + `BCFTOOLS_SORT` or bypass it, then rejoins before the optional region filter and reheader step; `needs_reheader` and `skip_vep_prep` flags stamped on `meta` by each per-caller subworkflow
-- [#1263](https://github.com/genomic-medicine-sweden/nallo/pull/1263) - Changed filtering of mitochondrial variants in `CALL_MITOCHONDRIAL_VARIANTS` to use `ch_sv/snv_call_regions` instead of splitting on `meta.variant_type`
+- [#1263](https://github.com/genomic-medicine-sweden/nallo/pull/1263) - Changed filtering of mitochondrial variants in `CALL_MITOCHONDRIAL_VARIANTS` to use `ch_sv/snv_call_regions` in addition to size for filtering (non deepvariant only)
 
 ### Removed
 
