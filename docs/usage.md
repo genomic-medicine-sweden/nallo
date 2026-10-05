@@ -275,6 +275,25 @@ Sometimes you might want to run more callers than you use for merging, this can 
 
     Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
 
+The SVDB matching settings of the two merging steps are set with the parameters below. Each is available for the merge of one caller across samples (`svdb_merge_by_caller_*`) and for the merge of callers into the family VCF (`svdb_merge_by_family_*`).
+
+| Parameter                                                                            | Description                                                                                   | Default (by caller / by family) |
+| ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- | ------------------------------- |
+| `svdb_merge_by_caller_overlap`, `svdb_merge_by_family_overlap`                       | **Optional**: Minimum reciprocal overlap for deletions and duplications (0-1)                 | 0.5 / 0.7                       |
+| `svdb_merge_by_caller_bnd_distance`, `svdb_merge_by_family_bnd_distance`             | **Optional**: Maximum distance in bp between breakpoints of translocations and inversions     | 1000 / 2000                     |
+| `svdb_merge_by_caller_ins_distance`, `svdb_merge_by_family_ins_distance`             | **Optional**: Maximum distance in bp between insertion positions                              | 100 / 100                       |
+| `svdb_merge_by_caller_ins_svlen_ratio`, `svdb_merge_by_family_ins_svlen_ratio`       | **Optional**: Minimum ratio of the smaller to the larger insertion length (0-1)               | 0.5 / 0.5                       |
+| `svdb_merge_by_caller_ins_seq_similarity`, `svdb_merge_by_family_ins_seq_similarity` | **Optional**: Minimum insertion sequence similarity (0-1), 0 disables the sequence comparison | 0 / 0                           |
+
+The settings can be changed in a parameters file passed with `-params-file`:
+
+```yaml
+svdb_merge_by_caller_overlap: 0.6
+svdb_merge_by_family_ins_distance: 150
+```
+
+Two settings are fixed and cannot be changed with these parameters: the merge by caller always uses `--bnd_distance 10000` for HiFiCNV, and adds `--no_intra` for Sawfish unless `--force_sawfish_joint_call_single_samples` is set.
+
 If HiFiCNV or Sawfish are used, the following files are required:
 
 | Parameter              | Description                                                                                                                                                                                     |
@@ -472,6 +491,16 @@ The following additional files are required:
 | `vep_plugin_files` <sup>2</sup>  | A CSV/TSV/JSON/YAML file with VEP plugin files, pLI and LoFtool are required. Example provided below.                                                                                                                                                                                                                                              |
 | `extra_vep_options_sv`           | **Optional**: Options appended to the VEP core command for SV annotation. Defaults to standard enrichment annotations. To add plugins, supply the default flags plus your additions (e.g. `'--appris --biotype ... --plugin CADD,sv.tsv.gz'`). Plugin files must be included in `vep_plugin_files`.                                                |
 | `variant_consequences_svs`       | A list of SO terms listed in the order of severity from most severe to lease severe for annotating SVs. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt). You can learn more about these terms [here](https://ensembl.org/info/genome/variation/prediction/predicted_data.html) |
+
+The SVDB matching settings used when annotating against the databases are set with the parameters below.
+
+| Parameter                       | Description                                                                                   | Default |
+| ------------------------------- | --------------------------------------------------------------------------------------------- | ------- |
+| `svdb_query_overlap`            | **Optional**: Minimum reciprocal overlap for deletions and duplications (0-1)                 | 0.7     |
+| `svdb_query_bnd_distance`       | **Optional**: Maximum distance in bp between breakpoints of translocations and inversions     | 1000    |
+| `svdb_query_ins_distance`       | **Optional**: Maximum distance in bp between insertion positions                              | 100     |
+| `svdb_query_ins_svlen_ratio`    | **Optional**: Minimum ratio of the smaller to the larger insertion length (0-1)               | 0.5     |
+| `svdb_query_ins_seq_similarity` | **Optional**: Minimum insertion sequence similarity (0-1), 0 disables the sequence comparison | 0       |
 
 <sup>1</sup> Example file for input with `--svdb_sv_databases`:
 
