@@ -285,7 +285,6 @@ The SVDB matching settings of the two merging steps are set with the parameters 
 | `svdb_merge_by_caller_ins_svlen_ratio`, `svdb_merge_by_family_ins_svlen_ratio`       | **Optional**: Minimum ratio of the smaller to the larger insertion length (0-1)               | 0.5 / 0.5                       |
 | `svdb_merge_by_caller_ins_seq_similarity`, `svdb_merge_by_family_ins_seq_similarity` | **Optional**: Minimum insertion sequence similarity (0-1), 0 disables the sequence comparison | 0 / 0                           |
 
-
 Two settings are fixed and cannot be changed with these parameters: the merge by caller always uses `--bnd_distance 10000` for HiFiCNV, and adds `--no_intra` for Sawfish unless `--force_sawfish_joint_call_single_samples` is set.
 
 If HiFiCNV or Sawfish are used, the following files are required:
