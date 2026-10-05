@@ -773,6 +773,105 @@
                     "minimum": 1,
                     "description": "Minimum allele length difference (abs(strlen(REF)-strlen(ALT))) to classify a mitochondrial variant as an SV rather than a SNV/small indel."
                 },
+                "svdb_merge_by_caller_overlap": {
+                    "type": "number",
+                    "default": 0.5,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Minimum reciprocal overlap (`svdb --overlap`) for deletions and duplications when merging the SVs of one caller across the samples of a family."
+                },
+                "svdb_merge_by_caller_bnd_distance": {
+                    "type": "integer",
+                    "default": 1000,
+                    "minimum": 0,
+                    "description": "Maximum distance in bp between breakpoints (`svdb --bnd_distance`) of translocations and inversions when merging the SVs of one caller across the samples of a family."
+                },
+                "svdb_merge_by_caller_ins_distance": {
+                    "type": "integer",
+                    "default": 100,
+                    "minimum": 0,
+                    "description": "Maximum distance in bp between insertion positions (`svdb --ins_distance`) when merging the SVs of one caller across the samples of a family."
+                },
+                "svdb_merge_by_caller_ins_svlen_ratio": {
+                    "type": "number",
+                    "default": 0.5,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Minimum ratio of the smaller to the larger insertion length (`svdb --ins_svlen_ratio`) when merging the SVs of one caller across the samples of a family."
+                },
+                "svdb_merge_by_caller_ins_seq_similarity": {
+                    "type": "number",
+                    "default": 0,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Minimum sequence similarity of insertions (`svdb --ins_seq_similarity`) when merging the SVs of one caller across the samples of a family; 0 disables the sequence comparison."
+                },
+                "svdb_merge_by_family_overlap": {
+                    "type": "number",
+                    "default": 0.7,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Minimum reciprocal overlap (`svdb --overlap`) for deletions and duplications when merging the SVs of different callers into one family VCF."
+                },
+                "svdb_merge_by_family_bnd_distance": {
+                    "type": "integer",
+                    "default": 2000,
+                    "minimum": 0,
+                    "description": "Maximum distance in bp between breakpoints (`svdb --bnd_distance`) of translocations and inversions when merging the SVs of different callers into one family VCF."
+                },
+                "svdb_merge_by_family_ins_distance": {
+                    "type": "integer",
+                    "default": 100,
+                    "minimum": 0,
+                    "description": "Maximum distance in bp between insertion positions (`svdb --ins_distance`) when merging the SVs of different callers into one family VCF."
+                },
+                "svdb_merge_by_family_ins_svlen_ratio": {
+                    "type": "number",
+                    "default": 0.5,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Minimum ratio of the smaller to the larger insertion length (`svdb --ins_svlen_ratio`) when merging the SVs of different callers into one family VCF."
+                },
+                "svdb_merge_by_family_ins_seq_similarity": {
+                    "type": "number",
+                    "default": 0,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Minimum sequence similarity of insertions (`svdb --ins_seq_similarity`) when merging the SVs of different callers into one family VCF; 0 disables the sequence comparison."
+                },
+                "svdb_query_overlap": {
+                    "type": "number",
+                    "default": 0.7,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Minimum reciprocal overlap (`svdb --overlap`) for deletions and duplications when annotating SVs against the databases in `--svdb_sv_databases`."
+                },
+                "svdb_query_bnd_distance": {
+                    "type": "integer",
+                    "default": 1000,
+                    "minimum": 0,
+                    "description": "Maximum distance in bp between breakpoints (`svdb --bnd_distance`) of translocations and inversions when annotating SVs against the databases in `--svdb_sv_databases`."
+                },
+                "svdb_query_ins_distance": {
+                    "type": "integer",
+                    "default": 100,
+                    "minimum": 0,
+                    "description": "Maximum distance in bp between insertion positions (`svdb --ins_distance`) when annotating SVs against the databases in `--svdb_sv_databases`."
+                },
+                "svdb_query_ins_svlen_ratio": {
+                    "type": "number",
+                    "default": 0.5,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Minimum ratio of the smaller to the larger insertion length (`svdb --ins_svlen_ratio`) when annotating SVs against the databases in `--svdb_sv_databases`."
+                },
+                "svdb_query_ins_seq_similarity": {
+                    "type": "number",
+                    "default": 0,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Minimum sequence similarity of insertions (`svdb --ins_seq_similarity`) when annotating SVs against the databases in `--svdb_sv_databases`; 0 disables the sequence comparison."
+                },
                 "alignment_processes": {
                     "type": "integer",
                     "minimum": 1,
