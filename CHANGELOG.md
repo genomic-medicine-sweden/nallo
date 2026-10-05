@@ -176,6 +176,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1250](https://github.com/genomic-medicine-sweden/nallo/pull/1250) - Fixed missing validation for `--methbat_map` causing a cryptic combine error when the parameter is not provided and methylation annotation is active
 - [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Fixed missing `##contig=<ID=chrM>` in the merged SV VCF: Sniffles v2 only writes `##contig` lines for chromosomes where SVs were called; when HiFiCNV called CNVs at chrM the merged VCF had chrM records but no chrM contig definition, causing `bcftools view --samples` and `bcftools sort` to fail
 - [#1259](https://github.com/genomic-medicine-sweden/nallo/pull/1259) - Fixed `snvs/family` output silently missing on targeted runs whose capture does not cover chrM: `groupKey` at `CONCAT_SORT_RANKED_SNVS` expected `num_intervals + 1` items but the mito VCF never arrived because `call_mitochondrial_variants` skips families with an empty mito BED
+- [#1268](https://github.com/genomic-medicine-sweden/nallo/pull/1268) - Fixed inconsistent sample order in Sentieon joint-called VCFs by sorting gVCF and index inputs by filename before GVCFtyper, to match the ordering used for mitochondrial merging
 
 ### Parameters
 
