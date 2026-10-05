@@ -220,8 +220,8 @@
                         "sv_caller": "severus"
                     },
                     "severus_svdb_merge_by_caller.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=48, phased=false, phasedAutodetect=false]",
-                    "983bbeaca66cfd3fb2f72b81bd605c1c"
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=47, phased=false, phasedAutodetect=false]",
+                    "9b3c026a0a92a4bed2deb854bc9b82cd"
                 ],
                 [
                     "family_caller_vcf:",
@@ -246,7 +246,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-08-19T16:37:14.167816081",
+        "timestamp": "2026-10-03T09:24:45.204763905",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
@@ -292,8 +292,8 @@
                         "sv_caller": "severus"
                     },
                     "severus_svdb_merge_by_caller.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=48, phased=false, phasedAutodetect=false]",
-                    "983bbeaca66cfd3fb2f72b81bd605c1c"
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=47, phased=false, phasedAutodetect=false]",
+                    "9b3c026a0a92a4bed2deb854bc9b82cd"
                 ],
                 [
                     "family_caller_vcf:",
@@ -303,7 +303,7 @@
                     },
                     "sniffles_svdb_merge_by_caller.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=62, phased=false, phasedAutodetect=false]",
-                    "4962c880046c60a53c9a2e1d06960322"
+                    "5bb13397a54a6933edd50d8869cbda8"
                 ]
             ],
             [
@@ -313,12 +313,12 @@
                         "id": "family"
                     },
                     "family_svdb_merge_by_family.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=3, variantCount=160, phased=false, phasedAutodetect=false]",
-                    "bdda5bca20fb67061d670bd7e45086a"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chrM, chr20], sampleCount=3, variantCount=154, phased=false, phasedAutodetect=false]",
+                    "29852dbeb745b4cd6da6bad2f899624"
                 ]
             ]
         ],
-        "timestamp": "2026-08-18T18:57:21.199578328",
+        "timestamp": "2026-10-03T09:24:54.697932053",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
@@ -364,8 +364,8 @@
                         "sv_caller": "severus"
                     },
                     "severus_svdb_merge_by_caller.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=48, phased=false, phasedAutodetect=false]",
-                    "983bbeaca66cfd3fb2f72b81bd605c1c"
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=47, phased=false, phasedAutodetect=false]",
+                    "9b3c026a0a92a4bed2deb854bc9b82cd"
                 ],
                 [
                     "family_caller_vcf:",
@@ -375,7 +375,7 @@
                     },
                     "sniffles_svdb_merge_by_caller.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=62, phased=false, phasedAutodetect=false]",
-                    "4962c880046c60a53c9a2e1d06960322"
+                    "5bb13397a54a6933edd50d8869cbda8"
                 ]
             ],
             [
@@ -390,7 +390,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-08-18T18:57:01.291196751",
+        "timestamp": "2026-10-03T09:24:27.387450951",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
@@ -426,8 +426,8 @@
                         "sv_caller": "severus"
                     },
                     "severus_svdb_merge_by_caller.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=48, phased=false, phasedAutodetect=false]",
-                    "983bbeaca66cfd3fb2f72b81bd605c1c"
+                    "VcfFile [chromosomes=[chrX, chr16], sampleCount=2, variantCount=47, phased=false, phasedAutodetect=false]",
+                    "9b3c026a0a92a4bed2deb854bc9b82cd"
                 ],
                 [
                     "family_caller_vcf:",
@@ -437,7 +437,7 @@
                     },
                     "sniffles_svdb_merge_by_caller.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=62, phased=false, phasedAutodetect=false]",
-                    "4962c880046c60a53c9a2e1d06960322"
+                    "5bb13397a54a6933edd50d8869cbda8"
                 ]
             ],
             [
@@ -448,11 +448,11 @@
                     },
                     "family_svdb_merge_by_family.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=62, phased=false, phasedAutodetect=false]",
-                    "d4a7330e32cd70546dbcb9a4c61ed6c3"
+                    "3547d8fc31e180c4464b9638648f7f74"
                 ]
             ]
         ],
-        "timestamp": "2026-08-18T18:57:11.41298369",
+        "timestamp": "2026-10-03T09:24:36.051821318",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

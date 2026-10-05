@@ -110,12 +110,12 @@
                     "splitubam": "0.1.1"
                 },
                 "SVDB_MERGE_BY_CALLER": {
-                    "bcftools": 1.23,
-                    "svdb": "2.8.4"
+                    "bcftools": 1.24,
+                    "svdb": "2.12.0"
                 },
                 "SVDB_MERGE_BY_FAMILY": {
-                    "bcftools": 1.23,
-                    "svdb": "2.8.4"
+                    "bcftools": 1.24,
+                    "svdb": "2.12.0"
                 },
                 "TAGBAM": {
                     "tagbam": "0.1.0"
@@ -211,7 +211,7 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-09-21T17:30:35.826261206",
+        "timestamp": "2026-10-02T18:13:45.956352224",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
