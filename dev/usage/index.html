@@ -1891,6 +1891,44 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <p class="admonition-title">Family-level VCFs per caller</p>
 <p>Unannotated family-level VCFs per caller can be output with <code>--publish_unannotated_family_svs</code>.</p>
 </div>
+<p>The SVDB matching settings of the two merging steps are set with the parameters below. Each is available for the merge of one caller across samples (<code>svdb_merge_by_caller_*</code>) and for the merge of callers into the family VCF (<code>svdb_merge_by_family_*</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Default (by caller / by family)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>svdb_merge_by_caller_overlap</code>, <code>svdb_merge_by_family_overlap</code></td>
+<td><strong>Optional</strong>: Minimum reciprocal overlap for deletions and duplications (0-1)</td>
+<td>0.5 / 0.7</td>
+</tr>
+<tr>
+<td><code>svdb_merge_by_caller_bnd_distance</code>, <code>svdb_merge_by_family_bnd_distance</code></td>
+<td><strong>Optional</strong>: Maximum distance in bp between breakpoints of translocations and inversions</td>
+<td>1000 / 2000</td>
+</tr>
+<tr>
+<td><code>svdb_merge_by_caller_ins_distance</code>, <code>svdb_merge_by_family_ins_distance</code></td>
+<td><strong>Optional</strong>: Maximum distance in bp between insertion positions</td>
+<td>100 / 100</td>
+</tr>
+<tr>
+<td><code>svdb_merge_by_caller_ins_svlen_ratio</code>, <code>svdb_merge_by_family_ins_svlen_ratio</code></td>
+<td><strong>Optional</strong>: Minimum ratio of the smaller to the larger insertion length (0-1)</td>
+<td>0.5 / 0.5</td>
+</tr>
+<tr>
+<td><code>svdb_merge_by_caller_ins_seq_similarity</code>, <code>svdb_merge_by_family_ins_seq_similarity</code></td>
+<td><strong>Optional</strong>: Minimum insertion sequence similarity (0-1), 0 disables the sequence comparison</td>
+<td>0 / 0</td>
+</tr>
+</tbody>
+</table>
+<p>Two settings are fixed and cannot be changed with these parameters: the merge by caller always uses <code>--bnd_distance 10000</code> for HiFiCNV, and adds <code>--no_intra</code> for Sawfish unless <code>--force_sawfish_joint_call_single_samples</code> is set.</p>
 <p>If HiFiCNV or Sawfish are used, the following files are required:</p>
 <table>
 <thead>
@@ -2271,6 +2309,43 @@ The phaser can be chosen using the <code>--phaser</code> argument. See the follo
 <tr>
 <td><code>variant_consequences_svs</code></td>
 <td>A list of SO terms listed in the order of severity from most severe to lease severe for annotating SVs. Sample file <a href="https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt">here</a>. You can learn more about these terms <a href="https://ensembl.org/info/genome/variation/prediction/predicted_data.html">here</a></td>
+</tr>
+</tbody>
+</table>
+<p>The SVDB matching settings used when annotating against the databases are set with the parameters below.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>svdb_query_overlap</code></td>
+<td><strong>Optional</strong>: Minimum reciprocal overlap for deletions and duplications (0-1)</td>
+<td>0.7</td>
+</tr>
+<tr>
+<td><code>svdb_query_bnd_distance</code></td>
+<td><strong>Optional</strong>: Maximum distance in bp between breakpoints of translocations and inversions</td>
+<td>1000</td>
+</tr>
+<tr>
+<td><code>svdb_query_ins_distance</code></td>
+<td><strong>Optional</strong>: Maximum distance in bp between insertion positions</td>
+<td>100</td>
+</tr>
+<tr>
+<td><code>svdb_query_ins_svlen_ratio</code></td>
+<td><strong>Optional</strong>: Minimum ratio of the smaller to the larger insertion length (0-1)</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td><code>svdb_query_ins_seq_similarity</code></td>
+<td><strong>Optional</strong>: Minimum insertion sequence similarity (0-1), 0 disables the sequence comparison</td>
+<td>0</td>
 </tr>
 </tbody>
 </table>

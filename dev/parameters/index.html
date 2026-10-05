@@ -1616,6 +1616,126 @@
 <td></td>
 </tr>
 <tr>
+<td><code>svdb_merge_by_caller_overlap</code></td>
+<td>Minimum reciprocal overlap (<code>svdb --overlap</code>) for deletions and duplications when merging the SVs of one caller across the samples of a family.</td>
+<td><code>number</code></td>
+<td>0.5</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>svdb_merge_by_caller_bnd_distance</code></td>
+<td>Maximum distance in bp between breakpoints (<code>svdb --bnd_distance</code>) of translocations and inversions when merging the SVs of one caller across the samples of a family.</td>
+<td><code>integer</code></td>
+<td>1000</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>svdb_merge_by_caller_ins_distance</code></td>
+<td>Maximum distance in bp between insertion positions (<code>svdb --ins_distance</code>) when merging the SVs of one caller across the samples of a family.</td>
+<td><code>integer</code></td>
+<td>100</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>svdb_merge_by_caller_ins_svlen_ratio</code></td>
+<td>Minimum ratio of the smaller to the larger insertion length (<code>svdb --ins_svlen_ratio</code>) when merging the SVs of one caller across the samples of a family.</td>
+<td><code>number</code></td>
+<td>0.5</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>svdb_merge_by_caller_ins_seq_similarity</code></td>
+<td>Minimum sequence similarity of insertions (<code>svdb --ins_seq_similarity</code>) when merging the SVs of one caller across the samples of a family; 0 disables the sequence comparison.</td>
+<td><code>number</code></td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>svdb_merge_by_family_overlap</code></td>
+<td>Minimum reciprocal overlap (<code>svdb --overlap</code>) for deletions and duplications when merging the SVs of different callers into one family VCF.</td>
+<td><code>number</code></td>
+<td>0.7</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>svdb_merge_by_family_bnd_distance</code></td>
+<td>Maximum distance in bp between breakpoints (<code>svdb --bnd_distance</code>) of translocations and inversions when merging the SVs of different callers into one family VCF.</td>
+<td><code>integer</code></td>
+<td>2000</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>svdb_merge_by_family_ins_distance</code></td>
+<td>Maximum distance in bp between insertion positions (<code>svdb --ins_distance</code>) when merging the SVs of different callers into one family VCF.</td>
+<td><code>integer</code></td>
+<td>100</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>svdb_merge_by_family_ins_svlen_ratio</code></td>
+<td>Minimum ratio of the smaller to the larger insertion length (<code>svdb --ins_svlen_ratio</code>) when merging the SVs of different callers into one family VCF.</td>
+<td><code>number</code></td>
+<td>0.5</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>svdb_merge_by_family_ins_seq_similarity</code></td>
+<td>Minimum sequence similarity of insertions (<code>svdb --ins_seq_similarity</code>) when merging the SVs of different callers into one family VCF; 0 disables the sequence comparison.</td>
+<td><code>number</code></td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>svdb_query_overlap</code></td>
+<td>Minimum reciprocal overlap (<code>svdb --overlap</code>) for deletions and duplications when annotating SVs against the databases in <code>--svdb_sv_databases</code>.</td>
+<td><code>number</code></td>
+<td>0.7</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>svdb_query_bnd_distance</code></td>
+<td>Maximum distance in bp between breakpoints (<code>svdb --bnd_distance</code>) of translocations and inversions when annotating SVs against the databases in <code>--svdb_sv_databases</code>.</td>
+<td><code>integer</code></td>
+<td>1000</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>svdb_query_ins_distance</code></td>
+<td>Maximum distance in bp between insertion positions (<code>svdb --ins_distance</code>) when annotating SVs against the databases in <code>--svdb_sv_databases</code>.</td>
+<td><code>integer</code></td>
+<td>100</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>svdb_query_ins_svlen_ratio</code></td>
+<td>Minimum ratio of the smaller to the larger insertion length (<code>svdb --ins_svlen_ratio</code>) when annotating SVs against the databases in <code>--svdb_sv_databases</code>.</td>
+<td><code>number</code></td>
+<td>0.5</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>svdb_query_ins_seq_similarity</code></td>
+<td>Minimum sequence similarity of insertions (<code>svdb --ins_seq_similarity</code>) when annotating SVs against the databases in <code>--svdb_sv_databases</code>; 0 disables the sequence comparison.</td>
+<td><code>number</code></td>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td><code>alignment_processes</code></td>
 <td>If alignment_processes is bigger than 1, input files will be split and aligned in parallel to reduce processing time.</td>
 <td><code>integer</code></td>
