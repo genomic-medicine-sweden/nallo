@@ -499,6 +499,8 @@ workflow {
         createReferenceChannelFromPath(params.sentieon_male_diploid_bed, channel.value([[], []])),
         createReferenceChannelFromPath(params.sentieon_male_haploid_bed, channel.value([[], []])),
         createReferenceChannelFromPath(params.sentieon_model_bundle, channel.value([[], []])),
+        createReferenceChannelFromPath(params.sentieon_population_vcf, channel.value([[], []])),
+        createReferenceChannelFromPath(params.sentieon_population_tbi, channel.value([[], []])),
         createReferenceChannelFromPath(params.snv_call_regions, channel.value([[], []])),
         createReferenceChannelFromPath(params.somalier_sites),
         createReferenceChannelFromPath(params.stranger_repeat_catalog),
@@ -574,8 +576,6 @@ workflow {
         params.sv_call_regions,
         params.vep_cache,
         params.vep_cache_version,
-        createReferenceChannelFromPath(params.sentieon_population_vcf, channel.value([[], []])),
-        createReferenceChannelFromPath(params.sentieon_population_tbi, channel.value([[], []])),
     )
 
     //
