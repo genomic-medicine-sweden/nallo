@@ -11,6 +11,7 @@ on BND/TRA records.
 """
 
 import argparse
+import gzip
 import re
 
 __version__ = "1.0.0"
@@ -24,18 +25,19 @@ SVTYPE_REMAP = {
     'INV/INVDUP': 'DUP',  # defensive
 }
 
+_SVTYPE_RE = re.compile(r'SVTYPE=([^;]+)')
+
 
 def remap_svtype(info):
-    m = re.search(r'SVTYPE=([^;]+)', info)
+    """Remap non-canonical SVTYPE in an INFO field string (tab-delimited VCF column 8)."""
+    m = _SVTYPE_RE.search(info)
     if not m:
         return info
     svtype = m.group(1)
     canonical = SVTYPE_REMAP.get(svtype)
     if canonical is None:
         return info
-    info = re.sub(r'SVTYPE=[^;]+', f'SVTYPE={canonical}', info)
-    info = info + f';ORIG_SVTYPE={svtype}'
-    return info
+    return info[: m.start()] + f'SVTYPE={canonical}' + info[m.end() :] + f';ORIG_SVTYPE={svtype}'
 
 
 def main():
@@ -50,7 +52,8 @@ def main():
     strandbias_added = False
     orig_svtype_header_added = False
 
-    for line in open(args.vcf):
+    opener = gzip.open(args.vcf, 'rt') if args.vcf.endswith('.gz') else open(args.vcf)
+    for line in opener:
         line = line.rstrip('\n')
 
         if line.startswith('#'):
@@ -75,7 +78,6 @@ def main():
                 parts = line.split(';SVLEN=1')
                 line = parts[0] + parts[-1]
 
-        # Generic: remap compound SVTYPEs to VEP-canonical types, store original in ORIG_SVTYPE
         fields = line.split('\t')
         if len(fields) >= 8:
             fields[7] = remap_svtype(fields[7])

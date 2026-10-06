@@ -1,0 +1,2 @@
+project,sample,file,family_id,paternal_id,maternal_id,sex,phenotype,aligned_bam,snv_vcf,sv_vcf
+test,hg002,0,hg002,0,0,1,2,https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8a22201fc4c3e1026eace0a680cb2757dd4fc7c2/testdata/HG002_ONT.bam,0,0

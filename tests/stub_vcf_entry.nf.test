@@ -1,0 +1,89 @@
+nextflow_pipeline {
+
+    name "Test pipeline GENOMICMEDICINESWEDEN_NALLO — Stub tests for vcf entry_point"
+    script "../main.nf"
+    tag "PIPELINE"
+    tag "pipeline_stub"
+    tag "stub_vcf_entry"
+    config "./nextflow.config"
+
+    test("stub | vcf entry_point | Revio trio") {
+        options "-stub"
+
+        when {
+            params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8a22201fc4c3e1026eace0a680cb2757dd4fc7c2/'
+                input                        = "$projectDir/assets/samplesheet_vcf.csv"
+                outdir                       = "$outputDir"
+                // Skip steps not applicable to vcf entry_point
+                skip_genome_assembly         = true
+                skip_portello                = true
+                skip_repeat_calling          = true
+                skip_repeat_annotation       = true
+                skip_methylation_calling     = true
+                skip_methylation_annotation  = true
+                skip_prepare_gens_input      = true
+                skip_mitochondrial_calling   = true
+            }
+        }
+
+        then {
+            def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
+            assertAll(
+                { assert workflow.success },
+                // SNV and SV calling should not run for vcf entry_point
+                { assert !versions.containsKey('DEEPVARIANT_RUNDEEPVARIANT') },
+                { assert !versions.containsKey('SNIFFLES') },
+                { assert !versions.containsKey('SVDB_MERGE') },
+                // Phasing should run since VCFs are provided
+                { assert versions.containsKey('WHATSHAP_STATS') || versions.containsKey('LONGPHASE_PHASE') },
+                { assert snapshot(
+                    workflow.trace.succeeded().size(),
+                    versions,
+                    stable_name
+                ).match() }
+            )
+        }
+    }
+
+    test("stub | vcf entry_point | ONT single-sample") {
+        options "-stub"
+
+        when {
+            params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8a22201fc4c3e1026eace0a680cb2757dd4fc7c2/'
+                input                        = "$projectDir/assets/samplesheet_ont_vcf.csv"
+                outdir                       = "$outputDir"
+                preset                       = "ONT_R10"
+                // Skip steps not applicable to vcf entry_point
+                skip_genome_assembly         = true
+                skip_portello                = true
+                skip_repeat_calling          = true
+                skip_repeat_annotation       = true
+                skip_methylation_calling     = true
+                skip_methylation_annotation  = true
+                skip_prepare_gens_input      = true
+                skip_mitochondrial_calling   = true
+            }
+        }
+
+        then {
+            def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
+            assertAll(
+                { assert workflow.success },
+                // SNV and SV calling should not run for vcf entry_point
+                { assert !versions.containsKey('DEEPVARIANT_RUNDEEPVARIANT') },
+                { assert !versions.containsKey('SNIFFLES') },
+                { assert !versions.containsKey('SVDB_MERGE') },
+                { assert snapshot(
+                    workflow.trace.succeeded().size(),
+                    versions,
+                    stable_name
+                ).match() }
+            )
+        }
+    }
+
+}

@@ -1,0 +1,120 @@
+{
+    "1 sample, no MAF track - stub": {
+        "content": [
+            {
+                "copynum": [
+                    [
+                        {
+                            "family_id": "FAM",
+                            "id": "HG002_Revio",
+                            "sex": 1
+                        },
+                        "HG002_Revio_hificnv.copynum.bedgraph:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "depth": [
+                    [
+                        {
+                            "family_id": "FAM",
+                            "id": "HG002_Revio",
+                            "sex": 1
+                        },
+                        "HG002_Revio_hificnv.depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "maf": [
+                    
+                ],
+                "tbi": [
+                    [
+                        {
+                            "family_id": "FAM",
+                            "id": "HG002_Revio",
+                            "needs_reheader": false,
+                            "sex": 1,
+                            "skip_vep_prep": true,
+                            "sv_caller": "hificnv"
+                        },
+                        "HG002_Revio_hificnv.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "family_id": "FAM",
+                            "id": "HG002_Revio",
+                            "needs_reheader": false,
+                            "sex": 1,
+                            "skip_vep_prep": true,
+                            "sv_caller": "hificnv"
+                        },
+                        "HG002_Revio_hificnv.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-09-15T17:00:19.361963336",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
+    "1 sample, no MAF track": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "HG002_Revio",
+                        "family_id": "FAM",
+                        "sex": 1,
+                        "sv_caller": "hificnv",
+                        "needs_reheader": false,
+                        "skip_vep_prep": true
+                    },
+                    "1c91313cf5b1ebcf71e5aa19a8c5d065"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002_Revio",
+                        "family_id": "FAM",
+                        "sex": 1,
+                        "sv_caller": "hificnv",
+                        "needs_reheader": false,
+                        "skip_vep_prep": true
+                    },
+                    "HG002_Revio_hificnv.HG002.vcf.gz.tbi"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002_Revio",
+                        "family_id": "FAM",
+                        "sex": 1
+                    },
+                    "HG002_Revio_hificnv.HG002.depth.bw:md5,73951a6eb4f47f0f5f3c89a9243bbbcf"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002_Revio",
+                        "family_id": "FAM",
+                        "sex": 1
+                    },
+                    "HG002_Revio_hificnv.HG002.copynum.bedgraph:md5,d9f899d17bebcbb6e1b3e4a593ece3d8"
+                ]
+            ],
+            [
+                
+            ]
+        ],
+        "timestamp": "2026-09-15T17:00:26.632832492",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    }
+}

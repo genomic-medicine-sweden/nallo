@@ -43,6 +43,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     ch_fai
     ch_genmod_reduced_penetrance
     ch_genmod_score_config_snvs
+    ch_genmod_score_config_snvs_mito
     ch_genmod_score_config_svs
     ch_gens_baf_positions
     ch_gens_coverage_bins
@@ -104,7 +105,6 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_plot_chromograph_autozygosity
     val_plot_chromograph_coverage
     val_pre_vep_snv_filter_expression
-    val_premapped
     val_read_aligner
     val_sentieon_tech
     val_skip_alignment
@@ -158,6 +158,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         ch_fai,
         ch_genmod_reduced_penetrance,
         ch_genmod_score_config_snvs,
+        ch_genmod_score_config_snvs_mito,
         ch_genmod_score_config_svs,
         ch_gens_baf_positions,
         ch_gens_coverage_bins,
@@ -219,7 +220,6 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_plot_chromograph_autozygosity,
         val_plot_chromograph_coverage,
         val_pre_vep_snv_filter_expression,
-        val_premapped,
         val_read_aligner,
         val_sentieon_tech,
         val_skip_alignment,
@@ -359,6 +359,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     sawfish_depth_bw                    = NALLO.out.sawfish_depth_bw // channel: [ val(meta), path(bw) ]
     sawfish_gc_bias_corrected_depth_bw  = NALLO.out.sawfish_gc_bias_corrected_depth_bw // channel: [ val(meta), path(bw) ]
     sawfish_maf_bw                      = NALLO.out.sawfish_maf_bw // channel: [ val(meta), path(bw) ]
+    snvs_family_joint_tbi               = NALLO.out.snvs_family_joint_tbi // channel: [ val(meta), path(tbi) ]
+    snvs_family_joint_vcf               = NALLO.out.snvs_family_joint_vcf // channel: [ val(meta), path(vcf) ]
     snvs_family_tbi                     = NALLO.out.snvs_family_tbi // channel: [ val(meta), path(tbi) ]
     snvs_family_vcf                     = NALLO.out.snvs_family_vcf // channel: [ val(meta), path(vcf) ]
     snvs_sample_tbi                     = NALLO.out.snvs_sample_tbi // channel: [ val(meta), path(tbi) ]
@@ -368,6 +370,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     somalier_relate_samples             = NALLO.out.somalier_relate_samples // channel: [ val(meta), path(samples.tsv) ]
     svs_per_family_and_caller_tbi       = NALLO.out.svs_per_family_and_caller_tbi // channel: [ val(meta), path(tbi) ]
     svs_per_family_and_caller_vcf       = NALLO.out.svs_per_family_and_caller_vcf // channel: [ val(meta), path(vcf) ]
+    svs_per_family_merged_tbi           = NALLO.out.svs_per_family_merged_tbi // channel: [ val(meta), path(tbi) ]
+    svs_per_family_merged_vcf           = NALLO.out.svs_per_family_merged_vcf // channel: [ val(meta), path(vcf) ]
     svs_per_family_tbi                  = NALLO.out.svs_per_family_tbi // channel: [ val(meta), path(tbi) ]
     svs_per_family_vcf                  = NALLO.out.svs_per_family_vcf // channel: [ val(meta), path(vcf.gz) ]
 }
@@ -398,18 +402,19 @@ workflow {
         params.fasta,
         params.genmod_reduced_penetrance,
         params.genmod_score_config_snvs,
+        params.genmod_score_config_snvs_mito,
         params.genmod_score_config_svs,
         params.gens_baf_positions,
         params.gens_coverage_bins,
         params.gens_panel_of_normals_female,
         params.gens_panel_of_normals_male,
         params.input,
+        params.methbat_map,
         params.methbat_regions,
         params.methylation_callers,
         params.mitochondrial_caller,
         params.par_regions,
         params.phaser,
-        params.premapped,
         params.preset,
         params.sambamba_regions,
         params.skip_alignment,
@@ -468,6 +473,7 @@ workflow {
         createReferenceChannelFromPath(params.fai),
         createReferenceChannelFromPath(params.genmod_reduced_penetrance),
         createReferenceChannelFromPath(params.genmod_score_config_snvs),
+        createReferenceChannelFromPath(params.genmod_score_config_snvs_mito),
         createReferenceChannelFromPath(params.genmod_score_config_svs),
         createReferenceChannelFromPath(params.gens_baf_positions),
         createReferenceChannelFromPath(params.gens_coverage_bins),
@@ -529,7 +535,6 @@ workflow {
         params.plot_chromograph_autozygosity,
         params.plot_chromograph_coverage,
         params.pre_vep_snv_filter_expression,
-        params.premapped,
         params.read_aligner,
         params.sentieon_tech,
         params.skip_alignment,
@@ -598,6 +603,8 @@ workflow {
     ch_aligned_reads_cram = GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_cram.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_crai)
 
     ch_repeats_annotated_family_vcf = GENOMICMEDICINESWEDEN_NALLO.out.repeats_annotated_family_vcf.mix(GENOMICMEDICINESWEDEN_NALLO.out.repeats_annotated_family_tbi)
+
+    ch_snvs_family_joint = GENOMICMEDICINESWEDEN_NALLO.out.snvs_family_joint_vcf.mix(GENOMICMEDICINESWEDEN_NALLO.out.snvs_family_joint_tbi)
 
     ch_snvs_family = GENOMICMEDICINESWEDEN_NALLO.out.snvs_family_vcf.mix(GENOMICMEDICINESWEDEN_NALLO.out.snvs_family_tbi)
 
@@ -679,6 +686,8 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.somalier_relate_samples)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.somalier_relate_pairs)
 
+    ch_svs_per_family_merged = GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_merged_vcf.mix(GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_merged_tbi)
+
     ch_svs_per_family = GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_vcf.mix(GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_tbi)
 
     ch_svs_per_family_and_caller = GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_and_caller_vcf.mix(GENOMICMEDICINESWEDEN_NALLO.out.svs_per_family_and_caller_tbi)
@@ -732,10 +741,12 @@ workflow {
     repeats_sample_trgt_bam        = ch_repeats_sample_trgt_bam // channel: [ val(meta), path(bam/bai) ]
     repeats_sample_trgt_cram       = ch_repeats_sample_trgt_cram // channel: [ val(meta), path(cram/crai) ]
     snvs_family                    = ch_snvs_family // channel: [ val(meta), path(vcf/tbi) ]
+    snvs_family_joint              = ch_snvs_family_joint // channel: [ val(meta), path(vcf/tbi) ]
     snvs_sample                    = ch_snvs_sample // channel: [ val(meta), path(vcf/tbi) ]
     somalier_relate                = ch_somalier_relate // channel: [ val(meta), path(html/pairs/samples) ]
     svs_per_family                 = ch_svs_per_family // channel: [ val(meta), path(vcf.gz/tbi) ]
     svs_per_family_and_caller      = ch_svs_per_family_and_caller // channel: [ val(meta), path(vcf/tbi) ]
+    svs_per_family_merged          = ch_svs_per_family_merged // channel: [ val(meta), path(vcf/tbi) ]
     visualization_tracks           = ch_visualization_tracks // channel: [ val(meta), path(bw,combined.bw/hap1.bw/hap2.bw) ]
     visualization_tracks_hificnv   = ch_visualization_tracks_hificnv // channel: [ val(meta), path(bw/bedgraph) ]
     visualization_tracks_sawfish   = ch_visualization_tracks_sawfish // channel: [ val(meta), path(bw/bedgraph) ]
@@ -862,6 +873,9 @@ output {
     snvs_family {
         path { meta, _file -> "snvs/family/${meta.id}/" }
     }
+    snvs_family_joint {
+        path { meta, _file -> "snvs/family/${meta.id}/" }
+    }
     snvs_sample {
         path { meta, _file -> "snvs/sample/${meta.id}/" }
     }
@@ -876,6 +890,9 @@ output {
     svs_per_family_and_caller {
         path { meta, _file -> "svs/family/${meta.id}/" }
         enabled params.publish_unannotated_family_svs
+    }
+    svs_per_family_merged {
+        path { meta, _file -> "svs/family/${meta.id}/" }
     }
     visualization_tracks {
         path { meta, _bw -> "visualization_tracks/${meta.id}/" }

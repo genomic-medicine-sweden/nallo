@@ -1,9 +1,9 @@
 include { samplesheetToList                                      } from 'plugin/nf-schema'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    IMPORT LOCAL SUBWORKFLOWS
+IMPORT LOCAL SUBWORKFLOWS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+ */
 
 include { ALIGN                                                  } from '../subworkflows/local/align'
 include { ALIGN_ASSEMBLIES                                       } from '../subworkflows/local/align_assemblies'
@@ -48,19 +48,22 @@ include { PORTELLO                                               } from '../subw
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    IMPORT LOCAL/NF-CORE MODULES
+IMPORT LOCAL/NF-CORE MODULES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+ */
 
 // local
 include { CREATE_PEDIGREE_FILE as SAMPLESHEET_PED                } from '../modules/local/create_pedigree_file/main'
 include { CREATE_PEDIGREE_FILE as SOMALIER_PED_FAMILY            } from '../modules/local/create_pedigree_file/main'
+include { VEP_PREP_SV                                            } from '../modules/local/vep_prep_sv/main'
 
 // nf-core
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_PHASING             } from '../modules/nf-core/bcftools/concat/main'
 include { BCFTOOLS_CONCAT as BCFTOOLS_CONCAT_MITO_SNVS           } from '../modules/nf-core/bcftools/concat/main'
+include { BCFTOOLS_SORT as BCFTOOLS_SORT_SVS                     } from '../modules/nf-core/bcftools/sort/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CHROMOGRAPH             } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING                 } from '../modules/nf-core/bcftools/view/main'
+include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SVS                     } from '../modules/nf-core/bcftools/view/main'
 include { MINIMAP2_ALIGN                                         } from '../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_MERGE                                         } from '../modules/nf-core/samtools/merge/main'
 include { SAMTOOLS_INDEX                                         } from '../modules/nf-core/samtools/index/main'
@@ -69,6 +72,8 @@ include { SAMTOOLS_CALMD                                         } from '../modu
 include { MULTIQC                                                } from '../modules/nf-core/multiqc/main'
 include { PEDDY                                                  } from '../modules/nf-core/peddy/main'
 include { SPLITUBAM                                              } from '../modules/nf-core/splitubam/main'
+include { TABIX_TABIX as TABIX_VCF_ENTRY_SNV                     } from '../modules/nf-core/tabix/tabix/main'
+include { TABIX_TABIX as TABIX_VCF_ENTRY_SV                      } from '../modules/nf-core/tabix/tabix/main'
 include { paramsSummaryMap                                       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc                                   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML                                 } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -77,9 +82,9 @@ include { citationBibliographyText                               } from '../subw
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    RUN MAIN WORKFLOW
+RUN MAIN WORKFLOW
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+ */
 
 workflow NALLO {
     take:
@@ -94,6 +99,7 @@ workflow NALLO {
     ch_fai
     ch_genmod_reduced_penetrance
     ch_genmod_score_config_snvs
+    ch_genmod_score_config_snvs_mito
     ch_genmod_score_config_svs
     ch_gens_baf_positions
     ch_gens_coverage_bins
@@ -155,7 +161,6 @@ workflow NALLO {
     val_plot_chromograph_autozygosity
     val_plot_chromograph_coverage
     val_pre_vep_snv_filter_expression
-    val_premapped
     val_read_aligner
     val_sentieon_tech
     val_skip_alignment
@@ -223,22 +228,27 @@ workflow NALLO {
      */
     if (!val_skip_alignment) {
 
-        if (!val_premapped) {
+        ch_for_alignment = ch_samplesheet.filter { meta, _reads -> meta.entry_point in ['fastq', 'ubam'] }
 
-            CONVERT_INPUT_FASTQS(
-                ch_samplesheet,
-                false,
-                true,
-            )
+        CONVERT_INPUT_FASTQS(
+            ch_for_alignment,
+            false,
+            true,
+        )
 
-            if (val_alignment_processes > 1) {
-                SPLITUBAM(CONVERT_INPUT_FASTQS.out.bam)
-                ch_unmapped = SPLITUBAM.out.bam.transpose()
-            }
-            else {
-                ch_unmapped = CONVERT_INPUT_FASTQS.out.bam
-            }
+        if (val_alignment_processes > 1) {
+            SPLITUBAM(CONVERT_INPUT_FASTQS.out.bam)
+            ch_unmapped = SPLITUBAM.out.bam.transpose()
         }
+        else {
+            ch_unmapped = CONVERT_INPUT_FASTQS.out.bam
+        }
+    }
+
+    // Strip routing fields so assembly BAM meta matches ch_aligned_bam when PORTELLO joins.
+    ch_samplesheet_for_assembly = ch_samplesheet.map { meta, reads ->
+        def clean_meta = meta - meta.subMap('aligned_bam', 'snv_vcf', 'sv_vcf')
+        meta.entry_point in ['bam', 'vcf'] ? [clean_meta, meta.aligned_bam] : [clean_meta, reads]
     }
 
     //
@@ -260,13 +270,17 @@ workflow NALLO {
         // Since starting with FASTQs is a rare case, no splitting of FASTQs alone just for the assembly is implemented
 
         CONVERT_INPUT_BAMS(
-            val_skip_alignment || val_premapped || (val_alignment_processes == 1) ? ch_samplesheet : SPLITUBAM.out.bam.transpose(),
+            val_skip_alignment || (val_alignment_processes == 1) ? ch_samplesheet_for_assembly : SPLITUBAM.out.bam.transpose(),
             true,
             false,
         )
 
-        // contains all FASTQ files, including those not converted
-        ch_genome_assembly_input = CONVERT_INPUT_BAMS.out.fastq.groupTuple()
+        // Strip routing fields; SPLITUBAM path carries raw samplesheet meta with those fields.
+        ch_genome_assembly_input = CONVERT_INPUT_BAMS.out.fastq
+            .groupTuple()
+            .map { meta, fastqs ->
+                [meta - meta.subMap('aligned_bam', 'snv_vcf', 'sv_vcf'), fastqs]
+            }
 
         // Hifiasm assembly
         // Concatenate haplotypes per sample if portello is not skipped so it can be used for reads-to-assembly alignment
@@ -289,56 +303,53 @@ workflow NALLO {
 
     if (!val_skip_alignment) {
 
-        if (!val_premapped) {
-            /*
-             * Create a grouping key per sample that records the number of split files,
-             * allowing downstream merging to trigger as soon as all alignments of a sample are ready.
-             */
-            ch_reads_grouping_key = ch_unmapped
-                .groupTuple()
-                .map { meta, files -> tuple(meta.id, files.size()) }
+        ch_aligned_for_merge = channel.empty()
 
-            // Add original file name to meta to join correct alignments and indexes
-            ch_align_in = ch_unmapped.map { meta, bam -> tuple(meta + [file: bam.name], bam) }
+        /*
+         * Create a grouping key per sample that records the number of split files,
+         * allowing downstream merging to trigger as soon as all alignments of a sample are ready.
+         */
+        ch_reads_grouping_key = ch_unmapped
+            .groupTuple()
+            .map { meta, files -> tuple(meta.id, files.size()) }
 
-            // If portello is not skipped, we need to align the reads to the concatenated haplotypes from the assembly,
-            // otherwise we can align to the reference genome.
-            ALIGN(
-                ch_align_in,
-                !val_skip_portello ? GENOME_ASSEMBLY.out.concatenated_haplotypes : ch_fasta,
-                val_read_aligner,
-                val_skip_portello,
-            )
+        // Add original file name to meta to join correct alignments and indexes
+        ch_align_in = ch_unmapped.map { meta, bam -> tuple(meta + [file: bam.name], bam) }
 
-            ch_aligned_for_merge = ALIGN.out.bam
-                .join(ALIGN.out.index, failOnMismatch: true, failOnDuplicate: true)
-                .combine(ch_reads_grouping_key)
-                .filter { bam_meta, _bam, _bai, group_id, _group_size ->
-                    bam_meta.id == group_id
-                }
-                .map { bam_meta, bam, bai, _group_id, group_size ->
-                    tuple(groupKey(bam_meta - bam_meta.subMap('file'), group_size), bam, bai)
-                }
-                .groupTuple()
-                .map { key, bams, bais -> tuple(key.getGroupTarget(), bams, bais) }
-                .map { meta, bams, bais ->
-                    // Keep BAM and BAI pairing while enforcing deterministic order.
-                    def bam_bai_pairs = [bams, bais]
-                        .transpose()
-                        .sort { left, right ->
-                            left[0].getName() <=> right[0].getName()
-                        }
-                    [meta, bam_bai_pairs.collect { pair -> pair[0] }, bam_bai_pairs.collect { pair -> pair[1] }]
-                }
-        }
-        else {
+        // If portello is not skipped, we need to align the reads to the concatenated haplotypes from the assembly,
+        // otherwise we can align to the reference genome.
+        ALIGN(
+            ch_align_in,
+            !val_skip_portello ? GENOME_ASSEMBLY.out.concatenated_haplotypes : ch_fasta,
+            val_read_aligner,
+            val_skip_portello,
+        )
 
-            // If bams are premapped, just merge them (ONT machines output several BAMs per sample)
-            // SAMTOOLS_MERGE expects indexes in the input but is happy to merge them if the indexes are missing
-            ch_aligned_for_merge = ch_samplesheet
-                .groupTuple()
-                .map { meta, reads -> [meta, reads, []] }
-        }
+        ch_aligned_for_merge = ch_aligned_for_merge.mix(
+            ALIGN.out.bam.join(ALIGN.out.index, failOnMismatch: true, failOnDuplicate: true).combine(ch_reads_grouping_key).filter { bam_meta, _bam, _bai, group_id, _group_size ->
+                bam_meta.id == group_id
+            }.map { bam_meta, bam, bai, _group_id, group_size ->
+                tuple(groupKey(bam_meta - bam_meta.subMap('file', 'aligned_bam', 'snv_vcf', 'sv_vcf'), group_size), bam, bai)
+            }.groupTuple().map { key, bams, bais -> tuple(key.getGroupTarget(), bams, bais) }.map { meta, bams, bais ->
+                // Keep BAM and BAI pairing while enforcing deterministic order.
+                def bam_bai_pairs = [bams, bais]
+                    .transpose()
+                    .sort { left, right ->
+                        left[0].getName() <=> right[0].getName()
+                    }
+                [meta, bam_bai_pairs.collect { pair -> pair[0] }, bam_bai_pairs.collect { pair -> pair[1] }]
+            }
+        )
+
+        // For bam/vcf entry points, use pre-aligned BAM from the aligned_bam column.
+        // Strip per-row routing fields from meta before groupTuple so multi-BAM samples
+        // with different aligned_bam values still group under the same sample meta.
+        // SAMTOOLS_MERGE expects indexes but is happy to merge without them.
+        ch_aligned_for_merge = ch_aligned_for_merge.mix(
+            ch_samplesheet.filter { meta, _reads -> meta.entry_point in ['bam', 'vcf'] }.map { meta, _reads ->
+                [meta - meta.subMap('aligned_bam', 'snv_vcf', 'sv_vcf'), meta.aligned_bam]
+            }.groupTuple().map { meta, bams -> [meta, bams, []] }
+        )
 
         SAMTOOLS_MERGE(
             ch_aligned_for_merge,
@@ -480,16 +491,36 @@ workflow NALLO {
 
         ch_bed_intervals = SCATTER_GENOME.out.bed_nuclear_intervals.map { meta, bed, num_intervals -> [meta + [caller: val_snv_caller], bed, num_intervals] }
         ch_mitochondrial_bed = SCATTER_GENOME.out.bed_mitochondrial_intervals.map { meta, bed, _num_intervals -> [meta, bed] }
+        // Single broadcast boolean: mito BED is non-empty. Same for all families (one genome).
+        // call_mitochondrial_variants filters bed.size() > 0 internally — this mirrors that check so
+        // groupKey at CONCAT_SORT_RANKED_SNVS does not expect a mito VCF that will never arrive.
+        ch_mito_nonempty = SCATTER_GENOME.out.bed_mitochondrial_intervals
+            .map { _meta, bed, _num_intervals -> bed.size() > 0 }
+            .first()
+
+        ch_snvs_per_family_unannotated_vcf_tbi = channel.empty()
+
+        // vcf entry_point: use family SNV VCF from samplesheet directly; one VCF per family
+        ch_vcf_entry_family_snv_vcf = ch_samplesheet
+            .filter { meta, _reads -> meta.entry_point == 'vcf' }
+            .map { meta, _reads -> [[id: meta.family_id], meta.snv_vcf] }
+            .unique { meta, _vcf -> meta.id }
+
+        TABIX_VCF_ENTRY_SNV(ch_vcf_entry_family_snv_vcf)
+
+        ch_bam_bai_for_snv_calling = ch_bam_bai.filter { meta, _bam, _bai -> meta.entry_point != 'vcf' }
 
         def ch_num_intervals = ch_bed_intervals.map { _meta, _bed, num_intervals -> num_intervals }.first()
 
         if (!val_skip_mitochondrial_calling) {
             CALL_MITOCHONDRIAL_VARIANTS(
-                ch_bam_bai,
+                ch_bam_bai_for_snv_calling,
                 ch_fasta,
                 ch_fai,
                 ch_par,
                 ch_mitochondrial_bed,
+                ch_snv_call_regions,
+                ch_sv_call_regions,
                 val_mitochondrial_caller,
             )
 
@@ -515,7 +546,7 @@ workflow NALLO {
 
         // Combine the BED intervals with BAM/BAI files to create a region-bam-bai for each sample.
         // This uses the whole BAM files for each region instead of splitting them.
-        ch_call_snvs_input = ch_bam_bai
+        ch_call_snvs_input = ch_bam_bai_for_snv_calling
             .combine(ch_bed_intervals)
             .map { meta, bam, bai, bed_meta, bed, num_intervals ->
                 [meta + [genome: bed_meta.genome, num_intervals: num_intervals, region: bed], bam, bai, bed]
@@ -602,11 +633,14 @@ workflow NALLO {
         )
         ch_multiqc_files = ch_multiqc_files.mix(QC_SNVS.out.stats.collect { _meta, metrics -> metrics }.ifEmpty([]))
 
-        // Set family_snv_vcf and family_snv_index for clarity
-        family_snv_vcf = GVCF_GLNEXUS_NORM_VARIANTS.out.vcf
-        family_snv_index = GVCF_GLNEXUS_NORM_VARIANTS.out.index
+        // Mix called families with vcf entry families
+        family_snv_vcf = GVCF_GLNEXUS_NORM_VARIANTS.out.vcf.mix(ch_vcf_entry_family_snv_vcf)
+        family_snv_index = GVCF_GLNEXUS_NORM_VARIANTS.out.index.mix(TABIX_VCF_ENTRY_SNV.out.index)
 
-        ch_snvs_per_family_unannotated_vcf_tbi = family_snv_vcf.join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
+        // Only called families have genome key; vcf entry families are excluded
+        ch_snvs_per_family_unannotated_vcf_tbi = family_snv_vcf
+            .join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
+            .filter { meta, _vcf, _tbi -> meta.containsKey('genome') }
     }
 
     if (!val_skip_prepare_gens_input) {
@@ -637,10 +671,25 @@ workflow NALLO {
     //
     // Call SVs
     //
+    ch_merge_svs_family_vcf = channel.empty()
+    ch_merge_svs_family_tbi = channel.empty()
+    ch_svs_per_family_merged_vcf = channel.empty()
+    ch_svs_per_family_merged_tbi = channel.empty()
+
     if (!val_skip_sv_calling) {
 
+        // vcf entry_point: use family SV VCF from samplesheet directly; one VCF per family
+        ch_vcf_entry_family_sv_vcf = ch_samplesheet
+            .filter { meta, _reads -> meta.entry_point == 'vcf' }
+            .map { meta, _reads -> [[id: meta.family_id], meta.sv_vcf] }
+            .unique { meta, _vcf -> meta.id }
+
+        TABIX_VCF_ENTRY_SV(ch_vcf_entry_family_sv_vcf)
+
+        ch_bam_bai_for_sv_calling = ch_bam_bai.filter { meta, _bam, _bai -> meta.entry_point != 'vcf' }
+
         CALL_SVS(
-            ch_bam_bai,
+            ch_bam_bai_for_sv_calling,
             ch_tandem_repeats,
             sample_snv_vcf,
             ch_fasta,
@@ -648,15 +697,44 @@ workflow NALLO {
             ch_expected_xx_bed,
             ch_exclude_bed,
             val_sv_callers_to_run.split(',').collect { caller -> caller.toLowerCase().trim() },
-            ch_sv_call_regions,
-            val_sv_call_regions,
             val_force_sawfish_joint_call_single_samples,
             val_create_hificnv_maf_track,
             val_create_sawfish_maf_track,
         )
 
+        // Branch on meta.skip_vep_prep: callers that need VEP normalisation go through
+        // VEP_PREP_SV + BCFTOOLS_SORT; callers that are already sorted and indexed bypass both.
+        ch_sv_calls_branched = CALL_SVS.out.sv_calls.branch { meta, _vcf, _tbi ->
+            vep_prep: !meta.skip_vep_prep
+            no_vep_prep: meta.skip_vep_prep
+        }
+
+        VEP_PREP_SV(ch_sv_calls_branched.vep_prep.map { meta, vcf, _tbi -> [meta, vcf] })
+
+        BCFTOOLS_SORT_SVS(VEP_PREP_SV.out.vcf)
+
+        ch_sv_calls_all = BCFTOOLS_SORT_SVS.out.vcf
+            .join(BCFTOOLS_SORT_SVS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+            .mix(ch_sv_calls_branched.no_vep_prep)
+
+        // Optionally filter to call regions
+        ch_sv_calls_filtered = channel.empty()
+        if (val_sv_call_regions) {
+            BCFTOOLS_VIEW_SVS(
+                ch_sv_calls_all,
+                ch_sv_call_regions.map { _meta, bed -> bed },
+                [],
+                [],
+            )
+            ch_sv_calls_filtered = BCFTOOLS_VIEW_SVS.out.vcf.join(BCFTOOLS_VIEW_SVS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+        }
+        else {
+            ch_sv_calls_filtered = ch_sv_calls_all
+        }
+
         REHEADER_SV_VCF(
-            CALL_SVS.out.vcf
+            ch_sv_calls_filtered,
+            ch_fai,
         )
 
         ch_merge_svs_in = REHEADER_SV_VCF.out.vcf
@@ -669,7 +747,17 @@ workflow NALLO {
             val_sv_callers_merge_priority.split(',').collect { caller -> caller.toLowerCase().trim() },
             ch_vcfexpress_prelude,
         )
+
+        // Mix called families with vcf entry families for downstream use (phasing, annotation)
+        ch_merge_svs_family_vcf = MERGE_SVS.out.family_vcf.mix(ch_vcf_entry_family_sv_vcf)
+        ch_merge_svs_family_tbi = MERGE_SVS.out.family_tbi.mix(TABIX_VCF_ENTRY_SV.out.index)
+        // Publish only pipeline-produced VCFs (vcf entry files are user inputs, not republished)
+        ch_svs_per_family_merged_vcf = MERGE_SVS.out.family_vcf
+        ch_svs_per_family_merged_tbi = MERGE_SVS.out.family_tbi
     }
+
+    ch_snvs_family_joint_vcf = channel.empty()
+    ch_snvs_family_joint_tbi = channel.empty()
 
     //
     // Phase SNVs, SVs and INDELs
@@ -683,9 +771,31 @@ workflow NALLO {
                 [[id: family_id], sample_ids.unique()]
             }
 
+        ch_phasing_snv_vcf = channel.empty()
+        ch_phasing_snv_tbi = channel.empty()
+        ch_snvs_family_joint_vcf = channel.empty()
+        ch_snvs_family_joint_tbi = channel.empty()
+
+        // Collect vcf entry family IDs so add_mito can exclude them after phasing strips meta fields.
+        // Wrap in a Map to prevent Nextflow from treating an empty list [] as an empty tuple during
+        // combine(), which would add 0 elements instead of 1 and break the downstream map closure.
+        ch_vcf_entry_family_ids = ch_samplesheet
+            .filter { meta, _reads -> meta.entry_point == 'vcf' }
+            .map { meta, _reads -> meta.family_id }
+            .unique()
+            .collect()
+            .ifEmpty([])
+            .map { ids -> [vcf_ids: ids] }
+
+        // vcf entry families provide whole-genome VCFs directly; pass with plain family meta [id: FAM]
+        // so SPLIT_MULTISAMPLE_VCF can match against ch_family_to_samples using .combine(by: 0)
+        ch_vcf_entry_phasing_vcf = family_snv_vcf.filter { meta, _vcf -> !meta.containsKey('genome') }
+        ch_vcf_entry_phasing_tbi = family_snv_index.filter { meta, _tbi -> !meta.containsKey('genome') }
+
         /*
          * The VCFs are split by calling regions but we need whole-genome VCFs for phasing, we first group by family and then concatenate the VCFs of the same family together.
          * We group only nuclear vcf for phasing as phasing mitochondrial variants is not relevant."num_intervals - 1" happens because groupKey should not expect the mitochondrial interval.
+         * vcf entry families (no genome key) are excluded by the genome == "nuclear" filter naturally.
          */
         ch_bcftools_concat_phasing_in = family_snv_vcf
             .join(family_snv_index, failOnMismatch: true, failOnDuplicate: true)
@@ -706,16 +816,23 @@ workflow NALLO {
             ch_bcftools_concat_phasing_in
         )
 
+        // Mix called families (concatenated) with vcf entry families (already whole-genome)
+        ch_phasing_snv_vcf = BCFTOOLS_CONCAT_PHASING.out.vcf.mix(ch_vcf_entry_phasing_vcf)
+        ch_phasing_snv_tbi = BCFTOOLS_CONCAT_PHASING.out.tbi.mix(ch_vcf_entry_phasing_tbi)
+        // Publish only pipeline-produced VCFs (vcf entry files are user inputs, not republished)
+        ch_snvs_family_joint_vcf = BCFTOOLS_CONCAT_PHASING.out.vcf
+        ch_snvs_family_joint_tbi = BCFTOOLS_CONCAT_PHASING.out.tbi
+
         // Provide a PED file to let whatshap activate pedigree phasing
         // Or pass 'empty_PED' if 'whatshap_pedigree_phasing==false'
         ch_ped_family = SOMALIER_PED_FAMILY.out.ped.map { meta, ped -> [[id: meta.id], val_whatshap_pedigree_phasing ? ped : []] }
 
         // Input is one VCF per family with all the regions (except chrM) and all the samples in the family
         PHASING(
-            BCFTOOLS_CONCAT_PHASING.out.vcf,
-            BCFTOOLS_CONCAT_PHASING.out.tbi,
-            val_skip_sv_calling ? channel.empty() : MERGE_SVS.out.family_vcf,
-            val_skip_sv_calling ? channel.empty() : MERGE_SVS.out.family_tbi,
+            ch_phasing_snv_vcf,
+            ch_phasing_snv_tbi,
+            val_skip_sv_calling ? channel.empty() : ch_merge_svs_family_vcf,
+            val_skip_sv_calling ? channel.empty() : ch_merge_svs_family_tbi,
             ch_bam_bai,
             ch_family_to_samples,
             ch_fasta,
@@ -745,10 +862,17 @@ workflow NALLO {
             [],
         )
         // Add the mitochondrial VCF after phasing SNVs.
-        // Add +1 to the num_intervals of nuclear channel to account for mitochondrial region
+        // Add +1 to num_intervals only when a mito VCF will actually arrive (non-empty mito BED).
+        // Targeted runs whose capture does not cover chrM produce an empty mito BED; call_mitochondrial_variants
+        // skips those families, so without this check groupKey would wait for N+1 items and hang.
         ch_snv_vcf_tbi_nuclear_for_annotation = BCFTOOLS_VIEW_PHASING.out.vcf
             .join(BCFTOOLS_VIEW_PHASING.out.tbi, failOnMismatch: true, failOnDuplicate: true)
-            .map { meta, vcf, tbi -> [meta + [num_intervals: val_skip_mitochondrial_calling ? meta.num_intervals : meta.num_intervals + 1], vcf, tbi] }
+            .combine(ch_mito_nonempty)
+            .combine(ch_vcf_entry_family_ids)
+            .map { meta, vcf, tbi, mito_nonempty, vcf_ids_wrap ->
+                def add_mito = !val_skip_mitochondrial_calling && mito_nonempty && !(meta.family_id in vcf_ids_wrap.vcf_ids)
+                [meta + [num_intervals: add_mito ? meta.num_intervals + 1 : meta.num_intervals], vcf, tbi]
+            }
 
         ch_snv_vcf_tbi_mitochondrial_for_annotation = ch_snvs_per_family_unannotated_vcf_tbi.filter { meta, _vcf, _tbi -> meta.genome == "mitochondrial" }
 
@@ -770,8 +894,8 @@ workflow NALLO {
                 vcf: [meta, vcf]
                 index: [meta, tbi]
             }
-        ch_sv_vcf_for_annotation = val_skip_sv_calling ? channel.empty() : MERGE_SVS.out.family_vcf
-        ch_sv_index_for_annotation = val_skip_sv_calling ? channel.empty() : MERGE_SVS.out.family_tbi
+        ch_sv_vcf_for_annotation = val_skip_sv_calling ? channel.empty() : ch_merge_svs_family_vcf
+        ch_sv_index_for_annotation = val_skip_sv_calling ? channel.empty() : ch_merge_svs_family_tbi
     }
 
     // Annotate SNVs
@@ -967,12 +1091,23 @@ workflow NALLO {
      */
     if (!val_skip_rank_variants) {
 
+        ch_snvs_vcf_nuclear = ANN_CSQ_PLI_SNV.out.vcf.filter { meta, _vcf -> meta.genome != 'mitochondrial' }
+        ch_snvs_vcf_mito = ANN_CSQ_PLI_SNV.out.vcf.filter { meta, _vcf -> meta.genome == 'mitochondrial' }
+
         ch_snvs_to_rank = buildRankVariantsInputChannel(
-            ANN_CSQ_PLI_SNV.out.vcf,
+            ch_snvs_vcf_nuclear,
             SOMALIER_PED_FAMILY.out.ped,
             'snv',
             ch_genmod_score_config_snvs,
             ch_samplesheet,
+        ).mix(
+            buildRankVariantsInputChannel(
+                ch_snvs_vcf_mito,
+                SOMALIER_PED_FAMILY.out.ped,
+                'snv',
+                ch_genmod_score_config_snvs_mito,
+                ch_samplesheet,
+            )
         )
 
         ch_svs_to_rank = buildRankVariantsInputChannel(
@@ -1052,7 +1187,7 @@ workflow NALLO {
     //
     if (!val_skip_modkit) {
         CALL_METHYLATION_MODKIT(
-            !val_skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
+            (!val_skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai),
             ch_fasta,
             ch_fai,
             ch_modkit_call_regions,
@@ -1062,7 +1197,7 @@ workflow NALLO {
 
     if (!val_skip_methbat) {
         CALL_METHYLATION_METHBAT(
-            !val_skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai,
+            (!val_skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai),
             ch_methbat_regions,
         )
 
@@ -1298,10 +1433,14 @@ workflow NALLO {
     somalier_relate_samples             = val_skip_sex_check ? channel.empty() : BAM_INFER_SEX.out.somalier_samples // channel: [ val(meta), path(samples.tsv) ]
     snvs_sample_tbi                     = val_skip_snv_calling ? channel.empty() : VCF_CONCAT_NORM_VARIANTS.out.index // channel: [ val(meta), path(tbi) ]
     snvs_sample_vcf                     = val_skip_snv_calling ? channel.empty() : VCF_CONCAT_NORM_VARIANTS.out.vcf // channel: [ val(meta), path(vcf) ]
+    snvs_family_joint_tbi               = ch_snvs_family_joint_tbi // channel: [ val(meta), path(tbi) ]
+    snvs_family_joint_vcf               = ch_snvs_family_joint_vcf // channel: [ val(meta), path(vcf) ]
     snvs_family_tbi                     = val_skip_snv_calling ? channel.empty() : CONCAT_SORT_RANKED_SNVS.out.index // channel: [ val(meta), path(tbi) ]
     snvs_family_vcf                     = val_skip_snv_calling ? channel.empty() : CONCAT_SORT_RANKED_SNVS.out.vcf // channel: [ val(meta), path(vcf) ]
     svs_per_family_and_caller_tbi       = val_skip_sv_calling ? channel.empty() : MERGE_SVS.out.family_caller_tbi // channel: [ val(meta), path(tbi) ]
     svs_per_family_and_caller_vcf       = val_skip_sv_calling ? channel.empty() : MERGE_SVS.out.family_caller_vcf // channel: [ val(meta), path(vcf) ]
+    svs_per_family_merged_tbi           = ch_svs_per_family_merged_tbi // channel: [ val(meta), path(tbi) ]
+    svs_per_family_merged_vcf           = ch_svs_per_family_merged_vcf // channel: [ val(meta), path(vcf) ]
     svs_per_family_tbi                  = val_skip_sv_calling ? channel.empty() : ch_collect_tbi // channel: [ val(meta), path(tbi) ]
     svs_per_family_vcf                  = val_skip_sv_calling ? channel.empty() : ch_collect_svs // channel: [ val(meta), path(vcf.gz) ]
 }

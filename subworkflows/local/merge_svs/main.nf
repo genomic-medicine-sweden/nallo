@@ -40,13 +40,10 @@ workflow MERGE_SVS {
         .map { meta, vcf ->
             [meta - meta.subMap('sv_caller'), [meta.sv_caller, vcf]]
         }
-        .groupTuple(
-            sort: { a, b ->
-                caller_priority.indexOf(a[0]) <=> caller_priority.indexOf(b[0])
-            }
-        )
+        .groupTuple()
         .map { meta, callers_vcfs ->
-            def vcf_paths = callers_vcfs.collect { caller_vcf_pair -> caller_vcf_pair[1] }
+            def sorted = callers_vcfs.sort { a, b -> caller_priority.indexOf(a[0]) <=> caller_priority.indexOf(b[0]) }
+            def vcf_paths = sorted.collect { caller_vcf_pair -> caller_vcf_pair[1] }
             [meta, vcf_paths]
         }
     SVDB_MERGE_BY_FAMILY(

@@ -1,0 +1,43 @@
+{
+    "homo_sapiens - [bam, bai] - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        "SNIFFLES1",
+                        "sniffles",
+                        "1.0.12"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_sniffles1": [
+                    [
+                        "SNIFFLES1",
+                        "sniffles",
+                        "1.0.12"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-08-21T14:12:50.386758107",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    }
+}

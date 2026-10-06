@@ -8,6 +8,7 @@ include { COLLAPSE_MITOCHONDRIAL_GT           } from '../../../modules/local/col
 include { DEEPVARIANT_RUNDEEPVARIANT          } from '../../../modules/nf-core/deepvariant/rundeepvariant/main'
 include { GAWK as GAWK_STRIP_CONTIG_HEADER    } from '../../../modules/nf-core/gawk/main'
 include { MITORSAW_HAPLOTYPE                  } from '../../../modules/nf-core/mitorsaw/haplotype/main'
+include { TABIX_BGZIPTABIX as BGZIPTABIX_MITO } from '../../../modules/nf-core/tabix/bgziptabix/main'
 
 workflow CALL_MITOCHONDRIAL_VARIANTS {
     take:
@@ -16,6 +17,8 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
     ch_fai // channel: [val(meta), path(fai)]
     ch_par_bed // channel: [val(meta), path(bed)]  – PAR regions (deepvariant)
     ch_mitochondrial_bed // channel: [val(meta), path(bed)]  – mitochondrial interval (deepvariant)
+    ch_snv_call_regions // channel: [val(meta), path(bed)]  – SNV call regions
+    ch_sv_call_regions // channel: [val(meta), path(bed)]  – structural variant call regions
     mitochondrial_caller // string
 
     main:
@@ -37,9 +40,9 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
     else if (mitochondrial_caller == "deepvariant") {
 
         /*
-     * Add the mitochondrial BED to every sample, skip if BED is empty. We do not want to run Deepvariant with an empty bed.
-     * The BED can be empty if there is no chrM region in the original BED processed in SCATTER_GENOME
-     */
+         * Add the mitochondrial BED to every sample, skip if BED is empty. We do not want to run Deepvariant with an empty bed.
+         * The BED can be empty if there is no chrM region in the original BED processed in SCATTER_GENOME
+         */
         ch_deepvariant_in = ch_bam_bai
             .combine(ch_mitochondrial_bed)
             .filter { _bam_meta, _bam, _bai, _mitochondrial_meta, bed -> bed.size() > 0 }
@@ -66,11 +69,11 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
     if (mitochondrial_caller != "deepvariant") {
 
         /*
-        * Mitochondrial-specific callers produce VCFs with only ##contig=<ID=chrM> in the header.
-        * bcftools reheader --fai only appends missing contigs — it does not replace existing ones.
-        * So we first strip all ##contig lines with GAWK, then reheader FAI
-        * This ensures all contigs appear in reference order so the downstream sort places chrM correctly.
-        */
+         * Mitochondrial-specific callers produce VCFs with only ##contig=<ID=chrM> in the header.
+         * bcftools reheader --fai only appends missing contigs — it does not replace existing ones.
+         * So we first strip all ##contig lines with GAWK, then reheader FAI
+         * This ensures all contigs appear in reference order so the downstream sort places chrM correctly.
+         */
 
         GAWK_STRIP_CONTIG_HEADER(
             ch_vcf.map { meta, vcf -> [meta, [vcf]] },
@@ -84,18 +87,46 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
         )
 
         /*
-        * Mitorsaw reports one GT entry per detected mitochondrial haplotype (e.g. `1|1|1|1|1`
-        * or `0|0|0|1|0`), which is not a standard diploid genotype and breaks interoperability
-        * with the rest of the pipeline. Collapse it to 0/0, 0/1 or 1/1 based on whether the ALT
-        * allele is absent, present in some, or present in all haplotypes.
-        */
+         * Mitorsaw reports one GT entry per detected mitochondrial haplotype (e.g. `1|1|1|1|1`
+         * or `0|0|0|1|0`), which is not a standard diploid genotype and breaks interoperability
+         * with the rest of the pipeline. Collapse it to 0/0, 0/1 or 1/1 based on whether the ALT
+         * allele is absent, present in some, or present in all haplotypes.
+         */
         COLLAPSE_MITOCHONDRIAL_GT(BCFTOOLS_REHEADER.out.vcf)
 
-        ch_mito_split_input = COLLAPSE_MITOCHONDRIAL_GT.out.vcf.flatMap { meta, vcf ->
-            [[meta + [variant_type: "snv"], vcf, []], [meta + [variant_type: "sv"], vcf, []]]
-        }
+        /*
+         * BCFTOOLS_VIEW_MITO filters by --regions-file, which requires a bgzipped and indexed VCF.
+         * COLLAPSE_MITOCHONDRIAL_GT emits a plain (uncompressed) VCF, so bgzip and index it first.
+         */
+        BGZIPTABIX_MITO(COLLAPSE_MITOCHONDRIAL_GT.out.vcf)
 
-        BCFTOOLS_VIEW_MITO(ch_mito_split_input, [], [], [])
+        /*
+         * Use ch_snv/sv_call_regions to filter the mitochondrial caller's SNV/SV output directly via
+         * bcftools view --regions-file
+         */
+        ch_call_regions = ch_snv_call_regions
+            .map { _meta, bed -> ['snv', bed] }
+            .mix(ch_sv_call_regions.map { _meta, bed -> ['sv', bed] })
+
+        ch_bcftools_view_input = BGZIPTABIX_MITO.out.gz_index
+            .flatMap { meta, vcf, tbi ->
+                [
+                    ['snv', meta + [variant_type: "snv"], vcf, tbi],
+                    ['sv', meta + [variant_type: "sv"], vcf, tbi],
+                ]
+            }
+            .combine(ch_call_regions, by: 0)
+            .multiMap { _type, meta, vcf, tbi, bed ->
+                vcf_tbi: [meta, vcf, tbi]
+                bed: bed
+            }
+
+        BCFTOOLS_VIEW_MITO(
+            ch_bcftools_view_input.vcf_tbi,
+            ch_bcftools_view_input.bed,
+            [],
+            [],
+        )
 
         ch_mito_vcf_split = BCFTOOLS_VIEW_MITO.out.vcf.branch { meta, _vcf ->
             snv: meta.variant_type == "snv"
@@ -106,7 +137,6 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
             snv: meta.variant_type == "snv"
             sv: meta.variant_type == "sv"
         }
-
 
         ch_snv_vcf = remove_variant_type_from_meta(ch_mito_vcf_split.snv)
         ch_snv_tbi = remove_variant_type_from_meta(ch_mito_tbi_split.snv)
@@ -126,6 +156,7 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
     mitochondrial_sv_vcf  = ch_sv_vcf // channel: [val(meta), path(vcf)]
     mitochondrial_sv_tbi  = ch_sv_tbi // channel: [val(meta), path(tbi)]
 }
+
 def remove_variant_type_from_meta(channel) {
     channel.map { meta, file -> [meta - meta.subMap('variant_type'), file] }
 }

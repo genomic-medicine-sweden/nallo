@@ -12,8 +12,8 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/1e84555134bb9638ad0dde49afd895e3192de3f0/'
-                input                        = "$projectDir/assets/samplesheet.csv"
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8a22201fc4c3e1026eace0a680cb2757dd4fc7c2/'
+                input                        = "$projectDir/assets/samplesheet_fastq.csv"
                 outdir                       = "$outputDir"
                 // Mock inputs for CADD
                 cadd_resources               = "$projectDir/assets"
@@ -60,8 +60,8 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/1e84555134bb9638ad0dde49afd895e3192de3f0/'
-                input                        = "$projectDir/assets/samplesheet.csv"
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8a22201fc4c3e1026eace0a680cb2757dd4fc7c2/'
+                input                        = "$projectDir/assets/samplesheet_fastq.csv"
                 outdir                       = "$outputDir"
                 // Mock inputs for VEP
                 vep_cache                    = "$projectDir/assets"
@@ -108,8 +108,8 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/1e84555134bb9638ad0dde49afd895e3192de3f0/'
-                input                        = "$projectDir/assets/samplesheet.csv"
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8a22201fc4c3e1026eace0a680cb2757dd4fc7c2/'
+                input                        = "$projectDir/assets/samplesheet_fastq.csv"
                 outdir                       = "$outputDir"
                 snv_caller                   = "sentieon"
                 snv_calling_processes        = 1

@@ -36,7 +36,7 @@
 ##### Variant calling
 
 - Call SNVs & joint genotyping with [deepvariant](https://github.com/google/deepvariant) and [GLNexus](https://github.com/dnanexus-rnd/GLnexus)
-- Call SVs with [Severus](https://github.com/KolmogorovLab/Severus), [Sniffles](https://github.com/fritzsedlazeck/Sniffles) or [Sawfish](https://github.com/PacificBiosciences/sawfish) (PacBio only)
+- Call SVs with [Severus](https://github.com/KolmogorovLab/Severus), [Sniffles](https://github.com/fritzsedlazeck/Sniffles) (v2 or v1), [DeBreak](https://github.com/Maggi-Chen/DeBreak) or [Sawfish](https://github.com/PacificBiosciences/sawfish) (PacBio only)
 - Call CNVs with [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV)
 - Call tandem repeats with [TRGT](https://github.com/PacificBiosciences/trgt/tree/main) (PacBio only) or [STRdust](https://github.com/wdecoster/STRdust)
 - Call paralogous genes with [Paraphase](https://github.com/PacificBiosciences/paraphase) (PacBio only)
@@ -72,9 +72,9 @@ Prepare a samplesheet with input data:
 
 ```
 project,sample,file,family_id,paternal_id,maternal_id,sex,phenotype
- my_project,HG002,/path/to/HG002.fastq.gz,NIST,HG003,HG004,1,2
- my_project,HG003,/path/to/HG003.bam,NIST,0,0,1,1
- my_project,HG004,/path/to/HG004.bam,NIST,0,0,2,1
+my_project,HG002,/path/to/HG002.fastq.gz,NIST,HG003,HG004,1,2
+my_project,HG003,/path/to/HG003.bam,NIST,0,0,1,1
+my_project,HG004,/path/to/HG004.bam,NIST,0,0,2,1
 ```
 
 Supply a reference genome with `--fasta` and choose a matching `--preset` for your data (`revio`, `pacbio`, `ONT_R10` or `ONT_R10_AS`). Now, you can run the pipeline using:

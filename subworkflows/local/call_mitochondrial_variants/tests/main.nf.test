@@ -69,7 +69,9 @@ nextflow_workflow {
                 input[2] = SAMTOOLS_FAIDX.out.fai
                 input[3] = [[],[]]
                 input[4] = [[],[]]
-                input[5] = "mitorsaw"
+                input[5] = channel.value([[],[]])
+                input[6] = channel.value([[],[]])
+                input[7] = "mitorsaw"
                 """
             }
         }
@@ -106,7 +108,9 @@ nextflow_workflow {
                 input[2] = SAMTOOLS_FAIDX.out.fai
                 input[3] = [[],[]]
                 input[4] = [[],[]]
-                input[5] = "mitorsaw"
+                input[5] = channel.value([[],[]])
+                input[6] = channel.value([[],[]])
+                input[7] = "mitorsaw"
                 """
             }
         }
@@ -139,7 +143,9 @@ nextflow_workflow {
                 input[2] = SAMTOOLS_FAIDX.out.fai
                 input[3] = [[],[]]
                 input[4] = [[],[]]
-                input[5] = "mitorsaw"
+                input[5] = channel.value([[],[]])
+                input[6] = channel.value([[],[]])
+                input[7] = "mitorsaw"
                 """
             }
         }
@@ -176,7 +182,9 @@ nextflow_workflow {
                 input[3] = [[],[]]
                 input[4] = SCATTER_GENOME_WITH_CHRM.out.bed_mitochondrial_intervals
                     .map { meta, bed, _num_intervals -> [meta, bed] }
-                input[5] = "deepvariant"
+                input[5] = channel.value([[],[]])
+                input[6] = channel.value([[],[]])
+                input[7] = "deepvariant"
                 """
             }
         }
@@ -209,7 +217,9 @@ nextflow_workflow {
                 input[3] = [[],[]]
                 input[4] = SCATTER_GENOME_WITH_CHRM.out.bed_mitochondrial_intervals
                     .map { meta, bed, _num_intervals -> [meta, bed] }
-                input[5] = "deepvariant"
+                input[5] = channel.value([[],[]])
+                input[6] = channel.value([[],[]])
+                input[7] = "deepvariant"
                 """
             }
         }
@@ -249,7 +259,9 @@ nextflow_workflow {
                 input[3] = [[],[]]
                 input[4] = SCATTER_GENOME_WITH_CHRM.out.bed_mitochondrial_intervals
                     .map { meta, bed, _num_intervals -> [meta, bed] }
-                input[5] = "deepvariant"
+                input[5] = channel.value([[],[]])
+                input[6] = channel.value([[],[]])
+                input[7] = "deepvariant"
                 """
             }
         }
@@ -281,7 +293,9 @@ nextflow_workflow {
                 input[3] = [[],[]]
                 input[4] = SCATTER_GENOME_WITHOUT_CHRM.out.bed_mitochondrial_intervals
                     .map { meta, bed, _num_intervals -> [meta, bed] }
-                input[5] = "deepvariant"
+                input[5] = channel.value([[],[]])
+                input[6] = channel.value([[],[]])
+                input[7] = "deepvariant"
                 """
             }
         }

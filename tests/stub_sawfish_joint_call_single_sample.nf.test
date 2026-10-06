@@ -12,8 +12,8 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path            = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/1e84555134bb9638ad0dde49afd895e3192de3f0/'
-                input                                   = "$projectDir/assets/samplesheet.csv"
+                pipelines_testdata_base_path            = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8a22201fc4c3e1026eace0a680cb2757dd4fc7c2/'
+                input                                   = "$projectDir/assets/samplesheet_fastq.csv"
                 outdir                                  = "$outputDir"
                 skip_annotate_paralogs                  = true
                 skip_call_paralogs                      = true
@@ -45,8 +45,8 @@ nextflow_pipeline {
             assertAll(
                 { assert workflow.success },
                 { assert versions.containsKey('SVDB_MERGE_BY_FAMILY') },
-                { assert versions.containsKey('SAWFISH_DISCOVER') },
-                { assert versions.containsKey('SAWFISH_JOINTCALL') },
+                { assert versions.containsKey('RUN_SAWFISH_DISCOVER') },
+                { assert versions.containsKey('RUN_SAWFISH_JOINTCALL') },
                 { assert snapshot(
                     workflow.trace.succeeded().size(),
                     versions,
