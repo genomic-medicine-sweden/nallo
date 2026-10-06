@@ -563,10 +563,10 @@ workflow NALLO {
             ch_sentieon_female_diploid_bed,
             ch_sentieon_male_diploid_bed,
             ch_sentieon_male_haploid_bed,
-            val_snv_caller,
-            val_sentieon_tech,
             ch_sentieon_population_vcf,
             ch_sentieon_population_tbi,
+            val_snv_caller,
+            val_sentieon_tech,
         )
 
         /*
