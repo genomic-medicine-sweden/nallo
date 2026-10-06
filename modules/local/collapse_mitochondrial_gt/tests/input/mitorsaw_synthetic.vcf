@@ -1,0 +1,12 @@
+##fileformat=VCFv4.2
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+##FORMAT=<ID=DP,Number=1,Type=Integer,Description="Read depth">
+##FORMAT=<ID=AD,Number=R,Type=Integer,Description="Read depth for each allele">
+##FORMAT=<ID=VAF,Number=A,Type=Float,Description="Variant allele fractions.">
+##contig=<ID=chrM,length=16569>
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	SAMPLE
+chrM	100	.	A	G	.	.	.	GT:DP:AD:VAF	0|0|0|0|0:30:30,0:0
+chrM	200	.	A	G	.	.	.	GT:DP:AD:VAF	1|1|1|1|1:30:0,30:1
+chrM	300	.	A	G	.	.	.	GT:DP:AD:VAF	0|0|0|1|0:30:24,6:0.2
+chrM	400	.	A	G	.	.	.	GT:DP:AD:VAF	1|0|1|1|1:30:6,24:0.8
+chrM	500	.	A	G	.	.	.	GT:DP:AD:VAF	.|.|.|.|.:30:0,0:0
