@@ -38,14 +38,14 @@
                     [
                         "DNASCOPE_LONGREAD_CALL_SNVS",
                         "sentieon-cli",
-                        "1.6.2"
+                        "2.0.0"
                     ]
                 ],
                 "5": [
                     [
                         "DNASCOPE_LONGREAD_CALL_SNVS",
                         "sentieon",
-                        "202503.03"
+                        "202503.04"
                     ]
                 ],
                 "6": [
@@ -126,19 +126,19 @@
                     [
                         "DNASCOPE_LONGREAD_CALL_SNVS",
                         "sentieon",
-                        "202503.03"
+                        "202503.04"
                     ]
                 ],
                 "versions_sentieon_cli": [
                     [
                         "DNASCOPE_LONGREAD_CALL_SNVS",
                         "sentieon-cli",
-                        "1.6.2"
+                        "2.0.0"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-09-21T15:37:39.532528616",
+        "timestamp": "2026-10-06T14:11:53.207380342",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
