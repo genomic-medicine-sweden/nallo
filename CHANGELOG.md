@@ -137,6 +137,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - `REHEADER_SV_VCF` now passes the reference FAI to `BCFTOOLS_REHEADER`, ensuring all reference `##contig` lines are present in per-caller VCFs before SVDB merge
 - [#1253](https://github.com/genomic-medicine-sweden/nallo/pull/1253) - Refactored `CALL_SVS` into per-caller subworkflows (`SNIFFLES_SV`, `SNIFFLES1_SV`, `SEVERUS_SV`, `DEBREAK_SV`, `HIFICNV_SV`, `SAWFISH_SV`); `CALL_SVS` now emits a single `sv_calls` channel (3-tuple `[meta, vcf, tbi]`, where `tbi` is `[]` for callers that do not pre-index); `nallo.nf` branches on `meta.skip_vep_prep` to route calls through `VEP_PREP_SV` + `BCFTOOLS_SORT` or bypass it, then rejoins before the optional region filter and reheader step; `needs_reheader` and `skip_vep_prep` flags stamped on `meta` by each per-caller subworkflow
 - [#1263](https://github.com/genomic-medicine-sweden/nallo/pull/1263) - Changed filtering of mitochondrial variants in `CALL_MITOCHONDRIAL_VARIANTS` to use `ch_sv/snv_call_regions` in addition to size for filtering (non deepvariant only)
+- [#1266](https://github.com/genomic-medicine-sweden/nallo/pull/1266) - Set explicit matching parameters for `SVDB_QUERY`, `SVDB_MERGE_BY_CALLER` and `SVDB_MERGE_BY_FAMILY` (`--overlap`, `--bnd_distance`, `--ins_distance`, `--ins_svlen_ratio` and `--ins_seq_similarity`) and expose them as the `--svdb_query_*`, `--svdb_merge_by_caller_*` and `--svdb_merge_by_family_*` parameters
 
 ### Removed
 
@@ -175,19 +176,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Parameters
 
-| Old parameter                    | New parameter                   |
-| -------------------------------- | ------------------------------- |
-|                                  | `--mitochondrial_sv_min_size`   |
-|                                  | `--mitorsaw_minimum_read_count` |
-|                                  | `--mitorsaw_minimum_maf`        |
-| `--run_methbat` / `--run_modkit` | `--methylation_callers`         |
-|                                  | `--skip_portello`               |
-|                                  | `--read_aligner`                |
-|                                  | `--pbmm2_preset`                |
-|                                  | `--glnexus_config`              |
-|                                  | `--preset ONT_R10_AS`           |
-|                                  | `--assembly_aligner`            |
-|                                  | `--methbat_map`                 |
+| Old parameter                    | New parameter                               |
+| -------------------------------- | ------------------------------------------- |
+|                                  | `--mitochondrial_sv_min_size`               |
+|                                  | `--mitorsaw_minimum_read_count`             |
+|                                  | `--mitorsaw_minimum_maf`                    |
+| `--run_methbat` / `--run_modkit` | `--methylation_callers`                     |
+|                                  | `--skip_portello`                           |
+|                                  | `--read_aligner`                            |
+|                                  | `--pbmm2_preset`                            |
+|                                  | `--glnexus_config`                          |
+|                                  | `--preset ONT_R10_AS`                       |
+|                                  | `--assembly_aligner`                        |
+|                                  | `--methbat_map`                             |
+|                                  | `--svdb_merge_by_caller_overlap`            |
+|                                  | `--svdb_merge_by_caller_bnd_distance`       |
+|                                  | `--svdb_merge_by_caller_ins_distance`       |
+|                                  | `--svdb_merge_by_caller_ins_svlen_ratio`    |
+|                                  | `--svdb_merge_by_caller_ins_seq_similarity` |
+|                                  | `--svdb_merge_by_family_overlap`            |
+|                                  | `--svdb_merge_by_family_bnd_distance`       |
+|                                  | `--svdb_merge_by_family_ins_distance`       |
+|                                  | `--svdb_merge_by_family_ins_svlen_ratio`    |
+|                                  | `--svdb_merge_by_family_ins_seq_similarity` |
+|                                  | `--svdb_query_overlap`                      |
+|                                  | `--svdb_query_bnd_distance`                 |
+|                                  | `--svdb_query_ins_distance`                 |
+|                                  | `--svdb_query_ins_svlen_ratio`              |
+|                                  | `--svdb_query_ins_seq_similarity`           |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -219,6 +235,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | sniffles                       | 1.0.12      | 2.7.3       |
 | sniffles1 (local)              |             | 1.0.12      |
 | debreak                        |             | 1.3         |
+| svdb/merge                     | 2.8.4       | 2.12.0      |
+| svdb/query                     | 2.8.4       | 2.12.0      |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

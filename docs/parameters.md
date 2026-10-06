@@ -159,6 +159,21 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `mitorsaw_minimum_maf` | Minimum minor allele frequency (MAF) for mitorsaw variant calling. | `number` | 0.1 |  |  |
 | `mitorsaw_minimum_read_count` | Minimum read count to consider a heteroplasmic variant. | `integer` | 3 |  |  |
 | `mitochondrial_sv_min_size` | Minimum allele length difference (abs(strlen(REF)-strlen(ALT))) to classify a mitochondrial variant as an SV rather than a SNV/small indel. | `integer` | 50 |  |  |
+| `svdb_merge_by_caller_overlap` | Minimum reciprocal overlap (`svdb --overlap`) for deletions and duplications when merging the SVs of one caller across the samples of a family. | `number` | 0.5 |  |  |
+| `svdb_merge_by_caller_bnd_distance` | Maximum distance in bp between breakpoints (`svdb --bnd_distance`) of translocations and inversions when merging the SVs of one caller across the samples of a family. | `integer` | 1000 |  |  |
+| `svdb_merge_by_caller_ins_distance` | Maximum distance in bp between insertion positions (`svdb --ins_distance`) when merging the SVs of one caller across the samples of a family. | `integer` | 100 |  |  |
+| `svdb_merge_by_caller_ins_svlen_ratio` | Minimum ratio of the smaller to the larger insertion length (`svdb --ins_svlen_ratio`) when merging the SVs of one caller across the samples of a family. | `number` | 0.5 |  |  |
+| `svdb_merge_by_caller_ins_seq_similarity` | Minimum sequence similarity of insertions (`svdb --ins_seq_similarity`) when merging the SVs of one caller across the samples of a family; 0 disables the sequence comparison. | `number` | 0 |  |  |
+| `svdb_merge_by_family_overlap` | Minimum reciprocal overlap (`svdb --overlap`) for deletions and duplications when merging the SVs of different callers into one family VCF. | `number` | 0.7 |  |  |
+| `svdb_merge_by_family_bnd_distance` | Maximum distance in bp between breakpoints (`svdb --bnd_distance`) of translocations and inversions when merging the SVs of different callers into one family VCF. | `integer` | 2000 |  |  |
+| `svdb_merge_by_family_ins_distance` | Maximum distance in bp between insertion positions (`svdb --ins_distance`) when merging the SVs of different callers into one family VCF. | `integer` | 100 |  |  |
+| `svdb_merge_by_family_ins_svlen_ratio` | Minimum ratio of the smaller to the larger insertion length (`svdb --ins_svlen_ratio`) when merging the SVs of different callers into one family VCF. | `number` | 0.5 |  |  |
+| `svdb_merge_by_family_ins_seq_similarity` | Minimum sequence similarity of insertions (`svdb --ins_seq_similarity`) when merging the SVs of different callers into one family VCF; 0 disables the sequence comparison. | `number` | 0 |  |  |
+| `svdb_query_overlap` | Minimum reciprocal overlap (`svdb --overlap`) for deletions and duplications when annotating SVs against the databases in `--svdb_sv_databases`. | `number` | 0.7 |  |  |
+| `svdb_query_bnd_distance` | Maximum distance in bp between breakpoints (`svdb --bnd_distance`) of translocations and inversions when annotating SVs against the databases in `--svdb_sv_databases`. | `integer` | 1000 |  |  |
+| `svdb_query_ins_distance` | Maximum distance in bp between insertion positions (`svdb --ins_distance`) when annotating SVs against the databases in `--svdb_sv_databases`. | `integer` | 100 |  |  |
+| `svdb_query_ins_svlen_ratio` | Minimum ratio of the smaller to the larger insertion length (`svdb --ins_svlen_ratio`) when annotating SVs against the databases in `--svdb_sv_databases`. | `number` | 0.5 |  |  |
+| `svdb_query_ins_seq_similarity` | Minimum sequence similarity of insertions (`svdb --ins_seq_similarity`) when annotating SVs against the databases in `--svdb_sv_databases`; 0 disables the sequence comparison. | `number` | 0 |  |  |
 | `alignment_processes` | If alignment_processes is bigger than 1, input files will be split and aligned in parallel to reduce processing time. | `integer` | 8 |  |  |
 | `snv_calling_processes` | If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time. Must be `1` when `--snv_caller sentieon` is used. | `integer` | 13 |  |  |
 | `vep_cache_version` | VEP cache version | `integer` | 116 |  |  |

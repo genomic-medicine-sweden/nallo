@@ -133,12 +133,12 @@
                     "strdust": "0.16.0"
                 },
                 "SVDB_MERGE_BY_CALLER": {
-                    "bcftools": 1.23,
-                    "svdb": "2.8.4"
+                    "bcftools": 1.24,
+                    "svdb": "2.12.0"
                 },
                 "SVDB_MERGE_BY_FAMILY": {
-                    "bcftools": 1.23,
-                    "svdb": "2.8.4"
+                    "bcftools": 1.24,
+                    "svdb": "2.12.0"
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
@@ -437,7 +437,7 @@
                 "visualization_tracks/HG002_ONT_C/HG002_ONT_C_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-09-21T17:25:38.049688374",
+        "timestamp": "2026-10-02T18:09:41.203043369",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

@@ -263,15 +263,15 @@
                     "strdrop": "0.3.1"
                 },
                 "SVDB_MERGE_BY_CALLER": {
-                    "bcftools": 1.23,
-                    "svdb": "2.8.4"
+                    "bcftools": 1.24,
+                    "svdb": "2.12.0"
                 },
                 "SVDB_MERGE_BY_FAMILY": {
-                    "bcftools": 1.23,
-                    "svdb": "2.8.4"
+                    "bcftools": 1.24,
+                    "svdb": "2.12.0"
                 },
                 "SVDB_QUERY": {
-                    "svdb": "2.8.4"
+                    "svdb": "2.12.0"
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
@@ -1287,15 +1287,15 @@
                 ],
                 [
                     "FAM_svs_annotated_ranked_clinical.vcf.gz",
-                    "VcfFile [chromosomes=[chr16], sampleCount=3, variantCount=7, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chr16], sampleCount=3, variantCount=6, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_svs_annotated_ranked_research.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=11, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=10, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_svs_unphased.vcf.gz",
-                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=11, phased=false, phasedAutodetect=false]"
+                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=10, phased=false, phasedAutodetect=false]"
                 ]
             ],
             [
@@ -1601,15 +1601,15 @@
                     "strdrop": "0.3.1"
                 },
                 "SVDB_MERGE_BY_CALLER": {
-                    "bcftools": 1.23,
-                    "svdb": "2.8.4"
+                    "bcftools": 1.24,
+                    "svdb": "2.12.0"
                 },
                 "SVDB_MERGE_BY_FAMILY": {
-                    "bcftools": 1.23,
-                    "svdb": "2.8.4"
+                    "bcftools": 1.24,
+                    "svdb": "2.12.0"
                 },
                 "SVDB_QUERY": {
-                    "svdb": "2.8.4"
+                    "svdb": "2.12.0"
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
@@ -2672,7 +2672,7 @@
                 
             ]
         ],
-        "timestamp": "2026-09-21T17:02:31.661869149",
+        "timestamp": "2026-10-02T17:49:47.106412801",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
