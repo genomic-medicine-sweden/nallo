@@ -29,8 +29,10 @@ nextflow_workflow {
                 input[5] = [[],[]]
                 input[6] = [[],[]]
                 input[7] = [[],[]]
-                input[8] = "deepvariant"
-                input[9] = "HiFi"
+                input[8] = [[],[]]
+                input[9] = [[],[]]
+                input[10] = "deepvariant"
+                input[11] = "HiFi"
                 """
             }
         }
@@ -76,8 +78,10 @@ nextflow_workflow {
                 input[5] = [[],[]]
                 input[6] = [[],[]]
                 input[7] = [[],[]]
-                input[8] = "deepvariant"
-                input[9] = "HiFi"
+                input[8] = [[],[]]
+                input[9] = [[],[]]
+                input[10] = "deepvariant"
+                input[11] = "HiFi"
                 """
             }
         }
@@ -139,8 +143,10 @@ nextflow_workflow {
                 input[5] = [[],[]]
                 input[6] = [[],[]]
                 input[7] = [[],[]]
-                input[8] = "deepvariant"
-                input[9] = "HiFi"
+                input[8] = [[],[]]
+                input[9] = [[],[]]
+                input[10] = "deepvariant"
+                input[11] = "HiFi"
                 """
             }
         }
@@ -180,8 +186,10 @@ nextflow_workflow {
                 input[5] = [[],[]]
                 input[6] = [[],[]]
                 input[7] = [[],[]]
-                input[8] = "deepvariant"
-                input[9] = "HiFi"
+                input[8] = [[],[]]
+                input[9] = [[],[]]
+                input[10] = "deepvariant"
+                input[11] = "HiFi"
                 """
             }
         }
@@ -222,8 +230,10 @@ nextflow_workflow {
                 input[5] = [[],[]]
                 input[6] = [[],[]]
                 input[7] = [[],[]]
-                input[8] = "deepvariant"
-                input[9] = "HiFi"
+                input[8] = [[],[]]
+                input[9] = [[],[]]
+                input[10] = "deepvariant"
+                input[11] = "HiFi"
                 """
             }
         }
@@ -272,8 +282,10 @@ nextflow_workflow {
                 input[5] = [[],[]]
                 input[6] = [[],[]]
                 input[7] = [[],[]]
-                input[8] = "deepvariant"
-                input[9] = "HiFi"
+                input[8] = [[],[]]
+                input[9] = [[],[]]
+                input[10] = "deepvariant"
+                input[11] = "HiFi"
                 """
             }
         }
@@ -334,8 +346,10 @@ nextflow_workflow {
                 input[5] = [[],[]]
                 input[6] = [[],[]]
                 input[7] = [[],[]]
-                input[8] = "deepvariant"
-                input[9] = "HiFi"
+                input[8] = [[],[]]
+                input[9] = [[],[]]
+                input[10] = "deepvariant"
+                input[11] = "HiFi"
                 """
             }
         }
@@ -399,8 +413,10 @@ nextflow_workflow {
                 input[5] = [[],[]]
                 input[6] = [[],[]]
                 input[7] = [[],[]]
-                input[8] = "deepvariant"
-                input[9] = "HiFi"
+                input[8] = [[],[]]
+                input[9] = [[],[]]
+                input[10] = "deepvariant"
+                input[11] = "HiFi"
                 """
             }
         }
@@ -456,8 +472,10 @@ nextflow_workflow {
                     [ id:'male_haploid_bed' ],
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.blacklist_intervals.bed', checkIfExists: true)
                 ])
-                input[8] = "sentieon"
-                input[9] = "HiFi"
+                input[8] = [[],[]]
+                input[9] = [[],[]]
+                input[10] = "sentieon"
+                input[11] = "HiFi"
                 """
             }
         }
@@ -512,8 +530,10 @@ nextflow_workflow {
                     [ id:'male_haploid_bed' ],
                     file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.blacklist_intervals.bed', checkIfExists: true)
                 ])
-                input[8] = "sentieon"
-                input[9] = "HiFi"
+                input[8] = [[],[]]
+                input[9] = [[],[]]
+                input[10] = "sentieon"
+                input[11] = "HiFi"
                 """
             }
         }
@@ -523,6 +543,77 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(workflow.out).match()
                 }
+            )
+        }
+
+    }
+
+    test("1 sample male - sentieon diploid and haploid beds with population VCF -stub") {
+
+        tag "sentieon"
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id:'test', family_id:'fam1', single_end:false, num_intervals:1, sex:1 ], // meta map
+                    file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam', checkIfExists: true),
+                    file(params.modules_testdata_base_path + '/genomics/homo_sapiens/illumina/bam/test.paired_end.sorted.bam.bai', checkIfExists: true),
+                    file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.multi_intervals.bed', checkIfExists: true)
+                ])
+                input[1] = [
+                    [ id:'genome'],
+                    file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta', checkIfExists: true)
+                ]
+                input[2] = [
+                    [ id:'genome'],
+                    file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.fasta.fai', checkIfExists: true)
+                ]
+                input[3] = [[],[]]
+                input[4] = channel.of([
+                    [ id:'sentieon_model_bundle' ],
+                    file(params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XX.bed', checkIfExists: true)
+                ])
+                input[5] = channel.of([
+                    [ id:'female_diploid_bed' ],
+                    file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.bed', checkIfExists: true)
+                ])
+                input[6] = channel.of([
+                    [ id:'male_diploid_bed' ],
+                    file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.bed', checkIfExists: true)
+                ])
+                input[7] = channel.of([
+                    [ id:'male_haploid_bed' ],
+                    file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/genome.blacklist_intervals.bed', checkIfExists: true)
+                ])
+                // Mock population resources: only staging is exercised in stub mode.
+                input[8] = [
+                    [ id:'population_vcf' ],
+                    file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz', checkIfExists: true)
+                ]
+                input[9] = [
+                    [ id:'population_tbi' ],
+                    file(params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz.tbi', checkIfExists: true)
+                ]
+                input[10] = "sentieon"
+                input[11] = "HiFi"
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.vcf.size() == 1 },
+                { assert workflow.out.index.size() == 1 },
+                { assert workflow.out.gvcf.size() == 1 },
+                { assert workflow.out.gvcf_index.size() == 1 },
+                { assert file(workflow.out.vcf.get(0).get(1)).name == 'test_ploidyfix.vcf.gz' },
+                { assert file(workflow.out.index.get(0).get(1)).name == 'test_ploidyfix.vcf.gz.tbi' },
+                { assert file(workflow.out.gvcf.get(0).get(1)).name == 'test_test_genome.multi_intervals.bed_diploid.bed_sentieon.g.vcf.gz' },
+                { assert file(workflow.out.gvcf_index.get(0).get(1)).name == 'test_test_genome.multi_intervals.bed_diploid.bed_sentieon.g.vcf.gz.tbi' }
             )
         }
 
