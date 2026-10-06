@@ -1,9 +1,9 @@
 include { samplesheetToList                                      } from 'plugin/nf-schema'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    IMPORT LOCAL SUBWORKFLOWS
+IMPORT LOCAL SUBWORKFLOWS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+ */
 
 include { ALIGN                                                  } from '../subworkflows/local/align'
 include { ALIGN_ASSEMBLIES                                       } from '../subworkflows/local/align_assemblies'
@@ -48,9 +48,9 @@ include { PORTELLO                                               } from '../subw
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    IMPORT LOCAL/NF-CORE MODULES
+IMPORT LOCAL/NF-CORE MODULES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+ */
 
 // local
 include { CREATE_PEDIGREE_FILE as SAMPLESHEET_PED                } from '../modules/local/create_pedigree_file/main'
@@ -82,9 +82,9 @@ include { citationBibliographyText                               } from '../subw
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    RUN MAIN WORKFLOW
+RUN MAIN WORKFLOW
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+ */
 
 workflow NALLO {
     take:
@@ -519,13 +519,15 @@ workflow NALLO {
                 ch_fai,
                 ch_par,
                 ch_mitochondrial_bed,
+                ch_snv_call_regions,
+                ch_sv_call_regions,
                 val_mitochondrial_caller,
             )
 
             /*
-                 * The meta.caller is needed for GVCF_GLNEXUS_NORM_VARIANTS workflow to process the VCFs differently.
-                 * the number of intervals is used in groupKey downstream, num_intervals should be the same in the nuclear and mitochondrial channels.
-                 */
+             * The meta.caller is needed for GVCF_GLNEXUS_NORM_VARIANTS workflow to process the VCFs differently.
+             * the number of intervals is used in groupKey downstream, num_intervals should be the same in the nuclear and mitochondrial channels.
+             */
             ch_mitochondrial = CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_vcf
                 .join(CALL_MITOCHONDRIAL_VARIANTS.out.mitochondrial_snv_tbi, failOnMismatch: true, failOnDuplicate: true)
                 .combine(ch_num_intervals)
@@ -564,11 +566,11 @@ workflow NALLO {
         )
 
         /*
-             * Group and create (GVCF_GLNEXUS_NORM_VARIANTS) a merged and normalized VCF, containing one region with all samples, to be used in annotation and ranking.
-             * We add the total number of intervals for grouping later (account for mitochondrial interval).
-             * Done for CALL_SNVS.out.gvcf but CALL_SNVS.out.vcf is used in QC_SNVS subworkflow, for now we do not want the mitochondrial variants to be included
-             * as it will make the deepvariant report harder to interpret.
-             */
+         * Group and create (GVCF_GLNEXUS_NORM_VARIANTS) a merged and normalized VCF, containing one region with all samples, to be used in annotation and ranking.
+         * We add the total number of intervals for grouping later (account for mitochondrial interval).
+         * Done for CALL_SNVS.out.gvcf but CALL_SNVS.out.vcf is used in QC_SNVS subworkflow, for now we do not want the mitochondrial variants to be included
+         * as it will make the deepvariant report harder to interpret.
+         */
         def variants_to_merge_per_family = CALL_SNVS.out.gvcf
             .join(CALL_SNVS.out.gvcf_index, failOnMismatch: true, failOnDuplicate: true)
             .map { meta, gvcf, index ->

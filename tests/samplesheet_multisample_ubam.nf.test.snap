@@ -912,8 +912,8 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ],
             [
-                "HG002_haplotype_1.assembly_summary:md5,a6ad30c5ee5267ca1b283564f1e5d129",
-                "HG002_haplotype_2.assembly_summary:md5,b99223d6c7d9ac989c98ec6b419d91e1",
+                "HG002_haplotype_1.assembly_summary:md5,559dd83efb6c01bea16886f4c4c04913",
+                "HG002_haplotype_2.assembly_summary:md5,f8fe962fb03e8f35e5f3586e74603988",
                 "HG003_haplotype_1.assembly_summary:md5,13dee2d12769dd9f9ba6f4e490e385b3",
                 "HG003_haplotype_2.assembly_summary:md5,750e1bf8191b520ff6afc302987cbc35",
                 "HG004_haplotype_1.assembly_summary:md5,d77dc8fbbb8a6dce71c9640d6a6be355",
@@ -1194,7 +1194,7 @@
                 ],
                 [
                     "HG002_aligned_assembly.bam",
-                    "744af813396a9a2ddaf7a0f15389e0ee"
+                    "f36ee58ba48e9d049de7bd1e5adc81cd"
                 ],
                 [
                     "HG003_aligned_assembly.bam",
@@ -1302,10 +1302,10 @@
                 
             ]
         ],
-        "timestamp": "2026-10-03T09:33:46.017827566",
+        "timestamp": "2026-10-02T16:43:51.443937948",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.08.0"
         }
     },
     "samplesheet_multisample_ubam": {
