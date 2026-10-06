@@ -65,6 +65,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     ch_sentieon_male_diploid_bed
     ch_sentieon_male_haploid_bed
     ch_sentieon_model_bundle
+    ch_sentieon_population_vcf
+    ch_sentieon_population_tbi
     ch_snv_call_regions
     ch_somalier_sites
     ch_stranger_repeat_catalog
@@ -140,8 +142,6 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_sv_call_regions
     val_vep_cache
     val_vep_cache_version
-    ch_sentieon_population_vcf
-    ch_sentieon_population_tbi
 
     main:
 
@@ -182,6 +182,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         ch_sentieon_male_diploid_bed,
         ch_sentieon_male_haploid_bed,
         ch_sentieon_model_bundle,
+        ch_sentieon_population_vcf,
+        ch_sentieon_population_tbi,
         ch_snv_call_regions,
         ch_somalier_sites,
         ch_stranger_repeat_catalog,
@@ -258,8 +260,6 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_sv_call_regions,
         val_vep_cache,
         val_vep_cache_version,
-        ch_sentieon_population_vcf,
-        ch_sentieon_population_tbi,
     )
 
     emit:
