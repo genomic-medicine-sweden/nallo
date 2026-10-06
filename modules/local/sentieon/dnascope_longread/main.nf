@@ -7,13 +7,13 @@ process DNASCOPE_LONGREAD_CALL_SNVS {
     container "docker.io/sentieon/sentieon-cli:2.0.0-0"
 
     input:
-    tuple val(meta),  path(bam), path(bai), path(diploid_intervals_bed), path(haploid_intervals_bed)
+    tuple val(meta), path(bam), path(bai), path(diploid_intervals_bed), path(haploid_intervals_bed)
     tuple val(meta2), path(fasta)
     tuple val(meta3), path(fai)
     tuple val(meta4), path(model_bundle)
     tuple val(meta5), path(population_vcf)
     tuple val(meta6), path(population_vcf_tbi)
-    val(tech)
+    val tech
 
     output:
     tuple val(meta), path("${prefix}.vcf.gz"), emit: vcf
