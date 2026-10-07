@@ -139,6 +139,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1253](https://github.com/genomic-medicine-sweden/nallo/pull/1253) - Refactored `CALL_SVS` into per-caller subworkflows (`SNIFFLES_SV`, `SNIFFLES1_SV`, `SEVERUS_SV`, `DEBREAK_SV`, `HIFICNV_SV`, `SAWFISH_SV`); `CALL_SVS` now emits a single `sv_calls` channel (3-tuple `[meta, vcf, tbi]`, where `tbi` is `[]` for callers that do not pre-index); `nallo.nf` branches on `meta.skip_vep_prep` to route calls through `VEP_PREP_SV` + `BCFTOOLS_SORT` or bypass it, then rejoins before the optional region filter and reheader step; `needs_reheader` and `skip_vep_prep` flags stamped on `meta` by each per-caller subworkflow
 - [#1263](https://github.com/genomic-medicine-sweden/nallo/pull/1263) - Changed filtering of mitochondrial variants from mitorsaw in to use SNV/SV call regions in addition to size for filtering
 - [#1266](https://github.com/genomic-medicine-sweden/nallo/pull/1266) - Set explicit matching parameters for `SVDB_QUERY`, `SVDB_MERGE_BY_CALLER` and `SVDB_MERGE_BY_FAMILY` (`--overlap`, `--bnd_distance`, `--ins_distance`, `--ins_svlen_ratio` and `--ins_seq_similarity`) and expose them as the `--svdb_query_*`, `--svdb_merge_by_caller_*` and `--svdb_merge_by_family_*` parameters
+- [#1272](https://github.com/genomic-medicine-sweden/nallo/pull/1272) - Changed CI to use `latest-stable` version of Nextflow instead of `latest-everything`
 
 ### Removed
 

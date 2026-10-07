@@ -60,7 +60,7 @@ jobs:
             tag: "samplesheet_target_regions_null"
         NXF_VER:
           - "26.04.4"
-          - "latest-everything"
+          - "latest-stable"
         include:
           - tag: "samplesheet"
             runCleanup: true
