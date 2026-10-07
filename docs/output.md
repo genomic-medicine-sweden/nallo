@@ -6,7 +6,7 @@ This document describes the pipeline output files and the tools used to generate
 
 ## Aligned reads
 
-[Minimap2](https://github.com/lh3/minimap2) is used to map the reads to a reference genome. The aligned reads are sorted, merged and indexed using [samtools](https://github.com/samtools/samtools). A sample with a single aligned file and index is not merged. If the pipeline is run with phasing, the aligned reads will be haplotagged using the active phasing tool.
+[Minimap2](https://github.com/lh3/minimap2) is used to map the reads to a reference genome. The aligned reads are sorted, merged and indexed using [samtools](https://github.com/samtools/samtools). A sample with a single pre-aligned BAM and index (`aligned_bam`) is not merged. If the pipeline is run with phasing, the aligned reads will be haplotagged using the active phasing tool.
 
 | Path                                                                   | Description                               | Alignment          | Alignment & phasing |
 | ---------------------------------------------------------------------- | ----------------------------------------- | ------------------ | ------------------- |
