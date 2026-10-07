@@ -139,6 +139,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1263](https://github.com/genomic-medicine-sweden/nallo/pull/1263) - Changed filtering of mitochondrial variants from mitorsaw in to use SNV/SV call regions in addition to size for filtering
 - [#1266](https://github.com/genomic-medicine-sweden/nallo/pull/1266) - Set explicit matching parameters for `SVDB_QUERY`, `SVDB_MERGE_BY_CALLER` and `SVDB_MERGE_BY_FAMILY` (`--overlap`, `--bnd_distance`, `--ins_distance`, `--ins_svlen_ratio` and `--ins_seq_similarity`) and expose them as the `--svdb_query_*`, `--svdb_merge_by_caller_*` and `--svdb_merge_by_family_*` parameters
 - [#1272](https://github.com/genomic-medicine-sweden/nallo/pull/1272) - Changed CI to use `latest-stable` version of Nextflow instead of `latest-everything`
+- [#1273](https://github.com/genomic-medicine-sweden/nallo/pull/1273) - A single aligned BAM with an index (`aligned_bam` entry points) or a single aligned output (`--alignment_processes 1`) is no longer passed through `SAMTOOLS_MERGE`; published `*_haplotagged` files are always named after the sample
 
 ### Removed
 
