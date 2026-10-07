@@ -766,16 +766,16 @@ output {
         enabled params.skip_portello && params.skip_phasing
     }
     aligned_haplotagged_reads_bam {
-        // HiPhase uses the input file (aligned reads) as template for naming output, so we need to remove the "_aligned" suffix here
+        // HiPhase uses the input file (aligned reads) as template for naming output, so we need to name the files after the sample here
         path { meta, file ->
-            file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_aligned(_reads)*", "")}"
+            file >> "aligned_reads/${meta.id}/${meta.id}${file.name.substring(file.name.indexOf('_haplotagged'))}"
         }
         enabled params.alignment_output_format == 'bam'
     }
     aligned_haplotagged_reads_cram {
-        // HiPhase uses the input file (aligned reads) as template for naming output, so we need to remove the "_aligned" suffix here
+        // HiPhase uses the input file (aligned reads) as template for naming output, so we need to name the files after the sample here
         path { meta, file ->
-            file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_aligned(_reads)*", "")}"
+            file >> "aligned_reads/${meta.id}/${meta.id}${file.name.substring(file.name.indexOf('_haplotagged'))}"
         }
         enabled params.alignment_output_format == 'cram'
     }
