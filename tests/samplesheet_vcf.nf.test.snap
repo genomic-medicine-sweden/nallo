@@ -1,7 +1,7 @@
 {
     "samplesheet_vcf | vcf entry_point | Revio trio": {
         "content": [
-            231,
+            228,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -175,9 +175,6 @@
                 },
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.23.1"
-                },
-                "SAMTOOLS_MERGE": {
-                    "samtools": 1.24
                 },
                 "SAMTOOLS_SORT": {
                     "samtools": "1.23.1"
@@ -1072,7 +1069,7 @@
                 
             ]
         ],
-        "timestamp": "2026-10-02T17:59:54.654314358",
+        "timestamp": "2026-10-07T19:21:23.121363984",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
