@@ -301,6 +301,9 @@ workflow NALLO {
         ch_assembly_bam_bai = ALIGN_ASSEMBLIES.out.unfiltered_bam.join(ALIGN_ASSEMBLIES.out.unfiltered_bai, failOnMismatch: true, failOnDuplicate: true)
     }
 
+    ch_input_bam = channel.empty()
+    ch_aligned_reads_published = channel.empty()
+
     if (!val_skip_alignment) {
 
         ch_aligned_for_merge = channel.empty()
@@ -345,18 +348,35 @@ workflow NALLO {
         // Strip per-row routing fields from meta before groupTuple so multi-BAM samples
         // with different aligned_bam values still group under the same sample meta.
         // SAMTOOLS_MERGE expects indexes but is happy to merge without them.
+        // A single BAM is passed on without merging if it has an index next to it (<name>.bam.bai or <name>.bai).
         ch_aligned_for_merge = ch_aligned_for_merge.mix(
             ch_samplesheet.filter { meta, _reads -> meta.entry_point in ['bam', 'vcf'] }.map { meta, _reads ->
                 [meta - meta.subMap('aligned_bam', 'snv_vcf', 'sv_vcf'), meta.aligned_bam]
-            }.groupTuple().map { meta, bams -> [meta, bams, []] }
+            }.groupTuple().map { meta, bams ->
+                def bais = bams.size() == 1 ? [bams[0].resolveSibling("${bams[0].name}.bai"), bams[0].resolveSibling("${bams[0].baseName}.bai")].findAll { bai -> bai.exists() }.take(1) : []
+                [meta, bams, bais]
+            }
         )
 
+        // A single BAM with an index is already merged
+        ch_aligned_for_merge_branched = ch_aligned_for_merge.branch { _meta, bams, bais ->
+            indexed: bams.size() == 1 && bais.size() == 1
+            unindexed: true
+        }
+
         SAMTOOLS_MERGE(
-            ch_aligned_for_merge,
+            ch_aligned_for_merge_branched.unindexed,
             [[], [], [], []],
         )
 
-        ch_aligned_bam = SAMTOOLS_MERGE.out.bam.join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true)
+        ch_aligned_bam = SAMTOOLS_MERGE.out.bam
+            .join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true)
+            .mix(ch_aligned_for_merge_branched.indexed.map { meta, bams, bais -> [meta, bams[0], bais[0]] })
+
+        // The BAM of a samplesheet sample with a single aligned_bam is an input file, not an output of the pipeline
+        ch_input_bam = ch_aligned_for_merge_branched.indexed
+            .filter { meta, _bams, _bais -> meta.entry_point in ['bam', 'vcf'] }
+            .map { meta, _bams, _bais -> [meta, true] }
 
         // Publish alignments as CRAM if requested
         if (val_convert_unphased_aligned_reads_to_cram) {
@@ -379,7 +399,7 @@ workflow NALLO {
 
         if (val_sv_callers_to_run.contains("sniffles") && val_read_aligner == "pbmm2") {
             SAMTOOLS_CALMD(
-                val_skip_portello ? SAMTOOLS_MERGE.out.bam : PORTELLO.out.bam,
+                ch_aligned_bam.map { meta, bam, _bai -> [meta, bam] },
                 ch_fasta.join(ch_fai).collect(),
             )
 
@@ -387,6 +407,14 @@ workflow NALLO {
 
             ch_aligned_bam = SAMTOOLS_CALMD.out.bam.join(SAMTOOLS_INDEX.out.index, failOnMismatch: true, failOnDuplicate: true)
         }
+
+        // Do not publish the input BAM of a samplesheet sample if no process has changed it
+        val_aligned_bam_changed = !val_skip_portello || (val_sv_callers_to_run.contains("sniffles") && val_read_aligner == "pbmm2")
+
+        ch_aligned_reads_published = ch_aligned_bam
+            .join(ch_input_bam, remainder: true)
+            .filter { _meta, _bam, _bai, input_bam -> val_aligned_bam_changed || !input_bam }
+            .map { meta, bam, bai, _input_bam -> [meta, bam, bai] }
 
         //
         // Create PED from samplesheet
@@ -1338,8 +1366,8 @@ workflow NALLO {
     aligned_haplotagged_reads_bam       = val_skip_phasing ? channel.empty() : PHASING.out.haplotagged_bam_bai.map { meta, bam, _bai -> [meta, bam] } // channel: [ val(meta), path(bam) ]
     aligned_haplotagged_reads_crai      = val_skip_phasing ? channel.empty() : PHASING.out.haplotagged_cram_crai.map { meta, _cram, crai -> [meta, crai] } // channel: [ val(meta), path(crai) ]
     aligned_haplotagged_reads_cram      = val_skip_phasing ? channel.empty() : PHASING.out.haplotagged_cram_crai.map { meta, cram, _crai -> [meta, cram] } // channel: [ val(meta), path(cram) ]
-    aligned_reads_bai                   = val_skip_alignment ? channel.empty() : ch_aligned_bam.map { meta, _bam, bai -> [meta, bai] } // channel: [ val(meta), path(bai) ]
-    aligned_reads_bam                   = val_skip_alignment ? channel.empty() : ch_aligned_bam.map { meta, bam, _bai -> [meta, bam] } // channel: [ val(meta), path(bam) ]
+    aligned_reads_bai                   = val_skip_alignment ? channel.empty() : ch_aligned_reads_published.map { meta, _bam, bai -> [meta, bai] } // channel: [ val(meta), path(bai) ]
+    aligned_reads_bam                   = val_skip_alignment ? channel.empty() : ch_aligned_reads_published.map { meta, bam, _bai -> [meta, bam] } // channel: [ val(meta), path(bam) ]
     aligned_reads_crai                  = !val_convert_unphased_aligned_reads_to_cram ? channel.empty() : SAMTOOLS_CONVERT.out.crai // channel: [ val(meta), path(crai) ]
     aligned_reads_cram                  = !val_convert_unphased_aligned_reads_to_cram ? channel.empty() : SAMTOOLS_CONVERT.out.cram // channel: [ val(meta), path(cram) ]
     assembly_summary                    = val_skip_genome_assembly ? channel.empty() : GENOME_ASSEMBLY.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
