@@ -349,34 +349,35 @@ workflow NALLO {
         // with different aligned_bam values still group under the same sample meta.
         // SAMTOOLS_MERGE expects indexes but is happy to merge without them.
         // A single BAM is passed on without merging if it has an index next to it (<name>.bam.bai or <name>.bai).
-        ch_aligned_for_merge = ch_aligned_for_merge.mix(
-            ch_samplesheet.filter { meta, _reads -> meta.entry_point in ['bam', 'vcf'] }.map { meta, _reads ->
+        ch_samplesheet_aligned_bams = ch_samplesheet
+            .filter { meta, _reads -> meta.entry_point in ['bam', 'vcf'] }
+            .map { meta, _reads ->
                 [meta - meta.subMap('aligned_bam', 'snv_vcf', 'sv_vcf'), meta.aligned_bam]
-            }.groupTuple().map { meta, bams ->
+            }
+            .groupTuple()
+            .map { meta, bams ->
                 def bais = bams.size() == 1 ? [bams[0].resolveSibling("${bams[0].name}.bai"), bams[0].resolveSibling("${bams[0].baseName}.bai")].findAll { bai -> bai.exists() }.take(1) : []
                 [meta, bams, bais]
             }
-        )
 
-        // A single BAM with an index is already merged
-        ch_aligned_for_merge_branched = ch_aligned_for_merge.branch { _meta, bams, bais ->
+        ch_samplesheet_aligned_bams_branched = ch_samplesheet_aligned_bams.branch { _meta, bams, bais ->
             indexed: bams.size() == 1 && bais.size() == 1
             unindexed: true
         }
 
+        ch_aligned_for_merge = ch_aligned_for_merge.mix(ch_samplesheet_aligned_bams_branched.unindexed)
+
         SAMTOOLS_MERGE(
-            ch_aligned_for_merge_branched.unindexed,
+            ch_aligned_for_merge,
             [[], [], [], []],
         )
 
         ch_aligned_bam = SAMTOOLS_MERGE.out.bam
             .join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true)
-            .mix(ch_aligned_for_merge_branched.indexed.map { meta, bams, bais -> [meta, bams[0], bais[0]] })
+            .mix(ch_samplesheet_aligned_bams_branched.indexed.map { meta, bams, bais -> [meta, bams[0], bais[0]] })
 
         // The BAM of a samplesheet sample with a single aligned_bam is an input file, not an output of the pipeline
-        ch_input_bam = ch_aligned_for_merge_branched.indexed
-            .filter { meta, _bams, _bais -> meta.entry_point in ['bam', 'vcf'] }
-            .map { meta, _bams, _bais -> [meta, true] }
+        ch_input_bam = ch_samplesheet_aligned_bams_branched.indexed.map { meta, _bams, _bais -> [meta, true] }
 
         // Publish alignments as CRAM if requested
         if (val_convert_unphased_aligned_reads_to_cram) {
