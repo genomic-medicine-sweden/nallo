@@ -67,6 +67,7 @@ include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SVS                     } from '../modu
 include { MINIMAP2_ALIGN                                         } from '../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_MERGE                                         } from '../modules/nf-core/samtools/merge/main'
 include { SAMTOOLS_INDEX                                         } from '../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_INPUT                 } from '../modules/nf-core/samtools/index/main'
 include { SAMTOOLS_CONVERT                                       } from '../modules/nf-core/samtools/convert/main'
 include { SAMTOOLS_CALMD                                         } from '../modules/nf-core/samtools/calmd/main'
 include { MULTIQC                                                } from '../modules/nf-core/multiqc/main'
@@ -347,37 +348,38 @@ workflow NALLO {
         // For bam/vcf entry points, use pre-aligned BAM from the aligned_bam column.
         // Strip per-row routing fields from meta before groupTuple so multi-BAM samples
         // with different aligned_bam values still group under the same sample meta.
-        // SAMTOOLS_MERGE expects indexes but is happy to merge without them.
-        // A single BAM is passed on without merging if it has an index next to it (<name>.bam.bai or <name>.bai).
+        // A single BAM has nothing to merge, so it is only indexed.
         ch_samplesheet_aligned_bams = ch_samplesheet
             .filter { meta, _reads -> meta.entry_point in ['bam', 'vcf'] }
             .map { meta, _reads ->
                 [meta - meta.subMap('aligned_bam', 'snv_vcf', 'sv_vcf'), meta.aligned_bam]
             }
             .groupTuple()
-            .map { meta, bams ->
-                def bais = bams.size() == 1 ? [bams[0].resolveSibling("${bams[0].name}.bai"), bams[0].resolveSibling("${bams[0].baseName}.bai")].findAll { bai -> bai.exists() }.take(1) : []
-                [meta, bams, bais]
+            .branch { _meta, bams ->
+                single: bams.size() == 1
+                multi: true
             }
 
-        ch_samplesheet_aligned_bams_branched = ch_samplesheet_aligned_bams.branch { _meta, bams, bais ->
-            indexed: bams.size() == 1 && bais.size() == 1
-            unindexed: true
-        }
-
-        ch_aligned_for_merge = ch_aligned_for_merge.mix(ch_samplesheet_aligned_bams_branched.unindexed)
+        // SAMTOOLS_MERGE expects indexes but is happy to merge without them.
+        ch_aligned_for_merge = ch_aligned_for_merge.mix(
+            ch_samplesheet_aligned_bams.multi.map { meta, bams -> [meta, bams, []] }
+        )
 
         SAMTOOLS_MERGE(
             ch_aligned_for_merge,
             [[], [], [], []],
         )
 
+        ch_single_aligned_bam = ch_samplesheet_aligned_bams.single.map { meta, bams -> [meta, bams[0]] }
+
+        SAMTOOLS_INDEX_INPUT(ch_single_aligned_bam)
+
         ch_aligned_bam = SAMTOOLS_MERGE.out.bam
             .join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true)
-            .mix(ch_samplesheet_aligned_bams_branched.indexed.map { meta, bams, bais -> [meta, bams[0], bais[0]] })
+            .mix(ch_single_aligned_bam.join(SAMTOOLS_INDEX_INPUT.out.index, failOnMismatch: true, failOnDuplicate: true))
 
         // The BAM of a samplesheet sample with a single aligned_bam is an input file, not an output of the pipeline
-        ch_input_bam = ch_samplesheet_aligned_bams_branched.indexed.map { meta, _bams, _bais -> [meta, true] }
+        ch_input_bam = ch_single_aligned_bam.map { meta, _bam -> [meta, true] }
 
         // Publish alignments as CRAM if requested
         if (val_convert_unphased_aligned_reads_to_cram) {
