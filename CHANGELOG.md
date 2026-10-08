@@ -212,6 +212,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Parameter has been added if just the new parameter information is present.
 > Parameter has been removed if new parameter information isn't present.
 
+- [#1273](https://github.com/genomic-medicine-sweden/nallo/pull/1273) - Added `--publish_input_aligned_bams` to publish the aligned BAMs given in the samplesheet as aligned reads (default `false`)
+
 ### Module updates
 
 | Tool                           | Old version | New version |

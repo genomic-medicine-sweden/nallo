@@ -162,6 +162,7 @@ workflow NALLO {
     val_plot_chromograph_autozygosity
     val_plot_chromograph_coverage
     val_pre_vep_snv_filter_expression
+    val_publish_input_aligned_bams
     val_read_aligner
     val_sentieon_tech
     val_skip_alignment
@@ -411,12 +412,12 @@ workflow NALLO {
             ch_aligned_bam = SAMTOOLS_CALMD.out.bam.join(SAMTOOLS_INDEX.out.index, failOnMismatch: true, failOnDuplicate: true)
         }
 
-        // Do not publish the input BAM of a samplesheet sample if no process has changed it
+        // Do not publish the input BAM of a samplesheet sample if no process has changed it, unless requested
         val_aligned_bam_changed = !val_skip_portello || (val_sv_callers_to_run.contains("sniffles") && val_read_aligner == "pbmm2")
 
         ch_aligned_reads_published = ch_aligned_bam
             .join(ch_input_bam, remainder: true)
-            .filter { _meta, _bam, _bai, input_bam -> val_aligned_bam_changed || !input_bam }
+            .filter { _meta, _bam, _bai, input_bam -> val_publish_input_aligned_bams || val_aligned_bam_changed || !input_bam }
             .map { meta, bam, bai, _input_bam -> [meta, bam, bai] }
 
         //
