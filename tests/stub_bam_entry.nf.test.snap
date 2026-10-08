@@ -1,7 +1,7 @@
 {
     "stub | bam entry_point | Revio trio": {
         "content": [
-            354,
+            360,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -66,8 +66,15 @@
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
                 },
+                "BGZIPTABIX_MITO": {
+                    "bgzip": 1.21,
+                    "tabix": 1.21
+                },
                 "CAT_CAT": {
                     "pigz": 2.8
+                },
+                "COLLAPSE_MITOCHONDRIAL_GT": {
+                    "collapse_mitochondrial_gt": "1.0.0"
                 },
                 "CRAMINO": {
                     "cramino": "1.1.0"
@@ -737,10 +744,10 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-10-02T18:03:34.917882073",
+        "timestamp": "2026-10-08T10:59:35.572146635",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.09.2"
         }
     }
 }
