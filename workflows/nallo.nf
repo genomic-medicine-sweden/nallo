@@ -143,9 +143,11 @@ workflow NALLO {
     val_create_sawfish_maf_track
     val_echtvar_snv_databases
     val_fasta
-    val_filter_snvs_expression
-    val_filter_svs_expression
+    val_filter_bcftools_snvs_expression
+    val_filter_bcftools_svs_expression
     val_filter_variants_hgnc_ids
+    val_filter_vep_snvs_expression
+    val_filter_vep_svs_expression
     val_force_sawfish_joint_call_single_samples
     val_hifiasm_mode
     val_mitochondrial_caller
@@ -925,13 +927,13 @@ workflow NALLO {
 
         ch_ann_csq_pli_snv_in = ch_clin_research_snvs_vcf.research
 
-        if (val_filter_variants_hgnc_ids || val_filter_snvs_expression != '') {
+        if (val_filter_variants_hgnc_ids || val_filter_bcftools_snvs_expression != '' || val_filter_vep_snvs_expression != '') {
 
             FILTER_VARIANTS_SNVS(
                 ch_clin_research_snvs_vcf.clinical,
                 ch_hgnc_ids,
-                val_filter_snvs_expression,
-                val_filter_variants_hgnc_ids,
+                val_filter_bcftools_snvs_expression,
+                val_filter_variants_hgnc_ids || val_filter_vep_snvs_expression != '',
             )
 
             ch_ann_csq_pli_snv_in = ch_ann_csq_pli_snv_in.mix(FILTER_VARIANTS_SNVS.out.vcf)
@@ -1066,13 +1068,13 @@ workflow NALLO {
         //
         // Filter SVs
         //
-        if (val_filter_variants_hgnc_ids || val_filter_svs_expression != '') {
+        if (val_filter_variants_hgnc_ids || val_filter_bcftools_svs_expression != '' || val_filter_vep_svs_expression != '') {
 
             FILTER_VARIANTS_SVS(
                 ch_clin_research_svs_vcf.clinical,
                 ch_hgnc_ids,
-                val_filter_svs_expression,
-                val_filter_variants_hgnc_ids,
+                val_filter_bcftools_svs_expression,
+                val_filter_variants_hgnc_ids || val_filter_vep_svs_expression != '',
             )
 
             ch_ann_csq_svs_in = ch_ann_csq_svs_in.mix(FILTER_VARIANTS_SVS.out.vcf)

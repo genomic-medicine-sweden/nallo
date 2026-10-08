@@ -918,15 +918,25 @@
                     "exits": true,
                     "schema": "assets/schema_hgnc_ids.json"
                 },
-                "filter_snvs_expression": {
+                "filter_bcftools_snvs_expression": {
                     "type": "string",
                     "default": null,
-                    "description": "An expression that is passed to bcftools view to filter SNVs, e.g. --filter_snvs_expression \"-e 'INFO/AQ>60'\""
+                    "description": "An expression that is passed to bcftools view to filter SNVs, e.g. --filter_bcftools_snvs_expression \"-e 'INFO/AQ>60'\""
                 },
-                "filter_svs_expression": {
+                "filter_bcftools_svs_expression": {
                     "type": "string",
                     "default": null,
-                    "description": "An expression that is passed to bcftools view to filter SVs, e.g. --filter_svs_expression \"-e 'INFO/AQ>60'\""
+                    "description": "An expression that is passed to bcftools view to filter SVs, e.g. --filter_bcftools_svs_expression \"-e 'INFO/AQ>60'\""
+                },
+                "filter_vep_snvs_expression": {
+                    "type": "string",
+                    "default": "",
+                    "description": "An expression passed to filter_vep to filter SNVs, e.g. --filter_vep_snvs_expression \"IMPACT is HIGH\". Combined with the HGNC ID restriction using AND when filter_variants_hgnc_ids is supplied. Do not include --filter."
+                },
+                "filter_vep_svs_expression": {
+                    "type": "string",
+                    "default": "",
+                    "description": "An expression passed to filter_vep to filter SVs, e.g. --filter_vep_svs_expression \"IMPACT is HIGH\". Combined with the HGNC ID restriction using AND when filter_variants_hgnc_ids is supplied. Do not include --filter."
                 },
                 "deepvariant_model_type": {
                     "type": "string",

@@ -86,4 +86,72 @@ nextflow_pipeline {
         }
     }
 
+    test("stub | vcf entry_point | VEP expressions without HGNC IDs") {
+        tag "filter_vep_expression"
+        options "-stub"
+
+        when {
+            params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8a22201fc4c3e1026eace0a680cb2757dd4fc7c2/'
+                input                        = "$projectDir/assets/samplesheet_vcf.csv"
+                outdir                       = "$outputDir"
+                filter_variants_hgnc_ids      = null
+                filter_vep_snvs_expression    = 'IMPACT is HIGH or IMPACT is MODERATE'
+                filter_vep_svs_expression     = 'IMPACT is HIGH'
+                skip_genome_assembly         = true
+                skip_portello                = true
+                skip_repeat_calling          = true
+                skip_repeat_annotation       = true
+                skip_methylation_calling     = true
+                skip_methylation_annotation  = true
+                skip_prepare_gens_input      = true
+                skip_mitochondrial_calling   = true
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.trace.succeeded().find { task -> task.name.contains('FILTER_VARIANTS_SNVS:ENSEMBLVEP_FILTERVEP') } != null },
+                { assert workflow.trace.succeeded().find { task -> task.name.contains('FILTER_VARIANTS_SVS:ENSEMBLVEP_FILTERVEP') } != null },
+                { assert workflow.trace.succeeded().find { task -> task.name.contains('FILTER_VARIANTS_SNVS:BCFTOOLS_VIEW') || task.name.contains('FILTER_VARIANTS_SVS:BCFTOOLS_VIEW') } == null }
+            )
+        }
+    }
+
+    test("stub | vcf entry_point | VEP expressions with HGNC IDs and bcftools") {
+        tag "filter_vep_expression"
+        options "-stub"
+
+        when {
+            params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8a22201fc4c3e1026eace0a680cb2757dd4fc7c2/'
+                input                        = "$projectDir/assets/samplesheet_vcf.csv"
+                outdir                       = "$outputDir"
+                filter_variants_hgnc_ids      = params.pipelines_testdata_base_path + 'testdata/hgnc_ids.tsv'
+                filter_vep_snvs_expression    = 'IMPACT is HIGH or IMPACT is MODERATE'
+                filter_vep_svs_expression     = 'IMPACT is HIGH'
+                filter_bcftools_snvs_expression = "-i 'FILTER=\"PASS\"'"
+                filter_bcftools_svs_expression = "-i 'FILTER=\"PASS\"'"
+                skip_genome_assembly         = true
+                skip_portello                = true
+                skip_repeat_calling          = true
+                skip_repeat_annotation       = true
+                skip_methylation_calling     = true
+                skip_methylation_annotation  = true
+                skip_prepare_gens_input      = true
+                skip_mitochondrial_calling   = true
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.trace.succeeded().find { task -> task.name.contains('FILTER_VARIANTS_SNVS:ENSEMBLVEP_FILTERVEP') } != null },
+                { assert workflow.trace.succeeded().find { task -> task.name.contains('FILTER_VARIANTS_SVS:ENSEMBLVEP_FILTERVEP') } != null },
+                { assert workflow.trace.succeeded().find { task -> task.name.contains('FILTER_VARIANTS_SNVS:BCFTOOLS_VIEW') } != null },
+                { assert workflow.trace.succeeded().find { task -> task.name.contains('FILTER_VARIANTS_SVS:BCFTOOLS_VIEW') } != null }
+            )
+        }
+    }
 }

@@ -535,8 +535,12 @@ This subworkflow filters SNVs and SVs to generate a "clinical" set of variants b
 | Parameter                               | Description                                                                                                                                                               |
 | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `filter_variants_hgnc_ids` <sup>1</sup> |  Used by filter_vep to filter variants on HGNC IDs. Requires a tsv/csv file with a `hgnc_ids` column, that has one numerical HGNC ID per row, e.g. `4281` or `HGNC:4281`. |
-| `filter_snvs_expression`                | An expression that is passed to bcftools view to filter SNVs, e.g. `--filter_snvs_expression "-e 'INFO/AQ>60'"`                                                           |
-| `filter_svs_expression`                 | An expression that is passed to bcftools view to filter SVs, e.g.`--filter_snvs_expression "-e 'INFO/AQ>60'"`                                                             |
+| `filter_bcftools_snvs_expression`       | An expression that is passed to bcftools view to filter SNVs, e.g. `--filter_bcftools_snvs_expression "-e 'INFO/AQ>60'"`                                                  |
+| `filter_bcftools_svs_expression`        | An expression that is passed to bcftools view to filter SVs, e.g.`--filter_bcftools_svs_expression "-e 'INFO/AQ>60'"`                                                     |
+| `filter_vep_snvs_expression`            | An expression passed to filter_vep for SNVs, e.g. `--filter_vep_snvs_expression "IMPACT is HIGH"`. Do not include `--filter`.                                             |
+| `filter_vep_svs_expression`             | An expression passed to filter_vep for SVs, e.g. `--filter_vep_svs_expression "IMPACT is HIGH"`. Do not include `--filter`.                                               |
+
+VEP expressions can be used without an HGNC ID file. When both are supplied, the HGNC restriction and the expression are parenthesized and combined with `and` in a single VEP filter. If a bcftools expression is also supplied, bcftools filtering runs before VEP filtering.
 
 <sup>1</sup> Example file for input with `--filter_variants_hgnc_ids`:
 

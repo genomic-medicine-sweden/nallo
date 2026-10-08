@@ -182,8 +182,10 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `vep_plugin_files` | Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required for SNV annotation; only pLI_values.txt is required for SV annotation. | `string` |  |  |  |
 | `force_sawfish_joint_call_single_samples` | Force sawfish to run joint-call on single samples instead of all samples from the same family. This effectively causes SVDB to merge the samples into family VCFs instead. | `boolean` |  |  |  |
 | `filter_variants_hgnc_ids` | A tsv/csv file with a `hgnc_ids` column header, and then one numerical HGNC ID per row. E.g. `4281` or `HGNC:4281`. | `string` |  |  |  |
-| `filter_snvs_expression` | An expression that is passed to bcftools view to filter SNVs, e.g. --filter_snvs_expression "-e 'INFO/AQ>60'" | `string` | None |  |  |
-| `filter_svs_expression` | An expression that is passed to bcftools view to filter SVs, e.g. --filter_svs_expression "-e 'INFO/AQ>60'" | `string` | None |  |  |
+| `filter_bcftools_snvs_expression` | An expression that is passed to bcftools view to filter SNVs, e.g. --filter_bcftools_snvs_expression "-e 'INFO/AQ>60'" | `string` | None |  |  |
+| `filter_bcftools_svs_expression` | An expression that is passed to bcftools view to filter SVs, e.g. --filter_bcftools_svs_expression "-e 'INFO/AQ>60'" | `string` | None |  |  |
+| `filter_vep_snvs_expression` | An expression passed to filter_vep to filter SNVs, e.g. --filter_vep_snvs_expression "IMPACT is HIGH". Combined with the HGNC ID restriction using AND when filter_variants_hgnc_ids is supplied. Do not include --filter. | `string` |  |  |  |
+| `filter_vep_svs_expression` | An expression passed to filter_vep to filter SVs, e.g. --filter_vep_svs_expression "IMPACT is HIGH". Combined with the HGNC ID restriction using AND when filter_variants_hgnc_ids is supplied. Do not include --filter. | `string` |  |  |  |
 | `deepvariant_model_type` | Sets the model type used for DeepVariant. This is set automatically using `--preset` by default. (accepted: `PACBIO`\|`ONT_R104`) | `string` | PACBIO |  | True |
 | `minimap2_read_mapping_preset` | Sets the minimap2-preset (-x) for read alignment. This is set automatically using the pipeline `--preset` by default. (accepted: `map-hifi`\|`map-ont`\|`lr:hq`\|`lr:hqae`) | `string` | map-hifi |  | True |
 | `extra_hifiasm_options` | Extra options to hifiasm, used for test profile. | `string` |  |  | True |
