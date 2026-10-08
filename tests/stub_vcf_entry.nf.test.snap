@@ -1,7 +1,7 @@
 {
     "stub | vcf entry_point | ONT single-sample": {
         "content": [
-            110,
+            111,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -127,6 +127,9 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_INDEX": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_INDEX_INPUT": {
                     "samtools": "1.23.1"
                 },
                 "SOMALIER_EXTRACT": {
@@ -301,7 +304,7 @@
                 "svs/family/hg002/hg002_svs_annotated_ranked_research.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-10-07T19:27:53.131328679",
+        "timestamp": "2026-10-08T11:22:28.163036217",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
@@ -309,7 +312,7 @@
     },
     "stub | vcf entry_point | Revio trio": {
         "content": [
-            166,
+            169,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -452,6 +455,9 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_INDEX": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_INDEX_INPUT": {
                     "samtools": "1.23.1"
                 },
                 "SOMALIER_EXTRACT": {
@@ -810,7 +816,7 @@
                 "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-10-07T19:26:47.131528213",
+        "timestamp": "2026-10-08T11:21:23.229170076",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

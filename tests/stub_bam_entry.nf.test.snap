@@ -1,7 +1,7 @@
 {
     "stub | bam entry_point | Revio trio": {
         "content": [
-            351,
+            354,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -225,6 +225,9 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_INDEX": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_INDEX_INPUT": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_SORT": {
@@ -734,7 +737,7 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-10-07T19:25:20.48120793",
+        "timestamp": "2026-10-08T11:19:54.328042113",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

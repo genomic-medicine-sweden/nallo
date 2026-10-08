@@ -1,7 +1,7 @@
 {
     "samplesheet_ont_vcf | vcf entry_point | ONT singleton": {
         "content": [
-            121,
+            122,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -136,6 +136,9 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_INDEX": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_INDEX_INPUT": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_VIEW": {
@@ -591,7 +594,7 @@
                 
             ]
         ],
-        "timestamp": "2026-10-07T19:19:21.545613544",
+        "timestamp": "2026-10-08T11:15:11.208019067",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

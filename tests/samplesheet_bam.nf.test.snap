@@ -1,7 +1,7 @@
 {
     "samplesheet_bam | aligned_bam column": {
         "content": [
-            360,
+            363,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -225,6 +225,9 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_INDEX": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_INDEX_INPUT": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_SORT": {
@@ -1256,7 +1259,7 @@
                 
             ]
         ],
-        "timestamp": "2026-10-07T19:14:54.519029385",
+        "timestamp": "2026-10-08T11:10:30.338167479",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
