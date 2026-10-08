@@ -109,6 +109,7 @@ nextflow_pipeline {
         when {
             params {
                 pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8a22201fc4c3e1026eace0a680cb2757dd4fc7c2/'
+                modules_testdata_base_path   = 'https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/'
                 input                        = "$projectDir/assets/samplesheet_fastq.csv"
                 outdir                       = "$outputDir"
                 snv_caller                   = "sentieon"
@@ -116,8 +117,8 @@ nextflow_pipeline {
 
                 // Mock resources
                 sentieon_model_bundle        = params.pipelines_testdata_base_path + 'reference/test_data.bed'
-                sentieon_population_vcf      = params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz'
-                sentieon_population_tbi      = params.modules_testdata_base_path + '/genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz.tbi'
+                sentieon_population_vcf      = params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz'
+                sentieon_population_tbi      = params.modules_testdata_base_path + 'genomics/homo_sapiens/genome/vcf/dbsnp_146.hg38.vcf.gz.tbi'
                 sentieon_female_diploid_bed  = params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XX.bed'
                 sentieon_male_diploid_bed    = params.pipelines_testdata_base_path + 'reference/empty.bed'
                 sentieon_male_haploid_bed    = params.pipelines_testdata_base_path + 'reference/expected_cn.hg38.XY.bed'
