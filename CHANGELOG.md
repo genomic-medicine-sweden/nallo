@@ -49,6 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Added DeBreak as a new SV caller option (`--sv_callers debreak`)
 - [#1252](https://github.com/genomic-medicine-sweden/nallo/pull/1252) - Added `--extra_vep_options_snv_mito` param for MT-specific VEP annotation (excludes nuclear-only flags `--sift`, `--polyphen`, `--humdiv`) and `--genmod_score_config_snvs_mito` param to route mitochondrial SNVs to a dedicated rank model
 - [#1260](https://github.com/genomic-medicine-sweden/nallo/pull/1260) - Added samplesheet-based entry point routing: three new columns (`aligned_bam`, `snv_vcf`, `sv_vcf`) allow providing pre-aligned BAMs or pre-called VCFs directly in the samplesheet. The pipeline derives `meta.entry_point` (`fastq`/`ubam`/`bam`/`vcf`) at parse time and routes samples channel-based accordingly. Pre-phasing family VCFs are now published to `unphased/` on every run.
+- [#XXXX](https://github.com/genomic-medicine-sweden/nallo/pull/XXXX) - Added `COLLAPSE_MITOCHONDRIAL_GT` module to `call_mitochondrial_variants`, collapsing mitorsaw's per-haplotype pseudo-ploidy `GT` field (one entry per detected mitochondrial haplotype) into a standard diploid `GT` (`0/0`, `0/1`, `1/1`) for interoperability with the rest of the pipeline
 
 ### Changed
 

@@ -228,3 +228,6 @@ tool:
   mm2plus:
     citation: "mm2plus (Chandra et al. 2024)"
     bibliography: "Ghanshyam Chandra, Md Vasimuddin, Sanchit Misra and Chirag Jain. Accelerating whole-genome alignment in the age of complete genome assemblies. bioRxiv 2024. doi: https://doi.org/10.1101/2024.11.25.625328"
+  collapse_mitochondrial_gt:
+    citation: "collapse_mitochondrial_gt"
+    bibliography: ""

@@ -1,0 +1,60 @@
+{
+    "collapse_mitochondrial_gt - synthetic": {
+        "content": [
+            "##fileformat=VCFv4.2\n##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n##FORMAT=<ID=DP,Number=1,Type=Integer,Description=\"Read depth\">\n##FORMAT=<ID=AD,Number=R,Type=Integer,Description=\"Read depth for each allele\">\n##FORMAT=<ID=VAF,Number=A,Type=Float,Description=\"Variant allele fractions.\">\n##contig=<ID=chrM,length=16569>\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tSAMPLE\nchrM\t100\t.\tA\tG\t.\t.\t.\tGT:DP:AD:VAF\t0/0:30:30,0:0\nchrM\t200\t.\tA\tG\t.\t.\t.\tGT:DP:AD:VAF\t1/1:30:0,30:1\nchrM\t300\t.\tA\tG\t.\t.\t.\tGT:DP:AD:VAF\t0/1:30:24,6:0.2\nchrM\t400\t.\tA\tG\t.\t.\t.\tGT:DP:AD:VAF\t0/1:30:6,24:0.8\nchrM\t500\t.\tA\tG\t.\t.\t.\tGT:DP:AD:VAF\t./.:30:0,0:0",
+            [
+                [
+                    "COLLAPSE_MITOCHONDRIAL_GT",
+                    "collapse_mitochondrial_gt",
+                    "1.0.0"
+                ]
+            ]
+        ],
+        "timestamp": "2026-10-06T12:07:04.938642083",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.07.0"
+        }
+    },
+    "collapse_mitochondrial_gt - synthetic -stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_gt_collapsed.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        "COLLAPSE_MITOCHONDRIAL_GT",
+                        "collapse_mitochondrial_gt",
+                        "1.0.0"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_gt_collapsed.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_collapse_mitochondrial_gt": [
+                    [
+                        "COLLAPSE_MITOCHONDRIAL_GT",
+                        "collapse_mitochondrial_gt",
+                        "1.0.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-06T12:07:10.43645254",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.07.0"
+        }
+    }
+}
