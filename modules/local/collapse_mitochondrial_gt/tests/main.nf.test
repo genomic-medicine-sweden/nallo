@@ -16,7 +16,7 @@ nextflow_process {
                 """
                 input[0] = [
                     [id: 'test'],
-                    file("${projectDir}/modules/local/collapse_mitochondrial_gt/tests/input/mitorsaw_synthetic.vcf", checkIfExists: true)
+                    file('params.pipelines_testdata_base_path + 'testdata/mitorsaw_synthetic.vcf.gz', checkIfExists: true)
                 ]
                 """
             }
@@ -50,7 +50,7 @@ nextflow_process {
                 """
                 input[0] = [
                     [id: 'test'],
-                    file("${projectDir}/modules/local/collapse_mitochondrial_gt/tests/input/mitorsaw_synthetic.vcf", checkIfExists: true)
+                    file('params.pipelines_testdata_base_path + 'testdata/mitorsaw_synthetic.vcf.gz', checkIfExists: true)
                 ]
                 """
             }
