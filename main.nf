@@ -105,7 +105,6 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_plot_chromograph_autozygosity
     val_plot_chromograph_coverage
     val_pre_vep_snv_filter_expression
-    val_publish_input_aligned_bams
     val_read_aligner
     val_sentieon_tech
     val_skip_alignment
@@ -221,7 +220,6 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_plot_chromograph_autozygosity,
         val_plot_chromograph_coverage,
         val_pre_vep_snv_filter_expression,
-        val_publish_input_aligned_bams,
         val_read_aligner,
         val_sentieon_tech,
         val_skip_alignment,
@@ -271,6 +269,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     aligned_haplotagged_reads_bam       = NALLO.out.aligned_haplotagged_reads_bam // channel: [ val(meta), path(bam) ]
     aligned_haplotagged_reads_crai      = NALLO.out.aligned_haplotagged_reads_crai // channel: [ val(meta), path(crai) ]
     aligned_haplotagged_reads_cram      = NALLO.out.aligned_haplotagged_reads_cram // channel: [ val(meta), path(cram) ]
+    aligned_input_reads_bai             = NALLO.out.aligned_input_reads_bai // channel: [ val(meta), path(bai) ]
+    aligned_input_reads_bam             = NALLO.out.aligned_input_reads_bam // channel: [ val(meta), path(bam) ]
     aligned_reads_bai                   = NALLO.out.aligned_reads_bai // channel: [ val(meta), path(bai) ]
     aligned_reads_bam                   = NALLO.out.aligned_reads_bam // channel: [ val(meta), path(bam) ]
     aligned_reads_crai                  = NALLO.out.aligned_reads_crai // channel: [ val(meta), path(crai) ]
@@ -537,7 +537,6 @@ workflow {
         params.plot_chromograph_autozygosity,
         params.plot_chromograph_coverage,
         params.pre_vep_snv_filter_expression,
-        params.publish_input_aligned_bams,
         params.read_aligner,
         params.sentieon_tech,
         params.skip_alignment,
@@ -600,6 +599,8 @@ workflow {
     ch_aligned_haplotagged_reads_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_haplotagged_reads_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_haplotagged_reads_bai)
 
     ch_aligned_haplotagged_reads_cram = GENOMICMEDICINESWEDEN_NALLO.out.aligned_haplotagged_reads_cram.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_haplotagged_reads_crai)
+
+    ch_aligned_input_reads_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_input_reads_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_input_reads_bai)
 
     ch_aligned_reads_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_bai)
 
@@ -715,6 +716,7 @@ workflow {
     aligned_portello_reads_bam     = ch_aligned_assemblies_remapped // channel: [ val(meta), path(bam/bai) ]
     aligned_haplotagged_reads_bam  = ch_aligned_haplotagged_reads_bam // channel: [ val(meta), path(bam/bai) ]
     aligned_haplotagged_reads_cram = ch_aligned_haplotagged_reads_cram // channel: [ val(meta), path(cram/crai) ]
+    aligned_input_reads_bam        = ch_aligned_input_reads_bam // channel: [ val(meta), path(bam/bai) ]
     aligned_reads_bam              = ch_aligned_reads_bam // channel: [ val(meta), path(bam/bai) ]
     aligned_reads_cram             = ch_aligned_reads_cram // channel: [ val(meta), path(cram/crai) ]
     assembly_summary               = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
@@ -781,6 +783,10 @@ output {
             file >> "aligned_reads/${meta.id}/${meta.id}${file.name.substring(file.name.indexOf('_haplotagged'))}"
         }
         enabled params.alignment_output_format == 'cram'
+    }
+    aligned_input_reads_bam {
+        path { meta, _file -> "aligned_reads/${meta.id}/" }
+        enabled params.publish_input_aligned_bams && params.alignment_output_format == 'bam' && params.skip_phasing && params.skip_portello
     }
     aligned_reads_bam {
         path { meta, _file -> "aligned_reads/${meta.id}/" }

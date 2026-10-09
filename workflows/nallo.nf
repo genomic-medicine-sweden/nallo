@@ -162,7 +162,6 @@ workflow NALLO {
     val_plot_chromograph_autozygosity
     val_plot_chromograph_coverage
     val_pre_vep_snv_filter_expression
-    val_publish_input_aligned_bams
     val_read_aligner
     val_sentieon_tech
     val_skip_alignment
@@ -303,8 +302,11 @@ workflow NALLO {
         ch_assembly_bam_bai = ALIGN_ASSEMBLIES.out.unfiltered_bam.join(ALIGN_ASSEMBLIES.out.unfiltered_bai, failOnMismatch: true, failOnDuplicate: true)
     }
 
-    ch_input_bam = channel.empty()
-    ch_aligned_reads_published = channel.empty()
+    ch_aligned_bam_merged = channel.empty()
+    ch_aligned_bam_input = channel.empty()
+
+    // The aligned BAMs are only changed (and then always published) if portello or calmd runs on them
+    val_aligned_bam_changed = !val_skip_portello || (val_sv_callers_to_run.contains("sniffles") && val_read_aligner == "pbmm2")
 
     if (!val_skip_alignment) {
 
@@ -375,12 +377,12 @@ workflow NALLO {
 
         SAMTOOLS_INDEX_INPUT(ch_single_aligned_bam)
 
-        ch_aligned_bam = SAMTOOLS_MERGE.out.bam
-            .join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true)
-            .mix(ch_single_aligned_bam.join(SAMTOOLS_INDEX_INPUT.out.index, failOnMismatch: true, failOnDuplicate: true))
+        ch_aligned_bam_merged = SAMTOOLS_MERGE.out.bam.join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true)
 
         // The BAM of a samplesheet sample with a single aligned_bam is an input file, not an output of the pipeline
-        ch_input_bam = ch_single_aligned_bam.map { meta, _bam -> [meta, true] }
+        ch_aligned_bam_input = ch_single_aligned_bam.join(SAMTOOLS_INDEX_INPUT.out.index, failOnMismatch: true, failOnDuplicate: true)
+
+        ch_aligned_bam = ch_aligned_bam_merged.mix(ch_aligned_bam_input)
 
         // Publish alignments as CRAM if requested
         if (val_convert_unphased_aligned_reads_to_cram) {
@@ -411,14 +413,6 @@ workflow NALLO {
 
             ch_aligned_bam = SAMTOOLS_CALMD.out.bam.join(SAMTOOLS_INDEX.out.index, failOnMismatch: true, failOnDuplicate: true)
         }
-
-        // Do not publish the input BAM of a samplesheet sample if no process has changed it, unless requested
-        val_aligned_bam_changed = !val_skip_portello || (val_sv_callers_to_run.contains("sniffles") && val_read_aligner == "pbmm2")
-
-        ch_aligned_reads_published = ch_aligned_bam
-            .join(ch_input_bam, remainder: true)
-            .filter { _meta, _bam, _bai, input_bam -> val_publish_input_aligned_bams || val_aligned_bam_changed || !input_bam }
-            .map { meta, bam, bai, _input_bam -> [meta, bam, bai] }
 
         //
         // Create PED from samplesheet
@@ -1370,8 +1364,10 @@ workflow NALLO {
     aligned_haplotagged_reads_bam       = val_skip_phasing ? channel.empty() : PHASING.out.haplotagged_bam_bai.map { meta, bam, _bai -> [meta, bam] } // channel: [ val(meta), path(bam) ]
     aligned_haplotagged_reads_crai      = val_skip_phasing ? channel.empty() : PHASING.out.haplotagged_cram_crai.map { meta, _cram, crai -> [meta, crai] } // channel: [ val(meta), path(crai) ]
     aligned_haplotagged_reads_cram      = val_skip_phasing ? channel.empty() : PHASING.out.haplotagged_cram_crai.map { meta, cram, _crai -> [meta, cram] } // channel: [ val(meta), path(cram) ]
-    aligned_reads_bai                   = val_skip_alignment ? channel.empty() : ch_aligned_reads_published.map { meta, _bam, bai -> [meta, bai] } // channel: [ val(meta), path(bai) ]
-    aligned_reads_bam                   = val_skip_alignment ? channel.empty() : ch_aligned_reads_published.map { meta, bam, _bai -> [meta, bam] } // channel: [ val(meta), path(bam) ]
+    aligned_input_reads_bai             = val_skip_alignment || val_aligned_bam_changed ? channel.empty() : ch_aligned_bam_input.map { meta, _bam, bai -> [meta, bai] } // channel: [ val(meta), path(bai) ]
+    aligned_input_reads_bam             = val_skip_alignment || val_aligned_bam_changed ? channel.empty() : ch_aligned_bam_input.map { meta, bam, _bai -> [meta, bam] } // channel: [ val(meta), path(bam) ]
+    aligned_reads_bai                   = val_skip_alignment ? channel.empty() : (val_aligned_bam_changed ? ch_aligned_bam : ch_aligned_bam_merged).map { meta, _bam, bai -> [meta, bai] } // channel: [ val(meta), path(bai) ]
+    aligned_reads_bam                   = val_skip_alignment ? channel.empty() : (val_aligned_bam_changed ? ch_aligned_bam : ch_aligned_bam_merged).map { meta, bam, _bai -> [meta, bam] } // channel: [ val(meta), path(bam) ]
     aligned_reads_crai                  = !val_convert_unphased_aligned_reads_to_cram ? channel.empty() : SAMTOOLS_CONVERT.out.crai // channel: [ val(meta), path(crai) ]
     aligned_reads_cram                  = !val_convert_unphased_aligned_reads_to_cram ? channel.empty() : SAMTOOLS_CONVERT.out.cram // channel: [ val(meta), path(cram) ]
     assembly_summary                    = val_skip_genome_assembly ? channel.empty() : GENOME_ASSEMBLY.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
