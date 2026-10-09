@@ -236,6 +236,9 @@
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.23.1"
                 },
+                "SAMTOOLS_INDEX_CALMD": {
+                    "samtools": "1.23.1"
+                },
                 "SAMTOOLS_MERGE": {
                     "samtools": 1.24
                 },
@@ -1572,6 +1575,9 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_INDEX": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_INDEX_CALMD": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
