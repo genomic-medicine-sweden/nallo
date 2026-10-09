@@ -217,7 +217,9 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `rhocallviz_min_af` | Minimum allele frequency for variants to be included in rhocall viz within the chromograph subworkflow. | `number` | 0.0001 |  |  |
 | `rhocallviz_min_qual` | Minimum quality for variants to be included in rhocall viz within the chromograph subworkflow. | `number` | 10.0 |  |  |
 | `tiddit_bin_size` | Bin size to use for TIDDIT coverage wig generation in the chromograph subworkflow. | `integer` | 500 |  |  |
-| `sentieon_model_bundle` | The location of the DNAscope model bundle. Model bundle files can be found in the sentieon-models Github repository. | `string` |  |  |  |
+| `sentieon_model_bundle` | The location of the DNAscope model bundle. Model bundle files can be found in the sentieon-models Github repository. Some model bundles require a matching population VCF. | `string` |  |  |  |
+| `sentieon_population_vcf` | Population VCF containing annotations for DNAModelApply. Required for some DNAscope model bundles; the population VCF must match --sentieon_model_bundle. | `string` |  |  |  |
+| `sentieon_population_tbi` | Tabix index for --sentieon_population_vcf. Provide the matching .tbi file alongside the population VCF. | `string` |  |  |  |
 | `sentieon_tech` | Sequencing technology used to generate the reads. Supported arguments are ONT or HiFi. (accepted: `HiFi`\|`ONT`) | `string` | HiFi |  |  |
 | `sentieon_male_haploid_bed` | Interval in the reference to restrict haploid variant calling for males, in BED file format. | `string` |  |  |  |
 | `sentieon_male_diploid_bed` | Interval in the reference to restrict diploid variant calling for males, in BED file format. | `string` |  |  |  |

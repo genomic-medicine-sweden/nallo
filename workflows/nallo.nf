@@ -121,6 +121,8 @@ workflow NALLO {
     ch_sentieon_male_diploid_bed
     ch_sentieon_male_haploid_bed
     ch_sentieon_model_bundle
+    ch_sentieon_population_vcf
+    ch_sentieon_population_tbi
     ch_snv_call_regions
     ch_somalier_sites
     ch_stranger_repeat_catalog
@@ -563,6 +565,8 @@ workflow NALLO {
             ch_sentieon_female_diploid_bed,
             ch_sentieon_male_diploid_bed,
             ch_sentieon_male_haploid_bed,
+            ch_sentieon_population_vcf,
+            ch_sentieon_population_tbi,
             val_snv_caller,
             val_sentieon_tech,
         )

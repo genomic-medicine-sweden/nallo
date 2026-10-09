@@ -51,7 +51,11 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     ch_gvcftyper_in = branched_gvcfs.sentieon
         .join(branched_tbis.sentieon, failOnMismatch: true, failOnDuplicate: true)
         .map { meta, gvcfs, tbis ->
-            [meta, gvcfs, tbis, []]
+            // GVCFtyper preserves input sample order. Match the filename ordering
+            // used by BCFTOOLS_MERGE for downstream mitochondrial calls.
+            def sorted_gvcfs = gvcfs.sort { gvcf -> gvcf.name }
+            def sorted_tbis = tbis.sort { tbi -> tbi.name }
+            [meta, sorted_gvcfs, sorted_tbis, []]
         }
 
     SENTIEON_GVCFTYPER(
