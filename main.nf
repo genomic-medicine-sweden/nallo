@@ -273,6 +273,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     aligned_haplotagged_reads_bam       = NALLO.out.aligned_haplotagged_reads_bam // channel: [ val(meta), path(bam) ]
     aligned_haplotagged_reads_crai      = NALLO.out.aligned_haplotagged_reads_crai // channel: [ val(meta), path(crai) ]
     aligned_haplotagged_reads_cram      = NALLO.out.aligned_haplotagged_reads_cram // channel: [ val(meta), path(cram) ]
+    aligned_input_reads_bai             = NALLO.out.aligned_input_reads_bai // channel: [ val(meta), path(bai) ]
+    aligned_input_reads_bam             = NALLO.out.aligned_input_reads_bam // channel: [ val(meta), path(bam) ]
     aligned_reads_bai                   = NALLO.out.aligned_reads_bai // channel: [ val(meta), path(bai) ]
     aligned_reads_bam                   = NALLO.out.aligned_reads_bam // channel: [ val(meta), path(bam) ]
     aligned_reads_crai                  = NALLO.out.aligned_reads_crai // channel: [ val(meta), path(crai) ]
@@ -604,6 +606,8 @@ workflow {
 
     ch_aligned_haplotagged_reads_cram = GENOMICMEDICINESWEDEN_NALLO.out.aligned_haplotagged_reads_cram.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_haplotagged_reads_crai)
 
+    ch_aligned_input_reads_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_input_reads_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_input_reads_bai)
+
     ch_aligned_reads_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_bai)
 
     ch_aligned_reads_cram = GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_cram.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_crai)
@@ -718,6 +722,7 @@ workflow {
     aligned_portello_reads_bam     = ch_aligned_assemblies_remapped // channel: [ val(meta), path(bam/bai) ]
     aligned_haplotagged_reads_bam  = ch_aligned_haplotagged_reads_bam // channel: [ val(meta), path(bam/bai) ]
     aligned_haplotagged_reads_cram = ch_aligned_haplotagged_reads_cram // channel: [ val(meta), path(cram/crai) ]
+    aligned_input_reads_bam        = ch_aligned_input_reads_bam // channel: [ val(meta), path(bam/bai) ]
     aligned_reads_bam              = ch_aligned_reads_bam // channel: [ val(meta), path(bam/bai) ]
     aligned_reads_cram             = ch_aligned_reads_cram // channel: [ val(meta), path(cram/crai) ]
     assembly_summary               = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
@@ -772,18 +777,22 @@ output {
         enabled params.skip_portello && params.skip_phasing
     }
     aligned_haplotagged_reads_bam {
-        // HiPhase uses the input file (aligned reads) as template for naming output, so we need to remove the "_aligned" suffix here
+        // HiPhase uses the input file (aligned reads) as template for naming output, so we need to name the files after the sample here
         path { meta, file ->
-            file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_aligned(_reads)*", "")}"
+            file >> "aligned_reads/${meta.id}/${meta.id}${file.name.substring(file.name.indexOf('_haplotagged'))}"
         }
         enabled params.alignment_output_format == 'bam'
     }
     aligned_haplotagged_reads_cram {
-        // HiPhase uses the input file (aligned reads) as template for naming output, so we need to remove the "_aligned" suffix here
+        // HiPhase uses the input file (aligned reads) as template for naming output, so we need to name the files after the sample here
         path { meta, file ->
-            file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_aligned(_reads)*", "")}"
+            file >> "aligned_reads/${meta.id}/${meta.id}${file.name.substring(file.name.indexOf('_haplotagged'))}"
         }
         enabled params.alignment_output_format == 'cram'
+    }
+    aligned_input_reads_bam {
+        path { meta, _file -> "aligned_reads/${meta.id}/" }
+        enabled params.publish_input_aligned_bams && params.alignment_output_format == 'bam' && params.skip_phasing && params.skip_portello
     }
     aligned_reads_bam {
         path { meta, _file -> "aligned_reads/${meta.id}/" }
