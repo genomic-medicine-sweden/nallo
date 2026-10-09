@@ -2065,7 +2065,23 @@
 </tr>
 <tr>
 <td><code>sentieon_model_bundle</code></td>
-<td>The location of the DNAscope model bundle. Model bundle files can be found in the sentieon-models Github repository.</td>
+<td>The location of the DNAscope model bundle. Model bundle files can be found in the sentieon-models Github repository. Some model bundles require a matching population VCF.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>sentieon_population_vcf</code></td>
+<td>Population VCF containing annotations for DNAModelApply. Required for some DNAscope model bundles; the population VCF must match --sentieon_model_bundle.</td>
+<td><code>string</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>sentieon_population_tbi</code></td>
+<td>Tabix index for --sentieon_population_vcf. Provide the matching .tbi file alongside the population VCF.</td>
 <td><code>string</code></td>
 <td></td>
 <td></td>

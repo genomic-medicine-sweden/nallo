@@ -1855,6 +1855,14 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 <td>Path to the DNAscope model bundle to load. Sentieon provides pre-trained bundles in the <a href="https://github.com/Sentieon/sentieon-models">sentieon-models</a> repository.</td>
 </tr>
 <tr>
+<td><code>sentieon_population_vcf</code></td>
+<td>Population VCF containing annotations for DNAModelApply. Required for some model bundles; it must match <code>sentieon_model_bundle</code>.</td>
+</tr>
+<tr>
+<td><code>sentieon_population_tbi</code></td>
+<td>Matching tabix index for <code>sentieon_population_vcf</code>.</td>
+</tr>
+<tr>
 <td><code>sentieon_tech</code></td>
 <td>Sequencing technology used by Sentieon DNAscope (<code>HiFi</code> or <code>ONT</code>). Defaults to <code>HiFi</code>, but is automatically set to <code>ONT</code> when running with the ONT presets.</td>
 </tr>
@@ -1873,6 +1881,7 @@ NB: The order of profiles is important! They are loaded in sequence, so later pr
 </tbody>
 </table>
 <p>All three Sentieon BED files and the model bundle must be provided when using Sentieon.</p>
+<p>If the selected model bundle requires population annotations, also supply <code>--sentieon_population_vcf</code> and <code>--sentieon_population_tbi</code>. Use the population VCF specified for that model bundle. The index filename must match the VCF filename with <code>.tbi</code> appended (for example, <code>population.vcf.gz.tbi</code>). These inputs can be omitted for model bundles that do not require a population VCF.</p>
 <p>Turned off with <code>--skip_snv_calling</code>.</p>
 <h4 id="call-svs">Call SVs</h4>
 <p>This subworkflow depends on the alignment subworkflow.</p>
