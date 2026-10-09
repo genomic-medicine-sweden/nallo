@@ -66,7 +66,7 @@ include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING                 } from '../modu
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SVS                     } from '../modules/nf-core/bcftools/view/main'
 include { MINIMAP2_ALIGN                                         } from '../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_MERGE                                         } from '../modules/nf-core/samtools/merge/main'
-include { SAMTOOLS_INDEX                                         } from '../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_CALMD                 } from '../modules/nf-core/samtools/index/main'
 include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_INPUT                 } from '../modules/nf-core/samtools/index/main'
 include { SAMTOOLS_CONVERT                                       } from '../modules/nf-core/samtools/convert/main'
 include { SAMTOOLS_CALMD                                         } from '../modules/nf-core/samtools/calmd/main'
@@ -409,9 +409,9 @@ workflow NALLO {
                 ch_fasta.join(ch_fai).collect(),
             )
 
-            SAMTOOLS_INDEX(SAMTOOLS_CALMD.out.bam)
+            SAMTOOLS_INDEX_CALMD(SAMTOOLS_CALMD.out.bam)
 
-            ch_aligned_bam = SAMTOOLS_CALMD.out.bam.join(SAMTOOLS_INDEX.out.index, failOnMismatch: true, failOnDuplicate: true)
+            ch_aligned_bam = SAMTOOLS_CALMD.out.bam.join(SAMTOOLS_INDEX_CALMD.out.index, failOnMismatch: true, failOnDuplicate: true)
         }
 
         //
