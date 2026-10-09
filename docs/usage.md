@@ -244,12 +244,16 @@ Additional inputs are required for Sentieon DNAscope:
 | Parameter                     | Description                                                                                                                                                        |
 | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `sentieon_model_bundle`       | Path to the DNAscope model bundle to load. Sentieon provides pre-trained bundles in the [sentieon-models](https://github.com/Sentieon/sentieon-models) repository. |
+| `sentieon_population_vcf`     | Population VCF containing annotations for DNAModelApply. Required for some model bundles; it must match `sentieon_model_bundle`.                                   |
+| `sentieon_population_tbi`     | Matching tabix index for `sentieon_population_vcf`.                                                                                                                |
 | `sentieon_tech`               | Sequencing technology used by Sentieon DNAscope (`HiFi` or `ONT`). Defaults to `HiFi`, but is automatically set to `ONT` when running with the ONT presets.        |
 | `sentieon_male_haploid_bed`   | BED file that restricts haploid variant calling for male samples (typically the Y chromosome non-PAR region).                                                      |
 | `sentieon_male_diploid_bed`   | BED file that restricts diploid variant calling for male samples (typically autosomes + chrX PAR).                                                                 |
 | `sentieon_female_diploid_bed` | BED file that restricts diploid variant calling for female samples (typically autosomes + chrX).                                                                   |
 
 All three Sentieon BED files and the model bundle must be provided when using Sentieon.
+
+If the selected model bundle requires population annotations, also supply `--sentieon_population_vcf` and `--sentieon_population_tbi`. Use the population VCF specified for that model bundle. The index filename must match the VCF filename with `.tbi` appended (for example, `population.vcf.gz.tbi`). These inputs can be omitted for model bundles that do not require a population VCF.
 
 Turned off with `--skip_snv_calling`.
 
