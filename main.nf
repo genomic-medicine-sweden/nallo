@@ -65,6 +65,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     ch_sentieon_male_diploid_bed
     ch_sentieon_male_haploid_bed
     ch_sentieon_model_bundle
+    ch_sentieon_population_vcf
+    ch_sentieon_population_tbi
     ch_snv_call_regions
     ch_somalier_sites
     ch_stranger_repeat_catalog
@@ -180,6 +182,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         ch_sentieon_male_diploid_bed,
         ch_sentieon_male_haploid_bed,
         ch_sentieon_model_bundle,
+        ch_sentieon_population_vcf,
+        ch_sentieon_population_tbi,
         ch_snv_call_regions,
         ch_somalier_sites,
         ch_stranger_repeat_catalog,
@@ -495,6 +499,8 @@ workflow {
         createReferenceChannelFromPath(params.sentieon_male_diploid_bed, channel.value([[], []])),
         createReferenceChannelFromPath(params.sentieon_male_haploid_bed, channel.value([[], []])),
         createReferenceChannelFromPath(params.sentieon_model_bundle, channel.value([[], []])),
+        createReferenceChannelFromPath(params.sentieon_population_vcf, channel.value([[], []])),
+        createReferenceChannelFromPath(params.sentieon_population_tbi, channel.value([[], []])),
         createReferenceChannelFromPath(params.snv_call_regions, channel.value([[], []])),
         createReferenceChannelFromPath(params.somalier_sites),
         createReferenceChannelFromPath(params.stranger_repeat_catalog),
