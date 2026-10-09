@@ -371,7 +371,7 @@ workflow NALLO {
             [[], [], [], []],
         )
 
-        ch_single_aligned_bam = ch_samplesheet_aligned_bams.single.map { meta, bams -> [meta, bams[0]] }
+        ch_single_aligned_bam = ch_samplesheet_aligned_bams.single.transpose()
 
         SAMTOOLS_INDEX_INPUT(ch_single_aligned_bam)
 
