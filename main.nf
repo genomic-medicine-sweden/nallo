@@ -88,9 +88,11 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_create_sawfish_maf_track
     val_echtvar_snv_databases
     val_fasta
-    val_filter_snvs_expression
-    val_filter_svs_expression
+    val_filter_bcftools_snvs_expression
+    val_filter_bcftools_svs_expression
     val_filter_variants_hgnc_ids
+    val_filter_vep_snvs_expression
+    val_filter_vep_svs_expression
     val_force_sawfish_joint_call_single_samples
     val_hifiasm_mode
     val_methylation_callers
@@ -206,9 +208,11 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_create_sawfish_maf_track,
         val_echtvar_snv_databases,
         val_fasta,
-        val_filter_snvs_expression,
-        val_filter_svs_expression,
+        val_filter_bcftools_snvs_expression,
+        val_filter_bcftools_svs_expression,
         val_filter_variants_hgnc_ids,
+        val_filter_vep_snvs_expression,
+        val_filter_vep_svs_expression,
         val_force_sawfish_joint_call_single_samples,
         val_hifiasm_mode,
         val_mitochondrial_caller,
@@ -484,7 +488,9 @@ workflow {
         createReferenceChannelFromPath(params.gens_panel_of_normals_female, '', 'female_pon'),
         createReferenceChannelFromPath(params.gens_panel_of_normals_male, '', 'male_pon'),
         createReferenceChannelFromPath(params.glnexus_config, channel.value([[id: 'glnexus_config'], "${projectDir}/assets/glnexus_config_dp1.yml"])),
-        createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', channel.value([])).map { hgnc_id_list -> hgnc_id_list[0].toString() }.collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true).map { file -> [[id: 'hgnc_ids'], file] }.collect(),
+        params.filter_variants_hgnc_ids
+            ? createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', channel.value([])).map { hgnc_id_list -> hgnc_id_list[0].toString() }.collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true).map { file -> [[id: 'hgnc_ids'], file] }.collect()
+            : channel.value([[id: 'hgnc_ids'], []]),
         PIPELINE_INITIALISATION.out.samplesheet,
         createReferenceChannelFromPath(params.cramino_regions, channel.value([[], []])),
         createReferenceChannelFromPath(params.methbat_map),
@@ -522,9 +528,11 @@ workflow {
         params.create_sawfish_maf_track,
         params.echtvar_snv_databases,
         params.fasta,
-        params.filter_snvs_expression,
-        params.filter_svs_expression,
+        params.filter_bcftools_snvs_expression,
+        params.filter_bcftools_svs_expression,
         params.filter_variants_hgnc_ids,
+        params.filter_vep_snvs_expression,
+        params.filter_vep_svs_expression,
         params.force_sawfish_joint_call_single_samples,
         params.hifiasm_mode,
         params.methylation_callers,
