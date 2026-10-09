@@ -19,21 +19,6 @@
     "collapse_mitochondrial_gt - synthetic -stub": {
         "content": [
             {
-                "0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test_gt_collapsed.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "1": [
-                    [
-                        "COLLAPSE_MITOCHONDRIAL_GT",
-                        "collapse_mitochondrial_gt",
-                        "1.0.0"
-                    ]
-                ],
                 "vcf": [
                     [
                         {
@@ -51,10 +36,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-10-06T12:07:10.43645254",
+        "timestamp": "2026-10-09T10:39:15.215806139",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.09.2"
         }
     }
 }
