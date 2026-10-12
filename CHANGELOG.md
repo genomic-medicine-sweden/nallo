@@ -141,6 +141,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1266](https://github.com/genomic-medicine-sweden/nallo/pull/1266) - Set explicit matching parameters for `SVDB_QUERY`, `SVDB_MERGE_BY_CALLER` and `SVDB_MERGE_BY_FAMILY` (`--overlap`, `--bnd_distance`, `--ins_distance`, `--ins_svlen_ratio` and `--ins_seq_similarity`) and expose them as the `--svdb_query_*`, `--svdb_merge_by_caller_*` and `--svdb_merge_by_family_*` parameters
 - [#1272](https://github.com/genomic-medicine-sweden/nallo/pull/1272) - Changed CI to use `latest-stable` version of Nextflow instead of `latest-everything`
 - [#1268](https://github.com/genomic-medicine-sweden/nallo/pull/1268) - Updated the sentieon-cli container from `1.6.2-0` to `2.0.0-0`
+- [#1280](https://github.com/genomic-medicine-sweden/nallo/pull/1280/) - Updated commit hash for test dataset paths
+
 
 ### Removed
 
@@ -178,7 +180,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1259](https://github.com/genomic-medicine-sweden/nallo/pull/1259) - Fixed `snvs/family` output silently missing on targeted runs whose capture does not cover chrM: `groupKey` at `CONCAT_SORT_RANKED_SNVS` expected `num_intervals + 1` items but the mito VCF never arrived because `call_mitochondrial_variants` skips families with an empty mito BED
 - [#1268](https://github.com/genomic-medicine-sweden/nallo/pull/1268) - Fixed inconsistent sample order in Sentieon joint-called VCFs by sorting gVCF and index inputs by filename before GVCFtyper, to match the ordering used for mitochondrial merging
 - [#1275](https://github.com/genomic-medicine-sweden/nallo/pull/1275) - Fixed `tests/stub_methbat_map_validation.nf.test` test to catch the error message in the stderr not in the stdout
-- [#1280](https://github.com/genomic-medicine-sweden/nallo/pull/1280/) - Updated commit hash for test dataset paths
 
 ### Parameters
 
