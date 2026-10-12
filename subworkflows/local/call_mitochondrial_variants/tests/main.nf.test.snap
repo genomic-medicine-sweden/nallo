@@ -18,7 +18,7 @@
         "timestamp": "2026-10-12T14:56:54.77932081",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.07.0"
         }
     },
     "2 samples - mitorsaw (Deepvariant/mitorsaw)": {
@@ -100,7 +100,7 @@
         "timestamp": "2026-10-12T14:57:34.919279567",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.07.0"
         }
     },
     "1 sample - mitorsaw (Deepvariant/mitorsaw)": {
@@ -228,7 +228,7 @@
         "timestamp": "2026-10-12T14:56:17.184918173",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.07.0"
         }
     },
     "1 sample - deepvariant (Deepvariant/Deepvariant) - without chrM intervals": {
