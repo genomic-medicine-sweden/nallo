@@ -23,7 +23,7 @@ nextflow_process {
         }
 
         then {
-            def vcf_lines = path(process.out.vcf.get(0).get(1)).readLines()
+            def vcf_lines = path(process.out.vcf[0][1]).linesGzip
             assertAll(
                 { assert process.success },
                 // all haplotypes REF -> 0/0, other FORMAT fields untouched

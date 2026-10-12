@@ -19,12 +19,27 @@
     "collapse_mitochondrial_gt - synthetic -stub": {
         "content": [
             {
+                "tbi": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_gt_collapsed.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
                 "vcf": [
                     [
                         {
                             "id": "test"
                         },
-                        "test_gt_collapsed.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_gt_collapsed.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "versions_bgzip": [
+                    [
+                        "COLLAPSE_MITOCHONDRIAL_GT",
+                        "bgzip",
+                        "1.21"
                     ]
                 ],
                 "versions_collapse_mitochondrial_gt": [
@@ -33,10 +48,17 @@
                         "collapse_mitochondrial_gt",
                         "1.0.0"
                     ]
+                ],
+                "versions_tabix": [
+                    [
+                        "COLLAPSE_MITOCHONDRIAL_GT",
+                        "tabix",
+                        "1.21"
+                    ]
                 ]
             }
         ],
-        "timestamp": "2026-10-09T10:39:15.215806139",
+        "timestamp": "2026-10-12T11:54:43.210784477",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.09.2"
