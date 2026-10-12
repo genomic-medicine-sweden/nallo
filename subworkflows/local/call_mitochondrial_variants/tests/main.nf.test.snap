@@ -9,16 +9,16 @@
                         "genome": "mitochondrial",
                         "num_intervals": 1
                     },
-                    "test_chr22_chrM_mitochondrial_deepvariant.vcf.gz",
+                    "test_mitochondrial_deepvariant.vcf.gz",
                     "VcfFile [chromosomes=[chrM], sampleCount=1, variantCount=14, phased=false, phasedAutodetect=false]",
                     "34764eb750d6bb0c027164afd51f70fc"
                 ]
             ]
         ],
-        "timestamp": "2026-07-29T11:32:30.881953621",
+        "timestamp": "2026-10-12T14:56:54.77932081",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     },
     "2 samples - mitorsaw (Deepvariant/mitorsaw)": {
@@ -80,7 +80,7 @@
                         "genome": "mitochondrial",
                         "num_intervals": 1
                     },
-                    "test_sample1_chr22_chrM_mitochondrial_deepvariant.vcf.gz",
+                    "test_sample1_mitochondrial_deepvariant.vcf.gz",
                     "VcfFile [chromosomes=[chrM], sampleCount=1, variantCount=15, phased=false, phasedAutodetect=false]",
                     "f2f3dc995906636c0fba2f9a2d71cbb5"
                 ],
@@ -91,16 +91,16 @@
                         "genome": "mitochondrial",
                         "num_intervals": 1
                     },
-                    "test_sample2_chr22_chrM_mitochondrial_deepvariant.vcf.gz",
+                    "test_sample2_mitochondrial_deepvariant.vcf.gz",
                     "VcfFile [chromosomes=[chrM], sampleCount=1, variantCount=29, phased=false, phasedAutodetect=false]",
                     "ba551268e92013b800064640f4efb6bf"
                 ]
             ]
         ],
-        "timestamp": "2026-07-29T11:33:03.899492053",
+        "timestamp": "2026-10-12T14:57:34.919279567",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     },
     "1 sample - mitorsaw (Deepvariant/mitorsaw)": {
@@ -219,16 +219,16 @@
                         "genome": "mitochondrial",
                         "num_intervals": 1
                     },
-                    "test_chr22_chrM_mitochondrial_deepvariant.vcf.gz",
+                    "test_mitochondrial_deepvariant.vcf.gz",
                     "VcfFile [chromosomes=[chrM], sampleCount=1, variantCount=15, phased=false, phasedAutodetect=false]",
                     "f2f3dc995906636c0fba2f9a2d71cbb5"
                 ]
             ]
         ],
-        "timestamp": "2026-07-29T11:32:02.08203904",
+        "timestamp": "2026-10-12T14:56:17.184918173",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.04.6"
         }
     },
     "1 sample - deepvariant (Deepvariant/Deepvariant) - without chrM intervals": {
