@@ -143,7 +143,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1268](https://github.com/genomic-medicine-sweden/nallo/pull/1268) - Updated the sentieon-cli container from `1.6.2-0` to `2.0.0-0`
 - [#1280](https://github.com/genomic-medicine-sweden/nallo/pull/1280/) - Updated commit hash for test dataset paths
 
-
 ### Removed
 
 - [#1072](https://github.com/genomic-medicine-sweden/nallo/pull/1072) - Remove sentieon/dnascope-longread Dockerfile
