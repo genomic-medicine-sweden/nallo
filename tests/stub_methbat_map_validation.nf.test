@@ -48,7 +48,7 @@ nextflow_pipeline {
         then {
             assertAll(
                 { assert workflow.failed },
-                { assert workflow.stdout.any { it.contains("--methbat_map must be provided when running without --skip_methylation_annotation") } }
+                { assert (workflow.stdout + workflow.stderr).any { it.contains("--methbat_map must be provided when running without --skip_methylation_annotation") } }
             )
         }
     }
