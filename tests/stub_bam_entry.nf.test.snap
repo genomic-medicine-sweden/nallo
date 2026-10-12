@@ -232,8 +232,8 @@
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_MERGE": {
-                    "samtools": 1.24
+                "SAMTOOLS_INDEX_INPUT": {
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_SORT": {
                     "samtools": "1.23.1"
@@ -742,7 +742,7 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-10-12T13:41:44.419301907",
+        "timestamp": "2026-10-08T11:19:54.328042113",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.09.2"

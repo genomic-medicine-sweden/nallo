@@ -66,7 +66,8 @@ include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING                 } from '../modu
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SVS                     } from '../modules/nf-core/bcftools/view/main'
 include { MINIMAP2_ALIGN                                         } from '../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_MERGE                                         } from '../modules/nf-core/samtools/merge/main'
-include { SAMTOOLS_INDEX                                         } from '../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_CALMD                 } from '../modules/nf-core/samtools/index/main'
+include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_INPUT                 } from '../modules/nf-core/samtools/index/main'
 include { SAMTOOLS_CONVERT                                       } from '../modules/nf-core/samtools/convert/main'
 include { SAMTOOLS_CALMD                                         } from '../modules/nf-core/samtools/calmd/main'
 include { MULTIQC                                                } from '../modules/nf-core/multiqc/main'
@@ -303,6 +304,12 @@ workflow NALLO {
         ch_assembly_bam_bai = ALIGN_ASSEMBLIES.out.unfiltered_bam.join(ALIGN_ASSEMBLIES.out.unfiltered_bai, failOnMismatch: true, failOnDuplicate: true)
     }
 
+    ch_aligned_bam_merged = channel.empty()
+    ch_aligned_bam_input = channel.empty()
+
+    // The aligned BAMs are only changed (and then always published) if portello or calmd runs on them
+    val_aligned_bam_changed = !val_skip_portello || (val_sv_callers_to_run.contains("sniffles") && val_read_aligner == "pbmm2")
+
     if (!val_skip_alignment) {
 
         ch_aligned_for_merge = channel.empty()
@@ -346,11 +353,21 @@ workflow NALLO {
         // For bam/vcf entry points, use pre-aligned BAM from the aligned_bam column.
         // Strip per-row routing fields from meta before groupTuple so multi-BAM samples
         // with different aligned_bam values still group under the same sample meta.
+        // A single BAM has nothing to merge, so it is only indexed.
+        ch_samplesheet_aligned_bams = ch_samplesheet
+            .filter { meta, _reads -> meta.entry_point in ['bam', 'vcf'] }
+            .map { meta, _reads ->
+                [meta - meta.subMap('aligned_bam', 'snv_vcf', 'sv_vcf'), meta.aligned_bam]
+            }
+            .groupTuple()
+            .branch { _meta, bams ->
+                single: bams.size() == 1
+                multi: true
+            }
+
         // SAMTOOLS_MERGE expects indexes but is happy to merge without them.
         ch_aligned_for_merge = ch_aligned_for_merge.mix(
-            ch_samplesheet.filter { meta, _reads -> meta.entry_point in ['bam', 'vcf'] }.map { meta, _reads ->
-                [meta - meta.subMap('aligned_bam', 'snv_vcf', 'sv_vcf'), meta.aligned_bam]
-            }.groupTuple().map { meta, bams -> [meta, bams, []] }
+            ch_samplesheet_aligned_bams.multi.map { meta, bams -> [meta, bams, []] }
         )
 
         SAMTOOLS_MERGE(
@@ -358,7 +375,16 @@ workflow NALLO {
             [[], [], [], []],
         )
 
-        ch_aligned_bam = SAMTOOLS_MERGE.out.bam.join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true)
+        ch_single_aligned_bam = ch_samplesheet_aligned_bams.single.transpose()
+
+        SAMTOOLS_INDEX_INPUT(ch_single_aligned_bam)
+
+        ch_aligned_bam_merged = SAMTOOLS_MERGE.out.bam.join(SAMTOOLS_MERGE.out.index, failOnMismatch: true, failOnDuplicate: true)
+
+        // The BAM of a samplesheet sample with a single aligned_bam is an input file, not an output of the pipeline
+        ch_aligned_bam_input = ch_single_aligned_bam.join(SAMTOOLS_INDEX_INPUT.out.index, failOnMismatch: true, failOnDuplicate: true)
+
+        ch_aligned_bam = ch_aligned_bam_merged.mix(ch_aligned_bam_input)
 
         // Publish alignments as CRAM if requested
         if (val_convert_unphased_aligned_reads_to_cram) {
@@ -381,13 +407,13 @@ workflow NALLO {
 
         if (val_sv_callers_to_run.contains("sniffles") && val_read_aligner == "pbmm2") {
             SAMTOOLS_CALMD(
-                val_skip_portello ? SAMTOOLS_MERGE.out.bam : PORTELLO.out.bam,
+                ch_aligned_bam.map { meta, bam, _bai -> [meta, bam] },
                 ch_fasta.join(ch_fai).collect(),
             )
 
-            SAMTOOLS_INDEX(SAMTOOLS_CALMD.out.bam)
+            SAMTOOLS_INDEX_CALMD(SAMTOOLS_CALMD.out.bam)
 
-            ch_aligned_bam = SAMTOOLS_CALMD.out.bam.join(SAMTOOLS_INDEX.out.index, failOnMismatch: true, failOnDuplicate: true)
+            ch_aligned_bam = SAMTOOLS_CALMD.out.bam.join(SAMTOOLS_INDEX_CALMD.out.index, failOnMismatch: true, failOnDuplicate: true)
         }
 
         //
@@ -1342,8 +1368,10 @@ workflow NALLO {
     aligned_haplotagged_reads_bam       = val_skip_phasing ? channel.empty() : PHASING.out.haplotagged_bam_bai.map { meta, bam, _bai -> [meta, bam] } // channel: [ val(meta), path(bam) ]
     aligned_haplotagged_reads_crai      = val_skip_phasing ? channel.empty() : PHASING.out.haplotagged_cram_crai.map { meta, _cram, crai -> [meta, crai] } // channel: [ val(meta), path(crai) ]
     aligned_haplotagged_reads_cram      = val_skip_phasing ? channel.empty() : PHASING.out.haplotagged_cram_crai.map { meta, cram, _crai -> [meta, cram] } // channel: [ val(meta), path(cram) ]
-    aligned_reads_bai                   = val_skip_alignment ? channel.empty() : ch_aligned_bam.map { meta, _bam, bai -> [meta, bai] } // channel: [ val(meta), path(bai) ]
-    aligned_reads_bam                   = val_skip_alignment ? channel.empty() : ch_aligned_bam.map { meta, bam, _bai -> [meta, bam] } // channel: [ val(meta), path(bam) ]
+    aligned_input_reads_bai             = val_skip_alignment || val_aligned_bam_changed ? channel.empty() : ch_aligned_bam_input.map { meta, _bam, bai -> [meta, bai] } // channel: [ val(meta), path(bai) ]
+    aligned_input_reads_bam             = val_skip_alignment || val_aligned_bam_changed ? channel.empty() : ch_aligned_bam_input.map { meta, bam, _bai -> [meta, bam] } // channel: [ val(meta), path(bam) ]
+    aligned_reads_bai                   = val_skip_alignment ? channel.empty() : (val_aligned_bam_changed ? ch_aligned_bam : ch_aligned_bam_merged).map { meta, _bam, bai -> [meta, bai] } // channel: [ val(meta), path(bai) ]
+    aligned_reads_bam                   = val_skip_alignment ? channel.empty() : (val_aligned_bam_changed ? ch_aligned_bam : ch_aligned_bam_merged).map { meta, bam, _bai -> [meta, bam] } // channel: [ val(meta), path(bam) ]
     aligned_reads_crai                  = !val_convert_unphased_aligned_reads_to_cram ? channel.empty() : SAMTOOLS_CONVERT.out.crai // channel: [ val(meta), path(crai) ]
     aligned_reads_cram                  = !val_convert_unphased_aligned_reads_to_cram ? channel.empty() : SAMTOOLS_CONVERT.out.cram // channel: [ val(meta), path(cram) ]
     assembly_summary                    = val_skip_genome_assembly ? channel.empty() : GENOME_ASSEMBLY.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]

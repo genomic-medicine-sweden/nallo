@@ -535,6 +535,12 @@
                     "description": "Publish unannotated SVs and CNVs per family and caller.",
                     "hidden": true,
                     "fa_icon": "fas fa-users-cog"
+                },
+                "publish_input_aligned_bams": {
+                    "type": "boolean",
+                    "description": "Publish the aligned BAMs provided in the samplesheet (aligned_bam) as aligned reads, even if the pipeline has not changed them.",
+                    "hidden": true,
+                    "fa_icon": "fas fa-users-cog"
                 }
             }
         },
