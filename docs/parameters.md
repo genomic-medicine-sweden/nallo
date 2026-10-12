@@ -107,6 +107,7 @@ Parameters used to describe centralised config profiles. These should not be edi
 | `config_profile_contact` | Institutional config contact information. | `string` |  |  | True |
 | `config_profile_url` | Institutional config URL link. | `string` |  |  | True |
 | `publish_unannotated_family_svs` | Publish unannotated SVs and CNVs per family and caller. | `boolean` |  |  | True |
+| `publish_input_aligned_bams` | Publish the aligned BAMs provided in the samplesheet (aligned_bam) as aligned reads, even if the pipeline has not changed them. | `boolean` |  |  | True |
 
 ## Generic options
 

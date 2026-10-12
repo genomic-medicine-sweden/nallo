@@ -138,8 +138,8 @@
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_MERGE": {
-                    "samtools": 1.24
+                "SAMTOOLS_INDEX_INPUT": {
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_VIEW": {
                     "samtools": 1.24
@@ -594,7 +594,7 @@
                 
             ]
         ],
-        "timestamp": "2026-10-02T17:54:06.634671017",
+        "timestamp": "2026-10-08T11:15:11.208019067",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

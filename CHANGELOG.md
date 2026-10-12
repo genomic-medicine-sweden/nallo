@@ -50,6 +50,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1252](https://github.com/genomic-medicine-sweden/nallo/pull/1252) - Added `--extra_vep_options_snv_mito` param for MT-specific VEP annotation (excludes nuclear-only flags `--sift`, `--polyphen`, `--humdiv`) and `--genmod_score_config_snvs_mito` param to route mitochondrial SNVs to a dedicated rank model
 - [#1260](https://github.com/genomic-medicine-sweden/nallo/pull/1260) - Added samplesheet-based entry point routing: three new columns (`aligned_bam`, `snv_vcf`, `sv_vcf`) allow providing pre-aligned BAMs or pre-called VCFs directly in the samplesheet. The pipeline derives `meta.entry_point` (`fastq`/`ubam`/`bam`/`vcf`) at parse time and routes samples channel-based accordingly. Pre-phasing family VCFs are now published to `unphased/` on every run.
 - [#1268](https://github.com/genomic-medicine-sweden/nallo/pull/1268) - Added optional population VCF and index inputs for Sentieon DNAscope SNV-calling via `--sentieon_population_vcf` and `--sentieon_population_tbi`
+- [#1273](https://github.com/genomic-medicine-sweden/nallo/pull/1273) - Added `--publish_input_aligned_bams` to publish the aligned BAMs given in the samplesheet as aligned reads (default `false`)
 
 ### Changed
 
@@ -142,6 +143,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1272](https://github.com/genomic-medicine-sweden/nallo/pull/1272) - Changed CI to use `latest-stable` version of Nextflow instead of `latest-everything`
 - [#1268](https://github.com/genomic-medicine-sweden/nallo/pull/1268) - Updated the sentieon-cli container from `1.6.2-0` to `2.0.0-0`
 - [#1280](https://github.com/genomic-medicine-sweden/nallo/pull/1280/) - Updated commit hash for test dataset paths
+- [#1273](https://github.com/genomic-medicine-sweden/nallo/pull/1273) - A single aligned BAM per sample (`aligned_bam` entry points) is now indexed with `SAMTOOLS_INDEX` instead of being passed through `SAMTOOLS_MERGE`; published `*_haplotagged` files are always named after the sample
 
 ### Removed
 
@@ -210,6 +212,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                                  | `--svdb_query_ins_distance`                 |
 |                                  | `--svdb_query_ins_svlen_ratio`              |
 |                                  | `--svdb_query_ins_seq_similarity`           |
+|                                  | `--publish_input_aligned_bams`              |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
