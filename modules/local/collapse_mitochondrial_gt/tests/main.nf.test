@@ -16,7 +16,7 @@ nextflow_process {
                 """
                 input[0] = [
                     [id: 'test'],
-                    file('params.pipelines_testdata_base_path + 'testdata/mitorsaw_synthetic.vcf.gz', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/mitorsaw_synthetic.vcf.gz', checkIfExists: true)
                 ]
                 """
             }
@@ -50,7 +50,7 @@ nextflow_process {
                 """
                 input[0] = [
                     [id: 'test'],
-                    file('params.pipelines_testdata_base_path + 'testdata/mitorsaw_synthetic.vcf.gz', checkIfExists: true)
+                    file(params.pipelines_testdata_base_path + 'testdata/mitorsaw_synthetic.vcf.gz', checkIfExists: true)
                 ]
                 """
             }
