@@ -2408,21 +2408,31 @@ The phaser can be chosen using the <code>--phaser</code> argument. See the follo
 <td> Used by filter_vep to filter variants on HGNC IDs. Requires a tsv/csv file with a <code>hgnc_ids</code> column, that has one numerical HGNC ID per row, e.g. <code>4281</code> or <code>HGNC:4281</code>.</td>
 </tr>
 <tr>
-<td><code>filter_snvs_expression</code></td>
-<td>An expression that is passed to bcftools view to filter SNVs, e.g. <code>--filter_snvs_expression "-e 'INFO/AQ&gt;60'"</code></td>
+<td><code>filter_bcftools_snvs_expression</code></td>
+<td>An expression that is passed to bcftools view to filter SNVs, e.g. <code>--filter_bcftools_snvs_expression "-e 'INFO/AQ&gt;60'"</code></td>
 </tr>
 <tr>
-<td><code>filter_svs_expression</code></td>
-<td>An expression that is passed to bcftools view to filter SVs, e.g.<code>--filter_snvs_expression "-e 'INFO/AQ&gt;60'"</code></td>
+<td><code>filter_bcftools_svs_expression</code></td>
+<td>An expression that is passed to bcftools view to filter SVs, e.g.<code>--filter_bcftools_svs_expression "-e 'INFO/AQ&gt;60'"</code></td>
+</tr>
+<tr>
+<td><code>filter_vep_snvs_expression</code></td>
+<td>An expression passed to filter_vep for SNVs, e.g. <code>--filter_vep_snvs_expression "IMPACT is HIGH"</code>. Do not include <code>--filter</code>.</td>
+</tr>
+<tr>
+<td><code>filter_vep_svs_expression</code></td>
+<td>An expression passed to filter_vep for SVs, e.g. <code>--filter_vep_svs_expression "IMPACT is HIGH"</code>. Do not include <code>--filter</code>.</td>
 </tr>
 </tbody>
 </table>
+<p>VEP expressions can be used without an HGNC ID file. When both are supplied, the HGNC restriction and the expression are parenthesized and combined with <code>and</code> in a single VEP filter. If a bcftools expression is also supplied, bcftools filtering runs before VEP filtering.</p>
+<p>The <code>ENSEMBLVEP_FILTERVEP</code> module runs <code>filter_vep</code> with <code>--only_matched</code>. This removes non-matching <code>CSQ</code> consequence annotations from retained variants in the clinical VCF, as well as removing variants with no matching annotation. This applies to both the VEP expressions and the HGNC ID filter.</p>
 <p><sup>1</sup> Example file for input with <code>--filter_variants_hgnc_ids</code>:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>hgnc_id
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>4865
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>14150
 </span></code></pre></div>
-<p>Filtering of variants only happens if any of these three parameters is active.</p>
+<p>Filtering of variants only happens if any of these five parameters is active.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>The <code>pre_vep_snv_filter_expression</code> parameter can be used to filter SNVs earlier, during the annotation step. Note that this filter applies to <em>both</em> the research and clinical VCFs.</p>
