@@ -51,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1260](https://github.com/genomic-medicine-sweden/nallo/pull/1260) - Added samplesheet-based entry point routing: three new columns (`aligned_bam`, `snv_vcf`, `sv_vcf`) allow providing pre-aligned BAMs or pre-called VCFs directly in the samplesheet. The pipeline derives `meta.entry_point` (`fastq`/`ubam`/`bam`/`vcf`) at parse time and routes samples channel-based accordingly. Pre-phasing family VCFs are now published to `unphased/` on every run.
 - [#1277](https://github.com/genomic-medicine-sweden/nallo/pull/1277) - Added `--filter_vep_snvs_expression` and `--filter_vep_svs_expression` for custom VEP annotation-based filtering of SNVs and SVs. Expressions can be used without an HGNC ID file or combined with `--filter_variants_hgnc_ids` using `and`; when bcftools filtering is also enabled, it runs before VEP filtering.
 - [#1268](https://github.com/genomic-medicine-sweden/nallo/pull/1268) - Added optional population VCF and index inputs for Sentieon DNAscope SNV-calling via `--sentieon_population_vcf` and `--sentieon_population_tbi`
+- [#1273](https://github.com/genomic-medicine-sweden/nallo/pull/1273) - Added `--publish_input_aligned_bams` to publish the aligned BAMs given in the samplesheet as aligned reads (default `false`)
 
 ### Changed
 
@@ -143,6 +144,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1272](https://github.com/genomic-medicine-sweden/nallo/pull/1272) - Changed CI to use `latest-stable` version of Nextflow instead of `latest-everything`
 - [#1277](https://github.com/genomic-medicine-sweden/nallo/pull/1277) - Renamed `--filter_snvs_expression` and `--filter_svs_expression` to `--filter_bcftools_snvs_expression` and `--filter_bcftools_svs_expression` to distinguish bcftools filtering from the new VEP filtering options.
 - [#1268](https://github.com/genomic-medicine-sweden/nallo/pull/1268) - Updated the sentieon-cli container from `1.6.2-0` to `2.0.0-0`
+- [#1280](https://github.com/genomic-medicine-sweden/nallo/pull/1280/) - Updated commit hash for test dataset paths
+- [#1273](https://github.com/genomic-medicine-sweden/nallo/pull/1273) - A single aligned BAM per sample (`aligned_bam` entry points) is now indexed with `SAMTOOLS_INDEX` instead of being passed through `SAMTOOLS_MERGE`; published `*_haplotagged` files are always named after the sample
 
 ### Removed
 
@@ -180,6 +183,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1259](https://github.com/genomic-medicine-sweden/nallo/pull/1259) - Fixed `snvs/family` output silently missing on targeted runs whose capture does not cover chrM: `groupKey` at `CONCAT_SORT_RANKED_SNVS` expected `num_intervals + 1` items but the mito VCF never arrived because `call_mitochondrial_variants` skips families with an empty mito BED
 - [#1268](https://github.com/genomic-medicine-sweden/nallo/pull/1268) - Fixed inconsistent sample order in Sentieon joint-called VCFs by sorting gVCF and index inputs by filename before GVCFtyper, to match the ordering used for mitochondrial merging
 - [#1275](https://github.com/genomic-medicine-sweden/nallo/pull/1275) - Fixed `tests/stub_methbat_map_validation.nf.test` test to catch the error message in the stderr not in the stdout
+- [#1283](https://github.com/genomic-medicine-sweden/nallo/pull/1283) - Fixed tests and formatting for Nextflow 26.10.0: aliased test setup processes that the tested workflow also calls, assert on stdout and stderr for expected error messages, and formatted config header comments with the 26.10.0 formatter
 
 ### Parameters
 
@@ -215,6 +219,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | `--filter_svs_expression`        | `--filter_bcftools_svs_expression`          |
 |                                  | `--filter_vep_snvs_expression`              |
 |                                  | `--filter_vep_svs_expression`               |
+|                                  | `--publish_input_aligned_bams`              |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.

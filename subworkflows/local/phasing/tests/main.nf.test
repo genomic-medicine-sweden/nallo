@@ -28,7 +28,7 @@ nextflow_workflow {
                 """
             }
         }
-        run("BCFTOOLS_MERGE") {
+        run("BCFTOOLS_MERGE", alias: "BCFTOOLS_MERGE_SETUP") {
             script "../../../../modules/nf-core/bcftools/merge/main.nf"
             process {
                 """
@@ -417,8 +417,8 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = BCFTOOLS_MERGE.out.vcf
-                input[1] = BCFTOOLS_MERGE.out.index
+                input[0] = BCFTOOLS_MERGE_SETUP.out.vcf
+                input[1] = BCFTOOLS_MERGE_SETUP.out.index
                 input[2] = channel.empty() // SV VCF
                 input[3] = channel.empty() // SV VCF index
                 input[4] = channel.of(
@@ -521,8 +521,8 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = BCFTOOLS_MERGE.out.vcf
-                input[1] = BCFTOOLS_MERGE.out.index
+                input[0] = BCFTOOLS_MERGE_SETUP.out.vcf
+                input[1] = BCFTOOLS_MERGE_SETUP.out.index
                 input[2] = SAWFISH_JOINTCALL.out.vcf
                 input[3] = SAWFISH_JOINTCALL.out.tbi
                 input[4] = channel.of(
@@ -575,8 +575,8 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = BCFTOOLS_MERGE.out.vcf
-                input[1] = BCFTOOLS_MERGE.out.index
+                input[0] = BCFTOOLS_MERGE_SETUP.out.vcf
+                input[1] = BCFTOOLS_MERGE_SETUP.out.index
                 input[2] = channel.empty() // SV VCF
                 input[3] = channel.empty() // SV VCF index
                 input[4] = channel.of(
