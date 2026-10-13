@@ -546,6 +546,8 @@ This subworkflow filters SNVs and SVs to generate a "clinical" set of variants b
 
 VEP expressions can be used without an HGNC ID file. When both are supplied, the HGNC restriction and the expression are parenthesized and combined with `and` in a single VEP filter. If a bcftools expression is also supplied, bcftools filtering runs before VEP filtering.
 
+The `ENSEMBLVEP_FILTERVEP` module runs `filter_vep` with `--only_matched`. This removes non-matching `CSQ` consequence annotations from retained variants in the clinical VCF, as well as removing variants with no matching annotation. This applies to both the VEP expressions and the HGNC ID filter.
+
 <sup>1</sup> Example file for input with `--filter_variants_hgnc_ids`:
 
 ```
@@ -554,7 +556,7 @@ hgnc_id
 14150
 ```
 
-Filtering of variants only happens if any of these three parameters is active.
+Filtering of variants only happens if any of these five parameters is active.
 
 !!!tip
 
