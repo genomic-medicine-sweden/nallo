@@ -58,7 +58,7 @@ nextflow_pipeline {
         then {
             assertAll(
                 { assert workflow.failed },
-                { assert workflow.stdout.any { it.contains("--target_regions must be provided when using --preset ONT_R10_AS") } }
+                { assert (workflow.stdout + workflow.stderr).any { it.contains("--target_regions must be provided when using --preset ONT_R10_AS") } }
             )
         }
     }
