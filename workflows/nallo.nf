@@ -64,6 +64,7 @@ include { BCFTOOLS_SORT as BCFTOOLS_SORT_SVS                     } from '../modu
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CHROMOGRAPH             } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING                 } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SVS                     } from '../modules/nf-core/bcftools/view/main'
+include { KIVVI as CALL_VNTR_REPEATS_KIVVI                       } from '../modules/nf-core/kivvi/main'
 include { MINIMAP2_ALIGN                                         } from '../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_MERGE                                         } from '../modules/nf-core/samtools/merge/main'
 include { SAMTOOLS_INDEX                                         } from '../modules/nf-core/samtools/index/main'
@@ -148,6 +149,7 @@ workflow NALLO {
     val_filter_variants_hgnc_ids
     val_force_sawfish_joint_call_single_samples
     val_hifiasm_mode
+    val_kivvi_preset
     val_mitochondrial_caller
     val_mosdepth_regions
     val_cramino_regions
@@ -168,6 +170,7 @@ workflow NALLO {
     val_skip_call_paralogs
     val_skip_chromograph
     val_skip_genome_assembly
+    val_skip_kivvi
     val_skip_methbat
     val_skip_methylation_annotation
     val_skip_modkit
@@ -473,6 +476,18 @@ workflow NALLO {
             CALL_PARALOGS.out.json,
             val_paraphrase_output_format,
             ch_paraphrase_rules,
+        )
+    }
+
+
+    /*
+     * Call long repeats in D4Z4 region
+     */
+
+    if (!val_skip_kivvi) {
+        CALL_VNTR_REPEATS_KIVVI(
+            ch_bam_bai,
+            val_kivvi_preset,
         )
     }
 
@@ -1357,6 +1372,11 @@ workflow NALLO {
     hificnv_copynum_bedgraph            = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.hificnv_copynum // channel: [ val(meta), path(bedgraph) ]
     hificnv_depth_bw                    = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.hificnv_depth // channel: [ val(meta), path(bw) ]
     hificnv_maf_bw                      = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.hificnv_maf // channel: [ val(meta), path(bw) ]
+    kivvi_vcf                           = val_skip_kivvi ? channel.empty() : CALL_VNTR_REPEATS_KIVVI.out.vcf // channel: [ val(meta), path(vcf) ]
+    kivvi_svg                           = val_skip_kivvi ? channel.empty() : CALL_VNTR_REPEATS_KIVVI.out.svg // channel: [ val(meta), path(svg) ]
+    kivvi_json                          = val_skip_kivvi ? channel.empty() : CALL_VNTR_REPEATS_KIVVI.out.json // channel: [ val(meta), path(png) ]
+    kivvi_bam                           = val_skip_kivvi ? channel.empty() : CALL_VNTR_REPEATS_KIVVI.out.bam // channel: [ val(meta), path(bam) ]
+    kivvi_bai                           = val_skip_kivvi ? channel.empty() : CALL_VNTR_REPEATS_KIVVI.out.bai // channel: [ val(meta), path(bai) ]
     methylation_family_annotated        = val_skip_methylation_annotation ? channel.empty() : ANNOTATE_METHYLATION.out.methylation_annotation // channel: [ val(meta), path(methylated_regions_by_family) ]
     methylation_methbat_combined_bed    = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_combined_bed // channel: [ val(meta), path(bed.gz) ]
     methylation_methbat_combined_bigwig = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_combined_bigwig // channel: [ val(meta), path(combined.bw) ]

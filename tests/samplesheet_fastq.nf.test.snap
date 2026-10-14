@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            236,
+            237,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -65,6 +65,9 @@
                 },
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
+                },
+                "CALL_VNTR_REPEATS_KIVVI": {
+                    "kivvi": "1.1.0"
                 },
                 "CAT_CAT": {
                     "pigz": 2.8
@@ -406,6 +409,12 @@
                 "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage_chrM.png",
                 "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage_chrX.png",
                 "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage_chrY.png",
+                "kivvi",
+                "kivvi/HG002_Revio",
+                "kivvi/HG002_Revio/HG002_Revio.kivvi.d4z4.bam",
+                "kivvi/HG002_Revio/HG002_Revio.kivvi.d4z4.bam.bai",
+                "kivvi/HG002_Revio/HG002_Revio.kivvi.d4z4.json",
+                "kivvi/HG002_Revio/HG002_Revio.kivvi.d4z4.vcf",
                 "methylation",
                 "methylation/pileup",
                 "methylation/pileup/HG002_Revio",
@@ -738,6 +747,10 @@
                 "HG002_Revio_chromograph_coverage_chrM.png:md5,f8b3af5db305513f712f17941962f315",
                 "HG002_Revio_chromograph_coverage_chrX.png:md5,396d5ba4d250214a723094c4449137dd",
                 "HG002_Revio_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_Revio.kivvi.d4z4.bam:md5,05223bf077fc5d7f9ab45671b0f8dff9",
+                "HG002_Revio.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
+                "HG002_Revio.kivvi.d4z4.json:md5,d8ca6519fabcf8cecb1ba857b0a9031e",
+                "HG002_Revio.kivvi.d4z4.vcf:md5,61d19a577342497569369965277c9f73",
                 "HG002_Revio_pbcpgtools.combined.bed.gz:md5,42d1d3a211e07b11b8ee750e0aed8319",
                 "HG002_Revio_pbcpgtools.combined.bed.gz.tbi:md5,1aa5003d31cda868177d772e6efe3e4a",
                 "HG002_Revio_pbcpgtools.hap1.bed.gz:md5,a86abdeb39cab71fea5d578d0181b9b0",
@@ -804,7 +817,10 @@
                 "HG002_Revio_pbcpgtools.hap2.bw:md5,e452d2986e38ba275033e8e613183b8d"
             ],
             [
-                
+                [
+                    "HG002_Revio.kivvi.d4z4.bam",
+                    "d41d8cd98f00b204e9800998ecf8427e"
+                ]
             ],
             [
                 [
@@ -870,7 +886,7 @@
                 
             ]
         ],
-        "timestamp": "2026-10-02T17:40:24.641017811",
+        "timestamp": "2026-10-14T17:03:06.00993289",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

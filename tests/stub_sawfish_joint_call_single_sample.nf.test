@@ -35,6 +35,7 @@ nextflow_pipeline {
                 skip_mitochondrial_calling              = true
                 // skip_portello for fastq input
                 skip_portello                           = true
+                skip_kivvi                              = true
             }
         }
 

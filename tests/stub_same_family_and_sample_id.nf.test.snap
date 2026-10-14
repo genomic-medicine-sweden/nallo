@@ -1,7 +1,7 @@
 {
     "Test family id same as sample id": {
         "content": [
-            194,
+            195,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -62,6 +62,9 @@
                 },
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
+                },
+                "CALL_VNTR_REPEATS_KIVVI": {
+                    "kivvi": "1.1.0"
                 },
                 "CAT_CAT": {
                     "pigz": 2.8
@@ -385,6 +388,13 @@
                 "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chrM.png",
                 "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chrX.png",
                 "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage.wig_chrY.png",
+                "kivvi",
+                "kivvi/HG002_Revio",
+                "kivvi/HG002_Revio/HG002_Revio.kivvi.d4z4.bam",
+                "kivvi/HG002_Revio/HG002_Revio.kivvi.d4z4.bam.bai",
+                "kivvi/HG002_Revio/HG002_Revio.kivvi.d4z4.json",
+                "kivvi/HG002_Revio/HG002_Revio.kivvi.d4z4.svg",
+                "kivvi/HG002_Revio/HG002_Revio.kivvi.d4z4.vcf",
                 "methylation",
                 "methylation/pileup",
                 "methylation/pileup/HG002_Revio",
@@ -525,7 +535,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-10-02T18:12:18.94538115",
+        "timestamp": "2026-10-14T15:52:27.882257073",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

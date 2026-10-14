@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ubam | --sv_callers sniffles1,debreak --phaser whatshap": {
         "content": [
-            395,
+            398,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -59,6 +59,9 @@
                 },
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
+                },
+                "CALL_VNTR_REPEATS_KIVVI": {
+                    "kivvi": "1.1.0"
                 },
                 "CAT_CAT": {
                     "pigz": 2.8
@@ -521,6 +524,22 @@
                 "images/chromograph/sample/HG004/HG004_chromograph_coverage_chrM.png",
                 "images/chromograph/sample/HG004/HG004_chromograph_coverage_chrX.png",
                 "images/chromograph/sample/HG004/HG004_chromograph_coverage_chrY.png",
+                "kivvi",
+                "kivvi/HG002",
+                "kivvi/HG002/HG002.kivvi.d4z4.bam",
+                "kivvi/HG002/HG002.kivvi.d4z4.bam.bai",
+                "kivvi/HG002/HG002.kivvi.d4z4.json",
+                "kivvi/HG002/HG002.kivvi.d4z4.vcf",
+                "kivvi/HG003",
+                "kivvi/HG003/HG003.kivvi.d4z4.bam",
+                "kivvi/HG003/HG003.kivvi.d4z4.bam.bai",
+                "kivvi/HG003/HG003.kivvi.d4z4.json",
+                "kivvi/HG003/HG003.kivvi.d4z4.vcf",
+                "kivvi/HG004",
+                "kivvi/HG004/HG004.kivvi.d4z4.bam",
+                "kivvi/HG004/HG004.kivvi.d4z4.bam.bai",
+                "kivvi/HG004/HG004.kivvi.d4z4.json",
+                "kivvi/HG004/HG004.kivvi.d4z4.vcf",
                 "methylation",
                 "methylation/pileup",
                 "methylation/pileup/HG002",
@@ -912,8 +931,8 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ],
             [
-                "HG002_haplotype_1.assembly_summary:md5,559dd83efb6c01bea16886f4c4c04913",
-                "HG002_haplotype_2.assembly_summary:md5,f8fe962fb03e8f35e5f3586e74603988",
+                "HG002_haplotype_1.assembly_summary:md5,a6ad30c5ee5267ca1b283564f1e5d129",
+                "HG002_haplotype_2.assembly_summary:md5,b99223d6c7d9ac989c98ec6b419d91e1",
                 "HG003_haplotype_1.assembly_summary:md5,13dee2d12769dd9f9ba6f4e490e385b3",
                 "HG003_haplotype_2.assembly_summary:md5,750e1bf8191b520ff6afc302987cbc35",
                 "HG004_haplotype_1.assembly_summary:md5,d77dc8fbbb8a6dce71c9640d6a6be355",
@@ -1080,6 +1099,18 @@
                 "HG004_chromograph_coverage_chrM.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG004_chromograph_coverage_chrX.png:md5,5474c0ec4a1b264b50eb61e8ce1ec937",
                 "HG004_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002.kivvi.d4z4.bam:md5,33544c51c77d73a17e9c9afdb7f707ec",
+                "HG002.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
+                "HG002.kivvi.d4z4.json:md5,d8ca6519fabcf8cecb1ba857b0a9031e",
+                "HG002.kivvi.d4z4.vcf:md5,40ed942068d9514b01b4d278fda7db94",
+                "HG003.kivvi.d4z4.bam:md5,8c5f142d79493a4049354a906b46273b",
+                "HG003.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
+                "HG003.kivvi.d4z4.json:md5,d8ca6519fabcf8cecb1ba857b0a9031e",
+                "HG003.kivvi.d4z4.vcf:md5,472eaee8b24437b64f3612b6f77b16b6",
+                "HG004.kivvi.d4z4.bam:md5,c08635926a6978e1a90d55086ccaaa70",
+                "HG004.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
+                "HG004.kivvi.d4z4.json:md5,d8ca6519fabcf8cecb1ba857b0a9031e",
+                "HG004.kivvi.d4z4.vcf:md5,9b8d012ab633b96a8adbb728ed27ea00",
                 "HG002_pbcpgtools.combined.bed.gz:md5,2335e1849d645cb082ff993ec001ef31",
                 "HG002_pbcpgtools.combined.bed.gz.tbi:md5,be19f72778ce254ab11ef922617679d6",
                 "HG002_pbcpgtools.hap1.bed.gz:md5,5dd84d48cb1d13a6095c0d0b1677860c",
@@ -1194,7 +1225,7 @@
                 ],
                 [
                     "HG002_aligned_assembly.bam",
-                    "f36ee58ba48e9d049de7bd1e5adc81cd"
+                    "744af813396a9a2ddaf7a0f15389e0ee"
                 ],
                 [
                     "HG003_aligned_assembly.bam",
@@ -1203,6 +1234,18 @@
                 [
                     "HG004_aligned_assembly.bam",
                     "ee430af552c4dd5fae7f01784d090b8b"
+                ],
+                [
+                    "HG002.kivvi.d4z4.bam",
+                    "d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                [
+                    "HG003.kivvi.d4z4.bam",
+                    "d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                [
+                    "HG004.kivvi.d4z4.bam",
+                    "d41d8cd98f00b204e9800998ecf8427e"
                 ],
                 [
                     "HG002_spanning_trgt.bam",
@@ -1302,15 +1345,15 @@
                 
             ]
         ],
-        "timestamp": "2026-10-02T16:43:51.443937948",
+        "timestamp": "2026-10-14T17:06:35.262542943",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.08.0"
+            "nextflow": "26.04.6"
         }
     },
     "samplesheet_multisample_ubam": {
         "content": [
-            430,
+            433,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -1371,6 +1414,9 @@
                 },
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
+                },
+                "CALL_VNTR_REPEATS_KIVVI": {
+                    "kivvi": "1.1.0"
                 },
                 "CAT_CAT": {
                     "pigz": 2.8
@@ -1856,6 +1902,22 @@
                 "images/chromograph/sample/HG004/HG004_chromograph_coverage_chrM.png",
                 "images/chromograph/sample/HG004/HG004_chromograph_coverage_chrX.png",
                 "images/chromograph/sample/HG004/HG004_chromograph_coverage_chrY.png",
+                "kivvi",
+                "kivvi/HG002",
+                "kivvi/HG002/HG002.kivvi.d4z4.bam",
+                "kivvi/HG002/HG002.kivvi.d4z4.bam.bai",
+                "kivvi/HG002/HG002.kivvi.d4z4.json",
+                "kivvi/HG002/HG002.kivvi.d4z4.vcf",
+                "kivvi/HG003",
+                "kivvi/HG003/HG003.kivvi.d4z4.bam",
+                "kivvi/HG003/HG003.kivvi.d4z4.bam.bai",
+                "kivvi/HG003/HG003.kivvi.d4z4.json",
+                "kivvi/HG003/HG003.kivvi.d4z4.vcf",
+                "kivvi/HG004",
+                "kivvi/HG004/HG004.kivvi.d4z4.bam",
+                "kivvi/HG004/HG004.kivvi.d4z4.bam.bai",
+                "kivvi/HG004/HG004.kivvi.d4z4.json",
+                "kivvi/HG004/HG004.kivvi.d4z4.vcf",
                 "methylation",
                 "methylation/pileup",
                 "methylation/pileup/HG002",
@@ -2433,6 +2495,18 @@
                 "HG004_chromograph_coverage_chrM.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG004_chromograph_coverage_chrX.png:md5,44c18de3b3d94bdc7eb010b5fe99216a",
                 "HG004_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002.kivvi.d4z4.bam:md5,33544c51c77d73a17e9c9afdb7f707ec",
+                "HG002.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
+                "HG002.kivvi.d4z4.json:md5,d8ca6519fabcf8cecb1ba857b0a9031e",
+                "HG002.kivvi.d4z4.vcf:md5,40ed942068d9514b01b4d278fda7db94",
+                "HG003.kivvi.d4z4.bam:md5,8c5f142d79493a4049354a906b46273b",
+                "HG003.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
+                "HG003.kivvi.d4z4.json:md5,d8ca6519fabcf8cecb1ba857b0a9031e",
+                "HG003.kivvi.d4z4.vcf:md5,472eaee8b24437b64f3612b6f77b16b6",
+                "HG004.kivvi.d4z4.bam:md5,c08635926a6978e1a90d55086ccaaa70",
+                "HG004.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
+                "HG004.kivvi.d4z4.json:md5,d8ca6519fabcf8cecb1ba857b0a9031e",
+                "HG004.kivvi.d4z4.vcf:md5,9b8d012ab633b96a8adbb728ed27ea00",
                 "HG002_pbcpgtools.combined.bed.gz:md5,1d56d09f8243d221404e0d2577f2359d",
                 "HG002_pbcpgtools.combined.bed.gz.tbi:md5,744f0ce191924acd83e8ca5f33e04398",
                 "HG002_pbcpgtools.hap1.bed.gz:md5,a07c21266259508c5aac3d31cf31d03c",
@@ -2575,6 +2649,18 @@
                     "ee430af552c4dd5fae7f01784d090b8b"
                 ],
                 [
+                    "HG002.kivvi.d4z4.bam",
+                    "d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                [
+                    "HG003.kivvi.d4z4.bam",
+                    "d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                [
+                    "HG004.kivvi.d4z4.bam",
+                    "d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                [
                     "HG002_spanning_trgt.bam",
                     "30ba267e3b89ce97d0df96640b22d265"
                 ],
@@ -2672,7 +2758,7 @@
                 
             ]
         ],
-        "timestamp": "2026-10-02T17:49:47.106412801",
+        "timestamp": "2026-10-14T17:10:13.914054767",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

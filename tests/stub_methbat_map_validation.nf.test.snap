@@ -1,7 +1,7 @@
 {
     "revio preset with skip_methylation_annotation succeeds without methbat_map": {
         "content": [
-            403,
+            406,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -65,6 +65,9 @@
                 },
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
+                },
+                "CALL_VNTR_REPEATS_KIVVI": {
+                    "kivvi": "1.1.0"
                 },
                 "CAT_CAT": {
                     "pigz": 2.8
@@ -318,7 +321,7 @@
                 }
             }
         ],
-        "timestamp": "2026-10-02T18:07:20.147708493",
+        "timestamp": "2026-10-14T15:47:52.993977605",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

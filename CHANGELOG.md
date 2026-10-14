@@ -49,6 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Added DeBreak as a new SV caller option (`--sv_callers debreak`)
 - [#1252](https://github.com/genomic-medicine-sweden/nallo/pull/1252) - Added `--extra_vep_options_snv_mito` param for MT-specific VEP annotation (excludes nuclear-only flags `--sift`, `--polyphen`, `--humdiv`) and `--genmod_score_config_snvs_mito` param to route mitochondrial SNVs to a dedicated rank model
 - [#1260](https://github.com/genomic-medicine-sweden/nallo/pull/1260) - Added samplesheet-based entry point routing: three new columns (`aligned_bam`, `snv_vcf`, `sv_vcf`) allow providing pre-aligned BAMs or pre-called VCFs directly in the samplesheet. The pipeline derives `meta.entry_point` (`fastq`/`ubam`/`bam`/`vcf`) at parse time and routes samples channel-based accordingly. Pre-phasing family VCFs are now published to `unphased/` on every run.
+- [#1287](https://github.com/genomic-medicine-sweden/nallo/pull/1287) - Added Kivvi for FSHD analysis (calls long D4Z4 repeats for FSHD resolution)
 
 ### Changed
 
@@ -239,6 +240,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | debreak                        |             | 1.3         |
 | svdb/merge                     | 2.8.4       | 2.12.0      |
 | svdb/query                     | 2.8.4       | 2.12.0      |
+| kivvi                          |             | 1.1.0       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
