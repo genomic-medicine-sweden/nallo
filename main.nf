@@ -59,6 +59,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     ch_mosdepth_regions
     ch_paraphrase_rules
     ch_par
+    ch_paraphase_config
     ch_peddy_sites
     ch_sambamba_regions
     ch_sentieon_female_diploid_bed
@@ -174,6 +175,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         ch_mosdepth_regions,
         ch_paraphrase_rules,
         ch_par,
+        ch_paraphase_config,
         ch_peddy_sites,
         ch_sambamba_regions,
         ch_sentieon_female_diploid_bed,
@@ -489,6 +491,7 @@ workflow {
         createReferenceChannelFromPath(params.mosdepth_regions, channel.value([[], []])),
         createReferenceChannelFromPath(params.paraphrase_rules, channel.value([[], []])),
         createReferenceChannelFromPath(params.par_regions),
+        createReferenceChannelFromPath(params.paraphase_config, channel.value([[], []])),
         createReferenceChannelFromPath(params.peddy_sites, channel.value([[], []])),
         createReferenceChannelFromPath(params.sambamba_regions, channel.value([[], []])),
         createReferenceChannelFromPath(params.sentieon_female_diploid_bed, channel.value([[], []])),

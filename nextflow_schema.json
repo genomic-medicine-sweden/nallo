@@ -1177,6 +1177,12 @@
                     "type": "string",
                     "format": "file-path",
                     "description": "Mapping file that can be used to filter and annotate the methbat output based on regions."
+                },
+                "paraphase_config": {
+                    "type": "string",
+                    "format": "file-path",
+                    "default": null,
+                    "description": "Configuration file for Paraphase."
                 }
             },
             "required": ["preset"]
