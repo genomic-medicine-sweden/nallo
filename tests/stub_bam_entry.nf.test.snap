@@ -1,7 +1,7 @@
 {
     "stub | bam entry_point | Revio trio": {
         "content": [
-            354,
+            357,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -68,6 +68,11 @@
                 },
                 "CAT_CAT": {
                     "pigz": 2.8
+                },
+                "COLLAPSE_MITOCHONDRIAL_GT": {
+                    "bgzip": 1.21,
+                    "collapse_mitochondrial_gt": "1.0.0",
+                    "tabix": 1.21
                 },
                 "CRAMINO": {
                     "cramino": "1.1.0"
@@ -740,7 +745,7 @@
         "timestamp": "2026-10-08T11:19:54.328042113",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.09.2"
         }
     }
 }

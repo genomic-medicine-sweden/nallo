@@ -1,7 +1,7 @@
 {
     "revio preset with skip_methylation_annotation succeeds without methbat_map": {
         "content": [
-            403,
+            406,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -71,6 +71,11 @@
                 },
                 "CAT_FASTQ": {
                     "cat": 9.5
+                },
+                "COLLAPSE_MITOCHONDRIAL_GT": {
+                    "bgzip": 1.21,
+                    "collapse_mitochondrial_gt": "1.0.0",
+                    "tabix": 1.21
                 },
                 "CRAMINO": {
                     "cramino": "1.1.0"
@@ -321,10 +326,10 @@
                 }
             }
         ],
-        "timestamp": "2026-10-02T18:07:20.147708493",
+        "timestamp": "2026-10-12T13:48:25.136201519",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.09.2"
         }
     }
 }

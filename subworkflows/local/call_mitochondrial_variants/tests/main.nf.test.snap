@@ -30,8 +30,8 @@
                         "id": "test_sample1"
                     },
                     "test_sample1_mitochondrial_snv.vcf.gz",
-                    "VcfFile [chromosomes=[chrM], sampleCount=1, variantCount=18, phased=true, phasedAutodetect=true]",
-                    "a94e33d65e5f349ac825fbaeba434ee4"
+                    "VcfFile [chromosomes=[chrM], sampleCount=1, variantCount=18, phased=false, phasedAutodetect=false]",
+                    "2bbc1f38ba16277320d2e2e17f5c94df"
                 ],
                 [
                     "mitochondrial_snv_vcf",
@@ -39,8 +39,8 @@
                         "id": "test_sample2"
                     },
                     "test_sample2_mitochondrial_snv.vcf.gz",
-                    "VcfFile [chromosomes=[chrM], sampleCount=1, variantCount=32, phased=true, phasedAutodetect=true]",
-                    "4e15cdd4ede932e8b6fc88e39313a463"
+                    "VcfFile [chromosomes=[chrM], sampleCount=1, variantCount=32, phased=false, phasedAutodetect=false]",
+                    "988bdc504733811527b7d3c52c76d6d4"
                 ]
             ],
             [
@@ -50,8 +50,8 @@
                         "id": "test_sample1"
                     },
                     "test_sample1_mitochondrial_sv.vcf.gz",
-                    "VcfFile [chromosomes=[chrM], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=false]",
-                    "3564d26b4d771126a7aa64eacb4ed8b8"
+                    "VcfFile [chromosomes=[chrM], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]",
+                    "95af4910ba886b85c3a2dceaaff0ba2e"
                 ],
                 [
                     "mitochondrial_sv_vcf",
@@ -64,7 +64,7 @@
                 ]
             ]
         ],
-        "timestamp": "2026-07-29T11:31:34.133809237",
+        "timestamp": "2026-10-06T12:09:07.400525003",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
@@ -112,8 +112,8 @@
                         "id": "test"
                     },
                     "test_mitochondrial_snv.vcf.gz",
-                    "VcfFile [chromosomes=[chrM], sampleCount=1, variantCount=18, phased=true, phasedAutodetect=true]",
-                    "a94e33d65e5f349ac825fbaeba434ee4"
+                    "VcfFile [chromosomes=[chrM], sampleCount=1, variantCount=18, phased=false, phasedAutodetect=false]",
+                    "2bbc1f38ba16277320d2e2e17f5c94df"
                 ]
             ],
             [
@@ -123,12 +123,12 @@
                         "id": "test"
                     },
                     "test_mitochondrial_sv.vcf.gz",
-                    "VcfFile [chromosomes=[chrM], sampleCount=1, variantCount=1, phased=true, phasedAutodetect=false]",
-                    "3564d26b4d771126a7aa64eacb4ed8b8"
+                    "VcfFile [chromosomes=[chrM], sampleCount=1, variantCount=1, phased=false, phasedAutodetect=false]",
+                    "95af4910ba886b85c3a2dceaaff0ba2e"
                 ]
             ]
         ],
-        "timestamp": "2026-07-29T11:30:37.608389582",
+        "timestamp": "2026-10-06T12:08:24.790231831",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.07.0"
