@@ -6,7 +6,7 @@ This document describes the pipeline output files and the tools used to generate
 
 ## Aligned reads
 
-[Minimap2](https://github.com/lh3/minimap2) is used to map the reads to a reference genome. The aligned reads are sorted, merged and indexed using [samtools](https://github.com/samtools/samtools). If the pipeline is run with phasing, the aligned reads will be haplotagged using the active phasing tool.
+[Minimap2](https://github.com/lh3/minimap2) is used to map the reads to a reference genome. The aligned reads are sorted, merged and indexed using [samtools](https://github.com/samtools/samtools). A sample with a single pre-aligned BAM (`aligned_bam`) is indexed, not merged. If the pipeline is run with phasing, the aligned reads will be haplotagged using the active phasing tool.
 
 | Path                                                                   | Description                               | Alignment          | Alignment & phasing |
 | ---------------------------------------------------------------------- | ----------------------------------------- | ------------------ | ------------------- |
@@ -252,7 +252,7 @@ In general, annotated variant calls are output per family while unannotated call
 
 #### Filtering
 
-[Filter_vep](https://www.ensembl.org/vep) and [bcftools](https://samtools.github.io/bcftools/bcftools.html) can be used to filter variants after annotation. These will be output if either of `--filter_variants_hgnc_id` and `--filter_snvs_expression` has been used, and only family VCFs are filtered.
+[Filter_vep](https://www.ensembl.org/vep) and [bcftools](https://samtools.github.io/bcftools/bcftools.html) can be used to filter variants after annotation. These will be output if any of `--filter_variants_hgnc_ids`, `--filter_bcftools_snvs_expression`, or `--filter_vep_snvs_expression` has been used, and only family VCFs are filtered.
 
 | Path                                           | Description                                  |
 | ---------------------------------------------- | -------------------------------------------- |
@@ -309,7 +309,7 @@ When `--skip_prepare_gens_input` is disabled, the pipeline prepares coverage and
 
 #### Filtering
 
-[Filter_vep](https://www.ensembl.org/vep) and [bcftools](https://samtools.github.io/bcftools/bcftools.html) can be used to filter variants after annotation. These will be output if either of `--filter_variants_hgnc_id` and `--filter_svs_expression` has been used, and only family VCFs are filtered.
+[Filter_vep](https://www.ensembl.org/vep) and [bcftools](https://samtools.github.io/bcftools/bcftools.html) can be used to filter variants after annotation. These will be output if any of `--filter_variants_hgnc_ids`, `--filter_bcftools_svs_expression`, or `--filter_vep_svs_expression` has been used, and only family VCFs are filtered.
 
 | Path                                          | Description                                  |
 | --------------------------------------------- | -------------------------------------------- |

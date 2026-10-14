@@ -107,6 +107,7 @@ Parameters used to describe centralised config profiles. These should not be edi
 | `config_profile_contact` | Institutional config contact information. | `string` |  |  | True |
 | `config_profile_url` | Institutional config URL link. | `string` |  |  | True |
 | `publish_unannotated_family_svs` | Publish unannotated SVs and CNVs per family and caller. | `boolean` |  |  | True |
+| `publish_input_aligned_bams` | Publish the aligned BAMs provided in the samplesheet (aligned_bam) as aligned reads, even if the pipeline has not changed them. | `boolean` |  |  | True |
 
 ## Generic options
 
@@ -124,7 +125,7 @@ Less common options for the pipeline, typically set in a config file.
 | `multiqc_logo` | Custom logo file to supply to MultiQC. File name must also be set in the MultiQC config file | `string` |  |  | True |
 | `multiqc_methods_description` | Custom MultiQC yaml file containing HTML including a methods description. | `string` |  |  |  |
 | `validate_params` | Boolean whether to validate parameters against the schema at runtime | `boolean` | True |  | True |
-| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/1e84555134bb9638ad0dde49afd895e3192de3f0/ |  | True |
+| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8cf6216b9cbf96f6bcfc918610182708e3796ad9/ |  | True |
 | `trace_report_suffix` | Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss. | `string` |  |  | True |
 | `help` | Display the help message. | `['boolean', 'string']` |  |  |  |
 | `help_full` | Display the full detailed help message. | `boolean` |  |  |  |
@@ -182,8 +183,10 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `vep_plugin_files` | Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required for SNV annotation; only pLI_values.txt is required for SV annotation. | `string` |  |  |  |
 | `force_sawfish_joint_call_single_samples` | Force sawfish to run joint-call on single samples instead of all samples from the same family. This effectively causes SVDB to merge the samples into family VCFs instead. | `boolean` |  |  |  |
 | `filter_variants_hgnc_ids` | A tsv/csv file with a `hgnc_ids` column header, and then one numerical HGNC ID per row. E.g. `4281` or `HGNC:4281`. | `string` |  |  |  |
-| `filter_snvs_expression` | An expression that is passed to bcftools view to filter SNVs, e.g. --filter_snvs_expression "-e 'INFO/AQ>60'" | `string` | None |  |  |
-| `filter_svs_expression` | An expression that is passed to bcftools view to filter SVs, e.g. --filter_svs_expression "-e 'INFO/AQ>60'" | `string` | None |  |  |
+| `filter_bcftools_snvs_expression` | An expression that is passed to bcftools view to filter SNVs, e.g. --filter_bcftools_snvs_expression "-e 'INFO/AQ>60'" | `string` | None |  |  |
+| `filter_bcftools_svs_expression` | An expression that is passed to bcftools view to filter SVs, e.g. --filter_bcftools_svs_expression "-e 'INFO/AQ>60'" | `string` | None |  |  |
+| `filter_vep_snvs_expression` | An expression passed to filter_vep to filter SNVs, e.g. --filter_vep_snvs_expression "IMPACT is HIGH". Combined with the HGNC ID restriction using AND when filter_variants_hgnc_ids is supplied. Do not include --filter. | `string` |  |  |  |
+| `filter_vep_svs_expression` | An expression passed to filter_vep to filter SVs, e.g. --filter_vep_svs_expression "IMPACT is HIGH". Combined with the HGNC ID restriction using AND when filter_variants_hgnc_ids is supplied. Do not include --filter. | `string` |  |  |  |
 | `deepvariant_model_type` | Sets the model type used for DeepVariant. This is set automatically using `--preset` by default. (accepted: `PACBIO`\|`ONT_R104`) | `string` | PACBIO |  | True |
 | `minimap2_read_mapping_preset` | Sets the minimap2-preset (-x) for read alignment. This is set automatically using the pipeline `--preset` by default. (accepted: `map-hifi`\|`map-ont`\|`lr:hq`\|`lr:hqae`) | `string` | map-hifi |  | True |
 | `extra_hifiasm_options` | Extra options to hifiasm, used for test profile. | `string` |  |  | True |
@@ -215,7 +218,9 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `rhocallviz_min_af` | Minimum allele frequency for variants to be included in rhocall viz within the chromograph subworkflow. | `number` | 0.0001 |  |  |
 | `rhocallviz_min_qual` | Minimum quality for variants to be included in rhocall viz within the chromograph subworkflow. | `number` | 10.0 |  |  |
 | `tiddit_bin_size` | Bin size to use for TIDDIT coverage wig generation in the chromograph subworkflow. | `integer` | 500 |  |  |
-| `sentieon_model_bundle` | The location of the DNAscope model bundle. Model bundle files can be found in the sentieon-models Github repository. | `string` |  |  |  |
+| `sentieon_model_bundle` | The location of the DNAscope model bundle. Model bundle files can be found in the sentieon-models Github repository. Some model bundles require a matching population VCF. | `string` |  |  |  |
+| `sentieon_population_vcf` | Population VCF containing annotations for DNAModelApply. Required for some DNAscope model bundles; the population VCF must match --sentieon_model_bundle. | `string` |  |  |  |
+| `sentieon_population_tbi` | Tabix index for --sentieon_population_vcf. Provide the matching .tbi file alongside the population VCF. | `string` |  |  |  |
 | `sentieon_tech` | Sequencing technology used to generate the reads. Supported arguments are ONT or HiFi. (accepted: `HiFi`\|`ONT`) | `string` | HiFi |  |  |
 | `sentieon_male_haploid_bed` | Interval in the reference to restrict haploid variant calling for males, in BED file format. | `string` |  |  |  |
 | `sentieon_male_diploid_bed` | Interval in the reference to restrict diploid variant calling for males, in BED file format. | `string` |  |  |  |

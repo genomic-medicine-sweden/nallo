@@ -87,11 +87,11 @@ Three additional columns - `aligned_bam`, `snv_vcf`, `sv_vcf` - are required whe
 
 **Optional columns** (required for `bam` and `vcf` entry points; omit or set to `0` otherwise)
 
-| Fields        | Description                                                                                                                  |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `aligned_bam` | Absolute path to a pre-aligned BAM file. Required for `bam` and `vcf` entry points. Set `file` to `0` when this is provided. |
-| `snv_vcf`     | Absolute path to a pre-called SNV VCF (`.vcf.gz`). Must be paired with `sv_vcf` and `aligned_bam`.                           |
-| `sv_vcf`      | Absolute path to a pre-called SV VCF (`.vcf.gz`). Must be paired with `snv_vcf` and `aligned_bam`.                           |
+| Fields        | Description                                                                                                                                                                                                              |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `aligned_bam` | Absolute path to a pre-aligned BAM file. Required for `bam` and `vcf` entry points. Set `file` to `0` when this is provided. A sample with a single BAM is indexed and used as is, samples with several BAMs are merged. |
+| `snv_vcf`     | Absolute path to a pre-called SNV VCF (`.vcf.gz`). Must be paired with `sv_vcf` and `aligned_bam`.                                                                                                                       |
+| `sv_vcf`      | Absolute path to a pre-called SV VCF (`.vcf.gz`). Must be paired with `snv_vcf` and `aligned_bam`.                                                                                                                       |
 
 !!!tip "Multiple files per sample"
 
@@ -244,12 +244,16 @@ Additional inputs are required for Sentieon DNAscope:
 | Parameter                     | Description                                                                                                                                                        |
 | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `sentieon_model_bundle`       | Path to the DNAscope model bundle to load. Sentieon provides pre-trained bundles in the [sentieon-models](https://github.com/Sentieon/sentieon-models) repository. |
+| `sentieon_population_vcf`     | Population VCF containing annotations for DNAModelApply. Required for some model bundles; it must match `sentieon_model_bundle`.                                   |
+| `sentieon_population_tbi`     | Matching tabix index for `sentieon_population_vcf`.                                                                                                                |
 | `sentieon_tech`               | Sequencing technology used by Sentieon DNAscope (`HiFi` or `ONT`). Defaults to `HiFi`, but is automatically set to `ONT` when running with the ONT presets.        |
 | `sentieon_male_haploid_bed`   | BED file that restricts haploid variant calling for male samples (typically the Y chromosome non-PAR region).                                                      |
 | `sentieon_male_diploid_bed`   | BED file that restricts diploid variant calling for male samples (typically autosomes + chrX PAR).                                                                 |
 | `sentieon_female_diploid_bed` | BED file that restricts diploid variant calling for female samples (typically autosomes + chrX).                                                                   |
 
 All three Sentieon BED files and the model bundle must be provided when using Sentieon.
+
+If the selected model bundle requires population annotations, also supply `--sentieon_population_vcf` and `--sentieon_population_tbi`. Use the population VCF specified for that model bundle. The index filename must match the VCF filename with `.tbi` appended (for example, `population.vcf.gz.tbi`). These inputs can be omitted for model bundles that do not require a population VCF.
 
 Turned off with `--skip_snv_calling`.
 
@@ -535,8 +539,14 @@ This subworkflow filters SNVs and SVs to generate a "clinical" set of variants b
 | Parameter                               | Description                                                                                                                                                               |
 | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `filter_variants_hgnc_ids` <sup>1</sup> |  Used by filter_vep to filter variants on HGNC IDs. Requires a tsv/csv file with a `hgnc_ids` column, that has one numerical HGNC ID per row, e.g. `4281` or `HGNC:4281`. |
-| `filter_snvs_expression`                | An expression that is passed to bcftools view to filter SNVs, e.g. `--filter_snvs_expression "-e 'INFO/AQ>60'"`                                                           |
-| `filter_svs_expression`                 | An expression that is passed to bcftools view to filter SVs, e.g.`--filter_snvs_expression "-e 'INFO/AQ>60'"`                                                             |
+| `filter_bcftools_snvs_expression`       | An expression that is passed to bcftools view to filter SNVs, e.g. `--filter_bcftools_snvs_expression "-e 'INFO/AQ>60'"`                                                  |
+| `filter_bcftools_svs_expression`        | An expression that is passed to bcftools view to filter SVs, e.g.`--filter_bcftools_svs_expression "-e 'INFO/AQ>60'"`                                                     |
+| `filter_vep_snvs_expression`            | An expression passed to filter_vep for SNVs, e.g. `--filter_vep_snvs_expression "IMPACT is HIGH"`. Do not include `--filter`.                                             |
+| `filter_vep_svs_expression`             | An expression passed to filter_vep for SVs, e.g. `--filter_vep_svs_expression "IMPACT is HIGH"`. Do not include `--filter`.                                               |
+
+VEP expressions can be used without an HGNC ID file. When both are supplied, the HGNC restriction and the expression are parenthesized and combined with `and` in a single VEP filter. If a bcftools expression is also supplied, bcftools filtering runs before VEP filtering.
+
+The `ENSEMBLVEP_FILTERVEP` module runs `filter_vep` with `--only_matched`. This removes non-matching `CSQ` consequence annotations from retained variants in the clinical VCF, as well as removing variants with no matching annotation. This applies to both the VEP expressions and the HGNC ID filter.
 
 <sup>1</sup> Example file for input with `--filter_variants_hgnc_ids`:
 
@@ -546,7 +556,7 @@ hgnc_id
 14150
 ```
 
-Filtering of variants only happens if any of these three parameters is active.
+Filtering of variants only happens if any of these five parameters is active.
 
 !!!tip
 

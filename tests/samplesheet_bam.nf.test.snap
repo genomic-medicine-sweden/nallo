@@ -72,6 +72,11 @@
                 "CAT_CAT": {
                     "pigz": 2.8
                 },
+                "COLLAPSE_MITOCHONDRIAL_GT": {
+                    "bgzip": 1.21,
+                    "collapse_mitochondrial_gt": "1.0.0",
+                    "tabix": 1.21
+                },
                 "CRAMINO": {
                     "cramino": "1.1.0"
                 },
@@ -230,8 +235,8 @@
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_MERGE": {
-                    "samtools": 1.24
+                "SAMTOOLS_INDEX_INPUT": {
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_SORT": {
                     "samtools": "1.23.1"
@@ -1218,7 +1223,7 @@
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -1299,13 +1304,13 @@
                 ]
             ],
             [
-                
+
             ]
         ],
         "timestamp": "2026-10-14T14:36:25.849066245",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.09.2"
         }
     }
 }

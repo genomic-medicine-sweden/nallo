@@ -1,17 +1,17 @@
 #!/usr/bin/env nextflow
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    genomic-medicine-sweden/nallo
+genomic-medicine-sweden/nallo
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Github : https://github.com/genomic-medicine-sweden/nallo
+Github : https://github.com/genomic-medicine-sweden/nallo
 ----------------------------------------------------------------------------------------
-*/
+ */
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS / WORKFLOWS
+IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS / WORKFLOWS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+ */
 
 include { NALLO                                 } from './workflows/nallo'
 include { PIPELINE_INITIALISATION               } from './subworkflows/local/utils_nfcore_nallo_pipeline'
@@ -23,9 +23,9 @@ include {
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    NAMED WORKFLOWS FOR PIPELINE
+NAMED WORKFLOWS FOR PIPELINE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+ */
 
 //
 // WORKFLOW: Run main analysis pipeline depending on type of input
@@ -65,6 +65,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     ch_sentieon_male_diploid_bed
     ch_sentieon_male_haploid_bed
     ch_sentieon_model_bundle
+    ch_sentieon_population_vcf
+    ch_sentieon_population_tbi
     ch_snv_call_regions
     ch_somalier_sites
     ch_stranger_repeat_catalog
@@ -86,9 +88,11 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_create_sawfish_maf_track
     val_echtvar_snv_databases
     val_fasta
-    val_filter_snvs_expression
-    val_filter_svs_expression
+    val_filter_bcftools_snvs_expression
+    val_filter_bcftools_svs_expression
     val_filter_variants_hgnc_ids
+    val_filter_vep_snvs_expression
+    val_filter_vep_svs_expression
     val_force_sawfish_joint_call_single_samples
     val_hifiasm_mode
     val_kivvi_preset
@@ -182,6 +186,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         ch_sentieon_male_diploid_bed,
         ch_sentieon_male_haploid_bed,
         ch_sentieon_model_bundle,
+        ch_sentieon_population_vcf,
+        ch_sentieon_population_tbi,
         ch_snv_call_regions,
         ch_somalier_sites,
         ch_stranger_repeat_catalog,
@@ -204,9 +210,11 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_create_sawfish_maf_track,
         val_echtvar_snv_databases,
         val_fasta,
-        val_filter_snvs_expression,
-        val_filter_svs_expression,
+        val_filter_bcftools_snvs_expression,
+        val_filter_bcftools_svs_expression,
         val_filter_variants_hgnc_ids,
+        val_filter_vep_snvs_expression,
+        val_filter_vep_svs_expression,
         val_force_sawfish_joint_call_single_samples,
         val_hifiasm_mode,
         val_kivvi_preset,
@@ -273,6 +281,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     aligned_haplotagged_reads_bam       = NALLO.out.aligned_haplotagged_reads_bam // channel: [ val(meta), path(bam) ]
     aligned_haplotagged_reads_crai      = NALLO.out.aligned_haplotagged_reads_crai // channel: [ val(meta), path(crai) ]
     aligned_haplotagged_reads_cram      = NALLO.out.aligned_haplotagged_reads_cram // channel: [ val(meta), path(cram) ]
+    aligned_input_reads_bai             = NALLO.out.aligned_input_reads_bai // channel: [ val(meta), path(bai) ]
+    aligned_input_reads_bam             = NALLO.out.aligned_input_reads_bam // channel: [ val(meta), path(bam) ]
     aligned_reads_bai                   = NALLO.out.aligned_reads_bai // channel: [ val(meta), path(bai) ]
     aligned_reads_bam                   = NALLO.out.aligned_reads_bam // channel: [ val(meta), path(bam) ]
     aligned_reads_crai                  = NALLO.out.aligned_reads_crai // channel: [ val(meta), path(crai) ]
@@ -386,9 +396,9 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    RUN MAIN WORKFLOW
+RUN MAIN WORKFLOW
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+ */
 
 workflow {
 
@@ -490,7 +500,9 @@ workflow {
         createReferenceChannelFromPath(params.gens_panel_of_normals_female, '', 'female_pon'),
         createReferenceChannelFromPath(params.gens_panel_of_normals_male, '', 'male_pon'),
         createReferenceChannelFromPath(params.glnexus_config, channel.value([[id: 'glnexus_config'], "${projectDir}/assets/glnexus_config_dp1.yml"])),
-        createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', channel.value([])).map { hgnc_id_list -> hgnc_id_list[0].toString() }.collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true).map { file -> [[id: 'hgnc_ids'], file] }.collect(),
+        params.filter_variants_hgnc_ids
+            ? createReferenceChannelFromSamplesheet(params.filter_variants_hgnc_ids, 'assets/schema_hgnc_ids.json', channel.value([])).map { hgnc_id_list -> hgnc_id_list[0].toString() }.collectFile(name: 'hgnc_ids.txt', newLine: true, sort: true).map { file -> [[id: 'hgnc_ids'], file] }.collect()
+            : channel.value([[id: 'hgnc_ids'], []]),
         PIPELINE_INITIALISATION.out.samplesheet,
         createReferenceChannelFromPath(params.cramino_regions, channel.value([[], []])),
         createReferenceChannelFromPath(params.methbat_map),
@@ -505,6 +517,8 @@ workflow {
         createReferenceChannelFromPath(params.sentieon_male_diploid_bed, channel.value([[], []])),
         createReferenceChannelFromPath(params.sentieon_male_haploid_bed, channel.value([[], []])),
         createReferenceChannelFromPath(params.sentieon_model_bundle, channel.value([[], []])),
+        createReferenceChannelFromPath(params.sentieon_population_vcf, channel.value([[], []])),
+        createReferenceChannelFromPath(params.sentieon_population_tbi, channel.value([[], []])),
         createReferenceChannelFromPath(params.snv_call_regions, channel.value([[], []])),
         createReferenceChannelFromPath(params.somalier_sites),
         createReferenceChannelFromPath(params.stranger_repeat_catalog),
@@ -526,9 +540,11 @@ workflow {
         params.create_sawfish_maf_track,
         params.echtvar_snv_databases,
         params.fasta,
-        params.filter_snvs_expression,
-        params.filter_svs_expression,
+        params.filter_bcftools_snvs_expression,
+        params.filter_bcftools_svs_expression,
         params.filter_variants_hgnc_ids,
+        params.filter_vep_snvs_expression,
+        params.filter_vep_svs_expression,
         params.force_sawfish_joint_call_single_samples,
         params.hifiasm_mode,
         params.kivvi_preset,
@@ -609,6 +625,8 @@ workflow {
     ch_aligned_haplotagged_reads_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_haplotagged_reads_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_haplotagged_reads_bai)
 
     ch_aligned_haplotagged_reads_cram = GENOMICMEDICINESWEDEN_NALLO.out.aligned_haplotagged_reads_cram.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_haplotagged_reads_crai)
+
+    ch_aligned_input_reads_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_input_reads_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_input_reads_bai)
 
     ch_aligned_reads_bam = GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_bam.mix(GENOMICMEDICINESWEDEN_NALLO.out.aligned_reads_bai)
 
@@ -729,6 +747,7 @@ workflow {
     aligned_portello_reads_bam     = ch_aligned_assemblies_remapped // channel: [ val(meta), path(bam/bai) ]
     aligned_haplotagged_reads_bam  = ch_aligned_haplotagged_reads_bam // channel: [ val(meta), path(bam/bai) ]
     aligned_haplotagged_reads_cram = ch_aligned_haplotagged_reads_cram // channel: [ val(meta), path(cram/crai) ]
+    aligned_input_reads_bam        = ch_aligned_input_reads_bam // channel: [ val(meta), path(bam/bai) ]
     aligned_reads_bam              = ch_aligned_reads_bam // channel: [ val(meta), path(bam/bai) ]
     aligned_reads_cram             = ch_aligned_reads_cram // channel: [ val(meta), path(cram/crai) ]
     assembly_summary               = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
@@ -784,18 +803,22 @@ output {
         enabled params.skip_portello && params.skip_phasing
     }
     aligned_haplotagged_reads_bam {
-        // HiPhase uses the input file (aligned reads) as template for naming output, so we need to remove the "_aligned" suffix here
+        // HiPhase uses the input file (aligned reads) as template for naming output, so we need to name the files after the sample here
         path { meta, file ->
-            file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_aligned(_reads)*", "")}"
+            file >> "aligned_reads/${meta.id}/${meta.id}${file.name.substring(file.name.indexOf('_haplotagged'))}"
         }
         enabled params.alignment_output_format == 'bam'
     }
     aligned_haplotagged_reads_cram {
-        // HiPhase uses the input file (aligned reads) as template for naming output, so we need to remove the "_aligned" suffix here
+        // HiPhase uses the input file (aligned reads) as template for naming output, so we need to name the files after the sample here
         path { meta, file ->
-            file >> "aligned_reads/${meta.id}/${file.name.replaceFirst("_aligned(_reads)*", "")}"
+            file >> "aligned_reads/${meta.id}/${meta.id}${file.name.substring(file.name.indexOf('_haplotagged'))}"
         }
         enabled params.alignment_output_format == 'cram'
+    }
+    aligned_input_reads_bam {
+        path { meta, _file -> "aligned_reads/${meta.id}/" }
+        enabled params.publish_input_aligned_bams && params.alignment_output_format == 'bam' && params.skip_phasing && params.skip_portello
     }
     aligned_reads_bam {
         path { meta, _file -> "aligned_reads/${meta.id}/" }

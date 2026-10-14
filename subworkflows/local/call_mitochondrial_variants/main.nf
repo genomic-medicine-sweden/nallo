@@ -4,6 +4,7 @@
 
 include { BCFTOOLS_REHEADER                   } from '../../../modules/nf-core/bcftools/reheader/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_MITO } from '../../../modules/nf-core/bcftools/view/main'
+include { COLLAPSE_MITOCHONDRIAL_GT           } from '../../../modules/local/collapse_mitochondrial_gt/main'
 include { DEEPVARIANT_RUNDEEPVARIANT          } from '../../../modules/nf-core/deepvariant/rundeepvariant/main'
 include { GAWK as GAWK_STRIP_CONTIG_HEADER    } from '../../../modules/nf-core/gawk/main'
 include { MITORSAW_HAPLOTYPE                  } from '../../../modules/nf-core/mitorsaw/haplotype/main'
@@ -85,6 +86,14 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
         )
 
         /*
+         * Mitorsaw reports one GT entry per detected mitochondrial haplotype (e.g. `1|1|1|1|1`
+         * or `0|0|0|1|0`), which is not a standard diploid genotype and breaks interoperability
+         * with the rest of the pipeline. Collapse it to 0/0, 0/1 or 1/1 based on whether the ALT
+         * allele is absent, present in some, or present in all haplotypes.
+         */
+        COLLAPSE_MITOCHONDRIAL_GT(BCFTOOLS_REHEADER.out.vcf)
+
+        /*
          * Use ch_snv/sv_call_regions to filter the mitochondrial caller's SNV/SV output directly via
          * bcftools view --regions-file
          */
@@ -92,8 +101,8 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
             .map { _meta, bed -> ['snv', bed] }
             .mix(ch_sv_call_regions.map { _meta, bed -> ['sv', bed] })
 
-        ch_bcftools_view_input = BCFTOOLS_REHEADER.out.vcf
-            .join(BCFTOOLS_REHEADER.out.index)
+        ch_bcftools_view_input = COLLAPSE_MITOCHONDRIAL_GT.out.vcf
+            .join(COLLAPSE_MITOCHONDRIAL_GT.out.tbi)
             .flatMap { meta, vcf, tbi ->
                 [
                     ['snv', meta + [variant_type: "snv"], vcf, tbi],
