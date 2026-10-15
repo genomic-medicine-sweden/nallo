@@ -907,15 +907,12 @@
                 "HG004_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002.kivvi.d4z4.bam:md5,6bb2bc51a4cd900a9902f9efc7ec2580",
                 "HG002.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
-                "HG002.kivvi.d4z4.json:md5,d8ca6519fabcf8cecb1ba857b0a9031e",
                 "HG002.kivvi.d4z4.vcf:md5,0274bb9658ee6aa49aeeecfcf07cd250",
                 "HG003.kivvi.d4z4.bam:md5,41eba63bd0c86099d75f4f1e58e3f2f6",
                 "HG003.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
-                "HG003.kivvi.d4z4.json:md5,d8ca6519fabcf8cecb1ba857b0a9031e",
                 "HG003.kivvi.d4z4.vcf:md5,e4401eb29dfbb8a5aed612743ac45d55",
                 "HG004.kivvi.d4z4.bam:md5,6090e4d85a24e5cda725d9dce937072e",
                 "HG004.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
-                "HG004.kivvi.d4z4.json:md5,d8ca6519fabcf8cecb1ba857b0a9031e",
                 "HG004.kivvi.d4z4.vcf:md5,653f1caaa8bf6d94b3f3155d163f3ab0",
                 "HG002_pbcpgtools.combined.bed.gz:md5,94e55bc32f9b93a28db4c2b6c84e1257",
                 "HG002_pbcpgtools.combined.bed.gz.tbi:md5,f0749ad87556a1c0bc762ea65cf367d2",
@@ -1115,7 +1112,7 @@
                 
             ]
         ],
-        "timestamp": "2026-10-15T08:09:25.500989915",
+        "timestamp": "2026-10-15T09:49:44.578016541",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

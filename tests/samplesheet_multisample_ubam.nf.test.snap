@@ -1109,15 +1109,12 @@
                 "HG004_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002.kivvi.d4z4.bam:md5,33544c51c77d73a17e9c9afdb7f707ec",
                 "HG002.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
-                "HG002.kivvi.d4z4.json:md5,d8ca6519fabcf8cecb1ba857b0a9031e",
                 "HG002.kivvi.d4z4.vcf:md5,40ed942068d9514b01b4d278fda7db94",
                 "HG003.kivvi.d4z4.bam:md5,8c5f142d79493a4049354a906b46273b",
                 "HG003.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
-                "HG003.kivvi.d4z4.json:md5,d8ca6519fabcf8cecb1ba857b0a9031e",
                 "HG003.kivvi.d4z4.vcf:md5,472eaee8b24437b64f3612b6f77b16b6",
                 "HG004.kivvi.d4z4.bam:md5,c08635926a6978e1a90d55086ccaaa70",
                 "HG004.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
-                "HG004.kivvi.d4z4.json:md5,d8ca6519fabcf8cecb1ba857b0a9031e",
                 "HG004.kivvi.d4z4.vcf:md5,9b8d012ab633b96a8adbb728ed27ea00",
                 "HG002_pbcpgtools.combined.bed.gz:md5,2335e1849d645cb082ff993ec001ef31",
                 "HG002_pbcpgtools.combined.bed.gz.tbi:md5,be19f72778ce254ab11ef922617679d6",
@@ -1353,7 +1350,7 @@
                 
             ]
         ],
-        "timestamp": "2026-10-15T08:34:54.23618402",
+        "timestamp": "2026-10-15T09:39:40.959890548",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
@@ -2513,15 +2510,12 @@
                 "HG004_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002.kivvi.d4z4.bam:md5,33544c51c77d73a17e9c9afdb7f707ec",
                 "HG002.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
-                "HG002.kivvi.d4z4.json:md5,d8ca6519fabcf8cecb1ba857b0a9031e",
                 "HG002.kivvi.d4z4.vcf:md5,40ed942068d9514b01b4d278fda7db94",
                 "HG003.kivvi.d4z4.bam:md5,8c5f142d79493a4049354a906b46273b",
                 "HG003.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
-                "HG003.kivvi.d4z4.json:md5,d8ca6519fabcf8cecb1ba857b0a9031e",
                 "HG003.kivvi.d4z4.vcf:md5,472eaee8b24437b64f3612b6f77b16b6",
                 "HG004.kivvi.d4z4.bam:md5,c08635926a6978e1a90d55086ccaaa70",
                 "HG004.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
-                "HG004.kivvi.d4z4.json:md5,d8ca6519fabcf8cecb1ba857b0a9031e",
                 "HG004.kivvi.d4z4.vcf:md5,9b8d012ab633b96a8adbb728ed27ea00",
                 "HG002_pbcpgtools.combined.bed.gz:md5,1d56d09f8243d221404e0d2577f2359d",
                 "HG002_pbcpgtools.combined.bed.gz.tbi:md5,744f0ce191924acd83e8ca5f33e04398",
@@ -2774,7 +2768,7 @@
                 
             ]
         ],
-        "timestamp": "2026-10-15T08:38:32.315162134",
+        "timestamp": "2026-10-15T09:43:21.314127665",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

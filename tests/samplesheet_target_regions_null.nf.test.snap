@@ -1,7 +1,7 @@
 {
     "test profile | --target_regions null --alignment_output_format cram": {
         "content": [
-            228,
+            229,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -71,6 +71,11 @@
                 },
                 "CAT_CAT": {
                     "pigz": 2.8
+                },
+                "COLLAPSE_MITOCHONDRIAL_GT": {
+                    "bgzip": 1.21,
+                    "collapse_mitochondrial_gt": "1.0.0",
+                    "tabix": 1.21
                 },
                 "CRAMINO": {
                     "cramino": "1.1.0"
@@ -736,7 +741,6 @@
                 "HG002_Revio_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG002_Revio.kivvi.d4z4.bam:md5,05223bf077fc5d7f9ab45671b0f8dff9",
                 "HG002_Revio.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
-                "HG002_Revio.kivvi.d4z4.json:md5,d8ca6519fabcf8cecb1ba857b0a9031e",
                 "HG002_Revio.kivvi.d4z4.vcf:md5,61d19a577342497569369965277c9f73",
                 "HG002_Revio_pbcpgtools.combined.bed.gz:md5,61c1913dc03409095fae1442b6acb1eb",
                 "HG002_Revio_pbcpgtools.combined.bed.gz.tbi:md5,eff007ce50cfb4cdaf2dee1d32dc4e9a",
@@ -870,7 +874,7 @@
                 
             ]
         ],
-        "timestamp": "2026-10-14T15:43:19.63369161",
+        "timestamp": "2026-10-15T09:48:29.213651753",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
