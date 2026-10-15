@@ -66,9 +66,6 @@
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
                 },
-                "KIVVI": {
-                    "kivvi": "1.1.0"
-                },
                 "CAT_CAT": {
                     "pigz": 2.8
                 },
@@ -162,6 +159,9 @@
                 "HTSLIB_BGZIPTABIX": {
                     "htslib": 1.24,
                     "xz": "5.8.3"
+                },
+                "KIVVI": {
+                    "kivvi": "1.1.0"
                 },
                 "LONGPHASE_HAPLOTAG": {
                     "longphase": "2.0.1"
@@ -1220,7 +1220,7 @@
                 ]
             ],
             [
-
+                
             ],
             [
                 [
@@ -1301,13 +1301,13 @@
                 ]
             ],
             [
-
+                
             ]
         ],
-        "timestamp": "2026-10-15T09:34:21.628237119",
+        "timestamp": "2026-10-15T13:55:14.448718385",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.0"
         }
     }
 }

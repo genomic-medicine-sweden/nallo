@@ -66,9 +66,6 @@
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
                 },
-                "CALL_VNTR_REPEATS_KIVVI": {
-                    "kivvi": "1.1.0"
-                },
                 "CAT_CAT": {
                     "pigz": 2.8
                 },
@@ -162,6 +159,9 @@
                 "HTSLIB_BGZIPTABIX": {
                     "htslib": 1.24,
                     "xz": "5.8.3"
+                },
+                "KIVVI": {
+                    "kivvi": "1.1.0"
                 },
                 "LONGPHASE_HAPLOTAG": {
                     "longphase": "2.0.1"
@@ -764,10 +764,10 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-10-15T08:14:12.448239837",
+        "timestamp": "2026-10-15T14:15:11.210708464",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.0"
         }
     }
 }

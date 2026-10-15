@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            238,
+            239,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -65,9 +65,6 @@
                 },
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
-                },
-                "CALL_VNTR_REPEATS_KIVVI": {
-                    "kivvi": "1.1.0"
                 },
                 "CAT_CAT": {
                     "pigz": 2.8
@@ -172,6 +169,9 @@
                     "htslib": 1.24,
                     "xz": "5.8.3"
                 },
+                "KIVVI": {
+                    "kivvi": "1.1.0"
+                },
                 "LONGPHASE_HAPLOTAG": {
                     "longphase": "2.0.1"
                 },
@@ -251,6 +251,9 @@
                     "python": "3.8.3"
                 },
                 "SAMTOOLS_CONVERT": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_CONVERT_KIVVI": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_FAIDX": {
@@ -416,6 +419,8 @@
                 "images/chromograph/sample/HG002_Revio/HG002_Revio_chromograph_coverage_chrY.png",
                 "kivvi",
                 "kivvi/HG002_Revio",
+                "kivvi/HG002_Revio/HG002_Revio.cram",
+                "kivvi/HG002_Revio/HG002_Revio.cram.crai",
                 "kivvi/HG002_Revio/HG002_Revio.kivvi.d4z4.bam",
                 "kivvi/HG002_Revio/HG002_Revio.kivvi.d4z4.bam.bai",
                 "kivvi/HG002_Revio/HG002_Revio.kivvi.d4z4.json",
@@ -752,6 +757,8 @@
                 "HG002_Revio_chromograph_coverage_chrM.png:md5,f8b3af5db305513f712f17941962f315",
                 "HG002_Revio_chromograph_coverage_chrX.png:md5,396d5ba4d250214a723094c4449137dd",
                 "HG002_Revio_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002_Revio.cram:md5,145e8c423887be70964cf29f8e3222a2",
+                "HG002_Revio.cram.crai:md5,7029066c27ac6f5ef18d660d5741979a",
                 "HG002_Revio.kivvi.d4z4.bam:md5,05223bf077fc5d7f9ab45671b0f8dff9",
                 "HG002_Revio.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
                 "HG002_Revio.kivvi.d4z4.vcf:md5,61d19a577342497569369965277c9f73",
@@ -836,6 +843,10 @@
                     "bb0797a883bb0532851980c737c0e22b"
                 ],
                 [
+                    "HG002_Revio.cram",
+                    "d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                [
                     "HG002_Revio_spanning_trgt.cram",
                     "30ba267e3b89ce97d0df96640b22d265"
                 ]
@@ -890,10 +901,10 @@
                 
             ]
         ],
-        "timestamp": "2026-10-15T09:36:19.514302611",
+        "timestamp": "2026-10-15T14:14:08.348499457",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.0"
         }
     }
 }
