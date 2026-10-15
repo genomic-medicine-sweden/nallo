@@ -1,7 +1,7 @@
 {
     "samplesheet_vcf | vcf entry_point | Revio trio": {
         "content": [
-            231,
+            234,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -118,6 +118,9 @@
                 "HTSLIB_BGZIPTABIX": {
                     "htslib": 1.24,
                     "xz": "5.8.3"
+                },
+                "KIVVI": {
+                    "kivvi": "1.1.0"
                 },
                 "LONGPHASE_HAPLOTAG": {
                     "longphase": "2.0.1"
@@ -404,6 +407,22 @@
                 "images/chromograph/sample/HG004/HG004_chromograph_coverage_chrM.png",
                 "images/chromograph/sample/HG004/HG004_chromograph_coverage_chrX.png",
                 "images/chromograph/sample/HG004/HG004_chromograph_coverage_chrY.png",
+                "kivvi",
+                "kivvi/HG002",
+                "kivvi/HG002/HG002.kivvi.d4z4.bam",
+                "kivvi/HG002/HG002.kivvi.d4z4.bam.bai",
+                "kivvi/HG002/HG002.kivvi.d4z4.json",
+                "kivvi/HG002/HG002.kivvi.d4z4.vcf",
+                "kivvi/HG003",
+                "kivvi/HG003/HG003.kivvi.d4z4.bam",
+                "kivvi/HG003/HG003.kivvi.d4z4.bam.bai",
+                "kivvi/HG003/HG003.kivvi.d4z4.json",
+                "kivvi/HG003/HG003.kivvi.d4z4.vcf",
+                "kivvi/HG004",
+                "kivvi/HG004/HG004.kivvi.d4z4.bam",
+                "kivvi/HG004/HG004.kivvi.d4z4.bam.bai",
+                "kivvi/HG004/HG004.kivvi.d4z4.json",
+                "kivvi/HG004/HG004.kivvi.d4z4.vcf",
                 "methylation",
                 "methylation/pileup",
                 "methylation/pileup/HG002",
@@ -886,6 +905,15 @@
                 "HG004_chromograph_coverage_chrM.png:md5,90de157b814be5dbca58b7719572192a",
                 "HG004_chromograph_coverage_chrX.png:md5,1b98fd0d646c6fa24a923eeebab1c19f",
                 "HG004_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002.kivvi.d4z4.bam:md5,6bb2bc51a4cd900a9902f9efc7ec2580",
+                "HG002.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
+                "HG002.kivvi.d4z4.vcf:md5,0274bb9658ee6aa49aeeecfcf07cd250",
+                "HG003.kivvi.d4z4.bam:md5,41eba63bd0c86099d75f4f1e58e3f2f6",
+                "HG003.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
+                "HG003.kivvi.d4z4.vcf:md5,e4401eb29dfbb8a5aed612743ac45d55",
+                "HG004.kivvi.d4z4.bam:md5,6090e4d85a24e5cda725d9dce937072e",
+                "HG004.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
+                "HG004.kivvi.d4z4.vcf:md5,653f1caaa8bf6d94b3f3155d163f3ab0",
                 "HG002_pbcpgtools.combined.bed.gz:md5,94e55bc32f9b93a28db4c2b6c84e1257",
                 "HG002_pbcpgtools.combined.bed.gz.tbi:md5,f0749ad87556a1c0bc762ea65cf367d2",
                 "HG002_pbcpgtools.hap1.bed.gz:md5,d470c082a773103f1896c8085771b388",
@@ -995,6 +1023,18 @@
                     "2b776dae5bae4889b786825ff96b2264"
                 ],
                 [
+                    "HG002.kivvi.d4z4.bam",
+                    "d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                [
+                    "HG003.kivvi.d4z4.bam",
+                    "d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                [
+                    "HG004.kivvi.d4z4.bam",
+                    "d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                [
                     "HG002_spanning_trgt.bam",
                     "30ba267e3b89ce97d0df96640b22d265"
                 ],
@@ -1072,10 +1112,10 @@
                 
             ]
         ],
-        "timestamp": "2026-10-08T11:17:16.207601213",
+        "timestamp": "2026-10-15T14:12:39.438585877",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.0"
         }
     }
 }

@@ -1,7 +1,7 @@
 {
     "stub | bam entry_point | Revio trio": {
         "content": [
-            357,
+            360,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -159,6 +159,9 @@
                 "HTSLIB_BGZIPTABIX": {
                     "htslib": 1.24,
                     "xz": "5.8.3"
+                },
+                "KIVVI": {
+                    "kivvi": "1.1.0"
                 },
                 "LONGPHASE_HAPLOTAG": {
                     "longphase": "2.0.1"
@@ -484,6 +487,25 @@
                 "images/chromograph/sample/HG004/HG004_chromograph_coverage.wig_chrM.png",
                 "images/chromograph/sample/HG004/HG004_chromograph_coverage.wig_chrX.png",
                 "images/chromograph/sample/HG004/HG004_chromograph_coverage.wig_chrY.png",
+                "kivvi",
+                "kivvi/HG002",
+                "kivvi/HG002/HG002.kivvi.d4z4.bam",
+                "kivvi/HG002/HG002.kivvi.d4z4.bam.bai",
+                "kivvi/HG002/HG002.kivvi.d4z4.json",
+                "kivvi/HG002/HG002.kivvi.d4z4.svg",
+                "kivvi/HG002/HG002.kivvi.d4z4.vcf",
+                "kivvi/HG003",
+                "kivvi/HG003/HG003.kivvi.d4z4.bam",
+                "kivvi/HG003/HG003.kivvi.d4z4.bam.bai",
+                "kivvi/HG003/HG003.kivvi.d4z4.json",
+                "kivvi/HG003/HG003.kivvi.d4z4.svg",
+                "kivvi/HG003/HG003.kivvi.d4z4.vcf",
+                "kivvi/HG004",
+                "kivvi/HG004/HG004.kivvi.d4z4.bam",
+                "kivvi/HG004/HG004.kivvi.d4z4.bam.bai",
+                "kivvi/HG004/HG004.kivvi.d4z4.json",
+                "kivvi/HG004/HG004.kivvi.d4z4.svg",
+                "kivvi/HG004/HG004.kivvi.d4z4.vcf",
                 "methylation",
                 "methylation/pileup",
                 "methylation/pileup/HG002",
@@ -742,10 +764,10 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-10-08T11:19:54.328042113",
+        "timestamp": "2026-10-15T14:15:11.210708464",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.09.2"
+            "nextflow": "26.10.0"
         }
     }
 }

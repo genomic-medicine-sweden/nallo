@@ -33,6 +33,7 @@ nextflow_pipeline {
                 skip_snv_annotation          = true
                 skip_sv_annotation           = true
                 skip_sv_calling              = true
+                skip_kivvi                   = true
             }
         }
 
@@ -77,6 +78,7 @@ nextflow_pipeline {
                 skip_sambamba_depth          = true
                 skip_snv_annotation          = true
                 skip_sv_annotation           = true
+                skip_kivvi                   = true
                 skip_sv_calling              = true
             }
         }

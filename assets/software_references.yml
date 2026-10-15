@@ -228,6 +228,9 @@ tool:
   mm2plus:
     citation: "mm2plus (Chandra et al. 2024)"
     bibliography: "Ghanshyam Chandra, Md Vasimuddin, Sanchit Misra and Chirag Jain. Accelerating whole-genome alignment in the age of complete genome assemblies. bioRxiv 2024. doi: https://doi.org/10.1101/2024.11.25.625328"
+  kivvi:
+    citation: "kivvi (Chen et al. 2026)"
+    bibliography: "Chen Xiao, Lemmers Richard, Kronenberg Zev, Devaney Joseph, Noya Jessica, Berlyoung April, Yusuff Shamila, Lynch Solomon, Nykamp Keith, Lyndy Amanda, Dolzhenko Egor, Maarel Silvere, Eberle Michael. Resolution of the D4Z4 repeat responsible for facioscapulohumeral muscular dystrophy with HiFi sequencing. bioRxiv. doi: 10.64898/2026.04.10.717730"
   collapse_mitochondrial_gt:
     citation: "collapse_mitochondrial_gt"
     bibliography: ""
