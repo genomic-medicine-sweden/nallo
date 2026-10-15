@@ -129,8 +129,8 @@
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_MERGE": {
-                    "samtools": 1.24
+                "SAMTOOLS_INDEX_INPUT": {
+                    "samtools": "1.23.1"
                 },
                 "SOMALIER_EXTRACT": {
                     "somalier": "0.2.18"
@@ -304,7 +304,7 @@
                 "svs/family/hg002/hg002_svs_annotated_ranked_research.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-10-02T18:19:11.31766953",
+        "timestamp": "2026-10-08T11:22:28.163036217",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
@@ -457,8 +457,8 @@
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_MERGE": {
-                    "samtools": 1.24
+                "SAMTOOLS_INDEX_INPUT": {
+                    "samtools": "1.23.1"
                 },
                 "SOMALIER_EXTRACT": {
                     "somalier": "0.2.18"
@@ -816,7 +816,7 @@
                 "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-10-02T18:17:33.989424682",
+        "timestamp": "2026-10-08T11:21:23.229170076",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

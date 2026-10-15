@@ -128,7 +128,7 @@
     },
     "Test mitochondrial calling runs by default": {
         "content": [
-            42,
+            43,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -162,6 +162,11 @@
                 },
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
+                },
+                "COLLAPSE_MITOCHONDRIAL_GT": {
+                    "bgzip": 1.21,
+                    "collapse_mitochondrial_gt": "1.0.0",
+                    "tabix": 1.21
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
                     "deepvariant": "1.10.0"
@@ -262,10 +267,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-31T10:20:17.461695095",
+        "timestamp": "2026-10-12T13:57:36.909896009",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.09.2"
         }
     }
 }

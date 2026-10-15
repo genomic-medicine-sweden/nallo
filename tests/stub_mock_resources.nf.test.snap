@@ -195,8 +195,8 @@
                     "bcftools": "1.23.1",
                     "bedtools": "2.30.0",
                     "samtools": "1.23.1",
-                    "sentieon": 202503.03,
-                    "sentieon-cli": "1.6.2"
+                    "sentieon": 202503.04,
+                    "sentieon-cli": "2.0.0"
                 },
                 "ECHTVAR_ANNO": {
                     "echtvar": "0.2.4"
@@ -303,7 +303,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-09-09T07:54:38.79458826",
+        "timestamp": "2026-10-08T09:10:22.711838478",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
