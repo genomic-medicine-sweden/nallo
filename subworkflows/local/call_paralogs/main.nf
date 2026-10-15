@@ -11,12 +11,13 @@ workflow CALL_PARALOGS {
     fasta // channel: [ val(meta), fasta ]
     fai // channel: [ val(meta), fai ]
     val_cram_output // bool: Publish alignments as CRAM (true) or BAM (false)
+    ch_paraphase_config // channel: [ val(meta), path(config) ]
 
     main:
     PARAPHASE(
         bam_bai,
         fasta,
-        [[], []],
+        ch_paraphase_config,
     )
 
     ch_paraphase_vcf_tbis = PARAPHASE.out.vcf

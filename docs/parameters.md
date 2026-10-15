@@ -238,3 +238,4 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `glnexus_config` | Glnexus config to use for merging gVCFs. If no file is provided, the default config `assets/glnexus_config_dp1.yml` will be used. | `string` | None |  |  |
 | `assembly_aligner` | Which aligner to use for assembly alignment. Supported arguments are mm2plus or minimap2. (accepted: `mm2plus`\|`minimap2`) | `string` | minimap2 |  |  |
 | `methbat_map` | Mapping file that can be used to filter and annotate the methbat output based on regions. | `string` |  |  |  |
+| `paraphase_config` | Configuration file for Paraphase. | `string` | None |  |  |

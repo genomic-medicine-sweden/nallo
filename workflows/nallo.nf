@@ -116,6 +116,7 @@ workflow NALLO {
     ch_mosdepth_regions
     ch_paraphrase_rules
     ch_par
+    ch_paraphase_config
     ch_peddy_sites
     ch_sambamba_regions
     ch_sentieon_female_diploid_bed
@@ -492,6 +493,7 @@ workflow NALLO {
             ch_fasta,
             ch_fai,
             val_cram_output,
+            ch_paraphase_config,
         )
     }
 
