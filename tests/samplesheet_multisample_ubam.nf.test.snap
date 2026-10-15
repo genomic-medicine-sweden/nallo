@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ubam | --sv_callers sniffles1,debreak --phaser whatshap": {
         "content": [
-            398,
+            401,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -1353,7 +1353,7 @@
                 
             ]
         ],
-        "timestamp": "2026-10-14T17:06:35.262542943",
+        "timestamp": "2026-10-15T08:34:54.23618402",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
@@ -1361,7 +1361,7 @@
     },
     "samplesheet_multisample_ubam": {
         "content": [
-            433,
+            436,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -2774,10 +2774,10 @@
                 
             ]
         ],
-        "timestamp": "2026-10-14T17:10:13.914054767",
+        "timestamp": "2026-10-15T08:38:32.315162134",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.09.2"
+            "nextflow": "26.04.6"
         }
     }
 }

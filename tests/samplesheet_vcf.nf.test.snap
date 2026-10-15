@@ -905,18 +905,18 @@
                 "HG004_chromograph_coverage_chrM.png:md5,90de157b814be5dbca58b7719572192a",
                 "HG004_chromograph_coverage_chrX.png:md5,1b98fd0d646c6fa24a923eeebab1c19f",
                 "HG004_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
-                "HG002.kivvi.d4z4.bam:md5,1c86f3aaa1605a1c43049c0c6761b682",
+                "HG002.kivvi.d4z4.bam:md5,6bb2bc51a4cd900a9902f9efc7ec2580",
                 "HG002.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
                 "HG002.kivvi.d4z4.json:md5,d8ca6519fabcf8cecb1ba857b0a9031e",
-                "HG002.kivvi.d4z4.vcf:md5,5ca42db373e7fc34c2bc209a1eea166a",
-                "HG003.kivvi.d4z4.bam:md5,318078aef0782e422c92eb6e6dbf279b",
+                "HG002.kivvi.d4z4.vcf:md5,0274bb9658ee6aa49aeeecfcf07cd250",
+                "HG003.kivvi.d4z4.bam:md5,41eba63bd0c86099d75f4f1e58e3f2f6",
                 "HG003.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
                 "HG003.kivvi.d4z4.json:md5,d8ca6519fabcf8cecb1ba857b0a9031e",
-                "HG003.kivvi.d4z4.vcf:md5,3d47ebf101a6a4bba95347c720226841",
-                "HG004.kivvi.d4z4.bam:md5,359fc9fb9176c61523620fea2869b65e",
+                "HG003.kivvi.d4z4.vcf:md5,e4401eb29dfbb8a5aed612743ac45d55",
+                "HG004.kivvi.d4z4.bam:md5,6090e4d85a24e5cda725d9dce937072e",
                 "HG004.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
                 "HG004.kivvi.d4z4.json:md5,d8ca6519fabcf8cecb1ba857b0a9031e",
-                "HG004.kivvi.d4z4.vcf:md5,7c36d26e1e46262cd7b9c867fa0de876",
+                "HG004.kivvi.d4z4.vcf:md5,653f1caaa8bf6d94b3f3155d163f3ab0",
                 "HG002_pbcpgtools.combined.bed.gz:md5,94e55bc32f9b93a28db4c2b6c84e1257",
                 "HG002_pbcpgtools.combined.bed.gz.tbi:md5,f0749ad87556a1c0bc762ea65cf367d2",
                 "HG002_pbcpgtools.hap1.bed.gz:md5,d470c082a773103f1896c8085771b388",
@@ -1115,7 +1115,7 @@
                 
             ]
         ],
-        "timestamp": "2026-10-14T15:44:37.008520751",
+        "timestamp": "2026-10-15T08:09:25.500989915",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
