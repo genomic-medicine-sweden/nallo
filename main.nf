@@ -307,6 +307,8 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     kivvi_json                          = NALLO.out.kivvi_json // channel: [ val(meta), path(json) ]
     kivvi_bam                           = NALLO.out.kivvi_bam // channel: [ val(meta), path(bam) ]
     kivvi_bai                           = NALLO.out.kivvi_bai // channel: [ val(meta), path(bai) ]
+    kivvi_crai                          = NALLO.out.kivvi_crai // channel: [ val(meta), path(crai) ]
+    kivvi_cram                          = NALLO.out.kivvi_cram // channel: [ val(meta), path(cram) ]
     methylation_family_annotated        = NALLO.out.methylation_family_annotated // channel: [ val(meta), path(methylated_regions_by_family) ]
     methylation_methbat_combined_bed    = NALLO.out.methylation_methbat_combined_bed // channel: [ val(meta), path(bed.gz) ]
     methylation_methbat_combined_bigwig = NALLO.out.methylation_methbat_combined_bigwig // channel: [ val(meta), path(combined.bw) ]
@@ -648,6 +650,8 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.kivvi_json)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.kivvi_bam)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.kivvi_bai)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.kivvi_cram)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.kivvi_crai)
 
     ch_methylation_pileup = GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_combined_bed
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_combined_index)

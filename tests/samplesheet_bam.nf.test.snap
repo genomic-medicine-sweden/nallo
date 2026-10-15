@@ -66,7 +66,7 @@
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
                 },
-                "CALL_VNTR_REPEATS_KIVVI": {
+                "KIVVI": {
                     "kivvi": "1.1.0"
                 },
                 "CAT_CAT": {
@@ -1220,7 +1220,7 @@
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -1301,7 +1301,7 @@
                 ]
             ],
             [
-                
+
             ]
         ],
         "timestamp": "2026-10-15T09:34:21.628237119",
