@@ -1,7 +1,7 @@
 {
     "samplesheet_bam | aligned_bam column": {
         "content": [
-            363,
+            366,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -68,6 +68,11 @@
                 },
                 "CAT_CAT": {
                     "pigz": 2.8
+                },
+                "COLLAPSE_MITOCHONDRIAL_GT": {
+                    "bgzip": 1.21,
+                    "collapse_mitochondrial_gt": "1.0.0",
+                    "tabix": 1.21
                 },
                 "CRAMINO": {
                     "cramino": "1.1.0"
@@ -227,8 +232,8 @@
                 "SAMTOOLS_INDEX": {
                     "samtools": "1.23.1"
                 },
-                "SAMTOOLS_MERGE": {
-                    "samtools": 1.24
+                "SAMTOOLS_INDEX_INPUT": {
+                    "samtools": "1.23.1"
                 },
                 "SAMTOOLS_SORT": {
                     "samtools": "1.23.1"
@@ -1175,7 +1180,7 @@
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -1256,13 +1261,13 @@
                 ]
             ],
             [
-                
+
             ]
         ],
-        "timestamp": "2026-10-03T09:28:17.953128786",
+        "timestamp": "2026-10-08T11:10:30.338167479",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.09.2"
         }
     }
 }

@@ -49,6 +49,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Added DeBreak as a new SV caller option (`--sv_callers debreak`)
 - [#1252](https://github.com/genomic-medicine-sweden/nallo/pull/1252) - Added `--extra_vep_options_snv_mito` param for MT-specific VEP annotation (excludes nuclear-only flags `--sift`, `--polyphen`, `--humdiv`) and `--genmod_score_config_snvs_mito` param to route mitochondrial SNVs to a dedicated rank model
 - [#1260](https://github.com/genomic-medicine-sweden/nallo/pull/1260) - Added samplesheet-based entry point routing: three new columns (`aligned_bam`, `snv_vcf`, `sv_vcf`) allow providing pre-aligned BAMs or pre-called VCFs directly in the samplesheet. The pipeline derives `meta.entry_point` (`fastq`/`ubam`/`bam`/`vcf`) at parse time and routes samples channel-based accordingly. Pre-phasing family VCFs are now published to `unphased/` on every run.
+- [#1268](https://github.com/genomic-medicine-sweden/nallo/pull/1268) - Added optional population VCF and index inputs for Sentieon DNAscope SNV-calling via `--sentieon_population_vcf` and `--sentieon_population_tbi`
+- [#1271](https://github.com/genomic-medicine-sweden/nallo/pull/1271) - Added `COLLAPSE_MITOCHONDRIAL_GT` module to `call_mitochondrial_variants`, collapsing mitorsaw's per-haplotype pseudo-ploidy `GT` field (one entry per detected mitochondrial haplotype) into a standard diploid `GT` (`0/0`, `0/1`, `1/1`) for interoperability with the rest of the pipeline
+- [#1273](https://github.com/genomic-medicine-sweden/nallo/pull/1273) - Added `--publish_input_aligned_bams` to publish the aligned BAMs given in the samplesheet as aligned reads (default `false`)
+- [#1277](https://github.com/genomic-medicine-sweden/nallo/pull/1277) - Added `--filter_vep_snvs_expression` and `--filter_vep_svs_expression` for custom VEP annotation-based filtering of SNVs and SVs. Expressions can be used without an HGNC ID file or combined with `--filter_variants_hgnc_ids` using `and`; when bcftools filtering is also enabled, it runs before VEP filtering.
 - [#1286](https://github.com/genomic-medicine-sweden/nallo/pull/1286) - Added `--paraphase_config` param to allow custom configuration of paraphase annotation
 
 ### Changed
@@ -140,6 +144,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1263](https://github.com/genomic-medicine-sweden/nallo/pull/1263) - Changed filtering of mitochondrial variants from mitorsaw in to use SNV/SV call regions in addition to size for filtering
 - [#1266](https://github.com/genomic-medicine-sweden/nallo/pull/1266) - Set explicit matching parameters for `SVDB_QUERY`, `SVDB_MERGE_BY_CALLER` and `SVDB_MERGE_BY_FAMILY` (`--overlap`, `--bnd_distance`, `--ins_distance`, `--ins_svlen_ratio` and `--ins_seq_similarity`) and expose them as the `--svdb_query_*`, `--svdb_merge_by_caller_*` and `--svdb_merge_by_family_*` parameters
 - [#1272](https://github.com/genomic-medicine-sweden/nallo/pull/1272) - Changed CI to use `latest-stable` version of Nextflow instead of `latest-everything`
+- [#1268](https://github.com/genomic-medicine-sweden/nallo/pull/1268) - Updated the sentieon-cli container from `1.6.2-0` to `2.0.0-0`
+- [#1280](https://github.com/genomic-medicine-sweden/nallo/pull/1280/) - Updated commit hash for test dataset paths
+- [#1273](https://github.com/genomic-medicine-sweden/nallo/pull/1273) - A single aligned BAM per sample (`aligned_bam` entry points) is now indexed with `SAMTOOLS_INDEX` instead of being passed through `SAMTOOLS_MERGE`; published `*_haplotagged` files are always named after the sample
+- [#1277](https://github.com/genomic-medicine-sweden/nallo/pull/1277) - Renamed `--filter_snvs_expression` and `--filter_svs_expression` to `--filter_bcftools_snvs_expression` and `--filter_bcftools_svs_expression` to distinguish bcftools filtering from the new VEP filtering options.
 
 ### Removed
 
@@ -175,7 +183,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1250](https://github.com/genomic-medicine-sweden/nallo/pull/1250) - Fixed missing validation for `--methbat_map` causing a cryptic combine error when the parameter is not provided and methylation annotation is active
 - [#1240](https://github.com/genomic-medicine-sweden/nallo/pull/1240) - Fixed missing `##contig=<ID=chrM>` in the merged SV VCF: Sniffles v2 only writes `##contig` lines for chromosomes where SVs were called; when HiFiCNV called CNVs at chrM the merged VCF had chrM records but no chrM contig definition, causing `bcftools view --samples` and `bcftools sort` to fail
 - [#1259](https://github.com/genomic-medicine-sweden/nallo/pull/1259) - Fixed `snvs/family` output silently missing on targeted runs whose capture does not cover chrM: `groupKey` at `CONCAT_SORT_RANKED_SNVS` expected `num_intervals + 1` items but the mito VCF never arrived because `call_mitochondrial_variants` skips families with an empty mito BED
+- [#1268](https://github.com/genomic-medicine-sweden/nallo/pull/1268) - Fixed inconsistent sample order in Sentieon joint-called VCFs by sorting gVCF and index inputs by filename before GVCFtyper, to match the ordering used for mitochondrial merging
 - [#1275](https://github.com/genomic-medicine-sweden/nallo/pull/1275) - Fixed `tests/stub_methbat_map_validation.nf.test` test to catch the error message in the stderr not in the stdout
+- [#1283](https://github.com/genomic-medicine-sweden/nallo/pull/1283) - Fixed tests and formatting for Nextflow 26.10.0: aliased test setup processes that the tested workflow also calls, assert on stdout and stderr for expected error messages, and formatted config header comments with the 26.10.0 formatter
+- [#1282](https://github.com/genomic-medicine-sweden/nallo/pull/1282) - Fixed `GLNEXUS` failing on long reference names (gVCF dataset names over 100 characters): interval BEDs are now named by genome (`nuclear`, `nuclear_chunk.NNNNN`, `mitochondrial`) instead of by reference, so gVCF names no longer depend on the reference or `--snv_call_regions` file names
 
 ### Parameters
 
@@ -207,6 +218,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                                  | `--svdb_query_ins_distance`                 |
 |                                  | `--svdb_query_ins_svlen_ratio`              |
 |                                  | `--svdb_query_ins_seq_similarity`           |
+| `--filter_snvs_expression`       | `--filter_bcftools_snvs_expression`         |
+| `--filter_svs_expression`        | `--filter_bcftools_svs_expression`          |
+|                                  | `--filter_vep_snvs_expression`              |
+|                                  | `--filter_vep_svs_expression`               |
+|                                  | `--publish_input_aligned_bams`              |
 |                                  | `--paraphase_config`                        |
 
 > [!NOTE]
@@ -218,7 +234,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Tool                           | Old version | New version |
 | ------------------------------ | ----------- | ----------- |
-| sentieon-cli/dnascope-longread | 1.5.2       | 1.6.2       |
+| sentieon-cli/dnascope-longread | 1.5.2       | 2.0.0       |
 | hiphase                        | 1.4.0       | 1.6.0       |
 | echtvar/anno                   | 0.2.2       | 0.2.4       |
 | portello                       |             | 0.7.0       |

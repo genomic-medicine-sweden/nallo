@@ -9,7 +9,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8a22201fc4c3e1026eace0a680cb2757dd4fc7c2/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8cf6216b9cbf96f6bcfc918610182708e3796ad9/'
                 input                        = "$projectDir/assets/samplesheet_multisample_ubam.csv"
                 outdir                       = "$outputDir"
                 phaser                       = "whatshap"
@@ -62,17 +62,19 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8a22201fc4c3e1026eace0a680cb2757dd4fc7c2/'
-                input                        = "$projectDir/assets/samplesheet_multisample_ubam.csv"
-                outdir                       = "$outputDir"
-                phaser                       = "hiphase"
-                sv_callers                   = "sawfish"
-                sv_callers_to_run            = "sawfish,severus,hificnv,sniffles"
-                filter_snvs_expression       = "-i 'AD>0'"
-                filter_svs_expression        = "-i 'FILTER=\"PASS\"'"
-                paraphrase_output_format     = 'json'
-                create_sawfish_maf_track     = false
-                skip_portello                = false
+                pipelines_testdata_base_path    = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8cf6216b9cbf96f6bcfc918610182708e3796ad9/'
+                input                           = "$projectDir/assets/samplesheet_multisample_ubam.csv"
+                outdir                          = "$outputDir"
+                phaser                          = "hiphase"
+                sv_callers                      = "sawfish"
+                sv_callers_to_run               = "sawfish,severus,hificnv,sniffles"
+                filter_bcftools_snvs_expression = "-i 'AD>0'"
+                filter_bcftools_svs_expression  = "-i 'FILTER=\"PASS\"'"
+                filter_vep_snvs_expression      = "SYMBOL is HBM"
+                filter_vep_svs_expression       = "IMPACT is HIGH or IMPACT is MODERATE"
+                paraphrase_output_format        = 'json'
+                create_sawfish_maf_track        = false
+                skip_portello                   = false
             }
         }
 
