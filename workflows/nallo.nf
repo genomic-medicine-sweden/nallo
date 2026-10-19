@@ -511,6 +511,8 @@ workflow NALLO {
     /*
      * Call SNVs
      */
+    sample_snv_vcf = channel.empty()
+
     if (!val_skip_snv_calling) {
 
         // Make BED intervals, can be used for parallel SNV calling
