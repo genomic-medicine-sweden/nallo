@@ -4,17 +4,18 @@ nextflow_pipeline {
     script "../main.nf"
     tag "PIPELINE"
 
-    test("samplesheet_multisample_ubam | --sv_callers sniffles1,debreak --phaser whatshap") {
+    test("samplesheet_multisample_ubam | --sv_callers sniffles1,debreak --sv_callers_to_run sniffles,sniffles1,debreak --phaser whatshap") {
         tag "samplesheet_multisample_ubam_debreak"
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8cf6216b9cbf96f6bcfc918610182708e3796ad9/'
-                input                        = "$projectDir/assets/samplesheet_multisample_ubam.csv"
-                outdir                       = "$outputDir"
-                phaser                       = "whatshap"
-                sv_callers                   = "sniffles1,debreak"
-                sv_callers_to_run            = "sniffles1,debreak"
+                pipelines_testdata_base_path   = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8cf6216b9cbf96f6bcfc918610182708e3796ad9/'
+                input                          = "$projectDir/assets/samplesheet_multisample_ubam.csv"
+                outdir                         = "$outputDir"
+                phaser                         = "whatshap"
+                sv_callers                     = "sniffles1,debreak"
+                sv_callers_to_run              = "sniffles,sniffles1,debreak"
+                publish_unannotated_family_svs = true
             }
         }
 
@@ -33,8 +34,15 @@ nextflow_pipeline {
             def all_vcf_files    = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_incompatible_variants', include: ['**/*.vcf.gz'])
             // stable_vcf_files: Vcf files with stable variants - can be snapshot using variantsMD5
             def stable_vcf_files = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore_unstable_variants', include: ['**/*.vcf.gz'])
+            // found_in_callers: Callers listed in FOUND_IN of the merged family VCF (sniffles is run but not merged)
+            def found_in_callers = path("$outputDir/svs/family/FAM/FAM_svs_unphased.vcf.gz").linesGzip
+                .findAll { line -> !line.startsWith('#') }
+                .collectMany { line -> line.split('\t')[7].split(';').findAll { field -> field.startsWith('FOUND_IN=') }.collectMany { field -> field.substring(9).split(',') as List } }
+                .unique()
+                .sort()
             assertAll(
                 { assert workflow.success },
+                { assert 'sniffles1' in found_in_callers && !('sniffles' in found_in_callers) },
                 { assert snapshot(
                     // Number of successful tasks
                     workflow.trace.succeeded().size(),
