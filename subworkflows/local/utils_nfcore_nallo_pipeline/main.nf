@@ -847,7 +847,7 @@ def validateSVCallingParameters(val_sv_callers_to_merge, val_sv_callers_merge_pr
     }
 
     if (sv_callers.contains('sniffles') && sv_callers.contains('sniffles1')) {
-        error("ERROR: --sv_callers cannot contain both 'sniffles' (v2) and 'sniffles1' (v1). Choose one Sniffles version.")
+        error("ERROR: --sv_callers_to_merge cannot contain both 'sniffles' (v2) and 'sniffles1' (v1). Choose one Sniffles version to merge; both can be run with --sv_callers_to_run.")
     }
 }
 

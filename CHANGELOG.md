@@ -148,6 +148,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1280](https://github.com/genomic-medicine-sweden/nallo/pull/1280/) - Updated commit hash for test dataset paths
 - [#1273](https://github.com/genomic-medicine-sweden/nallo/pull/1273) - A single aligned BAM per sample (`aligned_bam` entry points) is now indexed with `SAMTOOLS_INDEX` instead of being passed through `SAMTOOLS_MERGE`; published `*_haplotagged` files are always named after the sample
 - [#1277](https://github.com/genomic-medicine-sweden/nallo/pull/1277) - Renamed `--filter_snvs_expression` and `--filter_svs_expression` to `--filter_bcftools_snvs_expression` and `--filter_bcftools_svs_expression` to distinguish bcftools filtering from the new VEP filtering options.
+- [#XXXX](https://github.com/genomic-medicine-sweden/nallo/pull/XXXX) - Clarified in the usage docs and the error message that `sniffles` and `sniffles1` can be run at the same time with `--sv_callers_to_run`; only one of them can be merged
 
 ### Removed
 
