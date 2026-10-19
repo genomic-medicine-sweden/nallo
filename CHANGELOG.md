@@ -148,6 +148,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1280](https://github.com/genomic-medicine-sweden/nallo/pull/1280/) - Updated commit hash for test dataset paths
 - [#1273](https://github.com/genomic-medicine-sweden/nallo/pull/1273) - A single aligned BAM per sample (`aligned_bam` entry points) is now indexed with `SAMTOOLS_INDEX` instead of being passed through `SAMTOOLS_MERGE`; published `*_haplotagged` files are always named after the sample
 - [#1277](https://github.com/genomic-medicine-sweden/nallo/pull/1277) - Renamed `--filter_snvs_expression` and `--filter_svs_expression` to `--filter_bcftools_snvs_expression` and `--filter_bcftools_svs_expression` to distinguish bcftools filtering from the new VEP filtering options.
+- [#XXXX](https://github.com/genomic-medicine-sweden/nallo/pull/XXXX) - HiFiCNV and Sawfish run with `--skip_snv_calling` when their MAF track is disabled (`--create_maf_track false`); the start-up check now only requires SNV calling for the MAF track
 
 ### Removed
 
@@ -187,6 +188,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1275](https://github.com/genomic-medicine-sweden/nallo/pull/1275) - Fixed `tests/stub_methbat_map_validation.nf.test` test to catch the error message in the stderr not in the stdout
 - [#1283](https://github.com/genomic-medicine-sweden/nallo/pull/1283) - Fixed tests and formatting for Nextflow 26.10.0: aliased test setup processes that the tested workflow also calls, assert on stdout and stderr for expected error messages, and formatted config header comments with the 26.10.0 formatter
 - [#1282](https://github.com/genomic-medicine-sweden/nallo/pull/1282) - Fixed `GLNEXUS` failing on long reference names (gVCF dataset names over 100 characters): interval BEDs are now named by genome (`nuclear`, `nuclear_chunk.NNNNN`, `mitochondrial`) instead of by reference, so gVCF names no longer depend on the reference or `--snv_call_regions` file names
+- [#XXXX](https://github.com/genomic-medicine-sweden/nallo/pull/XXXX) - Fixed `--skip_snv_calling` with SV calling failing at launch with `No such variable: sample_snv_vcf`
 
 ### Parameters
 
