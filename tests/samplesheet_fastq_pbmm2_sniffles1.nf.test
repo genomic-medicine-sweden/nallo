@@ -1,0 +1,59 @@
+nextflow_pipeline {
+
+    name "Test pipeline GENOMICMEDICINESWEDEN_NALLO — pbmm2 alignment of FASTQ input with Sniffles v1"
+    script "../main.nf"
+    tag "PIPELINE"
+    tag "samplesheet_fastq_pbmm2_sniffles1"
+    config "./nextflow.config"
+
+    test("samplesheet_fastq | --read_aligner pbmm2 --sv_callers Sniffles1") {
+
+        when {
+            params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8cf6216b9cbf96f6bcfc918610182708e3796ad9/'
+                input                        = "$projectDir/assets/samplesheet_fastq.csv"
+                outdir                       = "$outputDir"
+                skip_portello                = true
+                // pbmm2 writes no MD tags, which sniffles1 needs; the capitalised name checks case handling
+                read_aligner                 = "pbmm2"
+                sv_callers                   = "Sniffles1"
+                sv_callers_to_run            = "Sniffles1"
+                // Skip irrelevant steps
+                skip_annotate_paralogs       = true
+                skip_call_paralogs           = true
+                skip_chromograph             = true
+                skip_genome_assembly         = true
+                skip_snv_calling             = true
+                skip_qc                      = true
+                skip_sv_annotation           = true
+                skip_peddy                   = true
+                skip_sambamba_depth          = true
+                skip_snv_annotation          = true
+                skip_phasing                 = true
+                skip_rank_variants           = true
+                skip_repeat_calling          = true
+                skip_repeat_annotation       = true
+                skip_methylation_annotation  = true
+                skip_methylation_calling     = true
+                skip_prepare_gens_input      = true
+                skip_mitochondrial_calling   = true
+            }
+        }
+
+        then {
+            // stable_name: All files + folders in ${params.outdir}/ with a stable name
+            def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
+            assertAll(
+                { assert workflow.success },
+                { assert versions.containsKey('SAMTOOLS_CALMD') },
+                { assert versions.containsKey('RUN_SNIFFLES1') },
+                { assert snapshot(
+                    workflow.trace.succeeded().size(),
+                    versions,
+                    stable_name
+                ).match() }
+            )
+        }
+    }
+}
