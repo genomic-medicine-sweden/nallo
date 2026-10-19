@@ -267,7 +267,7 @@ Sometimes you might want to run more callers than you use for merging, this can 
 
 !!!info "Choosing a Sniffles version"
 
-    Two versions of Sniffles are available: `sniffles` (v2) and `sniffles1` (v1.0.12). Only one can be active at a time - specifying both will cause the pipeline to exit with an error.
+    Two versions of Sniffles are available: `sniffles` (v2) and `sniffles1` (v1.0.12). Both can be run at the same time, but only one can be merged. For example, `--sv_callers sniffles --sv_callers_to_run sniffles,sniffles1` calls SVs with both versions and merges only `sniffles` for annotation and ranking. With `--publish_unannotated_family_svs`, the `sniffles1` family VCF is published as `{family}_sniffles1_svs.vcf.gz`.
 
 !!!info "Variant merging strategies"
 
