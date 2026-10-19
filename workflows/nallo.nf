@@ -310,9 +310,9 @@ workflow NALLO {
     ch_aligned_bam_merged = channel.empty()
     ch_aligned_bam_input = channel.empty()
 
-    // sniffles1 needs MD tags, which pbmm2 does not write
+    // sniffles1 needs MD tags (pbmm2 writes none); severus needs NM tags (portello writes none)
     val_sv_callers_to_run_list = val_sv_callers_to_run.split(',').collect { caller -> caller.toLowerCase().trim() }
-    val_run_calmd = 'sniffles1' in val_sv_callers_to_run_list && val_read_aligner == "pbmm2"
+    val_run_calmd = val_read_aligner == "pbmm2" && ('sniffles1' in val_sv_callers_to_run_list || (!val_skip_portello && 'severus' in val_sv_callers_to_run_list))
 
     // The aligned BAMs are only changed (and then always published) if portello or calmd runs on them
     val_aligned_bam_changed = !val_skip_portello || val_run_calmd

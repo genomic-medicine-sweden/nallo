@@ -23,7 +23,6 @@ nextflow_pipeline {
                 skip_call_paralogs           = true
                 skip_chromograph             = true
                 skip_genome_assembly         = true
-                skip_snv_calling             = true
                 skip_qc                      = true
                 skip_sv_annotation           = true
                 skip_peddy                   = true
