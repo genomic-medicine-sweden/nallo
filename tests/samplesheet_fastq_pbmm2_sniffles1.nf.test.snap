@@ -1,0 +1,221 @@
+{
+    "samplesheet_fastq | --read_aligner pbmm2 --sv_callers Sniffles1": {
+        "content": [
+            45,
+            {
+                "BCFTOOLS_CONCAT": {
+                    "bcftools": 1.21
+                },
+                "BCFTOOLS_NORM_MULTISAMPLE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_NORM_SINGLESAMPLE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_QUERY": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_REHEADER": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_SORT": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_SORT_SVS": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_STATS": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_SVS": {
+                    "bcftools": 1.22
+                },
+                "BEDTOOLS_MERGE": {
+                    "bedtools": "2.31.1"
+                },
+                "BEDTOOLS_SORT": {
+                    "bedtools": "2.31.1"
+                },
+                "BEDTOOLS_SPLIT": {
+                    "bedtools": "2.31.1"
+                },
+                "CREATE_SAMPLES_FILE": {
+                    "gawk": "5.3.1"
+                },
+                "DEEPVARIANT_RUNDEEPVARIANT": {
+                    "deepvariant": "1.10.0"
+                },
+                "DEEPVARIANT_VCFSTATSREPORT": {
+                    "deepvariant": "1.10.0"
+                },
+                "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GLNEXUS": {
+                    "glnexus": "1.4.3"
+                },
+                "GUNZIP_FASTA": {
+                    "gunzip": 1.13
+                },
+                "PBMM2_ALIGN": {
+                    "pbmm2": "26.2.0"
+                },
+                "RELATE_INFER": {
+                    "somalier": "0.2.18"
+                },
+                "RELATE_RELATE": {
+                    "somalier": "0.2.18"
+                },
+                "RUN_SNIFFLES1": {
+                    "sniffles": "1.0.12"
+                },
+                "SAMPLESHEET_PED": {
+                    "create_pedigree_file": 1.0,
+                    "python": "3.8.3"
+                },
+                "SAMTOOLS_CALMD": {
+                    "samtools": 1.24
+                },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_IMPORT": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_INDEX_CALMD": {
+                    "samtools": "1.23.1"
+                },
+                "SAMTOOLS_MERGE": {
+                    "samtools": 1.24
+                },
+                "SOMALIER_EXTRACT": {
+                    "somalier": "0.2.18"
+                },
+                "SPLITUBAM": {
+                    "splitubam": "0.1.1"
+                },
+                "SVDB_MERGE_BY_CALLER": {
+                    "bcftools": 1.24,
+                    "svdb": "2.12.0"
+                },
+                "SVDB_MERGE_BY_FAMILY": {
+                    "bcftools": 1.24,
+                    "svdb": "2.12.0"
+                },
+                "UNTAR_VEP_CACHE": {
+                    "untar": 1.34
+                },
+                "VCFEXPRESS": {
+                    "vcfexpress": "0.3.4"
+                },
+                "VEP_PREP_SV": {
+                    "vep_prep_sv": "1.0.0"
+                },
+                "Workflow": {
+                    "genomic-medicine-sweden/nallo": "v0.13.0dev"
+                }
+            },
+            [
+                "aligned_reads",
+                "aligned_reads/HG002_Revio",
+                "aligned_reads/HG002_Revio/HG002_Revio_aligned.bam",
+                "aligned_reads/HG002_Revio/HG002_Revio_aligned.bam.bai",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_data/bcftools-stats-subtypes.txt",
+                "multiqc/multiqc_data/bcftools_stats_indel-lengths.txt",
+                "multiqc/multiqc_data/bcftools_stats_vqc_Count_Indels.txt",
+                "multiqc/multiqc_data/bcftools_stats_vqc_Count_SNP.txt",
+                "multiqc/multiqc_data/bcftools_stats_vqc_Count_Transitions.txt",
+                "multiqc/multiqc_data/bcftools_stats_vqc_Count_Transversions.txt",
+                "multiqc/multiqc_data/llms-full.txt",
+                "multiqc/multiqc_data/multiqc.log",
+                "multiqc/multiqc_data/multiqc.parquet",
+                "multiqc/multiqc_data/multiqc_bcftools_stats.txt",
+                "multiqc/multiqc_data/multiqc_citations.txt",
+                "multiqc/multiqc_data/multiqc_data.json",
+                "multiqc/multiqc_data/multiqc_general_stats.txt",
+                "multiqc/multiqc_data/multiqc_software_versions.txt",
+                "multiqc/multiqc_data/multiqc_somalier.txt",
+                "multiqc/multiqc_data/multiqc_sources.txt",
+                "multiqc/multiqc_data/somalier_het_check_plot.txt",
+                "multiqc/multiqc_data/somalier_sex_check_plot.txt",
+                "multiqc/multiqc_data/somalier_stats.txt",
+                "multiqc/multiqc_plots",
+                "multiqc/multiqc_plots/pdf",
+                "multiqc/multiqc_plots/pdf/bcftools-stats-subtypes-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/bcftools-stats-subtypes-pct.pdf",
+                "multiqc/multiqc_plots/pdf/bcftools_stats_indel-lengths-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/bcftools_stats_indel-lengths-log.pdf",
+                "multiqc/multiqc_plots/pdf/bcftools_stats_vqc_Count_Indels.pdf",
+                "multiqc/multiqc_plots/pdf/bcftools_stats_vqc_Count_SNP.pdf",
+                "multiqc/multiqc_plots/pdf/bcftools_stats_vqc_Count_Transitions.pdf",
+                "multiqc/multiqc_plots/pdf/bcftools_stats_vqc_Count_Transversions.pdf",
+                "multiqc/multiqc_plots/pdf/somalier_het_check_plot.pdf",
+                "multiqc/multiqc_plots/pdf/somalier_sex_check_plot.pdf",
+                "multiqc/multiqc_plots/pdf/somalier_stats.pdf",
+                "multiqc/multiqc_plots/png",
+                "multiqc/multiqc_plots/png/bcftools-stats-subtypes-cnt.png",
+                "multiqc/multiqc_plots/png/bcftools-stats-subtypes-pct.png",
+                "multiqc/multiqc_plots/png/bcftools_stats_indel-lengths-cnt.png",
+                "multiqc/multiqc_plots/png/bcftools_stats_indel-lengths-log.png",
+                "multiqc/multiqc_plots/png/bcftools_stats_vqc_Count_Indels.png",
+                "multiqc/multiqc_plots/png/bcftools_stats_vqc_Count_SNP.png",
+                "multiqc/multiqc_plots/png/bcftools_stats_vqc_Count_Transitions.png",
+                "multiqc/multiqc_plots/png/bcftools_stats_vqc_Count_Transversions.png",
+                "multiqc/multiqc_plots/png/somalier_het_check_plot.png",
+                "multiqc/multiqc_plots/png/somalier_sex_check_plot.png",
+                "multiqc/multiqc_plots/png/somalier_stats.png",
+                "multiqc/multiqc_plots/svg",
+                "multiqc/multiqc_plots/svg/bcftools-stats-subtypes-cnt.svg",
+                "multiqc/multiqc_plots/svg/bcftools-stats-subtypes-pct.svg",
+                "multiqc/multiqc_plots/svg/bcftools_stats_indel-lengths-cnt.svg",
+                "multiqc/multiqc_plots/svg/bcftools_stats_indel-lengths-log.svg",
+                "multiqc/multiqc_plots/svg/bcftools_stats_vqc_Count_Indels.svg",
+                "multiqc/multiqc_plots/svg/bcftools_stats_vqc_Count_SNP.svg",
+                "multiqc/multiqc_plots/svg/bcftools_stats_vqc_Count_Transitions.svg",
+                "multiqc/multiqc_plots/svg/bcftools_stats_vqc_Count_Transversions.svg",
+                "multiqc/multiqc_plots/svg/somalier_het_check_plot.svg",
+                "multiqc/multiqc_plots/svg/somalier_sex_check_plot.svg",
+                "multiqc/multiqc_plots/svg/somalier_stats.svg",
+                "multiqc/multiqc_report.html",
+                "pipeline_info",
+                "pipeline_info/nallo_software_mqc_versions.yml",
+                "qc",
+                "qc/bcftools_stats",
+                "qc/bcftools_stats/HG002_Revio",
+                "qc/bcftools_stats/HG002_Revio/HG002_Revio.bcftools_stats.txt",
+                "qc/deepvariant_vcfstatsreport",
+                "qc/deepvariant_vcfstatsreport/HG002_Revio",
+                "qc/deepvariant_vcfstatsreport/HG002_Revio/HG002_Revio.visual_report.html",
+                "qc/somalier",
+                "qc/somalier/relate",
+                "qc/somalier/relate/test",
+                "qc/somalier/relate/test/test.html",
+                "qc/somalier/relate/test/test.pairs.tsv",
+                "qc/somalier/relate/test/test.samples.tsv",
+                "snvs",
+                "snvs/family",
+                "snvs/family/FAM",
+                "snvs/family/FAM/FAM_snvs.vcf.gz",
+                "snvs/family/FAM/FAM_snvs.vcf.gz.tbi",
+                "snvs/sample",
+                "snvs/sample/HG002_Revio",
+                "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz",
+                "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi",
+                "svs",
+                "svs/family",
+                "svs/family/FAM",
+                "svs/family/FAM/FAM_svs.vcf.gz",
+                "svs/family/FAM/FAM_svs.vcf.gz.tbi",
+                "svs/family/FAM/FAM_svs_unphased.vcf.gz",
+                "svs/family/FAM/FAM_svs_unphased.vcf.gz.tbi"
+            ]
+        ],
+        "timestamp": "2026-10-19T10:19:46.326284578",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    }
+}

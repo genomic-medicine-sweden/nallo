@@ -310,8 +310,12 @@ workflow NALLO {
     ch_aligned_bam_merged = channel.empty()
     ch_aligned_bam_input = channel.empty()
 
+    // sniffles1 needs MD tags (pbmm2 writes none); severus needs NM tags (portello writes none)
+    val_sv_callers_to_run_list = val_sv_callers_to_run.split(',').collect { caller -> caller.toLowerCase().trim() }
+    val_run_calmd = val_read_aligner == "pbmm2" && ('sniffles1' in val_sv_callers_to_run_list || (!val_skip_portello && 'severus' in val_sv_callers_to_run_list))
+
     // The aligned BAMs are only changed (and then always published) if portello or calmd runs on them
-    val_aligned_bam_changed = !val_skip_portello || (val_sv_callers_to_run.contains("sniffles") && val_read_aligner == "pbmm2")
+    val_aligned_bam_changed = !val_skip_portello || val_run_calmd
 
     if (!val_skip_alignment) {
 
@@ -408,7 +412,7 @@ workflow NALLO {
             ch_aligned_bam = PORTELLO.out.bam.join(PORTELLO.out.bai, failOnMismatch: true, failOnDuplicate: true)
         }
 
-        if (val_sv_callers_to_run.contains("sniffles") && val_read_aligner == "pbmm2") {
+        if (val_run_calmd) {
             SAMTOOLS_CALMD(
                 ch_aligned_bam.map { meta, bam, _bai -> [meta, bam] },
                 ch_fasta.join(ch_fai).collect(),
@@ -730,7 +734,7 @@ workflow NALLO {
             ch_expected_xy_bed,
             ch_expected_xx_bed,
             ch_exclude_bed,
-            val_sv_callers_to_run.split(',').collect { caller -> caller.toLowerCase().trim() },
+            val_sv_callers_to_run_list,
             val_force_sawfish_joint_call_single_samples,
             val_create_hificnv_maf_track,
             val_create_sawfish_maf_track,
