@@ -35,6 +35,8 @@ workflow PIPELINE_INITIALISATION {
     val_cnv_excluded_regions
     val_cnv_expected_xx_cn
     val_cnv_expected_xy_cn
+    val_create_hificnv_maf_track
+    val_create_sawfish_maf_track
     val_echtvar_snv_databases
     val_fasta
     val_genmod_reduced_penetrance
@@ -280,7 +282,7 @@ workflow PIPELINE_INITIALISATION {
     //
     validateInputParameters(parameterStatus, workflowSkips, workflowDependencies, fileDependencies)
     validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs, val_mitochondrial_caller, val_skip_portello)
-    validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge, val_skip_portello)
+    validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge, val_skip_portello, val_create_hificnv_maf_track, val_create_sawfish_maf_track)
 
     //
     // Create channel from input file provided through val_input
@@ -755,7 +757,7 @@ def validateSingleProjectPerRun(ch_samplesheet) {
         }
 }
 
-def validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge, val_skip_portello) {
+def validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge, val_skip_portello, val_create_hificnv_maf_track, val_create_sawfish_maf_track) {
     if (val_str_caller.matches('strdust') && !val_skip_repeat_annotation) {
         error("ERROR: Repeat annotation is not supported for STRdust. Run with --skip_repeat_annotation if you want to use STRdust.")
     }
@@ -764,10 +766,14 @@ def validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, va
         error("ERROR: --snv_calling_processes must be 1 when --snv_caller sentieon is used.")
     }
 
-    if (!val_skip_sv_calling && val_sv_callers_to_run.split(',').collect { caller -> caller.toLowerCase().trim() }.any { caller -> caller in ['hificnv', 'sawfish'] }) {
-        // We could probably change to not enforce this.
-        if (val_skip_snv_calling) {
-            error("ERROR: HiFiCNV and Sawfish requires SNV calling to be active. Run without --skip_snv_calling if you want to use HiFiCNV or Sawfish.")
+    def sv_callers_to_run = val_sv_callers_to_run.split(',').collect { caller -> caller.toLowerCase().trim() }
+    if (!val_skip_sv_calling && sv_callers_to_run.any { caller -> caller in ['hificnv', 'sawfish'] }) {
+        // The MAF tracks are made from the SNV calls
+        if (val_skip_snv_calling && sv_callers_to_run.contains('hificnv') && val_create_hificnv_maf_track) {
+            error("ERROR: The HiFiCNV MAF track requires SNV calling. Run with --create_hificnv_maf_track false (or --create_maf_track false) if you want to use HiFiCNV with --skip_snv_calling.")
+        }
+        if (val_skip_snv_calling && sv_callers_to_run.contains('sawfish') && val_create_sawfish_maf_track) {
+            error("ERROR: The Sawfish MAF track requires SNV calling. Run with --create_sawfish_maf_track false (or --create_maf_track false) if you want to use Sawfish with --skip_snv_calling.")
         }
         // We could probably change to not enforce this.
         if (!val_cnv_expected_xy_cn || !val_cnv_expected_xx_cn || !val_cnv_excluded_regions) {

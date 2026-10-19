@@ -301,6 +301,7 @@ If HiFiCNV or Sawfish are used, the following files are required:
 
 By default, HiFiCNV and Sawfish output optional SNV MAF tracks. This depends on the results of the SNV calling subworkflow, so it may introduce significant wait time and slow down execution.
 You can disable this behavior for both callers by setting `--create_maf_track` to `false` or control it for each caller separately using `--create_hificnv_maf_track` and `--create_sawfish_maf_track`.
+With the MAF track disabled, HiFiCNV and Sawfish also run with `--skip_snv_calling`.
 
 !!!tip "Family-level VCFs per caller"
 

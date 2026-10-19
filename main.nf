@@ -410,6 +410,8 @@ workflow {
         params.cnv_excluded_regions,
         params.cnv_expected_xx_cn,
         params.cnv_expected_xy_cn,
+        params.create_hificnv_maf_track,
+        params.create_sawfish_maf_track,
         params.echtvar_snv_databases,
         params.fasta,
         params.genmod_reduced_penetrance,
