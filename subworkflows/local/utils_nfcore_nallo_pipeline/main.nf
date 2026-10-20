@@ -769,11 +769,15 @@ def validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, va
     def sv_callers_to_run = val_sv_callers_to_run.split(',').collect { caller -> caller.toLowerCase().trim() }
     if (!val_skip_sv_calling && sv_callers_to_run.any { caller -> caller in ['hificnv', 'sawfish'] }) {
         // The MAF tracks are made from the SNV calls
-        if (val_skip_snv_calling && sv_callers_to_run.contains('hificnv') && val_create_hificnv_maf_track) {
-            error("ERROR: The HiFiCNV MAF track requires SNV calling. Run with --create_hificnv_maf_track false (or --create_maf_track false) if you want to use HiFiCNV with --skip_snv_calling.")
-        }
-        if (val_skip_snv_calling && sv_callers_to_run.contains('sawfish') && val_create_sawfish_maf_track) {
-            error("ERROR: The Sawfish MAF track requires SNV calling. Run with --create_sawfish_maf_track false (or --create_maf_track false) if you want to use Sawfish with --skip_snv_calling.")
+        if (val_skip_snv_calling) {
+            [
+                hificnv: [create_maf_track: val_create_hificnv_maf_track, name: 'HiFiCNV'],
+                sawfish: [create_maf_track: val_create_sawfish_maf_track, name: 'Sawfish'],
+            ].each { caller, maf_track ->
+                if (sv_callers_to_run.contains(caller) && maf_track.create_maf_track) {
+                    error("ERROR: The ${maf_track.name} MAF track requires SNV calling. Run with --create_${caller}_maf_track false (or --create_maf_track false) if you want to use ${maf_track.name} with --skip_snv_calling.")
+                }
+            }
         }
         // We could probably change to not enforce this.
         if (!val_cnv_expected_xy_cn || !val_cnv_expected_xx_cn || !val_cnv_excluded_regions) {
