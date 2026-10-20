@@ -1145,7 +1145,7 @@
 </tr>
 <tr>
 <td><code>create_maf_track</code></td>
-<td>Whether to create a MAF track from SNV calls when calling SVs with HiFiCNV or Sawfish. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Defaults to <code>true</code></td>
+<td>Whether to create a MAF track from SNV calls when calling SVs with HiFiCNV or Sawfish. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Set to <code>false</code> to run HiFiCNV or Sawfish with <code>--skip_snv_calling</code>. Defaults to <code>true</code></td>
 <td><code>boolean</code></td>
 <td>True</td>
 <td></td>
@@ -1153,7 +1153,7 @@
 </tr>
 <tr>
 <td><code>create_hificnv_maf_track</code></td>
-<td>Whether to create a MAF track from SNV calls when calling CNVs with HiFiCNV. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Defaults to <code>create_maf_track</code></td>
+<td>Whether to create a MAF track from SNV calls when calling CNVs with HiFiCNV. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Set to <code>false</code> to run HiFiCNV with <code>--skip_snv_calling</code>. Defaults to <code>create_maf_track</code></td>
 <td><code>boolean</code></td>
 <td>True</td>
 <td></td>
@@ -1161,7 +1161,7 @@
 </tr>
 <tr>
 <td><code>create_sawfish_maf_track</code></td>
-<td>Whether to create a MAF track from SNV calls when calling SVs with Sawfish. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Defaults to <code>create_maf_track</code></td>
+<td>Whether to create a MAF track from SNV calls when calling SVs with Sawfish. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Set to <code>false</code> to run Sawfish with <code>--skip_snv_calling</code>. Defaults to <code>create_maf_track</code></td>
 <td><code>boolean</code></td>
 <td>True</td>
 <td></td>
