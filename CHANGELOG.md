@@ -192,7 +192,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1282](https://github.com/genomic-medicine-sweden/nallo/pull/1282) - Fixed `GLNEXUS` failing on long reference names (gVCF dataset names over 100 characters): interval BEDs are now named by genome (`nuclear`, `nuclear_chunk.NNNNN`, `mitochondrial`) instead of by reference, so gVCF names no longer depend on the reference or `--snv_call_regions` file names
 - [#1293](https://github.com/genomic-medicine-sweden/nallo/pull/1293) - Fixed `sniffles1` failing after pbmm2 when written with capitals (e.g. `Sniffles1`)
 - [#1294](https://github.com/genomic-medicine-sweden/nallo/pull/1294) - Fixed `--skip_snv_calling` with SV calling failing at launch with `No such variable: sample_snv_vcf`
-- [#XXXX](https://github.com/genomic-medicine-sweden/nallo/pull/XXXX) - Fixed formatting for Nextflow 26.10.3: aligned comments of take/emit entries with the 26.10.3 formatter
+- [#1297](https://github.com/genomic-medicine-sweden/nallo/pull/1297) - Fixed formatting for Nextflow 26.10.3: aligned comments of take/emit entries with the 26.10.3 formatter
 
 ### Parameters
 
