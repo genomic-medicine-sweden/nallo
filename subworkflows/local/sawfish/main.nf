@@ -3,13 +3,13 @@ include { SAWFISH_JOINTCALL as RUN_SAWFISH_JOINTCALL } from '../../../modules/nf
 
 workflow SAWFISH {
     take:
-    ch_bam_bai // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
-    ch_snvs // channel:  [optional] [ val(meta), path(vcf) ]
-    ch_fasta // channel: [mandatory] [ val(meta), path(fasta) ]
-    ch_expected_xy_bed // channel: [mandatory] [ val(meta), path(bed) ]
-    ch_expected_xx_bed // channel: [mandatory] [ val(meta), path(bed) ]
-    ch_exclude_bed // channel:  [optional] [ val(meta), path(bed) ]
-    create_maf_track //     bool: [mandatory] should Sawfish produce a MAF track
+    ch_bam_bai                      // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
+    ch_snvs                         // channel:  [optional] [ val(meta), path(vcf) ]
+    ch_fasta                        // channel: [mandatory] [ val(meta), path(fasta) ]
+    ch_expected_xy_bed              // channel: [mandatory] [ val(meta), path(bed) ]
+    ch_expected_xx_bed              // channel: [mandatory] [ val(meta), path(bed) ]
+    ch_exclude_bed                  // channel:  [optional] [ val(meta), path(bed) ]
+    create_maf_track                //     bool: [mandatory] should Sawfish produce a MAF track
     force_joint_call_single_samples //     bool: [mandatory] force joint-calling even for single samples
 
     main:
@@ -66,12 +66,12 @@ workflow SAWFISH {
         .map { meta, vcf, tbi -> [meta + [sv_caller: 'sawfish', needs_reheader: false, skip_vep_prep: true], vcf, tbi] }
 
     emit:
-    vcf                        = ch_vcf_tbi.map { meta, vcf, _tbi -> [meta, vcf] } // channel: [ val(meta), path(vcf) ]
-    tbi                        = ch_vcf_tbi.map { meta, _vcf, tbi -> [meta, tbi] } // channel: [ val(meta), path(tbi) ]
-    depth_bw                   = addSampleIdFromSawfishPath(RUN_SAWFISH_JOINTCALL.out.depth_bw) // channel: [ val(meta), path(bw) ]
-    copynum_bedgraph           = addSampleIdFromSawfishPath(RUN_SAWFISH_JOINTCALL.out.copynum_bedgraph) // channel: [ val(meta), path(bedgraph) ]
+    vcf                        = ch_vcf_tbi.map { meta, vcf, _tbi -> [meta, vcf] }                                // channel: [ val(meta), path(vcf) ]
+    tbi                        = ch_vcf_tbi.map { meta, _vcf, tbi -> [meta, tbi] }                                // channel: [ val(meta), path(tbi) ]
+    depth_bw                   = addSampleIdFromSawfishPath(RUN_SAWFISH_JOINTCALL.out.depth_bw)                   // channel: [ val(meta), path(bw) ]
+    copynum_bedgraph           = addSampleIdFromSawfishPath(RUN_SAWFISH_JOINTCALL.out.copynum_bedgraph)           // channel: [ val(meta), path(bedgraph) ]
     gc_bias_corrected_depth_bw = addSampleIdFromSawfishPath(RUN_SAWFISH_JOINTCALL.out.gc_bias_corrected_depth_bw) // channel: [ val(meta), path(bw) ]
-    maf_bw                     = addSampleIdFromSawfishPath(RUN_SAWFISH_JOINTCALL.out.maf_bw) // channel: [ val(meta), path(bw) ]
+    maf_bw                     = addSampleIdFromSawfishPath(RUN_SAWFISH_JOINTCALL.out.maf_bw)                     // channel: [ val(meta), path(bw) ]
 }
 
 def addSampleIdFromSawfishPath(ch_sawfish_output) {

@@ -4,9 +4,9 @@ include { VCFEXPRESS                         } from '../../../modules/nf-core/vc
 
 workflow MERGE_SVS {
     take:
-    ch_vcf // channel: [ val(meta), [ path(vcf) ] ]
-    sv_callers_to_merge // List: [ 'caller1', 'caller2', 'caller3' ]
-    caller_priority // List: [ 'caller3', 'caller1', 'caller2' ]
+    ch_vcf                // channel: [ val(meta), [ path(vcf) ] ]
+    sv_callers_to_merge   // List: [ 'caller1', 'caller2', 'caller3' ]
+    caller_priority       // List: [ 'caller3', 'caller1', 'caller2' ]
     ch_vcfexpress_prelude // path: lua file
 
     main:

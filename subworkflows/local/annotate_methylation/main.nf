@@ -7,7 +7,7 @@ include { GAWK          } from '../../../modules/nf-core/gawk/main'
 workflow ANNOTATE_METHYLATION {
     take:
     ch_region_profile // channel: [ val(meta), path(tsv) ]
-    ch_map // channel: [ val(meta), path(tsv) ]
+    ch_map            // channel: [ val(meta), path(tsv) ]
 
     main:
     // GAWK is used to filter out rows with NA in the cpg_label column, as they are not approved HGNC genes

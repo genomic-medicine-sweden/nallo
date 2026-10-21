@@ -9,18 +9,18 @@ include { DNASCOPE_LONGREAD_CALL_SNVS as DNASCOPE_LONGREAD } from '../../../modu
 
 workflow CALL_SNVS {
     take:
-    ch_bam_bai_bed // channel: [mandatory] [ val(meta), path(bam), path(bai), path(call_regions_bed) ]
-    ch_fasta // channel: [mandatory] [ val(meta), path(fasta) ]
-    ch_fai // channel: [mandatory] [ val(meta), path(fai) ]
-    ch_par_bed // channel: [mandatory] [ val(meta), path(par_bed) ]
-    ch_sentieon_model_bundle // channel: [mandatory] [ val(meta), path(model_bundle) ]
+    ch_bam_bai_bed                 // channel: [mandatory] [ val(meta), path(bam), path(bai), path(call_regions_bed) ]
+    ch_fasta                       // channel: [mandatory] [ val(meta), path(fasta) ]
+    ch_fai                         // channel: [mandatory] [ val(meta), path(fai) ]
+    ch_par_bed                     // channel: [mandatory] [ val(meta), path(par_bed) ]
+    ch_sentieon_model_bundle       // channel: [mandatory] [ val(meta), path(model_bundle) ]
     ch_sentieon_female_diploid_bed // channel: [mandatory] [ val(meta), path(female_diploid_bed) ]
-    ch_sentieon_male_diploid_bed // channel: [mandatory] [ val(meta), path(male_diploid_bed) ]
-    ch_sentieon_male_haploid_bed // channel: [mandatory] [ val(meta), path(male_haploid_bed) ]
-    ch_sentieon_population_vcf // channel: [optional] [ val(meta), path(population_vcf) ]
-    ch_sentieon_population_tbi // channel: [optional] [ val(meta), path(population_vcf_tbi) ]
-    variant_caller // string: which variant caller to use, e.g. "deepvariant"
-    sentieon_tech // string: which sequencing tech produced the reads (sentieon)
+    ch_sentieon_male_diploid_bed   // channel: [mandatory] [ val(meta), path(male_diploid_bed) ]
+    ch_sentieon_male_haploid_bed   // channel: [mandatory] [ val(meta), path(male_haploid_bed) ]
+    ch_sentieon_population_vcf     // channel: [optional] [ val(meta), path(population_vcf) ]
+    ch_sentieon_population_tbi     // channel: [optional] [ val(meta), path(population_vcf_tbi) ]
+    variant_caller                 // string: which variant caller to use, e.g. "deepvariant"
+    sentieon_tech                  // string: which sequencing tech produced the reads (sentieon)
 
     main:
     if (variant_caller.equals("deepvariant")) {
@@ -121,9 +121,9 @@ workflow CALL_SNVS {
     }
 
     emit:
-    vcf        = ch_vcf // channel: [ val(meta), path(vcf) ]
-    index      = ch_index // channel: [ val(meta), path(tbi) ]
-    gvcf       = ch_gvcf // channel: [ val(meta), path(gvcf) ]
+    vcf        = ch_vcf        // channel: [ val(meta), path(vcf) ]
+    index      = ch_index      // channel: [ val(meta), path(tbi) ]
+    gvcf       = ch_gvcf       // channel: [ val(meta), path(gvcf) ]
     gvcf_index = ch_gvcf_index // channel: [ val(meta), path(tbi) ]
 }
 
