@@ -151,7 +151,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1291](https://github.com/genomic-medicine-sweden/nallo/pull/1291) - Clarified that `sniffles` and `sniffles1` can be run together with `--sv_callers_to_run`; only one can be merged
 - [#1293](https://github.com/genomic-medicine-sweden/nallo/pull/1293) - `SAMTOOLS_CALMD` runs after pbmm2 only for `sniffles1`, or for `severus` after portello
 - [#1294](https://github.com/genomic-medicine-sweden/nallo/pull/1294) - HiFiCNV and Sawfish run with `--skip_snv_calling` when their MAF track is disabled (`--create_maf_track false`); the start-up check now only requires SNV calling for the MAF track
-- [#XXXX](https://github.com/genomic-medicine-sweden/nallo/pull/XXXX) - Updated `hiphase` module so stub output names match the real run
+- [#1296](https://github.com/genomic-medicine-sweden/nallo/pull/1296) - Updated `hiphase` module so stub output names match the real run
 
 ### Removed
 
@@ -193,7 +193,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1282](https://github.com/genomic-medicine-sweden/nallo/pull/1282) - Fixed `GLNEXUS` failing on long reference names (gVCF dataset names over 100 characters): interval BEDs are now named by genome (`nuclear`, `nuclear_chunk.NNNNN`, `mitochondrial`) instead of by reference, so gVCF names no longer depend on the reference or `--snv_call_regions` file names
 - [#1293](https://github.com/genomic-medicine-sweden/nallo/pull/1293) - Fixed `sniffles1` failing after pbmm2 when written with capitals (e.g. `Sniffles1`)
 - [#1294](https://github.com/genomic-medicine-sweden/nallo/pull/1294) - Fixed `--skip_snv_calling` with SV calling failing at launch with `No such variable: sample_snv_vcf`
-- [#XXXX](https://github.com/genomic-medicine-sweden/nallo/pull/XXXX) - Fixed `--phaser hiphase` assigning haplotagged BAMs to the wrong samples when a sample ID is a prefix of another sample's BAM name: BAMs are now matched to samples by family and exact output name
+- [#1296](https://github.com/genomic-medicine-sweden/nallo/pull/1296) - Fixed `--phaser hiphase` assigning haplotagged BAMs to the wrong samples when a sample ID is a prefix of another sample's BAM name: BAMs are now matched to samples by family and exact output name
 
 ### Parameters
 
