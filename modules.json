@@ -252,7 +252,7 @@
                     },
                     "hiphase": {
                         "branch": "master",
-                        "git_sha": "32d9d7b17b837f68b7f3916f53bfa90d1b434fdd",
+                        "git_sha": "d340ff25bde432e420681e7ab822c53664c7f61a",
                         "installed_by": ["modules"]
                     },
                     "htslib/bgziptabix": {

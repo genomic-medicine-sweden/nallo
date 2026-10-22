@@ -292,6 +292,67 @@ nextflow_workflow {
         }
     }
 
+    test ("2 families - prefix-colliding IDs - SNVs only") {
+        when {
+            workflow {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id: 'FAM1' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'FAM2' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz', checkIfExists: true)
+                    ]
+                )
+                input[1] = channel.of(
+                    [
+                        [ id: 'FAM1' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'FAM2' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
+                    ]
+                )
+                input[2] = channel.empty()
+                input[3] = channel.empty()
+                // Sample ID 'HG00' is a prefix of the other family's BAM name (HG003_PacBio_Revio)
+                input[4] = channel.of(
+                    [
+                        [ id : 'HG00', family_id: 'FAM1' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id : 'HG003', family_id: 'FAM2' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
+                input[5] = channel.of(
+                    [ [ id: 'FAM1' ], [ 'HG002' ] ],
+                    [ [ id: 'FAM2' ], [ 'HG003' ] ]
+                )
+                input[6] = GUNZIP.out.gunzip
+                input[7] = SAMTOOLS_FAIDX.out.fai
+                input[8] = false
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.haplotagged_bam_bai.collect { meta, bam, _bai -> [meta.id, file(bam).name] }.sort() == [
+                    ['HG00', 'HG002_PacBio_Revio_haplotagged.bam'],
+                    ['HG003', 'HG003_PacBio_Revio_haplotagged.bam'],
+                ] },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+
     test ("1 sample - SNVs only - stub") {
         options "-stub"
 
@@ -525,4 +586,66 @@ nextflow_workflow {
         }
     }
 
+    test ("2 families - prefix-colliding IDs - SNVs only - stub") {
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id: 'FAM1' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'FAM2' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz', checkIfExists: true)
+                    ]
+                )
+                input[1] = channel.of(
+                    [
+                        [ id: 'FAM1' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'FAM2' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
+                    ]
+                )
+                input[2] = channel.empty()
+                input[3] = channel.empty()
+                // Sample ID 'HG00' is a prefix of the other family's BAM name (HG003_PacBio_Revio)
+                input[4] = channel.of(
+                    [
+                        [ id : 'HG00', family_id: 'FAM1' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ],
+                    [
+                        [ id : 'HG003', family_id: 'FAM2' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
+                    ]
+                )
+                input[5] = channel.of(
+                    [ [ id: 'FAM1' ], [ 'HG002' ] ],
+                    [ [ id: 'FAM2' ], [ 'HG003' ] ]
+                )
+                input[6] = GUNZIP.out.gunzip
+                input[7] = SAMTOOLS_FAIDX.out.fai
+                input[8] = false
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.haplotagged_bam_bai.collect { meta, bam, _bai -> [meta.id, file(bam).name] }.sort() == [
+                    ['HG00', 'HG002_PacBio_Revio_haplotagged.bam'],
+                    ['HG003', 'HG003_PacBio_Revio_haplotagged.bam'],
+                ] },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
 }

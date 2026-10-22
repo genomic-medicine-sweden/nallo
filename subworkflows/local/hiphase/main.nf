@@ -47,19 +47,17 @@ workflow HIPHASE {
     )
 
     // Prepare haplotagged BAM output by matching with original metadata
-    // The HiPhase output channels only contain family IDs
-    // We need to match the haplotagged BAMs back to the original sample metadata
-    // as to not lose information downstream processes might depend on.
-    ch_haplotagged_bam_bai = RUN_HIPHASE.out.bams
-        .join(RUN_HIPHASE.out.bams_indexes, failOnMismatch: true, failOnDuplicate: true)
-        .transpose()
-        .combine(ch_bam_bai)
-        .filter { _meta_phased, bam_phased, _bai_phased, meta_orig, _bam_orig, _bai_orig ->
-            bam_phased.simpleName.startsWith(meta_orig.id)
-        }
-        .map { _meta_phased, bam_phased, bai_phased, meta_orig, _bam_orig, _bai_orig ->
-            [meta_orig, bam_phased, bai_phased]
-        }
+    // The HiPhase output channels only contain family IDs, and HiPhase names each
+    // haplotagged BAM <input BAM basename>_haplotagged.bam. Join on family and exact
+    // name to get the original sample metadata back for downstream processes.
+    ch_sample_by_output_name = ch_bam_bai.map { meta, bam, _bai -> [[[id: meta.family_id], "${bam.baseName}_haplotagged.bam"], meta] }
+    ch_haplotagged_bam = RUN_HIPHASE.out.bams.transpose().map { meta, bam -> [[meta, bam.name], bam] }
+    ch_haplotagged_bai = RUN_HIPHASE.out.bams_indexes.transpose().map { meta, bai -> [[meta, bai.baseName], bai] }
+
+    ch_haplotagged_bam_bai = ch_sample_by_output_name
+        .join(ch_haplotagged_bam, failOnMismatch: true, failOnDuplicate: true)
+        .join(ch_haplotagged_bai, failOnMismatch: true, failOnDuplicate: true)
+        .map { _key, meta, bam, bai -> [meta, bam, bai] }
 
     emit:
     phased_snvs         = RUN_HIPHASE.out.vcfs                                               // channel: [ val(meta), path(vcf) ]
