@@ -2,7 +2,7 @@ include { PARAPHRASE } from '../../../modules/nf-core/paraphrase/main'
 
 workflow ANNOTATE_PARALOGS {
     take:
-    ch_json // channel: [ val(meta), path(json) ]
+    ch_json                  // channel: [ val(meta), path(json) ]
     paraphrase_output_format // string: Output format for paraphrase (json or tsv)
     ch_paraphrase_rules_yaml // channel: [ val(meta), path(yaml) ]
 
@@ -25,5 +25,5 @@ workflow ANNOTATE_PARALOGS {
 
     emit:
     json = PARAPHRASE.out.json // channel: [ val(meta), path(json) ]
-    tsv  = PARAPHRASE.out.tsv // channel: [ val(meta), path(tsv) ]
+    tsv  = PARAPHRASE.out.tsv  // channel: [ val(meta), path(tsv) ]
 }

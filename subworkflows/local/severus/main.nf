@@ -2,7 +2,7 @@ include { SEVERUS as RUN_SEVERUS } from '../../../modules/nf-core/severus/main'
 
 workflow SEVERUS {
     take:
-    ch_bam_bai // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
+    ch_bam_bai        // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
     ch_tandem_repeats // channel:  [optional] [ val(meta), path(bed) ]
 
     main:

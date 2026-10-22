@@ -6,9 +6,9 @@ include { PBMM2_ALIGN    } from '../../../modules/nf-core/pbmm2/align/main'
 
 workflow ALIGN {
     take:
-    ch_ubam // channel: [mandatory] [ val(meta), path(reads)]
-    ch_fasta // channel: [mandatory] [ val(meta), path(fasta) ]
-    val_aligner // channel: [mandatory] [ val(aligner) ]
+    ch_ubam              // channel: [mandatory] [ val(meta), path(reads)]
+    ch_fasta             // channel: [mandatory] [ val(meta), path(fasta) ]
+    val_aligner          // channel: [mandatory] [ val(aligner) ]
     use_genome_reference // boolean: [mandatory] [ true|false ]
 
     main:

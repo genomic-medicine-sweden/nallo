@@ -8,12 +8,12 @@ include { SAMTOOLS_VIEW                } from '../../../modules/nf-core/samtools
 
 workflow PREPARE_GENS_INPUTS {
     take:
-    ch_bam // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
-    ch_gvcf // channel: [mandatory] [ val(meta), path(gvcfs)], [path(tbis) ]
-    ch_baf_positions // channel: [mandatory] [ val(meta), path(gz) ]
+    ch_bam                     // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
+    ch_gvcf                    // channel: [mandatory] [ val(meta), path(gvcfs)], [path(tbis) ]
+    ch_baf_positions           // channel: [mandatory] [ val(meta), path(gz) ]
     ch_panel_of_normals_female // channel: [mandatory] [ val(meta), path(hd5) ]
-    ch_panel_of_normals_male // channel: [mandatory] [ val(meta), path(hd5) ]
-    ch_mosdepth_bins // channel: [mandatory] [ val(meta), path(bed) ]
+    ch_panel_of_normals_male   // channel: [mandatory] [ val(meta), path(hd5) ]
+    ch_mosdepth_bins           // channel: [mandatory] [ val(meta), path(bed) ]
 
     main:
     ch_mosdepth_in = ch_bam

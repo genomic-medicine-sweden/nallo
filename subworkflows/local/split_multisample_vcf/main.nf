@@ -3,7 +3,7 @@ include { BCFTOOLS_VIEW } from '../../../modules/nf-core/bcftools/view/main'
 // Splits mutli-sample VCFs into single-sample VCFs
 workflow SPLIT_MULTISAMPLE_VCF {
     take:
-    ch_vcf_vartype // channel: [ val(meta), path(vcf), val(variant_type) ]
+    ch_vcf_vartype       // channel: [ val(meta), path(vcf), val(variant_type) ]
     ch_family_to_samples // channel: [ val(meta), val(list_of_sample_ids) ]
 
     main:

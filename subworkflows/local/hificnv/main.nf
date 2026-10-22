@@ -3,13 +3,13 @@ include { TABIX_TABIX as TABIX_HIFICNV } from '../../../modules/nf-core/tabix/ta
 
 workflow HIFICNV {
     take:
-    ch_bam_bai // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
-    ch_snvs // channel:  [optional] [ val(meta), path(vcf) ]
-    ch_fasta // channel: [mandatory] [ val(meta), path(fasta) ]
+    ch_bam_bai         // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
+    ch_snvs            // channel:  [optional] [ val(meta), path(vcf) ]
+    ch_fasta           // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_expected_xy_bed // channel: [mandatory] [ val(meta), path(bed) ]
     ch_expected_xx_bed // channel: [mandatory] [ val(meta), path(bed) ]
-    ch_exclude_bed // channel:  [optional] [ val(meta), path(bed) ]
-    create_maf_track //     bool: [mandatory] should HiFiCNV produce a MAF track
+    ch_exclude_bed     // channel:  [optional] [ val(meta), path(bed) ]
+    create_maf_track   //     bool: [mandatory] should HiFiCNV produce a MAF track
 
     main:
     ch_for_hificnv = channel.empty()
@@ -48,7 +48,7 @@ workflow HIFICNV {
     emit:
     vcf     = ch_vcf_tbi.map { meta, vcf, _tbi -> [meta, vcf] } // channel: [ val(meta), path(vcf) ]
     tbi     = ch_vcf_tbi.map { meta, _vcf, tbi -> [meta, tbi] } // channel: [ val(meta), path(tbi) ]
-    depth   = RUN_HIFICNV.out.depth // channel: [ val(meta), path(bw) ]
-    copynum = RUN_HIFICNV.out.copynum // channel: [ val(meta), path(bedgraph) ]
-    maf     = RUN_HIFICNV.out.maf // channel: [ val(meta), path(bw) ]
+    depth   = RUN_HIFICNV.out.depth                             // channel: [ val(meta), path(bw) ]
+    copynum = RUN_HIFICNV.out.copynum                           // channel: [ val(meta), path(bedgraph) ]
+    maf     = RUN_HIFICNV.out.maf                               // channel: [ val(meta), path(bw) ]
 }

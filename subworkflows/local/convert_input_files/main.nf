@@ -6,8 +6,8 @@ include { SAMTOOLS_FASTQ  } from '../../../modules/nf-core/samtools/fastq/main'
 // into the respective output channels.
 workflow CONVERT_INPUT_FILES {
     take:
-    ch_input // channel: [ val(meta), reads ]
-    convert_bam //    bool: Should BAM files be converted to FASTQ
+    ch_input      // channel: [ val(meta), reads ]
+    convert_bam   //    bool: Should BAM files be converted to FASTQ
     convert_fastq //    bool: Should FASTQ files be converted to BAM
 
     main:
@@ -38,6 +38,6 @@ workflow CONVERT_INPUT_FILES {
     }
 
     emit:
-    bam   = ch_bam // channel: [ val(meta), bam ]
+    bam   = ch_bam   // channel: [ val(meta), bam ]
     fastq = ch_fastq // channel: [ val(meta), fastq ]
 }

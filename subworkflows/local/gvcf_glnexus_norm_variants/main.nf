@@ -12,12 +12,12 @@ include { VCFEXPRESS                                 } from '../../../modules/nf
 
 workflow GVCF_GLNEXUS_NORM_VARIANTS {
     take:
-    ch_gvcfs // channel: [mandatory] [ val(meta), path(gvcfs)     ]
-    ch_tbis // channel: [mandatory] [ val(meta), path(tbis)      ]
-    ch_bed // channel: [optional]  [ val(meta), path(input_bed) ]
-    ch_fasta // channel: [mandatory] [ val(meta), path(fasta)     ]
-    ch_fai // channel: [mandatory] [ val(meta), path(fai)       ]
-    ch_vcfexpress_prelude // path: [mandatory] lua file
+    ch_gvcfs                 // channel: [mandatory] [ val(meta), path(gvcfs)     ]
+    ch_tbis                  // channel: [mandatory] [ val(meta), path(tbis)      ]
+    ch_bed                   // channel: [optional]  [ val(meta), path(input_bed) ]
+    ch_fasta                 // channel: [mandatory] [ val(meta), path(fasta)     ]
+    ch_fai                   // channel: [mandatory] [ val(meta), path(fai)       ]
+    ch_vcfexpress_prelude    // path: [mandatory] lua file
     ch_custom_glnexus_config // path: [optional]  [ val(meta), path(config_file) ]
 
     main:
@@ -117,6 +117,6 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     )
 
     emit:
-    vcf   = BCFTOOLS_NORM_MULTISAMPLE.out.vcf // channel: [ val(meta), path(vcf) ]
+    vcf   = BCFTOOLS_NORM_MULTISAMPLE.out.vcf                                        // channel: [ val(meta), path(vcf) ]
     index = BCFTOOLS_NORM_MULTISAMPLE.out.tbi.mix(BCFTOOLS_NORM_MULTISAMPLE.out.csi) // channel: [ val(meta), path(tbi/csi) ]
 }
