@@ -4,11 +4,11 @@ include { SOMALIER_RELATE as RELATE_RELATE } from '../../../modules/nf-core/soma
 
 workflow BAM_INFER_SEX {
     take:
-    ch_bam_bai // channel: [ val(meta), path(bam), path(bai) ]
-    ch_fasta // channel: [ val(meta), path(fasta) ]
-    ch_fai // channel: [ val(meta), path(fai) ]
+    ch_bam_bai        // channel: [ val(meta), path(bam), path(bai) ]
+    ch_fasta          // channel: [ val(meta), path(fasta) ]
+    ch_fai            // channel: [ val(meta), path(fai) ]
     ch_somalier_sites // channel: [ val(meta), path(somalier_sites_vcf) ]
-    ch_ped // channel: [ val(meta), path(ped) ]
+    ch_ped            // channel: [ val(meta), path(ped) ]
 
     main:
     // Extract sites
@@ -66,8 +66,8 @@ workflow BAM_INFER_SEX {
     emit:
     bam              = ch_updated_sex.map { meta, bam, _bai -> [meta, bam] } // channel: [ val(meta), path(bam) ]
     bai              = ch_updated_sex.map { meta, _bam, bai -> [meta, bai] } // channel: [ val(meta), path(bai) ]
-    bam_bai          = ch_updated_sex // channel: [ val(meta), path(bam), path(bai) ]
-    somalier_html    = RELATE_RELATE.out.html // channel: [ val(meta), path(html) ]
-    somalier_samples = RELATE_RELATE.out.samples_tsv // channel: [ val(meta), path(samples_tsv) ]
-    somalier_pairs   = RELATE_RELATE.out.pairs_tsv // channel: [ val(meta), path(pairs_tsv) ]
+    bam_bai          = ch_updated_sex                                        // channel: [ val(meta), path(bam), path(bai) ]
+    somalier_html    = RELATE_RELATE.out.html                                // channel: [ val(meta), path(html) ]
+    somalier_samples = RELATE_RELATE.out.samples_tsv                         // channel: [ val(meta), path(samples_tsv) ]
+    somalier_pairs   = RELATE_RELATE.out.pairs_tsv                           // channel: [ val(meta), path(pairs_tsv) ]
 }

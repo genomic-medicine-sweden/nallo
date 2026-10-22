@@ -10,8 +10,8 @@ include { FIND_CONCATENATE            } from '../../../modules/nf-core/find/conc
 // It assumes that while each sample can have multiple files, each sample belongs to one family at most.
 workflow GENOME_ASSEMBLY {
     take:
-    ch_reads // channel: [ val(meta), fastqs ]
-    trio_binning // bool: Should we use trio binning mode where possible?
+    ch_reads          // channel: [ val(meta), fastqs ]
+    trio_binning      // bool: Should we use trio binning mode where possible?
     concat_assemblies // bool: Should we concatenate haplotypes per sample?
 
     main:
@@ -135,7 +135,7 @@ workflow GENOME_ASSEMBLY {
     }
 
     emit:
-    assembled_haplotypes    = GFASTATS.out.assembly // channel: [ val(meta), path(fasta) ]
+    assembled_haplotypes    = GFASTATS.out.assembly         // channel: [ val(meta), path(fasta) ]
     assembly_summary        = GFASTATS.out.assembly_summary // channel: [ val(meta), path(assembly_summary) ]
-    concatenated_haplotypes = ch_concatenated_haplotypes // channel: [ val(meta), path(fasta) ]
+    concatenated_haplotypes = ch_concatenated_haplotypes    // channel: [ val(meta), path(fasta) ]
 }

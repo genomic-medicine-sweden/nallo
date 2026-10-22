@@ -8,9 +8,9 @@ include { SAMTOOLS_CALMD           } from '../../../modules/nf-core/samtools/cal
 
 workflow PORTELLO {
     take:
-    ch_reads_to_assembly_bam_bai // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
+    ch_reads_to_assembly_bam_bai     // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
     ch_assembly_to_reference_bam_bai // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
-    ch_fasta // channel: [mandatory] [ val(meta), path(fasta) ]
+    ch_fasta                         // channel: [mandatory] [ val(meta), path(fasta) ]
 
     main:
 
@@ -54,6 +54,6 @@ workflow PORTELLO {
     )
 
     emit:
-    bam = GATK4_CLEANSAM.out.bam // channel: [ val(meta), path(bam) ]
+    bam = GATK4_CLEANSAM.out.bam   // channel: [ val(meta), path(bam) ]
     bai = SAMTOOLS_INDEX.out.index // channel: [ val(meta), path(bai) ]
 }

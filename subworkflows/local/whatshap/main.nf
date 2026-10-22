@@ -4,12 +4,12 @@ include { WHATSHAP_PHASE    } from '../../../modules/nf-core/whatshap/phase/main
 
 workflow WHATSHAP {
     take:
-    ch_snv_vcf // channel: [ val(meta), path(vcf) ]
+    ch_snv_vcf   // channel: [ val(meta), path(vcf) ]
     ch_snv_index // channel: [ val(meta), path(tbi) ]
-    ch_bam_bai // channel: [ val(meta), path(bam), path(bai) ]
-    fasta // channel: [ val(meta), path(fasta) ]
-    fai // channel: [ val(meta), path(fai) ]
-    ch_pedigree // channel: [ val(meta), path(pedigree) ]
+    ch_bam_bai   // channel: [ val(meta), path(bam), path(bai) ]
+    fasta        // channel: [ val(meta), path(fasta) ]
+    fai          // channel: [ val(meta), path(fai) ]
+    ch_pedigree  // channel: [ val(meta), path(pedigree) ]
 
     main:
     // Fix metadata to group by family

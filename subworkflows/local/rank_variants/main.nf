@@ -10,10 +10,10 @@ include { BCFTOOLS_SORT   } from '../../../modules/nf-core/bcftools/sort/main'
 
 workflow RANK_VARIANTS {
     take:
-    ch_vcf // channel: [mandatory] [ val(meta), path(vcf) ]
-    ch_ped // channel: [mandatory] [ val(meta), path(ped) ]
+    ch_vcf                       // channel: [mandatory] [ val(meta), path(vcf) ]
+    ch_ped                       // channel: [mandatory] [ val(meta), path(ped) ]
     ch_genmod_reduced_penetrance // channel: [mandatory] [ val(meta), path(penetrance) ]
-    ch_score_config // channel: [mandatory] [ val(meta), path(ini) ]
+    ch_score_config              // channel: [mandatory] [ val(meta), path(ini) ]
 
     main:
     GENMOD_ANNOTATE(
