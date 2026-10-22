@@ -151,6 +151,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1291](https://github.com/genomic-medicine-sweden/nallo/pull/1291) - Clarified that `sniffles` and `sniffles1` can be run together with `--sv_callers_to_run`; only one can be merged
 - [#1293](https://github.com/genomic-medicine-sweden/nallo/pull/1293) - `SAMTOOLS_CALMD` runs after pbmm2 only for `sniffles1`, or for `severus` after portello
 - [#1294](https://github.com/genomic-medicine-sweden/nallo/pull/1294) - HiFiCNV and Sawfish run with `--skip_snv_calling` when their MAF track is disabled (`--create_maf_track false`); the start-up check now only requires SNV calling for the MAF track
+- [#1297](https://github.com/genomic-medicine-sweden/nallo/pull/1297) - Updated minimum Nextflow version to 26.10.3
 
 ### Removed
 
