@@ -99,10 +99,10 @@
                     "minimap2": "2.29-r1283"
                 },
                 "MODKIT_BEDMETHYLTOBIGWIG": {
-                    "modkit": "0.6.1"
+                    "modkit": "0.6.4"
                 },
                 "MODKIT_PILEUP": {
-                    "modkit": "0.6.1"
+                    "modkit": "0.6.4"
                 },
                 "MOSDEPTH": {
                     "mosdepth": "0.3.11"
@@ -501,12 +501,12 @@
                 "hg002_chromograph_coverage_chrM.png:md5,0700e02e44d094b214d74680f8529d59",
                 "hg002_chromograph_coverage_chrX.png:md5,e8ceecdb88c3277c0aa64a0548982fbf",
                 "hg002_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
-                "hg002_modkit_pileup_combined.bed.gz:md5,85632d7de37d0450f55c983947ddb7d5",
-                "hg002_modkit_pileup_combined.bed.gz.tbi:md5,a22ca429b3b707ca40d3b83741ead79e",
-                "hg002_modkit_pileup_hp1.bed.gz:md5,70b9a180aafe330a82fdcca73597ba9d",
-                "hg002_modkit_pileup_hp1.bed.gz.tbi:md5,64f5cfd6919e2302bfd311d09c98a58b",
-                "hg002_modkit_pileup_hp2.bed.gz:md5,da977fec1c09e4870eb91e260c3cc085",
-                "hg002_modkit_pileup_hp2.bed.gz.tbi:md5,da42a56d8b9b363c34cafa38dd42b313",
+                "hg002_modkit_pileup_combined.bed.gz:md5,3551a340bd069247837f7155a69cb288",
+                "hg002_modkit_pileup_combined.bed.gz.tbi:md5,346b0cbc697a1ab3d4d0a49d1451bcc9",
+                "hg002_modkit_pileup_hp1.bed.gz:md5,46d3aea523012c61a8b8722fda9bef9a",
+                "hg002_modkit_pileup_hp1.bed.gz.tbi:md5,80fa9ceefc67d42a02656c4e48fd5e59",
+                "hg002_modkit_pileup_hp2.bed.gz:md5,abbbce52c065b6d669ca1f3f423a5df8",
+                "hg002_modkit_pileup_hp2.bed.gz.tbi:md5,2e2cc58321361bc908b931e21292bf3c",
                 "fastqc-status-check-heatmap.txt:md5,1d927bc4f778ba9da73c0ae634119c3c",
                 "fastqc_adapter_content_plot.txt:md5,23f8db4b533b9975e1ed0001b33a8b9d",
                 "fastqc_overrepresented_sequences_plot.txt:md5,c933981a22d49309df190d6f604b36ca",
@@ -551,9 +551,9 @@
                 "hg002_whatshap_stats.gtf.gz.tbi:md5,cdb4d0b6ece69c137fd9f363f7ff2445",
                 "hg002_whatshap_stats.tsv:md5,a9046c801e42467fff7b1104b72979aa",
                 "hg002_sambamba_depth.bed:md5,5d2024d4d04772150443ee1c79343574",
-                "hg002_modkit_pileup_combined.bw:md5,48730182498dac1680c321b7923fe6bd",
-                "hg002_modkit_pileup_hp1.bw:md5,212601656ad327de50e2dd4a4798ce3b",
-                "hg002_modkit_pileup_hp2.bw:md5,4852cdc340d34d66beef4054c325806e"
+                "hg002_modkit_pileup_combined.bw:md5,1817df8b35eefb010e1754ba60af2f06",
+                "hg002_modkit_pileup_hp1.bw:md5,280cedd7177a11db733bdde19bfda209",
+                "hg002_modkit_pileup_hp2.bw:md5,542165a29261c538afabe06e3034c66f"
             ],
             [
                 [
@@ -594,10 +594,10 @@
                 
             ]
         ],
-        "timestamp": "2026-10-08T11:15:11.208019067",
+        "timestamp": "2026-10-27T17:37:11.817555486",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.3"
         }
     }
 }
