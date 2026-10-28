@@ -85,7 +85,7 @@
                     "minimap2": "2.29-r1283"
                 },
                 "MODKIT_PILEUP": {
-                    "modkit": "0.6.1"
+                    "modkit": "0.6.4"
                 },
                 "MOSDEPTH": {
                     "mosdepth": "0.3.11"
@@ -437,10 +437,10 @@
                 "visualization_tracks/HG002_ONT_C/HG002_ONT_C_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-10-02T18:09:41.203043369",
+        "timestamp": "2026-10-27T17:26:20.804823333",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.3"
         }
     }
 }
