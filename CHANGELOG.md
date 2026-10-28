@@ -195,6 +195,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1293](https://github.com/genomic-medicine-sweden/nallo/pull/1293) - Fixed `sniffles1` failing after pbmm2 when written with capitals (e.g. `Sniffles1`)
 - [#1294](https://github.com/genomic-medicine-sweden/nallo/pull/1294) - Fixed `--skip_snv_calling` with SV calling failing at launch with `No such variable: sample_snv_vcf`
 - [#1297](https://github.com/genomic-medicine-sweden/nallo/pull/1297) - Fixed formatting for Nextflow 26.10.3: aligned comments of take/emit entries with the 26.10.3 formatter
+- [#1302](https://github.com/genomic-medicine-sweden/nallo/pull/1302) - Fixed PacBio runs without `--sv_call_regions` failing at launch with `No signature of method: java.lang.String.map()` in `call_mitochondrial_variants`
 
 ### Parameters
 

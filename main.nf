@@ -519,7 +519,7 @@ workflow {
         createReferenceChannelFromPath(params.stranger_repeat_catalog),
         createReferenceChannelFromPath(params.str_bed),
         createReferenceChannelFromPath(params.strdrop_training_set_json),
-        createReferenceChannelFromPath(params.sv_call_regions),
+        createReferenceChannelFromPath(params.sv_call_regions, channel.value([[], []])),
         createReferenceChannelFromSamplesheet(params.svdb_sv_databases, 'assets/svdb_query_vcf_schema.json', channel.value([])),
         createReferenceChannelFromPath(params.tandem_repeats, channel.value([[], []])),
         createReferenceChannelFromPath(params.variant_consequences_snvs),
