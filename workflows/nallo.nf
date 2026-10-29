@@ -518,7 +518,7 @@ workflow NALLO {
 
 
     /*
-     * Call long repeats in D4Z4 region
+     * Call long repeats (D4Z4 and KIV2)
      */
 
     if (!val_skip_kivvi) {
