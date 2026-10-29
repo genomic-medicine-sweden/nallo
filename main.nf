@@ -143,6 +143,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_sv_callers_to_merge
     val_sv_callers_to_run
     val_sv_call_regions
+    val_trgt_spanning_repeats_output_format
     val_vep_cache
     val_vep_cache_version
 
@@ -264,6 +265,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_sv_callers_to_merge,
         val_sv_callers_to_run,
         val_sv_call_regions,
+        val_trgt_spanning_repeats_output_format,
         val_vep_cache,
         val_vep_cache_version,
     )
@@ -589,6 +591,7 @@ workflow {
         params.sv_callers_to_merge,
         params.sv_callers_to_run,
         params.sv_call_regions,
+        params.trgt_spanning_repeats_output_format,
         params.vep_cache,
         params.vep_cache_version,
     )
