@@ -51,6 +51,51 @@ nextflow_pipeline {
         }
     }
 
+    test("Test mitochondrial calling runs without sv_call_regions") {
+        options "-stub"
+
+        when {
+            params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8cf6216b9cbf96f6bcfc918610182708e3796ad9/'
+                input                        = "$projectDir/assets/samplesheet_fastq.csv"
+                outdir                       = "$outputDir"
+                skip_annotate_paralogs       = true
+                skip_call_paralogs           = true
+                skip_chromograph             = true
+                skip_genome_assembly         = true
+                skip_portello                = true
+                skip_methylation_annotation  = true
+                skip_methylation_calling     = true
+                skip_peddy                   = true
+                skip_phasing                 = true
+                skip_prepare_gens_input      = true
+                skip_qc                      = true
+                skip_rank_variants           = true
+                skip_repeat_annotation       = true
+                skip_repeat_calling          = true
+                skip_sambamba_depth          = true
+                skip_snv_annotation          = true
+                skip_sv_annotation           = true
+                skip_sv_calling              = true
+                sv_call_regions              = null
+            }
+        }
+
+        then {
+            def stable_name = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
+            assertAll(
+                { assert workflow.success },
+                { assert versions.containsKey('MITORSAW_HAPLOTYPE') },
+                { assert snapshot(
+                    workflow.trace.succeeded().size(),
+                    versions,
+                    stable_name
+                ).match() }
+            )
+        }
+    }
+
     test("Test skip_mitochondrial_calling") {
         options "-stub"
 
