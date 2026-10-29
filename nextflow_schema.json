@@ -1216,6 +1216,7 @@
                     "type": "boolean",
                     "default": false,
                     "description": "Whether to skip running Kivvi."
+                },
                 "paraphase_config": {
                     "type": "string",
                     "format": "file-path",

@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ubam | --sv_callers sniffles1,debreak --sv_callers_to_run sniffles,sniffles1,debreak --phaser whatshap": {
         "content": [
-            401,
+            424,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -1371,10 +1371,10 @@
                 
             ]
         ],
-        "timestamp": "2026-10-15T14:01:22.799544273",
+        "timestamp": "2026-10-29T10:54:12.729593521",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.0"
+            "nextflow": "26.10.4"
         }
     },
     "samplesheet_multisample_ubam": {

@@ -1,7 +1,7 @@
 {
     "samplesheet_fastq | --read_aligner pbmm2 --sv_callers Sniffles1": {
         "content": [
-            25,
+            26,
             {
                 "BCFTOOLS_QUERY": {
                     "bcftools": 1.22
@@ -20,6 +20,9 @@
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
+                },
+                "KIVVI": {
+                    "kivvi": "1.1.0"
                 },
                 "PBMM2_ALIGN": {
                     "pbmm2": "26.2.0"
@@ -84,6 +87,12 @@
                 "aligned_reads/HG002_Revio",
                 "aligned_reads/HG002_Revio/HG002_Revio_aligned.bam",
                 "aligned_reads/HG002_Revio/HG002_Revio_aligned.bam.bai",
+                "kivvi",
+                "kivvi/HG002_Revio",
+                "kivvi/HG002_Revio/HG002_Revio.kivvi.d4z4.bam",
+                "kivvi/HG002_Revio/HG002_Revio.kivvi.d4z4.bam.bai",
+                "kivvi/HG002_Revio/HG002_Revio.kivvi.d4z4.json",
+                "kivvi/HG002_Revio/HG002_Revio.kivvi.d4z4.vcf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/llms-full.txt",
@@ -129,10 +138,10 @@
                 "svs/family/FAM/FAM_svs_unphased.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-10-19T13:45:52.110451281",
+        "timestamp": "2026-10-29T10:50:47.383838233",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.4"
         }
     }
 }
