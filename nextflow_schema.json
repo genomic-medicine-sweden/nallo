@@ -1214,7 +1214,7 @@
                 },
                 "trgt_spanning_repeats_output_format": {
                     "type": "string",
-                    "default": "BAM",
+                    "default": "bam",
                     "description": "Output format for TRGT spanning repeats. Supported arguments are BAM or CRAM.",
                     "enum": ["bam", "cram"]
                 }

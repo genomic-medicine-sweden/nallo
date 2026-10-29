@@ -239,4 +239,4 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `assembly_aligner` | Which aligner to use for assembly alignment. Supported arguments are mm2plus or minimap2. (accepted: `mm2plus`\|`minimap2`) | `string` | minimap2 |  |  |
 | `methbat_map` | Mapping file that can be used to filter and annotate the methbat output based on regions. | `string` |  |  |  |
 | `paraphase_config` | Configuration file for Paraphase. | `string` | None |  |  |
-| `trgt_spanning_repeats_output_format` | Output format for TRGT spanning repeats. Supported arguments are BAM or CRAM. (accepted: `bam`\|`cram`) | `string` | BAM |  |  |
+| `trgt_spanning_repeats_output_format` | Output format for TRGT spanning repeats. Supported arguments are BAM or CRAM. (accepted: `bam`\|`cram`) | `string` | bam |  |  |
