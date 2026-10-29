@@ -25,16 +25,18 @@ SUBWORKFLOW TO INITIALISE PIPELINE
 
 workflow PIPELINE_INITIALISATION {
     take:
-    help // boolean: Display help message and exit
-    help_full // boolean: Show the full help message
-    monochrome_logs // boolean: Do not use coloured log outputs
-    nextflow_cli_args // array: List of positional nextflow CLI args
-    outdir // string: The output directory where the results will be saved
-    show_hidden // boolean: Show hidden parameters in the help message
-    validate_params // boolean: Boolean whether to validate parameters against the schema at runtime
+    help                              // boolean: Display help message and exit
+    help_full                         // boolean: Show the full help message
+    monochrome_logs                   // boolean: Do not use coloured log outputs
+    nextflow_cli_args                 // array: List of positional nextflow CLI args
+    outdir                            // string: The output directory where the results will be saved
+    show_hidden                       // boolean: Show hidden parameters in the help message
+    validate_params                   // boolean: Boolean whether to validate parameters against the schema at runtime
     val_cnv_excluded_regions
     val_cnv_expected_xx_cn
     val_cnv_expected_xy_cn
+    val_create_hificnv_maf_track
+    val_create_sawfish_maf_track
     val_echtvar_snv_databases
     val_fasta
     val_genmod_reduced_penetrance
@@ -93,7 +95,7 @@ workflow PIPELINE_INITIALISATION {
     val_variant_consequences_svs
     val_vep_cache
     val_vep_plugin_files
-    version // boolean: Display version and exit
+    version                           // boolean: Display version and exit
 
     main:
     //
@@ -282,7 +284,7 @@ workflow PIPELINE_INITIALISATION {
     //
     validateInputParameters(parameterStatus, workflowSkips, workflowDependencies, fileDependencies)
     validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs, val_mitochondrial_caller, val_skip_portello, val_skip_kivvi)
-    validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge, val_skip_portello)
+    validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge, val_skip_portello, val_create_hificnv_maf_track, val_create_sawfish_maf_track)
 
     //
     // Create channel from input file provided through val_input
@@ -384,12 +386,12 @@ SUBWORKFLOW FOR PIPELINE COMPLETION
 
 workflow PIPELINE_COMPLETION {
     take:
-    email //  string: email address
-    email_on_fail //  string: email address sent on pipeline failure
+    email           //  string: email address
+    email_on_fail   //  string: email address sent on pipeline failure
     plaintext_email // boolean: Send plain-text email instead of HTML
-    outdir //    path: Path to output directory where results will be published
+    outdir          //    path: Path to output directory where results will be published
     monochrome_logs // boolean: Disable ANSI colour codes in log output
-    multiqc_report //  string: Path to MultiQC report
+    multiqc_report  //  string: Path to MultiQC report
 
     main:
     summary_params = paramsSummaryMap(workflow, parameters_schema: "nextflow_schema.json")
@@ -758,7 +760,7 @@ def validateSingleProjectPerRun(ch_samplesheet) {
         }
 }
 
-def validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge, val_skip_portello) {
+def validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge, val_skip_portello, val_create_hificnv_maf_track, val_create_sawfish_maf_track) {
     if (val_str_caller.matches('strdust') && !val_skip_repeat_annotation) {
         error("ERROR: Repeat annotation is not supported for STRdust. Run with --skip_repeat_annotation if you want to use STRdust.")
     }
@@ -767,10 +769,18 @@ def validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, va
         error("ERROR: --snv_calling_processes must be 1 when --snv_caller sentieon is used.")
     }
 
-    if (!val_skip_sv_calling && val_sv_callers_to_run.split(',').collect { caller -> caller.toLowerCase().trim() }.any { caller -> caller in ['hificnv', 'sawfish'] }) {
-        // We could probably change to not enforce this.
+    def sv_callers_to_run = val_sv_callers_to_run.split(',').collect { caller -> caller.toLowerCase().trim() }
+    if (!val_skip_sv_calling && sv_callers_to_run.any { caller -> caller in ['hificnv', 'sawfish'] }) {
+        // The MAF tracks are made from the SNV calls
         if (val_skip_snv_calling) {
-            error("ERROR: HiFiCNV and Sawfish requires SNV calling to be active. Run without --skip_snv_calling if you want to use HiFiCNV or Sawfish.")
+            [
+                hificnv: [create_maf_track: val_create_hificnv_maf_track, name: 'HiFiCNV'],
+                sawfish: [create_maf_track: val_create_sawfish_maf_track, name: 'Sawfish'],
+            ].each { caller, maf_track ->
+                if (sv_callers_to_run.contains(caller) && maf_track.create_maf_track) {
+                    error("ERROR: The ${maf_track.name} MAF track requires SNV calling. Run with --create_${caller}_maf_track false (or --create_maf_track false) if you want to use ${maf_track.name} with --skip_snv_calling.")
+                }
+            }
         }
         // We could probably change to not enforce this.
         if (!val_cnv_expected_xy_cn || !val_cnv_expected_xx_cn || !val_cnv_excluded_regions) {
@@ -850,7 +860,7 @@ def validateSVCallingParameters(val_sv_callers_to_merge, val_sv_callers_merge_pr
     }
 
     if (sv_callers.contains('sniffles') && sv_callers.contains('sniffles1')) {
-        error("ERROR: --sv_callers cannot contain both 'sniffles' (v2) and 'sniffles1' (v1). Choose one Sniffles version.")
+        error("ERROR: --sv_callers_to_merge cannot contain both 'sniffles' (v2) and 'sniffles1' (v1). Choose one Sniffles version to merge; both can be run with --sv_callers_to_run.")
     }
 }
 

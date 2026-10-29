@@ -9,10 +9,10 @@ include { TAGBAM           } from '../../../modules/nf-core/tagbam/main'
 
 workflow ALIGN_ASSEMBLIES {
     take:
-    ch_assembly // channel: [mandatory] [ val(meta), path(fasta) ]
-    ch_fasta // channel: [mandatory] [ val(meta), path(fasta) ]
-    ch_fai // channel: [mandatory] [ val(meta), path(fai)   ]
-    val_cram_output // bool: Publish alignments as CRAM (true) or BAM (false)
+    ch_assembly          // channel: [mandatory] [ val(meta), path(fasta) ]
+    ch_fasta             // channel: [mandatory] [ val(meta), path(fasta) ]
+    ch_fai               // channel: [mandatory] [ val(meta), path(fai)   ]
+    val_cram_output      // bool: Publish alignments as CRAM (true) or BAM (false)
     val_assembly_aligner // string: Which aligner to use for assembly alignment
 
     main:
@@ -86,10 +86,10 @@ workflow ALIGN_ASSEMBLIES {
     }
 
     emit:
-    unfiltered_bam = SAMTOOLS_MERGE.out.bam // channel: [ val(meta), path(bam) ]
-    unfiltered_bai = SAMTOOLS_MERGE.out.index // channel: [ val(meta), path(bai) ]
-    bam            = SAMTOOLS_VIEW.out.bam // channel: [ val(meta), path(bam) ]
-    bai            = SAMTOOLS_VIEW.out.bai // channel: [ val(meta), path(bai) ]
+    unfiltered_bam = SAMTOOLS_MERGE.out.bam                                        // channel: [ val(meta), path(bam) ]
+    unfiltered_bai = SAMTOOLS_MERGE.out.index                                      // channel: [ val(meta), path(bai) ]
+    bam            = SAMTOOLS_VIEW.out.bam                                         // channel: [ val(meta), path(bam) ]
+    bai            = SAMTOOLS_VIEW.out.bai                                         // channel: [ val(meta), path(bai) ]
     cram           = val_cram_output ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
     crai           = val_cram_output ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
 }

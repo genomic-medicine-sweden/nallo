@@ -10,10 +10,10 @@ include { TIDDIT_COV                                } from '../../../modules/nf-
 
 workflow CHROMOGRAPH {
     take:
-    ch_bam_bai // channel: [ val(meta), path(bam), path(bai) ]
-    ch_vcf // channel: [ val(meta), path(vcf) ]
-    ch_tbi // channel: [ val(meta), path(tbi) ]
-    plot_coverage // boolean
+    ch_bam_bai        // channel: [ val(meta), path(bam), path(bai) ]
+    ch_vcf            // channel: [ val(meta), path(vcf) ]
+    ch_tbi            // channel: [ val(meta), path(tbi) ]
+    plot_coverage     // boolean
     plot_autozygosity // boolean
 
     main:

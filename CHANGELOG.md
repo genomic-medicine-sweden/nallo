@@ -54,6 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1273](https://github.com/genomic-medicine-sweden/nallo/pull/1273) - Added `--publish_input_aligned_bams` to publish the aligned BAMs given in the samplesheet as aligned reads (default `false`)
 - [#1277](https://github.com/genomic-medicine-sweden/nallo/pull/1277) - Added `--filter_vep_snvs_expression` and `--filter_vep_svs_expression` for custom VEP annotation-based filtering of SNVs and SVs. Expressions can be used without an HGNC ID file or combined with `--filter_variants_hgnc_ids` using `and`; when bcftools filtering is also enabled, it runs before VEP filtering.
 - [#1287](https://github.com/genomic-medicine-sweden/nallo/pull/1287) - Added Kivvi for FSHD analysis (calls long D4Z4 repeats for FSHD resolution and KIV2 repeats for LPA)
+- [#1286](https://github.com/genomic-medicine-sweden/nallo/pull/1286) - Added `--paraphase_config` param to allow custom configuration of paraphase
 
 ### Changed
 
@@ -148,6 +149,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1280](https://github.com/genomic-medicine-sweden/nallo/pull/1280/) - Updated commit hash for test dataset paths
 - [#1273](https://github.com/genomic-medicine-sweden/nallo/pull/1273) - A single aligned BAM per sample (`aligned_bam` entry points) is now indexed with `SAMTOOLS_INDEX` instead of being passed through `SAMTOOLS_MERGE`; published `*_haplotagged` files are always named after the sample
 - [#1277](https://github.com/genomic-medicine-sweden/nallo/pull/1277) - Renamed `--filter_snvs_expression` and `--filter_svs_expression` to `--filter_bcftools_snvs_expression` and `--filter_bcftools_svs_expression` to distinguish bcftools filtering from the new VEP filtering options.
+- [#1291](https://github.com/genomic-medicine-sweden/nallo/pull/1291) - Clarified that `sniffles` and `sniffles1` can be run together with `--sv_callers_to_run`; only one can be merged
+- [#1293](https://github.com/genomic-medicine-sweden/nallo/pull/1293) - `SAMTOOLS_CALMD` runs after pbmm2 only for `sniffles1`, or for `severus` after portello
+- [#1294](https://github.com/genomic-medicine-sweden/nallo/pull/1294) - HiFiCNV and Sawfish run with `--skip_snv_calling` when their MAF track is disabled (`--create_maf_track false`); the start-up check now only requires SNV calling for the MAF track
+- [#1297](https://github.com/genomic-medicine-sweden/nallo/pull/1297) - Updated minimum Nextflow version to 26.10.3
+- [#1303](https://github.com/genomic-medicine-sweden/nallo/pull/1303) - Updated modkit to [0.6.4](https://github.com/nanoporetech/modkit/releases/tag/v0.6.4)
 
 ### Removed
 
@@ -187,6 +193,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1275](https://github.com/genomic-medicine-sweden/nallo/pull/1275) - Fixed `tests/stub_methbat_map_validation.nf.test` test to catch the error message in the stderr not in the stdout
 - [#1283](https://github.com/genomic-medicine-sweden/nallo/pull/1283) - Fixed tests and formatting for Nextflow 26.10.0: aliased test setup processes that the tested workflow also calls, assert on stdout and stderr for expected error messages, and formatted config header comments with the 26.10.0 formatter
 - [#1282](https://github.com/genomic-medicine-sweden/nallo/pull/1282) - Fixed `GLNEXUS` failing on long reference names (gVCF dataset names over 100 characters): interval BEDs are now named by genome (`nuclear`, `nuclear_chunk.NNNNN`, `mitochondrial`) instead of by reference, so gVCF names no longer depend on the reference or `--snv_call_regions` file names
+- [#1293](https://github.com/genomic-medicine-sweden/nallo/pull/1293) - Fixed `sniffles1` failing after pbmm2 when written with capitals (e.g. `Sniffles1`)
+- [#1294](https://github.com/genomic-medicine-sweden/nallo/pull/1294) - Fixed `--skip_snv_calling` with SV calling failing at launch with `No such variable: sample_snv_vcf`
+- [#1297](https://github.com/genomic-medicine-sweden/nallo/pull/1297) - Fixed formatting for Nextflow 26.10.3: aligned comments of take/emit entries with the 26.10.3 formatter
+- [#1302](https://github.com/genomic-medicine-sweden/nallo/pull/1302) - Fixed PacBio runs without `--sv_call_regions` failing at launch with `No signature of method: java.lang.String.map()` in `call_mitochondrial_variants`
 
 ### Parameters
 
@@ -223,6 +233,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                                  | `--filter_vep_snvs_expression`              |
 |                                  | `--filter_vep_svs_expression`               |
 |                                  | `--publish_input_aligned_bams`              |
+|                                  | `--paraphase_config`                        |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -257,6 +268,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | svdb/merge                     | 2.8.4       | 2.12.0      |
 | svdb/query                     | 2.8.4       | 2.12.0      |
 | kivvi                          |             | 1.1.0       |
+| modkit/pileup                  | 0.6.1       | 0.6.4       |
+| modkit/bedmethyltobigwig       | 0.6.1       | 0.6.4       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

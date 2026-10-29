@@ -1,5 +1,5 @@
 {
-    "samplesheet_multisample_ubam | --sv_callers sniffles1,debreak --phaser whatshap": {
+    "samplesheet_multisample_ubam | --sv_callers sniffles1,debreak --sv_callers_to_run sniffles,sniffles1,debreak --phaser whatshap": {
         "content": [
             401,
             {
@@ -221,6 +221,9 @@
                 },
                 "RUN_DEBREAK": {
                     "debreak": 1.3
+                },
+                "RUN_SNIFFLES": {
+                    "sniffles": "2.8.0"
                 },
                 "RUN_SNIFFLES1": {
                     "sniffles": "1.0.12"
@@ -918,6 +921,12 @@
                 "svs",
                 "svs/family",
                 "svs/family/FAM",
+                "svs/family/FAM/FAM_debreak_svs.vcf.gz",
+                "svs/family/FAM/FAM_debreak_svs.vcf.gz.tbi",
+                "svs/family/FAM/FAM_sniffles1_svs.vcf.gz",
+                "svs/family/FAM/FAM_sniffles1_svs.vcf.gz.tbi",
+                "svs/family/FAM/FAM_sniffles_svs.vcf.gz",
+                "svs/family/FAM/FAM_sniffles_svs.vcf.gz.tbi",
                 "svs/family/FAM/FAM_svs_annotated_ranked_clinical.vcf.gz",
                 "svs/family/FAM/FAM_svs_annotated_ranked_clinical.vcf.gz.tbi",
                 "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz",
@@ -1332,6 +1341,18 @@
                 [
                     "HG004_deepvariant_snvs.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=278, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "FAM_debreak_svs.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=3, variantCount=4, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "FAM_sniffles1_svs.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17], sampleCount=3, variantCount=8, phased=false, phasedAutodetect=false]"
+                ],
+                [
+                    "FAM_sniffles_svs.vcf.gz",
+                    "VcfFile [chromosomes=[chr16], sampleCount=3, variantCount=6, phased=false, phasedAutodetect=false]"
                 ],
                 [
                     "FAM_svs_annotated_ranked_clinical.vcf.gz",

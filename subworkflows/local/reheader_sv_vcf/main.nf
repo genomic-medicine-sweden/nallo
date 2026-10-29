@@ -6,7 +6,7 @@ include { GAWK as CREATE_SAMPLES_FILE } from '../../../modules/nf-core/gawk/main
 workflow REHEADER_SV_VCF {
     take:
     ch_vcf_tbi // channel: [ val(meta), path(vcf), path(tbi) ]
-    ch_fai // channel: [ val(meta), path(fai) ]
+    ch_fai     // channel: [ val(meta), path(fai) ]
 
     main:
     // Whether a caller needs reheadering is signalled via meta.needs_reheader,

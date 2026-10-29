@@ -410,7 +410,7 @@ nextflow_workflow {
 
     }
 
-    test("2 samples, 1 family - sniffles,hificnv,severus,sawfish,debreak with trf bed, run all callers") {
+    test("2 samples, 1 family - sniffles,sniffles1,hificnv,severus,sawfish,debreak with trf bed, run all callers") {
 
         when {
             workflow {
@@ -435,7 +435,7 @@ nextflow_workflow {
                     [ id: 'exclude_bed' ],
                     file(params.pipelines_testdata_base_path + 'reference/cnv.excluded_regions.hg38.bed.gz', checkIfExists: true)
                 ]).collect()
-                input[7] = ['sniffles', 'severus', 'hificnv', 'sawfish', 'debreak']
+                input[7] = ['sniffles', 'sniffles1', 'severus', 'hificnv', 'sawfish', 'debreak']
                 input[8] = false
                 input[9] = true
                 input[10] = true

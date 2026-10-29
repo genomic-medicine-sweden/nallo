@@ -5,10 +5,10 @@ include { GAWK                     } from '../../../modules/nf-core/gawk/main'
 workflow CALL_METHYLATION_MODKIT {
     take:
     ch_bam_bai // channel: [ val(meta), bam, bai ]
-    ch_fasta // channel: [ val(meta), fasta ]
-    ch_fai // channel: [ val(meta), fai ]
-    ch_bed // channel: [ val(meta), bed ]
-    modcodes // String or List
+    ch_fasta   // channel: [ val(meta), fasta ]
+    ch_fai     // channel: [ val(meta), fai ]
+    ch_bed     // channel: [ val(meta), bed ]
+    modcodes   // String or List
 
     main:
     ch_fasta_fai = ch_fasta
@@ -54,8 +54,8 @@ workflow CALL_METHYLATION_MODKIT {
     )
 
     emit:
-    bed    = ch_bedmethyl // channel: [ val(meta), path(bed) ]
-    tbi    = TABIX_TABIX.out.index // channel: [ val(meta), path(tbi) ]
+    bed    = ch_bedmethyl                    // channel: [ val(meta), path(bed) ]
+    tbi    = TABIX_TABIX.out.index           // channel: [ val(meta), path(tbi) ]
     bigwig = MODKIT_BEDMETHYLTOBIGWIG.out.bw // channel: [ val(meta), path(bw) ]
 }
 

@@ -11,13 +11,13 @@ include { MITORSAW_HAPLOTYPE                  } from '../../../modules/nf-core/m
 
 workflow CALL_MITOCHONDRIAL_VARIANTS {
     take:
-    ch_bam_bai // channel: [val(meta), path(bam), path(bai)]
-    ch_fasta // channel: [val(meta), path(fasta)]
-    ch_fai // channel: [val(meta), path(fai)]
-    ch_par_bed // channel: [val(meta), path(bed)]  – PAR regions (deepvariant)
+    ch_bam_bai           // channel: [val(meta), path(bam), path(bai)]
+    ch_fasta             // channel: [val(meta), path(fasta)]
+    ch_fai               // channel: [val(meta), path(fai)]
+    ch_par_bed           // channel: [val(meta), path(bed)]  – PAR regions (deepvariant)
     ch_mitochondrial_bed // channel: [val(meta), path(bed)]  – mitochondrial interval (deepvariant)
-    ch_snv_call_regions // channel: [val(meta), path(bed)]  – SNV call regions
-    ch_sv_call_regions // channel: [val(meta), path(bed)]  – structural variant call regions
+    ch_snv_call_regions  // channel: [val(meta), path(bed)]  – SNV call regions
+    ch_sv_call_regions   // channel: [val(meta), path(bed)]  – structural variant call regions
     mitochondrial_caller // string
 
     main:
@@ -147,8 +147,8 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
     emit:
     mitochondrial_snv_vcf = ch_snv_vcf // channel: [val(meta), path(vcf)]
     mitochondrial_snv_tbi = ch_snv_tbi // channel: [val(meta), path(tbi)]
-    mitochondrial_sv_vcf  = ch_sv_vcf // channel: [val(meta), path(vcf)]
-    mitochondrial_sv_tbi  = ch_sv_tbi // channel: [val(meta), path(tbi)]
+    mitochondrial_sv_vcf  = ch_sv_vcf  // channel: [val(meta), path(vcf)]
+    mitochondrial_sv_tbi  = ch_sv_tbi  // channel: [val(meta), path(tbi)]
 }
 
 def remove_variant_type_from_meta(channel) {

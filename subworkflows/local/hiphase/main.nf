@@ -2,15 +2,15 @@ include { HIPHASE as RUN_HIPHASE } from '../../../modules/nf-core/hiphase/main'
 
 workflow HIPHASE {
     take:
-    ch_snv_vcf // channel: [ val(meta), path(vcf) ]
-    ch_snv_vcf_index // channel: [ val(meta), path(tbi) ]
-    ch_sv_vcf // channel: [ val(meta), path(vcf) ] Optional
-    ch_sv_vcf_index // channel: [ val(meta), path(tbi) ] Optional
-    ch_bam_bai // channel: [ val(meta), path(bam), path(bai) ]
+    ch_snv_vcf           // channel: [ val(meta), path(vcf) ]
+    ch_snv_vcf_index     // channel: [ val(meta), path(tbi) ]
+    ch_sv_vcf            // channel: [ val(meta), path(vcf) ] Optional
+    ch_sv_vcf_index      // channel: [ val(meta), path(tbi) ] Optional
+    ch_bam_bai           // channel: [ val(meta), path(bam), path(bai) ]
     ch_family_to_samples // channel: [ val(meta), val( [ sample_ids ] ) ]
-    fasta // channel: [ val(meta), path(fasta) ]
-    fai // channel: [ val(meta), path(fai) ]
-    phase_with_svs // bool: Whether to include SVs in phasing (true) or not (false)
+    fasta                // channel: [ val(meta), path(fasta) ]
+    fai                  // channel: [ val(meta), path(fai) ]
+    phase_with_svs       // bool: Whether to include SVs in phasing (true) or not (false)
 
     main:
     // Prepare SNV VCF with index
@@ -62,9 +62,9 @@ workflow HIPHASE {
         }
 
     emit:
-    phased_snvs         = RUN_HIPHASE.out.vcfs // channel: [ val(meta), path(vcf) ]
-    phased_snvs_tbi     = RUN_HIPHASE.out.vcfs_indexes // channel: [ val(meta), path(tbi) ]
-    phased_svs          = phase_with_svs ? RUN_HIPHASE.out.sv_vcfs : ch_sv_vcf // channel: [ val(meta), path(vcf) ]
+    phased_snvs         = RUN_HIPHASE.out.vcfs                                               // channel: [ val(meta), path(vcf) ]
+    phased_snvs_tbi     = RUN_HIPHASE.out.vcfs_indexes                                       // channel: [ val(meta), path(tbi) ]
+    phased_svs          = phase_with_svs ? RUN_HIPHASE.out.sv_vcfs : ch_sv_vcf               // channel: [ val(meta), path(vcf) ]
     phased_svs_tbi      = phase_with_svs ? RUN_HIPHASE.out.sv_vcfs_indexes : ch_sv_vcf_index // channel: [ val(meta), path(tbi) ]
-    haplotagged_bam_bai = ch_haplotagged_bam_bai // channel: [ val(meta), path(bam), path(bai) ]
+    haplotagged_bam_bai = ch_haplotagged_bam_bai                                             // channel: [ val(meta), path(bam), path(bai) ]
 }

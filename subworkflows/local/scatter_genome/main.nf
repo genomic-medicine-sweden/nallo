@@ -6,10 +6,10 @@ include { GAWK as GAWK_EXTRACT_REGIONS } from '../../../modules/nf-core/gawk/mai
 
 workflow SCATTER_GENOME {
     take:
-    ch_fai // channel: [optional] [ val(meta), path(fai) ]
-    ch_input_bed // channel: [optional] [ val(meta), path(bed) ]
+    ch_fai            // channel: [optional] [ val(meta), path(fai) ]
+    ch_input_bed      // channel: [optional] [ val(meta), path(bed) ]
     make_bed_from_fai // bool: Should we build a bed file from the fai?
-    split_n // integer: split bed into n regions
+    split_n           // integer: split bed into n regions
 
     main:
     ch_bed = channel.empty()
@@ -105,8 +105,8 @@ workflow SCATTER_GENOME {
     }
 
     emit:
-    bed                         = BEDTOOLS_MERGE.out.bed // channel: [ val(meta), path(bed) ]
-    bed_nuclear_intervals       = ch_bed_nuclear_intervals // channel: [ val(meta), path(bed), val(num_intervals) ]
+    bed                         = BEDTOOLS_MERGE.out.bed         // channel: [ val(meta), path(bed) ]
+    bed_nuclear_intervals       = ch_bed_nuclear_intervals       // channel: [ val(meta), path(bed), val(num_intervals) ]
     bed_mitochondrial_intervals = ch_bed_mitochondrial_intervals // channel: [ val(meta), path(bed), val(num_intervals) ]
 }
 

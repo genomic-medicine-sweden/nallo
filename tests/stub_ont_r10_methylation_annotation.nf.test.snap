@@ -76,7 +76,7 @@
                     "minimap2": "2.29-r1283"
                 },
                 "MODKIT_PILEUP": {
-                    "modkit": "0.6.1"
+                    "modkit": "0.6.4"
                 },
                 "MOSDEPTH": {
                     "mosdepth": "0.3.11"
@@ -135,10 +135,10 @@
                 }
             }
         ],
-        "timestamp": "2026-07-30T15:55:36.958502612",
+        "timestamp": "2026-10-27T17:27:54.989583367",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.10.3"
         }
     }
 }

@@ -1,7 +1,7 @@
 {
     "revio preset with skip_methylation_annotation succeeds without methbat_map": {
         "content": [
-            406,
+            400,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -232,9 +232,6 @@
                     "create_pedigree_file": 1.0,
                     "python": "3.8.3"
                 },
-                "SAMTOOLS_CALMD": {
-                    "samtools": 1.24
-                },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
                 },
@@ -242,9 +239,6 @@
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.23.1"
-                },
-                "SAMTOOLS_INDEX_CALMD": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_MERGE": {
@@ -326,10 +320,10 @@
                 }
             }
         ],
-        "timestamp": "2026-10-12T13:48:25.136201519",
+        "timestamp": "2026-10-19T09:58:42.25277583",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.09.2"
+            "nextflow": "26.04.6"
         }
     }
 }

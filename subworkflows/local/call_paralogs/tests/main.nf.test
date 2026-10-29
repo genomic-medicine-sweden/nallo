@@ -46,6 +46,7 @@ nextflow_workflow {
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
                 input[3] = params.publish_alignments_as_cram
+                input[4] = [[],[]]
                 """
             }
         }
@@ -87,6 +88,7 @@ nextflow_workflow {
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
                 input[3] = params.publish_alignments_as_cram
+                input[4] = [[],[]]
                 """
             }
         }
@@ -145,6 +147,7 @@ nextflow_workflow {
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
                 input[3] = params.publish_alignments_as_cram
+                input[4] = [[],[]]
                 """
             }
         }
@@ -204,6 +207,7 @@ nextflow_workflow {
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
                 input[3] = params.publish_alignments_as_cram
+                input[4] = [[],[]]
                 """
             }
         }
@@ -252,6 +256,7 @@ nextflow_workflow {
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
                 input[3] = params.publish_alignments_as_cram
+                input[4] = [[],[]]
                 """
             }
         }
