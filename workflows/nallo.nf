@@ -205,6 +205,7 @@ workflow NALLO {
     val_sv_callers_to_merge
     val_sv_callers_to_run
     val_sv_call_regions
+    val_trgt_spanning_repeats_output_format
     val_vep_cache
     val_vep_cache_version
 
@@ -1283,7 +1284,7 @@ workflow NALLO {
             ch_fasta,
             ch_fai,
             ch_str_bed,
-            val_cram_output,
+            val_trgt_spanning_repeats_output_format == 'cram',
             ch_vcfexpress_prelude,
         )
 

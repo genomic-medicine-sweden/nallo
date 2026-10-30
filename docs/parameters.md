@@ -241,3 +241,4 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `kivvi_preset` | Preset to use for Kivvi. Supported arguments are d4z4 or kiv2. (accepted: `d4z4`\|`kiv2`) | `string` | d4z4 |  |  |
 | `skip_kivvi` | Whether to skip running Kivvi. | `boolean` | False |  |  |
 | `paraphase_config` | Configuration file for Paraphase. | `string` | None |  |  |
+| `trgt_spanning_repeats_output_format` | Output format for TRGT spanning repeats. Supported arguments are BAM or CRAM. (accepted: `bam`\|`cram`) | `string` | bam |  |  |
