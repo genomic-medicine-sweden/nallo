@@ -506,12 +506,12 @@
                     },
                     "trgt/genotype": {
                         "branch": "master",
-                        "git_sha": "d7accc83ceb8eee42e69bcd68e207a41e2ee9824",
+                        "git_sha": "7b3452a23773f687ededb4befd037920e5a51341",
                         "installed_by": ["modules"]
                     },
                     "trgt/merge": {
                         "branch": "master",
-                        "git_sha": "b2e78932ef01165fd85829513eaca29eff8e640a",
+                        "git_sha": "7b3452a23773f687ededb4befd037920e5a51341",
                         "installed_by": ["modules"]
                     },
                     "untar": {
