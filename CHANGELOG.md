@@ -53,6 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1271](https://github.com/genomic-medicine-sweden/nallo/pull/1271) - Added `COLLAPSE_MITOCHONDRIAL_GT` module to `call_mitochondrial_variants`, collapsing mitorsaw's per-haplotype pseudo-ploidy `GT` field (one entry per detected mitochondrial haplotype) into a standard diploid `GT` (`0/0`, `0/1`, `1/1`) for interoperability with the rest of the pipeline
 - [#1273](https://github.com/genomic-medicine-sweden/nallo/pull/1273) - Added `--publish_input_aligned_bams` to publish the aligned BAMs given in the samplesheet as aligned reads (default `false`)
 - [#1277](https://github.com/genomic-medicine-sweden/nallo/pull/1277) - Added `--filter_vep_snvs_expression` and `--filter_vep_svs_expression` for custom VEP annotation-based filtering of SNVs and SVs. Expressions can be used without an HGNC ID file or combined with `--filter_variants_hgnc_ids` using `and`; when bcftools filtering is also enabled, it runs before VEP filtering.
+- [#1287](https://github.com/genomic-medicine-sweden/nallo/pull/1287) - Added Kivvi for FSHD analysis (calls long D4Z4 repeats for FSHD resolution and KIV2 repeats for LPA)
 - [#1286](https://github.com/genomic-medicine-sweden/nallo/pull/1286) - Added `--paraphase_config` param to allow custom configuration of paraphase
 
 ### Changed
@@ -268,6 +269,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | debreak                        |             | 1.3         |
 | svdb/merge                     | 2.8.4       | 2.12.0      |
 | svdb/query                     | 2.8.4       | 2.12.0      |
+| kivvi                          |             | 1.1.0       |
 | modkit/pileup                  | 0.6.1       | 0.6.4       |
 | modkit/bedmethyltobigwig       | 0.6.1       | 0.6.4       |
 

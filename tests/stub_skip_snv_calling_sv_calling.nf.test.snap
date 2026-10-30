@@ -1,7 +1,7 @@
 {
     "All SV callers run with skip_snv_calling and create_maf_track false": {
         "content": [
-            78,
+            79,
             {
                 "BCFTOOLS_QUERY": {
                     "bcftools": 1.22
@@ -35,6 +35,9 @@
                 },
                 "HIFIASM_BINS": {
                     "hifiasm": "0.25.0-r726"
+                },
+                "KIVVI": {
+                    "kivvi": "1.1.0"
                 },
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283"
@@ -141,6 +144,13 @@
                 "assembly/stats/HG002_Revio",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_1.assembly_summary",
                 "assembly/stats/HG002_Revio/HG002_Revio_haplotype_2.assembly_summary",
+                "kivvi",
+                "kivvi/HG002_Revio",
+                "kivvi/HG002_Revio/HG002_Revio.kivvi.d4z4.bam",
+                "kivvi/HG002_Revio/HG002_Revio.kivvi.d4z4.bam.bai",
+                "kivvi/HG002_Revio/HG002_Revio.kivvi.d4z4.json",
+                "kivvi/HG002_Revio/HG002_Revio.kivvi.d4z4.svg",
+                "kivvi/HG002_Revio/HG002_Revio.kivvi.d4z4.vcf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/.stub",
@@ -195,10 +205,10 @@
                 "visualization_tracks/test/test_gc_bias_corrected_depth_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-10-19T12:27:34.530765192",
+        "timestamp": "2026-10-29T11:18:32.788983444",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.4"
         }
     }
 }

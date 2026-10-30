@@ -258,6 +258,11 @@
                     "htslib/bgziptabix": {
                         "branch": "master",
                         "git_sha": "37f69c8ca3eb3d038a5d44f33a329e49f44bd4f2",
+                        "installed_by": ["vcf_filter_bcftools_ensemblvep"]
+                    },
+                    "kivvi": {
+                        "branch": "master",
+                        "git_sha": "8e856f6a9903b9e6bf7ded6b58f7324d4e4fa2ce",
                         "installed_by": ["modules"]
                     },
                     "longphase/haplotag": {

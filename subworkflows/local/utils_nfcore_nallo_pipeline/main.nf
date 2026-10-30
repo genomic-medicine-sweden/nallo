@@ -61,6 +61,7 @@ workflow PIPELINE_INITIALISATION {
     val_skip_call_paralogs
     val_skip_chromograph
     val_skip_genome_assembly
+    val_skip_kivvi
     val_skip_methylation_calling
     val_skip_methylation_annotation
     val_skip_mitochondrial_calling
@@ -181,6 +182,7 @@ workflow PIPELINE_INITIALISATION {
         gens: "skip_prepare_gens_input",
         sex_check: "skip_sex_check",
         portello: "skip_portello",
+        kivvi: "skip_kivvi",
     ]
 
     //
@@ -281,7 +283,7 @@ workflow PIPELINE_INITIALISATION {
     // Custom validation for pipeline parameters
     //
     validateInputParameters(parameterStatus, workflowSkips, workflowDependencies, fileDependencies)
-    validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs, val_mitochondrial_caller, val_skip_portello)
+    validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs, val_mitochondrial_caller, val_skip_portello, val_skip_kivvi)
     validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge, val_skip_portello, val_create_hificnv_maf_track, val_create_sawfish_maf_track)
 
     //
@@ -678,7 +680,7 @@ def createReferenceChannelFromSamplesheet(param, schema, defaultValue = '') {
     return param ? channel.fromList(samplesheetToList(param, schema)) : defaultValue
 }
 
-def validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs, val_mitochondrial_caller, val_skip_portello) {
+def validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs, val_mitochondrial_caller, val_skip_portello, val_skip_kivvi) {
     def pacbioTools = [
         (val_phaser): 'HiPhase',
         (val_str_caller): 'TRGT',
@@ -688,6 +690,7 @@ def validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_cal
         (!val_skip_call_paralogs): 'Paraphase',
         (val_mitochondrial_caller): 'Mitorsaw',
         (!val_skip_portello): 'Portello',
+        (!val_skip_kivvi): 'Kivvi',
     ].findAll { k, v -> (k instanceof Boolean) ? k : k.toString().contains(v.toLowerCase()) }.values() as List
 
     if (!pacbioTools) {

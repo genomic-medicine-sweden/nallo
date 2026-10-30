@@ -1,7 +1,7 @@
 {
     "samplesheet_multisample_ubam | --sv_callers sniffles1,debreak --sv_callers_to_run sniffles,sniffles1,debreak --phaser whatshap": {
         "content": [
-            421,
+            424,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -165,6 +165,9 @@
                 "HTSLIB_BGZIPTABIX": {
                     "htslib": 1.24,
                     "xz": "5.8.3"
+                },
+                "KIVVI": {
+                    "kivvi": "1.1.0"
                 },
                 "METHBAT_PROFILE": {
                     "methbat": "0.17.0-7c5e249"
@@ -532,6 +535,22 @@
                 "images/chromograph/sample/HG004/HG004_chromograph_coverage_chrM.png",
                 "images/chromograph/sample/HG004/HG004_chromograph_coverage_chrX.png",
                 "images/chromograph/sample/HG004/HG004_chromograph_coverage_chrY.png",
+                "kivvi",
+                "kivvi/HG002",
+                "kivvi/HG002/HG002.kivvi.d4z4.bam",
+                "kivvi/HG002/HG002.kivvi.d4z4.bam.bai",
+                "kivvi/HG002/HG002.kivvi.d4z4.json",
+                "kivvi/HG002/HG002.kivvi.d4z4.vcf",
+                "kivvi/HG003",
+                "kivvi/HG003/HG003.kivvi.d4z4.bam",
+                "kivvi/HG003/HG003.kivvi.d4z4.bam.bai",
+                "kivvi/HG003/HG003.kivvi.d4z4.json",
+                "kivvi/HG003/HG003.kivvi.d4z4.vcf",
+                "kivvi/HG004",
+                "kivvi/HG004/HG004.kivvi.d4z4.bam",
+                "kivvi/HG004/HG004.kivvi.d4z4.bam.bai",
+                "kivvi/HG004/HG004.kivvi.d4z4.json",
+                "kivvi/HG004/HG004.kivvi.d4z4.vcf",
                 "methylation",
                 "methylation/pileup",
                 "methylation/pileup/HG002",
@@ -1097,6 +1116,15 @@
                 "HG004_chromograph_coverage_chrM.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG004_chromograph_coverage_chrX.png:md5,5474c0ec4a1b264b50eb61e8ce1ec937",
                 "HG004_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002.kivvi.d4z4.bam:md5,33544c51c77d73a17e9c9afdb7f707ec",
+                "HG002.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
+                "HG002.kivvi.d4z4.vcf:md5,40ed942068d9514b01b4d278fda7db94",
+                "HG003.kivvi.d4z4.bam:md5,8c5f142d79493a4049354a906b46273b",
+                "HG003.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
+                "HG003.kivvi.d4z4.vcf:md5,472eaee8b24437b64f3612b6f77b16b6",
+                "HG004.kivvi.d4z4.bam:md5,c08635926a6978e1a90d55086ccaaa70",
+                "HG004.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
+                "HG004.kivvi.d4z4.vcf:md5,9b8d012ab633b96a8adbb728ed27ea00",
                 "HG002_pbcpgtools.combined.bed.gz:md5,2335e1849d645cb082ff993ec001ef31",
                 "HG002_pbcpgtools.combined.bed.gz.tbi:md5,be19f72778ce254ab11ef922617679d6",
                 "HG002_pbcpgtools.hap1.bed.gz:md5,5dd84d48cb1d13a6095c0d0b1677860c",
@@ -1141,7 +1169,7 @@
                 "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
                 "somalier_stats.txt:md5,bfc85f681fb57c1025c7791c5b0e970a",
                 "whatshap-stats-table.txt:md5,14acf9cce13f1732ee00e93438bbe989",
-                "FAM_paraphase_annotated.tsv:md5,6d680215a6650b3d889fed9335ed1251",
+                "FAM_paraphase_annotated.tsv:md5,a2cc0ab6a272c1c2347baf66abe927bb",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002_cramino_aligned_phased.arrow:md5,796ee4e79b13531dae09e445164e5fe0",
                 "HG003_cramino_aligned_phased.arrow:md5,bb4d7ef993c11ad68987f07abcfde486",
@@ -1220,6 +1248,18 @@
                 [
                     "HG004_aligned_assembly.bam",
                     "ee430af552c4dd5fae7f01784d090b8b"
+                ],
+                [
+                    "HG002.kivvi.d4z4.bam",
+                    "d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                [
+                    "HG003.kivvi.d4z4.bam",
+                    "d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                [
+                    "HG004.kivvi.d4z4.bam",
+                    "d41d8cd98f00b204e9800998ecf8427e"
                 ],
                 [
                     "HG002_spanning_trgt.bam",
@@ -1331,15 +1371,15 @@
                 
             ]
         ],
-        "timestamp": "2026-10-19T09:25:54.440601977",
+        "timestamp": "2026-10-29T10:54:12.729593521",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.4"
         }
     },
     "samplesheet_multisample_ubam": {
         "content": [
-            433,
+            436,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -1514,6 +1554,9 @@
                 "HTSLIB_BGZIPTABIX": {
                     "htslib": 1.24,
                     "xz": "5.8.3"
+                },
+                "KIVVI": {
+                    "kivvi": "1.1.0"
                 },
                 "METHBAT_PROFILE": {
                     "methbat": "0.17.0-7c5e249"
@@ -1893,6 +1936,22 @@
                 "images/chromograph/sample/HG004/HG004_chromograph_coverage_chrM.png",
                 "images/chromograph/sample/HG004/HG004_chromograph_coverage_chrX.png",
                 "images/chromograph/sample/HG004/HG004_chromograph_coverage_chrY.png",
+                "kivvi",
+                "kivvi/HG002",
+                "kivvi/HG002/HG002.kivvi.d4z4.bam",
+                "kivvi/HG002/HG002.kivvi.d4z4.bam.bai",
+                "kivvi/HG002/HG002.kivvi.d4z4.json",
+                "kivvi/HG002/HG002.kivvi.d4z4.vcf",
+                "kivvi/HG003",
+                "kivvi/HG003/HG003.kivvi.d4z4.bam",
+                "kivvi/HG003/HG003.kivvi.d4z4.bam.bai",
+                "kivvi/HG003/HG003.kivvi.d4z4.json",
+                "kivvi/HG003/HG003.kivvi.d4z4.vcf",
+                "kivvi/HG004",
+                "kivvi/HG004/HG004.kivvi.d4z4.bam",
+                "kivvi/HG004/HG004.kivvi.d4z4.bam.bai",
+                "kivvi/HG004/HG004.kivvi.d4z4.json",
+                "kivvi/HG004/HG004.kivvi.d4z4.vcf",
                 "methylation",
                 "methylation/pileup",
                 "methylation/pileup/HG002",
@@ -2470,6 +2529,15 @@
                 "HG004_chromograph_coverage_chrM.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG004_chromograph_coverage_chrX.png:md5,44c18de3b3d94bdc7eb010b5fe99216a",
                 "HG004_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
+                "HG002.kivvi.d4z4.bam:md5,33544c51c77d73a17e9c9afdb7f707ec",
+                "HG002.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
+                "HG002.kivvi.d4z4.vcf:md5,40ed942068d9514b01b4d278fda7db94",
+                "HG003.kivvi.d4z4.bam:md5,8c5f142d79493a4049354a906b46273b",
+                "HG003.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
+                "HG003.kivvi.d4z4.vcf:md5,472eaee8b24437b64f3612b6f77b16b6",
+                "HG004.kivvi.d4z4.bam:md5,c08635926a6978e1a90d55086ccaaa70",
+                "HG004.kivvi.d4z4.bam.bai:md5,0d76977b2e36046cc176112776c5fa4e",
+                "HG004.kivvi.d4z4.vcf:md5,9b8d012ab633b96a8adbb728ed27ea00",
                 "HG002_pbcpgtools.combined.bed.gz:md5,1d56d09f8243d221404e0d2577f2359d",
                 "HG002_pbcpgtools.combined.bed.gz.tbi:md5,744f0ce191924acd83e8ca5f33e04398",
                 "HG002_pbcpgtools.hap1.bed.gz:md5,a07c21266259508c5aac3d31cf31d03c",
@@ -2612,6 +2680,18 @@
                     "ee430af552c4dd5fae7f01784d090b8b"
                 ],
                 [
+                    "HG002.kivvi.d4z4.bam",
+                    "d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                [
+                    "HG003.kivvi.d4z4.bam",
+                    "d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                [
+                    "HG004.kivvi.d4z4.bam",
+                    "d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                [
                     "HG002_spanning_trgt.bam",
                     "30ba267e3b89ce97d0df96640b22d265"
                 ],
@@ -2709,10 +2789,10 @@
                 
             ]
         ],
-        "timestamp": "2026-10-12T13:57:06.021615121",
+        "timestamp": "2026-10-15T13:51:35.744579952",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.09.2"
+            "nextflow": "26.10.0"
         }
     }
 }

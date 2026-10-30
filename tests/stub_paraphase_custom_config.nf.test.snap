@@ -1,7 +1,7 @@
 {
     "revio preset with custom paraphase config file": {
         "content": [
-            49,
+            52,
             {
                 "BCFTOOLS_MERGE": {
                     "bcftools": 1.22
@@ -23,6 +23,9 @@
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
+                },
+                "KIVVI": {
+                    "kivvi": "1.1.0"
                 },
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283"
@@ -165,6 +168,25 @@
                 "images/chromograph/sample/HG004/HG004_chromograph_coverage.wig_chrM.png",
                 "images/chromograph/sample/HG004/HG004_chromograph_coverage.wig_chrX.png",
                 "images/chromograph/sample/HG004/HG004_chromograph_coverage.wig_chrY.png",
+                "kivvi",
+                "kivvi/HG002",
+                "kivvi/HG002/HG002.kivvi.d4z4.bam",
+                "kivvi/HG002/HG002.kivvi.d4z4.bam.bai",
+                "kivvi/HG002/HG002.kivvi.d4z4.json",
+                "kivvi/HG002/HG002.kivvi.d4z4.svg",
+                "kivvi/HG002/HG002.kivvi.d4z4.vcf",
+                "kivvi/HG003",
+                "kivvi/HG003/HG003.kivvi.d4z4.bam",
+                "kivvi/HG003/HG003.kivvi.d4z4.bam.bai",
+                "kivvi/HG003/HG003.kivvi.d4z4.json",
+                "kivvi/HG003/HG003.kivvi.d4z4.svg",
+                "kivvi/HG003/HG003.kivvi.d4z4.vcf",
+                "kivvi/HG004",
+                "kivvi/HG004/HG004.kivvi.d4z4.bam",
+                "kivvi/HG004/HG004.kivvi.d4z4.bam.bai",
+                "kivvi/HG004/HG004.kivvi.d4z4.json",
+                "kivvi/HG004/HG004.kivvi.d4z4.svg",
+                "kivvi/HG004/HG004.kivvi.d4z4.vcf",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/.stub",
@@ -266,10 +288,10 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-10-15T13:31:22.951552036",
+        "timestamp": "2026-10-29T11:13:38.607121639",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.0"
+            "nextflow": "26.10.4"
         }
     }
 }

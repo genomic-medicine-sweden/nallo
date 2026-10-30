@@ -64,11 +64,13 @@ include { BCFTOOLS_SORT as BCFTOOLS_SORT_SVS                     } from '../modu
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CHROMOGRAPH             } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_PHASING                 } from '../modules/nf-core/bcftools/view/main'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SVS                     } from '../modules/nf-core/bcftools/view/main'
+include { KIVVI                                                  } from '../modules/nf-core/kivvi/main'
 include { MINIMAP2_ALIGN                                         } from '../modules/nf-core/minimap2/align/main'
 include { SAMTOOLS_MERGE                                         } from '../modules/nf-core/samtools/merge/main'
 include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_CALMD                 } from '../modules/nf-core/samtools/index/main'
 include { SAMTOOLS_INDEX as SAMTOOLS_INDEX_INPUT                 } from '../modules/nf-core/samtools/index/main'
-include { SAMTOOLS_CONVERT                                       } from '../modules/nf-core/samtools/convert/main'
+include { SAMTOOLS_CONVERT as SAMTOOLS_CONVERT_ALIGNED_READS     } from '../modules/nf-core/samtools/convert/main'
+include { SAMTOOLS_CONVERT as SAMTOOLS_CONVERT_KIVVI             } from '../modules/nf-core/samtools/convert/main'
 include { SAMTOOLS_CALMD                                         } from '../modules/nf-core/samtools/calmd/main'
 include { MULTIQC                                                } from '../modules/nf-core/multiqc/main'
 include { PEDDY                                                  } from '../modules/nf-core/peddy/main'
@@ -154,6 +156,7 @@ workflow NALLO {
     val_filter_vep_svs_expression
     val_force_sawfish_joint_call_single_samples
     val_hifiasm_mode
+    val_kivvi_preset
     val_mitochondrial_caller
     val_mosdepth_regions
     val_cramino_regions
@@ -174,6 +177,7 @@ workflow NALLO {
     val_skip_call_paralogs
     val_skip_chromograph
     val_skip_genome_assembly
+    val_skip_kivvi
     val_skip_methbat
     val_skip_methylation_annotation
     val_skip_modkit
@@ -395,7 +399,7 @@ workflow NALLO {
 
         // Publish alignments as CRAM if requested
         if (val_convert_unphased_aligned_reads_to_cram) {
-            SAMTOOLS_CONVERT(
+            SAMTOOLS_CONVERT_ALIGNED_READS(
                 ch_aligned_bam,
                 ch_fasta.join(ch_fai).collect(),
             )
@@ -510,6 +514,25 @@ workflow NALLO {
             val_paraphrase_output_format,
             ch_paraphrase_rules,
         )
+    }
+
+
+    /*
+     * Call long repeats (D4Z4 and KIV2)
+     */
+
+    if (!val_skip_kivvi) {
+        KIVVI(
+            ch_bam_bai,
+            val_kivvi_preset,
+        )
+
+        if (val_cram_output) {
+            SAMTOOLS_CONVERT_KIVVI(
+                KIVVI.out.bam.join(KIVVI.out.bai, failOnDuplicate: true, failOnMismatch: true),
+                ch_fasta.join(ch_fai, failOnDuplicate: true, failOnMismatch: true).collect(),
+            )
+        }
     }
 
     /*
@@ -1382,8 +1405,8 @@ workflow NALLO {
     aligned_input_reads_bam             = val_skip_alignment || val_aligned_bam_changed ? channel.empty() : ch_aligned_bam_input.map { meta, bam, _bai -> [meta, bam] }                    // channel: [ val(meta), path(bam) ]
     aligned_reads_bai                   = val_skip_alignment ? channel.empty() : (val_aligned_bam_changed ? ch_aligned_bam : ch_aligned_bam_merged).map { meta, _bam, bai -> [meta, bai] } // channel: [ val(meta), path(bai) ]
     aligned_reads_bam                   = val_skip_alignment ? channel.empty() : (val_aligned_bam_changed ? ch_aligned_bam : ch_aligned_bam_merged).map { meta, bam, _bai -> [meta, bam] } // channel: [ val(meta), path(bam) ]
-    aligned_reads_crai                  = !val_convert_unphased_aligned_reads_to_cram ? channel.empty() : SAMTOOLS_CONVERT.out.crai                                                        // channel: [ val(meta), path(crai) ]
-    aligned_reads_cram                  = !val_convert_unphased_aligned_reads_to_cram ? channel.empty() : SAMTOOLS_CONVERT.out.cram                                                        // channel: [ val(meta), path(cram) ]
+    aligned_reads_crai                  = !val_convert_unphased_aligned_reads_to_cram ? channel.empty() : SAMTOOLS_CONVERT_ALIGNED_READS.out.crai                                          // channel: [ val(meta), path(crai) ]
+    aligned_reads_cram                  = !val_convert_unphased_aligned_reads_to_cram ? channel.empty() : SAMTOOLS_CONVERT_ALIGNED_READS.out.cram                                          // channel: [ val(meta), path(cram) ]
     assembly_summary                    = val_skip_genome_assembly ? channel.empty() : GENOME_ASSEMBLY.out.assembly_summary                                                                // channel: [ val(meta), path(assembly_summary) ]
     chromograph_plots                   = val_skip_chromograph ? channel.empty() : CHROMOGRAPH.out.chromograph_plots                                                                       // channel: [ val(meta), path(png) ]
     cramino_phased_arrow                = val_skip_phasing ? channel.empty() : PHASING.out.haplotagging_arrow                                                                              // channel: [ val(meta), path(arrow) ]
@@ -1399,6 +1422,13 @@ workflow NALLO {
     hificnv_copynum_bedgraph            = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.hificnv_copynum                                                                             // channel: [ val(meta), path(bedgraph) ]
     hificnv_depth_bw                    = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.hificnv_depth                                                                               // channel: [ val(meta), path(bw) ]
     hificnv_maf_bw                      = val_skip_sv_calling ? channel.empty() : CALL_SVS.out.hificnv_maf                                                                                 // channel: [ val(meta), path(bw) ]
+    kivvi_vcf                           = val_skip_kivvi ? channel.empty() : KIVVI.out.vcf                                                                                                 // channel: [ val(meta), path(vcf) ]
+    kivvi_svg                           = val_skip_kivvi ? channel.empty() : KIVVI.out.svg                                                                                                 // channel: [ val(meta), path(svg) ]
+    kivvi_json                          = val_skip_kivvi ? channel.empty() : KIVVI.out.json                                                                                                // channel: [ val(meta), path(json) ]
+    kivvi_bam                           = val_skip_kivvi ? channel.empty() : KIVVI.out.bam                                                                                                 // channel: [ val(meta), path(bam) ]
+    kivvi_bai                           = val_skip_kivvi ? channel.empty() : KIVVI.out.bai                                                                                                 // channel: [ val(meta), path(bai) ]
+    kivvi_crai                          = !val_cram_output ? channel.empty() : SAMTOOLS_CONVERT_KIVVI.out.crai                                                                             // channel: [ val(meta), path(crai) ]
+    kivvi_cram                          = !val_cram_output ? channel.empty() : SAMTOOLS_CONVERT_KIVVI.out.cram                                                                             // channel: [ val(meta), path(cram) ]
     methylation_family_annotated        = val_skip_methylation_annotation ? channel.empty() : ANNOTATE_METHYLATION.out.methylation_annotation                                              // channel: [ val(meta), path(methylated_regions_by_family) ]
     methylation_methbat_combined_bed    = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_combined_bed                                                             // channel: [ val(meta), path(bed.gz) ]
     methylation_methbat_combined_bigwig = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_combined_bigwig                                                          // channel: [ val(meta), path(combined.bw) ]

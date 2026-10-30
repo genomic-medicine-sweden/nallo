@@ -96,6 +96,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_filter_vep_svs_expression
     val_force_sawfish_joint_call_single_samples
     val_hifiasm_mode
+    val_kivvi_preset
     val_methylation_callers
     val_mitochondrial_caller
     val_mosdepth_regions
@@ -117,6 +118,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     val_skip_call_paralogs
     val_skip_chromograph
     val_skip_genome_assembly
+    val_skip_kivvi
     val_skip_methylation_calling
     val_skip_methylation_annotation
     val_skip_peddy
@@ -217,6 +219,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_filter_vep_svs_expression,
         val_force_sawfish_joint_call_single_samples,
         val_hifiasm_mode,
+        val_kivvi_preset,
         val_mitochondrial_caller,
         val_mosdepth_regions,
         val_cramino_regions,
@@ -237,6 +240,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         val_skip_call_paralogs,
         val_skip_chromograph,
         val_skip_genome_assembly,
+        val_skip_kivvi,
         (val_skip_methylation_calling || !val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }.contains('methbat')),
         val_skip_methylation_annotation,
         (val_skip_methylation_calling || !val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }.contains('modkit')),
@@ -300,6 +304,13 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     hificnv_copynum_bedgraph            = NALLO.out.hificnv_copynum_bedgraph            // channel: [ val(meta), path(bedgraph) ]
     hificnv_depth_bw                    = NALLO.out.hificnv_depth_bw                    // channel: [ val(meta), path(bw) ]
     hificnv_maf_bw                      = NALLO.out.hificnv_maf_bw                      // channel: [ val(meta), path(bw) ]
+    kivvi_vcf                           = NALLO.out.kivvi_vcf                           // channel: [ val(meta), path(vcf) ]
+    kivvi_svg                           = NALLO.out.kivvi_svg                           // channel: [ val(meta), path(svg) ]
+    kivvi_json                          = NALLO.out.kivvi_json                          // channel: [ val(meta), path(json) ]
+    kivvi_bam                           = NALLO.out.kivvi_bam                           // channel: [ val(meta), path(bam) ]
+    kivvi_bai                           = NALLO.out.kivvi_bai                           // channel: [ val(meta), path(bai) ]
+    kivvi_crai                          = NALLO.out.kivvi_crai                          // channel: [ val(meta), path(crai) ]
+    kivvi_cram                          = NALLO.out.kivvi_cram                          // channel: [ val(meta), path(cram) ]
     methylation_family_annotated        = NALLO.out.methylation_family_annotated        // channel: [ val(meta), path(methylated_regions_by_family) ]
     methylation_methbat_combined_bed    = NALLO.out.methylation_methbat_combined_bed    // channel: [ val(meta), path(bed.gz) ]
     methylation_methbat_combined_bigwig = NALLO.out.methylation_methbat_combined_bigwig // channel: [ val(meta), path(combined.bw) ]
@@ -436,6 +447,7 @@ workflow {
         params.skip_call_paralogs,
         params.skip_chromograph,
         params.skip_genome_assembly,
+        params.skip_kivvi,
         params.skip_methylation_calling,
         params.skip_methylation_annotation,
         params.skip_mitochondrial_calling,
@@ -542,6 +554,7 @@ workflow {
         params.filter_vep_svs_expression,
         params.force_sawfish_joint_call_single_samples,
         params.hifiasm_mode,
+        params.kivvi_preset,
         params.methylation_callers,
         params.mitochondrial_caller,
         params.mosdepth_regions,
@@ -563,6 +576,7 @@ workflow {
         params.skip_call_paralogs,
         params.skip_chromograph,
         params.skip_genome_assembly,
+        params.skip_kivvi,
         params.skip_methylation_calling,
         params.skip_methylation_annotation,
         params.skip_peddy,
@@ -636,6 +650,13 @@ workflow {
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov_bed)
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.gens_cov_tbi)
 
+    ch_kivvi = GENOMICMEDICINESWEDEN_NALLO.out.kivvi_vcf
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.kivvi_svg)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.kivvi_json)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.kivvi_bam)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.kivvi_bai)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.kivvi_cram)
+        .mix(GENOMICMEDICINESWEDEN_NALLO.out.kivvi_crai)
 
     ch_methylation_pileup = GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_combined_bed
         .mix(GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_combined_index)
@@ -741,6 +762,7 @@ workflow {
     assembly_summary               = GENOMICMEDICINESWEDEN_NALLO.out.assembly_summary              // channel: [ val(meta), path(assembly_summary) ]
     chromograph_plots              = GENOMICMEDICINESWEDEN_NALLO.out.chromograph_plots             // channel: [ val(meta), path(png) ]
     gens                           = ch_gens                                                       // channel: [ val(meta), path(baf/cov.bed.gz), path(baf/cov.bed.gz.tbi) ]
+    kivvi                          = ch_kivvi                                                      // channel: [ val(meta), path(vcf/svg/json/bam.bai) ]
     methylation_family_annotated   = GENOMICMEDICINESWEDEN_NALLO.out.methylation_family_annotated  // channel: [ val(meta), path(methylated_regions_by_family) ]
     methylation_methbat_profiles   = GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_profiles  // channel: [ val(meta), path(region_profile) ]
     methylation_pileup             = ch_methylation_pileup                                         // channel: [ val(meta), path(combined.bed.gz/combined.bed.gz.tbi/hap1.bed.gz/hap1.bed.gz.tbi/hap2.bed.gz/hap2.bed.gz.tbi/bed.gz/bed.gz.tbi) ]
@@ -823,6 +845,9 @@ output {
     }
     gens {
         path { meta, _file -> "gens/${meta.id}/" }
+    }
+    kivvi {
+        path { meta, _file -> "kivvi/${meta.id}/" }
     }
     methylation_family_annotated {
         path { meta, _methylated_regions -> "methylation/profile/family/${meta.id}/" }
