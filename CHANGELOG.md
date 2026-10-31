@@ -155,6 +155,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1297](https://github.com/genomic-medicine-sweden/nallo/pull/1297) - Updated minimum Nextflow version to 26.10.3
 - [#1303](https://github.com/genomic-medicine-sweden/nallo/pull/1303) - Updated modkit to [0.6.4](https://github.com/nanoporetech/modkit/releases/tag/v0.6.4)
 - [#1296](https://github.com/genomic-medicine-sweden/nallo/pull/1296) - Updated `hiphase` module so stub output names match the real run
+- [#XXXX](https://github.com/genomic-medicine-sweden/nallo/pull/####) - Updated local ``sentieon/dnascope-longread` module to [v2.0.1](https://github.com/Sentieon/sentieon-cli/releases/tag/v2.0.1)
 
 ### Removed
 
