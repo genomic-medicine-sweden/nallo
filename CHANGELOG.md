@@ -155,6 +155,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1297](https://github.com/genomic-medicine-sweden/nallo/pull/1297) - Updated minimum Nextflow version to 26.10.3
 - [#1303](https://github.com/genomic-medicine-sweden/nallo/pull/1303) - Updated modkit to [0.6.4](https://github.com/nanoporetech/modkit/releases/tag/v0.6.4)
 - [#1296](https://github.com/genomic-medicine-sweden/nallo/pull/1296) - Updated `hiphase` module so stub output names match the real run
+- [#1311](https://github.com/genomic-medicine-sweden/nallo/pull/1311) - Updated `sawfish` modules to [v2.3.1](https://github.com/PacificBiosciences/sawfish/releases/tag/v2.3.1)
 
 ### Removed
 
@@ -272,6 +273,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | kivvi                          |             | 1.1.0       |
 | modkit/pileup                  | 0.6.1       | 0.6.4       |
 | modkit/bedmethyltobigwig       | 0.6.1       | 0.6.4       |
+| sawfish/discover               | 2.3.0       | 2.3.1       |
+| sawfish/jointcall              | 2.3.0       | 2.3.1       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
