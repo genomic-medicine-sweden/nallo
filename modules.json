@@ -13,8 +13,7 @@
                     "bcftools/concat": {
                         "branch": "master",
                         "git_sha": "ed7a2286df416088793e62fa6a740d07974d0ff8",
-                        "installed_by": ["modules"],
-                        "patch": "modules/nf-core/bcftools/concat/bcftools-concat.diff"
+                        "installed_by": ["modules"]
                     },
                     "bcftools/index": {
                         "branch": "master",

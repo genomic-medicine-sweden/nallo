@@ -4,7 +4,7 @@
             111,
             {
                 "BCFTOOLS_CONCAT": {
-                    "bcftools": 1.21
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_INDEX": {
                     "bcftools": 1.22
@@ -315,7 +315,7 @@
             169,
             {
                 "BCFTOOLS_CONCAT": {
-                    "bcftools": 1.21
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_INDEX": {
                     "bcftools": 1.22

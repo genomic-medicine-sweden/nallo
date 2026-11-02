@@ -881,10 +881,10 @@ workflow NALLO {
 
         // Mix called families (concatenated) with vcf entry families (already whole-genome)
         ch_phasing_snv_vcf = BCFTOOLS_CONCAT_PHASING.out.vcf.mix(ch_vcf_entry_phasing_vcf)
-        ch_phasing_snv_tbi = BCFTOOLS_CONCAT_PHASING.out.tbi.mix(ch_vcf_entry_phasing_tbi)
+        ch_phasing_snv_tbi = BCFTOOLS_CONCAT_PHASING.out.index.mix(ch_vcf_entry_phasing_tbi)
         // Publish only pipeline-produced VCFs (vcf entry files are user inputs, not republished)
         ch_snvs_family_joint_vcf = BCFTOOLS_CONCAT_PHASING.out.vcf
-        ch_snvs_family_joint_tbi = BCFTOOLS_CONCAT_PHASING.out.tbi
+        ch_snvs_family_joint_tbi = BCFTOOLS_CONCAT_PHASING.out.index
 
         // Provide a PED file to let whatshap activate pedigree phasing
         // Or pass 'empty_PED' if 'whatshap_pedigree_phasing==false'
