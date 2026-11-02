@@ -314,7 +314,7 @@
             70,
             {
                 "ANNOTATE_INDELS": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.25
@@ -404,7 +404,7 @@
                     "somalier": "0.2.18"
                 },
                 "RENAME_CHRNAMES": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "SAMPLESHEET_PED": {
                     "create_pedigree_file": 1.0,
@@ -480,10 +480,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-09-09T07:53:17.521538365",
+        "timestamp": "2026-11-02T16:17:37.834661805",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.4"
         }
     }
 }
