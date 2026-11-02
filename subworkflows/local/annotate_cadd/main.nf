@@ -64,6 +64,6 @@ workflow ANNOTATE_CADD {
     )
 
     emit:
-    vcf = ANNOTATE_INDELS.out.vcf // channel: [ val(meta), path(vcf) ]
+    vcf = ANNOTATE_INDELS.out.vcf   // channel: [ val(meta), path(vcf) ]
     tbi = ANNOTATE_INDELS.out.index // channel: [ val(meta), path(tbi) ]
 }
