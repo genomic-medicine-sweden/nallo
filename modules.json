@@ -419,12 +419,12 @@
                     },
                     "sawfish/discover": {
                         "branch": "master",
-                        "git_sha": "d5fb539029c50631cfc45ad8b1dc0265ee7b0b49",
+                        "git_sha": "b9eb9d591f5362b7c638c56d2ab1c0dfbb9b118c",
                         "installed_by": ["modules"]
                     },
                     "sawfish/jointcall": {
                         "branch": "master",
-                        "git_sha": "d5fb539029c50631cfc45ad8b1dc0265ee7b0b49",
+                        "git_sha": "fa83358d7adfe8f05dc36537409cacfd5293ea59",
                         "installed_by": ["modules"]
                     },
                     "sentieon/gvcftyper": {

@@ -913,7 +913,7 @@
                         "id": "FAM"
                     },
                     "FAM_sv_bcftools_merge.vcf.gz",
-                    "f87793d701d72542c0e027b7446760ab"
+                    "e6cb1737201b9e95cb77f0eaa468e63a"
                 ]
             ],
             "FAM_sv_bcftools_merge.vcf.gz.tbi",
@@ -1021,10 +1021,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-07-08T14:45:30.380590983",
+        "timestamp": "2026-11-03T11:17:59.685468494",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.10.3"
         }
     },
     "1 sample - SNVs only - Hiphase - bam output - stub": {
@@ -1573,7 +1573,7 @@
                         "id": "FAM"
                     },
                     "FAM_sv_bcftools_merge.vcf.gz",
-                    "cfe4d8ffda9fe53fc3a13bf759933f94"
+                    "cd06da40d22e69f7d1fd5b21b189c5cd"
                 ]
             ],
             "FAM_sv_bcftools_merge.vcf.gz.tbi",
@@ -1637,10 +1637,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-07-08T14:45:01.926677585",
+        "timestamp": "2026-11-03T11:16:51.976958603",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.10.3"
         }
     },
     "1 sample - SNVs + SVs - Hiphase - bam output": {
@@ -1662,7 +1662,7 @@
                         "id": "FAM"
                     },
                     "FAM_hiphase_sv_phased.vcf.gz",
-                    "91b39b9817c50a2a36f8baa4076b0ca6"
+                    "6ca4b1b6902d75c5d106fa3c25c83087"
                 ]
             ],
             "FAM_hiphase_sv_phased.vcf.gz.tbi",
@@ -1726,10 +1726,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-07-08T14:44:25.941506286",
+        "timestamp": "2026-11-03T11:15:22.347811113",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.10.3"
         }
     }
 }
