@@ -163,7 +163,7 @@
                     "bcftools": 1.25
                 },
                 "BCFTOOLS_INDEX": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_MERGE": {
                     "bcftools": 1.22
