@@ -66,7 +66,7 @@ workflow LONGPHASE {
     BCFTOOLS_INDEX(ch_bcftools_index_in)
 
     ch_phased_vcf = ch_bcftools_index_in
-        .join(BCFTOOLS_INDEX.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+        .join(BCFTOOLS_INDEX.out.index, failOnMismatch: true, failOnDuplicate: true)
         .map { meta, vcf, tbi -> [meta + [id: meta.family_id] - meta.subMap('family_id'), vcf, tbi] }
         .groupTuple()
         .map { meta, vcfs, tbis -> [meta, vcfs, tbis, []] }

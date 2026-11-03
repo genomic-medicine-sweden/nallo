@@ -4,10 +4,10 @@
             424,
             {
                 "BCFTOOLS_CONCAT": {
-                    "bcftools": 1.21
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_CONCAT_PHASING": {
-                    "bcftools": 1.21
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_MERGE": {
                     "bcftools": 1.22
@@ -1382,10 +1382,10 @@
             436,
             {
                 "BCFTOOLS_CONCAT": {
-                    "bcftools": 1.21
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_CONCAT_PHASING": {
-                    "bcftools": 1.21
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_MERGE": {
                     "bcftools": 1.22
