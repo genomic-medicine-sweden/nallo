@@ -52,7 +52,7 @@
                     },
                     "bcftools/sort": {
                         "branch": "master",
-                        "git_sha": "6383d8fe58f9498eecd5aa303e71a4a932d1e9f6",
+                        "git_sha": "ed7a2286df416088793e62fa6a740d07974d0ff8",
                         "installed_by": ["modules"]
                     },
                     "bcftools/stats": {
