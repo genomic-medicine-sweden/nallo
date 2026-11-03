@@ -44,7 +44,7 @@ jobs:
     name: "${{ matrix.tag }} | ${{ matrix.profile }} | ${{ matrix.NXF_VER }}"
     needs: [find-tests]
     runs-on: # use GitHub runners
-      - "ubuntu-latest"
+      - "ubuntu-22.04"
     strategy:
       fail-fast: false
       matrix:
