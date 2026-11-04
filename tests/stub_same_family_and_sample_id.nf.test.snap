@@ -224,8 +224,7 @@
                     "sambamba": "1.0.1"
                 },
                 "SAMPLESHEET_PED": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
+                    "create_pedigree_file": 1.0
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
@@ -252,8 +251,7 @@
                     "somalier": "0.2.18"
                 },
                 "SOMALIER_PED_FAMILY": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
+                    "create_pedigree_file": 1.0
                 },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
@@ -535,10 +533,10 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-10-15T14:21:05.027708912",
+        "timestamp": "2026-11-04T12:13:18.298858929",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.0"
+            "nextflow": "26.10.3"
         }
     }
 }

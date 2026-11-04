@@ -54,8 +54,7 @@
                     "sambamba": "1.0.1"
                 },
                 "SAMPLESHEET_PED": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
+                    "create_pedigree_file": 1.0
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
@@ -146,10 +145,10 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
-        "timestamp": "2026-08-13T10:51:52.060428484",
+        "timestamp": "2026-11-04T12:14:28.933467804",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.10.3"
         }
     },
     "Test skip sex check - multisample": {
@@ -285,8 +284,7 @@
                     "preparecovandbaf": "1.1.5"
                 },
                 "SAMPLESHEET_PED": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
+                    "create_pedigree_file": 1.0
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
@@ -304,8 +302,7 @@
                     "samtools": 1.24
                 },
                 "SOMALIER_PED_FAMILY": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
+                    "create_pedigree_file": 1.0
                 },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
@@ -506,10 +503,10 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-10-12T13:49:53.646448687",
+        "timestamp": "2026-11-04T12:15:48.523596752",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.09.2"
+            "nextflow": "26.10.3"
         }
     }
 }
