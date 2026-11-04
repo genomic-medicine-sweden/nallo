@@ -278,6 +278,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | modkit/bedmethyltobigwig       | 0.6.1       | 0.6.4       |
 | sawfish/discover               | 2.3.0       | 2.3.1       |
 | sawfish/jointcall              | 2.3.0       | 2.3.1       |
+| longphase/phase                | 2.0.1       | 2.1.1       |
+| longphase/haplotag             | 2.0.1       | 2.1.1       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
