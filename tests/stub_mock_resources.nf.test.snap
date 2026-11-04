@@ -196,7 +196,7 @@
                     "bedtools": "2.30.0",
                     "samtools": "1.23.1",
                     "sentieon": 202503.04,
-                    "sentieon-cli": "2.0.0"
+                    "sentieon-cli": "2.0.1"
                 },
                 "ECHTVAR_ANNO": {
                     "echtvar": "0.2.4"

@@ -76,10 +76,10 @@
                     "somalier": "0.2.18"
                 },
                 "RUN_SAWFISH_DISCOVER": {
-                    "sawfish": "2.2.0"
+                    "sawfish": "2.3.1"
                 },
                 "RUN_SAWFISH_JOINTCALL": {
-                    "sawfish": "2.2.0"
+                    "sawfish": "2.3.1"
                 },
                 "SAMBAMBA_DEPTH": {
                     "sambamba": "1.0.1"

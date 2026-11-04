@@ -232,10 +232,10 @@
                     "hificnv": "1.0.0-36e6461"
                 },
                 "RUN_SAWFISH_DISCOVER": {
-                    "sawfish": "2.2.0"
+                    "sawfish": "2.3.1"
                 },
                 "RUN_SAWFISH_JOINTCALL": {
-                    "sawfish": "2.2.0"
+                    "sawfish": "2.3.1"
                 },
                 "RUN_SEVERUS": {
                     "severus": 1.7
