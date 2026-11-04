@@ -1169,7 +1169,6 @@
                 "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
                 "somalier_stats.txt:md5,bfc85f681fb57c1025c7791c5b0e970a",
                 "whatshap-stats-table.txt:md5,14acf9cce13f1732ee00e93438bbe989",
-                "FAM_paraphase_annotated.tsv:md5,a2cc0ab6a272c1c2347baf66abe927bb",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002_cramino_aligned_phased.arrow:md5,796ee4e79b13531dae09e445164e5fe0",
                 "HG003_cramino_aligned_phased.arrow:md5,bb4d7ef993c11ad68987f07abcfde486",
@@ -1224,6 +1223,7 @@
                 "HG004_pbcpgtools.hap1.bw:md5,06c7d259130bde8d9fccef2974bd22aa",
                 "HG004_pbcpgtools.hap2.bw:md5,cb7e074d191d58f481ce728b6c4014b4"
             ],
+            "e88a423c7cebb60cc1b3e2647bb98478",
             [
                 [
                     "HG002_haplotagged.bam",
@@ -1371,10 +1371,10 @@
                 
             ]
         ],
-        "timestamp": "2026-10-29T10:54:12.729593521",
+        "timestamp": "2026-11-04T13:32:02.886054968",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.4"
+            "nextflow": "26.10.3"
         }
     },
     "samplesheet_multisample_ubam": {
@@ -1618,10 +1618,10 @@
                     "portello": "0.7.0"
                 },
                 "RUN_SAWFISH_DISCOVER": {
-                    "sawfish": "2.2.0"
+                    "sawfish": "2.3.1"
                 },
                 "RUN_SAWFISH_JOINTCALL": {
-                    "sawfish": "2.2.0"
+                    "sawfish": "2.3.1"
                 },
                 "RUN_SEVERUS": {
                     "severus": 1.7
@@ -2789,10 +2789,10 @@
                 
             ]
         ],
-        "timestamp": "2026-10-15T13:51:35.744579952",
+        "timestamp": "2026-11-04T13:35:41.974578134",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.0"
+            "nextflow": "26.10.3"
         }
     }
 }
