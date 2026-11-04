@@ -7,13 +7,13 @@
                     "bcftools": 1.25
                 },
                 "BCFTOOLS_MERGE": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_ROH": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_SORT": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_VIEW_CHROMOGRAPH": {
                     "bcftools": 1.22

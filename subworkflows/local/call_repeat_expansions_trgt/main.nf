@@ -58,7 +58,7 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
 
     // Add sample IDs for all XY samples in family to meta for later repeat annotation with strdrop
     ch_trgt_merge_in = BCFTOOLS_SORT.out.vcf
-        .join(BCFTOOLS_SORT.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+        .join(BCFTOOLS_SORT.out.index, failOnMismatch: true, failOnDuplicate: true)
         .map { meta, vcf, tbi -> [[id: meta.family_id], meta, vcf, tbi] }
         .groupTuple()
         .map { meta, sample_metas, vcf, tbi ->
@@ -78,7 +78,7 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
 
     emit:
     sample_vcf  = BCFTOOLS_SORT.out.vcf                                         // channel: [ val(meta), path(vcf) ]
-    sample_tbi  = BCFTOOLS_SORT.out.tbi                                         // channel: [ val(meta), path(tbi) ]
+    sample_tbi  = BCFTOOLS_SORT.out.index                                       // channel: [ val(meta), path(tbi) ]
     family_vcf  = TRGT_MERGE.out.vcf                                            // channel: [ val(meta), path(vcf) ]
     family_tbi  = TRGT_MERGE.out.index                                          // channel: [ val(meta), path(tbi) ]
     sample_bam  = SAMTOOLS_SORT.out.bam                                         // channel: [ val(meta), path(bam) ]

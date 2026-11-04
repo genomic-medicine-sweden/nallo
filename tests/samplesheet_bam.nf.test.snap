@@ -13,31 +13,31 @@
                     "bcftools": 1.25
                 },
                 "BCFTOOLS_MERGE": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_NORM_MULTISAMPLE": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_QUERY": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_REHEADER": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_ROH": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_SORT": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_SORT_SVS": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_STATS": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_VIEW": {
                     "bcftools": 1.22
@@ -1038,7 +1038,7 @@
                 "HG004_chromograph_autozyg_chr8.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG004_chromograph_autozyg_chr9.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG004_chromograph_autozyg_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "HG004_chromograph_autozyg_chrX.png:md5,4043f9dd0efed4d0dcc3fdc92678d2e8",
+                "HG004_chromograph_autozyg_chrX.png:md5,73f335560997fc92bd360bf0fb82b9ba",
                 "HG004_chromograph_autozyg_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG004_chromograph_coverage_chr1.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG004_chromograph_coverage_chr10.png:md5,954482b960865332f37d386da5c9fb75",

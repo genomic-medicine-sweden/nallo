@@ -4,13 +4,13 @@
             34,
             {
                 "BCFTOOLS_MERGE": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_QUERY": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_REHEADER": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "CRAMINO": {
                     "cramino": "1.1.0"
@@ -166,22 +166,22 @@
                     "bcftools": 1.25
                 },
                 "BCFTOOLS_MERGE": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_NORM_MULTISAMPLE": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_REHEADER": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_SORT": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_STATS": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_VIEW": {
                     "bcftools": 1.22

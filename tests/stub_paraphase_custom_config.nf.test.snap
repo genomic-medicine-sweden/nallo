@@ -4,13 +4,13 @@
             52,
             {
                 "BCFTOOLS_MERGE": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_QUERY": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_REHEADER": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "CRAMINO": {
                     "cramino": "1.1.0"

@@ -777,7 +777,7 @@ workflow NALLO {
         BCFTOOLS_SORT_SVS(VEP_PREP_SV.out.vcf)
 
         ch_sv_calls_all = BCFTOOLS_SORT_SVS.out.vcf
-            .join(BCFTOOLS_SORT_SVS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+            .join(BCFTOOLS_SORT_SVS.out.index, failOnMismatch: true, failOnDuplicate: true)
             .mix(ch_sv_calls_branched.no_vep_prep)
 
         // Optionally filter to call regions
