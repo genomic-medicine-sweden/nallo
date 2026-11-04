@@ -17,7 +17,7 @@
                     "FAM_snv_phased.vcf.gz.tbi:md5,93d9b7e735b00b6fcbade51cfd5f028f"
                 ]
             ],
-            "4cecdaa511c5f9b894a78dc53e954f96",
+            "d4b874a3d9b676c324f1d617fb5ebcf2",
             "FAM_sv_phased.vcf.gz.tbi",
             [
                 [
@@ -30,10 +30,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-07-08T11:05:11.985257433",
+        "timestamp": "2026-11-03T11:08:28.505041599",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.10.3"
         }
     },
     "2 samples - SNVs + SVs - stub": {
@@ -490,7 +490,7 @@
                     "FAM_snv_phased.vcf.gz.tbi:md5,adf0a36671b68d7b6cced7e0170131e0"
                 ]
             ],
-            "c306d9c66c07e0a935738ec8aa45cf49",
+            "4a71c39f19e0de017eaebf2d4205d0a6",
             "FAM_sv_phased.vcf.gz.tbi",
             [
                 [
@@ -511,10 +511,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-07-08T11:05:27.008077099",
+        "timestamp": "2026-11-03T11:08:57.674061327",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.10.3"
         }
     },
     "2 samples - SNVs only": {

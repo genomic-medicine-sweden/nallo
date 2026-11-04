@@ -17,7 +17,7 @@
                     "FAM_phased_snv.vcf.gz.tbi:md5,9fd08cad9ef0876c278bf963d99d1b18"
                 ]
             ],
-            "f6d4ab6bd45b7ec7f7f8d01d4cf855a6",
+            "ea4536908593f1329bc26a2bc341339b",
             "FAM_phased_sv.vcf.gz.tbi",
             [
                 [
@@ -30,10 +30,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-07-08T11:06:30.65632286",
+        "timestamp": "2026-11-03T11:12:05.067211953",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.10.3"
         }
     },
     "2 samples - SNVs + SVs - stub": {

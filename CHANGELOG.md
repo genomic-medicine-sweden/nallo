@@ -156,6 +156,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1303](https://github.com/genomic-medicine-sweden/nallo/pull/1303) - Updated modkit to [0.6.4](https://github.com/nanoporetech/modkit/releases/tag/v0.6.4)
 - [#1296](https://github.com/genomic-medicine-sweden/nallo/pull/1296) - Updated `hiphase` module so stub output names match the real run
 - [#1308](https://github.com/genomic-medicine-sweden/nallo/pull/1308) - Updated trgt to 5.1.0
+- [#1313](https://github.com/genomic-medicine-sweden/nallo/pull/1313) - Updated nf-test CI `setup-apptainer` to v3.0.0
+- [#1311](https://github.com/genomic-medicine-sweden/nallo/pull/1311) - Updated `sawfish` modules to [v2.3.1](https://github.com/PacificBiosciences/sawfish/releases/tag/v2.3.1)
+- [#1309](https://github.com/genomic-medicine-sweden/nallo/pull/1309) - Updated local `sentieon/dnascope-longread` module to [v2.0.1](https://github.com/Sentieon/sentieon-cli/releases/tag/v2.0.1)
 
 ### Removed
 
@@ -275,6 +278,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | modkit/bedmethyltobigwig       | 0.6.1       | 0.6.4       |
 | trgt/genotype                  | 5.0.0       | 5.1.0       |
 | trgt/merge                     | 5.0.0       | 5.1.0       |
+| sawfish/discover               | 2.3.0       | 2.3.1       |
+| sawfish/jointcall              | 2.3.0       | 2.3.1       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
