@@ -157,6 +157,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1296](https://github.com/genomic-medicine-sweden/nallo/pull/1296) - Updated `hiphase` module so stub output names match the real run
 - [#1313](https://github.com/genomic-medicine-sweden/nallo/pull/1313) - Updated nf-test CI `setup-apptainer` to v3.0.0
 - [#1311](https://github.com/genomic-medicine-sweden/nallo/pull/1311) - Updated `sawfish` modules to [v2.3.1](https://github.com/PacificBiosciences/sawfish/releases/tag/v2.3.1)
+- [#1320](https://github.com/genomic-medicine-sweden/nallo/pull/1320) - Updated `longphase` modules to v2.1.1
 
 ### Removed
 
