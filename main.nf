@@ -895,11 +895,11 @@ output {
     }
     repeats_sample_trgt_cram {
         path { meta, _file -> "repeats/sample/${meta.id}/" }
-        enabled params.alignment_output_format == 'cram'
+        enabled params.trgt_spanning_repeats_output_format == 'cram'
     }
     repeats_sample_trgt_bam {
         path { meta, _file -> "repeats/sample/${meta.id}/" }
-        enabled params.alignment_output_format == 'bam'
+        enabled params.trgt_spanning_repeats_output_format == 'bam'
     }
     snvs_family {
         path { meta, _file -> "snvs/family/${meta.id}/" }
