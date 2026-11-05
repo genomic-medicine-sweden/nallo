@@ -76,17 +76,16 @@
                     "somalier": "0.2.18"
                 },
                 "RUN_SAWFISH_DISCOVER": {
-                    "sawfish": "2.2.0"
+                    "sawfish": "2.3.1"
                 },
                 "RUN_SAWFISH_JOINTCALL": {
-                    "sawfish": "2.2.0"
+                    "sawfish": "2.3.1"
                 },
                 "SAMBAMBA_DEPTH": {
                     "sambamba": "1.0.1"
                 },
                 "SAMPLESHEET_PED": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
+                    "create_pedigree_file": 1.0
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
@@ -211,10 +210,10 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-10-02T18:13:45.956352224",
+        "timestamp": "2026-11-04T12:13:58.891290346",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.3"
         }
     }
 }

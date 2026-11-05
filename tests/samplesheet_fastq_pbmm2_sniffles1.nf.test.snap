@@ -37,8 +37,7 @@
                     "sniffles": "1.0.12"
                 },
                 "SAMPLESHEET_PED": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
+                    "create_pedigree_file": 1.0
                 },
                 "SAMTOOLS_CALMD": {
                     "samtools": 1.24
@@ -138,10 +137,10 @@
                 "svs/family/FAM/FAM_svs_unphased.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-10-29T10:50:47.383838233",
+        "timestamp": "2026-11-04T11:32:09.222733113",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.4"
+            "nextflow": "26.10.3"
         }
     }
 }

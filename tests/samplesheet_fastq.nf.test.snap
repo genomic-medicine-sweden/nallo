@@ -232,10 +232,10 @@
                     "hificnv": "1.0.0-36e6461"
                 },
                 "RUN_SAWFISH_DISCOVER": {
-                    "sawfish": "2.2.0"
+                    "sawfish": "2.3.1"
                 },
                 "RUN_SAWFISH_JOINTCALL": {
-                    "sawfish": "2.2.0"
+                    "sawfish": "2.3.1"
                 },
                 "RUN_SEVERUS": {
                     "severus": 1.7
@@ -247,8 +247,7 @@
                     "sambamba": "1.0.1"
                 },
                 "SAMPLESHEET_PED": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
+                    "create_pedigree_file": 1.0
                 },
                 "SAMTOOLS_CONVERT": {
                     "samtools": "1.23.1"
@@ -281,8 +280,7 @@
                     "somalier": "0.2.18"
                 },
                 "SOMALIER_PED_FAMILY": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
+                    "create_pedigree_file": 1.0
                 },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
@@ -901,10 +899,10 @@
                 
             ]
         ],
-        "timestamp": "2026-10-15T14:14:08.348499457",
+        "timestamp": "2026-11-04T11:31:11.983210693",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.0"
+            "nextflow": "26.10.3"
         }
     }
 }

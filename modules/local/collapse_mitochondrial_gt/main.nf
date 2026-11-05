@@ -3,8 +3,8 @@ process COLLAPSE_MITOCHONDRIAL_GT {
 
     conda "${moduleDir}/environment.yml"
     container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
-        ? 'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/cb/cbeb20c898a76bec809629320ece9e1f84a3e355e96568bfbe14b9f411bdf3e7/data'
-        : 'community.wave.seqera.io/library/htslib_python:9c6265e98ef06930'}"
+        ? 'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/99/99ae4e6605f4b9f9d3197dcc856f867fbbd1e6a334dee63957e56f908ed4599d/data'
+        : 'community.wave.seqera.io/library/htslib_python:ef76279c6a229e2e'}"
 
     input:
     tuple val(meta), path(vcf)
