@@ -160,6 +160,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1320](https://github.com/genomic-medicine-sweden/nallo/pull/1320) - Updated `longphase` modules to v2.1.1
 - [#1309](https://github.com/genomic-medicine-sweden/nallo/pull/1309) - Updated local `sentieon/dnascope-longread` module to [v2.0.1](https://github.com/Sentieon/sentieon-cli/releases/tag/v2.0.1)
 - [#1318](https://github.com/genomic-medicine-sweden/nallo/pull/1318) - Updated local modules `collapse_mitochondrial_gt` and `vep_prep_sv` to Python 3.14.4, and switched `create_pedigree_file` to a coreutils image, as it does not use Python
+- [#1322](https://github.com/genomic-medicine-sweden/nallo/pull/1322) - Updated all nf-core modules that doesn't include version bumps
 
 ### Removed
 
