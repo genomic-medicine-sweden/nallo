@@ -267,12 +267,12 @@
                     },
                     "longphase/haplotag": {
                         "branch": "master",
-                        "git_sha": "b8d30a43f33aee3148b0e9e9f00587984a4ac195",
+                        "git_sha": "7b3452a23773f687ededb4befd037920e5a51341",
                         "installed_by": ["modules"]
                     },
                     "longphase/phase": {
                         "branch": "master",
-                        "git_sha": "b8d30a43f33aee3148b0e9e9f00587984a4ac195",
+                        "git_sha": "7b3452a23773f687ededb4befd037920e5a51341",
                         "installed_by": ["modules"]
                     },
                     "methbat/profile": {

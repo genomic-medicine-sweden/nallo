@@ -178,14 +178,14 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_stats.tsv:md5,c5fcae8ecb4e0872e8f91157d0b1a368"
+                    "HG002_stats.tsv:md5,6d3903f95da37ed262471f8fdb339311"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.tsv:md5,3c0021436ec278a5872cae4566f5dda1"
+                    "HG003_stats.tsv:md5,af12429aa9809e7ca45034738a67f894"
                 ]
             ],
             [
@@ -194,14 +194,14 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_stats.gtf.gz:md5,595c4020cfb952b0c8e4b6c8685220ab"
+                    "HG002_stats.gtf.gz:md5,2ae222cd226f39c8a0257bc6f74a5d65"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.gtf.gz:md5,6a77ee63383acffe72b0bd2e3a2a81b9"
+                    "HG003_stats.gtf.gz:md5,e19a7c2b2a5e911c8ea63e8b965efa89"
                 ]
             ],
             [
@@ -210,14 +210,14 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_stats.gtf.gz.tbi:md5,20daa809d5ddbcb59a03735feb6f0762"
+                    "HG002_stats.gtf.gz.tbi:md5,83d4731882da2de489be7c51e07cd8c8"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.gtf.gz.tbi:md5,ffa10b38ec47d325925ca88de68549f1"
+                    "HG003_stats.gtf.gz.tbi:md5,f3b2ab27eb04883fc589ab9f8417f49e"
                 ]
             ],
             [
@@ -254,11 +254,11 @@
                     "Mean identity\t99.48",
                     "Modal identity\t99.9",
                     "",
-                    "Fraction reads phased\t0.25",
-                    "Number of phaseblocks\t12",
+                    "Fraction reads phased\t0.20",
+                    "Number of phaseblocks\t9",
                     "Total bases phased [Gb]\t0.00",
-                    "Median phaseblock length\t153962.00",
-                    "N50 phaseblock length\t258152",
+                    "Median phaseblock length\t20821.00",
+                    "N50 phaseblock length\t222597",
                     "",
                     "",
                     "",
@@ -289,11 +289,11 @@
                     "Mean identity\t99.55",
                     "Modal identity\t99.9",
                     "",
-                    "Fraction reads phased\t0.22",
-                    "Number of phaseblocks\t6",
+                    "Fraction reads phased\t0.15",
+                    "Number of phaseblocks\t4",
                     "Total bases phased [Gb]\t0.00",
-                    "Median phaseblock length\t330390.50",
-                    "N50 phaseblock length\t432148",
+                    "Median phaseblock length\t419081.00",
+                    "N50 phaseblock length\t807199",
                     "",
                     "",
                     "",
@@ -309,10 +309,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-05-27T11:11:20.997870409",
+        "timestamp": "2026-11-04T16:48:47.41919724",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.10.3"
         }
     },
     "2 samples - SNVs only": {
@@ -323,14 +323,14 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_stats.tsv:md5,6792060ed9a0620ade38498cd4e4ccec"
+                    "HG002_stats.tsv:md5,b77c9e325bd1754486fc9dbbeacdfbf7"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_stats.tsv:md5,96e7f98846c5d87dcfe834f8477cfc20"
+                    "HG003_stats.tsv:md5,98f2816cc8a20ed884915dd53f852af5"
                 ]
             ],
             [
@@ -454,10 +454,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-05-27T11:11:03.189935304",
+        "timestamp": "2026-11-04T16:48:07.440498268",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.10.3"
         }
     },
     "2 samples - SNVs only - stub": {
