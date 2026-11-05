@@ -1169,6 +1169,7 @@
                 "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
                 "somalier_stats.txt:md5,bfc85f681fb57c1025c7791c5b0e970a",
                 "whatshap-stats-table.txt:md5,14acf9cce13f1732ee00e93438bbe989",
+                "FAM_paraphase_annotated.tsv:md5,92c269fa7b2c24ba52b3c14d80f61635",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002_cramino_aligned_phased.arrow:md5,796ee4e79b13531dae09e445164e5fe0",
                 "HG003_cramino_aligned_phased.arrow:md5,bb4d7ef993c11ad68987f07abcfde486",
@@ -1223,7 +1224,6 @@
                 "HG004_pbcpgtools.hap1.bw:md5,06c7d259130bde8d9fccef2974bd22aa",
                 "HG004_pbcpgtools.hap2.bw:md5,cb7e074d191d58f481ce728b6c4014b4"
             ],
-            "e88a423c7cebb60cc1b3e2647bb98478",
             [
                 [
                     "HG002_haplotagged.bam",
@@ -1371,7 +1371,7 @@
                 
             ]
         ],
-        "timestamp": "2026-11-04T13:32:02.886054968",
+        "timestamp": "2026-11-05T12:47:56.401615966",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.3"
