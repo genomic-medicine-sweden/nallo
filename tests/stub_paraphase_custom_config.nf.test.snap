@@ -1,7 +1,7 @@
 {
     "revio preset with custom paraphase config file": {
         "content": [
-            52,
+            56,
             {
                 "BCFTOOLS_MERGE": {
                     "bcftools": 1.22
@@ -10,6 +10,9 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_REHEADER": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_SORT": {
                     "bcftools": 1.22
                 },
                 "CRAMINO": {
@@ -23,9 +26,6 @@
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
-                },
-                "KIVVI": {
-                    "kivvi": "1.1.0"
                 },
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283"
@@ -49,6 +49,9 @@
                 },
                 "RUN_CHROMOGRAPH": {
                     "chromograph": "1.3.1"
+                },
+                "RUN_KIVVI": {
+                    "kivvi": "1.1.0"
                 },
                 "SAMBAMBA_DEPTH": {
                     "sambamba": "1.0.1"
@@ -287,10 +290,10 @@
                 "qc/somalier/relate/test/test.samples.tsv"
             ]
         ],
-        "timestamp": "2026-11-04T12:11:46.989610265",
+        "timestamp": "2026-11-06T11:17:51.702296154",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.3"
+            "nextflow": "26.10.4"
         }
     }
 }

@@ -1,7 +1,7 @@
 {
     "test profile": {
         "content": [
-            239,
+            241,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -169,14 +169,11 @@
                     "htslib": 1.24,
                     "xz": "5.8.3"
                 },
-                "KIVVI": {
-                    "kivvi": "1.1.0"
-                },
                 "LONGPHASE_HAPLOTAG": {
-                    "longphase": "2.0.1"
+                    "longphase": "2.1.1"
                 },
                 "LONGPHASE_PHASE": {
-                    "longphase": "2.0.1"
+                    "longphase": "2.1.1"
                 },
                 "METHBAT_PROFILE": {
                     "methbat": "0.17.0-7c5e249"
@@ -231,6 +228,9 @@
                 "RUN_HIFICNV": {
                     "hificnv": "1.0.0-36e6461"
                 },
+                "RUN_KIVVI": {
+                    "kivvi": "1.1.0"
+                },
                 "RUN_SAWFISH_DISCOVER": {
                     "sawfish": "2.3.1"
                 },
@@ -250,9 +250,6 @@
                     "create_pedigree_file": 1.0
                 },
                 "SAMTOOLS_CONVERT": {
-                    "samtools": "1.23.1"
-                },
-                "SAMTOOLS_CONVERT_KIVVI": {
                     "samtools": "1.23.1"
                 },
                 "SAMTOOLS_FAIDX": {
@@ -899,10 +896,10 @@
                 
             ]
         ],
-        "timestamp": "2026-11-04T11:31:11.983210693",
+        "timestamp": "2026-11-06T10:55:42.725562671",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.3"
+            "nextflow": "26.10.4"
         }
     }
 }

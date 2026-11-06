@@ -14,6 +14,8 @@ include { samplesheetToList       } from 'plugin/nf-schema'
 include { paramsHelp              } from 'plugin/nf-schema'
 include { completionEmail         } from '../../nf-core/utils_nfcore_pipeline'
 include { completionSummary       } from '../../nf-core/utils_nfcore_pipeline'
+include { paramsSummaryMultiqc    } from '../../nf-core/utils_nfcore_pipeline'
+include { softwareVersionsToYAML  } from '../../nf-core/utils_nfcore_pipeline'
 include { UTILS_NFCORE_PIPELINE   } from '../../nf-core/utils_nfcore_pipeline'
 include { UTILS_NEXTFLOW_PIPELINE } from '../../nf-core/utils_nextflow_pipeline'
 
@@ -461,6 +463,112 @@ def validateUniqueSampleIDs(input) {
     }
 
     return input
+}
+
+/**
+ * Adds `child_with_two_parents_in_family` to the meta of `ch_input`, based on whether the family has a child with two parents according to the samplesheet.
+ *
+ * @param ch_input       Channel of [meta, file] where meta contains `family_id`
+ * @param ch_samplesheet Channel of [meta, files] where meta contains `family_id` and `two_parents`
+ * @return               Channel of [meta, file] with updated meta
+ */
+def addChildWithTwoParentsToMeta(ch_input, ch_samplesheet) {
+    def ch_families = ch_samplesheet
+        .map { meta, _files -> [meta.family_id, meta.two_parents] }
+        .groupTuple()
+        .map { family_id, child_with_two_parents -> [family_id, child_with_two_parents.any()] }
+
+    // Need to use combine and filter here instead of join, since we only have one entry per family in ch_families but potentially multiple entries per family in ch_input
+    ch_families
+        .combine(ch_input)
+        .filter { samplesheet_family_id, _child_with_two_parents, file_meta, _file ->
+            samplesheet_family_id == file_meta.family_id
+        }
+        .map { _family_id, child_with_two_parents, meta, file ->
+            [meta + [child_with_two_parents_in_family: child_with_two_parents], file]
+        }
+}
+
+/**
+ * Build input channel for ranking variants, by combining VCFs with PED files and ranking config, and adding variant type to the meta for downstream use.
+ *
+ * @param ch_vcf          Channel of [meta, vcf]
+ * @param ch_ped          Channel of [meta, ped]
+ * @param variant_type    String (e.g. 'snv' or 'sv')
+ * @param ch_score_config Channel of [meta, score_config]
+ * @param ch_samplesheet  Channel used to derive family-level metadata
+ * @return                Channel of [meta, vcf, ped, score_config]
+ */
+def buildRankVariantsInputChannel(ch_vcf, ch_ped, variant_type, ch_score_config, ch_samplesheet) {
+    // This is used to determine compound ranking thresholds and penalties in genmod
+    // Need to use combine and filter here instead of join, since we only have one entry per family in ch_ped but potentially multiple entries per family in vcf_with_meta.
+    // The meta.id of the PED channel is the family_id
+    addChildWithTwoParentsToMeta(ch_vcf, ch_samplesheet)
+        .map { meta, vcf ->
+            [meta + [variant_type: variant_type], vcf]
+        }
+        .combine(ch_ped)
+        .filter { vcf_meta, _vcf, ped_meta, _ped ->
+            vcf_meta.family_id == ped_meta.id
+        }
+        .combine(ch_score_config)
+        .map { vcf_meta, vcf, _ped_meta, ped, _score_config_meta, score_config ->
+            [vcf_meta, vcf, ped, score_config]
+        }
+}
+
+def prepareMultiqcFiles(ch_multiqc_files, ch_versions, val_outdir, summary_params, val_multiqc_methods_description) {
+    def topic_versions = ch_versions
+        .distinct()
+        .branch { entry ->
+            versions_file: entry instanceof Path
+            versions_tuple: true
+        }
+
+    def topic_versions_string = topic_versions.versions_tuple
+        .map { process, tool, version ->
+            [process[process.lastIndexOf(':') + 1..-1], "  ${tool}: ${version}"]
+        }
+        .groupTuple(by: 0)
+        .map { process, tool_versions ->
+            tool_versions.unique().sort()
+            "${process}:\n${tool_versions.join('\n')}"
+        }
+
+    def ch_collated_versions = softwareVersionsToYAML(topic_versions.versions_file)
+        .mix(topic_versions_string)
+        .collectFile(
+            storeDir: "${val_outdir}/pipeline_info",
+            name: 'nallo_software_' + 'mqc_' + 'versions.yml',
+            sort: true,
+            newLine: true,
+        )
+
+    def ch_workflow_summary = channel.value(paramsSummaryMultiqc(summary_params))
+    def methods_description = val_multiqc_methods_description
+        ? file(val_multiqc_methods_description, checkIfExists: true)
+        : file("${projectDir}/assets/methods_description_template.yml", checkIfExists: true)
+    def ch_methods_description = channel.value(methodsDescriptionText(methods_description))
+    def ch_citation = citationBibliographyText(
+        topic_versions_string,
+        file("${projectDir}/assets/software_references.yml"),
+        'citation',
+    )
+    def ch_bibliography = citationBibliographyText(
+        topic_versions_string,
+        file("${projectDir}/assets/software_references.yml"),
+        'bibliography',
+    )
+
+    ch_multiqc_files
+        .mix(ch_workflow_summary.collectFile(name: 'workflow_summary_mqc.yaml'))
+        .mix(ch_collated_versions)
+        .mix(
+            ch_methods_description.concat(ch_citation).concat(ch_bibliography).flatten().collectFile(
+                name: 'methods_description_mqc.yaml',
+                sort: false,
+            )
+        )
 }
 
 //

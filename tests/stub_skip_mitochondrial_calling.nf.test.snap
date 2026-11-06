@@ -127,7 +127,7 @@
     },
     "Test mitochondrial calling runs without sv_call_regions": {
         "content": [
-            44,
+            46,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -185,9 +185,6 @@
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
                 },
-                "KIVVI": {
-                    "kivvi": "1.1.0"
-                },
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283"
                 },
@@ -202,6 +199,9 @@
                 },
                 "RELATE_RELATE": {
                     "somalier": "0.2.18"
+                },
+                "RUN_KIVVI": {
+                    "kivvi": "1.1.0"
                 },
                 "SAMPLESHEET_PED": {
                     "create_pedigree_file": 1.0
@@ -275,10 +275,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-11-04T12:17:08.991024179",
+        "timestamp": "2026-11-06T11:21:09.826667068",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.3"
+            "nextflow": "26.10.4"
         }
     },
     "Test mitochondrial calling runs by default": {
