@@ -14,6 +14,20 @@ jobs:
       - name: Check out pipeline code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
+      - name: Check Nextflow source sizes
+        shell: bash
+        run: |
+          limit=65535
+          failed=0
+          while IFS= read -r -d '' source; do
+            size=$(wc -c < "$source")
+            if (( size > limit )); then
+              echo "::error file=$source::Nextflow source is $size bytes; maximum allowed is $limit bytes."
+              failed=1
+            fi
+          done < <(git ls-files -z -- '*.nf')
+          exit "$failed"
+
       - name: Install Nextflow
         uses: nf-core/setup-nextflow@b4ec1bc7c16a94435159de94a05253542fddf6ef # v3
 
