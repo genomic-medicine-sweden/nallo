@@ -1,12 +1,18 @@
 {
     "All SV callers run with skip_snv_calling and create_maf_track false": {
         "content": [
-            79,
+            81,
             {
+                "BCFTOOLS_MERGE": {
+                    "bcftools": 1.22
+                },
                 "BCFTOOLS_QUERY": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_REHEADER": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_SORT": {
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_SORT_SVS": {
@@ -36,9 +42,6 @@
                 "HIFIASM_BINS": {
                     "hifiasm": "0.25.0-r726"
                 },
-                "KIVVI": {
-                    "kivvi": "1.1.0"
-                },
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283"
                 },
@@ -59,6 +62,9 @@
                 },
                 "RUN_HIFICNV": {
                     "hificnv": "1.0.0-36e6461"
+                },
+                "RUN_KIVVI": {
+                    "kivvi": "1.1.0"
                 },
                 "RUN_SAWFISH_DISCOVER": {
                     "sawfish": "2.3.1"
@@ -204,10 +210,10 @@
                 "visualization_tracks/test/test_gc_bias_corrected_depth_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-11-04T12:19:54.186385515",
+        "timestamp": "2026-11-06T11:23:01.539389448",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.3"
+            "nextflow": "26.10.4"
         }
     }
 }
