@@ -789,7 +789,7 @@ workflow NALLO {
                 [],
                 [],
             )
-            ch_sv_calls_filtered = BCFTOOLS_VIEW_SVS.out.vcf.join(BCFTOOLS_VIEW_SVS.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+            ch_sv_calls_filtered = BCFTOOLS_VIEW_SVS.out.vcf.join(BCFTOOLS_VIEW_SVS.out.index, failOnMismatch: true, failOnDuplicate: true)
         }
         else {
             ch_sv_calls_filtered = ch_sv_calls_all
@@ -929,7 +929,7 @@ workflow NALLO {
         // Targeted runs whose capture does not cover chrM produce an empty mito BED; call_mitochondrial_variants
         // skips those families, so without this check groupKey would wait for N+1 items and hang.
         ch_snv_vcf_tbi_nuclear_for_annotation = BCFTOOLS_VIEW_PHASING.out.vcf
-            .join(BCFTOOLS_VIEW_PHASING.out.tbi, failOnMismatch: true, failOnDuplicate: true)
+            .join(BCFTOOLS_VIEW_PHASING.out.index, failOnMismatch: true, failOnDuplicate: true)
             .combine(ch_mito_nonempty)
             .combine(ch_vcf_entry_family_ids)
             .map { meta, vcf, tbi, mito_nonempty, vcf_ids_wrap ->
@@ -1097,7 +1097,7 @@ workflow NALLO {
         CHROMOGRAPH(
             ch_bam_bai,
             split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.vcf : channel.empty(),
-            split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.tbi : channel.empty(),
+            split_family_vcf_for_chromograph ? BCFTOOLS_VIEW_CHROMOGRAPH.out.index : channel.empty(),
             val_plot_chromograph_coverage,
             val_plot_chromograph_autozygosity,
         )

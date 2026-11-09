@@ -54,7 +54,7 @@ workflow ANNOTATE_SNVS {
         ANNOTATE_CADD(
             ch_fai,
             pre_vep_filter ? BCFTOOLS_VIEW.out.vcf : annotate_echtvar ? ECHTVAR_ANNO.out.vcf : ch_vcf,
-            pre_vep_filter ? BCFTOOLS_VIEW.out.tbi : ch_vcf.map { meta, _vcf -> [meta, []] },
+            pre_vep_filter ? BCFTOOLS_VIEW.out.index : ch_vcf.map { meta, _vcf -> [meta, []] },
             ch_cadd_header,
             ch_cadd_resources,
             ch_cadd_prescored_indels,

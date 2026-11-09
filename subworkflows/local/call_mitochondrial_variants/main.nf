@@ -127,7 +127,7 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
             sv: meta.variant_type == "sv"
         }
 
-        ch_mito_tbi_split = BCFTOOLS_VIEW_MITO.out.tbi.branch { meta, _tbi ->
+        ch_mito_tbi_split = BCFTOOLS_VIEW_MITO.out.index.branch { meta, _tbi ->
             snv: meta.variant_type == "snv"
             sv: meta.variant_type == "sv"
         }
