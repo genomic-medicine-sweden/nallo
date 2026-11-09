@@ -205,6 +205,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1302](https://github.com/genomic-medicine-sweden/nallo/pull/1302) - Fixed PacBio runs without `--sv_call_regions` failing at launch with `No signature of method: java.lang.String.map()` in `call_mitochondrial_variants`
 - [#1296](https://github.com/genomic-medicine-sweden/nallo/pull/1296) - Fixed `--phaser hiphase` assigning haplotagged BAMs to the wrong samples when a sample ID is a prefix of another sample's BAM name: BAMs are now matched to samples by family and exact output name
 - [#1331](https://github.com/genomic-medicine-sweden/nallo/pull/1331) - Fixed pipeline crash when combining `--skip_kivvi` and `alignment_output_format` set to `cram`
+- [#1335](https://github.com/genomic-medicine-sweden/nallo/pull/1335) - Fixed missing snapshots updates after Longphase update
 
 ### Parameters
 

@@ -164,10 +164,10 @@
                     "kivvi": "1.1.0"
                 },
                 "LONGPHASE_HAPLOTAG": {
-                    "longphase": "2.0.1"
+                    "longphase": "2.1.1"
                 },
                 "LONGPHASE_PHASE": {
-                    "longphase": "2.0.1"
+                    "longphase": "2.1.1"
                 },
                 "METHBAT_PROFILE": {
                     "methbat": "0.17.0-7c5e249"
@@ -1111,11 +1111,11 @@
                 "multiqc_bcftools_stats.txt:md5,bde59835db1cd3f3282d0e3c128dba2c",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
                 "multiqc_fastqc.txt:md5,ded82be2d5363bef79652ecf4bf24ea4",
-                "multiqc_general_stats.txt:md5,3fea39d481fb4218700dba245749e960",
+                "multiqc_general_stats.txt:md5,dbfbb95704c1a8a3e8e9f58c1c145e26",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,96f21f631d1a6c03b06ebf24f9fe6590",
                 "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
                 "somalier_stats.txt:md5,2087a0114648e698a828f29eac18f5e4",
-                "whatshap-stats-table.txt:md5,b3153cfc786ed28760bb6053656c8cdf",
+                "whatshap-stats-table.txt:md5,f33b3cd4d20a0d50bad5275c355adfcd",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002_cramino_aligned_phased.arrow:md5,59218ecb157374692c12a6ffc63ad0e0",
                 "HG003_cramino_aligned_phased.arrow:md5,3dbdcb3873a561fc10192f5c4326d4d5",
@@ -1153,10 +1153,10 @@
                 "HG002_whatshap_stats.tsv:md5,36099489c742eb27a68956014f67b9fc",
                 "HG003_whatshap_stats.gtf.gz:md5,3ac719a2f40a1cea540123454c081fd5",
                 "HG003_whatshap_stats.gtf.gz.tbi:md5,e6ea891c3185bfbc9850f6f16de0aa89",
-                "HG003_whatshap_stats.tsv:md5,bd36a2b5117f882fca0996828e0e4678",
+                "HG003_whatshap_stats.tsv:md5,71f8c76f446c659020365942a827c452",
                 "HG004_whatshap_stats.gtf.gz:md5,286d5d619552e6f5cb5ea85b5ab8d28a",
                 "HG004_whatshap_stats.gtf.gz.tbi:md5,de03190e068e222d46a3fb2749af7f27",
-                "HG004_whatshap_stats.tsv:md5,714e78ea4054cbf925cbbb8727159e0f",
+                "HG004_whatshap_stats.tsv:md5,b4e221057a92c91c84bc6897c8690bf9",
                 "HG002_sambamba_depth.bed:md5,7acdc503fab76e33fa6b00446a82971c",
                 "HG003_sambamba_depth.bed:md5,6b87e82e7624db10f2d15a890bcfe6cf",
                 "HG004_sambamba_depth.bed:md5,ad9af0d845359cfd0ee86e478e5960d7",
@@ -1302,10 +1302,10 @@
                 
             ]
         ],
-        "timestamp": "2026-11-04T11:28:34.775705419",
+        "timestamp": "2026-11-09T13:54:52.197535984",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.3"
+            "nextflow": "26.10.4"
         }
     }
 }

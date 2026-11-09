@@ -61,10 +61,10 @@
                     "gunzip": 1.13
                 },
                 "LONGPHASE_HAPLOTAG": {
-                    "longphase": "2.0.1"
+                    "longphase": "2.1.1"
                 },
                 "LONGPHASE_PHASE": {
-                    "longphase": "2.0.1"
+                    "longphase": "2.1.1"
                 },
                 "MINIMAP2_ALIGN": {
                     "minimap2": "2.29-r1283"
@@ -297,10 +297,10 @@
                 "snvs/sample/HG002_ONT_C/HG002_ONT_C_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-11-04T12:11:05.774192078",
+        "timestamp": "2026-11-09T14:18:48.682708018",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.3"
+            "nextflow": "26.10.4"
         }
     }
 }
