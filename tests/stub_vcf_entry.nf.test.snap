@@ -93,10 +93,10 @@
                     "xz": "5.8.3"
                 },
                 "LONGPHASE_HAPLOTAG": {
-                    "longphase": "2.0.1"
+                    "longphase": "2.1.1"
                 },
                 "LONGPHASE_PHASE": {
-                    "longphase": "2.0.1"
+                    "longphase": "2.1.1"
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
@@ -138,7 +138,7 @@
                     "create_pedigree_file": 1.0
                 },
                 "SVDB_QUERY": {
-                    "svdb": "2.12.0"
+                    "svdb": "2.12.2"
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
@@ -302,7 +302,7 @@
                 "svs/family/hg002/hg002_svs_annotated_ranked_research.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-11-04T12:22:32.623907532",
+        "timestamp": "2026-11-09T08:43:12.064979367",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.3"
@@ -411,10 +411,10 @@
                     "xz": "5.8.3"
                 },
                 "LONGPHASE_HAPLOTAG": {
-                    "longphase": "2.0.1"
+                    "longphase": "2.1.1"
                 },
                 "LONGPHASE_PHASE": {
-                    "longphase": "2.0.1"
+                    "longphase": "2.1.1"
                 },
                 "MINIMAP2_INDEX": {
                     "minimap2": "2.29-r1283"
@@ -464,7 +464,7 @@
                     "create_pedigree_file": 1.0
                 },
                 "SVDB_QUERY": {
-                    "svdb": "2.12.0"
+                    "svdb": "2.12.2"
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
@@ -812,7 +812,7 @@
                 "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-11-04T12:21:28.386631412",
+        "timestamp": "2026-11-09T08:42:08.137270154",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.3"

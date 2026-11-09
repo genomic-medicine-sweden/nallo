@@ -276,14 +276,14 @@
                 },
                 "SVDB_MERGE_BY_CALLER": {
                     "bcftools": 1.24,
-                    "svdb": "2.12.0"
+                    "svdb": "2.12.2"
                 },
                 "SVDB_MERGE_BY_FAMILY": {
                     "bcftools": 1.24,
-                    "svdb": "2.12.0"
+                    "svdb": "2.12.2"
                 },
                 "SVDB_QUERY": {
-                    "svdb": "2.12.0"
+                    "svdb": "2.12.2"
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
@@ -1369,7 +1369,7 @@
                 
             ]
         ],
-        "timestamp": "2026-11-04T11:35:33.616113191",
+        "timestamp": "2026-11-09T08:54:19.010512771",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.3"
@@ -1678,14 +1678,14 @@
                 },
                 "SVDB_MERGE_BY_CALLER": {
                     "bcftools": 1.24,
-                    "svdb": "2.12.0"
+                    "svdb": "2.12.2"
                 },
                 "SVDB_MERGE_BY_FAMILY": {
                     "bcftools": 1.24,
-                    "svdb": "2.12.0"
+                    "svdb": "2.12.2"
                 },
                 "SVDB_QUERY": {
-                    "svdb": "2.12.0"
+                    "svdb": "2.12.2"
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
@@ -2785,7 +2785,7 @@
                 
             ]
         ],
-        "timestamp": "2026-11-04T11:39:22.961150322",
+        "timestamp": "2026-11-09T08:58:01.30867939",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.3"
