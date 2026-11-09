@@ -258,14 +258,14 @@
                 },
                 "SVDB_MERGE_BY_CALLER": {
                     "bcftools": 1.24,
-                    "svdb": "2.12.2"
+                    "svdb": "2.12.0"
                 },
                 "SVDB_MERGE_BY_FAMILY": {
                     "bcftools": 1.24,
-                    "svdb": "2.12.2"
+                    "svdb": "2.12.0"
                 },
                 "SVDB_QUERY": {
-                    "svdb": "2.12.2"
+                    "svdb": "2.12.0"
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
@@ -762,10 +762,10 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-11-09T08:31:08.034057172",
+        "timestamp": "2026-11-09T14:13:25.470120159",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.3"
+            "nextflow": "26.10.4"
         }
     }
 }

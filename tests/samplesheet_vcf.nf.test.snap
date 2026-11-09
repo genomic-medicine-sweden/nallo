@@ -201,7 +201,7 @@
                     "strdrop": "0.3.1"
                 },
                 "SVDB_QUERY": {
-                    "svdb": "2.12.2"
+                    "svdb": "2.12.0"
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
@@ -1110,10 +1110,10 @@
                 
             ]
         ],
-        "timestamp": "2026-11-09T09:05:36.1162396",
+        "timestamp": "2026-11-09T14:11:16.107670047",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.3"
+            "nextflow": "26.10.4"
         }
     }
 }

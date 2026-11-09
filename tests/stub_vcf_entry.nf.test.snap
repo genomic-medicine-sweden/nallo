@@ -138,7 +138,7 @@
                     "create_pedigree_file": 1.0
                 },
                 "SVDB_QUERY": {
-                    "svdb": "2.12.2"
+                    "svdb": "2.12.0"
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
@@ -302,10 +302,10 @@
                 "svs/family/hg002/hg002_svs_annotated_ranked_research.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-11-09T08:43:12.064979367",
+        "timestamp": "2026-11-09T14:26:09.663325094",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.3"
+            "nextflow": "26.10.4"
         }
     },
     "stub | vcf entry_point | Revio trio": {
@@ -464,7 +464,7 @@
                     "create_pedigree_file": 1.0
                 },
                 "SVDB_QUERY": {
-                    "svdb": "2.12.2"
+                    "svdb": "2.12.0"
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,
@@ -812,10 +812,10 @@
                 "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-11-09T08:42:08.137270154",
+        "timestamp": "2026-11-09T14:25:35.485591839",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.3"
+            "nextflow": "26.10.4"
         }
     }
 }
