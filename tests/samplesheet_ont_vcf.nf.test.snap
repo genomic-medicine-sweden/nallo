@@ -16,13 +16,13 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_CHROMOGRAPH": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_VIEW_PHASING": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_VIEW_UNCOMPRESS": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BEDTOOLS_MERGE": {
                     "bedtools": "2.31.1"
@@ -51,7 +51,7 @@
                     "echtvar": "0.2.4"
                 },
                 "ENSEMBLVEP_FILTERVEP": {
-                    "ensemblvep": 116.1,
+                    "ensemblvep": 116.3,
                     "perl-math-cdf": 0.1
                 },
                 "ENSEMBLVEP_SNV": {
@@ -92,7 +92,7 @@
                     "gunzip": 1.13
                 },
                 "HTSLIB_BGZIPTABIX": {
-                    "htslib": 1.24,
+                    "htslib": 1.25,
                     "xz": "5.8.3"
                 },
                 "MINIMAP2_INDEX": {
@@ -155,10 +155,6 @@
                 },
                 "SVDB_QUERY": {
                     "svdb": "2.12.0"
-                },
-                "TABIX_BGZIPTABIX": {
-                    "bgzip": 1.21,
-                    "tabix": 1.21
                 },
                 "TABIX_TABIX": {
                     "tabix": 1.21

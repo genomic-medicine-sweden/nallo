@@ -34,10 +34,10 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_VIEW_PHASING": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BEDTOOLS_MERGE": {
                     "bedtools": "2.31.1"
@@ -138,9 +138,9 @@
                     "bcftools": 1.24,
                     "svdb": "2.12.0"
                 },
-                "TABIX_BGZIPTABIX": {
-                    "bgzip": 1.21,
-                    "tabix": 1.21
+                "HTSLIB_BGZIPTABIX": {
+                    "htslib": 1.25,
+                    "xz": "5.8.3"
                 },
                 "TABIX_HIFICNV": {
                     "tabix": 1.21

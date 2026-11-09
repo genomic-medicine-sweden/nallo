@@ -13,7 +13,7 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW_SVS": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "CRAMINO": {
                     "cramino": "1.1.0"
