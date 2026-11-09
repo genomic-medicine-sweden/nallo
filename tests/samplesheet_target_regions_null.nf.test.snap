@@ -173,10 +173,10 @@
                     "kivvi": "1.1.0"
                 },
                 "LONGPHASE_HAPLOTAG": {
-                    "longphase": "2.0.1"
+                    "longphase": "2.1.1"
                 },
                 "LONGPHASE_PHASE": {
-                    "longphase": "2.0.1"
+                    "longphase": "2.1.1"
                 },
                 "METHBAT_PROFILE": {
                     "methbat": "0.17.0-7c5e249"
@@ -872,10 +872,10 @@
                 
             ]
         ],
-        "timestamp": "2026-11-04T11:45:02.162912806",
+        "timestamp": "2026-11-09T14:09:59.120555448",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.3"
+            "nextflow": "26.10.4"
         }
     }
 }
