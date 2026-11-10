@@ -506,7 +506,7 @@
                     },
                     "trgt/genotype": {
                         "branch": "master",
-                        "git_sha": "7b3452a23773f687ededb4befd037920e5a51341",
+                        "git_sha": "a09b8547c2ee560d45e55f79f1557f45548cf39e",
                         "installed_by": ["modules"]
                     },
                     "trgt/merge": {
