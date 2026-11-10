@@ -62,11 +62,11 @@
                 },
                 "SVDB_MERGE_BY_CALLER": {
                     "bcftools": 1.24,
-                    "svdb": "2.12.0"
+                    "svdb": "2.12.2"
                 },
                 "SVDB_MERGE_BY_FAMILY": {
                     "bcftools": 1.24,
-                    "svdb": "2.12.0"
+                    "svdb": "2.12.2"
                 },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
@@ -137,7 +137,7 @@
                 "svs/family/FAM/FAM_svs_unphased.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-11-04T11:32:09.222733113",
+        "timestamp": "2026-11-09T08:50:55.990157467",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.3"
