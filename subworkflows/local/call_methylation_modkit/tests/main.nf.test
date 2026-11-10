@@ -354,4 +354,67 @@ nextflow_workflow {
             )
         }
     }
+
+    test("1 sample - [] phased - labelled regions") {
+        when {
+            params {
+                skip_phasing = false
+                modkit_modified_bases = '5mC 5hmC'
+            }
+            workflow {
+                """
+                input[0] = PHASING.out.haplotagged_bam_bai
+                input[1] = PREPARE_REFERENCES.out.fasta
+                input[2] = PREPARE_REFERENCES.out.fai
+                input[3] = channel.of([[],[]])
+                input[4] = channel.of([
+                    [ id: 'methylation_regions_labelled' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/methylation_regions_labelled.tsv', checkIfExists: true)
+                ])
+                input[5] = 'h,m'
+                input[6] = false
+                """
+            }
+        }
+        then {
+            // dmr runs with -t task.cpus: snapshot region columns, not md5. One row per region, named chrom:start-end
+            def dmr = workflow.out.dmr.collect { meta, bed ->
+                [ meta, file(bed).name, path(bed).readLines().findAll { line -> !line.startsWith('#') && !line.startsWith('chrom') }.collect { line -> line.tokenize('\t')[0..3].join('\t') } ]
+            }
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(dmr).match() }
+            )
+        }
+    }
+
+    test("1 sample - [] phased - labelled regions - stub") {
+        options "-stub"
+        when {
+            params {
+                skip_phasing = false
+                modkit_modified_bases = '5mC 5hmC'
+            }
+            workflow {
+                """
+                input[0] = PHASING.out.haplotagged_bam_bai
+                input[1] = PREPARE_REFERENCES.out.fasta
+                input[2] = PREPARE_REFERENCES.out.fai
+                input[3] = channel.of([[],[]])
+                input[4] = channel.of([
+                    [ id: 'methylation_regions_labelled' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/methylation_regions_labelled.tsv', checkIfExists: true)
+                ])
+                input[5] = 'h,m'
+                input[6] = false
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
 }
