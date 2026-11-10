@@ -344,8 +344,8 @@ workflow PIPELINE_INITIALISATION {
         error("Error: --methylation_regions file must be provided when methbat is in --methylation_callers. Remove methbat from --methylation_callers or use --skip_methylation_calling to disable methylation calling.")
     }
 
-    // Check that methbat_map is provided when methbat annotation is active
-    if (!val_skip_methylation_annotation && methylation_callers.contains('methbat') && !val_methbat_map) {
+    // Check that methbat_map is provided when methylation annotation is active
+    if (!val_skip_methylation_annotation && !val_methbat_map) {
         error("Error: --methbat_map must be provided when running without --skip_methylation_annotation. Provide a mapping file or use --skip_methylation_annotation to disable methylation annotation.")
     }
 
