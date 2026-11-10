@@ -1204,7 +1204,7 @@
                 "methbat_map": {
                     "type": "string",
                     "format": "file-path",
-                    "description": "Mapping file that can be used to filter and annotate the methbat output based on regions."
+                    "description": "Mapping file used to annotate methbat profiles and modkit dmr results with HGNC genes and region types based on regions."
                 },
                 "kivvi_preset": {
                     "type": "string",

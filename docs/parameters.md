@@ -237,7 +237,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `pbmm2_preset` | Preset to use for pbmm2. Supported arguments are HIFI, CCS, or SUBREAD. (accepted: `HIFI`\|`CCS`\|`SUBREAD`) | `string` | CCS |  |  |
 | `glnexus_config` | Glnexus config to use for merging gVCFs. If no file is provided, the default config `assets/glnexus_config_dp1.yml` will be used. | `string` | None |  |  |
 | `assembly_aligner` | Which aligner to use for assembly alignment. Supported arguments are mm2plus or minimap2. (accepted: `mm2plus`\|`minimap2`) | `string` | minimap2 |  |  |
-| `methbat_map` | Mapping file that can be used to filter and annotate the methbat output based on regions. | `string` |  |  |  |
+| `methbat_map` | Mapping file used to annotate methbat profiles and modkit dmr results with HGNC genes and region types based on regions. | `string` |  |  |  |
 | `kivvi_preset` | Preset to use for Kivvi. Supported arguments are d4z4 or kiv2. (accepted: `d4z4`\|`kiv2`) | `string` | d4z4 |  |  |
 | `skip_kivvi` | Whether to skip running Kivvi. | `boolean` | False |  |  |
 | `paraphase_config` | Configuration file for Paraphase. | `string` | None |  |  |

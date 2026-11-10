@@ -50,13 +50,14 @@ This document describes the pipeline output files and the tools used to generate
 
 ### Methylation profile
 
-[Methbat](https://github.com/PacificBiosciences/MethBat) is used to create methylation profiles for PacBio data, where each region in a given input file is categorized based on methylation state. If the background file contains information from a cohort, the methylation profile will also contain a comparison label which compares each region to the background cohort methylation values.
+[Methbat](https://github.com/PacificBiosciences/MethBat) is used to create methylation profiles for PacBio data, where each region in a given input file is categorized based on methylation state. If the background file contains information from a cohort, the methylation profile will also contain a comparison label which compares each region to the background cohort methylation values. For ONT data, modkit dmr compares haplotype 1 with haplotype 2 in the same regions. With methylation annotation, both are summarised per family in the same table layout.
 
-| Path                                                                  | Description                                                                                                                                                        |
-| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `methylation/profile/{sample}/{sample}_methbat_profile.tsv`           | TSV file with methylation profile of input regions                                                                                                                 |
-| `methylation/profile/{family}/{family}_methbat_profile_annotated.tsv` | TSV file with methylation profile of input regions concatenated per family and sorted on sample_id, chromosome and start position                                  |
-| `methylation/profile/{sample}/{sample}_modkit_dmr_hp1_vs_hp2.bed`     | BED file from modkit dmr comparing methylation on haplotype 1 and haplotype 2 in each region of `--methylation_regions` (modkit only, with methylation annotation) |
+| Path                                                                         | Description                                                                                                                                                                                  |
+| ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `methylation/profile/sample/{sample}/{sample}_methbat_profile.tsv`           | TSV file with methylation profile of input regions, one row per region named `chrom:start-end`                                                                                               |
+| `methylation/profile/sample/{sample}/{sample}_modkit_dmr_hp1_vs_hp2.bed`     | BED file from modkit dmr comparing methylation on haplotype 1 and haplotype 2, one row per region named `chrom:start-end` (modkit only, with methylation annotation)                         |
+| `methylation/profile/family/{family}/{family}_methbat_profile_annotated.tsv` | TSV file with methylation profile per region label (`cpg_label`), `sample_id` and genes from `--methbat_map`, concatenated per family and sorted on sample_id, chromosome and start position |
+| `methylation/profile/family/{family}/{family}_modkit_dmr_annotated.tsv`      | The same for modkit dmr: haplotype comparison per region label, `sample_id` and genes from `--methbat_map` (modkit only, with methylation annotation)                                        |
 
 ## MultiQC
 
