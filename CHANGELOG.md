@@ -57,6 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1286](https://github.com/genomic-medicine-sweden/nallo/pull/1286) - Added `--paraphase_config` param to allow custom configuration of paraphase
 - [#1307](https://github.com/genomic-medicine-sweden/nallo/pull/1307) - Added `--trgt_spanning_repeats_output_format` parameter to control the output format of TRGT separately from the general alignment format. The default takes the same value as the general alignment output format.
 - [#1329](https://github.com/genomic-medicine-sweden/nallo/pull/1329) - Added haplotype comparison (HP1 vs HP2) over `--methylation_regions` with nf-core `modkit/dmr` for modkit methylation calling, run as part of methylation annotation
+- [#XXXX](https://github.com/genomic-medicine-sweden/nallo/pull/XXXX) - Added a per-family annotated table for modkit dmr results (`{family}_modkit_dmr_annotated.tsv`), in the same layout as the methbat table
 
 ### Changed
 
@@ -164,6 +165,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1318](https://github.com/genomic-medicine-sweden/nallo/pull/1318) - Updated local modules `collapse_mitochondrial_gt` and `vep_prep_sv` to Python 3.14.4, and switched `create_pedigree_file` to a coreutils image, as it does not use Python
 - [#1329](https://github.com/genomic-medicine-sweden/nallo/pull/1329) - Renamed `--methbat_regions` to `--methylation_regions`, used by both methbat and modkit
 - [#1329](https://github.com/genomic-medicine-sweden/nallo/pull/1329) - Changed `--skip_methylation_annotation` to default to `false` whenever a methylation caller runs (previously only methbat); methylation annotation now requires phasing and `--methylation_regions`
+- [#XXXX](https://github.com/genomic-medicine-sweden/nallo/pull/XXXX) - Changed methbat and modkit dmr to measure each region of `--methylation_regions` once (named `chrom:start-end`); region labels and `--methbat_map` genes are added afterwards, each label with its own gene
+- [#XXXX](https://github.com/genomic-medicine-sweden/nallo/pull/XXXX) - Changed `--methbat_map` to be required for methylation annotation with any methylation caller
 
 ### Removed
 
