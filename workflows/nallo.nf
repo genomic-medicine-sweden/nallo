@@ -1249,6 +1249,9 @@ workflow NALLO {
     //
     // Create methylation pileups with modkit or pbcpgtools, create methylation profile with methbat for pacbio
     //
+    ch_methylation_dmr = channel.empty()
+    ch_methylation_profiles = channel.empty()
+
     if (!val_skip_modkit) {
         CALL_METHYLATION_MODKIT(
             (!val_skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai),
@@ -1259,6 +1262,8 @@ workflow NALLO {
             val_bigwig_modcodes,
             val_skip_methylation_annotation,
         )
+
+        ch_methylation_dmr = CALL_METHYLATION_MODKIT.out.dmr
     }
 
     if (!val_skip_methbat) {
@@ -1270,9 +1275,11 @@ workflow NALLO {
         ch_methylation_profiles = CALL_METHYLATION_METHBAT.out.region_profile
     }
 
-    if (!val_skip_methylation_annotation && !val_skip_methbat) {
+    if (!val_skip_methylation_annotation) {
         ANNOTATE_METHYLATION(
             ch_methylation_profiles,
+            ch_methylation_dmr,
+            ch_methylation_regions,
             ch_methbat_map,
         )
     }
@@ -1432,7 +1439,7 @@ workflow NALLO {
     kivvi_bai                           = val_skip_kivvi ? channel.empty() : KIVVI.out.bai                                                                                                 // channel: [ val(meta), path(bai) ]
     kivvi_crai                          = val_skip_kivvi || !val_cram_output ? channel.empty() : SAMTOOLS_CONVERT_KIVVI.out.crai                                                           // channel: [ val(meta), path(crai) ]
     kivvi_cram                          = val_skip_kivvi || !val_cram_output ? channel.empty() : SAMTOOLS_CONVERT_KIVVI.out.cram                                                           // channel: [ val(meta), path(cram) ]
-    methylation_family_annotated        = val_skip_methylation_annotation || val_skip_methbat ? channel.empty() : ANNOTATE_METHYLATION.out.methylation_annotation                          // channel: [ val(meta), path(methylated_regions_by_family) ]
+    methylation_family_annotated        = val_skip_methylation_annotation ? channel.empty() : ANNOTATE_METHYLATION.out.methylation_annotation                                              // channel: [ val(meta), path(methylated_regions_by_family) ]
     methylation_methbat_combined_bed    = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_combined_bed                                                             // channel: [ val(meta), path(bed.gz) ]
     methylation_methbat_combined_bigwig = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_combined_bigwig                                                          // channel: [ val(meta), path(combined.bw) ]
     methylation_methbat_combined_index  = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_combined_index                                                           // channel: [ val(meta), path(bed.gz.tbi) ]
