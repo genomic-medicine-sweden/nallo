@@ -1,0 +1,250 @@
+{
+    "methbat - labelled regions": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "FAM",
+                        "methylation_caller": "methbat"
+                    },
+                    "FAM_methbat_profile_annotated.tsv",
+                    "b20b6f8cbbaf05781391a25f9f763147",
+                    [
+                        "chrom\tstart\tend\tcpg_label\tsample_id\thgnc_symbol\thgnc_id\tregion_type",
+                        "chr16\t172876\t173710\tcpg_island_HBA_locus\ttest\tHBM\t4826\tpromoter",
+                        "chr16\t172876\t173710\tcpg_island_HBA_locus\ttest\tHBA2\t4824\tpromoter",
+                        "chr16\t172876\t173710\tpromoter_HBM_HGNC:4826\ttest\tHBM\t4826\tpromoter",
+                        "chr16\t172876\t173710\tpromoter_HBA2_HGNC:4824\ttest\tHBA2\t4824\tpromoter",
+                        "chr20\t2652400\t2653100\tpromoter_NPEPL1_HGNC:16244\ttest\t\t\t",
+                        "chr20\t2652400\t2653100\tnanoimprint_GNAS_HGNC:4392\ttest\tGNAS\t4392\tnanoimprint"
+                    ]
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-10T19:56:52.44474681",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.3"
+        }
+    },
+    "modkit - labelled regions - stub": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "FAM",
+                        "methylation_caller": "modkit"
+                    },
+                    "FAM_modkit_dmr_annotated.tsv"
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-10T19:57:55.254251834",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.3"
+        }
+    },
+    "methbat - 1 sample - stub": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "FAM",
+                        "methylation_caller": "methbat"
+                    },
+                    "FAM_methbat_profile_annotated.tsv"
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-10T19:57:22.225798357",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.3"
+        }
+    },
+    "methbat and modkit - labelled regions - stub": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "FAM",
+                        "methylation_caller": "methbat"
+                    },
+                    "FAM_methbat_profile_annotated.tsv"
+                ],
+                [
+                    {
+                        "id": "FAM",
+                        "methylation_caller": "modkit"
+                    },
+                    "FAM_modkit_dmr_annotated.tsv"
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-10T19:58:06.30138115",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.3"
+        }
+    },
+    "methbat - 2 samples - stub": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "FAM",
+                        "methylation_caller": "methbat"
+                    },
+                    "FAM_methbat_profile_annotated.tsv"
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-10T19:57:36.94623447",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.3"
+        }
+    },
+    "methbat - labelled regions - stub": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "FAM",
+                        "methylation_caller": "methbat"
+                    },
+                    "FAM_methbat_profile_annotated.tsv"
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-10T19:57:45.932765134",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.3"
+        }
+    },
+    "methbat - 1 sample": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "FAM",
+                        "methylation_caller": "methbat"
+                    },
+                    "FAM_methbat_profile_annotated.tsv",
+                    "670e23fe6d6657b6e1c7b028cdbdf1fa",
+                    [
+                        "chrom\tstart\tend\tcpg_label\tsample_id\thgnc_symbol\thgnc_id\tregion_type",
+                        "chr16\t172876\t173710\t\ttest\t\t\t",
+                        "chr20\t2652400\t2653100\t\ttest\tGNAS\t4392\tnanoimprint"
+                    ]
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-10T19:56:32.819323496",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.3"
+        }
+    },
+    "methbat - 2 samples": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "FAM",
+                        "methylation_caller": "methbat"
+                    },
+                    "FAM_methbat_profile_annotated.tsv",
+                    "986eece2cfebbcd253dfed429febfc22",
+                    [
+                        "chrom\tstart\tend\tcpg_label\tsample_id\thgnc_symbol\thgnc_id\tregion_type",
+                        "chr16\t172876\t173710\t\ttest\t\t\t",
+                        "chr20\t2652400\t2653100\t\ttest\tGNAS\t4392\tnanoimprint",
+                        "chr16\t172876\t173710\t\ttest2\t\t\t",
+                        "chr20\t2652400\t2653100\t\ttest2\tGNAS\t4392\tnanoimprint"
+                    ]
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-10T19:56:42.97195751",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.3"
+        }
+    },
+    "modkit - labelled regions": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "FAM",
+                        "methylation_caller": "modkit"
+                    },
+                    "FAM_modkit_dmr_annotated.tsv",
+                    "ee8b0d972294a73757dcd06d5d5d783f",
+                    [
+                        "chrom\tstart\tend\tcpg_label\tsample_id\thgnc_symbol\thgnc_id\tregion_type",
+                        "chr16\t172876\t173710\tcpg_island_HBA_locus\ttest\tHBM\t4826\tpromoter",
+                        "chr16\t172876\t173710\tcpg_island_HBA_locus\ttest\tHBA2\t4824\tpromoter",
+                        "chr16\t172876\t173710\tpromoter_HBM_HGNC:4826\ttest\tHBM\t4826\tpromoter",
+                        "chr16\t172876\t173710\tpromoter_HBA2_HGNC:4824\ttest\tHBA2\t4824\tpromoter",
+                        "chr20\t2652400\t2653100\tpromoter_NPEPL1_HGNC:16244\ttest\t\t\t",
+                        "chr20\t2652400\t2653100\tnanoimprint_GNAS_HGNC:4392\ttest\tGNAS\t4392\tnanoimprint"
+                    ]
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-10T20:55:41.2661936",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.3"
+        }
+    },
+    "methbat and modkit - labelled regions": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "FAM",
+                        "methylation_caller": "methbat"
+                    },
+                    "FAM_methbat_profile_annotated.tsv",
+                    "b20b6f8cbbaf05781391a25f9f763147",
+                    [
+                        "chrom\tstart\tend\tcpg_label\tsample_id\thgnc_symbol\thgnc_id\tregion_type",
+                        "chr16\t172876\t173710\tcpg_island_HBA_locus\ttest\tHBM\t4826\tpromoter",
+                        "chr16\t172876\t173710\tcpg_island_HBA_locus\ttest\tHBA2\t4824\tpromoter",
+                        "chr16\t172876\t173710\tpromoter_HBM_HGNC:4826\ttest\tHBM\t4826\tpromoter",
+                        "chr16\t172876\t173710\tpromoter_HBA2_HGNC:4824\ttest\tHBA2\t4824\tpromoter",
+                        "chr20\t2652400\t2653100\tpromoter_NPEPL1_HGNC:16244\ttest\t\t\t",
+                        "chr20\t2652400\t2653100\tnanoimprint_GNAS_HGNC:4392\ttest\tGNAS\t4392\tnanoimprint"
+                    ]
+                ],
+                [
+                    {
+                        "id": "FAM",
+                        "methylation_caller": "modkit"
+                    },
+                    "FAM_modkit_dmr_annotated.tsv",
+                    "ee8b0d972294a73757dcd06d5d5d783f",
+                    [
+                        "chrom\tstart\tend\tcpg_label\tsample_id\thgnc_symbol\thgnc_id\tregion_type",
+                        "chr16\t172876\t173710\tcpg_island_HBA_locus\ttest\tHBM\t4826\tpromoter",
+                        "chr16\t172876\t173710\tcpg_island_HBA_locus\ttest\tHBA2\t4824\tpromoter",
+                        "chr16\t172876\t173710\tpromoter_HBM_HGNC:4826\ttest\tHBM\t4826\tpromoter",
+                        "chr16\t172876\t173710\tpromoter_HBA2_HGNC:4824\ttest\tHBA2\t4824\tpromoter",
+                        "chr20\t2652400\t2653100\tpromoter_NPEPL1_HGNC:16244\ttest\t\t\t",
+                        "chr20\t2652400\t2653100\tnanoimprint_GNAS_HGNC:4392\ttest\tGNAS\t4392\tnanoimprint"
+                    ]
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-10T20:55:51.933656632",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.3"
+        }
+    }
+}
