@@ -1,7 +1,7 @@
 {
     "ONT_R10 preset with default methylation annotation settings": {
         "content": [
-            127,
+            128,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -51,10 +51,13 @@
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
-                "GAWK": {
+                "GAWK_DMR_REGIONS": {
                     "gawk": "5.3.1"
                 },
                 "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_PILEUP_REGIONS": {
                     "gawk": "5.3.1"
                 },
                 "GLNEXUS": {
@@ -133,7 +136,7 @@
                 }
             }
         ],
-        "timestamp": "2026-11-09T14:18:12.620016209",
+        "timestamp": "2026-11-09T19:19:21.293293268",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"

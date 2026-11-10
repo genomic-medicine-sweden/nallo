@@ -54,7 +54,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     ch_samplesheet
     ch_cramino_regions
     ch_methbat_map
-    ch_methbat_regions
+    ch_methylation_regions
     ch_modkit_call_regions
     ch_mosdepth_regions
     ch_paraphrase_rules
@@ -177,7 +177,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
         ch_samplesheet,
         ch_cramino_regions,
         ch_methbat_map,
-        ch_methbat_regions,
+        ch_methylation_regions,
         ch_modkit_call_regions,
         ch_mosdepth_regions,
         ch_paraphrase_rules,
@@ -325,6 +325,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO {
     methylation_methbat_hap2_index      = NALLO.out.methylation_methbat_hap2_index      // channel: [ val(meta), path(bed.gz.tbi) ]
     methylation_methbat_profiles        = NALLO.out.methylation_methbat_profiles        // channel: [ val(meta), path(region_profile) ]
     methylation_modkit_bed              = NALLO.out.methylation_modkit_bed              // channel: [ val(meta), path(bed.gz) ]
+    methylation_modkit_dmr              = NALLO.out.methylation_modkit_dmr              // channel: [ val(meta), path(bed) ]
     methylation_modkit_bigwig           = NALLO.out.methylation_modkit_bigwig           // channel: [ val(meta), path(bw) ]
     methylation_modkit_tbi              = NALLO.out.methylation_modkit_tbi              // channel: [ val(meta), path(bed.gz.tbi) ]
     mosdepth_global_dist                = NALLO.out.mosdepth_global_dist                // channel: [ val(meta), path(txt) ]
@@ -437,7 +438,7 @@ workflow {
         params.gens_panel_of_normals_male,
         params.input,
         params.methbat_map,
-        params.methbat_regions,
+        params.methylation_regions,
         params.methylation_callers,
         params.mitochondrial_caller,
         params.par_regions,
@@ -514,7 +515,7 @@ workflow {
         PIPELINE_INITIALISATION.out.samplesheet,
         createReferenceChannelFromPath(params.cramino_regions, channel.value([[], []])),
         createReferenceChannelFromPath(params.methbat_map),
-        createReferenceChannelFromPath(params.methbat_regions),
+        createReferenceChannelFromPath(params.methylation_regions),
         createReferenceChannelFromPath(params.modkit_call_regions, channel.value([[], []])),
         createReferenceChannelFromPath(params.mosdepth_regions, channel.value([[], []])),
         createReferenceChannelFromPath(params.paraphrase_rules, channel.value([[], []])),
@@ -768,6 +769,7 @@ workflow {
     kivvi                          = ch_kivvi                                                      // channel: [ val(meta), path(vcf/svg/json/bam.bai) ]
     methylation_family_annotated   = GENOMICMEDICINESWEDEN_NALLO.out.methylation_family_annotated  // channel: [ val(meta), path(methylated_regions_by_family) ]
     methylation_methbat_profiles   = GENOMICMEDICINESWEDEN_NALLO.out.methylation_methbat_profiles  // channel: [ val(meta), path(region_profile) ]
+    methylation_modkit_dmr         = GENOMICMEDICINESWEDEN_NALLO.out.methylation_modkit_dmr        // channel: [ val(meta), path(bed) ]
     methylation_pileup             = ch_methylation_pileup                                         // channel: [ val(meta), path(combined.bed.gz/combined.bed.gz.tbi/hap1.bed.gz/hap1.bed.gz.tbi/hap2.bed.gz/hap2.bed.gz.tbi/bed.gz/bed.gz.tbi) ]
     multiqc                        = ch_multiqc                                                    // channel: [ val(meta), path(html/multiqc_data) ]
     paraphase_family               = ch_paraphase_family                                           // channel: [ val(meta), path(vcf/tbi/tsv/json) ]
@@ -857,6 +859,9 @@ output {
     }
     methylation_methbat_profiles {
         path { meta, _region_profile -> "methylation/profile/sample/${meta.id}/" }
+    }
+    methylation_modkit_dmr {
+        path { meta, _dmr -> "methylation/profile/sample/${meta.id}/" }
     }
     methylation_pileup {
         path { meta, _file -> "methylation/pileup/${meta.id}/" }

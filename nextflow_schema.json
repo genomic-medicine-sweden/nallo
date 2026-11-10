@@ -255,11 +255,11 @@
                     "description": "A BED file with regions of interest.",
                     "exists": true
                 },
-                "methbat_regions": {
+                "methylation_regions": {
                     "type": "string",
                     "pattern": "^\\S+\\.tsv$",
                     "format": "file-path",
-                    "description": "A tsv file with only regions of interest (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv) or with both regions and background cohort values (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv), made with methbat build",
+                    "description": "A tsv file with regions of interest for methylation profiling with methbat and haplotype comparison with modkit dmr: either regions only (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv) or regions with background cohort values (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv), made with methbat build",
                     "exists": true
                 },
                 "cramino_regions": {
