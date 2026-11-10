@@ -58,6 +58,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1307](https://github.com/genomic-medicine-sweden/nallo/pull/1307) - Added `--trgt_spanning_repeats_output_format` parameter to control the output format of TRGT separately from the general alignment format. The default takes the same value as the general alignment output format.
 - [#1329](https://github.com/genomic-medicine-sweden/nallo/pull/1329) - Added haplotype comparison (HP1 vs HP2) over `--methylation_regions` with nf-core `modkit/dmr` for modkit methylation calling, run as part of methylation annotation
 - [#XXXX](https://github.com/genomic-medicine-sweden/nallo/pull/XXXX) - Added a per-family annotated table for modkit dmr results (`{family}_modkit_dmr_annotated.tsv`), in the same layout as the methbat table
+- [#XXXX](https://github.com/genomic-medicine-sweden/nallo/pull/XXXX) - Added start-up checks of the `--methylation_regions` and `--methbat_map` file contents
 
 ### Changed
 

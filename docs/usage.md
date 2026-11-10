@@ -361,6 +361,8 @@ methbat and modkit measure each region of `--methylation_regions` once, also whe
 | Contains `HGNC:NA`               | Region label left out                                            |
 | No `HGNC` id, or no label column | Every row with the same coordinates                              |
 
+Both files are checked at start-up: `--methylation_regions` needs `chrom`, `start` and `end` columns and at least one region whose label is not `HGNC:NA`; `--methbat_map` needs `chrom`, `start`, `end` and `hgnc_id`.
+
 If modkit is used, the following optional parameter can be provided:
 
 | Parameter         | Description                                                                                                                                                                                                                                 |

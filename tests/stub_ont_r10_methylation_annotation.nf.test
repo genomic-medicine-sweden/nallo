@@ -128,6 +128,44 @@ nextflow_pipeline {
         }
     }
 
+    test("ONT_R10 preset with only HGNC:NA region labels fails with informative error") {
+        options "-stub"
+
+        when {
+            params {
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8cf6216b9cbf96f6bcfc918610182708e3796ad9/'
+                input                        = "$projectDir/assets/samplesheet_multisample_ont_ubam.csv"
+                outdir                       = "$outputDir"
+                preset                       = "ONT_R10"
+                // Null out params with exists:true that are not needed for this test
+                sv_call_regions              = null
+                gens_panel_of_normals_female = null
+                gens_panel_of_normals_male   = null
+                // Skip steps irrelevant to methylation annotation
+                skip_genome_assembly         = true
+                skip_portello                = true
+                skip_annotate_paralogs       = true
+                skip_call_paralogs           = true
+                skip_chromograph             = true
+                skip_peddy                   = true
+                skip_prepare_gens_input      = true
+                skip_rank_variants           = true
+                skip_repeat_annotation       = true
+                skip_sv_calling              = true
+                skip_sv_annotation           = true
+                skip_snv_annotation          = true
+                methylation_regions          = 'https://raw.githubusercontent.com/aksenia/test-datasets/da523b48f6fdc7e8ac58c169f8449c065d8f49b4/testdata/methylation_regions_hgnc_na.tsv'
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.failed },
+                { assert (workflow.stdout + workflow.stderr).any { line -> line.contains("--methylation_regions needs a header with `chrom`, `start` and `end`, and at least one region whose label is not `HGNC:NA`") } }
+            )
+        }
+    }
+
     test("ONT_R10 preset with skip_phasing fails with informative error") {
         options "-stub"
 

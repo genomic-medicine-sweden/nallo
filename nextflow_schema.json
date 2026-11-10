@@ -260,7 +260,8 @@
                     "pattern": "^\\S+\\.tsv$",
                     "format": "file-path",
                     "description": "A tsv file with regions of interest for methylation profiling with methbat and haplotype comparison with modkit dmr: either regions only (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv) or regions with background cohort values (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv), made with methbat build",
-                    "exists": true
+                    "exists": true,
+                    "schema": "assets/schema_methylation_regions.json"
                 },
                 "cramino_regions": {
                     "type": "string",
@@ -1204,7 +1205,8 @@
                 "methbat_map": {
                     "type": "string",
                     "format": "file-path",
-                    "description": "Mapping file used to annotate methbat profiles and modkit dmr results with HGNC genes and region types based on regions."
+                    "description": "Mapping file used to annotate methbat profiles and modkit dmr results with HGNC genes and region types based on regions.",
+                    "schema": "assets/schema_methbat_map.json"
                 },
                 "kivvi_preset": {
                     "type": "string",
