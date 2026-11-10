@@ -475,12 +475,12 @@
                     },
                     "svdb/merge": {
                         "branch": "master",
-                        "git_sha": "7b3452a23773f687ededb4befd037920e5a51341",
+                        "git_sha": "d47037a36629d6abfdd58720800263e04741f4fa",
                         "installed_by": ["modules"]
                     },
                     "svdb/query": {
                         "branch": "master",
-                        "git_sha": "7b3452a23773f687ededb4befd037920e5a51341",
+                        "git_sha": "d47037a36629d6abfdd58720800263e04741f4fa",
                         "installed_by": ["modules"]
                     },
                     "tabix/bgziptabix": {

@@ -205,6 +205,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1297](https://github.com/genomic-medicine-sweden/nallo/pull/1297) - Fixed formatting for Nextflow 26.10.3: aligned comments of take/emit entries with the 26.10.3 formatter
 - [#1302](https://github.com/genomic-medicine-sweden/nallo/pull/1302) - Fixed PacBio runs without `--sv_call_regions` failing at launch with `No signature of method: java.lang.String.map()` in `call_mitochondrial_variants`
 - [#1296](https://github.com/genomic-medicine-sweden/nallo/pull/1296) - Fixed `--phaser hiphase` assigning haplotagged BAMs to the wrong samples when a sample ID is a prefix of another sample's BAM name: BAMs are now matched to samples by family and exact output name
+- [#1335](https://github.com/genomic-medicine-sweden/nallo/pull/1335) - Fixed missing snapshots updates after Longphase update
+- [#1319](https://github.com/genomic-medicine-sweden/nallo/pull/1319) - Fixed paraphrase output rows changing order between runs: Paraphase JSONs are now sorted by sample name within each family
+- [#1332](https://github.com/genomic-medicine-sweden/nallo/pull/1332) - Fixed `SVDB_QUERY` failing with `KeyError: 'END'` when `SVDB_MERGE` clustered a `<TRA>` record with `BND` records from other callers, by updating the SVDB modules to 2.12.2
 
 ### Parameters
 
@@ -273,8 +276,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | sniffles                       | 1.0.12      | 2.7.3       |
 | sniffles1 (local)              |             | 1.0.12      |
 | debreak                        |             | 1.3         |
-| svdb/merge                     | 2.8.4       | 2.12.0      |
-| svdb/query                     | 2.8.4       | 2.12.0      |
+| svdb/merge                     | 2.8.4       | 2.12.2      |
+| svdb/query                     | 2.8.4       | 2.12.2      |
 | kivvi                          |             | 1.1.0       |
 | modkit/pileup                  | 0.6.1       | 0.6.4       |
 | modkit/bedmethyltobigwig       | 0.6.1       | 0.6.4       |

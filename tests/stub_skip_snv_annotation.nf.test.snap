@@ -122,14 +122,14 @@
                 },
                 "SVDB_MERGE_BY_CALLER": {
                     "bcftools": 1.24,
-                    "svdb": "2.12.0"
+                    "svdb": "2.12.2"
                 },
                 "SVDB_MERGE_BY_FAMILY": {
                     "bcftools": 1.24,
-                    "svdb": "2.12.0"
+                    "svdb": "2.12.2"
                 },
                 "SVDB_QUERY": {
-                    "svdb": "2.12.0"
+                    "svdb": "2.12.2"
                 },
                 "TABIX_HIFICNV": {
                     "tabix": 1.21
@@ -233,7 +233,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-11-04T12:18:31.309425374",
+        "timestamp": "2026-11-09T08:39:00.499518809",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.3"
