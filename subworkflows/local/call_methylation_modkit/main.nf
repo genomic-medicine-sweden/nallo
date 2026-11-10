@@ -64,7 +64,7 @@ workflow CALL_METHYLATION_MODKIT {
     // Compare haplotype 1 with haplotype 2 over the methylation regions
     //
     if (!val_skip_dmr) {
-        // One BED row per region and label; background models have one row per region and data category
+        // One BED row per region, named chrom:start-end
         GAWK_DMR_REGIONS(
             ch_regions,
             [],
