@@ -1,7 +1,7 @@
 {
     "revio preset with skip_methylation_annotation succeeds without methbat_map": {
         "content": [
-            400,
+            401,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -124,6 +124,9 @@
                     "gawk": "5.3.1"
                 },
                 "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_METHBAT_REGIONS": {
                     "gawk": "5.3.1"
                 },
                 "GAWK_STRIP_CONTIG_HEADER": {
@@ -318,10 +321,10 @@
                 }
             }
         ],
-        "timestamp": "2026-11-09T14:14:44.616348898",
+        "timestamp": "2026-11-10T20:36:56.498510849",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.4"
+            "nextflow": "26.10.3"
         }
     }
 }
