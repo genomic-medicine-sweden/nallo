@@ -1,10 +1,11 @@
-include { PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES } from '../../../modules/nf-core/pbcpgtools/alignedbamtocpgscores/main'
+include { GAWK as GAWK_METHBAT_REGIONS     } from '../../../modules/nf-core/gawk/main'
 include { METHBAT_PROFILE                  } from '../../../modules/nf-core/methbat/profile/main'
+include { PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES } from '../../../modules/nf-core/pbcpgtools/alignedbamtocpgscores/main'
 
 workflow CALL_METHYLATION_METHBAT {
     take:
-    ch_bam_bai // channel: [ val(meta), bam, bai ]
-    ch_regions // channel: [ val(meta), tsv ]
+    ch_bam_bai // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
+    ch_regions // channel: [mandatory] [ val(meta), path(tsv) ]
 
     main:
     PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES(
@@ -21,9 +22,16 @@ workflow CALL_METHYLATION_METHBAT {
         )
         .groupTuple()
 
+    // One row per region (and data category), labelled chrom:start-end; labels are added back in ANNOTATE_METHYLATION
+    GAWK_METHBAT_REGIONS(
+        ch_regions,
+        [],
+        false,
+    )
+
     METHBAT_PROFILE(
         ch_methbat_profile_in,
-        ch_regions,
+        GAWK_METHBAT_REGIONS.out.output.collect(),
     )
 
     emit:
