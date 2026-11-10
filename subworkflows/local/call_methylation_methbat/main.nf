@@ -22,7 +22,7 @@ workflow CALL_METHYLATION_METHBAT {
         )
         .groupTuple()
 
-    // One row per region (and data category), labelled chrom:start-end; labels are added back in ANNOTATE_METHYLATION
+    // One row per region; labels are added in ANNOTATE_METHYLATION
     GAWK_METHBAT_REGIONS(
         ch_regions,
         [],

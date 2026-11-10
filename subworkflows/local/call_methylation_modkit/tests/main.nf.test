@@ -377,7 +377,7 @@ nextflow_workflow {
             }
         }
         then {
-            // dmr runs with -t task.cpus: snapshot region columns, not md5. One row per region, named chrom:start-end
+            // dmr runs with -t task.cpus: snapshot region columns, not md5
             def dmr = workflow.out.dmr.collect { meta, bed ->
                 [ meta, file(bed).name, path(bed).readLines().findAll { line -> !line.startsWith('#') && !line.startsWith('chrom') }.collect { line -> line.tokenize('\t')[0..3].join('\t') } ]
             }

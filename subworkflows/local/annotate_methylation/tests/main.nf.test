@@ -29,7 +29,7 @@ nextflow_workflow {
         }
 
         then {
-            // One table per family and caller, in any order; rows as coordinates, cpg_label, sample_id and the map columns
+            // Keys, sample_id and map columns per row
             def tables = workflow.out.methylation_annotation.collect { meta, tsv ->
                 [ meta, file(tsv).name, path(tsv).md5, file(tsv).readLines().collect { line -> line.split('\t', -1).with { cols -> (cols[0..4] + cols[-3..-1]).join('\t') } } ]
             }.sort { table -> table[1] }
@@ -68,7 +68,7 @@ nextflow_workflow {
         }
 
         then {
-            // One table per family and caller, in any order; rows as coordinates, cpg_label, sample_id and the map columns
+            // Keys, sample_id and map columns per row
             def tables = workflow.out.methylation_annotation.collect { meta, tsv ->
                 [ meta, file(tsv).name, path(tsv).md5, file(tsv).readLines().collect { line -> line.split('\t', -1).with { cols -> (cols[0..4] + cols[-3..-1]).join('\t') } } ]
             }.sort { table -> table[1] }
@@ -103,7 +103,7 @@ nextflow_workflow {
         }
 
         then {
-            // One table per family and caller, in any order; rows as coordinates, cpg_label, sample_id and the map columns
+            // Keys, sample_id and map columns per row
             def tables = workflow.out.methylation_annotation.collect { meta, tsv ->
                 [ meta, file(tsv).name, path(tsv).md5, file(tsv).readLines().collect { line -> line.split('\t', -1).with { cols -> (cols[0..4] + cols[-3..-1]).join('\t') } } ]
             }.sort { table -> table[1] }
@@ -138,7 +138,7 @@ nextflow_workflow {
         }
 
         then {
-            // One table per family and caller, in any order; rows as coordinates, cpg_label, sample_id and the map columns
+            // Keys, sample_id and map columns per row
             def tables = workflow.out.methylation_annotation.collect { meta, tsv ->
                 [ meta, file(tsv).name, path(tsv).md5, file(tsv).readLines().collect { line -> line.split('\t', -1).with { cols -> (cols[0..4] + cols[-3..-1]).join('\t') } } ]
             }.sort { table -> table[1] }
@@ -178,7 +178,7 @@ nextflow_workflow {
         }
 
         then {
-            // One table per family and caller, in any order; rows as coordinates, cpg_label, sample_id and the map columns
+            // Keys, sample_id and map columns per row
             def tables = workflow.out.methylation_annotation.collect { meta, tsv ->
                 [ meta, file(tsv).name, path(tsv).md5, file(tsv).readLines().collect { line -> line.split('\t', -1).with { cols -> (cols[0..4] + cols[-3..-1]).join('\t') } } ]
             }.sort { table -> table[1] }

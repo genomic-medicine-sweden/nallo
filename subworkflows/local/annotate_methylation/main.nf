@@ -15,32 +15,27 @@ workflow ANNOTATE_METHYLATION {
     ch_map              // channel: [mandatory] [ val(meta), path(tsv) ]
 
     main:
-    //
-    // Once per run: region labels, and the genes of each label from the map
-    //
+    // Per run: labels and genes
     GAWK_REGION_LABELS(
         ch_regions,
         [],
         false,
     )
 
-    // The region file must come first: the program reads it as ARGV[1]
+    // Regions first: read as ARGV[1]
     GAWK_REGION_GENES(
         ch_regions.combine(ch_map).map { meta, regions, _meta_map, map -> [meta, [regions, map]] },
         [],
         false,
     )
 
-    //
-    // Per sample: values per region, spread to labels and genes
-    //
+    // Per sample: values -> labels -> sample_id -> genes
     ch_region_values = ch_methbat_profiles
         .map { meta, profile -> [meta + [methylation_caller: 'methbat'], profile] }
         .mix(
             ch_modkit_dmr.map { meta, dmr -> [meta + [methylation_caller: 'modkit'], dmr] }
         )
 
-    // Drops the region name column, which the tools set to chrom:start-end
     GAWK_REGION_VALUES(
         ch_region_values,
         [],
