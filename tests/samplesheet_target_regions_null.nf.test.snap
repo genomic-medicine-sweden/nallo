@@ -282,14 +282,14 @@
                 },
                 "SVDB_MERGE_BY_CALLER": {
                     "bcftools": 1.24,
-                    "svdb": "2.12.0"
+                    "svdb": "2.12.2"
                 },
                 "SVDB_MERGE_BY_FAMILY": {
                     "bcftools": 1.24,
-                    "svdb": "2.12.0"
+                    "svdb": "2.12.2"
                 },
                 "SVDB_QUERY": {
-                    "svdb": "2.12.0"
+                    "svdb": "2.12.2"
                 },
                 "TABIX_BGZIPTABIX": {
                     "bgzip": 1.21,

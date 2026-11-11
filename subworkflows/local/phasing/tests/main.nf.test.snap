@@ -28,10 +28,10 @@
                     ]
                 ],
                 "2": [
-                    
+
                 ],
                 "3": [
-                    
+
                 ],
                 "4": [
                     [
@@ -44,7 +44,7 @@
                     ]
                 ],
                 "5": [
-                    
+
                 ],
                 "6": [
                     [
@@ -111,7 +111,7 @@
                     ]
                 ],
                 "haplotagged_cram_crai": [
-                    
+
                 ],
                 "haplotagging_arrow": [
                     [
@@ -148,10 +148,10 @@
                     ]
                 ],
                 "phased_family_svs": [
-                    
+
                 ],
                 "phased_family_svs_tbi": [
-                    
+
                 ],
                 "stats": [
                     [
@@ -184,10 +184,10 @@
             ],
             "FAM_hiphase_snv_phased.vcf.gz.tbi",
             [
-                
+
             ],
             [
-                
+
             ],
             [
                 [
@@ -200,7 +200,7 @@
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -269,10 +269,10 @@
             ],
             "FAM_whatshap_phase.vcf.gz.tbi",
             [
-                
+
             ],
             [
-                
+
             ],
             [
                 [
@@ -285,7 +285,7 @@
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -376,10 +376,10 @@
                     ]
                 ],
                 "2": [
-                    
+
                 ],
                 "3": [
-                    
+
                 ],
                 "4": [
                     [
@@ -400,7 +400,7 @@
                     ]
                 ],
                 "5": [
-                    
+
                 ],
                 "6": [
                     [
@@ -517,7 +517,7 @@
                     ]
                 ],
                 "haplotagged_cram_crai": [
-                    
+
                 ],
                 "haplotagging_arrow": [
                     [
@@ -568,10 +568,10 @@
                     ]
                 ],
                 "phased_family_svs": [
-                    
+
                 ],
                 "phased_family_svs_tbi": [
-                    
+
                 ],
                 "stats": [
                     [
@@ -611,10 +611,10 @@
             ],
             "FAM_hiphase_snv_phased.vcf.gz.tbi",
             [
-                
+
             ],
             [
-                
+
             ],
             [
                 [
@@ -694,10 +694,10 @@
             ],
             "FAM_snv_bcftools_merge.vcf.gz.tbi",
             [
-                
+
             ],
             [
-                
+
             ],
             [
                 [
@@ -705,12 +705,12 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_longphase_haplotag.bam:md5,5963b63ef29a1a1abb9f015f02a0bc50",
-                    "HG002_longphase_haplotag.bam.bai:md5,d486268d6ef9c307dfd4404934cc7eb0"
+                    "HG002_longphase_haplotag.bam:md5,4384378e90e8661f63b7a88df40234e7",
+                    "HG002_longphase_haplotag.bam.bai:md5,55bc8a4497f405704c1757be9739da57"
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -759,10 +759,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-11-10T13:47:25.027417693",
+        "timestamp": "2026-11-10T15:17:46.342220992",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.4"
+            "nextflow": "26.10.5"
         }
     },
     "2 samples - SNVs only - Longphase - bam output": {
@@ -779,10 +779,10 @@
             ],
             "FAM_snv_bcftools_merge.vcf.gz.tbi",
             [
-                
+
             ],
             [
-                
+
             ],
             [
                 [
@@ -790,20 +790,20 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_longphase_haplotag.bam:md5,5963b63ef29a1a1abb9f015f02a0bc50",
-                    "HG002_longphase_haplotag.bam.bai:md5,d486268d6ef9c307dfd4404934cc7eb0"
+                    "HG002_longphase_haplotag.bam:md5,4384378e90e8661f63b7a88df40234e7",
+                    "HG002_longphase_haplotag.bam.bai:md5,55bc8a4497f405704c1757be9739da57"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_longphase_haplotag.bam:md5,107e838d2c65a49bfa21bd0b8461a931",
-                    "HG003_longphase_haplotag.bam.bai:md5,d43b451bc102d98ace3e267722f68d6d"
+                    "HG003_longphase_haplotag.bam:md5,80a9ae63e7554f450a21aeddb5c15284",
+                    "HG003_longphase_haplotag.bam.bai:md5,01695bdc11ce8903dd1f86676dc2ff83"
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -888,10 +888,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-11-10T13:47:52.09526481",
+        "timestamp": "2026-11-10T15:18:16.113352826",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.4"
+            "nextflow": "26.10.5"
         }
     },
     "2 samples - SNVs + SVs - Longphase - bam output": {
@@ -923,20 +923,20 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_longphase_haplotag.bam:md5,ee8b2abfa0aa46ce3a4926a090d9a5a0",
-                    "HG002_longphase_haplotag.bam.bai:md5,5b7f9ddc739896bbc360771f1b3eddc7"
+                    "HG002_longphase_haplotag.bam:md5,2c14eab2f36f750084c09ec4ed791d8b",
+                    "HG002_longphase_haplotag.bam.bai:md5,a7fe605e6dd6eca3e95e63e93e09512c"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_longphase_haplotag.bam:md5,850606f7150cbabbfe426c6cdc40cc51",
-                    "HG003_longphase_haplotag.bam.bai:md5,14ca316abffdd03255fb2e0687284c4b"
+                    "HG003_longphase_haplotag.bam:md5,285ff85904faee7906c597ad01e27fe2",
+                    "HG003_longphase_haplotag.bam.bai:md5,0b7f390a27efe5fa267d0fc71b4568a1"
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -1021,10 +1021,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-11-10T13:48:08.117918421",
+        "timestamp": "2026-11-10T15:18:34.97894867",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.4"
+            "nextflow": "26.10.5"
         }
     },
     "1 sample - SNVs only - Hiphase - bam output - stub": {
@@ -1056,10 +1056,10 @@
                     ]
                 ],
                 "2": [
-                    
+
                 ],
                 "3": [
-                    
+
                 ],
                 "4": [
                     [
@@ -1072,7 +1072,7 @@
                     ]
                 ],
                 "5": [
-                    
+
                 ],
                 "6": [
                     [
@@ -1139,7 +1139,7 @@
                     ]
                 ],
                 "haplotagged_cram_crai": [
-                    
+
                 ],
                 "haplotagging_arrow": [
                     [
@@ -1176,10 +1176,10 @@
                     ]
                 ],
                 "phased_family_svs": [
-                    
+
                 ],
                 "phased_family_svs_tbi": [
-                    
+
                 ],
                 "stats": [
                     [
@@ -1227,10 +1227,10 @@
                     ]
                 ],
                 "2": [
-                    
+
                 ],
                 "3": [
-                    
+
                 ],
                 "4": [
                     [
@@ -1243,7 +1243,7 @@
                     ]
                 ],
                 "5": [
-                    
+
                 ],
                 "6": [
                     [
@@ -1310,7 +1310,7 @@
                     ]
                 ],
                 "haplotagged_cram_crai": [
-                    
+
                 ],
                 "haplotagging_arrow": [
                     [
@@ -1347,10 +1347,10 @@
                     ]
                 ],
                 "phased_family_svs": [
-                    
+
                 ],
                 "phased_family_svs_tbi": [
-                    
+
                 ],
                 "stats": [
                     [
@@ -1398,10 +1398,10 @@
                     ]
                 ],
                 "2": [
-                    
+
                 ],
                 "3": [
-                    
+
                 ],
                 "4": [
                     [
@@ -1532,10 +1532,10 @@
                     ]
                 ],
                 "phased_family_svs": [
-                    
+
                 ],
                 "phased_family_svs_tbi": [
-                    
+
                 ],
                 "stats": [
                     [
@@ -1583,12 +1583,12 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_longphase_haplotag.bam:md5,fa9b15adbd4d0488b382ae7533f69c18",
-                    "HG002_longphase_haplotag.bam.bai:md5,c4763c97f7d2221ee0e67cd289475121"
+                    "HG002_longphase_haplotag.bam:md5,76930ca5a88637c13e490e52e496b7fc",
+                    "HG002_longphase_haplotag.bam.bai:md5,4a95a46db8b84b34268bf0daa27fac22"
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -1637,10 +1637,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-11-10T13:47:40.278095407",
+        "timestamp": "2026-11-10T15:18:02.881210095",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.4"
+            "nextflow": "26.10.5"
         }
     },
     "1 sample - SNVs + SVs - Hiphase - bam output": {
@@ -1677,7 +1677,7 @@
                 ]
             ],
             [
-                
+
             ],
             [
                 [

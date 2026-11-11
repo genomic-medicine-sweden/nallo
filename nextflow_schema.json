@@ -1222,6 +1222,12 @@
                     "format": "file-path",
                     "default": null,
                     "description": "Configuration file for Paraphase."
+                },
+                "trgt_spanning_repeats_output_format": {
+                    "type": "string",
+                    "default": "bam",
+                    "description": "Output format for TRGT spanning repeats. Supported arguments are BAM or CRAM.",
+                    "enum": ["bam", "cram"]
                 }
             },
             "required": ["preset"]
