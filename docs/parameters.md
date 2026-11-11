@@ -238,5 +238,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `glnexus_config` | Glnexus config to use for merging gVCFs. If no file is provided, the default config `assets/glnexus_config_dp1.yml` will be used. | `string` | None |  |  |
 | `assembly_aligner` | Which aligner to use for assembly alignment. Supported arguments are mm2plus or minimap2. (accepted: `mm2plus`\|`minimap2`) | `string` | minimap2 |  |  |
 | `methbat_map` | Mapping file that can be used to filter and annotate the methbat output based on regions. | `string` |  |  |  |
+| `kivvi_preset` | Preset to use for Kivvi. Supported arguments are d4z4 or kiv2. (accepted: `d4z4`\|`kiv2`) | `string` | d4z4 |  |  |
+| `skip_kivvi` | Whether to skip running Kivvi. | `boolean` | False |  |  |
 | `paraphase_config` | Configuration file for Paraphase. | `string` | None |  |  |
 | `trgt_spanning_repeats_output_format` | Output format for TRGT spanning repeats. Supported arguments are BAM or CRAM. (accepted: `bam`\|`cram`) | `string` | bam |  |  |

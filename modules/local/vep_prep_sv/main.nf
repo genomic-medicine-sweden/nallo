@@ -1,10 +1,10 @@
 process VEP_PREP_SV {
     tag "${meta.id}"
 
-    conda "conda-forge::python=3.12"
+    conda "${moduleDir}/environment.yml"
     container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
-        ? 'https://depot.galaxyproject.org/singularity/python:3.12'
-        : 'biocontainers/python:3.12'}"
+        ? 'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/99/99ae4e6605f4b9f9d3197dcc856f867fbbd1e6a334dee63957e56f908ed4599d/data'
+        : 'community.wave.seqera.io/library/htslib_python:ef76279c6a229e2e'}"
 
     input:
     tuple val(meta), path(vcf)

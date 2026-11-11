@@ -1206,6 +1206,17 @@
                     "format": "file-path",
                     "description": "Mapping file that can be used to filter and annotate the methbat output based on regions."
                 },
+                "kivvi_preset": {
+                    "type": "string",
+                    "default": "d4z4",
+                    "description": "Preset to use for Kivvi. Supported arguments are d4z4 or kiv2.",
+                    "enum": ["d4z4", "kiv2"]
+                },
+                "skip_kivvi": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Whether to skip running Kivvi."
+                },
                 "paraphase_config": {
                     "type": "string",
                     "format": "file-path",

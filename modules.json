@@ -258,16 +258,21 @@
                     "htslib/bgziptabix": {
                         "branch": "master",
                         "git_sha": "37f69c8ca3eb3d038a5d44f33a329e49f44bd4f2",
+                        "installed_by": ["vcf_filter_bcftools_ensemblvep"]
+                    },
+                    "kivvi": {
+                        "branch": "master",
+                        "git_sha": "8e856f6a9903b9e6bf7ded6b58f7324d4e4fa2ce",
                         "installed_by": ["modules"]
                     },
                     "longphase/haplotag": {
                         "branch": "master",
-                        "git_sha": "b8d30a43f33aee3148b0e9e9f00587984a4ac195",
+                        "git_sha": "7b3452a23773f687ededb4befd037920e5a51341",
                         "installed_by": ["modules"]
                     },
                     "longphase/phase": {
                         "branch": "master",
-                        "git_sha": "b8d30a43f33aee3148b0e9e9f00587984a4ac195",
+                        "git_sha": "7b3452a23773f687ededb4befd037920e5a51341",
                         "installed_by": ["modules"]
                     },
                     "methbat/profile": {
@@ -414,12 +419,12 @@
                     },
                     "sawfish/discover": {
                         "branch": "master",
-                        "git_sha": "d5fb539029c50631cfc45ad8b1dc0265ee7b0b49",
+                        "git_sha": "b9eb9d591f5362b7c638c56d2ab1c0dfbb9b118c",
                         "installed_by": ["modules"]
                     },
                     "sawfish/jointcall": {
                         "branch": "master",
-                        "git_sha": "d5fb539029c50631cfc45ad8b1dc0265ee7b0b49",
+                        "git_sha": "fa83358d7adfe8f05dc36537409cacfd5293ea59",
                         "installed_by": ["modules"]
                     },
                     "sentieon/gvcftyper": {
@@ -471,12 +476,12 @@
                     },
                     "svdb/merge": {
                         "branch": "master",
-                        "git_sha": "56155f73713bc32c5343b59f05d968794c1b596d",
+                        "git_sha": "d47037a36629d6abfdd58720800263e04741f4fa",
                         "installed_by": ["modules"]
                     },
                     "svdb/query": {
                         "branch": "master",
-                        "git_sha": "56155f73713bc32c5343b59f05d968794c1b596d",
+                        "git_sha": "d47037a36629d6abfdd58720800263e04741f4fa",
                         "installed_by": ["modules"]
                     },
                     "tabix/bgziptabix": {

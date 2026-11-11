@@ -4,4 +4,4 @@ channels:
 
 dependencies:
   - bioconda::htslib=1.21
-  - conda-forge::python=3.13.2
+  - conda-forge::python=3.14.4

@@ -79,8 +79,7 @@
                     "somalier": "0.2.18"
                 },
                 "SAMPLESHEET_PED": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
+                    "create_pedigree_file": 1.0
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
@@ -146,10 +145,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-09-09T07:54:00.753952759",
+        "timestamp": "2026-11-04T12:04:49.043119342",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.3"
         }
     },
     "Test Sentieon SNV calling with mock resources": {
@@ -196,7 +195,7 @@
                     "bedtools": "2.30.0",
                     "samtools": "1.23.1",
                     "sentieon": 202503.04,
-                    "sentieon-cli": "2.0.0"
+                    "sentieon-cli": "2.0.1"
                 },
                 "ECHTVAR_ANNO": {
                     "echtvar": "0.2.4"
@@ -233,8 +232,7 @@
                     "somalier": "0.2.18"
                 },
                 "SAMPLESHEET_PED": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
+                    "create_pedigree_file": 1.0
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
@@ -303,10 +301,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-10-08T09:10:22.711838478",
+        "timestamp": "2026-11-04T12:05:55.058938396",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.3"
         }
     },
     "Test CADD with mock resources": {
@@ -407,8 +405,7 @@
                     "bcftools": 1.22
                 },
                 "SAMPLESHEET_PED": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
+                    "create_pedigree_file": 1.0
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
@@ -480,10 +477,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-09-09T07:53:17.521538365",
+        "timestamp": "2026-11-04T12:03:58.722397584",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.3"
         }
     }
 }

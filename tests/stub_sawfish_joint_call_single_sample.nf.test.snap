@@ -76,17 +76,16 @@
                     "somalier": "0.2.18"
                 },
                 "RUN_SAWFISH_DISCOVER": {
-                    "sawfish": "2.2.0"
+                    "sawfish": "2.3.1"
                 },
                 "RUN_SAWFISH_JOINTCALL": {
-                    "sawfish": "2.2.0"
+                    "sawfish": "2.3.1"
                 },
                 "SAMBAMBA_DEPTH": {
                     "sambamba": "1.0.1"
                 },
                 "SAMPLESHEET_PED": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
+                    "create_pedigree_file": 1.0
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
@@ -111,11 +110,11 @@
                 },
                 "SVDB_MERGE_BY_CALLER": {
                     "bcftools": 1.24,
-                    "svdb": "2.12.0"
+                    "svdb": "2.12.2"
                 },
                 "SVDB_MERGE_BY_FAMILY": {
                     "bcftools": 1.24,
-                    "svdb": "2.12.0"
+                    "svdb": "2.12.2"
                 },
                 "TAGBAM": {
                     "tagbam": "0.1.0"
@@ -211,10 +210,10 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-10-02T18:13:45.956352224",
+        "timestamp": "2026-11-09T08:38:12.108937767",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.3"
         }
     }
 }
