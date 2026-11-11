@@ -195,8 +195,8 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_PacBio_Revio_haplotagged.bam:md5,8a974a28fcdab98f4d751e4202850fce",
-                    "HG002_PacBio_Revio_haplotagged.bam.bai:md5,ab8ec29cbca9bf749ba37803249ff64e"
+                    "HG002_PacBio_Revio_haplotagged.bam:md5,a161972b13772c0cd21222a8eea0264c",
+                    "HG002_PacBio_Revio_haplotagged.bam.bai:md5,a5d3b4c3f3ba61dbb7054cf1737415e3"
                 ]
             ],
             [
@@ -249,10 +249,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-07-08T14:44:11.154616687",
+        "timestamp": "2026-11-10T13:46:48.90437111",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.10.4"
         }
     },
     "1 sample - SNVs only - Whatshap - bam output": {
@@ -280,8 +280,8 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_whatshap_haplotag.bam:md5,a97a893068343cd4c0cefed0b54b1c83",
-                    "HG002_whatshap_haplotag.bam.bai:md5,defc32743c1d1acf391640a2b0acd7ea"
+                    "HG002_whatshap_haplotag.bam:md5,1d38b26d1170c3cee7cc8919086a40ec",
+                    "HG002_whatshap_haplotag.bam.bai:md5,d9768b71349e09328a30f723308410b2"
                 ]
             ],
             [
@@ -334,10 +334,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-07-08T14:45:50.926921764",
+        "timestamp": "2026-11-10T13:48:30.674316652",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.10.4"
         }
     },
     "2 samples - SNVs only - Longphase - bam output - stub": {
@@ -622,8 +622,8 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_PacBio_Revio_haplotagged.bam:md5,8a974a28fcdab98f4d751e4202850fce",
-                    "HG002_PacBio_Revio_haplotagged.bam.bai:md5,ab8ec29cbca9bf749ba37803249ff64e"
+                    "HG002_PacBio_Revio_haplotagged.bam:md5,a161972b13772c0cd21222a8eea0264c",
+                    "HG002_PacBio_Revio_haplotagged.bam.bai:md5,a5d3b4c3f3ba61dbb7054cf1737415e3"
                 ]
             ],
             "HG002.cram",
@@ -674,10 +674,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-07-08T14:44:35.988194941",
+        "timestamp": "2026-11-10T13:47:13.764907472",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.10.4"
         }
     },
     "1 sample - SNVs only - Longphase - bam output": {
@@ -689,7 +689,7 @@
                     },
                     "FAM_snv_bcftools_merge.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=169, phased=false, phasedAutodetect=false]",
-                    "c3373d4620e2a5eeb0c051c246b206db"
+                    "4a750d03056aaf7050ffbdbab1f04aba"
                 ]
             ],
             "FAM_snv_bcftools_merge.vcf.gz.tbi",
@@ -705,8 +705,8 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_longphase_haplotag.bam:md5,f657a988d18519e244617627ad949c81",
-                    "HG002_longphase_haplotag.bam.bai:md5,55bc8a4497f405704c1757be9739da57"
+                    "HG002_longphase_haplotag.bam:md5,5963b63ef29a1a1abb9f015f02a0bc50",
+                    "HG002_longphase_haplotag.bam.bai:md5,d486268d6ef9c307dfd4404934cc7eb0"
                 ]
             ],
             [
@@ -759,10 +759,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-07-08T14:44:46.084451441",
+        "timestamp": "2026-11-10T13:47:25.027417693",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.10.4"
         }
     },
     "2 samples - SNVs only - Longphase - bam output": {
@@ -774,7 +774,7 @@
                     },
                     "FAM_snv_bcftools_merge.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=236, phased=false, phasedAutodetect=false]",
-                    "4f271e6809aece6fa9550077dd70768a"
+                    "29ad7b4ef2b210c1b8cf973e47746255"
                 ]
             ],
             "FAM_snv_bcftools_merge.vcf.gz.tbi",
@@ -790,16 +790,16 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_longphase_haplotag.bam:md5,f657a988d18519e244617627ad949c81",
-                    "HG002_longphase_haplotag.bam.bai:md5,55bc8a4497f405704c1757be9739da57"
+                    "HG002_longphase_haplotag.bam:md5,5963b63ef29a1a1abb9f015f02a0bc50",
+                    "HG002_longphase_haplotag.bam.bai:md5,d486268d6ef9c307dfd4404934cc7eb0"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_longphase_haplotag.bam:md5,fc1777fd920f0693b7b39164193d5c35",
-                    "HG003_longphase_haplotag.bam.bai:md5,01695bdc11ce8903dd1f86676dc2ff83"
+                    "HG003_longphase_haplotag.bam:md5,107e838d2c65a49bfa21bd0b8461a931",
+                    "HG003_longphase_haplotag.bam.bai:md5,d43b451bc102d98ace3e267722f68d6d"
                 ]
             ],
             [
@@ -811,14 +811,14 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_whatshap_stats.tsv:md5,8d7e2e71bdcee11438f841159113a998"
+                    "HG002_whatshap_stats.tsv:md5,70981f017bd1017d84dd3aa829c6f60d"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_whatshap_stats.tsv:md5,39ee7c482b681e80c80ca2e32587b514"
+                    "HG003_whatshap_stats.tsv:md5,96933e7b02634379891d7ff398804ca1"
                 ]
             ],
             [
@@ -888,10 +888,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-07-08T14:45:13.131036641",
+        "timestamp": "2026-11-10T13:47:52.09526481",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.10.4"
         }
     },
     "2 samples - SNVs + SVs - Longphase - bam output": {
@@ -903,7 +903,7 @@
                     },
                     "FAM_snv_bcftools_merge.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=236, phased=false, phasedAutodetect=false]",
-                    "5ef7fd96d9411f19fc8bb8d38e811363"
+                    "d5a60f1570ac1e8d1566c19f581e8235"
                 ]
             ],
             "FAM_snv_bcftools_merge.vcf.gz.tbi",
@@ -913,7 +913,7 @@
                         "id": "FAM"
                     },
                     "FAM_sv_bcftools_merge.vcf.gz",
-                    "e6cb1737201b9e95cb77f0eaa468e63a"
+                    "268f14081c4b2b250fb1ab05e70e22d9"
                 ]
             ],
             "FAM_sv_bcftools_merge.vcf.gz.tbi",
@@ -923,16 +923,16 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_longphase_haplotag.bam:md5,9794ae4b32d3620168dc5e1a631a7e93",
-                    "HG002_longphase_haplotag.bam.bai:md5,6cf338abd4dff75f47726e80e8492f3e"
+                    "HG002_longphase_haplotag.bam:md5,ee8b2abfa0aa46ce3a4926a090d9a5a0",
+                    "HG002_longphase_haplotag.bam.bai:md5,5b7f9ddc739896bbc360771f1b3eddc7"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_longphase_haplotag.bam:md5,4baf8247af8d83d4ff5952dca1c78543",
-                    "HG003_longphase_haplotag.bam.bai:md5,d1446ebc46ce5d5bb80ea3b468afe942"
+                    "HG003_longphase_haplotag.bam:md5,850606f7150cbabbfe426c6cdc40cc51",
+                    "HG003_longphase_haplotag.bam.bai:md5,14ca316abffdd03255fb2e0687284c4b"
                 ]
             ],
             [
@@ -944,14 +944,14 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_whatshap_stats.tsv:md5,689c71fe253617dbc0571d50cf549da8"
+                    "HG002_whatshap_stats.tsv:md5,7f3eb0175cebc45cb9e6ba36a3746e41"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003_whatshap_stats.tsv:md5,2740ee2c5dafb27c8a79d8a389d28c74"
+                    "HG003_whatshap_stats.tsv:md5,2f96e7d1f14e091cc9c5fb6420cd65a1"
                 ]
             ],
             [
@@ -960,14 +960,14 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002.gtf.gz:md5,182a2d991eba874ddbaed435ed342b6d"
+                    "HG002.gtf.gz:md5,99494b5e433dc389f98bd124c1734645"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003.gtf.gz:md5,b26d1bbdc09195c1dbe3278fc937f65e"
+                    "HG003.gtf.gz:md5,0f348ba650c5861f3f13b9df8851a3f3"
                 ]
             ],
             [
@@ -976,14 +976,14 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002.gtf.gz.tbi:md5,8cca58e33d719aca7a6fd7e425291acc"
+                    "HG002.gtf.gz.tbi:md5,515313bc779aafb210ca68fb369f05a2"
                 ],
                 [
                     {
                         "id": "HG003",
                         "family_id": "FAM"
                     },
-                    "HG003.gtf.gz.tbi:md5,ffa10b38ec47d325925ca88de68549f1"
+                    "HG003.gtf.gz.tbi:md5,829ab6c5f5638f26227f131a450268fe"
                 ]
             ],
             [
@@ -1021,10 +1021,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-11-03T11:17:59.685468494",
+        "timestamp": "2026-11-10T13:48:08.117918421",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.3"
+            "nextflow": "26.10.4"
         }
     },
     "1 sample - SNVs only - Hiphase - bam output - stub": {
@@ -1563,7 +1563,7 @@
                     },
                     "FAM_snv_bcftools_merge.vcf.gz",
                     "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=169, phased=false, phasedAutodetect=false]",
-                    "921c9a2f145f51e659e72aa6b01576ae"
+                    "3fa2f376b8dcf77482efbaba843c6f97"
                 ]
             ],
             "FAM_snv_bcftools_merge.vcf.gz.tbi",
@@ -1573,7 +1573,7 @@
                         "id": "FAM"
                     },
                     "FAM_sv_bcftools_merge.vcf.gz",
-                    "cd06da40d22e69f7d1fd5b21b189c5cd"
+                    "07a229241a0c3ed213f1c5f71a7e9080"
                 ]
             ],
             "FAM_sv_bcftools_merge.vcf.gz.tbi",
@@ -1583,8 +1583,8 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_longphase_haplotag.bam:md5,9794ae4b32d3620168dc5e1a631a7e93",
-                    "HG002_longphase_haplotag.bam.bai:md5,6cf338abd4dff75f47726e80e8492f3e"
+                    "HG002_longphase_haplotag.bam:md5,fa9b15adbd4d0488b382ae7533f69c18",
+                    "HG002_longphase_haplotag.bam.bai:md5,c4763c97f7d2221ee0e67cd289475121"
                 ]
             ],
             [
@@ -1596,7 +1596,7 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_whatshap_stats.tsv:md5,a5e648585efabe8fb5a2e9e63ba49a1f"
+                    "HG002_whatshap_stats.tsv:md5,e5250615d2bc5284de5fae838b77e509"
                 ]
             ],
             [
@@ -1605,7 +1605,7 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002.gtf.gz:md5,182a2d991eba874ddbaed435ed342b6d"
+                    "HG002.gtf.gz:md5,efb2b9ac544d340755c171879315f382"
                 ]
             ],
             [
@@ -1614,7 +1614,7 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002.gtf.gz.tbi:md5,8cca58e33d719aca7a6fd7e425291acc"
+                    "HG002.gtf.gz.tbi:md5,70dcea94ec45886a6e52241437dc9953"
                 ]
             ],
             [
@@ -1637,10 +1637,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-11-03T11:16:51.976958603",
+        "timestamp": "2026-11-10T13:47:40.278095407",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.3"
+            "nextflow": "26.10.4"
         }
     },
     "1 sample - SNVs + SVs - Hiphase - bam output": {
@@ -1672,8 +1672,8 @@
                         "id": "HG002",
                         "family_id": "FAM"
                     },
-                    "HG002_PacBio_Revio_haplotagged.bam:md5,f4a2bc37b043e30b19252dbc61f34f30",
-                    "HG002_PacBio_Revio_haplotagged.bam.bai:md5,33fb8115ec3e1fc0c97e27cacb640350"
+                    "HG002_PacBio_Revio_haplotagged.bam:md5,94e61e00de19c80ee2a137ecf7cf9d9c",
+                    "HG002_PacBio_Revio_haplotagged.bam.bai:md5,dd4680a5dffffc054ff41213f0d0a448"
                 ]
             ],
             [
@@ -1726,10 +1726,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-11-03T11:15:22.347811113",
+        "timestamp": "2026-11-10T13:47:03.158800231",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.3"
+            "nextflow": "26.10.4"
         }
     }
 }

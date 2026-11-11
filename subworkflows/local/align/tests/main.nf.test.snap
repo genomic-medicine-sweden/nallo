@@ -4,20 +4,20 @@
             {
                 "maxReadLength": 33619,
                 "minReadLength": 1915,
-                "meanReadLength": 16960,
+                "meanReadLength": 16793,
                 "maxQuality": 60,
-                "minQuality": 0,
-                "meanQuality": 53,
-                "readCount": 1223,
+                "minQuality": 1,
+                "meanQuality": 56,
+                "readCount": 1258,
                 "duplicateReadCount": 0,
                 "sorted": false
             },
             "test_aligned_reads_no_md.bam.bai"
         ],
-        "timestamp": "2026-08-06T15:29:19.215085916",
+        "timestamp": "2026-11-10T13:11:48.736078751",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.10.4"
         }
     },
     "[bam, fasta] - pbmm2 - stub": {
@@ -79,20 +79,20 @@
             {
                 "maxReadLength": 33619,
                 "minReadLength": 1915,
-                "meanReadLength": 16960,
+                "meanReadLength": 16793,
                 "maxQuality": 60,
-                "minQuality": 0,
-                "meanQuality": 53,
-                "readCount": 1223,
+                "minQuality": 1,
+                "meanQuality": 56,
+                "readCount": 1258,
                 "duplicateReadCount": 0,
                 "sorted": false
             },
             "test_aligned_reads_no_md.bam.bai"
         ],
-        "timestamp": "2026-08-06T15:29:31.729846625",
+        "timestamp": "2026-11-10T13:12:02.297078605",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.10.4"
         }
     },
     "[bam, fasta] - pbmm2 - use_genome_reference = false - stub": {
