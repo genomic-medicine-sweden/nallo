@@ -308,10 +308,10 @@
                     "tiddit": "3.9.4"
                 },
                 "TRGT_GENOTYPE": {
-                    "trgt": "5.0.0-e9acee0"
+                    "trgt": "5.1.0-ec66463"
                 },
                 "TRGT_MERGE": {
-                    "trgt": "5.0.0-e9acee0"
+                    "trgt": "5.1.0-ec66463"
                 },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
