@@ -113,7 +113,7 @@ workflow NALLO {
     ch_samplesheet
     ch_cramino_regions
     ch_methbat_map
-    ch_methbat_regions
+    ch_methylation_regions
     ch_modkit_call_regions
     ch_mosdepth_regions
     ch_paraphrase_rules
@@ -1255,14 +1255,16 @@ workflow NALLO {
             ch_fasta,
             ch_fai,
             ch_modkit_call_regions,
+            ch_methylation_regions,
             val_bigwig_modcodes,
+            val_skip_methylation_annotation,
         )
     }
 
     if (!val_skip_methbat) {
         CALL_METHYLATION_METHBAT(
             (!val_skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai),
-            ch_methbat_regions,
+            ch_methylation_regions,
         )
 
         ch_methylation_profiles = CALL_METHYLATION_METHBAT.out.region_profile
@@ -1430,7 +1432,7 @@ workflow NALLO {
     kivvi_bai                           = val_skip_kivvi ? channel.empty() : KIVVI.out.bai                                                                                                 // channel: [ val(meta), path(bai) ]
     kivvi_crai                          = val_skip_kivvi || !val_cram_output ? channel.empty() : SAMTOOLS_CONVERT_KIVVI.out.crai                                                           // channel: [ val(meta), path(crai) ]
     kivvi_cram                          = val_skip_kivvi || !val_cram_output ? channel.empty() : SAMTOOLS_CONVERT_KIVVI.out.cram                                                           // channel: [ val(meta), path(cram) ]
-    methylation_family_annotated        = val_skip_methylation_annotation ? channel.empty() : ANNOTATE_METHYLATION.out.methylation_annotation                                              // channel: [ val(meta), path(methylated_regions_by_family) ]
+    methylation_family_annotated        = val_skip_methylation_annotation || val_skip_methbat ? channel.empty() : ANNOTATE_METHYLATION.out.methylation_annotation                          // channel: [ val(meta), path(methylated_regions_by_family) ]
     methylation_methbat_combined_bed    = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_combined_bed                                                             // channel: [ val(meta), path(bed.gz) ]
     methylation_methbat_combined_bigwig = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_combined_bigwig                                                          // channel: [ val(meta), path(combined.bw) ]
     methylation_methbat_combined_index  = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_combined_index                                                           // channel: [ val(meta), path(bed.gz.tbi) ]
@@ -1442,6 +1444,7 @@ workflow NALLO {
     methylation_methbat_hap2_index      = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_hap2_index                                                               // channel: [ val(meta), path(bed.gz.tbi) ]
     methylation_methbat_profiles        = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.region_profile                                                                 // channel: [ val(meta), path(region_profile) ]
     methylation_modkit_bed              = val_skip_modkit ? channel.empty() : CALL_METHYLATION_MODKIT.out.bed                                                                              // channel: [ val(meta), path(bed.gz) ]
+    methylation_modkit_dmr              = val_skip_modkit ? channel.empty() : CALL_METHYLATION_MODKIT.out.dmr                                                                              // channel: [ val(meta), path(bed) ]
     methylation_modkit_bigwig           = val_skip_modkit ? channel.empty() : CALL_METHYLATION_MODKIT.out.bigwig                                                                           // channel: [ val(meta), path(bw) ]
     methylation_modkit_tbi              = val_skip_modkit ? channel.empty() : CALL_METHYLATION_MODKIT.out.tbi                                                                              // channel: [ val(meta), path(bed.gz.tbi) ]
     mosdepth_global_dist                = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_global_dist                                                                        // channel: [ val(meta), path(txt) ]
