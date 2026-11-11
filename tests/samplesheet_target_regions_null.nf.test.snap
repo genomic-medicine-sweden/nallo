@@ -1,7 +1,7 @@
 {
     "test profile | --target_regions null --alignment_output_format cram": {
         "content": [
-            229,
+            233,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -83,7 +83,10 @@
                 "CSVTK_CONCAT": {
                     "csvtk": "0.31.0"
                 },
-                "CSVTK_JOIN": {
+                "CSVTK_JOIN_REGION_GENES": {
+                    "csvtk": "0.37.0"
+                },
+                "CSVTK_JOIN_REGION_LABELS": {
                     "csvtk": "0.37.0"
                 },
                 "CSVTK_MUTATE2": {
@@ -133,6 +136,18 @@
                     "gawk": "5.3.1"
                 },
                 "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_METHBAT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_REGION_GENES": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_REGION_LABELS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_REGION_VALUES": {
                     "gawk": "5.3.1"
                 },
                 "GAWK_STRIP_CONTIG_HEADER": {
@@ -872,10 +887,10 @@
                 
             ]
         ],
-        "timestamp": "2026-11-09T14:09:59.120555448",
+        "timestamp": "2026-11-10T20:29:43.273849195",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.4"
+            "nextflow": "26.10.3"
         }
     }
 }

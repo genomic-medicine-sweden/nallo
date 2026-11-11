@@ -1,7 +1,7 @@
 {
     "samplesheet_ont_bam | bam entry_point | ONT singleton": {
         "content": [
-            154,
+            164,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -63,6 +63,21 @@
                 "CREATE_SAMPLES_FILE": {
                     "gawk": "5.3.1"
                 },
+                "CSVTK_CONCAT": {
+                    "csvtk": "0.31.0"
+                },
+                "CSVTK_JOIN_REGION_GENES": {
+                    "csvtk": "0.37.0"
+                },
+                "CSVTK_JOIN_REGION_LABELS": {
+                    "csvtk": "0.37.0"
+                },
+                "CSVTK_MUTATE2": {
+                    "csvtk": "0.31.0"
+                },
+                "CSVTK_SORT": {
+                    "csvtk": "0.31.0"
+                },
                 "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
                     "addmostsevereconsequence": "1.2.0",
                     "bgzip": 1.21
@@ -100,10 +115,22 @@
                 "GATK4_DENOISEREADCOUNTS": {
                     "gatk4": "4.6.2.0"
                 },
-                "GAWK": {
+                "GAWK_DMR_REGIONS": {
                     "gawk": "5.3.1"
                 },
                 "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_PILEUP_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_REGION_GENES": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_REGION_LABELS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_REGION_VALUES": {
                     "gawk": "5.3.1"
                 },
                 "GENMOD_ANNOTATE": {
@@ -132,6 +159,9 @@
                     "minimap2": "2.29-r1283"
                 },
                 "MODKIT_BEDMETHYLTOBIGWIG": {
+                    "modkit": "0.6.4"
+                },
+                "MODKIT_DMR": {
                     "modkit": "0.6.4"
                 },
                 "MODKIT_PILEUP": {
@@ -312,6 +342,13 @@
                 "methylation/pileup/hg002/hg002_modkit_pileup_hp1.bed.gz.tbi",
                 "methylation/pileup/hg002/hg002_modkit_pileup_hp2.bed.gz",
                 "methylation/pileup/hg002/hg002_modkit_pileup_hp2.bed.gz.tbi",
+                "methylation/profile",
+                "methylation/profile/family",
+                "methylation/profile/family/hg002",
+                "methylation/profile/family/hg002/hg002_modkit_dmr_annotated.tsv",
+                "methylation/profile/sample",
+                "methylation/profile/sample/hg002",
+                "methylation/profile/sample/hg002/hg002_modkit_dmr_hp1_vs_hp2.bed",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/bcftools-stats-subtypes.txt",
@@ -709,7 +746,7 @@
                 
             ]
         ],
-        "timestamp": "2026-11-09T08:59:46.981615073",
+        "timestamp": "2026-11-10T20:25:46.623135391",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.3"

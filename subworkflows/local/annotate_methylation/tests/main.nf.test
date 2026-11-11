@@ -5,96 +5,191 @@ nextflow_workflow {
     config "./nextflow.config"
     workflow "ANNOTATE_METHYLATION"
 
-    test("1 sample") {
-        when {
-            workflow {
-                """
-                input[0] = channel.of( [
-                    [ id:'test', family_id:'FAM'],
-                    file(params.pipelines_testdata_base_path + 'testdata/charmedswan_methbat_profile.tsv', checkIfExists: true)
-                ]
-                )
-                input[1] = channel.of(
-                    [
-                        [ id:'test2'],
-                    file(params.pipelines_testdata_base_path + 'reference/methbat_map.tsv', checkIfExists: true)
-                    ]
-                )
-                """
-            }
-        }
-
-         then {
-            assert workflow.success
-            assertAll(
-                { assert snapshot(workflow.out).match() }
-            )
-        }
-    }
-
-    test("2 samples") {
+    test("methbat - 1 sample") {
         when {
             workflow {
                 """
                 input[0] = channel.of(
                     [
                         [ id:'test', family_id:'FAM' ],
-                    file(params.pipelines_testdata_base_path + 'testdata/charmedswan_methbat_profile.tsv', checkIfExists: true)
-                    ],
-                    [
-                        [ id:'test2', family_id:'FAM' ],
-                    file(params.pipelines_testdata_base_path + 'testdata/charmedswan_methbat_profile.tsv', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_methbat_profile_regions.tsv', checkIfExists: true)
                     ]
                 )
-                input[1] = channel.of(
-                    [
-                        [ id:'test2'],
+                input[1] = channel.empty()
+                input[2] = channel.of([
+                    [ id:'methbat_regions' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
+                ])
+                input[3] = channel.of([
+                    [ id:'methbat_map' ],
                     file(params.pipelines_testdata_base_path + 'reference/methbat_map.tsv', checkIfExists: true)
-                    ]
-                )
-                """
-            }
-        }
-
-         then {
-            assert workflow.success
-            assertAll(
-                { assert snapshot(workflow.out).match() }
-            )
-        }
-    }
-
-    test("1 sample - stub") {
-
-        options "-stub"
-
-        when {
-            workflow {
-                """
-                input[0] =  channel.of([
-                    [ id:'test', family_id:'FAM'],
-                    file(params.pipelines_testdata_base_path + 'testdata/charmedswan_methbat_profile.tsv', checkIfExists: true)
-                ]
-                )
-                input[1] = channel.of(
-                    [
-                        [ id:'test2'],
-                    file(params.pipelines_testdata_base_path + 'reference/methbat_map.tsv', checkIfExists: true)
-                    ]
-                )
+                ])
                 """
             }
         }
 
         then {
-            assert workflow.success
+            // Keys, sample_id and map columns per row
+            def tables = workflow.out.methylation_annotation.collect { meta, tsv ->
+                [ meta, file(tsv).name, path(tsv).md5, file(tsv).readLines().collect { line -> line.split('\t', -1).with { cols -> (cols[0..4] + cols[-3..-1]).join('\t') } } ]
+            }.sort { table -> table[1] }
             assertAll(
-                { assert snapshot(workflow.out).match() }
+                { assert workflow.success },
+                { assert snapshot(tables).match() }
             )
         }
     }
 
-    test("2 samples - stub") {
+    test("methbat - 2 samples") {
+        when {
+            workflow {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id:'test', family_id:'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_methbat_profile_regions.tsv', checkIfExists: true)
+                    ],
+                    [
+                        [ id:'test2', family_id:'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_methbat_profile_regions.tsv', checkIfExists: true)
+                    ]
+                )
+                input[1] = channel.empty()
+                input[2] = channel.of([
+                    [ id:'methbat_regions' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
+                ])
+                input[3] = channel.of([
+                    [ id:'methbat_map' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_map.tsv', checkIfExists: true)
+                ])
+                """
+            }
+        }
+
+        then {
+            // Keys, sample_id and map columns per row
+            def tables = workflow.out.methylation_annotation.collect { meta, tsv ->
+                [ meta, file(tsv).name, path(tsv).md5, file(tsv).readLines().collect { line -> line.split('\t', -1).with { cols -> (cols[0..4] + cols[-3..-1]).join('\t') } } ]
+            }.sort { table -> table[1] }
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(tables).match() }
+            )
+        }
+    }
+
+    test("methbat - labelled regions") {
+        when {
+            workflow {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id:'test', family_id:'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_methbat_profile_regions.tsv', checkIfExists: true)
+                    ]
+                )
+                input[1] = channel.empty()
+                input[2] = channel.of([
+                    [ id:'methylation_regions_labelled' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/methylation_regions_labelled.tsv', checkIfExists: true)
+                ])
+                input[3] = channel.of([
+                    [ id:'methbat_map_labelled' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/methbat_map_labelled.tsv', checkIfExists: true)
+                ])
+                """
+            }
+        }
+
+        then {
+            // Keys, sample_id and map columns per row
+            def tables = workflow.out.methylation_annotation.collect { meta, tsv ->
+                [ meta, file(tsv).name, path(tsv).md5, file(tsv).readLines().collect { line -> line.split('\t', -1).with { cols -> (cols[0..4] + cols[-3..-1]).join('\t') } } ]
+            }.sort { table -> table[1] }
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(tables).match() }
+            )
+        }
+    }
+
+    test("modkit - labelled regions") {
+        when {
+            workflow {
+                """
+                input[0] = channel.empty()
+                input[1] = channel.of(
+                    [
+                        [ id:'test', family_id:'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_modkit_dmr_hp1_vs_hp2.bed', checkIfExists: true)
+                    ]
+                )
+                input[2] = channel.of([
+                    [ id:'methylation_regions_labelled' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/methylation_regions_labelled.tsv', checkIfExists: true)
+                ])
+                input[3] = channel.of([
+                    [ id:'methbat_map_labelled' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/methbat_map_labelled.tsv', checkIfExists: true)
+                ])
+                """
+            }
+        }
+
+        then {
+            // Keys, sample_id and map columns per row
+            def tables = workflow.out.methylation_annotation.collect { meta, tsv ->
+                [ meta, file(tsv).name, path(tsv).md5, file(tsv).readLines().collect { line -> line.split('\t', -1).with { cols -> (cols[0..4] + cols[-3..-1]).join('\t') } } ]
+            }.sort { table -> table[1] }
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(tables).match() }
+            )
+        }
+    }
+
+    test("methbat and modkit - labelled regions") {
+        when {
+            workflow {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id:'test', family_id:'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_methbat_profile_regions.tsv', checkIfExists: true)
+                    ]
+                )
+                input[1] = channel.of(
+                    [
+                        [ id:'test', family_id:'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_modkit_dmr_hp1_vs_hp2.bed', checkIfExists: true)
+                    ]
+                )
+                input[2] = channel.of([
+                    [ id:'methylation_regions_labelled' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/methylation_regions_labelled.tsv', checkIfExists: true)
+                ])
+                input[3] = channel.of([
+                    [ id:'methbat_map_labelled' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/methbat_map_labelled.tsv', checkIfExists: true)
+                ])
+                """
+            }
+        }
+
+        then {
+            // Keys, sample_id and map columns per row
+            def tables = workflow.out.methylation_annotation.collect { meta, tsv ->
+                [ meta, file(tsv).name, path(tsv).md5, file(tsv).readLines().collect { line -> line.split('\t', -1).with { cols -> (cols[0..4] + cols[-3..-1]).join('\t') } } ]
+            }.sort { table -> table[1] }
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(tables).match() }
+            )
+        }
+    }
+
+    test("methbat - 1 sample - stub") {
 
         options "-stub"
 
@@ -104,27 +199,176 @@ nextflow_workflow {
                 input[0] = channel.of(
                     [
                         [ id:'test', family_id:'FAM' ],
-                    file(params.pipelines_testdata_base_path + 'testdata/charmedswan_methbat_profile.tsv', checkIfExists: true)
-                    ],
-                    [
-                        [ id:'test2', family_id:'FAM' ],
-                    file(params.pipelines_testdata_base_path + 'testdata/charmedswan_methbat_profile.tsv', checkIfExists: true)
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_methbat_profile_regions.tsv', checkIfExists: true)
                     ]
                 )
-                input[1] = channel.of(
-                    [
-                        [ id:'test2'],
+                input[1] = channel.empty()
+                input[2] = channel.of([
+                    [ id:'methbat_regions' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
+                ])
+                input[3] = channel.of([
+                    [ id:'methbat_map' ],
                     file(params.pipelines_testdata_base_path + 'reference/methbat_map.tsv', checkIfExists: true)
-                    ]
-                )
+                ])
                 """
             }
         }
 
-         then {
-            assert workflow.success
+        then {
+            def tables = workflow.out.methylation_annotation.collect { meta, tsv -> [ meta, file(tsv).name ] }.sort { table -> table[1] }
             assertAll(
-                { assert snapshot(workflow.out).match() }
+                { assert workflow.success },
+                { assert snapshot(tables).match() }
+            )
+        }
+    }
+
+    test("methbat - 2 samples - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id:'test', family_id:'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_methbat_profile_regions.tsv', checkIfExists: true)
+                    ],
+                    [
+                        [ id:'test2', family_id:'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_methbat_profile_regions.tsv', checkIfExists: true)
+                    ]
+                )
+                input[1] = channel.empty()
+                input[2] = channel.of([
+                    [ id:'methbat_regions' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_regions.tsv', checkIfExists: true)
+                ])
+                input[3] = channel.of([
+                    [ id:'methbat_map' ],
+                    file(params.pipelines_testdata_base_path + 'reference/methbat_map.tsv', checkIfExists: true)
+                ])
+                """
+            }
+        }
+
+        then {
+            def tables = workflow.out.methylation_annotation.collect { meta, tsv -> [ meta, file(tsv).name ] }.sort { table -> table[1] }
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(tables).match() }
+            )
+        }
+    }
+
+    test("methbat - labelled regions - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id:'test', family_id:'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_methbat_profile_regions.tsv', checkIfExists: true)
+                    ]
+                )
+                input[1] = channel.empty()
+                input[2] = channel.of([
+                    [ id:'methylation_regions_labelled' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/methylation_regions_labelled.tsv', checkIfExists: true)
+                ])
+                input[3] = channel.of([
+                    [ id:'methbat_map_labelled' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/methbat_map_labelled.tsv', checkIfExists: true)
+                ])
+                """
+            }
+        }
+
+        then {
+            def tables = workflow.out.methylation_annotation.collect { meta, tsv -> [ meta, file(tsv).name ] }.sort { table -> table[1] }
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(tables).match() }
+            )
+        }
+    }
+
+    test("modkit - labelled regions - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = channel.empty()
+                input[1] = channel.of(
+                    [
+                        [ id:'test', family_id:'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_modkit_dmr_hp1_vs_hp2.bed', checkIfExists: true)
+                    ]
+                )
+                input[2] = channel.of([
+                    [ id:'methylation_regions_labelled' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/methylation_regions_labelled.tsv', checkIfExists: true)
+                ])
+                input[3] = channel.of([
+                    [ id:'methbat_map_labelled' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/methbat_map_labelled.tsv', checkIfExists: true)
+                ])
+                """
+            }
+        }
+
+        then {
+            def tables = workflow.out.methylation_annotation.collect { meta, tsv -> [ meta, file(tsv).name ] }.sort { table -> table[1] }
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(tables).match() }
+            )
+        }
+    }
+
+    test("methbat and modkit - labelled regions - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id:'test', family_id:'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_methbat_profile_regions.tsv', checkIfExists: true)
+                    ]
+                )
+                input[1] = channel.of(
+                    [
+                        [ id:'test', family_id:'FAM' ],
+                        file(params.pipelines_testdata_base_path + 'testdata/HG002_modkit_dmr_hp1_vs_hp2.bed', checkIfExists: true)
+                    ]
+                )
+                input[2] = channel.of([
+                    [ id:'methylation_regions_labelled' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/methylation_regions_labelled.tsv', checkIfExists: true)
+                ])
+                input[3] = channel.of([
+                    [ id:'methbat_map_labelled' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/methbat_map_labelled.tsv', checkIfExists: true)
+                ])
+                """
+            }
+        }
+
+        then {
+            def tables = workflow.out.methylation_annotation.collect { meta, tsv -> [ meta, file(tsv).name ] }.sort { table -> table[1] }
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(tables).match() }
             )
         }
     }

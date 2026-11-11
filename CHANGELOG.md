@@ -56,6 +56,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1287](https://github.com/genomic-medicine-sweden/nallo/pull/1287) - Added Kivvi for FSHD analysis (calls long D4Z4 repeats for FSHD resolution and KIV2 repeats for LPA)
 - [#1286](https://github.com/genomic-medicine-sweden/nallo/pull/1286) - Added `--paraphase_config` param to allow custom configuration of paraphase
 - [#1307](https://github.com/genomic-medicine-sweden/nallo/pull/1307) - Added `--trgt_spanning_repeats_output_format` parameter to control the output format of TRGT separately from the general alignment format. The default takes the same value as the general alignment output format.
+- [#1329](https://github.com/genomic-medicine-sweden/nallo/pull/1329) - Added haplotype comparison (HP1 vs HP2) over `--methylation_regions` with nf-core `modkit/dmr` for modkit methylation calling, run as part of methylation annotation
+- [#1340](https://github.com/genomic-medicine-sweden/nallo/pull/1340) - Added a per-family annotated table for modkit dmr results (`{family}_modkit_dmr_annotated.tsv`), in the same layout as the methbat table
+- [#1340](https://github.com/genomic-medicine-sweden/nallo/pull/1340) - Added start-up checks of the `--methylation_regions` and `--methbat_map` file contents
 
 ### Changed
 
@@ -161,6 +164,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1320](https://github.com/genomic-medicine-sweden/nallo/pull/1320) - Updated `longphase` modules to v2.1.1
 - [#1309](https://github.com/genomic-medicine-sweden/nallo/pull/1309) - Updated local `sentieon/dnascope-longread` module to [v2.0.1](https://github.com/Sentieon/sentieon-cli/releases/tag/v2.0.1)
 - [#1318](https://github.com/genomic-medicine-sweden/nallo/pull/1318) - Updated local modules `collapse_mitochondrial_gt` and `vep_prep_sv` to Python 3.14.4, and switched `create_pedigree_file` to a coreutils image, as it does not use Python
+- [#1329](https://github.com/genomic-medicine-sweden/nallo/pull/1329) - Renamed `--methbat_regions` to `--methylation_regions`, used by both methbat and modkit
+- [#1329](https://github.com/genomic-medicine-sweden/nallo/pull/1329) - Changed `--skip_methylation_annotation` to default to `false` whenever a methylation caller runs (previously only methbat); methylation annotation now requires phasing and `--methylation_regions`
+- [#1340](https://github.com/genomic-medicine-sweden/nallo/pull/1340) - Changed methbat and modkit dmr to measure each region of `--methylation_regions` once (named `chrom:start-end`); region labels and `--methbat_map` genes are added afterwards, each label with its own gene
+- [#1340](https://github.com/genomic-medicine-sweden/nallo/pull/1340) - Changed `--methbat_map` to be required for methylation annotation with any methylation caller
 
 ### Removed
 
@@ -247,6 +254,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                                  | `--publish_input_aligned_bams`              |
 |                                  | `--paraphase_config`                        |
 |                                  | `--trgt_spanning_repeats_output_format`     |
+| `--methbat_regions`              | `--methylation_regions`                     |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.

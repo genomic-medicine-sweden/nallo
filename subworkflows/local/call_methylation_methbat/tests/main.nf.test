@@ -291,4 +291,53 @@ nextflow_workflow {
         }
     }
 
+    test("1 sample - phased - labelled regions") {
+        when {
+            params{
+                extra_methbat_profile_args = ""
+            }
+            workflow {
+                """
+                input[0] = PHASING.out.haplotagged_bam_bai
+                input[1] = channel.of([
+                    [ id: 'methylation_regions_labelled' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/methylation_regions_labelled.tsv', checkIfExists: true)
+                ])
+                """
+            }
+        }
+        then {
+            // One row per region, cpg_label set to chrom:start-end
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    file(workflow.out.region_profile[0][1]).readLines().findAll { line -> line.startsWith('chr') }
+                ).match() }
+            )
+        }
+    }
+
+    test("1 sample - phased - labelled regions - stub") {
+        options "-stub"
+        when {
+            params{
+                extra_methbat_profile_args = ""
+            }
+            workflow {
+                """
+                input[0] = PHASING.out.haplotagged_bam_bai
+                input[1] = channel.of([
+                    [ id: 'methylation_regions_labelled' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/methylation_regions_labelled.tsv', checkIfExists: true)
+                ])
+                """
+            }
+        }
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
 }

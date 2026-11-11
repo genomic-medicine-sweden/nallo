@@ -1,0 +1,42 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/genomic-medicine-sweden/nallo/master/assets/schema_methylation_regions.json",
+    "title": "genomic-medicine-sweden/nallo pipeline - params.methylation_regions schema",
+    "description": "Schema for the file provided with params.methylation_regions",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "chrom": {
+                "errorMessage": "Each region needs a `chrom`."
+            },
+            "start": {
+                "type": "integer",
+                "minimum": 0,
+                "errorMessage": "`start` must be a non-negative integer."
+            },
+            "end": {
+                "type": "integer",
+                "minimum": 0,
+                "errorMessage": "`end` must be a non-negative integer."
+            }
+        },
+        "required": ["chrom", "start", "end"]
+    },
+    "minItems": 1,
+    "contains": {
+        "not": {
+            "anyOf": [
+                {
+                    "required": ["cpg_label"],
+                    "properties": { "cpg_label": { "pattern": "HGNC:NA" } }
+                },
+                {
+                    "required": ["region_label"],
+                    "properties": { "region_label": { "pattern": "HGNC:NA" } }
+                }
+            ]
+        }
+    },
+    "errorMessage": "--methylation_regions needs a header with `chrom`, `start` and `end`, and at least one region whose label is not `HGNC:NA`."
+}

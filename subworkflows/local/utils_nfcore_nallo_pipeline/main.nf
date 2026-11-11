@@ -49,7 +49,7 @@ workflow PIPELINE_INITIALISATION {
     val_gens_panel_of_normals_male
     val_input
     val_methbat_map
-    val_methbat_regions
+    val_methylation_regions
     val_methylation_callers
     val_mitochondrial_caller
     val_par_regions
@@ -205,7 +205,7 @@ workflow PIPELINE_INITIALISATION {
         repeat_calling: ["mapping", "snv_calling", "phasing"],
         repeat_annotation: ["mapping", "snv_calling", "phasing", "repeat_calling"],
         methylation: ["mapping", "snv_calling"],
-        methylation_annotation: ["mapping", "snv_calling", "methylation"],
+        methylation_annotation: ["mapping", "snv_calling", "phasing", "methylation"],
         mitochondrial: ["mapping"],
         gens: ["mapping", "snv_calling"],
         portello: ["mapping", "assembly"],
@@ -228,6 +228,7 @@ workflow PIPELINE_INITIALISATION {
         repeat_annotation: ["stranger_repeat_catalog"],
         gens: ["gens_baf_positions", "gens_panel_of_normals_female", "gens_panel_of_normals_male", "gens_coverage_bins"],
         sex_check: ["somalier_sites"],
+        methylation_annotation: ["methylation_regions"],
     ]
 
     def parameterStatus = [workflow: [
@@ -277,6 +278,7 @@ workflow PIPELINE_INITIALISATION {
         gens_panel_of_normals_female: val_gens_panel_of_normals_female,
         gens_panel_of_normals_male: val_gens_panel_of_normals_male,
         gens_coverage_bins: val_gens_coverage_bins,
+        methylation_regions: val_methylation_regions,
     ]]
 
     //
@@ -335,9 +337,11 @@ workflow PIPELINE_INITIALISATION {
     // Check that all families has at least one sample with affected phenotype if ranking is active
     validateAllFamiliesHasAffectedSamples(ch_samplesheet, val_skip_rank_variants)
 
-    // Check that methbat_regions is provided when methbat is active
-    if (!val_skip_methylation_calling && val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }.contains('methbat') && !val_methbat_regions) {
-        error("Error: --methbat_regions file must be provided when methbat is in --methylation_callers. Remove methbat from --methylation_callers or use --skip_methylation_calling to disable methylation calling.")
+    def methylation_callers = val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }
+
+    // Check that methylation_regions is provided when methbat is active
+    if (!val_skip_methylation_calling && methylation_callers.contains('methbat') && !val_methylation_regions) {
+        error("Error: --methylation_regions file must be provided when methbat is in --methylation_callers. Remove methbat from --methylation_callers or use --skip_methylation_calling to disable methylation calling.")
     }
 
     // Check that methbat_map is provided when methylation annotation is active
@@ -345,9 +349,9 @@ workflow PIPELINE_INITIALISATION {
         error("Error: --methbat_map must be provided when running without --skip_methylation_annotation. Provide a mapping file or use --skip_methylation_annotation to disable methylation annotation.")
     }
 
-    // Check that methbat is in --methylation_callers when methylation annotation is active
-    if (!val_skip_methylation_annotation && !val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }.contains('methbat')) {
-        error("Error: methbat must be in --methylation_callers when running without --skip_methylation_annotation. Add methbat to --methylation_callers or use --skip_methylation_annotation to disable methylation annotation.")
+    // Check that a methylation caller is selected when methylation annotation is active
+    if (!val_skip_methylation_annotation && !methylation_callers) {
+        error("Error: methbat or modkit must be in --methylation_callers when running without --skip_methylation_annotation. Add a caller to --methylation_callers or use --skip_methylation_annotation to disable methylation annotation.")
     }
 
     // Check that target_regions is provided when using the ONT_R10_AS preset

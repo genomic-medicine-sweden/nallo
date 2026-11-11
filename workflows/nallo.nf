@@ -113,7 +113,7 @@ workflow NALLO {
     ch_samplesheet
     ch_cramino_regions
     ch_methbat_map
-    ch_methbat_regions
+    ch_methylation_regions
     ch_modkit_call_regions
     ch_mosdepth_regions
     ch_paraphrase_rules
@@ -1249,28 +1249,37 @@ workflow NALLO {
     //
     // Create methylation pileups with modkit or pbcpgtools, create methylation profile with methbat for pacbio
     //
+    ch_methylation_dmr = channel.empty()
+    ch_methylation_profiles = channel.empty()
+
     if (!val_skip_modkit) {
         CALL_METHYLATION_MODKIT(
             (!val_skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai),
             ch_fasta,
             ch_fai,
             ch_modkit_call_regions,
+            ch_methylation_regions,
             val_bigwig_modcodes,
+            val_skip_methylation_annotation,
         )
+
+        ch_methylation_dmr = CALL_METHYLATION_MODKIT.out.dmr
     }
 
     if (!val_skip_methbat) {
         CALL_METHYLATION_METHBAT(
             (!val_skip_phasing ? PHASING.out.haplotagged_bam_bai : ch_bam_bai),
-            ch_methbat_regions,
+            ch_methylation_regions,
         )
 
         ch_methylation_profiles = CALL_METHYLATION_METHBAT.out.region_profile
     }
 
-    if (!val_skip_methylation_annotation && !val_skip_methbat) {
+    if (!val_skip_methylation_annotation) {
         ANNOTATE_METHYLATION(
             ch_methylation_profiles,
+            ch_methylation_dmr,
+            ch_methylation_regions,
             ch_methbat_map,
         )
     }
@@ -1442,6 +1451,7 @@ workflow NALLO {
     methylation_methbat_hap2_index      = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_hap2_index                                                               // channel: [ val(meta), path(bed.gz.tbi) ]
     methylation_methbat_profiles        = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.region_profile                                                                 // channel: [ val(meta), path(region_profile) ]
     methylation_modkit_bed              = val_skip_modkit ? channel.empty() : CALL_METHYLATION_MODKIT.out.bed                                                                              // channel: [ val(meta), path(bed.gz) ]
+    methylation_modkit_dmr              = val_skip_modkit ? channel.empty() : CALL_METHYLATION_MODKIT.out.dmr                                                                              // channel: [ val(meta), path(bed) ]
     methylation_modkit_bigwig           = val_skip_modkit ? channel.empty() : CALL_METHYLATION_MODKIT.out.bigwig                                                                           // channel: [ val(meta), path(bw) ]
     methylation_modkit_tbi              = val_skip_modkit ? channel.empty() : CALL_METHYLATION_MODKIT.out.tbi                                                                              // channel: [ val(meta), path(bed.gz.tbi) ]
     mosdepth_global_dist                = val_skip_qc ? channel.empty() : QC_ALIGNED_READS.out.mosdepth_global_dist                                                                        // channel: [ val(meta), path(txt) ]

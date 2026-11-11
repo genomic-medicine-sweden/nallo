@@ -1,7 +1,7 @@
 {
     "samplesheet_vcf | vcf entry_point | Revio trio": {
         "content": [
-            234,
+            240,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -54,7 +54,10 @@
                 "CSVTK_CONCAT": {
                     "csvtk": "0.31.0"
                 },
-                "CSVTK_JOIN": {
+                "CSVTK_JOIN_REGION_GENES": {
+                    "csvtk": "0.37.0"
+                },
+                "CSVTK_JOIN_REGION_LABELS": {
                     "csvtk": "0.37.0"
                 },
                 "CSVTK_MUTATE2": {
@@ -98,6 +101,18 @@
                     "gawk": "5.3.1"
                 },
                 "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_METHBAT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_REGION_GENES": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_REGION_LABELS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_REGION_VALUES": {
                     "gawk": "5.3.1"
                 },
                 "GENMOD_ANNOTATE": {
@@ -1110,10 +1125,10 @@
                 
             ]
         ],
-        "timestamp": "2026-11-09T14:11:16.107670047",
+        "timestamp": "2026-11-10T20:31:42.209004825",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.4"
+            "nextflow": "26.10.3"
         }
     }
 }

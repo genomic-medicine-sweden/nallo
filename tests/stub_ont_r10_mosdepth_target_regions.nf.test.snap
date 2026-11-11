@@ -1,7 +1,7 @@
 {
     "ONT_R10 preset with target_regions uses mosdepth region distribution for MultiQC": {
         "content": [
-            117,
+            120,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -48,10 +48,19 @@
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
-                "GAWK": {
+                "GAWK_DMR_REGIONS": {
                     "gawk": "5.3.1"
                 },
                 "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_PILEUP_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_REGION_GENES": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_REGION_LABELS": {
                     "gawk": "5.3.1"
                 },
                 "GLNEXUS": {
@@ -297,10 +306,10 @@
                 "snvs/sample/HG002_ONT_C/HG002_ONT_C_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-11-09T14:18:48.682708018",
+        "timestamp": "2026-11-10T20:40:01.679232309",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.4"
+            "nextflow": "26.10.3"
         }
     }
 }

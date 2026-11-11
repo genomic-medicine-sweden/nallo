@@ -1,0 +1,40 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/genomic-medicine-sweden/nallo/master/assets/schema_methbat_map.json",
+    "title": "genomic-medicine-sweden/nallo pipeline - params.methbat_map schema",
+    "description": "Schema for the file provided with params.methbat_map",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "chrom": {
+                "errorMessage": "Each row needs a `chrom`."
+            },
+            "start": {
+                "type": "integer",
+                "minimum": 0,
+                "errorMessage": "`start` must be a non-negative integer."
+            },
+            "end": {
+                "type": "integer",
+                "minimum": 0,
+                "errorMessage": "`end` must be a non-negative integer."
+            },
+            "hgnc_id": {
+                "oneOf": [
+                    {
+                        "type": "string",
+                        "pattern": "^\\S+$"
+                    },
+                    {
+                        "type": "integer"
+                    }
+                ],
+                "errorMessage": "Each row needs an `hgnc_id`, e.g. `4826` or `HGNC:4826`."
+            }
+        },
+        "required": ["chrom", "start", "end", "hgnc_id"]
+    },
+    "minItems": 1,
+    "errorMessage": "--methbat_map needs a header with `chrom`, `start`, `end` and `hgnc_id`, and at least one row."
+}
