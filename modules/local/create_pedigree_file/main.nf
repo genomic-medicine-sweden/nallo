@@ -2,10 +2,10 @@ process CREATE_PEDIGREE_FILE {
     tag "${meta.id}"
     label 'process_single'
 
-    conda "conda-forge::python=3.8.3"
+    conda "${moduleDir}/environment.yml"
     container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
-        ? 'https://depot.galaxyproject.org/singularity/python:3.8.3'
-        : 'biocontainers/python:3.8.3'}"
+        ? 'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/52/52ccce28d2ab928ab862e25aae26314d69c8e38bd41ca9431c67ef05221348aa/data'
+        : 'community.wave.seqera.io/library/coreutils_grep_gzip_lbzip2_pruned:838ba80435a629f8'}"
 
     input:
     tuple val(meta), val(sample_metas)
@@ -13,7 +13,6 @@ process CREATE_PEDIGREE_FILE {
     output:
     tuple val(meta), path("*.ped"), emit: ped
     tuple val("${task.process}"), val('create_pedigree_file'), val("1.0"), emit: versions_create_pedigree_file, topic: versions
-    tuple val("${task.process}"), val('python'), eval("python --version | sed 's/Python //g'"), emit: versions_python, topic: versions
 
     when:
     task.ext.when == null || task.ext.when

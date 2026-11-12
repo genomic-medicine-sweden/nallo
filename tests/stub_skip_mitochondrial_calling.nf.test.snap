@@ -55,8 +55,7 @@
                     "somalier": "0.2.18"
                 },
                 "SAMPLESHEET_PED": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
+                    "create_pedigree_file": 1.0
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
@@ -120,10 +119,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-07-31T10:20:40.41501554",
+        "timestamp": "2026-11-04T12:17:42.890857974",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.10.3"
         }
     },
     "Test mitochondrial calling runs without sv_call_regions": {
@@ -205,8 +204,7 @@
                     "somalier": "0.2.18"
                 },
                 "SAMPLESHEET_PED": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
+                    "create_pedigree_file": 1.0
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
@@ -277,10 +275,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-10-29T11:16:47.99637575",
+        "timestamp": "2026-11-04T12:17:08.991024179",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.4"
+            "nextflow": "26.10.3"
         }
     },
     "Test mitochondrial calling runs by default": {
@@ -359,8 +357,7 @@
                     "somalier": "0.2.18"
                 },
                 "SAMPLESHEET_PED": {
-                    "create_pedigree_file": 1.0,
-                    "python": "3.8.3"
+                    "create_pedigree_file": 1.0
                 },
                 "SAMTOOLS_FAIDX": {
                     "samtools": "1.23.1"
@@ -424,10 +421,10 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-10-12T13:57:36.909896009",
+        "timestamp": "2026-11-04T12:16:27.695938236",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.09.2"
+            "nextflow": "26.10.3"
         }
     }
 }

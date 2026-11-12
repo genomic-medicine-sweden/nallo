@@ -205,6 +205,7 @@ workflow NALLO {
     val_sv_callers_to_merge
     val_sv_callers_to_run
     val_sv_call_regions
+    val_trgt_spanning_repeats_output_format
     val_vep_cache
     val_vep_cache_version
 
@@ -1283,7 +1284,7 @@ workflow NALLO {
             ch_fasta,
             ch_fai,
             ch_str_bed,
-            val_cram_output,
+            val_trgt_spanning_repeats_output_format == 'cram',
             ch_vcfexpress_prelude,
         )
 
@@ -1427,8 +1428,8 @@ workflow NALLO {
     kivvi_json                          = val_skip_kivvi ? channel.empty() : KIVVI.out.json                                                                                                // channel: [ val(meta), path(json) ]
     kivvi_bam                           = val_skip_kivvi ? channel.empty() : KIVVI.out.bam                                                                                                 // channel: [ val(meta), path(bam) ]
     kivvi_bai                           = val_skip_kivvi ? channel.empty() : KIVVI.out.bai                                                                                                 // channel: [ val(meta), path(bai) ]
-    kivvi_crai                          = !val_cram_output ? channel.empty() : SAMTOOLS_CONVERT_KIVVI.out.crai                                                                             // channel: [ val(meta), path(crai) ]
-    kivvi_cram                          = !val_cram_output ? channel.empty() : SAMTOOLS_CONVERT_KIVVI.out.cram                                                                             // channel: [ val(meta), path(cram) ]
+    kivvi_crai                          = val_skip_kivvi || !val_cram_output ? channel.empty() : SAMTOOLS_CONVERT_KIVVI.out.crai                                                           // channel: [ val(meta), path(crai) ]
+    kivvi_cram                          = val_skip_kivvi || !val_cram_output ? channel.empty() : SAMTOOLS_CONVERT_KIVVI.out.cram                                                           // channel: [ val(meta), path(cram) ]
     methylation_family_annotated        = val_skip_methylation_annotation ? channel.empty() : ANNOTATE_METHYLATION.out.methylation_annotation                                              // channel: [ val(meta), path(methylated_regions_by_family) ]
     methylation_methbat_combined_bed    = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_combined_bed                                                             // channel: [ val(meta), path(bed.gz) ]
     methylation_methbat_combined_bigwig = val_skip_methbat ? channel.empty() : CALL_METHYLATION_METHBAT.out.pbcpg_combined_bigwig                                                          // channel: [ val(meta), path(combined.bw) ]
