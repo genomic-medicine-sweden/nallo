@@ -3,7 +3,7 @@ Changes in component 'nf-core/custom/addmostseverepli'
 Changes in 'custom/addmostseverepli/main.nf':
 --- modules/nf-core/custom/addmostseverepli/main.nf
 +++ modules/nf-core/custom/addmostseverepli/main.nf
-@@ -12,7 +12,7 @@
+@@ -15,7 +15,7 @@
  
      output:
      tuple val(meta), path("*.vcf.gz"), emit: vcf
@@ -15,6 +15,8 @@ Changes in 'custom/addmostseverepli/main.nf':
 
 'modules/nf-core/custom/addmostseverepli/meta.yml' is unchanged
 'modules/nf-core/custom/addmostseverepli/resources/usr/bin/add_most_severe_pli.py' is unchanged
+'modules/nf-core/custom/addmostseverepli/.conda-lock/linux_arm64-bd-2700cd1b1e45679d_1.txt' is unchanged
+'modules/nf-core/custom/addmostseverepli/.conda-lock/linux_amd64-bd-1cb13a63908506a2_1.txt' is unchanged
 'modules/nf-core/custom/addmostseverepli/tests/main.nf.test.snap' is unchanged
 'modules/nf-core/custom/addmostseverepli/tests/nextflow.config' is unchanged
 'modules/nf-core/custom/addmostseverepli/tests/main.nf.test' is unchanged

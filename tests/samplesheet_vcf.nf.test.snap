@@ -201,7 +201,7 @@
                     "strdrop": "0.3.1"
                 },
                 "SVDB_QUERY": {
-                    "svdb": "2.12.0"
+                    "svdb": "2.12.2"
                 },
                 "TABIX_TABIX": {
                     "tabix": 1.21
@@ -216,10 +216,10 @@
                     "tiddit": "3.9.4"
                 },
                 "TRGT_GENOTYPE": {
-                    "trgt": "5.0.0-e9acee0"
+                    "trgt": "5.1.0-ec66463"
                 },
                 "TRGT_MERGE": {
-                    "trgt": "5.0.0-e9acee0"
+                    "trgt": "5.1.0-ec66463"
                 },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34

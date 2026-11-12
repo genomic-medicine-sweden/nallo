@@ -55,6 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1277](https://github.com/genomic-medicine-sweden/nallo/pull/1277) - Added `--filter_vep_snvs_expression` and `--filter_vep_svs_expression` for custom VEP annotation-based filtering of SNVs and SVs. Expressions can be used without an HGNC ID file or combined with `--filter_variants_hgnc_ids` using `and`; when bcftools filtering is also enabled, it runs before VEP filtering.
 - [#1287](https://github.com/genomic-medicine-sweden/nallo/pull/1287) - Added Kivvi for FSHD analysis (calls long D4Z4 repeats for FSHD resolution and KIV2 repeats for LPA)
 - [#1286](https://github.com/genomic-medicine-sweden/nallo/pull/1286) - Added `--paraphase_config` param to allow custom configuration of paraphase
+- [#1307](https://github.com/genomic-medicine-sweden/nallo/pull/1307) - Added `--trgt_spanning_repeats_output_format` parameter to control the output format of TRGT separately from the general alignment format. The default takes the same value as the general alignment output format.
 
 ### Changed
 
@@ -160,6 +161,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1320](https://github.com/genomic-medicine-sweden/nallo/pull/1320) - Updated `longphase` modules to v2.1.1
 - [#1309](https://github.com/genomic-medicine-sweden/nallo/pull/1309) - Updated local `sentieon/dnascope-longread` module to [v2.0.1](https://github.com/Sentieon/sentieon-cli/releases/tag/v2.0.1)
 - [#1318](https://github.com/genomic-medicine-sweden/nallo/pull/1318) - Updated local modules `collapse_mitochondrial_gt` and `vep_prep_sv` to Python 3.14.4, and switched `create_pedigree_file` to a coreutils image, as it does not use Python
+- [#1308](https://github.com/genomic-medicine-sweden/nallo/pull/1308) - Updated trgt to 5.1.0
+- [#1322](https://github.com/genomic-medicine-sweden/nallo/pull/1322) - Updated all nf-core modules that don't include version bumps
 - [#XXX]() - Updated bcftools/view and adapted local subworkflows to `bcftools/view` index output and migrated phasing GTF compression to `htslib/bgziptabix`, preserving TBI indexes and output names.
 
 ### Removed
@@ -205,6 +208,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1297](https://github.com/genomic-medicine-sweden/nallo/pull/1297) - Fixed formatting for Nextflow 26.10.3: aligned comments of take/emit entries with the 26.10.3 formatter
 - [#1302](https://github.com/genomic-medicine-sweden/nallo/pull/1302) - Fixed PacBio runs without `--sv_call_regions` failing at launch with `No signature of method: java.lang.String.map()` in `call_mitochondrial_variants`
 - [#1296](https://github.com/genomic-medicine-sweden/nallo/pull/1296) - Fixed `--phaser hiphase` assigning haplotagged BAMs to the wrong samples when a sample ID is a prefix of another sample's BAM name: BAMs are now matched to samples by family and exact output name
+- [#1331](https://github.com/genomic-medicine-sweden/nallo/pull/1331) - Fixed pipeline crash when combining `--skip_kivvi` and `alignment_output_format` set to `cram`
 - [#1335](https://github.com/genomic-medicine-sweden/nallo/pull/1335) - Fixed missing snapshots updates after Longphase update
 - [#1319](https://github.com/genomic-medicine-sweden/nallo/pull/1319) - Fixed paraphrase output rows changing order between runs: Paraphase JSONs are now sorted by sample name within each family
 - [#1332](https://github.com/genomic-medicine-sweden/nallo/pull/1332) - Fixed `SVDB_QUERY` failing with `KeyError: 'END'` when `SVDB_MERGE` clustered a `<TRA>` record with `BND` records from other callers, by updating the SVDB modules to 2.12.2
@@ -245,6 +249,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                                  | `--filter_vep_svs_expression`               |
 |                                  | `--publish_input_aligned_bams`              |
 |                                  | `--paraphase_config`                        |
+|                                  | `--trgt_spanning_repeats_output_format`     |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.
@@ -285,6 +290,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | sawfish/jointcall              | 2.3.0       | 2.3.1       |
 | longphase/phase                | 2.0.1       | 2.1.1       |
 | longphase/haplotag             | 2.0.1       | 2.1.1       |
+| trgt/genotype                  | 5.0.0       | 5.1.0       |
+| trgt/merge                     | 5.0.0       | 5.1.0       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
