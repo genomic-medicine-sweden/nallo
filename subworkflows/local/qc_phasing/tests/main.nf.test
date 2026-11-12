@@ -105,6 +105,8 @@ nextflow_workflow {
                 { assert workflow.out.phasing_stats.size() == 2 },
                 { assert workflow.out.phasing_blocks.size() == 2 },
                 { assert workflow.out.phasing_blocks_index.size() == 2 },
+                { assert workflow.out.phasing_blocks.every { meta, gtf -> file(gtf).name == "${meta.id}_stats.gtf.gz" } },
+                { assert workflow.out.phasing_blocks_index.every { meta, index -> file(index).name == "${meta.id}_stats.gtf.gz.tbi" } },
                 { assert workflow.out.haplotagging_stats.size() == 2 },
                 { assert workflow.out.haplotagging_arrow.size() == 2 },
                 { // Making sure that the samples are actually different
@@ -228,6 +230,8 @@ nextflow_workflow {
                 { assert workflow.out.phasing_stats.size() == 2 },
                 { assert workflow.out.phasing_blocks.size() == 2 },
                 { assert workflow.out.phasing_blocks_index.size() == 2 },
+                { assert workflow.out.phasing_blocks.every { meta, gtf -> file(gtf).name == "${meta.id}_stats.gtf.gz" } },
+                { assert workflow.out.phasing_blocks_index.every { meta, index -> file(index).name == "${meta.id}_stats.gtf.gz.tbi" } },
                 { assert workflow.out.haplotagging_stats.size() == 2 },
                 { assert workflow.out.haplotagging_arrow.size() == 2 },
                 { // Making sure that the samples are actually different
@@ -304,6 +308,8 @@ nextflow_workflow {
                 { assert workflow.out.phasing_stats.size() == 2 },
                 { assert workflow.out.phasing_blocks.size() == 2 },
                 { assert workflow.out.phasing_blocks_index.size() == 2 },
+                { assert workflow.out.phasing_blocks.every { meta, gtf -> file(gtf).name == "${meta.id}_stats.gtf.gz" } },
+                { assert workflow.out.phasing_blocks_index.every { meta, index -> file(index).name == "${meta.id}_stats.gtf.gz.tbi" } },
                 { assert workflow.out.haplotagging_stats.size() == 2 },
                 { assert workflow.out.haplotagging_arrow.size() == 2 },
                 { assert snapshot(workflow.out).match() }
@@ -415,6 +421,8 @@ nextflow_workflow {
                 { assert workflow.out.phasing_stats.size() == 2 },
                 { assert workflow.out.phasing_blocks.size() == 2 },
                 { assert workflow.out.phasing_blocks_index.size() == 2 },
+                { assert workflow.out.phasing_blocks.every { meta, gtf -> file(gtf).name == "${meta.id}_stats.gtf.gz" } },
+                { assert workflow.out.phasing_blocks_index.every { meta, index -> file(index).name == "${meta.id}_stats.gtf.gz.tbi" } },
                 { assert workflow.out.haplotagging_stats.size() == 2 },
                 { assert workflow.out.haplotagging_arrow.size() == 2 },
                 { assert snapshot(workflow.out).match() }

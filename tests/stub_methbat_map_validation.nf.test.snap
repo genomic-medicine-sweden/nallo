@@ -40,22 +40,22 @@
                     "bcftools": 1.22
                 },
                 "BCFTOOLS_VIEW": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_VIEW_CHROMOGRAPH": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_VIEW_MITO": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_VIEW_PHASING": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_VIEW_SVS": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_VIEW_UNCOMPRESS": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BEDTOOLS_MERGE": {
                     "bedtools": "2.31.1"
@@ -101,7 +101,7 @@
                     "echtvar": "0.2.4"
                 },
                 "ENSEMBLVEP_FILTERVEP": {
-                    "ensemblvep": 116.1,
+                    "ensemblvep": 116.3,
                     "perl-math-cdf": 0.1
                 },
                 "ENSEMBLVEP_SNV": {
@@ -157,7 +157,7 @@
                     "hifiasm": "0.25.0-r726"
                 },
                 "HTSLIB_BGZIPTABIX": {
-                    "htslib": 1.24,
+                    "htslib": 1.25,
                     "xz": "5.8.3"
                 },
                 "LONGPHASE_HAPLOTAG": {
@@ -275,10 +275,6 @@
                 },
                 "SVDB_QUERY": {
                     "svdb": "2.12.2"
-                },
-                "TABIX_BGZIPTABIX": {
-                    "bgzip": 1.21,
-                    "tabix": 1.21
                 },
                 "TABIX_HIFICNV": {
                     "tabix": 1.21

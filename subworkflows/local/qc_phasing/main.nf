@@ -1,7 +1,7 @@
-include { BCFTOOLS_CONCAT  } from '../../../modules/nf-core/bcftools/concat/main'
-include { CRAMINO          } from '../../../modules/nf-core/cramino/main'
-include { WHATSHAP_STATS   } from '../../../modules/nf-core/whatshap/stats/main'
-include { TABIX_BGZIPTABIX } from '../../../modules/nf-core/tabix/bgziptabix/main'
+include { BCFTOOLS_CONCAT   } from '../../../modules/nf-core/bcftools/concat/main'
+include { CRAMINO           } from '../../../modules/nf-core/cramino/main'
+include { WHATSHAP_STATS    } from '../../../modules/nf-core/whatshap/stats/main'
+include { HTSLIB_BGZIPTABIX } from '../../../modules/nf-core/htslib/bgziptabix/main'
 
 workflow QC_PHASING {
     take:
@@ -48,19 +48,19 @@ workflow QC_PHASING {
         false,
     )
 
-    TABIX_BGZIPTABIX(WHATSHAP_STATS.out.gtf)
-
-    ch_phasing_gtf = TABIX_BGZIPTABIX.out.gz_index.multiMap { meta, gtf, index ->
-        gz: [meta, gtf]
-        tbi: [meta, index]
-    }
+    HTSLIB_BGZIPTABIX(
+        WHATSHAP_STATS.out.gtf.map { meta, gtf -> [meta, gtf, [], []] },
+        'compress',
+        true,
+        'gtf',
+    )
 
     CRAMINO(ch_bam_bai_haplotagged)
 
     emit:
-    phasing_stats        = WHATSHAP_STATS.out.tsv // channel: [ val(meta), path(stats) ]
-    phasing_blocks       = ch_phasing_gtf.gz      // channel: [ val(meta), path(gtf)   ]
-    phasing_blocks_index = ch_phasing_gtf.tbi     // channel: [ val(meta), path(tbi)   ]
-    haplotagging_stats   = CRAMINO.out.stats      // channel: [ val(meta), path(txt)   ]
-    haplotagging_arrow   = CRAMINO.out.arrow      // channel: [ val(meta), path(arrow) ]
+    phasing_stats        = WHATSHAP_STATS.out.tsv       // channel: [ val(meta), path(stats) ]
+    phasing_blocks       = HTSLIB_BGZIPTABIX.out.output // channel: [ val(meta), path(gtf)   ]
+    phasing_blocks_index = HTSLIB_BGZIPTABIX.out.index  // channel: [ val(meta), path(tbi)   ]
+    haplotagging_stats   = CRAMINO.out.stats            // channel: [ val(meta), path(txt)   ]
+    haplotagging_arrow   = CRAMINO.out.arrow            // channel: [ val(meta), path(arrow) ]
 }
