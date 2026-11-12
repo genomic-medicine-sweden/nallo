@@ -247,6 +247,10 @@
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
                 },
+                "HTSLIB_BGZIPTABIX": {
+                    "htslib": 1.25,
+                    "xz": "5.8.3"
+                },
                 "LONGPHASE_HAPLOTAG": {
                     "longphase": "2.1.1"
                 },
@@ -306,10 +310,6 @@
                 },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
-                },
-                "HTSLIB_BGZIPTABIX": {
-                    "htslib": 1.25,
-                    "xz": "5.8.3"
                 },
                 "TRGT_GENOTYPE": {
                     "trgt": "5.1.0-ec66463"
@@ -503,7 +503,7 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-11-09T14:21:50.548193428",
+        "timestamp": "2026-11-12T14:30:28.861214645",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"

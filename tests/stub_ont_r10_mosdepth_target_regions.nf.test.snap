@@ -60,6 +60,10 @@
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
                 },
+                "HTSLIB_BGZIPTABIX": {
+                    "htslib": 1.25,
+                    "xz": "5.8.3"
+                },
                 "LONGPHASE_HAPLOTAG": {
                     "longphase": "2.1.1"
                 },
@@ -111,10 +115,6 @@
                 "STRDUST": {
                     "bgzip": "1.23.1",
                     "strdust": "0.16.0"
-                },
-                "HTSLIB_BGZIPTABIX": {
-                    "htslib": 1.25,
-                    "xz": "5.8.3"
                 },
                 "TABIX_TABIX": {
                     "tabix": 1.21
@@ -297,7 +297,7 @@
                 "snvs/sample/HG002_ONT_C/HG002_ONT_C_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-11-09T14:18:48.682708018",
+        "timestamp": "2026-11-12T14:22:47.60172084",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"

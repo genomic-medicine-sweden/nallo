@@ -72,6 +72,10 @@
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
                 },
+                "HTSLIB_BGZIPTABIX": {
+                    "htslib": 1.25,
+                    "xz": "5.8.3"
+                },
                 "LONGPHASE_HAPLOTAG": {
                     "longphase": "2.1.1"
                 },
@@ -137,10 +141,6 @@
                 "SVDB_MERGE_BY_FAMILY": {
                     "bcftools": 1.24,
                     "svdb": "2.12.2"
-                },
-                "HTSLIB_BGZIPTABIX": {
-                    "htslib": 1.25,
-                    "xz": "5.8.3"
                 },
                 "TABIX_HIFICNV": {
                     "tabix": 1.21
@@ -435,7 +435,7 @@
                 "visualization_tracks/HG002_ONT_C/HG002_ONT_C_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-11-09T14:17:16.397184173",
+        "timestamp": "2026-11-12T14:32:17.546191592",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"
