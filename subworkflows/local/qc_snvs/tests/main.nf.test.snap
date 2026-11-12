@@ -15,7 +15,7 @@
                         {
                             "id": "test"
                         },
-                        "test.bcftools_stats.txt:md5,a84bf91b4f074e3c07f23bd285dcc12b"
+                        "test.bcftools_stats.txt:md5,43794b692478e4607db7058ac4b9a2be"
                     ]
                 ],
                 "stats": [
@@ -23,7 +23,7 @@
                         {
                             "id": "test"
                         },
-                        "test.bcftools_stats.txt:md5,a84bf91b4f074e3c07f23bd285dcc12b"
+                        "test.bcftools_stats.txt:md5,43794b692478e4607db7058ac4b9a2be"
                     ]
                 ],
                 "vcfstatsreport": [
@@ -96,7 +96,7 @@
                         {
                             "id": "test"
                         },
-                        "test.bcftools_stats.txt:md5,a84bf91b4f074e3c07f23bd285dcc12b"
+                        "test.bcftools_stats.txt:md5,43794b692478e4607db7058ac4b9a2be"
                     ]
                 ],
                 "stats": [
@@ -104,7 +104,7 @@
                         {
                             "id": "test"
                         },
-                        "test.bcftools_stats.txt:md5,a84bf91b4f074e3c07f23bd285dcc12b"
+                        "test.bcftools_stats.txt:md5,43794b692478e4607db7058ac4b9a2be"
                     ]
                 ],
                 "vcfstatsreport": [

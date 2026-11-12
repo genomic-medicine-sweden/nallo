@@ -38,7 +38,7 @@ workflow VCF_CONCAT_NORM_VARIANTS {
     )
 
     emit:
-    vcf                 = BCFTOOLS_NORM_SINGLESAMPLE.out.vcf                                         // channel: [ val(meta), path(vcf) ]
-    index               = BCFTOOLS_NORM_SINGLESAMPLE.out.tbi.mix(BCFTOOLS_NORM_SINGLESAMPLE.out.csi) // channel: [ val(meta), path(tbi/csi) ]
-    bcftools_concat_vcf = BCFTOOLS_CONCAT.out.vcf                                                    // channel: [ val(meta), path(vcf) ]
+    vcf                 = BCFTOOLS_NORM_SINGLESAMPLE.out.vcf   // channel: [ val(meta), path(vcf) ]
+    index               = BCFTOOLS_NORM_SINGLESAMPLE.out.index // channel: [ val(meta), path(tbi/csi) ]
+    bcftools_concat_vcf = BCFTOOLS_CONCAT.out.vcf              // channel: [ val(meta), path(vcf) ]
 }

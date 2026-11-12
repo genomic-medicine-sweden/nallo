@@ -1,20 +1,21 @@
+// Copyright (c) the nf-core community under an open-source MIT license.
+// See https://github.com/nf-core/modules for full license, file patching instructions and upstream contributing.
+
 process BCFTOOLS_CONCAT {
     tag "${meta.id}"
     label 'process_medium'
 
     conda "${moduleDir}/environment.yml"
-    // Newer versions automatically "upgrades" all VCFs to partially phased version 4.5, which breaks some tools in the phasing subworkflow
-    container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
-        ? 'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/5a/5acacb55c52bec97c61fd34ffa8721fce82ce823005793592e2a80bf71632cd0/data'
-        : 'community.wave.seqera.io/library/bcftools:1.21--4335bec1d7b44d11' }"
+    container "${workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container
+        ? 'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/91/914b9b38bbfa22c458ceee6c578fd3d70ee1bffc33d3a064b0663ed4944e7872/data'
+        : 'community.wave.seqera.io/library/bcftools_htslib:1.25--130aa7603bf3bf5c'}"
 
     input:
     tuple val(meta), path(vcfs), path(tbi)
 
     output:
     tuple val(meta), path("${prefix}.${extension}"), emit: vcf
-    tuple val(meta), path("${prefix}.${extension}.tbi"), emit: tbi, optional: true
-    tuple val(meta), path("${prefix}.${extension}.csi"), emit: csi, optional: true
+    tuple val(meta), path("${prefix}.${extension}.{tbi,csi}"), emit: index, optional: true
     tuple val("${task.process}"), val('bcftools'), eval("bcftools --version | sed '1!d; s/^.*bcftools //'"), topic: versions, emit: versions_bcftools
 
     when:

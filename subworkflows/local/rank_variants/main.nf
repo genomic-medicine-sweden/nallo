@@ -44,6 +44,6 @@ workflow RANK_VARIANTS {
     )
 
     emit:
-    vcf = BCFTOOLS_SORT.out.vcf // channel: [ val(meta), path(vcf) ]
-    tbi = BCFTOOLS_SORT.out.tbi // channel: [ val(meta), path(tbi) ]
+    vcf = BCFTOOLS_SORT.out.vcf   // channel: [ val(meta), path(vcf) ]
+    tbi = BCFTOOLS_SORT.out.index // channel: [ val(meta), path(tbi) ]
 }

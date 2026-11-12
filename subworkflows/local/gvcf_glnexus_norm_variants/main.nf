@@ -117,6 +117,6 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     )
 
     emit:
-    vcf   = BCFTOOLS_NORM_MULTISAMPLE.out.vcf                                        // channel: [ val(meta), path(vcf) ]
-    index = BCFTOOLS_NORM_MULTISAMPLE.out.tbi.mix(BCFTOOLS_NORM_MULTISAMPLE.out.csi) // channel: [ val(meta), path(tbi/csi) ]
+    vcf   = BCFTOOLS_NORM_MULTISAMPLE.out.vcf   // channel: [ val(meta), path(vcf) ]
+    index = BCFTOOLS_NORM_MULTISAMPLE.out.index // channel: [ val(meta), path(tbi/csi) ]
 }

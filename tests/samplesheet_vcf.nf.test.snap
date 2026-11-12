@@ -4,25 +4,25 @@
             234,
             {
                 "BCFTOOLS_CONCAT": {
-                    "bcftools": 1.21
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_INDEX": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_MERGE": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_QUERY": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_REHEADER": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_ROH": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_SORT": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_VIEW": {
                     "bcftools": 1.22
@@ -876,7 +876,7 @@
                 "HG004_chromograph_autozyg_chr8.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG004_chromograph_autozyg_chr9.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG004_chromograph_autozyg_chrM.png:md5,33d95212be5bf91fbea53500bcbba19c",
-                "HG004_chromograph_autozyg_chrX.png:md5,8a9113dcdf27328e0e40864af1e60b64",
+                "HG004_chromograph_autozyg_chrX.png:md5,ecdce873982ab227a90007c26a34ed54",
                 "HG004_chromograph_autozyg_chrY.png:md5,33d95212be5bf91fbea53500bcbba19c",
                 "HG004_chromograph_coverage_chr1.png:md5,954482b960865332f37d386da5c9fb75",
                 "HG004_chromograph_coverage_chr10.png:md5,954482b960865332f37d386da5c9fb75",
@@ -1046,7 +1046,7 @@
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -1107,7 +1107,7 @@
                 ]
             ],
             [
-                
+
             ]
         ],
         "timestamp": "2026-11-09T14:11:16.107670047",

@@ -4,19 +4,19 @@
             57,
             {
                 "BCFTOOLS_CONCAT": {
-                    "bcftools": 1.21
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_NORM_MULTISAMPLE": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_SORT": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_STATS": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BEDTOOLS_MERGE": {
                     "bedtools": "2.31.1"
@@ -156,22 +156,22 @@
             44,
             {
                 "BCFTOOLS_CONCAT": {
-                    "bcftools": 1.21
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_NORM_MULTISAMPLE": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_PLUGINFIXPLOIDY": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_SORT": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_STATS": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BEDTOOLS_INTERSECT": {
                     "bedtools": "2.31.1"
@@ -312,22 +312,22 @@
             70,
             {
                 "ANNOTATE_INDELS": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_CONCAT": {
-                    "bcftools": 1.21
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_NORM_MULTISAMPLE": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_NORM_SINGLESAMPLE": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_SORT": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_STATS": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "BCFTOOLS_VIEW": {
                     "bcftools": 1.22
@@ -402,7 +402,7 @@
                     "somalier": "0.2.18"
                 },
                 "RENAME_CHRNAMES": {
-                    "bcftools": 1.22
+                    "bcftools": 1.25
                 },
                 "SAMPLESHEET_PED": {
                     "create_pedigree_file": 1.0

@@ -115,7 +115,7 @@ workflow CALL_SNVS {
         )
 
         ch_vcf = BCFTOOLS_PLUGINFIXPLOIDY.out.vcf
-        ch_index = BCFTOOLS_PLUGINFIXPLOIDY.out.tbi
+        ch_index = BCFTOOLS_PLUGINFIXPLOIDY.out.index
         ch_gvcf = DNASCOPE_LONGREAD.out.gvcf
         ch_gvcf_index = DNASCOPE_LONGREAD.out.gvcf_tbi
     }
