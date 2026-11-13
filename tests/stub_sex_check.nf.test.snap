@@ -43,9 +43,9 @@
                     "mosdepth": "0.3.11"
                 },
                 "PARAPHASE": {
-                    "minimap2": "2.30-r1287",
-                    "paraphase": "3.5.0",
-                    "samtools": 1.23
+                    "minimap2": "2.31-r1302",
+                    "paraphase": "4.1.0",
+                    "samtools": 1.25
                 },
                 "PARAPHRASE": {
                     "paraphrase": "0.2.0"
@@ -145,10 +145,10 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
-        "timestamp": "2026-11-04T12:14:28.933467804",
+        "timestamp": "2026-11-13T16:14:24.986375116",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.3"
+            "nextflow": "26.10.4"
         }
     },
     "Test skip sex check - multisample": {
