@@ -188,9 +188,9 @@
                     "gawk": "5.3.1"
                 },
                 "PARAPHASE": {
-                    "minimap2": "2.30-r1287",
-                    "paraphase": "3.5.0",
-                    "samtools": 1.23
+                    "minimap2": "2.31-r1302",
+                    "paraphase": "4.1.0",
+                    "samtools": 1.25
                 },
                 "PARAPHRASE": {
                     "paraphrase": "0.2.0"
@@ -762,7 +762,7 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-11-09T14:13:25.470120159",
+        "timestamp": "2026-11-13T16:06:25.895970228",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"
