@@ -10,7 +10,7 @@ nextflow_pipeline {
 
         when {
             params {
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8cf6216b9cbf96f6bcfc918610182708e3796ad9/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/bf80152d00c9fb4c8b4aa3f00761f779173cfb79/'
                 input                        = "$projectDir/assets/samplesheet_fastq.csv"
                 outdir                       = "$outputDir"
                 skip_portello                = true

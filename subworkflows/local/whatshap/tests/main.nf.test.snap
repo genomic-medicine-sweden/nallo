@@ -24,8 +24,8 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_haplotagged.bam:md5,6a719774d1f3fef8c71a27dde700e77d",
-                        "HG002_haplotagged.bam.bai:md5,0b5519b4a52f678462a13c3786c5da4c"
+                        "HG002_haplotagged.bam:md5,987d1c9d1c7a0d14b85428100b105027",
+                        "HG002_haplotagged.bam.bai:md5,e341d8633fa846e8e51248178cf7371e"
                     ]
                 ],
                 "haplotagged_bam_bai": [
@@ -34,8 +34,8 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_haplotagged.bam:md5,6a719774d1f3fef8c71a27dde700e77d",
-                        "HG002_haplotagged.bam.bai:md5,0b5519b4a52f678462a13c3786c5da4c"
+                        "HG002_haplotagged.bam:md5,987d1c9d1c7a0d14b85428100b105027",
+                        "HG002_haplotagged.bam.bai:md5,e341d8633fa846e8e51248178cf7371e"
                     ]
                 ],
                 "phased_family_snvs": [
@@ -56,10 +56,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-08T11:16:42.273591832",
+        "timestamp": "2026-11-10T13:57:05.744415142",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.10.4"
         }
     },
     "3 samples - family ID equal to sample ID": {
@@ -87,24 +87,24 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_haplotagged.bam:md5,a0d49896227e17303b4ac4fddda52ce5",
-                        "HG002_haplotagged.bam.bai:md5,967cf50a5401520b59bfbca1fdaa3118"
+                        "HG002_haplotagged.bam:md5,7c24bb659c6b86251665715654828166",
+                        "HG002_haplotagged.bam.bai:md5,168f6e9a8eeb99324b633be057ebc8a2"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "HG002"
                         },
-                        "HG003_haplotagged.bam:md5,cd435b2bc3f860a8751ef3b1847d433f",
-                        "HG003_haplotagged.bam.bai:md5,793861c2b6dd935d79f1bce8c94fd3ed"
+                        "HG003_haplotagged.bam:md5,9a3dd69d9bd8ca85c8600d5be699f83b",
+                        "HG003_haplotagged.bam.bai:md5,04379074ee2989b26298fc9059d921e3"
                     ],
                     [
                         {
                             "id": "HG004",
                             "family_id": "HG002"
                         },
-                        "HG004_haplotagged.bam:md5,969b2ce357816e039996a86e49a70354",
-                        "HG004_haplotagged.bam.bai:md5,0bba7a45e4c8077aa5ef2137132555b0"
+                        "HG004_haplotagged.bam:md5,dbf0678c555e7aa1a56760a77f9910a5",
+                        "HG004_haplotagged.bam.bai:md5,a256f4b3fbccfb345de4c20c7c4779e1"
                     ]
                 ],
                 "haplotagged_bam_bai": [
@@ -113,24 +113,24 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_haplotagged.bam:md5,a0d49896227e17303b4ac4fddda52ce5",
-                        "HG002_haplotagged.bam.bai:md5,967cf50a5401520b59bfbca1fdaa3118"
+                        "HG002_haplotagged.bam:md5,7c24bb659c6b86251665715654828166",
+                        "HG002_haplotagged.bam.bai:md5,168f6e9a8eeb99324b633be057ebc8a2"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "HG002"
                         },
-                        "HG003_haplotagged.bam:md5,cd435b2bc3f860a8751ef3b1847d433f",
-                        "HG003_haplotagged.bam.bai:md5,793861c2b6dd935d79f1bce8c94fd3ed"
+                        "HG003_haplotagged.bam:md5,9a3dd69d9bd8ca85c8600d5be699f83b",
+                        "HG003_haplotagged.bam.bai:md5,04379074ee2989b26298fc9059d921e3"
                     ],
                     [
                         {
                             "id": "HG004",
                             "family_id": "HG002"
                         },
-                        "HG004_haplotagged.bam:md5,969b2ce357816e039996a86e49a70354",
-                        "HG004_haplotagged.bam.bai:md5,0bba7a45e4c8077aa5ef2137132555b0"
+                        "HG004_haplotagged.bam:md5,dbf0678c555e7aa1a56760a77f9910a5",
+                        "HG004_haplotagged.bam.bai:md5,a256f4b3fbccfb345de4c20c7c4779e1"
                     ]
                 ],
                 "phased_family_snvs": [
@@ -151,10 +151,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-08T11:17:05.835169365",
+        "timestamp": "2026-11-10T13:57:29.132637671",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.10.4"
         }
     },
     "3 samples - With corresponding pedigree file": {
@@ -182,24 +182,24 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_haplotagged.bam:md5,d7bc3c7dc53154f1cfcd8d21ecc11d6f",
-                        "HG002_haplotagged.bam.bai:md5,7fd916f3ed6b275c6b297ba9b7899340"
+                        "HG002_haplotagged.bam:md5,221ca6842e2279c1d730f423884e15aa",
+                        "HG002_haplotagged.bam.bai:md5,2454e7a53810793facf067bd385894de"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003_haplotagged.bam:md5,eeb0f4a716caebabec962ca821472a2e",
-                        "HG003_haplotagged.bam.bai:md5,202930bacd48597e7cf617b03cea26fe"
+                        "HG003_haplotagged.bam:md5,f5316720d7ba7c54c719e56820b0c7c4",
+                        "HG003_haplotagged.bam.bai:md5,0b76c19662f6bd24ad4574891ad2c444"
                     ],
                     [
                         {
                             "id": "HG004",
                             "family_id": "FAM"
                         },
-                        "HG004_haplotagged.bam:md5,dd6c9200f86f4b3a6b6d81020db29fa9",
-                        "HG004_haplotagged.bam.bai:md5,46dae4df4185554ee7f59e8a652c03dc"
+                        "HG004_haplotagged.bam:md5,4f632529f77c427a9997b743fac5bd65",
+                        "HG004_haplotagged.bam.bai:md5,2ca213c0ce25625b1171164abfe662be"
                     ]
                 ],
                 "haplotagged_bam_bai": [
@@ -208,24 +208,24 @@
                             "id": "HG002",
                             "family_id": "FAM"
                         },
-                        "HG002_haplotagged.bam:md5,d7bc3c7dc53154f1cfcd8d21ecc11d6f",
-                        "HG002_haplotagged.bam.bai:md5,7fd916f3ed6b275c6b297ba9b7899340"
+                        "HG002_haplotagged.bam:md5,221ca6842e2279c1d730f423884e15aa",
+                        "HG002_haplotagged.bam.bai:md5,2454e7a53810793facf067bd385894de"
                     ],
                     [
                         {
                             "id": "HG003",
                             "family_id": "FAM"
                         },
-                        "HG003_haplotagged.bam:md5,eeb0f4a716caebabec962ca821472a2e",
-                        "HG003_haplotagged.bam.bai:md5,202930bacd48597e7cf617b03cea26fe"
+                        "HG003_haplotagged.bam:md5,f5316720d7ba7c54c719e56820b0c7c4",
+                        "HG003_haplotagged.bam.bai:md5,0b76c19662f6bd24ad4574891ad2c444"
                     ],
                     [
                         {
                             "id": "HG004",
                             "family_id": "FAM"
                         },
-                        "HG004_haplotagged.bam:md5,dd6c9200f86f4b3a6b6d81020db29fa9",
-                        "HG004_haplotagged.bam.bai:md5,46dae4df4185554ee7f59e8a652c03dc"
+                        "HG004_haplotagged.bam:md5,4f632529f77c427a9997b743fac5bd65",
+                        "HG004_haplotagged.bam.bai:md5,2ca213c0ce25625b1171164abfe662be"
                     ]
                 ],
                 "phased_family_snvs": [
@@ -246,10 +246,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-08T11:16:53.755950612",
+        "timestamp": "2026-11-10T13:57:17.48666823",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.10.4"
         }
     }
 }

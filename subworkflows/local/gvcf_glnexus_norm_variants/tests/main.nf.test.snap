@@ -79,10 +79,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-20T10:39:39.711275895",
+        "timestamp": "2026-11-11T16:46:00.245563669",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.06.0"
+            "nextflow": "26.10.4"
         }
     },
     "1 gVCF, without bed, without config": {
@@ -122,10 +122,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-20T10:29:55.498805428",
+        "timestamp": "2026-11-11T16:46:08.234104826",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.06.0"
+            "nextflow": "26.10.4"
         }
     },
     "2 gVCFs, without bed": {
@@ -165,10 +165,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-20T10:39:53.22199622",
+        "timestamp": "2026-11-11T16:46:16.725830966",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.06.0"
+            "nextflow": "26.10.4"
         }
     },
     "2 gVCFs, without bed, sentieon -stub": {
@@ -380,10 +380,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-20T10:40:00.077817475",
+        "timestamp": "2026-11-11T16:46:25.345810539",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.06.0"
+            "nextflow": "26.10.4"
         }
     }
 }
