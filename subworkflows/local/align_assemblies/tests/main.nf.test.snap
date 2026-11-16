@@ -15,7 +15,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38_unfiltered.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "hg38_unfiltered.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
@@ -67,7 +67,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38_unfiltered.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "hg38_unfiltered.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "unfiltered_bam": [
@@ -80,10 +80,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-31T15:39:43.224699355",
+        "timestamp": "2026-11-16T11:45:40.815356449",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.10.4"
         }
     },
     "bam - mm2plus": {
@@ -113,7 +113,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38_unfiltered.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "hg38_unfiltered.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
@@ -165,7 +165,7 @@
                         {
                             "id": "hg38"
                         },
-                        "hg38_unfiltered.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "hg38_unfiltered.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "unfiltered_bam": [
@@ -178,10 +178,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-31T15:39:35.224267326",
+        "timestamp": "2026-11-16T11:45:32.416433464",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.10.4"
         }
     },
     "bam - minimap2": {
