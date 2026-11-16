@@ -144,12 +144,12 @@
                     "gawk": "5.3.1"
                 },
                 "PARAPHASE": {
-                    "minimap2": "2.30-r1287",
-                    "paraphase": "3.5.0",
-                    "samtools": 1.23
+                    "minimap2": "2.31-r1302",
+                    "paraphase": "4.1.0",
+                    "samtools": 1.25
                 },
                 "PARAPHRASE": {
-                    "paraphrase": "0.2.0"
+                    "paraphrase": "0.3.0"
                 },
                 "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
                     "pbcpgtools": "3.0.0"
@@ -1110,7 +1110,7 @@
                 
             ]
         ],
-        "timestamp": "2026-11-09T14:11:16.107670047",
+        "timestamp": "2026-11-16T09:49:09.771923266",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"

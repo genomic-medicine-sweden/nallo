@@ -327,12 +327,12 @@
                     },
                     "paraphase": {
                         "branch": "master",
-                        "git_sha": "c44957c086f54e5be7046cbda7bdb906148a50a8",
+                        "git_sha": "9638b276356e5a51afbdf811ebc38d34a18dd34c",
                         "installed_by": ["modules"]
                     },
                     "paraphrase": {
                         "branch": "master",
-                        "git_sha": "7b3452a23773f687ededb4befd037920e5a51341",
+                        "git_sha": "a81c5fb3e8428fcaab8c8a6d8d6492e0c9c26db3",
                         "installed_by": ["modules"]
                     },
                     "pbcpgtools/alignedbamtocpgscores": {
