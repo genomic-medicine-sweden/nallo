@@ -428,7 +428,7 @@
                     "samtools": 1.25
                 },
                 "PARAPHRASE": {
-                    "paraphrase": "0.2.0"
+                    "paraphrase": "0.3.0"
                 },
                 "PEDDY": {
                     "peddy": "0.4.8"
@@ -812,7 +812,7 @@
                 "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-11-13T16:18:48.906747308",
+        "timestamp": "2026-11-16T10:05:16.623843608",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"

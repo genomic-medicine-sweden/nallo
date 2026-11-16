@@ -196,7 +196,7 @@
                     "samtools": 1.25
                 },
                 "PARAPHRASE": {
-                    "paraphrase": "0.2.0"
+                    "paraphrase": "0.3.0"
                 },
                 "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
                     "pbcpgtools": "3.0.0"
@@ -1167,7 +1167,7 @@
                 "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
                 "somalier_stats.txt:md5,bfc85f681fb57c1025c7791c5b0e970a",
                 "whatshap-stats-table.txt:md5,14acf9cce13f1732ee00e93438bbe989",
-                "FAM_paraphase_annotated.tsv:md5,0003b7dd7071edcfdcac64cac290e66b",
+                "FAM_paraphase_annotated.tsv:md5,55e0a7e1a9be39d55fd113af3ddfe46d",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002_cramino_aligned_phased.arrow:md5,796ee4e79b13531dae09e445164e5fe0",
                 "HG003_cramino_aligned_phased.arrow:md5,bb4d7ef993c11ad68987f07abcfde486",
@@ -1369,7 +1369,7 @@
                 
             ]
         ],
-        "timestamp": "2026-11-13T15:54:08.956554536",
+        "timestamp": "2026-11-16T09:38:31.985441899",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"
@@ -1583,7 +1583,7 @@
                     "samtools": 1.25
                 },
                 "PARAPHRASE": {
-                    "paraphrase": "0.2.0"
+                    "paraphrase": "0.3.0"
                 },
                 "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
                     "pbcpgtools": "3.0.0"
@@ -2785,7 +2785,7 @@
                 
             ]
         ],
-        "timestamp": "2026-11-13T15:57:47.724458241",
+        "timestamp": "2026-11-16T09:42:05.780289158",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"

@@ -205,7 +205,7 @@
                     "samtools": 1.25
                 },
                 "PARAPHRASE": {
-                    "paraphrase": "0.2.0"
+                    "paraphrase": "0.3.0"
                 },
                 "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
                     "pbcpgtools": "3.0.0"
@@ -771,7 +771,7 @@
                 "multiqc_whatshap_phased_bp_plot.txt:md5,b983debaadc2eff7c0287d9290cbfb78",
                 "somalier_stats.txt:md5,e126d444d466c0e6a21e8ae56ddcf819",
                 "whatshap-stats-table.txt:md5,8009db9f6ac06faabf9cad84ef41fd79",
-                "FAM_paraphase_annotated.tsv:md5,f3f07156d2ece0ecbde23902079afd6c",
+                "FAM_paraphase_annotated.tsv:md5,51130cfa7b38893d311fcd01666de7bc",
                 "FAM.ped:md5,bd5cec27ba7337a85cf98e787131e2b5",
                 "HG002_Revio_cramino_aligned_phased.arrow:md5,59218ecb157374692c12a6ffc63ad0e0",
                 "HG002_Revio_cramino_aligned.arrow:md5,59218ecb157374692c12a6ffc63ad0e0",
@@ -872,7 +872,7 @@
                 
             ]
         ],
-        "timestamp": "2026-11-13T16:03:05.309986041",
+        "timestamp": "2026-11-16T09:47:56.247398888",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"

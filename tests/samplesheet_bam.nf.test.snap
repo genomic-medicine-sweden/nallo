@@ -193,7 +193,7 @@
                     "samtools": 1.25
                 },
                 "PARAPHRASE": {
-                    "paraphrase": "0.2.0"
+                    "paraphrase": "0.3.0"
                 },
                 "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
                     "pbcpgtools": "3.0.0"
@@ -1302,7 +1302,7 @@
                 
             ]
         ],
-        "timestamp": "2026-11-13T15:47:56.049891039",
+        "timestamp": "2026-11-16T09:32:27.555659153",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"
