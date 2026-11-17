@@ -163,7 +163,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1318](https://github.com/genomic-medicine-sweden/nallo/pull/1318) - Updated local modules `collapse_mitochondrial_gt` and `vep_prep_sv` to Python 3.14.4, and switched `create_pedigree_file` to a coreutils image, as it does not use Python
 - [#1308](https://github.com/genomic-medicine-sweden/nallo/pull/1308) - Updated trgt to 5.1.0
 - [#1322](https://github.com/genomic-medicine-sweden/nallo/pull/1322) - Updated all nf-core modules that don't include version bumps
+- [#1342](https://github.com/genomic-medicine-sweden/nallo/pull/1342) - Updated `paraphase` to 4.1.0 and `paraphrase` to 0.3.0
 - [#1346](https://github.com/genomic-medicine-sweden/nallo/pull/1346) - Updated all remaining nf-core modules. For more details about what was changed, see PR description.
+
 
 ### Removed
 
@@ -292,6 +294,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | longphase/haplotag             | 2.0.1         | 2.1.1         |
 | trgt/genotype                  | 5.0.0         | 5.1.0         |
 | trgt/merge                     | 5.0.0         | 5.1.0         |
+| paraphase                      | 3.5.0         | 4.1.0         |
+| paraphrase                     | 0.2.0         | 0.3.0         |
 | cramino                        | 1.1.0         | 2.0.0         |
 | csvtk                          | 0.31.0        | 0.37.0        |
 | ensemblvep                     | 116.1         | 116.3         |

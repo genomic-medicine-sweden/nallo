@@ -194,12 +194,12 @@
                     "gawk": "5.3.1"
                 },
                 "PARAPHASE": {
-                    "minimap2": "2.30-r1287",
-                    "paraphase": "3.5.0",
-                    "samtools": 1.23
+                    "minimap2": "2.31-r1302",
+                    "paraphase": "4.1.0",
+                    "samtools": 1.25
                 },
                 "PARAPHRASE": {
-                    "paraphrase": "0.2.0"
+                    "paraphrase": "0.3.0"
                 },
                 "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
                     "pbcpgtools": "3.0.0"
@@ -1163,7 +1163,7 @@
                 "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
                 "somalier_stats.txt:md5,82e6b7a72046326f10c69f150692d1db",
                 "whatshap-stats-table.txt:md5,14acf9cce13f1732ee00e93438bbe989",
-                "FAM_paraphase_annotated.tsv:md5,92c269fa7b2c24ba52b3c14d80f61635",
+                "FAM_paraphase_annotated.tsv:md5,55e0a7e1a9be39d55fd113af3ddfe46d",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002_cramino_aligned_phased.arrow:md5,a698d4b3e7dff7bc79b2e21e68152112",
                 "HG003_cramino_aligned_phased.arrow:md5,e3093002f207dc145b8677114a2afb4c",
@@ -1572,12 +1572,12 @@
                     "gawk": "5.3.1"
                 },
                 "PARAPHASE": {
-                    "minimap2": "2.30-r1287",
-                    "paraphase": "3.5.0",
-                    "samtools": 1.23
+                    "minimap2": "2.31-r1302",
+                    "paraphase": "4.1.0",
+                    "samtools": 1.25
                 },
                 "PARAPHRASE": {
-                    "paraphrase": "0.2.0"
+                    "paraphrase": "0.3.0"
                 },
                 "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
                     "pbcpgtools": "3.0.0"
