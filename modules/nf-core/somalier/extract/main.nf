@@ -7,8 +7,8 @@ process SOMALIER_EXTRACT {
 
     conda "${moduleDir}/environment.yml"
     container "${workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container
-        ? 'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/f5/f5ad8a7223d537f18f2899b16bd2b14f93866656c4ddce6d16181319d9a82f63/data'
-        : 'community.wave.seqera.io/library/somalier:0.3.6--127e0e29751f4940'}"
+        ? 'https://depot.galaxyproject.org/singularity/somalier:0.2.18--hb57907c_0'
+        : 'biocontainers/somalier:0.2.18--hb57907c_0'}"
 
     input:
     tuple val(meta), path(input), path(input_index)

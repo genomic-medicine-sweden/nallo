@@ -166,7 +166,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1342](https://github.com/genomic-medicine-sweden/nallo/pull/1342) - Updated `paraphase` to 4.1.0 and `paraphrase` to 0.3.0
 - [#1346](https://github.com/genomic-medicine-sweden/nallo/pull/1346) - Updated all remaining nf-core modules. For more details about what was changed, see PR description.
 
-
 ### Removed
 
 - [#1072](https://github.com/genomic-medicine-sweden/nallo/pull/1072) - Remove sentieon/dnascope-longread Dockerfile
@@ -260,57 +259,55 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Module updates
 
-| Tool                           | Old version   | New version   |
-| ------------------------------ | ------------- | ------------- |
-| sentieon-cli/dnascope-longread | 1.5.2         | 2.0.0         |
-| hiphase                        | 1.4.0         | 1.6.0         |
-| echtvar/anno                   | 0.2.2         | 0.2.4         |
-| portello                       |               | 0.7.0         |
-| samtools/addreplacerg          |               | 1.23.1        |
-| gatk4/cleansam                 |               | 4.6.2.0       |
-| find/concatenate               |               | 4.6.0         |
-| genmod/annotate                | 3.10.2        | 3.12.0        |
-| genmod/compound                | 3.10.2        | 3.12.0        |
-| genmod/models                  | 3.10.2        | 3.12.0        |
-| genmod/score                   | 3.10.2        | 3.12.0        |
-| mitorsaw/haplotype             |               | 0.2.9         |
-| pbmm2/align                    |               | 26.2.0        |
-| samtools/calmd                 |               | 1.24          |
-| samtools/view                  | 1.23.1        | 1.24          |
-| mm2plus                        |               | 1.3           |
-| samtools/merge                 | 1.23.1        | 1.24          |
-| csvtk/join                     |               | 0.37.0        |
-| sniffles                       | 1.0.12        | 2.7.3         |
-| sniffles1 (local)              |               | 1.0.12        |
-| debreak                        |               | 1.3           |
-| svdb/merge                     | 2.8.4         | 2.12.2        |
-| svdb/query                     | 2.8.4         | 2.12.2        |
-| kivvi                          |               | 1.1.0         |
-| modkit/pileup                  | 0.6.1         | 0.6.4         |
-| modkit/bedmethyltobigwig       | 0.6.1         | 0.6.4         |
-| sawfish/discover               | 2.3.0         | 2.3.1         |
-| sawfish/jointcall              | 2.3.0         | 2.3.1         |
-| longphase/phase                | 2.0.1         | 2.1.1         |
-| longphase/haplotag             | 2.0.1         | 2.1.1         |
-| trgt/genotype                  | 5.0.0         | 5.1.0         |
-| trgt/merge                     | 5.0.0         | 5.1.0         |
-| paraphase                      | 3.5.0         | 4.1.0         |
-| paraphrase                     | 0.2.0         | 0.3.0         |
-| cramino                        | 1.1.0         | 2.0.0         |
-| csvtk                          | 0.31.0        | 0.37.0        |
-| ensemblvep                     | 116.1         | 116.3         |
-| find                           |               | 4.6.0         |
-| pigz                           |               | 2.8           |
-| gatk4                          | 4.6.2         | 4.7.0         |
-| htslib                         | 1.24          | 1.25          |
-| minimap2                       | 2.29-r1283    | 2.30-r1287    |
-| mosdepth                       | 0.3.11        | 0.3.14        |
-| gzip                           |               | 1.14          |
-| somalier                       | 0.2.18        | 0.3.6         |
-| hificnv                        | 1.0.0-36e6461 | 1.0.1-4de7d40 |
-| sniffles                       | 2.8.0         | 2.8.1         |
-| samtools                       | 1.23.1        | 1.25          |
-| tiddit                         | 3.9.4         | 3.9.7         |
+| Tool                           | Old version | New version |
+| ------------------------------ | ----------- | ----------- |
+| sentieon-cli/dnascope-longread | 1.5.2       | 2.0.0       |
+| hiphase                        | 1.4.0       | 1.6.0       |
+| echtvar/anno                   | 0.2.2       | 0.2.4       |
+| portello                       |             | 0.7.0       |
+| samtools/addreplacerg          |             | 1.23.1      |
+| gatk4/cleansam                 |             | 4.6.2.0     |
+| find/concatenate               |             | 4.6.0       |
+| genmod/annotate                | 3.10.2      | 3.12.0      |
+| genmod/compound                | 3.10.2      | 3.12.0      |
+| genmod/models                  | 3.10.2      | 3.12.0      |
+| genmod/score                   | 3.10.2      | 3.12.0      |
+| mitorsaw/haplotype             |             | 0.2.9       |
+| pbmm2/align                    |             | 26.2.0      |
+| samtools/calmd                 |             | 1.24        |
+| samtools/view                  | 1.23.1      | 1.24        |
+| mm2plus                        |             | 1.3         |
+| samtools/merge                 | 1.23.1      | 1.24        |
+| csvtk/join                     |             | 0.37.0      |
+| sniffles                       | 1.0.12      | 2.7.3       |
+| sniffles1 (local)              |             | 1.0.12      |
+| debreak                        |             | 1.3         |
+| svdb/merge                     | 2.8.4       | 2.12.2      |
+| svdb/query                     | 2.8.4       | 2.12.2      |
+| kivvi                          |             | 1.1.0       |
+| modkit/pileup                  | 0.6.1       | 0.6.4       |
+| modkit/bedmethyltobigwig       | 0.6.1       | 0.6.4       |
+| sawfish/discover               | 2.3.0       | 2.3.1       |
+| sawfish/jointcall              | 2.3.0       | 2.3.1       |
+| longphase/phase                | 2.0.1       | 2.1.1       |
+| longphase/haplotag             | 2.0.1       | 2.1.1       |
+| trgt/genotype                  | 5.0.0       | 5.1.0       |
+| trgt/merge                     | 5.0.0       | 5.1.0       |
+| paraphase                      | 3.5.0       | 4.1.0       |
+| paraphrase                     | 0.2.0       | 0.3.0       |
+| cramino                        | 1.1.0       | 2.0.0       |
+| csvtk                          | 0.31.0      | 0.37.0      |
+| ensemblvep                     | 116.1       | 116.3       |
+| find                           |             | 4.6.0       |
+| pigz                           |             | 2.8         |
+| gatk4                          | 4.6.2       | 4.7.0       |
+| htslib                         | 1.24        | 1.25        |
+| minimap2                       | 2.29-r1283  | 2.30-r1287  |
+| mosdepth                       | 0.3.11      | 0.3.14      |
+| gzip                           |             | 1.14        |
+| sniffles                       | 2.8.0       | 2.8.1       |
+| samtools                       | 1.23.1      | 1.25        |
+| tiddit                         | 3.9.4       | 3.9.7       |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
