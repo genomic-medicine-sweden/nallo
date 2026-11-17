@@ -1,6 +1,6 @@
 include { MODKIT_PILEUP            } from '../../../modules/nf-core/modkit/pileup/main'
 include { MODKIT_BEDMETHYLTOBIGWIG } from '../../../modules/nf-core/modkit/bedmethyltobigwig/main'
-include { TABIX_TABIX              } from '../../../modules/nf-core/tabix/tabix/main'
+include { HTSLIB_BGZIPTABIX        } from '../../../modules/nf-core/htslib/bgziptabix/main'
 include { GAWK                     } from '../../../modules/nf-core/gawk/main'
 workflow CALL_METHYLATION_MODKIT {
     take:
@@ -22,7 +22,7 @@ workflow CALL_METHYLATION_MODKIT {
     }
 
     GAWK(
-        ch_bed_branches.with_bed,
+        ch_bed_branches.with_bed.map { meta, bed -> [meta, bed, 'bed'] },
         [],
         false,
     )
@@ -43,8 +43,11 @@ workflow CALL_METHYLATION_MODKIT {
         .tap { ch_bedmethyl }
         .filter { _meta, bed -> gzNotEmptyBySize(bed) }
 
-    TABIX_TABIX(
-        ch_bedmethyl
+    HTSLIB_BGZIPTABIX(
+        ch_bedmethyl.map { meta, bed -> [meta, bed, [], []] },
+        'compress',
+        true,
+        'bed',
     )
 
     MODKIT_BEDMETHYLTOBIGWIG(
@@ -55,7 +58,7 @@ workflow CALL_METHYLATION_MODKIT {
 
     emit:
     bed    = ch_bedmethyl                    // channel: [ val(meta), path(bed) ]
-    tbi    = TABIX_TABIX.out.index           // channel: [ val(meta), path(tbi) ]
+    tbi    = HTSLIB_BGZIPTABIX.out.index     // channel: [ val(meta), path(tbi) ]
     bigwig = MODKIT_BEDMETHYLTOBIGWIG.out.bw // channel: [ val(meta), path(bw) ]
 }
 

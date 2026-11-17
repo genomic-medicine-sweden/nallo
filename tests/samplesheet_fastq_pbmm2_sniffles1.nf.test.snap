@@ -28,10 +28,10 @@
                     "pbmm2": "26.2.0"
                 },
                 "RELATE_INFER": {
-                    "somalier": "0.2.18"
+                    "somalier": "0.3.6"
                 },
                 "RELATE_RELATE": {
-                    "somalier": "0.2.18"
+                    "somalier": "0.3.6"
                 },
                 "RUN_SNIFFLES1": {
                     "sniffles": "1.0.12"
@@ -40,22 +40,22 @@
                     "create_pedigree_file": 1.0
                 },
                 "SAMTOOLS_CALMD": {
-                    "samtools": 1.24
+                    "samtools": 1.25
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.25
                 },
                 "SAMTOOLS_IMPORT": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.25
                 },
                 "SAMTOOLS_INDEX_CALMD": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.25
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": 1.24
+                    "samtools": 1.25
                 },
                 "SOMALIER_EXTRACT": {
-                    "somalier": "0.2.18"
+                    "somalier": "0.3.6"
                 },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
@@ -137,10 +137,10 @@
                 "svs/family/FAM/FAM_svs_unphased.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-11-09T08:50:55.990157467",
+        "timestamp": "2026-11-17T10:02:45.843433476",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.3"
+            "nextflow": "26.10.4"
         }
     }
 }

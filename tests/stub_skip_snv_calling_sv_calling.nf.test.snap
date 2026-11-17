@@ -16,13 +16,13 @@
                     "bcftools": 1.22
                 },
                 "CRAMINO": {
-                    "cramino": "1.1.0"
+                    "cramino": "2.0.0"
                 },
                 "CREATE_SAMPLES_FILE": {
                     "gawk": "5.3.1"
                 },
                 "FASTQC": {
-                    "fastqc": "0.12.1"
+                    "fastqc": "0.13.0"
                 },
                 "GFASTATS": {
                     "gfastats": "1.3.11"
@@ -40,25 +40,26 @@
                     "kivvi": "1.1.0"
                 },
                 "MINIMAP2_ALIGN": {
-                    "minimap2": "2.29-r1283"
+                    "minimap2": "2.30-r1287"
                 },
                 "MINIMAP2_INDEX": {
-                    "minimap2": "2.29-r1283"
+                    "minimap2": "2.30-r1287"
                 },
                 "MOSDEPTH": {
-                    "mosdepth": "0.3.11"
+                    "gzip": 1.14,
+                    "mosdepth": "0.3.14"
                 },
                 "RELATE_INFER": {
-                    "somalier": "0.2.18"
+                    "somalier": "0.3.6"
                 },
                 "RELATE_RELATE": {
-                    "somalier": "0.2.18"
+                    "somalier": "0.3.6"
                 },
                 "RUN_DEBREAK": {
                     "debreak": 1.3
                 },
                 "RUN_HIFICNV": {
-                    "hificnv": "1.0.0-36e6461"
+                    "hificnv": "1.0.1-4de7d40"
                 },
                 "RUN_SAWFISH_DISCOVER": {
                     "sawfish": "2.3.1"
@@ -70,7 +71,7 @@
                     "severus": 1.7
                 },
                 "RUN_SNIFFLES": {
-                    "sniffles": "2.8.0"
+                    "sniffles": "2.8.1"
                 },
                 "RUN_SNIFFLES1": {
                     "sniffles": "1.0.12"
@@ -82,22 +83,22 @@
                     "create_pedigree_file": 1.0
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.25
                 },
                 "SAMTOOLS_FASTQ": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.25
                 },
                 "SAMTOOLS_IMPORT": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.25
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": 1.24
+                    "samtools": 1.25
                 },
                 "SAMTOOLS_VIEW": {
-                    "samtools": 1.24
+                    "samtools": 1.25
                 },
                 "SOMALIER_EXTRACT": {
-                    "somalier": "0.2.18"
+                    "somalier": "0.3.6"
                 },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
@@ -111,7 +112,8 @@
                     "svdb": "2.12.2"
                 },
                 "TABIX_HIFICNV": {
-                    "tabix": 1.21
+                    "htslib": 1.25,
+                    "xz": "5.8.3"
                 },
                 "TAGBAM": {
                     "tagbam": "0.1.0"
@@ -132,8 +134,8 @@
             [
                 "aligned_reads",
                 "aligned_reads/HG002_Revio",
-                "aligned_reads/HG002_Revio/HG002_Revio.bai",
                 "aligned_reads/HG002_Revio/HG002_Revio.bam",
+                "aligned_reads/HG002_Revio/HG002_Revio.bam.bai",
                 "assembly",
                 "assembly/sample",
                 "assembly/sample/HG002_Revio",
@@ -204,10 +206,10 @@
                 "visualization_tracks/test/test_gc_bias_corrected_depth_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-11-09T08:40:35.157803354",
+        "timestamp": "2026-11-17T11:19:42.274489186",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.3"
+            "nextflow": "26.10.4"
         }
     }
 }

@@ -31,7 +31,7 @@
                     "bedtools": "2.31.1"
                 },
                 "CRAMINO": {
-                    "cramino": "1.1.0"
+                    "cramino": "2.0.0"
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
                     "deepvariant": "1.10.0"
@@ -40,7 +40,7 @@
                     "deepvariant": "1.10.0"
                 },
                 "FASTQC": {
-                    "fastqc": "0.12.1"
+                    "fastqc": "0.13.0"
                 },
                 "GAWK_EXTRACT_REGIONS": {
                     "gawk": "5.3.1"
@@ -61,19 +61,20 @@
                     "hifiasm": "0.25.0-r726"
                 },
                 "MINIMAP2_ALIGN": {
-                    "minimap2": "2.29-r1283"
+                    "minimap2": "2.30-r1287"
                 },
                 "MINIMAP2_INDEX": {
-                    "minimap2": "2.29-r1283"
+                    "minimap2": "2.30-r1287"
                 },
                 "MOSDEPTH": {
-                    "mosdepth": "0.3.11"
+                    "gzip": 1.14,
+                    "mosdepth": "0.3.14"
                 },
                 "RELATE_INFER": {
-                    "somalier": "0.2.18"
+                    "somalier": "0.3.6"
                 },
                 "RELATE_RELATE": {
-                    "somalier": "0.2.18"
+                    "somalier": "0.3.6"
                 },
                 "RUN_SAWFISH_DISCOVER": {
                     "sawfish": "2.3.1"
@@ -88,22 +89,22 @@
                     "create_pedigree_file": 1.0
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.25
                 },
                 "SAMTOOLS_FASTQ": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.25
                 },
                 "SAMTOOLS_IMPORT": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.25
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": 1.24
+                    "samtools": 1.25
                 },
                 "SAMTOOLS_VIEW": {
-                    "samtools": 1.24
+                    "samtools": 1.25
                 },
                 "SOMALIER_EXTRACT": {
-                    "somalier": "0.2.18"
+                    "somalier": "0.3.6"
                 },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
@@ -132,8 +133,8 @@
             [
                 "aligned_reads",
                 "aligned_reads/HG002_Revio",
-                "aligned_reads/HG002_Revio/HG002_Revio.bai",
                 "aligned_reads/HG002_Revio/HG002_Revio.bam",
+                "aligned_reads/HG002_Revio/HG002_Revio.bam.bai",
                 "assembly",
                 "assembly/sample",
                 "assembly/sample/HG002_Revio",
@@ -210,10 +211,10 @@
                 "visualization_tracks/test/test_maf_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-11-09T08:38:12.108937767",
+        "timestamp": "2026-11-17T11:15:31.988581365",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.3"
+            "nextflow": "26.10.4"
         }
     }
 }

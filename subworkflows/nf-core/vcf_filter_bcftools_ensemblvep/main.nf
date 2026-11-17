@@ -28,7 +28,7 @@ workflow VCF_FILTER_BCFTOOLS_ENSEMBLVEP {
         )
 
         ch_vcf = BCFTOOLS_VIEW.out.vcf
-        ch_tbi = BCFTOOLS_VIEW.out.index
+        ch_tbi = BCFTOOLS_VIEW.out.tbi
     }
 
     if (filter_with_filter_vep) {
