@@ -23,6 +23,17 @@ Changes in 'untar/main.nf':
  
      ## Ensures --strip-components only applied when top level of tar contents is a directory
      ## If just files or multiple directories, place all in prefix
+@@ -50,8 +51,9 @@
+ 
+     stub:
+     prefix = task.ext.prefix ?: (meta.id ? "${meta.id}" : archive.toString().replaceFirst(/\.[^\.]+(.gz)?$/, ""))
++    dir = prefix.split('/')[1]
+     """
+-    mkdir ${prefix}
++    mkdir -p ${prefix}
+     ## Dry-run untaring the archive to get the files and place all in prefix
+     if [[ \$(tar -taf ${archive} | grep -o -P "^.*?\\/" | uniq | wc -l) -eq 1 ]]; then
+         for i in `tar -tf ${archive}`;
 
 'modules/nf-core/untar/meta.yml' is unchanged
 'modules/nf-core/untar/tests/main.nf.test.snap' is unchanged
