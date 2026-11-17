@@ -35,7 +35,7 @@
                             "skip_vep_prep": true,
                             "sv_caller": "hificnv"
                         },
-                        "HG002_Revio_hificnv.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_Revio_tabix_hificnv.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "vcf": [
@@ -48,15 +48,15 @@
                             "skip_vep_prep": true,
                             "sv_caller": "hificnv"
                         },
-                        "HG002_Revio_hificnv.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_Revio_tabix_hificnv.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-09-15T17:00:19.361963336",
+        "timestamp": "2026-11-16T15:49:05.240552896",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.4"
         }
     },
     "1 sample, no MAF track": {
@@ -84,7 +84,7 @@
                         "needs_reheader": false,
                         "skip_vep_prep": true
                     },
-                    "HG002_Revio_hificnv.HG002.vcf.gz.tbi"
+                    "HG002_Revio_tabix_hificnv.vcf.gz.tbi"
                 ]
             ],
             [
@@ -111,10 +111,10 @@
                 
             ]
         ],
-        "timestamp": "2026-09-15T17:00:26.632832492",
+        "timestamp": "2026-11-16T15:49:12.206484474",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.4"
         }
     }
 }

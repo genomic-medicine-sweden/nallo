@@ -31,4 +31,10 @@ module_order:
   - peddy:
       name: "Peddy"
 
+sp:
+  somalier/pairs:
+    fn: "*.pairs.tsv"
+    contents: "#sample_a"
+    num_lines: 5
+
 disable_version_detection: true

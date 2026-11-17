@@ -385,6 +385,7 @@ workflow NALLO {
         SAMTOOLS_MERGE(
             ch_aligned_for_merge,
             [[], [], [], []],
+            'bai',
         )
 
         ch_single_aligned_bam = ch_samplesheet_aligned_bams.single.transpose()

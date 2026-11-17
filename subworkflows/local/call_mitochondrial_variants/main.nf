@@ -58,7 +58,7 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
         )
 
         ch_vcf = DEEPVARIANT_RUNDEEPVARIANT.out.vcf ?: channel.empty()
-        ch_tbi = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_tbi ?: channel.empty()
+        ch_tbi = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_index ?: channel.empty()
     }
 
     /*
@@ -75,7 +75,7 @@ workflow CALL_MITOCHONDRIAL_VARIANTS {
          */
 
         GAWK_STRIP_CONTIG_HEADER(
-            ch_vcf.map { meta, vcf -> [meta, [vcf]] },
+            ch_vcf.map { meta, vcf -> [meta, [vcf], 'vcf'] },
             [],
             false,
         )

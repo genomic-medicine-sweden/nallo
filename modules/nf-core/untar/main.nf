@@ -51,8 +51,9 @@ process UNTAR {
 
     stub:
     prefix = task.ext.prefix ?: (meta.id ? "${meta.id}" : archive.toString().replaceFirst(/\.[^\.]+(.gz)?$/, ""))
+    dir = prefix.split('/')[1]
     """
-    mkdir ${prefix}
+    mkdir -p ${prefix}
     ## Dry-run untaring the archive to get the files and place all in prefix
     if [[ \$(tar -taf ${archive} | grep -o -P "^.*?\\/" | uniq | wc -l) -eq 1 ]]; then
         for i in `tar -tf ${archive}`;

@@ -2,7 +2,7 @@ include { ANNOTATE_CADD                    } from '../annotate_cadd/main'
 include { BCFTOOLS_VIEW                    } from '../../../modules/nf-core/bcftools/view/main'
 include { ECHTVAR_ANNO                     } from '../../../modules/nf-core/echtvar/anno/main'
 include { ENSEMBLVEP_VEP as ENSEMBLVEP_SNV } from '../../../modules/nf-core/ensemblvep/vep/main'
-include { TABIX_TABIX                      } from '../../../modules/nf-core/tabix/tabix/main'
+include { HTSLIB_BGZIPTABIX                } from '../../../modules/nf-core/htslib/bgziptabix/main'
 
 workflow ANNOTATE_SNVS {
     take:
@@ -29,8 +29,11 @@ workflow ANNOTATE_SNVS {
             'bcf.gz',
         )
 
-        TABIX_TABIX(
-            ECHTVAR_ANNO.out.vcf
+        HTSLIB_BGZIPTABIX(
+            ECHTVAR_ANNO.out.vcf.map { meta, vcf -> [meta, vcf, [], []] },
+            'compress',
+            true,
+            'bcf',
         )
     }
 
@@ -78,6 +81,6 @@ workflow ANNOTATE_SNVS {
     emit:
     vep_annotated_vcf     = ENSEMBLVEP_SNV.out.vcf
     vep_annotated_tbi     = ENSEMBLVEP_SNV.out.tbi
-    echtvar_annotated_vcf = annotate_echtvar ? ECHTVAR_ANNO.out.vcf : channel.empty()
-    echtvar_annotated_tbi = annotate_echtvar ? TABIX_TABIX.out.index : channel.empty()
+    echtvar_annotated_vcf = annotate_echtvar ? HTSLIB_BGZIPTABIX.out.output : channel.empty()
+    echtvar_annotated_tbi = annotate_echtvar ? HTSLIB_BGZIPTABIX.out.index : channel.empty()
 }

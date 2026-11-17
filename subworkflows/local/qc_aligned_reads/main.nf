@@ -45,6 +45,7 @@ workflow QC_ALIGNED_READS {
     MOSDEPTH(
         ch_mosdepth_in,
         ch_fasta,
+        '',
     )
 
     if (run_sambamba_depth) {

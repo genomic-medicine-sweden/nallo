@@ -3,18 +3,7 @@ Changes in component 'nf-core/glnexus'
 Changes in 'glnexus/main.nf':
 --- modules/nf-core/glnexus/main.nf
 +++ modules/nf-core/glnexus/main.nf
-@@ -3,9 +3,7 @@
-     label 'process_high'
- 
-     conda "${moduleDir}/environment.yml"
--    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
--        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/6c/6cf504ad8e4ebda286609fa3c1a5f9af68dbca9ec06bb4428e219e84754bd140/data' :
--        'community.wave.seqera.io/library/bcftools_glnexus:cf380f1a6410f606' }"
-+    container "pacbio/glnexus:v1.4.3" // Biocontainers version does not have jemalloc
- 
-     input:
-     tuple val(meta), path(gvcfs), path(custom_config)
-@@ -13,7 +11,7 @@
+@@ -16,7 +16,7 @@
  
      output:
      tuple val(meta), path("*.bcf"), emit: bcf
