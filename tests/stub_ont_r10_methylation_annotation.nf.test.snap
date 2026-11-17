@@ -58,7 +58,7 @@
                     "gawk": "5.3.1"
                 },
                 "GLNEXUS": {
-                    "glnexus": "1.4.3"
+                    "glnexus": "1.4.1"
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
@@ -87,7 +87,7 @@
                     "mosdepth": "0.3.14"
                 },
                 "RELATE_RELATE": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "SAMBAMBA_DEPTH": {
                     "sambamba": "1.0.1"
@@ -105,7 +105,7 @@
                     "samtools": 1.25
                 },
                 "SOMALIER_EXTRACT": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "SOMALIER_PED_FAMILY": {
                     "create_pedigree_file": 1.0
@@ -131,7 +131,7 @@
                 }
             }
         ],
-        "timestamp": "2026-11-17T11:41:28.519320147",
+        "timestamp": "2026-11-17T15:05:48.108249955",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"

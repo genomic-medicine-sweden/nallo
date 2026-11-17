@@ -50,16 +50,16 @@
                     "mosdepth": "0.3.14"
                 },
                 "RELATE_INFER": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "RELATE_RELATE": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "RUN_DEBREAK": {
                     "debreak": 1.3
                 },
                 "RUN_HIFICNV": {
-                    "hificnv": "1.0.1-4de7d40"
+                    "hificnv": "1.0.0-36e6461"
                 },
                 "RUN_SAWFISH_DISCOVER": {
                     "sawfish": "2.3.1"
@@ -98,7 +98,7 @@
                     "samtools": 1.25
                 },
                 "SOMALIER_EXTRACT": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
@@ -206,7 +206,7 @@
                 "visualization_tracks/test/test_gc_bias_corrected_depth_sawfish.bw"
             ]
         ],
-        "timestamp": "2026-11-17T11:19:42.274489186",
+        "timestamp": "2026-11-17T15:12:13.643303383",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"

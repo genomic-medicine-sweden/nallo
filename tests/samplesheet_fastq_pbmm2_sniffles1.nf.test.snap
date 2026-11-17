@@ -28,10 +28,10 @@
                     "pbmm2": "26.2.0"
                 },
                 "RELATE_INFER": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "RELATE_RELATE": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "RUN_SNIFFLES1": {
                     "sniffles": "1.0.12"
@@ -55,7 +55,7 @@
                     "samtools": 1.25
                 },
                 "SOMALIER_EXTRACT": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
@@ -137,7 +137,7 @@
                 "svs/family/FAM/FAM_svs_unphased.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-11-17T10:02:45.843433476",
+        "timestamp": "2026-11-17T14:44:46.178402614",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"

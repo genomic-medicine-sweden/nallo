@@ -156,7 +156,7 @@
                     "gfastats": "1.3.11"
                 },
                 "GLNEXUS": {
-                    "glnexus": "1.4.3"
+                    "glnexus": "1.4.1"
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
@@ -220,10 +220,10 @@
                     "preparecovandbaf": "1.1.5"
                 },
                 "RELATE_INFER": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "RELATE_RELATE": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "RHOCALL_VIZ": {
                     "rhocall": "0.5.1"
@@ -232,7 +232,7 @@
                     "chromograph": "1.3.1"
                 },
                 "RUN_HIFICNV": {
-                    "hificnv": "1.0.1-4de7d40"
+                    "hificnv": "1.0.0-36e6461"
                 },
                 "RUN_SEVERUS": {
                     "severus": 1.7
@@ -268,7 +268,7 @@
                     "samtools": 1.25
                 },
                 "SOMALIER_EXTRACT": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "SOMALIER_PED_FAMILY": {
                     "create_pedigree_file": 1.0
@@ -766,7 +766,7 @@
                 "multiqc_fastqc.txt:md5,4753729c2a6df1df46b97302dcad2c35",
                 "multiqc_general_stats.txt:md5,cdce3ed68907a7a4f9597660cfa1a9d0",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,b983debaadc2eff7c0287d9290cbfb78",
-                "somalier_stats.txt:md5,016ff4f391be5f1dd682c0d49aff0b08",
+                "somalier_stats.txt:md5,e126d444d466c0e6a21e8ae56ddcf819",
                 "whatshap-stats-table.txt:md5,8009db9f6ac06faabf9cad84ef41fd79",
                 "FAM_paraphase_annotated.tsv:md5,51130cfa7b38893d311fcd01666de7bc",
                 "FAM.ped:md5,bd5cec27ba7337a85cf98e787131e2b5",
@@ -869,7 +869,7 @@
                 
             ]
         ],
-        "timestamp": "2026-11-17T10:09:07.674805074",
+        "timestamp": "2026-11-17T14:57:35.939128171",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"

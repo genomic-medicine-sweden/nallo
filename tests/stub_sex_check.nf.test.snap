@@ -245,7 +245,7 @@
                     "gawk": "5.3.1"
                 },
                 "GLNEXUS": {
-                    "glnexus": "1.4.3"
+                    "glnexus": "1.4.1"
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
@@ -507,7 +507,7 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-11-17T10:17:25.501291992",
+        "timestamp": "2026-11-17T15:09:20.501365234",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"

@@ -69,7 +69,7 @@
                     "gawk": "5.3.1"
                 },
                 "GLNEXUS": {
-                    "glnexus": "1.4.3"
+                    "glnexus": "1.4.1"
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
@@ -85,16 +85,16 @@
                     "minimap2": "2.30-r1287"
                 },
                 "RELATE_INFER": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "RELATE_RELATE": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "RUN_CHROMOGRAPH": {
                     "chromograph": "1.3.1"
                 },
                 "RUN_HIFICNV": {
-                    "hificnv": "1.0.1-4de7d40"
+                    "hificnv": "1.0.0-36e6461"
                 },
                 "RUN_SEVERUS": {
                     "severus": 1.7
@@ -115,7 +115,7 @@
                     "samtools": 1.25
                 },
                 "SOMALIER_EXTRACT": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
@@ -231,7 +231,7 @@
                 "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-11-17T11:18:46.148752938",
+        "timestamp": "2026-11-17T15:11:16.264842186",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"
@@ -275,7 +275,7 @@
                     "gawk": "5.3.1"
                 },
                 "GLNEXUS": {
-                    "glnexus": "1.4.3"
+                    "glnexus": "1.4.1"
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
@@ -290,10 +290,10 @@
                     "peddy": "0.4.8"
                 },
                 "RELATE_INFER": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "RELATE_RELATE": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "SAMPLESHEET_PED": {
                     "create_pedigree_file": 1.0
@@ -308,7 +308,7 @@
                     "samtools": 1.25
                 },
                 "SOMALIER_EXTRACT": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
@@ -372,7 +372,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-11-17T11:19:13.312628932",
+        "timestamp": "2026-11-17T15:11:43.159040741",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"

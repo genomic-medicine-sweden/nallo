@@ -153,7 +153,7 @@
                     "gfastats": "1.3.11"
                 },
                 "GLNEXUS": {
-                    "glnexus": "1.4.3"
+                    "glnexus": "1.4.1"
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
@@ -214,7 +214,7 @@
                     "preparecovandbaf": "1.1.5"
                 },
                 "RELATE_RELATE": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "RHOCALL_VIZ": {
                     "rhocall": "0.5.1"
@@ -262,7 +262,7 @@
                     "samtools": 1.25
                 },
                 "SOMALIER_EXTRACT": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "SOMALIER_PED_FAMILY": {
                     "create_pedigree_file": 1.0
@@ -1161,7 +1161,7 @@
                 "multiqc_general_stats.txt:md5,f9fb9bc7c632e4f9c089d00edbddea5b",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,9fe95252b660470d6e26b1e227705ce6",
                 "peddy_relatedness_plot.txt:md5,ccb7576c82712746a7805e4b08f8de11",
-                "somalier_stats.txt:md5,82e6b7a72046326f10c69f150692d1db",
+                "somalier_stats.txt:md5,bfc85f681fb57c1025c7791c5b0e970a",
                 "whatshap-stats-table.txt:md5,14acf9cce13f1732ee00e93438bbe989",
                 "FAM_paraphase_annotated.tsv:md5,55e0a7e1a9be39d55fd113af3ddfe46d",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
@@ -1365,7 +1365,7 @@
                 
             ]
         ],
-        "timestamp": "2026-11-17T10:06:16.376470971",
+        "timestamp": "2026-11-17T14:48:16.464955181",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"
@@ -1531,7 +1531,7 @@
                     "gfastats": "1.3.11"
                 },
                 "GLNEXUS": {
-                    "glnexus": "1.4.3"
+                    "glnexus": "1.4.1"
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
@@ -1592,7 +1592,7 @@
                     "preparecovandbaf": "1.1.5"
                 },
                 "RELATE_RELATE": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "RHOCALL_VIZ": {
                     "rhocall": "0.5.1"
@@ -1601,7 +1601,7 @@
                     "chromograph": "1.3.1"
                 },
                 "RUN_HIFICNV": {
-                    "hificnv": "1.0.1-4de7d40"
+                    "hificnv": "1.0.0-36e6461"
                 },
                 "RUN_HIPHASE": {
                     "hiphase": "1.6.0-ac3f399"
@@ -1655,7 +1655,7 @@
                     "samtools": 1.25
                 },
                 "SOMALIER_EXTRACT": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "SOMALIER_PED_FAMILY": {
                     "create_pedigree_file": 1.0
@@ -2564,7 +2564,7 @@
                 "multiqc_general_stats.txt:md5,1291eea7b3e9725b9ea63db5e231baab",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,5367473f043564c1995035e669f25b76",
                 "peddy_relatedness_plot.txt:md5,38bbf220ffc042cfa5d4696fccda3f55",
-                "somalier_stats.txt:md5,018fc0e1583845086fe87b0fc2961848",
+                "somalier_stats.txt:md5,a6119aecaa54536d9b358b7feba7841a",
                 "whatshap-stats-table.txt:md5,75b348395a44d55fa4d178cdf393f65d",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002_cramino_aligned_phased.arrow:md5,d868bfcf28fb61f485869b634a6b71c3",
@@ -2773,7 +2773,7 @@
                 
             ]
         ],
-        "timestamp": "2026-11-17T10:38:49.036760153",
+        "timestamp": "2026-11-17T14:52:09.231718675",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"

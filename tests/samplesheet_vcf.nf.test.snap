@@ -161,7 +161,7 @@
                     "peddy": "0.4.8"
                 },
                 "RELATE_RELATE": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "RHOCALL_VIZ": {
                     "rhocall": "0.5.1"
@@ -191,7 +191,7 @@
                     "samtools": 1.25
                 },
                 "SOMALIER_EXTRACT": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "SOMALIER_PED_FAMILY": {
                     "create_pedigree_file": 1.0
@@ -949,7 +949,7 @@
                 "multiqc_general_stats.txt:md5,f8cfd5e3f6d7b4a4b3437aa397beed76",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,28dc18b9feafa3ca1c2878033957fe3f",
                 "peddy_relatedness_plot.txt:md5,38bbf220ffc042cfa5d4696fccda3f55",
-                "somalier_stats.txt:md5,80a76fc458dd0c637777a06bbf6265f8",
+                "somalier_stats.txt:md5,2087a0114648e698a828f29eac18f5e4",
                 "whatshap-stats-table.txt:md5,9a41f9cbf33f9f483d26967852bb60fc",
                 "FAM.ped:md5,c1be629e4d55fe3bd2b661c340ddedc1",
                 "HG002_cramino_aligned_phased.arrow:md5,4a7bb8400aab52dacada11e880a49f8f",
@@ -1108,7 +1108,7 @@
                 
             ]
         ],
-        "timestamp": "2026-11-17T10:56:45.502528595",
+        "timestamp": "2026-11-17T14:58:51.854913239",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"

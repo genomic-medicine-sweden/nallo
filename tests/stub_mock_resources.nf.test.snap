@@ -57,7 +57,7 @@
                     "gawk": "5.3.1"
                 },
                 "GLNEXUS": {
-                    "glnexus": "1.4.3"
+                    "glnexus": "1.4.1"
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
@@ -73,10 +73,10 @@
                     "minimap2": "2.30-r1287"
                 },
                 "RELATE_INFER": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "RELATE_RELATE": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "SAMPLESHEET_PED": {
                     "create_pedigree_file": 1.0
@@ -91,7 +91,7 @@
                     "samtools": 1.25
                 },
                 "SOMALIER_EXTRACT": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
@@ -142,7 +142,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-11-17T11:11:10.94976117",
+        "timestamp": "2026-11-17T15:03:36.474344049",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"
@@ -223,10 +223,10 @@
                     "minimap2": "2.30-r1287"
                 },
                 "RELATE_INFER": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "RELATE_RELATE": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "SAMPLESHEET_PED": {
                     "create_pedigree_file": 1.0
@@ -244,7 +244,7 @@
                     "sentieon": 202503.03
                 },
                 "SOMALIER_EXTRACT": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
@@ -295,7 +295,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_sentieon_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-11-17T11:11:38.235792331",
+        "timestamp": "2026-11-17T15:04:03.017174134",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"
@@ -371,7 +371,7 @@
                     "gawk": "5.3.1"
                 },
                 "GLNEXUS": {
-                    "glnexus": "1.4.3"
+                    "glnexus": "1.4.1"
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
@@ -390,10 +390,10 @@
                     "gawk": "5.3.1"
                 },
                 "RELATE_INFER": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "RELATE_RELATE": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "RENAME_CHRNAMES": {
                     "bcftools": 1.22
@@ -411,7 +411,7 @@
                     "samtools": 1.25
                 },
                 "SOMALIER_EXTRACT": {
-                    "somalier": "0.3.6"
+                    "somalier": "0.2.18"
                 },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
@@ -469,7 +469,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-11-17T11:25:57.23224682",
+        "timestamp": "2026-11-17T15:03:07.779580262",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"

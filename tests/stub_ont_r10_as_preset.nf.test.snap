@@ -67,7 +67,7 @@
                     "gawk": "5.3.1"
                 },
                 "GLNEXUS": {
-                    "glnexus": "1.4.3"
+                    "glnexus": "1.4.1"
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
@@ -99,7 +99,7 @@
                     "chromograph": "1.3.1"
                 },
                 "RUN_HIFICNV": {
-                    "hificnv": "1.0.1-4de7d40"
+                    "hificnv": "1.0.0-36e6461"
                 },
                 "RUN_SEVERUS": {
                     "severus": 1.7
@@ -434,7 +434,7 @@
                 "visualization_tracks/HG002_ONT_C/HG002_ONT_C_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-11-17T11:47:01.118871354",
+        "timestamp": "2026-11-17T15:04:51.214177881",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"
