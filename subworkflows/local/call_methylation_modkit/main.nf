@@ -57,7 +57,7 @@ workflow CALL_METHYLATION_MODKIT {
     )
 
     emit:
-    bed    = ch_bedmethyl                    // channel: [ val(meta), path(bed) ]
+    bed    = HTSLIB_BGZIPTABIX.out.output    // channel: [ val(meta), path(bed) ]
     tbi    = HTSLIB_BGZIPTABIX.out.index     // channel: [ val(meta), path(tbi) ]
     bigwig = MODKIT_BEDMETHYLTOBIGWIG.out.bw // channel: [ val(meta), path(bw) ]
 }
