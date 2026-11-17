@@ -25,7 +25,7 @@ workflow VCF_CONCAT_NORM_VARIANTS {
     VCFEXPRESS(
         ch_vcfexpress_input,
         ch_vcfexpress_prelude,
-        '',
+        'bcf.gz',
     )
 
     // Remove added caller information in meta

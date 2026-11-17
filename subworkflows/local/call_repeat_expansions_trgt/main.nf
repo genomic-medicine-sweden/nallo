@@ -49,7 +49,7 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     VCFEXPRESS(
         TRGT_GENOTYPE.out.vcf,
         ch_vcfexpress_prelude,
-        '',
+        'bcf.gz',
     )
 
     // Sort and index bcf
