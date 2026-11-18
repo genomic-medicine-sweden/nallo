@@ -26,7 +26,7 @@ workflow MERGE_SVS {
     VCFEXPRESS(
         SVDB_MERGE_BY_CALLER.out.vcf,
         ch_vcfexpress_prelude,
-        '',
+        'vcf.gz',
     )
 
     /*
