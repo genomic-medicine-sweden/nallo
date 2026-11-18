@@ -164,6 +164,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1308](https://github.com/genomic-medicine-sweden/nallo/pull/1308) - Updated trgt to 5.1.0
 - [#1322](https://github.com/genomic-medicine-sweden/nallo/pull/1322) - Updated all nf-core modules that don't include version bumps
 - [#1342](https://github.com/genomic-medicine-sweden/nallo/pull/1342) - Updated `paraphase` to 4.1.0 and `paraphrase` to 0.3.0
+- [#1351](https://github.com/genomic-medicine-sweden/nallo/pull/1351) - `--genmod_score_config_snvs_mito` is now only required when neither `--skip_rank_variants` nor `--skip_mitochondrial_calling` is set
 
 ### Removed
 
