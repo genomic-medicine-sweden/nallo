@@ -309,6 +309,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | sniffles                       | 2.8.0       | 2.8.1       |
 | samtools                       | 1.23.1      | 1.25        |
 | tiddit                         | 3.9.4       | 3.9.7       |
+| tabix/tabix                    | 1.21        |             |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.

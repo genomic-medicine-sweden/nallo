@@ -488,11 +488,6 @@
                         "git_sha": "7b3452a23773f687ededb4befd037920e5a51341",
                         "installed_by": ["vcf_filter_bcftools_ensemblvep"]
                     },
-                    "tabix/tabix": {
-                        "branch": "master",
-                        "git_sha": "7b3452a23773f687ededb4befd037920e5a51341",
-                        "installed_by": ["modules"]
-                    },
                     "tagbam": {
                         "branch": "master",
                         "git_sha": "7b3452a23773f687ededb4befd037920e5a51341",
