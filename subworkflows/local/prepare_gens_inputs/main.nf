@@ -31,6 +31,7 @@ workflow PREPARE_GENS_INPUTS {
         false,
     )
 
+    // Prefix GAWK output filenames with 1 and 2 to keep the header first when FIND_CONCATENATE sorts them alphabetically.
     MOSDEPTH_GATK_HEADER(
         SAMTOOLS_VIEW.out.sam.map { meta, sam -> [meta, sam, '1.mosdepth_gatk_header.tsv'] },
         [],
