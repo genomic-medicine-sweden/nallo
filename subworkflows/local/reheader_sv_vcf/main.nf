@@ -25,7 +25,11 @@ workflow REHEADER_SV_VCF {
     )
 
     // Then create a "vcf_sample_name meta.id" file for bcftools reheader
-    CREATE_SAMPLES_FILE(BCFTOOLS_QUERY.out.output, [], false)
+    CREATE_SAMPLES_FILE(
+        BCFTOOLS_QUERY.out.output.map { meta, query -> [meta, query, 'reheader_mapping.txt'] },
+        [],
+        false,
+    )
 
     ch_bcftools_reheader_input = ch_vcf_reheader.reheader
         .join(CREATE_SAMPLES_FILE.out.output, failOnMismatch: true, failOnDuplicate: true)

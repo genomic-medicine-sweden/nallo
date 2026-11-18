@@ -28,8 +28,8 @@
                             "needs_reheader": false,
                             "skip_vep_prep": true
                         },
-                        "test_1_hificnv.vcf.gz",
-                        "test_1_hificnv.vcf.gz.tbi"
+                        "test_1_tabix_hificnv.vcf.gz",
+                        "test_1_tabix_hificnv.vcf.gz.tbi"
                     ],
                     [
                         {
@@ -86,8 +86,8 @@
                             "needs_reheader": false,
                             "skip_vep_prep": true
                         },
-                        "test_2_hificnv.vcf.gz",
-                        "test_2_hificnv.vcf.gz.tbi"
+                        "test_2_tabix_hificnv.vcf.gz",
+                        "test_2_tabix_hificnv.vcf.gz.tbi"
                     ],
                     [
                         {
@@ -194,10 +194,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-09-11T06:58:31.263052217",
+        "timestamp": "2026-11-17T13:52:13.885762114",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.4"
         }
     },
     "2 samples, 1 family - sniffles,sniffles1,hificnv,severus,sawfish,debreak with trf bed, run all callers": {
@@ -251,7 +251,7 @@
                     [
                         "test_1.vcf.gz",
                         "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=55, phased=false, phasedAutodetect=false]",
-                        "ef540facf6d5d0ba34557afb4170b73"
+                        "7a9085173723bcd627f19344f42c10ab"
                     ]
                 ],
                 [
@@ -319,7 +319,7 @@
                     [
                         "test_2.vcf.gz",
                         "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=32, phased=false, phasedAutodetect=false]",
-                        "939b56d4547d8334200006c335ae6705"
+                        "1f7b7c20763408d03c7fb51865a90989"
                     ]
                 ],
                 [
@@ -367,9 +367,9 @@
                         "skip_vep_prep": true
                     },
                     [
-                        "test_1_hificnv.test_1.vcf.gz"
+                        "test_1_tabix_hificnv.vcf.gz"
                     ],
-                    "test_1_hificnv.test_1.vcf.gz.tbi"
+                    "test_1_tabix_hificnv.vcf.gz.tbi"
                 ],
                 [
                     "sv_calls_indexed:",
@@ -383,16 +383,16 @@
                         "skip_vep_prep": true
                     },
                     [
-                        "test_2_hificnv.test_2.vcf.gz"
+                        "test_2_tabix_hificnv.vcf.gz"
                     ],
-                    "test_2_hificnv.test_2.vcf.gz.tbi"
+                    "test_2_tabix_hificnv.vcf.gz.tbi"
                 ]
             ]
         ],
-        "timestamp": "2026-10-19T09:18:20.324372607",
+        "timestamp": "2026-11-17T13:51:14.479321307",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.4"
         }
     },
     "1 sample, 1 family - sniffles": {
@@ -412,15 +412,15 @@
                     [
                         "test.vcf.gz",
                         "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=58, phased=false, phasedAutodetect=false]",
-                        "18d7f9a70df36051aff4f5d46e4beea1"
+                        "99087db0a472a426af6d931d7e48da4a"
                     ]
                 ]
             ]
         ],
-        "timestamp": "2026-09-11T06:52:39.021766457",
+        "timestamp": "2026-11-17T13:29:30.374552487",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.4"
         }
     },
     "1 sample, 1 family - sawfish": {
@@ -477,9 +477,9 @@
                         "skip_vep_prep": true
                     },
                     [
-                        "test_1_hificnv.test_1.vcf.gz"
+                        "test_1_tabix_hificnv.vcf.gz"
                     ],
-                    "test_1_hificnv.test_1.vcf.gz.tbi"
+                    "test_1_tabix_hificnv.vcf.gz.tbi"
                 ],
                 [
                     "sv_calls_indexed:",
@@ -493,16 +493,16 @@
                         "skip_vep_prep": true
                     },
                     [
-                        "test_2_hificnv.test_2.vcf.gz"
+                        "test_2_tabix_hificnv.vcf.gz"
                     ],
-                    "test_2_hificnv.test_2.vcf.gz.tbi"
+                    "test_2_tabix_hificnv.vcf.gz.tbi"
                 ]
             ]
         ],
-        "timestamp": "2026-09-11T06:56:47.057661256",
+        "timestamp": "2026-11-17T13:50:19.813834465",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.4"
         }
     },
     "1 sample, 1 family - debreak": {
@@ -584,7 +584,7 @@
                     [
                         "test_1.vcf.gz",
                         "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=55, phased=false, phasedAutodetect=false]",
-                        "ef540facf6d5d0ba34557afb4170b73"
+                        "7a9085173723bcd627f19344f42c10ab"
                     ]
                 ],
                 [
@@ -635,7 +635,7 @@
                     [
                         "test_2.vcf.gz",
                         "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=32, phased=false, phasedAutodetect=false]",
-                        "939b56d4547d8334200006c335ae6705"
+                        "1f7b7c20763408d03c7fb51865a90989"
                     ]
                 ]
             ],
@@ -652,9 +652,9 @@
                         "skip_vep_prep": true
                     },
                     [
-                        "test_1_hificnv.test_1.vcf.gz"
+                        "test_1_tabix_hificnv.vcf.gz"
                     ],
-                    "test_1_hificnv.test_1.vcf.gz.tbi"
+                    "test_1_tabix_hificnv.vcf.gz.tbi"
                 ],
                 [
                     "sv_calls_indexed:",
@@ -684,9 +684,9 @@
                         "skip_vep_prep": true
                     },
                     [
-                        "test_2_hificnv.test_2.vcf.gz"
+                        "test_2_tabix_hificnv.vcf.gz"
                     ],
-                    "test_2_hificnv.test_2.vcf.gz.tbi"
+                    "test_2_tabix_hificnv.vcf.gz.tbi"
                 ],
                 [
                     "sv_calls_indexed:",
@@ -706,10 +706,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-09-11T06:58:16.119259378",
+        "timestamp": "2026-11-17T13:51:59.871987335",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.4"
         }
     },
     "1 sample, 1 family - sniffles1": {
@@ -774,7 +774,7 @@
                     [
                         "test_1.vcf.gz",
                         "VcfFile [chromosomes=[chrX, chr16], sampleCount=1, variantCount=55, phased=false, phasedAutodetect=false]",
-                        "ef540facf6d5d0ba34557afb4170b73"
+                        "7a9085173723bcd627f19344f42c10ab"
                     ]
                 ],
                 [
@@ -808,7 +808,7 @@
                     [
                         "test_2.vcf.gz",
                         "VcfFile [chromosomes=[chr16], sampleCount=1, variantCount=32, phased=false, phasedAutodetect=false]",
-                        "939b56d4547d8334200006c335ae6705"
+                        "1f7b7c20763408d03c7fb51865a90989"
                     ]
                 ]
             ],
@@ -839,9 +839,9 @@
                         "skip_vep_prep": true
                     },
                     [
-                        "test_1_hificnv.test_1.vcf.gz"
+                        "test_1_tabix_hificnv.vcf.gz"
                     ],
-                    "test_1_hificnv.test_1.vcf.gz.tbi"
+                    "test_1_tabix_hificnv.vcf.gz.tbi"
                 ],
                 [
                     "sv_calls_indexed:",
@@ -855,16 +855,16 @@
                         "skip_vep_prep": true
                     },
                     [
-                        "test_2_hificnv.test_2.vcf.gz"
+                        "test_2_tabix_hificnv.vcf.gz"
                     ],
-                    "test_2_hificnv.test_2.vcf.gz.tbi"
+                    "test_2_tabix_hificnv.vcf.gz.tbi"
                 ]
             ]
         ],
-        "timestamp": "2026-09-11T06:56:07.386035378",
+        "timestamp": "2026-11-17T13:49:32.732361309",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.4"
         }
     },
     "1 sample, 1 family - sawfish, force_sawfish_joint_call_single_samples true": {

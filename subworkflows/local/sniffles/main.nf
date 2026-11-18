@@ -8,7 +8,7 @@ workflow SNIFFLES {
 
     main:
     RUN_SNIFFLES(
-        ch_bam_bai,
+        ch_bam_bai.map { meta, bam, bai -> [meta, bam, bai, [], []] },
         ch_fasta,
         ch_tandem_repeats,
         true,

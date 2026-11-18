@@ -1,4 +1,4 @@
-include { CAT_CAT                      } from '../../../modules/nf-core/cat/cat/main'
+include { FIND_CONCATENATE             } from '../../../modules/nf-core/find/concatenate/main'
 include { GATK4_DENOISEREADCOUNTS      } from '../../../modules/nf-core/gatk4/denoisereadcounts/main'
 include { GAWK as MOSDEPTH_GATK_HEADER } from '../../../modules/nf-core/gawk/main'
 include { GAWK as MOSDEPTH_GATK_FORMAT } from '../../../modules/nf-core/gawk/main'
@@ -31,8 +31,9 @@ workflow PREPARE_GENS_INPUTS {
         false,
     )
 
+    // Prefix GAWK output filenames with 1 and 2 to keep the header first when FIND_CONCATENATE sorts them alphabetically.
     MOSDEPTH_GATK_HEADER(
-        SAMTOOLS_VIEW.out.sam,
+        SAMTOOLS_VIEW.out.sam.map { meta, sam -> [meta, sam, '1.mosdepth_gatk_header.tsv'] },
         [],
         false,
     )
@@ -41,10 +42,11 @@ workflow PREPARE_GENS_INPUTS {
     MOSDEPTH(
         ch_mosdepth_in,
         [[], []],
+        '',
     )
 
     MOSDEPTH_GATK_FORMAT(
-        MOSDEPTH.out.regions_bed,
+        MOSDEPTH.out.regions_bed.map { meta, bed -> [meta, bed, '2.gatk_formatted.gatk_format.tsv'] },
         [],
         false,
     )
@@ -54,9 +56,9 @@ workflow PREPARE_GENS_INPUTS {
         .join(MOSDEPTH_GATK_FORMAT.out.output)
         .map { meta, header, body -> [meta, [header, body]] }
 
-    CAT_CAT(ch_cat_input)
+    FIND_CONCATENATE(ch_cat_input)
 
-    ch_branched = CAT_CAT.out.file_out.branch { meta, _file ->
+    ch_branched = FIND_CONCATENATE.out.file_out.branch { meta, _file ->
         male: meta.sex == 1
         female: meta.sex == 2
     }

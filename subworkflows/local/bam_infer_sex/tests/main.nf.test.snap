@@ -636,10 +636,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-08-29T13:41:42.597572407",
+        "timestamp": "2026-11-17T14:15:58.432647044",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.4"
         }
     },
     "[bam, bai], fasta, fai, somalier_sites, ped - stub multiple samples": {

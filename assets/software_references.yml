@@ -234,3 +234,6 @@ tool:
   collapse_mitochondrial_gt:
     citation: "collapse_mitochondrial_gt"
     bibliography: ""
+  gzip:
+    citation: "gzip"
+    bibliography: ""

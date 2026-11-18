@@ -34,9 +34,9 @@ workflow CALL_SNVS {
         )
 
         ch_vcf = DEEPVARIANT_RUNDEEPVARIANT.out.vcf
-        ch_index = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_tbi
+        ch_index = DEEPVARIANT_RUNDEEPVARIANT.out.vcf_index
         ch_gvcf = DEEPVARIANT_RUNDEEPVARIANT.out.gvcf
-        ch_gvcf_index = DEEPVARIANT_RUNDEEPVARIANT.out.gvcf_tbi
+        ch_gvcf_index = DEEPVARIANT_RUNDEEPVARIANT.out.gvcf_index
     }
     else if (variant_caller.equals("sentieon")) {
 
@@ -64,6 +64,7 @@ workflow CALL_SNVS {
         BEDTOOLS_INTERSECT(
             ch_bedtools_intersect_in,
             [[], []],
+            '',
         )
 
         ch_intersected_calling_intervals = BEDTOOLS_INTERSECT.out.intersect.branch { meta, intersected_bed ->

@@ -67,6 +67,7 @@ workflow ALIGN_ASSEMBLIES {
     SAMTOOLS_MERGE(
         ch_assemblies_per_sample,
         [[], [], [], []],
+        'bai',
     )
 
     SAMTOOLS_VIEW(

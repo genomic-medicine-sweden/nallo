@@ -1,5 +1,5 @@
-include { HIFICNV as RUN_HIFICNV       } from '../../../modules/nf-core/hificnv/main'
-include { TABIX_TABIX as TABIX_HIFICNV } from '../../../modules/nf-core/tabix/tabix/main'
+include { HIFICNV as RUN_HIFICNV             } from '../../../modules/nf-core/hificnv/main'
+include { HTSLIB_BGZIPTABIX as TABIX_HIFICNV } from '../../../modules/nf-core/htslib/bgziptabix/main'
 
 workflow HIFICNV {
     take:
@@ -38,10 +38,13 @@ workflow HIFICNV {
     )
 
     TABIX_HIFICNV(
-        RUN_HIFICNV.out.vcf
+        RUN_HIFICNV.out.vcf.map { meta, vcf -> [meta, vcf, [], []] },
+        'compress',
+        true,
+        'vcf',
     )
 
-    ch_vcf_tbi = RUN_HIFICNV.out.vcf
+    ch_vcf_tbi = TABIX_HIFICNV.out.output
         .join(TABIX_HIFICNV.out.index, failOnMismatch: true, failOnDuplicate: true)
         .map { meta, vcf, tbi -> [meta + [sv_caller: 'hificnv', needs_reheader: false, skip_vep_prep: true], vcf, tbi] }
 

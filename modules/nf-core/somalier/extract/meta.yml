@@ -1,6 +1,5 @@
 name: "somalier_extract"
-description: Somalier can extract informative sites, evaluate relatedness, and
-  perform quality-control on BAM/CRAM/BCF/VCF/GVCF or from jointly-called VCFs
+description: Somalier can extract informative sites, evaluate relatedness, and perform quality-control on BAM/CRAM/BCF/VCF/GVCF or from jointly-called VCFs
 keywords:
   - relatedness
   - QC
@@ -15,8 +14,7 @@ keywords:
   - family
 tools:
   - "somalier":
-      description: "Somalier can extract informative sites, evaluate relatedness, and
-        perform quality-control on BAM/CRAM/BCF/VCF/GVCF or from jointly-called VCFs"
+      description: "Somalier can extract informative sites, evaluate relatedness, and perform quality-control on BAM/CRAM/BCF/VCF/GVCF or from jointly-called VCFs"
       homepage: "https://github.com/brentp/somalier"
       documentation: "https://github.com/brentp/somalier/blob/master/README.md"
       tool_dev_url: "https://github.com/brentp/somalier"
@@ -65,8 +63,7 @@ input:
           e.g. [ id:'hg38' ]
     - sites:
         type: file
-        description: sites file in VCF format which can be taken from
-          https://github.com/brentp/somalier
+        description: sites file in VCF format which can be taken from https://github.com/brentp/somalier
         pattern: "*.vcf.gz"
         ontologies:
           - edam: http://edamontology.org/format_3989
