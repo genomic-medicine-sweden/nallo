@@ -7,63 +7,63 @@
                 "nf-core": {
                     "bcftools/annotate": {
                         "branch": "master",
-                        "git_sha": "b489eb2587cb508cc9eef65c53f04f7419b5f6d9",
+                        "git_sha": "3d9c2f4beaa4f62b3f006928fd9095a496d1e5a8",
                         "installed_by": ["modules"]
                     },
                     "bcftools/concat": {
                         "branch": "master",
-                        "git_sha": "b489eb2587cb508cc9eef65c53f04f7419b5f6d9",
+                        "git_sha": "6383d8fe58f9498eecd5aa303e71a4a932d1e9f6",
                         "installed_by": ["modules"],
                         "patch": "modules/nf-core/bcftools/concat/bcftools-concat.diff"
                     },
                     "bcftools/index": {
                         "branch": "master",
-                        "git_sha": "b489eb2587cb508cc9eef65c53f04f7419b5f6d9",
+                        "git_sha": "6383d8fe58f9498eecd5aa303e71a4a932d1e9f6",
                         "installed_by": ["modules"]
                     },
                     "bcftools/merge": {
                         "branch": "master",
-                        "git_sha": "b489eb2587cb508cc9eef65c53f04f7419b5f6d9",
+                        "git_sha": "3d9c2f4beaa4f62b3f006928fd9095a496d1e5a8",
                         "installed_by": ["modules"]
                     },
                     "bcftools/norm": {
                         "branch": "master",
-                        "git_sha": "6c0344510a1f5ca831e5806134d839c1c3380d48",
+                        "git_sha": "6383d8fe58f9498eecd5aa303e71a4a932d1e9f6",
                         "installed_by": ["modules"]
                     },
                     "bcftools/pluginfixploidy": {
                         "branch": "master",
-                        "git_sha": "b489eb2587cb508cc9eef65c53f04f7419b5f6d9",
+                        "git_sha": "62011b929647d15dac1f53f3164a152b64223619",
                         "installed_by": ["modules"]
                     },
                     "bcftools/query": {
                         "branch": "master",
-                        "git_sha": "b489eb2587cb508cc9eef65c53f04f7419b5f6d9",
+                        "git_sha": "6383d8fe58f9498eecd5aa303e71a4a932d1e9f6",
                         "installed_by": ["modules"]
                     },
                     "bcftools/reheader": {
                         "branch": "master",
-                        "git_sha": "b489eb2587cb508cc9eef65c53f04f7419b5f6d9",
+                        "git_sha": "6383d8fe58f9498eecd5aa303e71a4a932d1e9f6",
                         "installed_by": ["modules"]
                     },
                     "bcftools/roh": {
                         "branch": "master",
-                        "git_sha": "b489eb2587cb508cc9eef65c53f04f7419b5f6d9",
+                        "git_sha": "6383d8fe58f9498eecd5aa303e71a4a932d1e9f6",
                         "installed_by": ["modules"]
                     },
                     "bcftools/sort": {
                         "branch": "master",
-                        "git_sha": "b489eb2587cb508cc9eef65c53f04f7419b5f6d9",
+                        "git_sha": "6383d8fe58f9498eecd5aa303e71a4a932d1e9f6",
                         "installed_by": ["modules"]
                     },
                     "bcftools/stats": {
                         "branch": "master",
-                        "git_sha": "b489eb2587cb508cc9eef65c53f04f7419b5f6d9",
+                        "git_sha": "6383d8fe58f9498eecd5aa303e71a4a932d1e9f6",
                         "installed_by": ["modules"]
                     },
                     "bcftools/view": {
                         "branch": "master",
-                        "git_sha": "b489eb2587cb508cc9eef65c53f04f7419b5f6d9",
+                        "git_sha": "6383d8fe58f9498eecd5aa303e71a4a932d1e9f6",
                         "installed_by": ["vcf_filter_bcftools_ensemblvep"]
                     },
                     "bedtools/intersect": {
@@ -567,7 +567,8 @@
                     "vcf_filter_bcftools_ensemblvep": {
                         "branch": "master",
                         "git_sha": "ed7a2286df416088793e62fa6a740d07974d0ff8",
-                        "installed_by": ["subworkflows"]
+                        "installed_by": ["subworkflows"],
+                        "patch": "subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/vcf_filter_bcftools_ensemblvep.diff"
                     }
                 }
             }
