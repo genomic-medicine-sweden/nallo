@@ -223,7 +223,7 @@ workflow PIPELINE_INITIALISATION {
         snv_annotation: ["vep_cache", "vep_plugin_files", "variant_consequences_snvs"],
         sv_calling: ["fasta"],
         sv_annotation: ["svdb_sv_databases", "vep_cache", "vep_plugin_files", "variant_consequences_svs"],
-        rank_variants: ["genmod_reduced_penetrance", "genmod_score_config_snvs", "genmod_score_config_snvs_mito", "genmod_score_config_svs"],
+        rank_variants: ["genmod_reduced_penetrance", "genmod_score_config_snvs", "genmod_score_config_svs"],
         repeat_calling: ["str_bed"],
         repeat_annotation: ["stranger_repeat_catalog"],
         gens: ["gens_baf_positions", "gens_panel_of_normals_female", "gens_panel_of_normals_male", "gens_coverage_bins"],
@@ -336,6 +336,11 @@ workflow PIPELINE_INITIALISATION {
 
     // Check that all families has at least one sample with affected phenotype if ranking is active
     validateAllFamiliesHasAffectedSamples(ch_samplesheet, val_skip_rank_variants)
+
+    // Mitochondrial SNVs are only ranked when both ranking and mitochondrial calling are active
+    if (!val_skip_rank_variants && !val_skip_mitochondrial_calling && !val_genmod_score_config_snvs_mito) {
+        error("Error: --genmod_score_config_snvs_mito must be provided when running without --skip_rank_variants and --skip_mitochondrial_calling. Provide a rank model config or use --skip_rank_variants or --skip_mitochondrial_calling.")
+    }
 
     def methylation_callers = val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }
 

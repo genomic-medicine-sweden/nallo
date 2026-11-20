@@ -200,12 +200,12 @@
                     "gawk": "5.3.1"
                 },
                 "PARAPHASE": {
-                    "minimap2": "2.30-r1287",
-                    "paraphase": "3.5.0",
-                    "samtools": 1.23
+                    "minimap2": "2.31-r1302",
+                    "paraphase": "4.1.0",
+                    "samtools": 1.25
                 },
                 "PARAPHRASE": {
-                    "paraphrase": "0.2.0"
+                    "paraphrase": "0.3.0"
                 },
                 "PBCPGTOOLS_ALIGNEDBAMTOCPGSCORES": {
                     "pbcpgtools": "3.0.0"
@@ -320,10 +320,10 @@
                     "tiddit": "3.9.4"
                 },
                 "TRGT_GENOTYPE": {
-                    "trgt": "5.0.0-e9acee0"
+                    "trgt": "5.1.0-ec66463"
                 },
                 "TRGT_MERGE": {
-                    "trgt": "5.0.0-e9acee0"
+                    "trgt": "5.1.0-ec66463"
                 },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
@@ -791,7 +791,7 @@
                 "multiqc_whatshap_phased_bp_plot.txt:md5,1ba29a9165b1c24067b3f723230b4feb",
                 "somalier_stats.txt:md5,e126d444d466c0e6a21e8ae56ddcf819",
                 "whatshap-stats-table.txt:md5,c37f978ef46561ab4b195ebf10005b70",
-                "FAM_paraphase_annotated.tsv:md5,f95c3b89013784ed27feb71c46c09d85",
+                "FAM_paraphase_annotated.tsv:md5,51130cfa7b38893d311fcd01666de7bc",
                 "FAM.ped:md5,bd5cec27ba7337a85cf98e787131e2b5",
                 "HG002_Revio_cramino_aligned_phased.arrow:md5,59218ecb157374692c12a6ffc63ad0e0",
                 "HG002_Revio_cramino_aligned.arrow:md5,59218ecb157374692c12a6ffc63ad0e0",
@@ -899,7 +899,7 @@
                 
             ]
         ],
-        "timestamp": "2026-11-09T13:56:52.545127634",
+        "timestamp": "2026-11-16T09:34:26.198497144",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"
