@@ -56,6 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1287](https://github.com/genomic-medicine-sweden/nallo/pull/1287) - Added Kivvi for FSHD analysis (calls long D4Z4 repeats for FSHD resolution and KIV2 repeats for LPA)
 - [#1286](https://github.com/genomic-medicine-sweden/nallo/pull/1286) - Added `--paraphase_config` param to allow custom configuration of paraphase
 - [#1307](https://github.com/genomic-medicine-sweden/nallo/pull/1307) - Added `--trgt_spanning_repeats_output_format` parameter to control the output format of TRGT separately from the general alignment format. The default takes the same value as the general alignment output format.
+- [#1329](https://github.com/genomic-medicine-sweden/nallo/pull/1329) - Added haplotype comparison (HP1 vs HP2) over `--methylation_regions` with nf-core `modkit/dmr` for modkit methylation calling, run as part of methylation annotation
 
 ### Changed
 
@@ -165,6 +166,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1322](https://github.com/genomic-medicine-sweden/nallo/pull/1322) - Updated all nf-core modules that don't include version bumps
 - [#1342](https://github.com/genomic-medicine-sweden/nallo/pull/1342) - Updated `paraphase` to 4.1.0 and `paraphrase` to 0.3.0
 - [#1351](https://github.com/genomic-medicine-sweden/nallo/pull/1351) - `--genmod_score_config_snvs_mito` is now only required when neither `--skip_rank_variants` nor `--skip_mitochondrial_calling` is set
+- [#1329](https://github.com/genomic-medicine-sweden/nallo/pull/1329) - Renamed `--methbat_regions` to `--methylation_regions`, used by both methbat and modkit
+- [#1329](https://github.com/genomic-medicine-sweden/nallo/pull/1329) - Changed `--skip_methylation_annotation` to default to `false` whenever a methylation caller runs (previously only methbat); methylation annotation now requires phasing and `--methylation_regions`
 
 ### Removed
 
@@ -251,6 +254,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 |                                  | `--publish_input_aligned_bams`              |
 |                                  | `--paraphase_config`                        |
 |                                  | `--trgt_spanning_repeats_output_format`     |
+| `--methbat_regions`              | `--methylation_regions`                     |
 
 > [!NOTE]
 > Parameter has been updated if both old and new parameter information is present.

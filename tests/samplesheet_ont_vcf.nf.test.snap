@@ -70,10 +70,10 @@
                 "GATK4_DENOISEREADCOUNTS": {
                     "gatk4": "4.6.2.0"
                 },
-                "GAWK": {
+                "GAWK_EXTRACT_REGIONS": {
                     "gawk": "5.3.1"
                 },
-                "GAWK_EXTRACT_REGIONS": {
+                "GAWK_PILEUP_REGIONS": {
                     "gawk": "5.3.1"
                 },
                 "GENMOD_ANNOTATE": {
@@ -592,7 +592,7 @@
                 
             ]
         ],
-        "timestamp": "2026-11-09T09:01:21.847809551",
+        "timestamp": "2026-11-09T19:16:22.53117217",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.3"

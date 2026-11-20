@@ -310,6 +310,11 @@
                         "git_sha": "10d5bc958ad3d70a30ecd69cd9f4c84cb467c878",
                         "installed_by": ["modules"]
                     },
+                    "modkit/dmr": {
+                        "branch": "master",
+                        "git_sha": "10d5bc958ad3d70a30ecd69cd9f4c84cb467c878",
+                        "installed_by": ["modules"]
+                    },
                     "modkit/pileup": {
                         "branch": "master",
                         "git_sha": "10d5bc958ad3d70a30ecd69cd9f4c84cb467c878",

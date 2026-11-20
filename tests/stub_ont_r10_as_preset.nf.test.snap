@@ -1,7 +1,7 @@
 {
     "ONT_R10_AS preset with target_regions filters reads to regions before cramino QC and applies correct preset defaults": {
         "content": [
-            186,
+            187,
             {
                 "BCFTOOLS_CONCAT": {
                     "bcftools": 1.21
@@ -60,10 +60,13 @@
                 "FASTQC": {
                     "fastqc": "0.12.1"
                 },
-                "GAWK": {
+                "GAWK_DMR_REGIONS": {
                     "gawk": "5.3.1"
                 },
                 "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GAWK_PILEUP_REGIONS": {
                     "gawk": "5.3.1"
                 },
                 "GLNEXUS": {
@@ -435,7 +438,7 @@
                 "visualization_tracks/HG002_ONT_C/HG002_ONT_C_hificnv.maf.bw"
             ]
         ],
-        "timestamp": "2026-11-09T14:17:16.397184173",
+        "timestamp": "2026-11-09T19:17:50.465320626",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"

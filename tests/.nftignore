@@ -3,6 +3,7 @@ aligned_reads/**/*.{bam,bai,cram,crai}
 assembly/**/*.{bam,bai,cram,crai}
 cnv_calling/**/*.log
 methylation/profile/**/*.tsv
+methylation/profile/**/*_modkit_dmr_hp1_vs_hp2.bed
 multiqc/multiqc_data/fastqc_top_overrepresented_sequences_table.txt
 multiqc/multiqc_data/BETA-multiqc.parquet
 multiqc/multiqc_data/multiqc.parquet

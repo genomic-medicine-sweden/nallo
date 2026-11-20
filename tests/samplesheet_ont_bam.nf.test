@@ -15,7 +15,6 @@ nextflow_pipeline {
                 preset                         = 'ONT_R10'
                 snv_calling_processes          = 1
                 phaser                         = 'whatshap'
-                skip_methylation_annotation    = true
                 sv_callers                     = 'sniffles,debreak'
                 sv_callers_to_run              = 'sniffles,debreak'
                 skip_genome_assembly           = true
@@ -52,6 +51,8 @@ nextflow_pipeline {
                 { assert versions.containsKey('RUN_DEBREAK') || versions.containsKey('DEBREAK') },
                 // Phasing must run (ONT_R10 preset with --phaser whatshap uses WhatsHap)
                 { assert versions.containsKey('WHATSHAP_PHASE') },
+                // Methylation annotation runs modkit dmr over methylation_regions
+                { assert versions.containsKey('MODKIT_DMR') },
                 { assert snapshot(
                     // Number of successful tasks
                     workflow.trace.succeeded().size(),

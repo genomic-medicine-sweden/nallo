@@ -344,14 +344,14 @@ Turned off with `--skip_phasing`.
 
 #### Methylation calling
 
-This subworkflow relies on alignment and short variant calling subworkflows, but requires no additional files. By default, modkit is run when `--preset ONT_R10` is active, while methbat is run when `--preset revio` is active.
+This subworkflow relies on alignment and short variant calling subworkflows. By default, modkit is run when `--preset ONT_R10` is active, while methbat is run when `--preset revio` is active.
 
-If MethBat is used, the following files are required:
+Methylation annotation runs by default whenever a methylation caller runs, and requires phasing. It summarises methylation over the regions in `--methylation_regions`: methbat profiles each region, and with modkit, `modkit dmr` compares haplotype 1 with haplotype 2 in each region.
 
-| Parameter         | Description                                                                                                                                                                                                                                                                                                                  |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `methbat_regions` | A tsv file with only regions of interest ([example](https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv)), or with both regions and background cohort values ([example](https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv)), made with methbat build |
-| `methbat_map`     | A tsv file mapping genomic regions to HGNC gene names and region types (e.g. imprinted regions, promoters), used to annotate methbat output. Required when `--skip_methylation_annotation` is not set.                                                                                                                       |
+| Parameter             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `methylation_regions` | A tsv file with only regions of interest ([example](https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv)), or with both regions and background cohort values ([example](https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv)), made with methbat build. Used by both methbat and modkit. Required with methbat, and with modkit unless `--skip_methylation_annotation` is set. |
+| `methbat_map`         | A tsv file mapping genomic regions to HGNC gene names and region types (e.g. imprinted regions, promoters), used to annotate methbat output. Required with methbat unless `--skip_methylation_annotation` is set.                                                                                                                                                                                                                                    |
 
 If modkit is used, the following optional parameter can be provided:
 
@@ -359,7 +359,7 @@ If modkit is used, the following optional parameter can be provided:
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `bigwig_modcodes` | A comma-separated list of codes of base modifications to include in bigWig files for visualization. Defaults to `h,m`, i.e. 5hmC and 5mC. See [the SAM specification](https://samtools.github.io/hts-specs/SAMtags.pdf) for a complete list |
 
-Turned off with `--skip_methylation_calling`.
+Turned off with `--skip_methylation_calling`. Methylation annotation alone is turned off with `--skip_methylation_annotation`.
 
 !!!tip
 
@@ -573,7 +573,7 @@ The `--target_regions` parameter can be used to limit parts of the analysis to i
 
 !!!note
 
-    When running with the `revio` preset, methbat is used instead of modkit. To limit the output profile, the input region file would need to be edited to contain only regions of interest and then passed with `--methbat_regions`.
+    When running with the `revio` preset, methbat is used instead of modkit. To limit the output profile, the input region file would need to be edited to contain only regions of interest and then passed with `--methylation_regions`.
 
 ### Parallelization
 

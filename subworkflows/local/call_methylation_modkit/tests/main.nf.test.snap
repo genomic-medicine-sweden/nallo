@@ -71,6 +71,9 @@
                         "HG002_modkit_pileup_hp2.bw:md5,d076b83debcf3063024ed13ddb89e87d"
                     ]
                 ],
+                "3": [
+                    
+                ],
                 "bed": [
                     [
                         {
@@ -117,6 +120,9 @@
                         "HG002_modkit_pileup_hp2.bw:md5,d076b83debcf3063024ed13ddb89e87d"
                     ]
                 ],
+                "dmr": [
+                    
+                ],
                 "tbi": [
                     [
                         {
@@ -142,7 +148,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-10-27T17:29:30.889659969",
+        "timestamp": "2026-11-07T11:10:14.03275798",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.3"
@@ -172,6 +178,9 @@
                 "2": [
                     
                 ],
+                "3": [
+                    
+                ],
                 "bed": [
                     [
                         {
@@ -182,6 +191,9 @@
                     ]
                 ],
                 "bigwig": [
+                    
+                ],
+                "dmr": [
                     
                 ],
                 "tbi": [
@@ -195,10 +207,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-05-27T10:46:04.397063466",
+        "timestamp": "2026-11-07T11:11:48.416700056",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.10.3"
         }
     },
     "1 sample - [] unphased - stub": {
@@ -225,6 +237,9 @@
                 "2": [
                     
                 ],
+                "3": [
+                    
+                ],
                 "bed": [
                     [
                         {
@@ -235,6 +250,9 @@
                     ]
                 ],
                 "bigwig": [
+                    
+                ],
+                "dmr": [
                     
                 ],
                 "tbi": [
@@ -248,10 +266,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-05-27T10:45:53.423404706",
+        "timestamp": "2026-11-07T11:11:35.313515077",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.10.3"
         }
     },
     "1 sample - [] phased - stub": {
@@ -278,6 +296,9 @@
                 "2": [
                     
                 ],
+                "3": [
+                    
+                ],
                 "bed": [
                     [
                         {
@@ -288,6 +309,9 @@
                     ]
                 ],
                 "bigwig": [
+                    
+                ],
+                "dmr": [
                     
                 ],
                 "tbi": [
@@ -301,10 +325,90 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-08T14:07:01.412867865",
+        "timestamp": "2026-11-07T11:11:08.759582218",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.10.3"
+        }
+    },
+    "1 sample - [] phased - methylation_regions": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_modkit_dmr_hp1_vs_hp2.bed",
+                    [
+                        "chr16\t172876\t173710\tchr16:172876-173710"
+                    ]
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-07T11:12:09.917128012",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.3"
+        }
+    },
+    "1 sample - [] phased - methylation_regions - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_modkit_pileup.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_modkit_pileup.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    
+                ],
+                "3": [
+                    
+                ],
+                "bed": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_modkit_pileup.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "bigwig": [
+                    
+                ],
+                "dmr": [
+                    
+                ],
+                "tbi": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_modkit_pileup.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-11-07T11:12:23.034088572",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.3"
         }
     },
     "1 sample - [] unphased": {
@@ -337,6 +441,9 @@
                         "HG002_modkit_pileup.bw:md5,0afad3b3eee0c8d4e402e13b5871cf9c"
                     ]
                 ],
+                "3": [
+                    
+                ],
                 "bed": [
                     [
                         {
@@ -355,6 +462,9 @@
                         "HG002_modkit_pileup.bw:md5,0afad3b3eee0c8d4e402e13b5871cf9c"
                     ]
                 ],
+                "dmr": [
+                    
+                ],
                 "tbi": [
                     [
                         {
@@ -366,7 +476,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-10-27T17:29:47.522748738",
+        "timestamp": "2026-11-07T11:10:27.186304573",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.3"
@@ -430,6 +540,9 @@
                         "HG002_modkit_pileup_combined.bw:md5,4a497de45d4fbe04c3555a6b7cc40438"
                     ]
                 ],
+                "3": [
+                    
+                ],
                 "bed": [
                     [
                         {
@@ -462,6 +575,9 @@
                         "HG002_modkit_pileup_combined.bw:md5,4a497de45d4fbe04c3555a6b7cc40438"
                     ]
                 ],
+                "dmr": [
+                    
+                ],
                 "tbi": [
                     [
                         {
@@ -487,7 +603,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-10-27T17:30:07.795000374",
+        "timestamp": "2026-11-07T11:10:42.468378296",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.3"
@@ -517,6 +633,9 @@
                 "2": [
                     
                 ],
+                "3": [
+                    
+                ],
                 "bed": [
                     [
                         {
@@ -527,6 +646,9 @@
                     ]
                 ],
                 "bigwig": [
+                    
+                ],
+                "dmr": [
                     
                 ],
                 "tbi": [
@@ -540,10 +662,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-08T14:07:12.333869871",
+        "timestamp": "2026-11-07T11:11:22.154820536",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.4"
+            "nextflow": "26.10.3"
         }
     },
     "1 sample - bed unphased": {
@@ -576,6 +698,9 @@
                         "HG002_modkit_pileup.bw:md5,4a497de45d4fbe04c3555a6b7cc40438"
                     ]
                 ],
+                "3": [
+                    
+                ],
                 "bed": [
                     [
                         {
@@ -594,6 +719,9 @@
                         "HG002_modkit_pileup.bw:md5,4a497de45d4fbe04c3555a6b7cc40438"
                     ]
                 ],
+                "dmr": [
+                    
+                ],
                 "tbi": [
                     [
                         {
@@ -605,7 +733,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-10-27T17:30:24.643448463",
+        "timestamp": "2026-11-07T11:10:55.702298182",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.3"
