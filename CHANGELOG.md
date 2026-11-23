@@ -166,6 +166,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1342](https://github.com/genomic-medicine-sweden/nallo/pull/1342) - Updated `paraphase` to 4.1.0 and `paraphrase` to 0.3.0
 - [#1346](https://github.com/genomic-medicine-sweden/nallo/pull/1346) - Updated all remaining nf-core modules. For more details about what was changed, see PR description.
 - [#1351](https://github.com/genomic-medicine-sweden/nallo/pull/1351) - `--genmod_score_config_snvs_mito` is now only required when neither `--skip_rank_variants` nor `--skip_mitochondrial_calling` is set
+- [#1353](https://github.com/genomic-medicine-sweden/nallo/pull/1353) - Fixed mitochondrial ranking being initialized when `--skip_mitochondrial_calling` was enabled, causing an error when `--genmod_score_config_snvs_mito` was omitted. Mitochondrial snvs are now only mixed with the snvs to rank if `--skip_mitochondrial_calling` is not active.
 
 ### Removed
 
