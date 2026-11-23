@@ -58,7 +58,7 @@ workflow ANNOTATE_CADD {
     )
 
     ch_annotate_indels_in = RENAME_CHRNAMES.out.vcf
-        .join(CADD.out.tsv, failOnMismatch: true, failOnDuplicate: true)
+        .join(TABIX_CADD.out.output, failOnMismatch: true, failOnDuplicate: true)
         .join(TABIX_CADD.out.index, failOnMismatch: true, failOnDuplicate: true)
         .map { meta, vcf, annotations, annotations_index -> [meta, vcf, [], annotations, annotations_index, []] }
         .combine(ch_header.map { _meta, header -> header })
