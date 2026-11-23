@@ -119,7 +119,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-11-17T15:10:42.569968617",
+        "timestamp": "2026-11-23T13:20:30.785567899",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"
@@ -275,7 +275,7 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-11-17T15:10:16.111096745",
+        "timestamp": "2026-11-23T13:20:04.931296798",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"
@@ -421,7 +421,238 @@
                 "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi"
             ]
         ],
-        "timestamp": "2026-11-17T15:09:48.498820843",
+        "timestamp": "2026-11-23T13:19:37.502687064",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.4"
+        }
+    },
+    "Test skip_mitochondrial_calling without genmod_score_config_snvs_mito": {
+        "content": [
+            123,
+            {
+                "BCFTOOLS_CONCAT": {
+                    "bcftools": 1.21
+                },
+                "BCFTOOLS_NORM_MULTISAMPLE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_NORM_SINGLESAMPLE": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_QUERY": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_REHEADER": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_SORT": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_SORT_SVS": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_STATS": {
+                    "bcftools": 1.22
+                },
+                "BCFTOOLS_VIEW_SVS": {
+                    "bcftools": 1.22
+                },
+                "BEDTOOLS_MERGE": {
+                    "bedtools": "2.31.1"
+                },
+                "BEDTOOLS_SORT": {
+                    "bedtools": "2.31.1"
+                },
+                "BEDTOOLS_SPLIT": {
+                    "bedtools": "2.31.1"
+                },
+                "CREATE_SAMPLES_FILE": {
+                    "gawk": "5.3.1"
+                },
+                "CUSTOM_ADDMOSTSEVERECONSEQUENCE": {
+                    "addmostsevereconsequence": "1.2.0",
+                    "bgzip": 1.21
+                },
+                "CUSTOM_ADDMOSTSEVEREPLI": {
+                    "addmostseverepli": "1.2.0",
+                    "bgzip": 1.21
+                },
+                "DEEPVARIANT_RUNDEEPVARIANT": {
+                    "deepvariant": "1.10.0"
+                },
+                "DEEPVARIANT_VCFSTATSREPORT": {
+                    "deepvariant": "1.10.0"
+                },
+                "ECHTVAR_ANNO": {
+                    "echtvar": "0.2.4"
+                },
+                "ENSEMBLVEP_FILTERVEP": {
+                    "ensemblvep": 116.3,
+                    "perl-math-cdf": 0.1
+                },
+                "ENSEMBLVEP_SNV": {
+                    "ensemblvep": 116.3,
+                    "perl-math-cdf": 0.1,
+                    "tabix": 1.21
+                },
+                "ENSEMBLVEP_SV": {
+                    "ensemblvep": 116.3,
+                    "perl-math-cdf": 0.1,
+                    "tabix": 1.21
+                },
+                "GAWK_EXTRACT_REGIONS": {
+                    "gawk": "5.3.1"
+                },
+                "GENMOD_ANNOTATE": {
+                    "genmod": "3.12.0"
+                },
+                "GENMOD_COMPOUND": {
+                    "genmod": "3.12.0"
+                },
+                "GENMOD_MODELS": {
+                    "genmod": "3.12.0"
+                },
+                "GENMOD_SCORE": {
+                    "genmod": "3.12.0"
+                },
+                "GLNEXUS": {
+                    "glnexus": "1.4.1"
+                },
+                "GUNZIP_FASTA": {
+                    "gunzip": 1.13
+                },
+                "HTSLIB_BGZIPTABIX": {
+                    "htslib": 1.25,
+                    "xz": "5.8.3"
+                },
+                "MINIMAP2_ALIGN": {
+                    "minimap2": "2.30-r1287"
+                },
+                "MINIMAP2_INDEX": {
+                    "minimap2": "2.30-r1287"
+                },
+                "RELATE_INFER": {
+                    "somalier": "0.2.18"
+                },
+                "RELATE_RELATE": {
+                    "somalier": "0.2.18"
+                },
+                "RUN_HIFICNV": {
+                    "hificnv": "1.0.0-36e6461"
+                },
+                "RUN_SEVERUS": {
+                    "severus": 1.7
+                },
+                "RUN_SNIFFLES": {
+                    "sniffles": "2.8.1"
+                },
+                "SAMPLESHEET_PED": {
+                    "create_pedigree_file": 1.0
+                },
+                "SAMTOOLS_FAIDX": {
+                    "samtools": 1.25
+                },
+                "SAMTOOLS_IMPORT": {
+                    "samtools": 1.25
+                },
+                "SAMTOOLS_MERGE": {
+                    "samtools": 1.25
+                },
+                "SOMALIER_EXTRACT": {
+                    "somalier": "0.2.18"
+                },
+                "SOMALIER_PED_FAMILY": {
+                    "create_pedigree_file": 1.0
+                },
+                "SPLITUBAM": {
+                    "splitubam": "0.1.1"
+                },
+                "SVDB_MERGE_BY_CALLER": {
+                    "bcftools": 1.24,
+                    "svdb": "2.12.2"
+                },
+                "SVDB_MERGE_BY_FAMILY": {
+                    "bcftools": 1.24,
+                    "svdb": "2.12.2"
+                },
+                "SVDB_QUERY": {
+                    "svdb": "2.12.2"
+                },
+                "TABIX_HIFICNV": {
+                    "htslib": 1.25,
+                    "xz": "5.8.3"
+                },
+                "UNTAR_VEP_CACHE": {
+                    "untar": 1.34
+                },
+                "VCFEXPRESS": {
+                    "vcfexpress": "0.3.4"
+                },
+                "VEP_PREP_SV": {
+                    "vep_prep_sv": "1.0.0"
+                },
+                "Workflow": {
+                    "genomic-medicine-sweden/nallo": "v0.13.0dev"
+                }
+            },
+            [
+                "aligned_reads",
+                "aligned_reads/HG002_Revio",
+                "aligned_reads/HG002_Revio/HG002_Revio.bam",
+                "aligned_reads/HG002_Revio/HG002_Revio.bam.bai",
+                "multiqc",
+                "multiqc/multiqc_data",
+                "multiqc/multiqc_data/.stub",
+                "multiqc/multiqc_plots",
+                "multiqc/multiqc_plots/.stub",
+                "multiqc/multiqc_report.html",
+                "pedigree",
+                "pedigree/family",
+                "pedigree/family/FAM.ped",
+                "pipeline_info",
+                "pipeline_info/nallo_software_mqc_versions.yml",
+                "qc",
+                "qc/bcftools_stats",
+                "qc/bcftools_stats/HG002_Revio",
+                "qc/bcftools_stats/HG002_Revio/HG002_Revio.bcftools_stats.txt",
+                "qc/deepvariant_vcfstatsreport",
+                "qc/deepvariant_vcfstatsreport/HG002_Revio",
+                "qc/deepvariant_vcfstatsreport/HG002_Revio/HG002_Revio.visual_report.html",
+                "qc/somalier",
+                "qc/somalier/relate",
+                "qc/somalier/relate/test",
+                "qc/somalier/relate/test/test.html",
+                "qc/somalier/relate/test/test.pairs.tsv",
+                "qc/somalier/relate/test/test.samples.tsv",
+                "snvs",
+                "snvs/family",
+                "snvs/family/FAM",
+                "snvs/family/FAM/FAM_snvs_annotated_ranked_clinical.vcf.gz",
+                "snvs/family/FAM/FAM_snvs_annotated_ranked_clinical.vcf.gz.tbi",
+                "snvs/family/FAM/FAM_snvs_annotated_ranked_research.vcf.gz",
+                "snvs/family/FAM/FAM_snvs_annotated_ranked_research.vcf.gz.tbi",
+                "snvs/sample",
+                "snvs/sample/HG002_Revio",
+                "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz",
+                "snvs/sample/HG002_Revio/HG002_Revio_deepvariant_snvs.vcf.gz.tbi",
+                "svs",
+                "svs/family",
+                "svs/family/FAM",
+                "svs/family/FAM/FAM_svs_annotated_ranked_clinical.vcf.gz",
+                "svs/family/FAM/FAM_svs_annotated_ranked_clinical.vcf.gz.tbi",
+                "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz",
+                "svs/family/FAM/FAM_svs_annotated_ranked_research.vcf.gz.tbi",
+                "svs/family/FAM/FAM_svs_unphased.vcf.gz",
+                "svs/family/FAM/FAM_svs_unphased.vcf.gz.tbi",
+                "visualization_tracks",
+                "visualization_tracks/HG002_Revio",
+                "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.copynum.bedgraph",
+                "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.depth.bw",
+                "visualization_tracks/HG002_Revio/HG002_Revio_hificnv.maf.bw"
+            ]
+        ],
+        "timestamp": "2026-11-23T13:21:08.49922326",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"
