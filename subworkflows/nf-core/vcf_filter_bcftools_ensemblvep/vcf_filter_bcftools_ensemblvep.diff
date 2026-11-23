@@ -1,0 +1,20 @@
+Changes in component 'nf-core/vcf_filter_bcftools_ensemblvep'
+Changes in 'vcf_filter_bcftools_ensemblvep/main.nf':
+--- subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main.nf
++++ subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/main.nf
+@@ -28,7 +28,7 @@
+         )
+ 
+         ch_vcf = BCFTOOLS_VIEW.out.vcf
+-        ch_tbi = BCFTOOLS_VIEW.out.index
++        ch_tbi = BCFTOOLS_VIEW.out.tbi
+     }
+ 
+     if (filter_with_filter_vep) {
+
+'subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/meta.yml' is unchanged
+'subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/nextflow.config' is unchanged
+'subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/tests/main.nf.test.snap' is unchanged
+'subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/tests/nextflow.config' is unchanged
+'subworkflows/nf-core/vcf_filter_bcftools_ensemblvep/tests/main.nf.test' is unchanged
+************************************************************

@@ -490,7 +490,7 @@
                     },
                     "tabix/tabix": {
                         "branch": "master",
-                        "git_sha": "7b3452a23773f687ededb4befd037920e5a51341",
+                        "git_sha": "524a7d5ef99a0cbfb4feec8bf7062eb6a531931a",
                         "installed_by": ["modules"]
                     },
                     "tagbam": {
@@ -566,7 +566,7 @@
                     },
                     "vcf_filter_bcftools_ensemblvep": {
                         "branch": "master",
-                        "git_sha": "ed7a2286df416088793e62fa6a740d07974d0ff8",
+                        "git_sha": "7b581d0afbf489e9a04cc54bb739445ecf316e96",
                         "installed_by": ["subworkflows"]
                     }
                 }

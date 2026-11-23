@@ -165,6 +165,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1322](https://github.com/genomic-medicine-sweden/nallo/pull/1322) - Updated all nf-core modules that don't include version bumps
 - [#1342](https://github.com/genomic-medicine-sweden/nallo/pull/1342) - Updated `paraphase` to 4.1.0 and `paraphrase` to 0.3.0
 - [#1346](https://github.com/genomic-medicine-sweden/nallo/pull/1346) - Updated all remaining nf-core modules. For more details about what was changed, see PR description.
+- [#1351](https://github.com/genomic-medicine-sweden/nallo/pull/1351) - `--genmod_score_config_snvs_mito` is now only required when neither `--skip_rank_variants` nor `--skip_mitochondrial_calling` is set
 
 ### Removed
 
@@ -309,6 +310,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | sniffles                       | 2.8.0       | 2.8.1       |
 | samtools                       | 1.23.1      | 1.25        |
 | tiddit                         | 3.9.4       | 3.9.7       |
+| tabix/tabix                    | 1.21        |             |
 
 > [!NOTE]
 > Version has been updated if both old and new version information is present.
