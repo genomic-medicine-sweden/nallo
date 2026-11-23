@@ -184,6 +184,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1245](https://github.com/genomic-medicine-sweden/nallo/pull/1245) - Updated VEP from 110 to 116.1; removed the local downgrade patch; updated default `vep_cache_version` to 116
 - [#1245](https://github.com/genomic-medicine-sweden/nallo/pull/1245) - Updated `ensemblvep/filtervep` and `vcf_filter_bcftools_ensemblvep` to current nf-core/modules versions; `vcf_filter_bcftools_ensemblvep` now uses `htslib/bgziptabix` instead of `tabix/bgziptabix`
 - [#1260](https://github.com/genomic-medicine-sweden/nallo/pull/1260) - Removed `--premapped` parameter; use the `aligned_bam` samplesheet column instead
+- [#1350](https://github.com/genomic-medicine-sweden/nallo/pull/1350) - Removed unused `ext.prefix`, `ext.suffix = 'tsv|txt|vcf'` and unused processes from configs after updating all the nf-core modules
 
 ### Fixed
 
