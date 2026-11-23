@@ -1,7 +1,7 @@
-include { BCFTOOLS_MERGE } from '../../../modules/nf-core/bcftools/merge/'
-include { STRDUST        } from '../../../modules/nf-core/strdust/'
-include { TABIX_TABIX    } from '../../../modules/nf-core/tabix/tabix/main'
-include { VCFEXPRESS     } from '../../../modules/nf-core/vcfexpress/main'
+include { BCFTOOLS_MERGE    } from '../../../modules/nf-core/bcftools/merge/'
+include { STRDUST           } from '../../../modules/nf-core/strdust/'
+include { HTSLIB_BGZIPTABIX } from '../../../modules/nf-core/htslib/bgziptabix/main'
+include { VCFEXPRESS        } from '../../../modules/nf-core/vcfexpress/main'
 
 workflow CALL_REPEAT_EXPANSIONS_STRDUST {
     take:
@@ -23,14 +23,18 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
     VCFEXPRESS(
         STRDUST.out.vcf,
         ch_vcfexpress_prelude,
+        'vcf.gz',
     )
 
-    TABIX_TABIX(
-        VCFEXPRESS.out.vcf
+    HTSLIB_BGZIPTABIX(
+        VCFEXPRESS.out.vcf.map { meta, vcf -> [meta, vcf, [], []] },
+        'compress',
+        true,
+        'vcf',
     )
 
-    ch_bcftools_merge_in = VCFEXPRESS.out.vcf
-        .join(TABIX_TABIX.out.index, failOnDuplicate: true, failOnMismatch: true)
+    ch_bcftools_merge_in = HTSLIB_BGZIPTABIX.out.output
+        .join(HTSLIB_BGZIPTABIX.out.index, failOnDuplicate: true, failOnMismatch: true)
         .map { meta, vcf, tbi -> [[id: meta.family_id], vcf, tbi] }
         .groupTuple()
         .map { meta, vcfs, tbis -> [meta, vcfs, tbis, []] }
@@ -41,8 +45,8 @@ workflow CALL_REPEAT_EXPANSIONS_STRDUST {
     )
 
     emit:
-    sample_vcf = VCFEXPRESS.out.vcf       // channel: [ val(meta), path(vcf) ]
-    sample_tbi = TABIX_TABIX.out.index    // channel: [ val(meta), path(tbi) ]
-    family_vcf = BCFTOOLS_MERGE.out.vcf   // channel: [ val(meta), path(vcf) ]
-    family_tbi = BCFTOOLS_MERGE.out.index // channel: [ val(meta), path(tbi) ]
+    sample_vcf = VCFEXPRESS.out.vcf          // channel: [ val(meta), path(vcf) ]
+    sample_tbi = HTSLIB_BGZIPTABIX.out.index // channel: [ val(meta), path(tbi) ]
+    family_vcf = BCFTOOLS_MERGE.out.vcf      // channel: [ val(meta), path(vcf) ]
+    family_tbi = BCFTOOLS_MERGE.out.index    // channel: [ val(meta), path(tbi) ]
 }

@@ -40,7 +40,7 @@ workflow CALL_PARALOGS {
      * We add the biological sample name as a prefix to the paraphase identifier (e.g. hba_hba2hap1 -> ${sample}_hba_hba2hap1), since bcftools merge requires all sample names across input VCFs to be unique.
      */
     GAWK(
-        BCFTOOLS_QUERY.out.output,
+        BCFTOOLS_QUERY.out.output.map { meta, query -> [meta, query, 'reheader_mapping.txt'] },
         [],
         false,
     )

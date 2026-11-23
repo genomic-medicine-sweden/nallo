@@ -54,11 +54,8 @@
                 "BEDTOOLS_SORT": {
                     "bedtools": "2.31.1"
                 },
-                "CAT_CAT": {
-                    "pigz": 2.8
-                },
                 "CRAMINO": {
-                    "cramino": "1.1.0"
+                    "cramino": "2.0.0"
                 },
                 "CREATE_SAMPLES_FILE": {
                     "gawk": "5.3.1"
@@ -81,24 +78,29 @@
                     "echtvar": "0.2.4"
                 },
                 "ENSEMBLVEP_FILTERVEP": {
-                    "ensemblvep": 116.1,
+                    "ensemblvep": 116.3,
                     "perl-math-cdf": 0.1
                 },
                 "ENSEMBLVEP_SNV": {
-                    "ensemblvep": 116.1,
+                    "ensemblvep": 116.3,
                     "perl-math-cdf": 0.1,
-                    "tabix": "1.23.1"
+                    "tabix": 1.21
                 },
                 "ENSEMBLVEP_SV": {
-                    "ensemblvep": 116.1,
+                    "ensemblvep": 116.3,
                     "perl-math-cdf": 0.1,
-                    "tabix": "1.23.1"
+                    "tabix": 1.21
                 },
                 "FASTQC": {
-                    "fastqc": "0.12.1"
+                    "fastqc": "0.13.0"
+                },
+                "FIND_CONCATENATE": {
+                    "coreutils": 9.4,
+                    "find": "4.6.0",
+                    "pigz": 2.8
                 },
                 "GATK4_DENOISEREADCOUNTS": {
-                    "gatk4": "4.6.2.0"
+                    "gatk4": "4.7.0.0"
                 },
                 "GAWK": {
                     "gawk": "5.3.1"
@@ -119,17 +121,17 @@
                     "genmod": "3.12.0"
                 },
                 "GLNEXUS": {
-                    "glnexus": "1.4.3"
+                    "glnexus": "1.4.1"
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
                 },
                 "HTSLIB_BGZIPTABIX": {
-                    "htslib": 1.24,
+                    "htslib": 1.25,
                     "xz": "5.8.3"
                 },
                 "MINIMAP2_INDEX": {
-                    "minimap2": "2.29-r1283"
+                    "minimap2": "2.30-r1287"
                 },
                 "MODKIT_BEDMETHYLTOBIGWIG": {
                     "modkit": "0.6.4"
@@ -138,7 +140,8 @@
                     "modkit": "0.6.4"
                 },
                 "MOSDEPTH": {
-                    "mosdepth": "0.3.11"
+                    "gzip": 1.14,
+                    "mosdepth": "0.3.14"
                 },
                 "MOSDEPTH_GATK_FORMAT": {
                     "gawk": "5.3.1"
@@ -165,7 +168,7 @@
                     "debreak": 1.3
                 },
                 "RUN_SNIFFLES": {
-                    "sniffles": "2.8.0"
+                    "sniffles": "2.8.1"
                 },
                 "SAMBAMBA_DEPTH": {
                     "sambamba": "1.0.1"
@@ -174,16 +177,16 @@
                     "create_pedigree_file": 1.0
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.25
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.25
                 },
                 "SAMTOOLS_INDEX_INPUT": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.25
                 },
                 "SAMTOOLS_VIEW": {
-                    "samtools": 1.24
+                    "samtools": 1.25
                 },
                 "SOMALIER_EXTRACT": {
                     "somalier": "0.2.18"
@@ -206,15 +209,8 @@
                 "SVDB_QUERY": {
                     "svdb": "2.12.2"
                 },
-                "TABIX_BGZIPTABIX": {
-                    "bgzip": 1.21,
-                    "tabix": 1.21
-                },
-                "TABIX_TABIX": {
-                    "tabix": 1.21
-                },
                 "TIDDIT_COV": {
-                    "tiddit": "3.9.4"
+                    "tiddit": "3.9.7"
                 },
                 "UNTAR_VEP_CACHE": {
                     "untar": 1.34
@@ -306,12 +302,12 @@
                 "methylation",
                 "methylation/pileup",
                 "methylation/pileup/hg002",
-                "methylation/pileup/hg002/hg002_modkit_pileup_combined.bed.gz",
-                "methylation/pileup/hg002/hg002_modkit_pileup_combined.bed.gz.tbi",
-                "methylation/pileup/hg002/hg002_modkit_pileup_hp1.bed.gz",
-                "methylation/pileup/hg002/hg002_modkit_pileup_hp1.bed.gz.tbi",
-                "methylation/pileup/hg002/hg002_modkit_pileup_hp2.bed.gz",
-                "methylation/pileup/hg002/hg002_modkit_pileup_hp2.bed.gz.tbi",
+                "methylation/pileup/hg002/hg002_modkit_pileup_combined_indexed.bed.gz",
+                "methylation/pileup/hg002/hg002_modkit_pileup_combined_indexed.bed.gz.tbi",
+                "methylation/pileup/hg002/hg002_modkit_pileup_hp1_indexed.bed.gz",
+                "methylation/pileup/hg002/hg002_modkit_pileup_hp1_indexed.bed.gz.tbi",
+                "methylation/pileup/hg002/hg002_modkit_pileup_hp2_indexed.bed.gz",
+                "methylation/pileup/hg002/hg002_modkit_pileup_hp2_indexed.bed.gz.tbi",
                 "multiqc",
                 "multiqc/multiqc_data",
                 "multiqc/multiqc_data/bcftools-stats-subtypes.txt",
@@ -517,7 +513,7 @@
                 "repeats/sample",
                 "repeats/sample/hg002",
                 "repeats/sample/hg002/hg002_strdust.vcf.gz",
-                "repeats/sample/hg002/hg002_strdust.vcf.gz.tbi",
+                "repeats/sample/hg002/hg002_strdust_indexed.vcf.gz.tbi",
                 "snvs",
                 "snvs/family",
                 "snvs/family/hg002",
@@ -601,17 +597,17 @@
                 "hg002_chromograph_coverage_chrM.png:md5,0700e02e44d094b214d74680f8529d59",
                 "hg002_chromograph_coverage_chrX.png:md5,e8ceecdb88c3277c0aa64a0548982fbf",
                 "hg002_chromograph_coverage_chrY.png:md5,954482b960865332f37d386da5c9fb75",
-                "hg002_modkit_pileup_combined.bed.gz:md5,3551a340bd069247837f7155a69cb288",
-                "hg002_modkit_pileup_combined.bed.gz.tbi:md5,346b0cbc697a1ab3d4d0a49d1451bcc9",
-                "hg002_modkit_pileup_hp1.bed.gz:md5,46d3aea523012c61a8b8722fda9bef9a",
-                "hg002_modkit_pileup_hp1.bed.gz.tbi:md5,80fa9ceefc67d42a02656c4e48fd5e59",
-                "hg002_modkit_pileup_hp2.bed.gz:md5,abbbce52c065b6d669ca1f3f423a5df8",
-                "hg002_modkit_pileup_hp2.bed.gz.tbi:md5,2e2cc58321361bc908b931e21292bf3c",
+                "hg002_modkit_pileup_combined_indexed.bed.gz:md5,3551a340bd069247837f7155a69cb288",
+                "hg002_modkit_pileup_combined_indexed.bed.gz.tbi:md5,346b0cbc697a1ab3d4d0a49d1451bcc9",
+                "hg002_modkit_pileup_hp1_indexed.bed.gz:md5,46d3aea523012c61a8b8722fda9bef9a",
+                "hg002_modkit_pileup_hp1_indexed.bed.gz.tbi:md5,80fa9ceefc67d42a02656c4e48fd5e59",
+                "hg002_modkit_pileup_hp2_indexed.bed.gz:md5,abbbce52c065b6d669ca1f3f423a5df8",
+                "hg002_modkit_pileup_hp2_indexed.bed.gz.tbi:md5,2e2cc58321361bc908b931e21292bf3c",
                 "bcftools-stats-subtypes.txt:md5,cb4927dc391f73b2549a09335b2149ed",
                 "bcftools_stats_indel-lengths.txt:md5,e562a37bbad152faff092b4481c42747",
                 "fastqc-status-check-heatmap.txt:md5,1d927bc4f778ba9da73c0ae634119c3c",
                 "fastqc_adapter_content_plot.txt:md5,23f8db4b533b9975e1ed0001b33a8b9d",
-                "fastqc_overrepresented_sequences_plot.txt:md5,c933981a22d49309df190d6f604b36ca",
+                "fastqc_overrepresented_sequences_plot.txt:md5,a73b02c44493153a0aeeb1efe98502d4",
                 "fastqc_per_base_n_content_plot.txt:md5,1e8eb85c4e19c99651e2034899d92dd0",
                 "fastqc_per_base_sequence_quality_plot.txt:md5,206b1c802d8f28acada2c57962c5997a",
                 "fastqc_per_sequence_gc_content_plot_Counts.txt:md5,85c10382a7c20f76928c7a4e6a527ec8",
@@ -627,19 +623,19 @@
                 "mosdepth_perchrom.txt:md5,479a966c0ada1b475ee58fe1f7359692",
                 "multiqc_bcftools_stats.txt:md5,e2e1691ad2ca5916be17a61c93cc33d5",
                 "multiqc_citations.txt:md5,b3367d20aa6e8306ca1c32c0f5993899",
-                "multiqc_fastqc.txt:md5,0619799a29992c9fb0571509350de062",
+                "multiqc_fastqc.txt:md5,8fb5dc950c8799368dc54d1a57175d46",
                 "multiqc_general_stats.txt:md5,fa95944ddb1811b6de217c60346f1335",
                 "multiqc_whatshap_phased_bp_plot.txt:md5,a3cae1da0bceed2b1aa3a4a1b452a951",
                 "somalier_stats.txt:md5,47209a793391569b7e05f0abb515d2b8",
                 "whatshap-stats-table.txt:md5,45f8f1cb608a31b3827101783c621d2e",
                 "hg002.ped:md5,76bd1b80d6843a6a15bfd324a9a0598c",
-                "hg002_cramino_aligned_phased.arrow:md5,454472e923f5d7a6389d61e690d62b18",
-                "hg002_cramino_aligned.arrow:md5,454472e923f5d7a6389d61e690d62b18",
+                "hg002_cramino_aligned_phased.arrow:md5,ab5b65a90781a41974ab29622657ad68",
+                "hg002_cramino_aligned.arrow:md5,ab5b65a90781a41974ab29622657ad68",
                 "hg002.mosdepth.global.dist.txt:md5,9543b21553dad77d4217eb6580b13c2c",
                 "hg002.mosdepth.region.dist.txt:md5,e25a124f8284e22d82c010ba1122eca0",
                 "hg002.mosdepth.summary.txt:md5,5cef946c1a46a496dfcbf2503d6b6a49",
                 "hg002.regions.bed.gz:md5,0306db344793b9f2c1edd190af18b390",
-                "hg002.regions.bed.gz.csi:md5,2fb6ae9d90cd9a3f328b37ca314035a9",
+                "hg002.regions.bed.gz.csi:md5,5d0d05c8cc16a119d679d5e2bc3cda79",
                 "hg002.het_check.csv:md5,8074c1a7e15115cdb3343e9fba3cfd06",
                 "hg002.het_check.png:md5,44c68dd246585de33dcc46678c6fd65f",
                 "hg002.html:md5,0307ea400481bb8deccdc3aebd2a3c7c",
@@ -709,10 +705,10 @@
                 
             ]
         ],
-        "timestamp": "2026-11-09T08:59:46.981615073",
+        "timestamp": "2026-11-17T14:54:05.187794326",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.3"
+            "nextflow": "26.10.4"
         }
     }
 }

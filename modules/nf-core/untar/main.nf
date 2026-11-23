@@ -1,9 +1,12 @@
+// Copyright (c) the nf-core community under an open-source MIT license.
+// See https://github.com/nf-core/modules for full license, file patching instructions and upstream contributing.
+
 process UNTAR {
     tag "${archive}"
     label 'process_single'
 
     conda "${moduleDir}/environment.yml"
-    container "${workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container
+    container "${workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container
         ? 'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/52/52ccce28d2ab928ab862e25aae26314d69c8e38bd41ca9431c67ef05221348aa/data'
         : 'community.wave.seqera.io/library/coreutils_grep_gzip_lbzip2_pruned:838ba80435a629f8'}"
 
@@ -11,7 +14,7 @@ process UNTAR {
     tuple val(meta), path(archive)
 
     output:
-    tuple val(meta), path("${dir}"), emit: untar
+    tuple val(meta), path("$dir"), emit: untar
     tuple val("${task.process}"), val('untar'), eval('tar --version 2>&1 | head -1 | sed "s/tar (GNU tar) //; s/ Copyright.*//"'), emit: versions_untar, topic: versions
 
     when:
@@ -21,6 +24,7 @@ process UNTAR {
     def args = task.ext.args ?: ''
     def args2 = task.ext.args2 ?: ''
     prefix = task.ext.prefix ?: (meta.id ? "${meta.id}" : archive.baseName.toString().replaceFirst(/\.tar$/, ""))
+
     dir = prefix.split('/')[1]
     """
     mkdir -p ${prefix}

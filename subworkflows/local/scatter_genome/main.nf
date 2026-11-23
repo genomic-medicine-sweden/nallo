@@ -22,7 +22,7 @@ workflow SCATTER_GENOME {
     if (make_bed_from_fai) {
 
         GAWK_BUILD_INTERVALS(
-            ch_fai,
+            ch_fai.map { meta, fai -> [meta, fai, 'bed'] },
             [],
             false,
         )
@@ -37,6 +37,7 @@ workflow SCATTER_GENOME {
     BEDTOOLS_SORT(
         ch_bed,
         [],
+        '',
     )
 
     BEDTOOLS_MERGE(
@@ -45,7 +46,7 @@ workflow SCATTER_GENOME {
 
     // Add meta.genome so we can extract the mitochondrial region from the BED file
     ch_input_gawk = BEDTOOLS_MERGE.out.bed.flatMap { meta, bed ->
-        [[meta + [genome: "nuclear"], bed], [meta + [genome: "mitochondrial"], bed]]
+        [[meta + [genome: "nuclear"], bed, 'bed'], [meta + [genome: "mitochondrial"], bed, 'bed']]
     }
 
     // Exctract according to meta.genome, logic is in the config file

@@ -75,8 +75,8 @@ include { SAMTOOLS_CALMD                                         } from '../modu
 include { MULTIQC                                                } from '../modules/nf-core/multiqc/main'
 include { PEDDY                                                  } from '../modules/nf-core/peddy/main'
 include { SPLITUBAM                                              } from '../modules/nf-core/splitubam/main'
-include { TABIX_TABIX as TABIX_VCF_ENTRY_SNV                     } from '../modules/nf-core/tabix/tabix/main'
-include { TABIX_TABIX as TABIX_VCF_ENTRY_SV                      } from '../modules/nf-core/tabix/tabix/main'
+include { HTSLIB_BGZIPTABIX as TABIX_VCF_ENTRY_SNV               } from '../modules/nf-core/htslib/bgziptabix/main'
+include { HTSLIB_BGZIPTABIX as TABIX_VCF_ENTRY_SV                } from '../modules/nf-core/htslib/bgziptabix/main'
 include { paramsSummaryMap                                       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc                                   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML                                 } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -385,6 +385,7 @@ workflow NALLO {
         SAMTOOLS_MERGE(
             ch_aligned_for_merge,
             [[], [], [], []],
+            'bai',
         )
 
         ch_single_aligned_bam = ch_samplesheet_aligned_bams.single.transpose()
@@ -568,7 +569,12 @@ workflow NALLO {
             .map { meta, _reads -> [[id: meta.family_id], meta.snv_vcf] }
             .unique { meta, _vcf -> meta.id }
 
-        TABIX_VCF_ENTRY_SNV(ch_vcf_entry_family_snv_vcf)
+        TABIX_VCF_ENTRY_SNV(
+            ch_vcf_entry_family_snv_vcf.map { meta, vcf -> [meta, vcf, [], []] },
+            'compress',
+            true,
+            'vcf',
+        )
 
         ch_bam_bai_for_snv_calling = ch_bam_bai.filter { meta, _bam, _bai -> meta.entry_point != 'vcf' }
 
@@ -748,7 +754,12 @@ workflow NALLO {
             .map { meta, _reads -> [[id: meta.family_id], meta.sv_vcf] }
             .unique { meta, _vcf -> meta.id }
 
-        TABIX_VCF_ENTRY_SV(ch_vcf_entry_family_sv_vcf)
+        TABIX_VCF_ENTRY_SV(
+            ch_vcf_entry_family_sv_vcf.map { meta, vcf -> [meta, vcf, [], []] },
+            'compress',
+            true,
+            'vcf',
+        )
 
         ch_bam_bai_for_sv_calling = ch_bam_bai.filter { meta, _bam, _bai -> meta.entry_point != 'vcf' }
 

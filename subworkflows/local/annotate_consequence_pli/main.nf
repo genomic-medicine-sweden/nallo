@@ -4,7 +4,7 @@
 
 include { CUSTOM_ADDMOSTSEVERECONSEQUENCE } from '../../../modules/nf-core/custom/addmostsevereconsequence/main'
 include { CUSTOM_ADDMOSTSEVEREPLI         } from '../../../modules/nf-core/custom/addmostseverepli/main'
-include { TABIX_TABIX                     } from '../../../modules/nf-core/tabix/tabix/main'
+include { HTSLIB_BGZIPTABIX               } from '../../../modules/nf-core/htslib/bgziptabix/main'
 workflow ANNOTATE_CSQ_PLI {
     take:
     ch_vcf                  // channel: [mandatory] [ val(meta), path(vcf) ]
@@ -15,9 +15,14 @@ workflow ANNOTATE_CSQ_PLI {
 
     CUSTOM_ADDMOSTSEVEREPLI(CUSTOM_ADDMOSTSEVERECONSEQUENCE.out.vcf)
 
-    TABIX_TABIX(CUSTOM_ADDMOSTSEVEREPLI.out.vcf)
+    HTSLIB_BGZIPTABIX(
+        CUSTOM_ADDMOSTSEVEREPLI.out.vcf.map { meta, vcf -> [meta, vcf, [], []] },
+        'compress',
+        true,
+        'vcf',
+    )
 
     emit:
-    vcf = CUSTOM_ADDMOSTSEVEREPLI.out.vcf // channel: [ val(meta), path(vcf) ]
-    tbi = TABIX_TABIX.out.index           // channel: [ val(meta), path(tbi) ]
+    vcf = HTSLIB_BGZIPTABIX.out.output // channel: [ val(meta), path(vcf) ]
+    tbi = HTSLIB_BGZIPTABIX.out.index  // channel: [ val(meta), path(tbi) ]
 }

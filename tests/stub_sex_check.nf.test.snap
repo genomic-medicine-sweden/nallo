@@ -13,10 +13,10 @@
                     "bcftools": 1.22
                 },
                 "CRAMINO": {
-                    "cramino": "1.1.0"
+                    "cramino": "2.0.0"
                 },
                 "FASTQC": {
-                    "fastqc": "0.12.1"
+                    "fastqc": "0.13.0"
                 },
                 "GAWK": {
                     "gawk": "5.3.1"
@@ -34,13 +34,14 @@
                     "hifiasm": "0.25.0-r726"
                 },
                 "MINIMAP2_ALIGN": {
-                    "minimap2": "2.29-r1283"
+                    "minimap2": "2.30-r1287"
                 },
                 "MINIMAP2_INDEX": {
-                    "minimap2": "2.29-r1283"
+                    "minimap2": "2.30-r1287"
                 },
                 "MOSDEPTH": {
-                    "mosdepth": "0.3.11"
+                    "gzip": 1.14,
+                    "mosdepth": "0.3.14"
                 },
                 "PARAPHASE": {
                     "minimap2": "2.31-r1302",
@@ -57,19 +58,19 @@
                     "create_pedigree_file": 1.0
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.25
                 },
                 "SAMTOOLS_FASTQ": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.25
                 },
                 "SAMTOOLS_IMPORT": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.25
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": 1.24
+                    "samtools": 1.25
                 },
                 "SAMTOOLS_VIEW": {
-                    "samtools": 1.24
+                    "samtools": 1.25
                 },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
@@ -87,8 +88,8 @@
             [
                 "aligned_reads",
                 "aligned_reads/HG002_Revio",
-                "aligned_reads/HG002_Revio/HG002_Revio.bai",
                 "aligned_reads/HG002_Revio/HG002_Revio.bam",
+                "aligned_reads/HG002_Revio/HG002_Revio.bam.bai",
                 "assembly",
                 "assembly/sample",
                 "assembly/sample/HG002_Revio",
@@ -145,7 +146,7 @@
                 "qc/sambamba_depth/HG002_Revio/HG002_Revio_sambamba_depth.bed"
             ]
         ],
-        "timestamp": "2026-11-16T10:00:19.602060119",
+        "timestamp": "2026-11-17T10:16:37.287647273",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"
@@ -200,28 +201,25 @@
                 "BEDTOOLS_SPLIT": {
                     "bedtools": "2.31.1"
                 },
-                "CAT_CAT": {
-                    "pigz": 2.8
-                },
                 "COLLAPSE_MITOCHONDRIAL_GT": {
                     "bgzip": 1.21,
                     "collapse_mitochondrial_gt": "1.0.0",
                     "tabix": 1.21
                 },
                 "CRAMINO": {
-                    "cramino": "1.1.0"
+                    "cramino": "2.0.0"
                 },
                 "CSVTK_CONCAT": {
-                    "csvtk": "0.31.0"
+                    "csvtk": "0.37.0"
                 },
                 "CSVTK_JOIN": {
                     "csvtk": "0.37.0"
                 },
                 "CSVTK_MUTATE2": {
-                    "csvtk": "0.31.0"
+                    "csvtk": "0.37.0"
                 },
                 "CSVTK_SORT": {
-                    "csvtk": "0.31.0"
+                    "csvtk": "0.37.0"
                 },
                 "DEEPVARIANT_RUNDEEPVARIANT": {
                     "deepvariant": "1.10.0"
@@ -229,8 +227,13 @@
                 "DEEPVARIANT_VCFSTATSREPORT": {
                     "deepvariant": "1.10.0"
                 },
+                "FIND_CONCATENATE": {
+                    "coreutils": 9.4,
+                    "find": "4.6.0",
+                    "pigz": 2.8
+                },
                 "GATK4_DENOISEREADCOUNTS": {
-                    "gatk4": "4.6.2.0"
+                    "gatk4": "4.7.0.0"
                 },
                 "GAWK": {
                     "gawk": "5.3.1"
@@ -242,10 +245,14 @@
                     "gawk": "5.3.1"
                 },
                 "GLNEXUS": {
-                    "glnexus": "1.4.3"
+                    "glnexus": "1.4.1"
                 },
                 "GUNZIP_FASTA": {
                     "gunzip": 1.13
+                },
+                "HTSLIB_BGZIPTABIX": {
+                    "htslib": 1.25,
+                    "xz": "5.8.3"
                 },
                 "LONGPHASE_HAPLOTAG": {
                     "longphase": "2.1.1"
@@ -257,16 +264,17 @@
                     "methbat": "0.17.0-7c5e249"
                 },
                 "MINIMAP2_ALIGN": {
-                    "minimap2": "2.29-r1283"
+                    "minimap2": "2.30-r1287"
                 },
                 "MINIMAP2_INDEX": {
-                    "minimap2": "2.29-r1283"
+                    "minimap2": "2.30-r1287"
                 },
                 "MITORSAW_HAPLOTYPE": {
                     "mitorsaw": "0.2.9-0dc8e58"
                 },
                 "MOSDEPTH": {
-                    "mosdepth": "0.3.11"
+                    "gzip": 1.14,
+                    "mosdepth": "0.3.14"
                 },
                 "MOSDEPTH_GATK_FORMAT": {
                     "gawk": "5.3.1"
@@ -287,29 +295,25 @@
                     "create_pedigree_file": 1.0
                 },
                 "SAMTOOLS_FAIDX": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.25
                 },
                 "SAMTOOLS_INDEX": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.25
                 },
                 "SAMTOOLS_MERGE": {
-                    "samtools": 1.24
+                    "samtools": 1.25
                 },
                 "SAMTOOLS_SORT": {
-                    "samtools": "1.23.1"
+                    "samtools": 1.25
                 },
                 "SAMTOOLS_VIEW": {
-                    "samtools": 1.24
+                    "samtools": 1.25
                 },
                 "SOMALIER_PED_FAMILY": {
                     "create_pedigree_file": 1.0
                 },
                 "SPLITUBAM": {
                     "splitubam": "0.1.1"
-                },
-                "TABIX_BGZIPTABIX": {
-                    "bgzip": 1.21,
-                    "tabix": 1.21
                 },
                 "TRGT_GENOTYPE": {
                     "trgt": "5.1.0-ec66463"
@@ -503,7 +507,7 @@
                 "visualization_tracks/HG004/HG004_pbcpgtools.hap2.bw"
             ]
         ],
-        "timestamp": "2026-11-09T14:21:50.548193428",
+        "timestamp": "2026-11-17T15:09:20.501365234",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.4"

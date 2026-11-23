@@ -32,7 +32,7 @@
                             "family_id": "family",
                             "sex": 1
                         },
-                        "test_strdust_found_in.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_strdust_found_in_indexed.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
@@ -75,7 +75,7 @@
                             "family_id": "family",
                             "sex": 1
                         },
-                        "test_strdust_found_in.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_strdust_found_in_indexed.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "sample_vcf": [
@@ -91,10 +91,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-05-27T10:48:44.335484866",
+        "timestamp": "2026-11-16T14:06:51.526886206",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.02.0"
+            "nextflow": "26.10.4"
         }
     }
 }

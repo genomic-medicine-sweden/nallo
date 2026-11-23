@@ -11,14 +11,14 @@
                         "needs_reheader": true,
                         "skip_vep_prep": false
                     },
-                    "bd120e44912730fa1581764a2b055bf8"
+                    "fdad793cccf407b2f5e6dee8352e0b87"
                 ]
             ]
         ],
-        "timestamp": "2026-09-15T17:01:10.197623089",
+        "timestamp": "2026-11-17T13:51:04.484997524",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "26.10.4"
         }
     },
     "1 sample - stub": {

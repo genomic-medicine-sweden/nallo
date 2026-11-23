@@ -102,6 +102,7 @@ workflow GVCF_GLNEXUS_NORM_VARIANTS {
     VCFEXPRESS(
         ch_merged_family_gvcf,
         ch_vcfexpress_prelude,
+        'bcf.gz',
     )
 
     // Remove added caller information in meta

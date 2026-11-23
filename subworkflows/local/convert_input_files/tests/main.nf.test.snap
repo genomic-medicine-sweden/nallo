@@ -13,7 +13,7 @@
                         {
                             "id": "test_fastq"
                         },
-                        "test_fastq.bam:md5,e8ad87a82bb7eb7d66ac95ea8302c81e"
+                        "test_fastq.bam:md5,b7fcbd14447c5544ebc880189aa31834"
                     ]
                 ],
                 "1": [
@@ -35,7 +35,7 @@
                         {
                             "id": "test_fastq"
                         },
-                        "test_fastq.bam:md5,e8ad87a82bb7eb7d66ac95ea8302c81e"
+                        "test_fastq.bam:md5,b7fcbd14447c5544ebc880189aa31834"
                     ]
                 ],
                 "fastq": [
@@ -48,10 +48,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-08-13T14:32:40.741780076",
+        "timestamp": "2026-11-17T13:39:00.326896777",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.10.4"
         }
     },
     "convert BAM to FASTQ": {
@@ -123,7 +123,7 @@
                         {
                             "id": "test_fastq"
                         },
-                        "test_fastq.bam:md5,e8ad87a82bb7eb7d66ac95ea8302c81e"
+                        "test_fastq.bam:md5,b7fcbd14447c5544ebc880189aa31834"
                     ]
                 ],
                 "1": [
@@ -151,7 +151,7 @@
                         {
                             "id": "test_fastq"
                         },
-                        "test_fastq.bam:md5,e8ad87a82bb7eb7d66ac95ea8302c81e"
+                        "test_fastq.bam:md5,b7fcbd14447c5544ebc880189aa31834"
                     ]
                 ],
                 "fastq": [
@@ -170,10 +170,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-08-13T14:32:55.473620843",
+        "timestamp": "2026-11-17T13:39:11.320794627",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.07.0"
+            "nextflow": "26.10.4"
         }
     },
     "convert neither BAM to FASTQ nor FASTQ to BAM": {

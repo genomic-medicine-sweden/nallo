@@ -236,7 +236,7 @@
                         "family_id": "FAM"
                     },
                     "HG002_cramino.txt",
-                    "9d16b67b282f52584ae175feaa043fd0"
+                    "d2ca4af553c68064d8d3ecba4eb2cd34"
                 ]
             ],
             [
@@ -249,10 +249,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-07-08T14:44:11.154616687",
+        "timestamp": "2026-11-17T13:44:28.643972257",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.10.4"
         }
     },
     "1 sample - SNVs only - Whatshap - bam output": {
@@ -321,7 +321,7 @@
                         "family_id": "FAM"
                     },
                     "HG002_cramino.txt",
-                    "1b466fb6ec78b417d07924091755aea8"
+                    "dd1223f58692187b55c004105a66bc70"
                 ]
             ],
             [
@@ -334,10 +334,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-07-08T14:45:50.926921764",
+        "timestamp": "2026-11-17T13:46:52.475936367",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.10.4"
         }
     },
     "2 samples - SNVs only - Longphase - bam output - stub": {
@@ -661,7 +661,7 @@
                         "family_id": "FAM"
                     },
                     "HG002_cramino.txt",
-                    "9d16b67b282f52584ae175feaa043fd0"
+                    "d2ca4af553c68064d8d3ecba4eb2cd34"
                 ]
             ],
             [
@@ -674,10 +674,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-07-08T14:44:35.988194941",
+        "timestamp": "2026-11-17T13:45:03.942280477",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.03.4"
+            "nextflow": "26.10.4"
         }
     },
     "1 sample - SNVs only - Longphase - bam output": {
@@ -746,7 +746,7 @@
                         "family_id": "FAM"
                     },
                     "HG002_cramino.txt",
-                    "d7108a41b2d4c0cd2297de91858df6e0"
+                    "7c4db6add18de12a0d57e60d82368ba3"
                 ]
             ],
             [
@@ -759,10 +759,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-11-10T15:17:46.342220992",
+        "timestamp": "2026-11-17T13:45:19.775398534",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.5"
+            "nextflow": "26.10.4"
         }
     },
     "2 samples - SNVs only - Longphase - bam output": {
@@ -860,7 +860,7 @@
                         "family_id": "FAM"
                     },
                     "HG002_cramino.txt",
-                    "d7108a41b2d4c0cd2297de91858df6e0"
+                    "7c4db6add18de12a0d57e60d82368ba3"
                 ],
                 [
                     {
@@ -868,7 +868,7 @@
                         "family_id": "FAM"
                     },
                     "HG003_cramino.txt",
-                    "971c16b71741697ee35d1bc2cd142a2b"
+                    "35bf7563597d5476e77595eea5049135"
                 ]
             ],
             [
@@ -888,10 +888,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-11-10T15:18:16.113352826",
+        "timestamp": "2026-11-17T13:45:58.257438651",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.5"
+            "nextflow": "26.10.4"
         }
     },
     "2 samples - SNVs + SVs - Longphase - bam output": {
@@ -993,7 +993,7 @@
                         "family_id": "FAM"
                     },
                     "HG002_cramino.txt",
-                    "d7108a41b2d4c0cd2297de91858df6e0"
+                    "7c4db6add18de12a0d57e60d82368ba3"
                 ],
                 [
                     {
@@ -1001,7 +1001,7 @@
                         "family_id": "FAM"
                     },
                     "HG003_cramino.txt",
-                    "971c16b71741697ee35d1bc2cd142a2b"
+                    "35bf7563597d5476e77595eea5049135"
                 ]
             ],
             [
@@ -1021,10 +1021,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-11-10T15:18:34.97894867",
+        "timestamp": "2026-11-17T13:46:19.783461937",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.5"
+            "nextflow": "26.10.4"
         }
     },
     "1 sample - SNVs only - Hiphase - bam output - stub": {
@@ -1624,7 +1624,7 @@
                         "family_id": "FAM"
                     },
                     "HG002_cramino.txt",
-                    "d7108a41b2d4c0cd2297de91858df6e0"
+                    "7c4db6add18de12a0d57e60d82368ba3"
                 ]
             ],
             [
@@ -1637,10 +1637,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-11-10T15:18:02.881210095",
+        "timestamp": "2026-11-17T13:45:40.364554946",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.5"
+            "nextflow": "26.10.4"
         }
     },
     "1 sample - SNVs + SVs - Hiphase - bam output": {
@@ -1713,7 +1713,7 @@
                         "family_id": "FAM"
                     },
                     "HG002_cramino.txt",
-                    "9d16b67b282f52584ae175feaa043fd0"
+                    "d2ca4af553c68064d8d3ecba4eb2cd34"
                 ]
             ],
             [
@@ -1726,10 +1726,10 @@
                 ]
             ]
         ],
-        "timestamp": "2026-11-03T11:15:22.347811113",
+        "timestamp": "2026-11-17T13:44:46.921005576",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.3"
+            "nextflow": "26.10.4"
         }
     }
 }
