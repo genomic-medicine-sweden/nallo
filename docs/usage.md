@@ -468,11 +468,11 @@ Turned off with `--skip_snv_annotation`.
 
 This subworkflow ranks SNVs, and relies on the alignment, SNV calling and SNV annotation subworkflows. It requires the following additional files:
 
-| Parameter                       | Description                                                                                                                                                                                                                                                    |
-| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `genmod_score_config_snvs`      | Used by GENMOD when ranking nuclear SNVs. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini)                                                                                                           |
-| `genmod_score_config_snvs_mito` | **Optional**: Used by GENMOD when ranking mitochondrial SNVs. Should reference only fields produced by the MT VEP command (i.e. exclude nuclear-only annotations such as SIFT, PolyPhen, SpliceAI, LoFtool). Not required with `--skip_mitochondrial_calling`. |
-| `genmod_reduced_penetrance`     | A list of loci that show [reduced penetrance](https://medlineplus.gov/genetics/understanding/inheritance/penetranceexpressivity/) in people. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/reduced_penetrance.tsv)    |
+| Parameter                       | Description                                                                                                                                                                                                                                                          |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `genmod_score_config_snvs`      | Used by GENMOD when ranking nuclear SNVs. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini)                                                                                                                 |
+| `genmod_score_config_snvs_mito` | Required when ranking mitochondrial SNVs; not required with `--skip_mitochondrial_calling` or `--skip_rank_variants`. Should reference only fields produced by the MT VEP command (i.e. exclude nuclear-only annotations such as SIFT, PolyPhen, SpliceAI, LoFtool). |
+| `genmod_reduced_penetrance`     | A list of loci that show [reduced penetrance](https://medlineplus.gov/genetics/understanding/inheritance/penetranceexpressivity/) in people. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/reduced_penetrance.tsv)          |
 
 Turned off with `--skip_rank_variants`.
 

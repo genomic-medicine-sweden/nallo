@@ -1175,15 +1175,19 @@ workflow NALLO {
             'snv',
             ch_genmod_score_config_snvs,
             ch_samplesheet,
-        ).mix(
-            buildRankVariantsInputChannel(
-                ch_snvs_vcf_mito,
-                SOMALIER_PED_FAMILY.out.ped,
-                'snv',
-                ch_genmod_score_config_snvs_mito,
-                ch_samplesheet,
-            )
         )
+
+        if (!val_skip_mitochondrial_calling) {
+            ch_snvs_to_rank = ch_snvs_to_rank.mix(
+                buildRankVariantsInputChannel(
+                    ch_snvs_vcf_mito,
+                    SOMALIER_PED_FAMILY.out.ped,
+                    'snv',
+                    ch_genmod_score_config_snvs_mito,
+                    ch_samplesheet,
+                )
+            )
+        }
 
         ch_svs_to_rank = buildRankVariantsInputChannel(
             ANN_CSQ_PLI_SVS.out.vcf.map { meta, vcf -> [meta + [family_id: meta.id], vcf] },
