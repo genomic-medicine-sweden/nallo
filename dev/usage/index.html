@@ -2280,7 +2280,7 @@ The phaser can be chosen using the <code>--phaser</code> argument. See the follo
 </tr>
 <tr>
 <td><code>genmod_score_config_snvs_mito</code></td>
-<td><strong>Optional</strong>: Used by GENMOD when ranking mitochondrial SNVs. Should reference only fields produced by the MT VEP command (i.e. exclude nuclear-only annotations such as SIFT, PolyPhen, SpliceAI, LoFtool). Not required with <code>--skip_mitochondrial_calling</code>.</td>
+<td>Required when ranking mitochondrial SNVs; not required with <code>--skip_mitochondrial_calling</code> or <code>--skip_rank_variants</code>. Should reference only fields produced by the MT VEP command (i.e. exclude nuclear-only annotations such as SIFT, PolyPhen, SpliceAI, LoFtool).</td>
 </tr>
 <tr>
 <td><code>genmod_reduced_penetrance</code></td>
