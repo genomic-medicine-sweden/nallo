@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.13.0dev - [XXXX-XX-XX]
+## 0.13.0 - [2026-11-24]
 
 ### Added
 
@@ -168,6 +168,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1346](https://github.com/genomic-medicine-sweden/nallo/pull/1346) - Updated all remaining nf-core modules. For more details about what was changed, see PR description.
 - [#1351](https://github.com/genomic-medicine-sweden/nallo/pull/1351) - `--genmod_score_config_snvs_mito` is now only required when neither `--skip_rank_variants` nor `--skip_mitochondrial_calling` is set
 - [#1353](https://github.com/genomic-medicine-sweden/nallo/pull/1353) - Fixed mitochondrial ranking being initialized when `--skip_mitochondrial_calling` was enabled, causing an error when `--genmod_score_config_snvs_mito` was omitted.
+- [#1356](https://github.com/genomic-medicine-sweden/nallo/pull/1356) - Updated version to 0.13.0
 
 ### Removed
 

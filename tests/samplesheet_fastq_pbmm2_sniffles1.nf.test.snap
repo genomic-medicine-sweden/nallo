@@ -78,7 +78,7 @@
                     "vep_prep_sv": "1.0.0"
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.13.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.13.0"
                 }
             },
             [

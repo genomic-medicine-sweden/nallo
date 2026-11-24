@@ -100,7 +100,7 @@
                     "vcfexpress": "0.3.4"
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.13.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.13.0"
                 }
             },
             [
@@ -256,7 +256,7 @@
                     "vcfexpress": "0.3.4"
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.13.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.13.0"
                 }
             },
             [
@@ -427,7 +427,7 @@
                     "vcfexpress": "0.3.4"
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.13.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.13.0"
                 }
             },
             [
