@@ -159,7 +159,7 @@
                     "whatshap": 2.8
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.13.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.13.0"
                 }
             },
             [
@@ -481,7 +481,7 @@
                     "whatshap": 2.8
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.13.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.13.0"
                 }
             },
             [

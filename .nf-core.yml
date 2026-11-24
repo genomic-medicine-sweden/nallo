@@ -47,4 +47,4 @@ template:
   skip_features:
     - igenomes
     - fastqc
-  version: 0.13.0dev
+  version: 0.13.0

@@ -319,7 +319,7 @@
                     "whatshap": 2.8
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.13.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.13.0"
                 },
                 "YAK_COUNT": {
                     "yak": "0.1-r69-dirty"
@@ -1269,7 +1269,7 @@
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -1362,7 +1362,7 @@
                 ]
             ],
             [
-                
+
             ]
         ],
         "timestamp": "2026-11-17T14:48:16.464955181",
@@ -1710,7 +1710,7 @@
                     "whatshap": 2.8
                 },
                 "Workflow": {
-                    "genomic-medicine-sweden/nallo": "v0.13.0dev"
+                    "genomic-medicine-sweden/nallo": "v0.13.0"
                 },
                 "YAK_COUNT": {
                     "yak": "0.1-r69-dirty"
@@ -2689,7 +2689,7 @@
                 ]
             ],
             [
-                
+
             ],
             [
                 [
@@ -2770,7 +2770,7 @@
                 ]
             ],
             [
-                
+
             ]
         ],
         "timestamp": "2026-11-17T14:52:09.231718675",
