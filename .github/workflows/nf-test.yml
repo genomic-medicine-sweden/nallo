@@ -16,14 +16,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  NFT_VER: "0.9.5"
-  NFT_WORKDIR: "~"
-  NXF_ANSI_LOG: false
-  NXF_SINGULARITY_CACHEDIR: ${{ github.workspace }}/.singularity
-  NXF_SINGULARITY_LIBRARYDIR: ${{ github.workspace }}/.singularity
-
 jobs:
   find-tests:
     runs-on: ubuntu-latest
@@ -41,80 +33,21 @@ jobs:
           echo ${{ steps.find.outputs.tags }}
 
   nf-test:
-    name: "${{ matrix.tag }} | ${{ matrix.profile }} | ${{ matrix.NXF_VER }}"
+    name: "nf-test | ${{ matrix.NXF_VER }}"
     needs: [find-tests]
-    runs-on: # use GitHub runners
-      - "ubuntu-latest"
     strategy:
       fail-fast: false
       matrix:
-        profile: [docker, singularity]
-        tag: ${{ fromJson(needs.find-tests.outputs.tags) }}
-        isMain:
-          - ${{ github.base_ref == 'master' || github.base_ref == 'main' }}
-        # Exclude conda and singularity on dev
-        exclude:
-          - isMain: false
-            profile: "singularity"
-          - isMain: false
-            tag: "samplesheet_target_regions_null"
         NXF_VER:
           - "26.10.3"
           - "latest-stable"
-        include:
-          - tag: "samplesheet"
-            runCleanup: true
-          - tag: "samplesheet_multisample_bam"
-            runCleanup: true
-          - tag: "samplesheet_multisample_ont_bam"
-            runCleanup: true
-          - tag: "samplesheet_multisample_ont_bam_ont_r10_as"
-            runCleanup: true
-          - tag: "samplesheet_target_regions_null"
-            runCleanup: true
-          - tag: "call_svs"
-            profile: "singularity"
-            runCleanup: true
-          - tag: "qc_snvs"
-            profile: "singularity"
-            runCleanup: true
-          - tag: "call_snvs"
-            profile: "singularity"
-            runCleanup: true
-          - tag: "annotate_cadd"
-            profile: "singularity"
-            runCleanup: true
-    env:
-      NXF_ANSI_LOG: false
-      TOTAL_SHARDS: ${{ needs.nf-test-changes.outputs.total_shards }}
-
-    steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-        with:
-          fetch-depth: 0
-
-      - name: Clean up Disk space
-        if: matrix.runCleanup
-        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
-        with:
-          android: true
-          dotnet: false
-          haskell: true
-          large-packages: false
-          docker-images: true
-          swap-storage: true
-
-      - name: Run nf-test
-        if: matrix.profile != ''
-        uses: ./.github/actions/nf-test
-        env:
-          NFT_WORKDIR: ${{ env.NFT_WORKDIR }}
-          NXF_VERSION: ${{ matrix.NXF_VER }}
-        with:
-          profile: ${{ matrix.profile }}
-          tags: ${{ matrix.tag }}
-          shard: 1
-          total_shards: 1
+    # Each Nextflow version gets its own tag/profile matrix below the 256-job limit.
+    uses: ./.github/workflows/nf-test-matrix.yml
+    with:
+      tags: ${{ needs.find-tests.outputs.tags }}
+      nextflow-version: ${{ matrix.NXF_VER }}
+      is-main: ${{ github.base_ref == 'master' || github.base_ref == 'main' }}
+    secrets: inherit
 
   confirm-pass:
     needs: [nf-test]
