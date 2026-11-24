@@ -217,6 +217,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#1335](https://github.com/genomic-medicine-sweden/nallo/pull/1335) - Fixed missing snapshots updates after Longphase update
 - [#1319](https://github.com/genomic-medicine-sweden/nallo/pull/1319) - Fixed paraphrase output rows changing order between runs: Paraphase JSONs are now sorted by sample name within each family
 - [#1332](https://github.com/genomic-medicine-sweden/nallo/pull/1332) - Fixed `SVDB_QUERY` failing with `KeyError: 'END'` when `SVDB_MERGE` clustered a `<TRA>` record with `BND` records from other callers, by updating the SVDB modules to 2.12.2
+- [#1355](https://github.com/genomic-medicine-sweden/nallo/pull/1355) - Fixed CADD annotation to use the BGZF output matching its tabix index instead of the original CADD gzip file. Fixed annotate_cadd config to use args2 from `HTSLIB_BGZIPTABIX` instead of args.
 
 ### Parameters
 
