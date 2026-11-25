@@ -33,7 +33,7 @@ nextflow_pipeline {
             def versions = removeNextflowVersion("$outputDir/pipeline_info/nallo_software_mqc_versions.yml")
             assertAll(
                 { assert workflow.success },
-                { assert !versions.containsKey('MITORSAW_HAPLOTYPE') }, // skip_mitochondrial_calling=true in ONT_R10_AS
+                { assert workflow.trace.tasks().findAll {it.name.contains(':CALL_MITOCHONDRIAL_VARIANTS:')}.isEmpty() }, // skip_mitochondrial_calling=true in ONT_R10_AS
                 { assert snapshot(
                     workflow.trace.succeeded().size(),
                     versions,
