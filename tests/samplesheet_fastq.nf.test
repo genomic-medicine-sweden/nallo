@@ -3,10 +3,11 @@ nextflow_pipeline {
     name "Test pipeline GENOMICMEDICINESWEDEN_NALLO"
     script "../main.nf"
     tag "PIPELINE"
-    tag "samplesheet"
+    tag "samplesheet_fastq"
     config "./nextflow.config"
 
     test("test profile") {
+
         when {
             params {
                 pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8cf6216b9cbf96f6bcfc918610182708e3796ad9/'

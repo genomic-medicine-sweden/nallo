@@ -7,6 +7,7 @@ nextflow_process {
     tag "modules"
     tag "modules_local"
     tag "sentieon"
+    tag "dnascope_longread"
 
     test("dnascope_longread_call_snvs -stub") {
 

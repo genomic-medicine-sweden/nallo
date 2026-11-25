@@ -4,6 +4,7 @@ nextflow_workflow {
     script "../main.nf"
     config "./nextflow.config"
     workflow "ANNOTATE_CSQ_PLI"
+    tag "annotate_consequence_pli"
 
     test("vcf") {
         when {

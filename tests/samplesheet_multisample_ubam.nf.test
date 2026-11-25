@@ -3,6 +3,7 @@ nextflow_pipeline {
     name "Test pipeline GENOMICMEDICINESWEDEN_NALLO"
     script "../main.nf"
     tag "PIPELINE"
+    tag "samplesheet_multisample_ubam"
 
     test("samplesheet_multisample_ubam | --sv_callers sniffles1,debreak --sv_callers_to_run sniffles,sniffles1,debreak --phaser whatshap") {
         tag "samplesheet_multisample_ubam_debreak"
