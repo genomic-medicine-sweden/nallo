@@ -61,7 +61,7 @@ First, you will need to create a samplesheet with information about the samples 
 --input '[path to samplesheet file]'
 ```
 
-It has to be a comma-separated file with seven columns and a header row, as shown in the example below:
+It has to be a comma-separated file with eight required columns and a header row, as shown in the example below:
 
 ```console
 project,sample,file,family_id,paternal_id,maternal_id,sex,phenotype
@@ -70,30 +70,71 @@ testrun,HG002,/path/to/HG002_2.bam,NIST,HG003,0,1,2
 testrun,HG003,/path/to/HG003.fastq.gz,NIST,0,0,2,1
 ```
 
-| Fields        | Description                                                                                                                       |
-| ------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `project`     | Project name must be provided and cannot contain spaces, needs to be the same for all samples.                                    |
-| `sample`      | Custom sample name, cannot contain spaces.                                                                                        |
-| `file`        | Absolute path to a BAM or gzipped FASTQ file. File has to have the extension ".fastq.gz", .fq.gz" or ".bam".                      |
-| `family_id`   | Family ID must be provided and cannot contain spaces. If no family ID is available use the same ID as sample.                     |
-| `paternal_id` | Paternal ID must be provided and cannot contain spaces. If no paternal ID is available, use 0.                                    |
-| `maternal_id` | Maternal ID must be provided and cannot contain spaces. If no maternal ID is available, use 0.                                    |
-| `sex`         | Sex must be provided as 0, 1 or 2 (0=unknown; 1=male; 2=female). If sex is unknown it will be assigned automatically if possible. |
-| `phenotype`   | Affected status of patient (0 = missing; 1=unaffected; 2=affected).                                                               |
+Three additional columns - `aligned_bam`, `snv_vcf`, `sv_vcf` - are required when skipping alignment or variant calling (see [Entry points](#entry-points) below). They can be omitted entirely for FASTQ and uBAM runs.
+
+**Required columns**
+
+| Fields        | Description                                                                                                                                                                                        |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `project`     | Project name must be provided and cannot contain spaces, needs to be the same for all samples.                                                                                                     |
+| `sample`      | Custom sample name, cannot contain spaces.                                                                                                                                                         |
+| `file`        | Absolute path to an unaligned BAM or gzipped FASTQ file. File has to have the extension ".fastq.gz", ".fq.gz" or ".bam". Set to `0` when providing a pre-aligned BAM via the `aligned_bam` column. |
+| `family_id`   | Family ID must be provided and cannot contain spaces. If no family ID is available use the same ID as sample.                                                                                      |
+| `paternal_id` | Paternal ID must be provided and cannot contain spaces. If no paternal ID is available, use 0.                                                                                                     |
+| `maternal_id` | Maternal ID must be provided and cannot contain spaces. If no maternal ID is available, use 0.                                                                                                     |
+| `sex`         | Sex must be provided as 0, 1 or 2 (0=unknown; 1=male; 2=female). If sex is unknown it will be assigned automatically if possible.                                                                  |
+| `phenotype`   | Affected status of patient (0 = missing; 1=unaffected; 2=affected).                                                                                                                                |
+
+**Optional columns** (required for `bam` and `vcf` entry points; omit or set to `0` otherwise)
+
+| Fields        | Description                                                                                                                                                                                                              |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `aligned_bam` | Absolute path to a pre-aligned BAM file. Required for `bam` and `vcf` entry points. Set `file` to `0` when this is provided. A sample with a single BAM is indexed and used as is, samples with several BAMs are merged. |
+| `snv_vcf`     | Absolute path to a pre-called SNV VCF (`.vcf.gz`). Must be paired with `sv_vcf` and `aligned_bam`.                                                                                                                       |
+| `sv_vcf`      | Absolute path to a pre-called SV VCF (`.vcf.gz`). Must be paired with `snv_vcf` and `aligned_bam`.                                                                                                                       |
 
 !!!tip "Multiple files per sample"
 
     If you have multiple files per sample, they can be added on separate rows. Keep all columns except `file` identical for each sample. The files will be merged after alignment or before assembly.
 
+### Entry points
+
+The pipeline automatically detects the entry point for each sample from the samplesheet columns. All samples in the same family must share the same entry point.
+
+| `file` | `aligned_bam` | `snv_vcf` | `sv_vcf` | Entry point | Description                                         |
+| ------ | ------------- | --------- | -------- | ----------- | --------------------------------------------------- |
+| FASTQ  | `0`           | `0`       | `0`      | `fastq`     | Align, call SNVs/SVs, phase and annotate            |
+| uBAM   | `0`           | `0`       | `0`      | `ubam`      | Same as `fastq`                                     |
+| `0`    | BAM           | `0`       | `0`      | `bam`       | Skip alignment; call SNVs/SVs, phase and annotate   |
+| `0`    | BAM           | VCF       | VCF      | `vcf`       | Skip alignment and calling; phase and annotate only |
+
+!!!note
+
+    If your FASTQ files do not contain modification tags (MM/ML), set `--skip_methylation_calling` to skip the methylation subworkflow.
+
+!!!tip "vcf entry point"
+
+    `aligned_bam` is required alongside `snv_vcf` and `sv_vcf` - the BAM is still used for QC, phasing, and methylation calling. Providing VCF columns without `aligned_bam`, or providing only one of the two VCF columns, is an error. The pipeline publishes pre-phasing joint family VCFs to `snvs/family/{family}/{family}_snvs_unphased.vcf.gz` and `svs/family/{family}/{family}_svs_unphased.vcf.gz` on every run, which can be used as input for a subsequent `vcf` entry point run.
+
 ### Presets
 
-This pipeline comes with three different presets that should be set with the `--preset` parameter: `revio` (default), `pacbio` or `ONT_R10`. The preset parameter controls certain technology specific tools and parameters.
+This pipeline comes with four different presets that should be set with the `--preset` parameter: `revio` (default), `pacbio`, `ONT_R10` or `ONT_R10_AS`. The preset parameter controls certain technology specific tools and parameters.
 
 !!!info "Preset effects on subworkflows"
 
-    - `--skip_repeat_annotation` will be set to `true` for `ONT_R10`
-    - `--skip_call_paralogs` will be set to `true` for `ONT_R10`
+    - `--skip_repeat_annotation` will be set to `true` for `ONT_R10` and `ONT_R10_AS`
+    - `--skip_call_paralogs` will be set to `true` for `ONT_R10` and `ONT_R10_AS`
     - `--skip_methylation_calling` will be set to `true` for `pacbio`
+    - `--skip_mitochondrial_calling` will be set to `true` for `ONT_R10_AS`
+
+!!!info "ONT_R10_AS — adaptive sampling preset"
+
+    `ONT_R10_AS` is intended for Oxford Nanopore adaptive sampling runs. In adaptive sampling, the sequencer selectively enriches reads from target regions in real time; rejected off-target reads are still output and will map across the genome. The preset inherits all `ONT_R10` settings and adds targeted-run behaviour on top.
+
+    Provide the BED file of enriched regions with `--target_regions`. This single parameter automatically sets all region-related parameters (`--mosdepth_regions`, `--modkit_include_bed`, `--snv_call_regions`, `--sv_call_regions`). The pipeline will then:
+
+    - Filter aligned reads to on-target regions before cramino QC, so yield and N50 reflect enriched reads only
+    - Run mosdepth with per-region depth and coverage thresholds (≥20X, ≥30X) for each target region
 
 ### Reference files
 
@@ -143,6 +184,10 @@ The majority of subworkflows depend on the alignment subworkflow which requires 
 | `fasta`   | Reference genome, either gzipped or uncompressed (e.g. [GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz](https://lh3.github.io/2017/11/13/which-human-reference-genome-to-use)) |
 
 Turned off with `--skip_alignment`.
+
+!!!info "Using pbmm2 with fastq files"
+
+    pbmm2 can be used to align the reads to the reference. If you are running the pipeline with fastq files as input, they will be converted to bam files for the analysis, and a `DS:READTYPE=CCS` tag will be added to the header. Without this tag, pbmm2 will not be able to run successfully. This tag is only added under these conditions (pbmm2 as aligner and fastq as input).
 
 #### Sex check
 
@@ -199,12 +244,16 @@ Additional inputs are required for Sentieon DNAscope:
 | Parameter                     | Description                                                                                                                                                        |
 | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `sentieon_model_bundle`       | Path to the DNAscope model bundle to load. Sentieon provides pre-trained bundles in the [sentieon-models](https://github.com/Sentieon/sentieon-models) repository. |
+| `sentieon_population_vcf`     | Population VCF containing annotations for DNAModelApply. Required for some model bundles; it must match `sentieon_model_bundle`.                                   |
+| `sentieon_population_tbi`     | Matching tabix index for `sentieon_population_vcf`.                                                                                                                |
 | `sentieon_tech`               | Sequencing technology used by Sentieon DNAscope (`HiFi` or `ONT`). Defaults to `HiFi`, but is automatically set to `ONT` when running with the ONT presets.        |
 | `sentieon_male_haploid_bed`   | BED file that restricts haploid variant calling for male samples (typically the Y chromosome non-PAR region).                                                      |
 | `sentieon_male_diploid_bed`   | BED file that restricts diploid variant calling for male samples (typically autosomes + chrX PAR).                                                                 |
 | `sentieon_female_diploid_bed` | BED file that restricts diploid variant calling for female samples (typically autosomes + chrX).                                                                   |
 
 All three Sentieon BED files and the model bundle must be provided when using Sentieon.
+
+If the selected model bundle requires population annotations, also supply `--sentieon_population_vcf` and `--sentieon_population_tbi`. Use the population VCF specified for that model bundle. The index filename must match the VCF filename with `.tbi` appended (for example, `population.vcf.gz.tbi`). These inputs can be omitted for model bundles that do not require a population VCF.
 
 Turned off with `--skip_snv_calling`.
 
@@ -216,6 +265,10 @@ Which callers to run and merge into family VCFs that are used for subsequent ann
 
 Sometimes you might want to run more callers than you use for merging, this can be controlled with the `--sv_callers_to_run` and `--sv_callers_to_merge` parameters. By default these are the same as `--sv_callers` but can be overwritten.
 
+!!!info "Choosing a Sniffles version"
+
+    Two versions of Sniffles are available: `sniffles` (v2) and `sniffles1` (v1.0.12). Both can be run at the same time, but only one can be merged. For example, `--sv_callers sniffles --sv_callers_to_run sniffles,sniffles1` calls SVs with both versions and merges only `sniffles` for annotation and ranking. With `--publish_unannotated_family_svs`, the `sniffles1` family VCF is published as `{family}_sniffles1_svs.vcf.gz`.
+
 !!!info "Variant merging strategies"
 
     Variant calls from samples within the same family are first merged into one family-level VCF per caller. Then, the family-caller files are merged into a final family file, which can then be annotated, ranked and filtered. The merging is done in this order so that different callers can have different merge parameters.
@@ -225,6 +278,18 @@ Sometimes you might want to run more callers than you use for merging, this can 
 !!!tip "Family-level VCFs per caller"
 
     Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
+
+The SVDB matching settings of the two merging steps are set with the parameters below. Each is available for the merge of one caller across samples (`svdb_merge_by_caller_*`) and for the merge of callers into the family VCF (`svdb_merge_by_family_*`).
+
+| Parameter                                                                            | Description                                                                                   | Default (by caller / by family) |
+| ------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------- | ------------------------------- |
+| `svdb_merge_by_caller_overlap`, `svdb_merge_by_family_overlap`                       | **Optional**: Minimum reciprocal overlap for deletions and duplications (0-1)                 | 0.5 / 0.7                       |
+| `svdb_merge_by_caller_bnd_distance`, `svdb_merge_by_family_bnd_distance`             | **Optional**: Maximum distance in bp between breakpoints of translocations and inversions     | 1000 / 2000                     |
+| `svdb_merge_by_caller_ins_distance`, `svdb_merge_by_family_ins_distance`             | **Optional**: Maximum distance in bp between insertion positions                              | 100 / 100                       |
+| `svdb_merge_by_caller_ins_svlen_ratio`, `svdb_merge_by_family_ins_svlen_ratio`       | **Optional**: Minimum ratio of the smaller to the larger insertion length (0-1)               | 0.5 / 0.5                       |
+| `svdb_merge_by_caller_ins_seq_similarity`, `svdb_merge_by_family_ins_seq_similarity` | **Optional**: Minimum insertion sequence similarity (0-1), 0 disables the sequence comparison | 0 / 0                           |
+
+Two settings are fixed and cannot be changed with these parameters: the merge by caller always uses `--bnd_distance 10000` for HiFiCNV, and adds `--no_intra` for Sawfish unless `--force_sawfish_joint_call_single_samples` is set.
 
 If HiFiCNV or Sawfish are used, the following files are required:
 
@@ -236,12 +301,31 @@ If HiFiCNV or Sawfish are used, the following files are required:
 
 By default, HiFiCNV and Sawfish output optional SNV MAF tracks. This depends on the results of the SNV calling subworkflow, so it may introduce significant wait time and slow down execution.
 You can disable this behavior for both callers by setting `--create_maf_track` to `false` or control it for each caller separately using `--create_hificnv_maf_track` and `--create_sawfish_maf_track`.
+With the MAF track disabled, HiFiCNV and Sawfish also run with `--skip_snv_calling`.
 
 !!!tip "Family-level VCFs per caller"
 
     Unannotated family-level VCFs per caller can be output with `--publish_unannotated_family_svs`.
 
 Turned off with `--skip_sv_calling`.
+
+#### Call mitochondrial variants
+
+This subworkflow specifically calls mitochondrial variants. The resulting VCF file is then merged together with the VCF containing the nuclear variants.
+The mitochondrial caller can be selected with `--mitochondrial_caller`. Note that the mitorsaw [license](https://github.com/PacificBiosciences/mitorsaw/blob/main/LICENSE.md) doesn't generally allow usage of ONT data.
+
+| Caller      | Parameter value | Compatible data |
+| ----------- | --------------- | --------------- |
+| Mitorsaw    | `mitorsaw`      | Pacbio          |
+| Deepvariant | `deepvariant`   | Pacbio, ONT     |
+
+The following parameters can be used:
+
+| Parameter                     | Description                                                                                                                                 |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `mitorsaw_minimum_maf`        | Minimum minor allele frequency (MAF) for mitorsaw variant calling.                                                                          |
+| `mitorsaw_minimum_read_count` | Minimum read count to consider a heteroplasmic variant.                                                                                     |
+| `mitochondrial_sv_min_size`   | Minimum allele length difference (abs(strlen(REF)-strlen(ALT))) to classify a mitochondrial variant as an SV rather than a SNV/small indel. |
 
 #### Phasing
 
@@ -262,11 +346,12 @@ Turned off with `--skip_phasing`.
 
 This subworkflow relies on alignment and short variant calling subworkflows, but requires no additional files. By default, modkit is run when `--preset ONT_R10` is active, while methbat is run when `--preset revio` is active.
 
-If MethBat is used, it requires the following file:
+If MethBat is used, the following files are required:
 
 | Parameter         | Description                                                                                                                                                                                                                                                                                                                  |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `methbat_regions` | A tsv file with only regions of interest ([example](https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv)), or with both regions and background cohort values ([example](https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv)), made with methbat build |
+| `methbat_map`     | A tsv file mapping genomic regions to HGNC gene names and region types (e.g. imprinted regions, promoters), used to annotate methbat output. Required when `--skip_methylation_annotation` is not set.                                                                                                                       |
 
 If modkit is used, the following optional parameter can be provided:
 
@@ -341,12 +426,14 @@ The following additional files are required:
 
 <!-- TODO: genmod_score_config_snvs, genmod_reduced_penetrance and variant_consequences_snvs should link to real examples -->
 
-| Parameter                            | Description                                                                                                                                                                                                                                                                                                                                                                   |
-| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `vep_cache`                          | VEP cache matching your reference genome, either as a `.tar.gz` archive or path to a directory (e.g. [homo_sapiens_vep_110_GRCh38.tar.gz](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz))                                                                                                                                          |
-| `vep_plugin_files` <sup>1</sup>      | A CSV/TSV/JSON/YAML file with VEP plugin files, pLI and LoFtool are required. Example provided below.                                                                                                                                                                                                                                                                         |
-| `echtvar_snv_databases` <sup>2</sup> | **Optional**: A CSV/TSV/JSON/YAML file with annotation databases from [echtvar encode](https://github.com/brentp/echtvar) (e.g. [`gnomad.v3.1.2.echtvar.popmax.v2.zip`](https://surfdrive.surf.nl/files/index.php/s/LddbAYQAYPqtYu6/download))                                                                                                                                |
-| `variant_consequences_snvs`          | A list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic and mitochondrial SNVs. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt). You can learn more about these terms [here](https://ensembl.org/info/genome/variation/prediction/predicted_data.html) |
+| Parameter                            | Description                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `vep_cache`                          | VEP cache matching your reference genome, either as a `.tar.gz` archive or path to a directory (e.g. [homo_sapiens_vep_110_GRCh38.tar.gz](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz))                                                                                                                                                                                      |
+| `vep_plugin_files` <sup>1</sup>      | A CSV/TSV/JSON/YAML file with VEP plugin files, pLI and LoFtool are required. Example provided below.                                                                                                                                                                                                                                                                                                                     |
+| `echtvar_snv_databases` <sup>2</sup> | **Optional**: A CSV/TSV/JSON/YAML file with annotation databases from [echtvar encode](https://github.com/brentp/echtvar) (e.g. [`gnomad.v3.1.2.echtvar.popmax.v2.zip`](https://surfdrive.surf.nl/files/index.php/s/LddbAYQAYPqtYu6/download))                                                                                                                                                                            |
+| `extra_vep_options_snv`              | **Optional**: Options appended to the VEP core command for nuclear SNV annotation. Defaults to standard enrichment annotations including SIFT and PolyPhen. To add plugins (e.g. CADD, SpliceAI), supply the default flags plus your additions (e.g. `'--buffer_size 20000 ... --plugin CADD,snv.tsv.gz'`). Plugin files must be included in `vep_plugin_files`.                                                          |
+| `extra_vep_options_snv_mito`         | **Optional**: Options appended to the VEP core command for mitochondrial SNV annotation. Defaults to the same enrichment annotations as `extra_vep_options_snv` minus nuclear-only flags (`--sift`, `--polyphen`, `--humdiv`). To add MT-specific plugins (e.g. `gnomADMt` for heteroplasmy-aware allele frequencies), supply the default flags plus your additions. Plugin files must be included in `vep_plugin_files`. |
+| `variant_consequences_snvs`          | A list of SO terms listed in the order of severity from most severe to lease severe for annotating genomic and mitochondrial SNVs. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt). You can learn more about these terms [here](https://ensembl.org/info/genome/variation/prediction/predicted_data.html)                                             |
 
 <sup>1</sup> Example file for input with `--vep_plugin_files`
 
@@ -375,16 +462,17 @@ Turned off with `--skip_snv_annotation`.
 
 !!!tip
 
-    If variants are annotated with allele frequecies, these can be used in the `chromograph` subworkflow to generate plots with regions of autozygosity from [chromograph](https://github.com/Clinical-Genomics/chromograph). By default only coverage plots are generated, since the pipeline doesn't require annotation with allele frequencies. Annotate variants with allele frequencies (e.g. from gnomAD), and set the tag using `--chromograph_af_tag`.
+    If variants are annotated with allele frequencies, these can be used in the `chromograph` subworkflow to generate plots with regions of autozygosity from [chromograph](https://github.com/Clinical-Genomics/chromograph). By default only coverage plots are generated, since the pipeline doesn't require annotation with allele frequencies. Annotate variants with allele frequencies (e.g. from gnomAD), and set the tag using `--chromograph_af_tag`. If `echtvar` annotation is skipped, the unannotated vcfs can be used as input to `chromograph`.
 
 #### Rank SNVs and INDELs
 
 This subworkflow ranks SNVs, and relies on the alignment, SNV calling and SNV annotation subworkflows. It requires the following additional files:
 
-| Parameter                   | Description                                                                                                                                                                                                                                                 |
-| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `genmod_score_config_snvs`  |  Used by GENMOD when ranking variants. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini)                                                                                                           |
-| `genmod_reduced_penetrance` | A list of loci that show [reduced penetrance](https://medlineplus.gov/genetics/understanding/inheritance/penetranceexpressivity/) in people. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/reduced_penetrance.tsv) |
+| Parameter                       | Description                                                                                                                                                                                                                                                          |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `genmod_score_config_snvs`      | Used by GENMOD when ranking nuclear SNVs. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/rank_model_snv.ini)                                                                                                                 |
+| `genmod_score_config_snvs_mito` | Required when ranking mitochondrial SNVs; not required with `--skip_mitochondrial_calling` or `--skip_rank_variants`. Should reference only fields produced by the MT VEP command (i.e. exclude nuclear-only annotations such as SIFT, PolyPhen, SpliceAI, LoFtool). |
+| `genmod_reduced_penetrance`     | A list of loci that show [reduced penetrance](https://medlineplus.gov/genetics/understanding/inheritance/penetranceexpressivity/) in people. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/reduced_penetrance.tsv)          |
 
 Turned off with `--skip_rank_variants`.
 
@@ -399,7 +487,18 @@ The following additional files are required:
 | `svdb_sv_databases` <sup>1</sup> | CSV/TSV/JSON/YAML file with databases (VCFs) used for structural variant annotation                                                                                                                                                                                                                                                                |
 | `vep_cache`                      | VEP cache matching your reference genome, either as a `.tar.gz` archive or path to a directory (e.g. [homo_sapiens_vep_110_GRCh38.tar.gz](https://ftp.ensembl.org/pub/release-110/variation/vep/homo_sapiens_vep_110_GRCh38.tar.gz))                                                                                                               |
 | `vep_plugin_files` <sup>2</sup>  | A CSV/TSV/JSON/YAML file with VEP plugin files, pLI and LoFtool are required. Example provided below.                                                                                                                                                                                                                                              |
+| `extra_vep_options_sv`           | **Optional**: Options appended to the VEP core command for SV annotation. Defaults to standard enrichment annotations. To add plugins, supply the default flags plus your additions (e.g. `'--appris --biotype ... --plugin CADD,sv.tsv.gz'`). Plugin files must be included in `vep_plugin_files`.                                                |
 | `variant_consequences_svs`       | A list of SO terms listed in the order of severity from most severe to lease severe for annotating SVs. Sample file [here](https://github.com/nf-core/test-datasets/blob/raredisease/reference/variant_consequences_v2.txt). You can learn more about these terms [here](https://ensembl.org/info/genome/variation/prediction/predicted_data.html) |
+
+The SVDB matching settings used when annotating against the databases are set with the parameters below.
+
+| Parameter                       | Description                                                                                   | Default |
+| ------------------------------- | --------------------------------------------------------------------------------------------- | ------- |
+| `svdb_query_overlap`            | **Optional**: Minimum reciprocal overlap for deletions and duplications (0-1)                 | 0.7     |
+| `svdb_query_bnd_distance`       | **Optional**: Maximum distance in bp between breakpoints of translocations and inversions     | 1000    |
+| `svdb_query_ins_distance`       | **Optional**: Maximum distance in bp between insertion positions                              | 100     |
+| `svdb_query_ins_svlen_ratio`    | **Optional**: Minimum ratio of the smaller to the larger insertion length (0-1)               | 0.5     |
+| `svdb_query_ins_seq_similarity` | **Optional**: Minimum insertion sequence similarity (0-1), 0 disables the sequence comparison | 0       |
 
 <sup>1</sup> Example file for input with `--svdb_sv_databases`:
 
@@ -441,8 +540,14 @@ This subworkflow filters SNVs and SVs to generate a "clinical" set of variants b
 | Parameter                               | Description                                                                                                                                                               |
 | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `filter_variants_hgnc_ids` <sup>1</sup> |  Used by filter_vep to filter variants on HGNC IDs. Requires a tsv/csv file with a `hgnc_ids` column, that has one numerical HGNC ID per row, e.g. `4281` or `HGNC:4281`. |
-| `filter_snvs_expression`                | An expression that is passed to bcftools view to filter SNVs, e.g. `--filter_snvs_expression "-e 'INFO/AQ>60'"`                                                           |
-| `filter_svs_expression`                 | An expression that is passed to bcftools view to filter SVs, e.g.`--filter_snvs_expression "-e 'INFO/AQ>60'"`                                                             |
+| `filter_bcftools_snvs_expression`       | An expression that is passed to bcftools view to filter SNVs, e.g. `--filter_bcftools_snvs_expression "-e 'INFO/AQ>60'"`                                                  |
+| `filter_bcftools_svs_expression`        | An expression that is passed to bcftools view to filter SVs, e.g.`--filter_bcftools_svs_expression "-e 'INFO/AQ>60'"`                                                     |
+| `filter_vep_snvs_expression`            | An expression passed to filter_vep for SNVs, e.g. `--filter_vep_snvs_expression "IMPACT is HIGH"`. Do not include `--filter`.                                             |
+| `filter_vep_svs_expression`             | An expression passed to filter_vep for SVs, e.g. `--filter_vep_svs_expression "IMPACT is HIGH"`. Do not include `--filter`.                                               |
+
+VEP expressions can be used without an HGNC ID file. When both are supplied, the HGNC restriction and the expression are parenthesized and combined with `and` in a single VEP filter. If a bcftools expression is also supplied, bcftools filtering runs before VEP filtering.
+
+The `ENSEMBLVEP_FILTERVEP` module runs `filter_vep` with `--only_matched`. This removes non-matching `CSQ` consequence annotations from retained variants in the clinical VCF, as well as removing variants with no matching annotation. This applies to both the VEP expressions and the HGNC ID filter.
 
 <sup>1</sup> Example file for input with `--filter_variants_hgnc_ids`:
 
@@ -452,7 +557,7 @@ hgnc_id
 14150
 ```
 
-Filtering of variants only happens if any of these three parameters is active.
+Filtering of variants only happens if any of these five parameters is active.
 
 !!!tip
 
@@ -549,19 +654,19 @@ Specify the path to a specific config file (this is a core Nextflow command). Se
 
 Whilst the default requirements set within the pipeline will hopefully work for most people and with most input data, you may find that you want to customise the compute resources that the pipeline requests. Each step in the pipeline has a default set of requirements for number of CPUs, memory and time. For most of the pipeline steps, if the job exits with any of the error codes specified [here](https://github.com/nf-core/rnaseq/blob/4c27ef5610c87db00c3c5a3eed10b1d161abf575/conf/base.config#L18) it will automatically be resubmitted with higher resources request (2 x original, then 3 x original). If it still fails after the third attempt then the pipeline execution is stopped.
 
-To change the resource requests, please see the [max resources](https://nf-co.re/docs/usage/configuration#max-resources) and [tuning workflow resources](https://nf-co.re/docs/usage/configuration#tuning-workflow-resources) section of the nf-core website.
+To change the resource requests, please see the [max resources](https://nf-co.re/docs/running/configuration/nextflow-for-your-system#set-max-resources) and [customise process resources](https://nf-co.re/docs/running/configuration/nextflow-for-your-system#customize-process-resources) section of the nf-core website.
 
 ### Custom Containers
 
 In some cases, you may wish to change the container or conda environment used by a pipeline steps for a particular tool. By default, nf-core pipelines use containers and software from the [biocontainers](https://biocontainers.pro/) or [bioconda](https://bioconda.github.io/) projects. However, in some cases the pipeline specified version maybe out of date.
 
-To use a different container from the default container or conda environment specified in a pipeline, please see the [updating tool versions](https://nf-co.re/docs/usage/configuration#updating-tool-versions) section of the nf-core website.
+To use a different container from the default container or conda environment specified in a pipeline, please see the [updating tool versions](https://nf-co.re/docs/running/configuration/nextflow-for-your-system#update-tool-versions) section of the nf-core website.
 
 ### Custom Tool Arguments
 
 A pipeline might not always support every possible argument or option of a particular tool used in pipeline. Fortunately, nf-core pipelines provide some freedom to users to insert additional parameters that the pipeline does not include by default.
 
-To learn how to provide additional arguments to a particular tool of the pipeline, please see the [customising tool arguments](https://nf-co.re/docs/usage/configuration#customising-tool-arguments) section of the nf-core website.
+To learn how to provide additional arguments to a particular tool of the pipeline, please see the [customising tool arguments](https://nf-co.re/docs/running/configuration/nextflow-for-your-system#modifying-tool-arguments) section of the nf-core website.
 
 ### nf-core/configs
 

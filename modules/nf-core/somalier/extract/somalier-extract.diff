@@ -1,21 +1,63 @@
 Changes in component 'nf-core/somalier/extract'
-'modules/nf-core/somalier/extract/environment.yml' is unchanged
+Changes in 'somalier/extract/environment.yml':
+--- modules/nf-core/somalier/extract/environment.yml
++++ modules/nf-core/somalier/extract/environment.yml
+@@ -4,4 +4,4 @@
+   - conda-forge
+   - bioconda
+ dependencies:
+-  - bioconda::somalier=0.3.6
++  - bioconda::somalier=0.2.18
+
 Changes in 'somalier/extract/main.nf':
 --- modules/nf-core/somalier/extract/main.nf
 +++ modules/nf-core/somalier/extract/main.nf
-@@ -5,8 +5,8 @@
+@@ -7,8 +7,8 @@
  
      conda "${moduleDir}/environment.yml"
-     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
--        'https://depot.galaxyproject.org/singularity/somalier:0.2.19--h0c29559_0':
--        'biocontainers/somalier:0.2.19--h0c29559_0' }"
-+        'https://depot.galaxyproject.org/singularity/somalier:0.2.18--hb57907c_0':
-+        'biocontainers/somalier:0.2.18--hb57907c_0' }"
+     container "${workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container
+-        ? 'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/f5/f5ad8a7223d537f18f2899b16bd2b14f93866656c4ddce6d16181319d9a82f63/data'
+-        : 'community.wave.seqera.io/library/somalier:0.3.6--127e0e29751f4940'}"
++        ? 'https://depot.galaxyproject.org/singularity/somalier:0.2.18--hb57907c_0'
++        : 'biocontainers/somalier:0.2.18--hb57907c_0'}"
  
      input:
      tuple val(meta), path(input), path(input_index)
 
-'modules/nf-core/somalier/extract/meta.yml' is unchanged
+Changes in 'somalier/extract/meta.yml':
+--- modules/nf-core/somalier/extract/meta.yml
++++ modules/nf-core/somalier/extract/meta.yml
+@@ -106,27 +106,3 @@
+ maintainers:
+   - "@ashotmarg"
+   - "@nvnieuwk"
+-containers:
+-  docker:
+-    linux/amd64:
+-      name: community.wave.seqera.io/library/somalier:0.3.6--127e0e29751f4940
+-      build_id: bd-127e0e29751f4940_1
+-      scan_id: sc-d34171139d0f9edf_1
+-    linux/arm64:
+-      name: community.wave.seqera.io/library/somalier:0.3.6--76b5278bf32df42f
+-      build_id: bd-76b5278bf32df42f_1
+-      scan_id: sc-17f16146fcb05675_1
+-  singularity:
+-    linux/amd64:
+-      name: oras://community.wave.seqera.io/library/somalier:0.3.6--b3834d7a12ae1f53
+-      build_id: bd-b3834d7a12ae1f53_1
+-      https: https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/f5/f5ad8a7223d537f18f2899b16bd2b14f93866656c4ddce6d16181319d9a82f63/data
+-    linux/arm64:
+-      name: oras://community.wave.seqera.io/library/somalier:0.3.6--616e8a160c41dcb7
+-      build_id: bd-616e8a160c41dcb7_1
+-      https: https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/47/47d07f6bfed89f10492f67cd64ccc33efb18a9fc1dc596dd55642efca5d67c0e/data
+-  conda:
+-    linux/amd64:
+-      lock_file: modules/nf-core/somalier/extract/.conda-lock/linux_amd64-bd-127e0e29751f4940_1.txt
+-    linux/arm64:
+-      lock_file: modules/nf-core/somalier/extract/.conda-lock/linux_arm64-bd-76b5278bf32df42f_1.txt
+
+'modules/nf-core/somalier/extract/.conda-lock/linux_arm64-bd-76b5278bf32df42f_1.txt' is unchanged
+'modules/nf-core/somalier/extract/.conda-lock/linux_amd64-bd-127e0e29751f4940_1.txt' is unchanged
 'modules/nf-core/somalier/extract/tests/main.nf.test.snap' is unchanged
 'modules/nf-core/somalier/extract/tests/main.nf.test' is unchanged
 ************************************************************

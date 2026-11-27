@@ -16,6 +16,7 @@ nextflow_workflow {
                     ]
                 )
                 input[1] = false
+                input[2] = false
                 """
             }
         }
@@ -64,6 +65,7 @@ nextflow_workflow {
                     }
                     .groupTuple()
                 input[1] = true
+                input[2] = false
                 """
             }
         }
@@ -77,7 +79,7 @@ nextflow_workflow {
         }
     }
 
-    test("two children with two parents, trio-binning mode") {
+    test("two children with two parents, trio-binning mode, concatenated_haplotypes output") {
 
         setup {
             run("SAMTOOLS_FASTQ") {
@@ -115,6 +117,7 @@ nextflow_workflow {
                     }
                     .groupTuple()
                 input[1] = true
+                input[2] = true
                 """
             }
         }
@@ -124,7 +127,7 @@ nextflow_workflow {
                 // other than a manual .view() on `ch_with_both_parents`, without adding the
                 // `ch_with_both_parents` intermediate channel to the output.
                 { assert workflow.success },
-                { assert workflow.trace.succeeded().size() == 22 }, // 22 tasks: 4x FASTQ, 2x YAK_COUNT, 4x HIFIASM_BINS, 4x HIFIASM_ASSEMBLY, 8x GFASTATS.
+                { assert workflow.trace.succeeded().size() == 26 }, // 26 tasks: 4x FASTQ, 2x YAK_COUNT, 4x HIFIASM_BINS, 4x HIFIASM_ASSEMBLY, 8x GFASTATS, 4x FIND_CONCATENATE.
                 { assert workflow.out.assembled_haplotypes.size() == 8 },
                 { assert snapshot(workflow.out).match() }
             )
@@ -163,6 +166,7 @@ nextflow_workflow {
                     }
                     .groupTuple()
                 input[1] = true
+                input[2] = false
                 """
             }
         }
@@ -190,6 +194,7 @@ nextflow_workflow {
                     ]
                 )
                 input[1] = false
+                input[2] = false
                 """
             }
         }
@@ -221,6 +226,7 @@ nextflow_workflow {
                 }
                 .groupTuple()
                 input[1] = true
+                input[2] = false
                 """
             }
         }
@@ -234,7 +240,7 @@ nextflow_workflow {
         }
     }
 
-    test("child with two parents, trio-binning mode -stub") {
+    test("child with two parents, trio-binning mode, concatenated_haplotypes output -stub") {
 
         options "-stub"
 
@@ -271,13 +277,14 @@ nextflow_workflow {
                     }
                     .groupTuple()
                 input[1] = true
+                input[2] = true
                 """
             }
         }
         then {
             assertAll(
                 { assert workflow.success },
-                { assert workflow.trace.succeeded().size() == 17 }, // 17 tasks: 3x FASTQ, 2x YAK_COUNT, 3x HIFIASM_BINS, 3x HIFIASM_ASSEMBLY, 6x GFASTATS.
+                { assert workflow.trace.succeeded().size() == 20 }, // 20 tasks: 3x FASTQ, 2x YAK_COUNT, 3x HIFIASM_BINS, 3x HIFIASM_ASSEMBLY, 6x GFASTATS, 3x FIND_CONCATENATE
                 { assert workflow.out.assembled_haplotypes.size() == 6 },
                 { assert snapshot(workflow.out).match() }
             )

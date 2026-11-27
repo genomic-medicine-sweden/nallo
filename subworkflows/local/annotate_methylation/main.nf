@@ -1,27 +1,42 @@
-include { CSVTK_MUTATE2 } from '../../../modules/nf-core/csvtk/mutate2/main'
 include { CSVTK_CONCAT  } from '../../../modules/nf-core/csvtk/concat/main'
+include { CSVTK_JOIN    } from '../../../modules/nf-core/csvtk/join/main'
+include { CSVTK_MUTATE2 } from '../../../modules/nf-core/csvtk/mutate2/main'
 include { CSVTK_SORT    } from '../../../modules/nf-core/csvtk/sort/main'
+include { GAWK          } from '../../../modules/nf-core/gawk/main'
 
 workflow ANNOTATE_METHYLATION {
     take:
     ch_region_profile // channel: [ val(meta), path(tsv) ]
+    ch_map            // channel: [ val(meta), path(tsv) ]
 
     main:
+    // GAWK is used to filter out rows with NA in the cpg_label column, as they are not approved HGNC genes
+    GAWK(
+        ch_region_profile.map { meta, tsv -> [meta, tsv, 'tsv'] },
+        [],
+        false,
+    )
+
+    CSVTK_JOIN(
+        GAWK.out.output.combine(ch_map).map { meta, region_profile, _meta_map, map ->
+            [meta, [region_profile, map]]
+        }
+    )
+
     CSVTK_MUTATE2(
-        ch_region_profile,
+        CSVTK_JOIN.out.out_file,
         'tsv',
         'tsv',
     )
 
-    CSVTK_MUTATE2.out.output
+    ch_region_profiles_with_sample_id_per_family = CSVTK_MUTATE2.out.output
         .map { meta, region_profile_with_sample_id ->
             [[id: meta.family_id], region_profile_with_sample_id]
         }
         .groupTuple()
-        .set { region_profiles_with_sample_id_per_family }
 
     CSVTK_CONCAT(
-        region_profiles_with_sample_id_per_family,
+        ch_region_profiles_with_sample_id_per_family,
         'tsv',
         'tsv',
     )

@@ -20,24 +20,24 @@ runs:
   using: "composite"
   steps:
     - name: Setup Nextflow
-      uses: nf-core/setup-nextflow@v2
+      uses: nf-core/setup-nextflow@b4ec1bc7c16a94435159de94a05253542fddf6ef # v3
       with:
         version: "${{ env.NXF_VERSION }}"
 
     - name: Set up Python
-      uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c # v6
+      uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
       with:
         python-version: "3.14"
 
     - name: Install nf-test
-      uses: nf-core/setup-nf-test@v1
+      uses: nf-core/setup-nf-test@4069fbbaabe94c08faba4ad261bfa88225ba133f # v2
       with:
         version: "${{ env.NFT_VER }}"
         install-pdiff: true
 
     - name: Setup apptainer
       if: contains(inputs.profile, 'singularity')
-      uses: eWaterCycle/setup-apptainer@main
+      uses: eWaterCycle/setup-apptainer@v3.0.0 # v3
 
     - name: Set up Singularity
       if: contains(inputs.profile, 'singularity')
@@ -46,32 +46,31 @@ runs:
         mkdir -p $NXF_SINGULARITY_CACHEDIR
         mkdir -p $NXF_SINGULARITY_LIBRARYDIR
 
-    - name: Conda setup
-      if: contains(inputs.profile, 'conda')
-      uses: conda-incubator/setup-miniconda@505e6394dae86d6a5c7fbb6e3fb8938e3e863830 # v3
-      with:
-        auto-update-conda: true
-        conda-solver: libmamba
-        channels: conda-forge
-        channel-priority: strict
-        conda-remove-defaults: true
-
     - name: Run nf-test
       shell: bash
       env:
         NFT_WORKDIR: ${{ env.NFT_WORKDIR }}
       run: |
-        nf-test test \
-          --profile=+${{ inputs.profile }} \
-          $(if [ -n "${{ inputs.tags }}" ]; then echo "--tag ${{ inputs.tags }}"; fi) \
-          --ci \
-          --changed-since HEAD^ \
-          --verbose \
-          --tap=test.tap \
-          --shard ${{ inputs.shard }}/${{ inputs.total_shards }}
+        run_nf_test() {
+          nf-test test \
+            --profile=+${{ inputs.profile }} \
+            $(if [ -n "${{ inputs.tags }}" ]; then echo "--tag ${{ inputs.tags }}"; fi) \
+            --ci \
+            --changed-since HEAD^ \
+            --verbose \
+            --tap=test.tap \
+            --shard ${{ inputs.shard }}/${{ inputs.total_shards }}
+        }
 
-          # Save the absolute path of the test.tap file to the output
-          echo "tap_file_path=$(realpath test.tap)" >> $GITHUB_OUTPUT
+        set -o pipefail
+        if ! run_nf_test 2>&1 | tee nf-test.log; then
+          if grep -iqE "connection reset|Connection timed out|no space left on device|Can't stage file.*https://|file does not exist.*https://|Failed to pull singularity image|unexpected HTTP status: 5|context deadline exceeded" nf-test.log; then
+            echo "::warning::Transient network/disk failure detected — retrying once"
+            run_nf_test
+          else
+            exit 1
+          fi
+        fi
 
     - name: Generate test summary
       if: always()

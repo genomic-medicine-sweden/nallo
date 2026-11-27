@@ -1,0 +1,60 @@
+{
+    "1 sample": {
+        "content": [
+            "6d1c7fae80ef997d0b76946d621af168",
+            "HG002_remapped_assembly.bam.bai"
+        ],
+        "timestamp": "2026-07-07T15:23:58.940389546",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.4"
+        }
+    },
+    "1 sample - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "HG002",
+                            "sex": 1
+                        },
+                        "HG002_remapped_assembly.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "HG002",
+                            "sex": 1
+                        },
+                        "HG002_remapped_assembly.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "sex": 1
+                        },
+                        "HG002_remapped_assembly.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "bam": [
+                    [
+                        {
+                            "id": "HG002",
+                            "sex": 1
+                        },
+                        "HG002_remapped_assembly.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-07T15:48:34.881982187",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.4"
+        }
+    }
+}

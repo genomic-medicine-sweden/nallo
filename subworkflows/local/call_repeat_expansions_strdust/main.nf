@@ -1,51 +1,52 @@
-include { BCFTOOLS_MERGE   } from '../../../modules/nf-core/bcftools/merge/'
-include { STRDUST          } from '../../../modules/nf-core/strdust/'
-include { TABIX_TABIX      } from '../../../modules/nf-core/tabix/tabix/main'
-include { VCFEXPRESS       } from '../../../modules/nf-core/vcfexpress/main'
+include { BCFTOOLS_MERGE    } from '../../../modules/nf-core/bcftools/merge/'
+include { STRDUST           } from '../../../modules/nf-core/strdust/'
+include { HTSLIB_BGZIPTABIX } from '../../../modules/nf-core/htslib/bgziptabix/main'
+include { VCFEXPRESS        } from '../../../modules/nf-core/vcfexpress/main'
 
 workflow CALL_REPEAT_EXPANSIONS_STRDUST {
-
     take:
-    ch_bam_bai              // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
-    ch_fasta                // channel: [mandatory] [ val(meta), path(fasta) ]
-    ch_fai                  // channel: [mandatory] [ val(meta), path(fai) ]
-    ch_bed                  // channel: [mandatory] [ val(meta), path(bed) ]
-    ch_vcfexpress_prelude   // path: [mandatory] lua file
+    ch_bam_bai            // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
+    ch_fasta              // channel: [mandatory] [ val(meta), path(fasta) ]
+    ch_fai                // channel: [mandatory] [ val(meta), path(fai) ]
+    ch_bed                // channel: [mandatory] [ val(meta), path(bed) ]
+    ch_vcfexpress_prelude // path: [mandatory] lua file
 
     main:
 
-    STRDUST (
+    STRDUST(
         ch_bam_bai,
         ch_fasta,
         ch_fai,
-        ch_bed
+        ch_bed,
     )
 
-    VCFEXPRESS (
+    VCFEXPRESS(
         STRDUST.out.vcf,
-        ch_vcfexpress_prelude
+        ch_vcfexpress_prelude,
+        'vcf.gz',
     )
 
-    TABIX_TABIX (
-        VCFEXPRESS.out.vcf
+    HTSLIB_BGZIPTABIX(
+        VCFEXPRESS.out.vcf.map { meta, vcf -> [meta, vcf, [], []] },
+        'compress',
+        true,
+        'vcf',
     )
 
-    VCFEXPRESS.out.vcf
-        .join(TABIX_TABIX.out.index, failOnDuplicate: true, failOnMismatch: true)
-        .map { meta, vcf, tbi -> [ [ id: meta.family_id ], vcf, tbi ] }
+    ch_bcftools_merge_in = HTSLIB_BGZIPTABIX.out.output
+        .join(HTSLIB_BGZIPTABIX.out.index, failOnDuplicate: true, failOnMismatch: true)
+        .map { meta, vcf, tbi -> [[id: meta.family_id], vcf, tbi] }
         .groupTuple()
-        .map { meta, vcfs, tbis -> [ meta, vcfs, tbis, [] ] }
-        .set { ch_bcftools_merge_in }
+        .map { meta, vcfs, tbis -> [meta, vcfs, tbis, []] }
 
-    BCFTOOLS_MERGE (
+    BCFTOOLS_MERGE(
         ch_bcftools_merge_in,
-        ch_fasta.join(ch_fai, failOnMismatch: true, failOnDuplicate: true).collect()
+        ch_fasta.join(ch_fai, failOnMismatch: true, failOnDuplicate: true).collect(),
     )
 
     emit:
-    sample_vcf  = STRDUST.out.vcf          // channel: [ val(meta), path(vcf) ]
-    sample_tbi  = STRDUST.out.tbi          // channel: [ val(meta), path(tbi) ]
-    family_vcf  = BCFTOOLS_MERGE.out.vcf   // channel: [ val(meta), path(vcf) ]
-    family_tbi  = BCFTOOLS_MERGE.out.index // channel: [ val(meta), path(tbi) ]
-
+    sample_vcf = VCFEXPRESS.out.vcf          // channel: [ val(meta), path(vcf) ]
+    sample_tbi = HTSLIB_BGZIPTABIX.out.index // channel: [ val(meta), path(tbi) ]
+    family_vcf = BCFTOOLS_MERGE.out.vcf      // channel: [ val(meta), path(vcf) ]
+    family_tbi = BCFTOOLS_MERGE.out.index    // channel: [ val(meta), path(tbi) ]
 }

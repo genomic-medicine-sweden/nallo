@@ -6,7 +6,7 @@ This document describes the pipeline output files and the tools used to generate
 
 ## Aligned reads
 
-[Minimap2](https://github.com/lh3/minimap2) is used to map the reads to a reference genome. The aligned reads are sorted, merged and indexed using [samtools](https://github.com/samtools/samtools). If the pipeline is run with phasing, the aligned reads will be haplotagged using the active phasing tool.
+[Minimap2](https://github.com/lh3/minimap2) is used to map the reads to a reference genome. The aligned reads are sorted, merged and indexed using [samtools](https://github.com/samtools/samtools). A sample with a single pre-aligned BAM (`aligned_bam`) is indexed, not merged. If the pipeline is run with phasing, the aligned reads will be haplotagged using the active phasing tool.
 
 | Path                                                                   | Description                               | Alignment          | Alignment & phasing |
 | ---------------------------------------------------------------------- | ----------------------------------------- | ------------------ | ------------------- |
@@ -114,9 +114,10 @@ This document describes the pipeline output files and the tools used to generate
 | `qc/mosdepth/{sample}/{sample}.mosdepth.global.dist.txt` | Cumulative distribution of bases covered for at least a given coverage value, across chromosomes and the whole genome | :white_check_mark:      | :white_check_mark:         |
 | `qc/mosdepth/{sample}/{sample}.mosdepth.summary.txt`     | Mosdepth summary file                                                                                                 | :white_check_mark:      | :white_check_mark:         |
 | `qc/mosdepth/{sample}/{sample}.mosdepth.region.dist.txt` | Cumulative distribution of bases covered for at least a given coverage value, across regions                          | :white_check_mark:      |                            |
-| `qc/mosdepth/{sample}/{sample}.per-base.d4`              | Per-base depth in d4 format. Output if `--mosdepth_d4_output` is set                                                  | :white_check_mark:      |
-| `qc/mosdepth/{sample}/{sample}.regions.bed.gz`           | Depth per region                                                                                                      | :white_check_mark:      |
-| `qc/mosdepth/{sample}/{sample}.regions.bed.gz.csi`       | Index of the regions.bed.gz file                                                                                      | :white_check_mark:      |
+| `qc/mosdepth/{sample}/{sample}.per-base.d4`              | Per-base depth in d4 format. Output if `--mosdepth_d4_output` is set                                                  | :white_check_mark:      |                            |
+| `qc/mosdepth/{sample}/{sample}.regions.bed.gz`           | Mean depth per target region                                                                                          | :white_check_mark:      |                            |
+| `qc/mosdepth/{sample}/{sample}.regions.bed.gz.csi`       | Index of the regions.bed.gz file                                                                                      | :white_check_mark:      |                            |
+| `qc/mosdepth/{sample}/{sample}.thresholds.bed.gz`        | Bases covered at ≥20X and ≥30X per target region                                                                      | :white_check_mark:      |                            |
 
 ### Cramino
 
@@ -228,6 +229,8 @@ In general, annotated variant calls are output per family while unannotated call
 | `snvs/sample/{sample}/{sample}_deepvariant_snvs.vcf.gz.tbi`           | Index of the corresponding VCF file                             | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
 | `snvs/family/{family}/{family}_snvs.vcf.gz`                           | VCF file containing called variants for all samples in a family | :white_check_mark: |                      |                              |
 | `snvs/family/{family}/{family}_snvs.vcf.gz.tbi`                       | Index of the corresponding VCF file                             | :white_check_mark: |                      |                              |
+| `snvs/family/{family}/{family}_snvs_unphased.vcf.gz`                  | Pre-phasing joint family SNV VCF (vcf entry point input)        | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
+| `snvs/family/{family}/{family}_snvs_unphased.vcf.gz.tbi`              | Index of the pre-phasing SNV VCF                                | :white_check_mark: | :white_check_mark:   | :white_check_mark:           |
 
 #### Annotation
 
@@ -249,7 +252,7 @@ In general, annotated variant calls are output per family while unannotated call
 
 #### Filtering
 
-[Filter_vep](https://www.ensembl.org/vep) and [bcftools](https://samtools.github.io/bcftools/bcftools.html) can be used to filter variants after annotation. These will be output if either of `--filter_variants_hgnc_id` and `--filter_snvs_expression` has been used, and only family VCFs are filtered.
+[Filter_vep](https://www.ensembl.org/vep) and [bcftools](https://samtools.github.io/bcftools/bcftools.html) can be used to filter variants after annotation. These will be output if any of `--filter_variants_hgnc_ids`, `--filter_bcftools_snvs_expression`, or `--filter_vep_snvs_expression` has been used, and only family VCFs are filtered.
 
 | Path                                           | Description                                  |
 | ---------------------------------------------- | -------------------------------------------- |
@@ -271,18 +274,20 @@ When `--skip_prepare_gens_input` is disabled, the pipeline prepares coverage and
 
 ### SVs (and CNVs)
 
-[Severus](https://github.com/KolmogorovLab/Severus) or [Sniffles](https://github.com/fritzsedlazeck/Sniffles) are used to call structural variants, while [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs. HiFiCNV also produces copy number, depth, and MAF [visualization tracks](#visualization-tracks). [Sawfish](https://github.com/PacificBiosciences/sawfish) calls both SVs and CNVs by default.
+[Severus](https://github.com/KolmogorovLab/Severus), [Sniffles](https://github.com/fritzsedlazeck/Sniffles) (v2 or v1) or [DeBreak](https://github.com/Maggi-Chen/DeBreak) are used to call structural variants, while [HiFiCNV](https://github.com/PacificBiosciences/HiFiCNV) is used to call CNVs. HiFiCNV also produces copy number, depth, and MAF [visualization tracks](#visualization-tracks). [Sawfish](https://github.com/PacificBiosciences/sawfish) calls both SVs and CNVs by default.
 
 !!!tip "Family-level VCFs per caller"
 
     Unannotated family-level VCFs per caller can be output with --publish_unannotated_family_svs.
 
-| Path                                                                                   | Description                                        | Call SVs           | `--publish_unannotated_family_svs` |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------- | ------------------ | ---------------------------------- |
-| `svs/family/{family_id}/{family_id}_{hificnv,sawfish,severus,sniffles}_svs.vcf.gz`     | VCF file with merged SVs/CNVs by family and caller |                    | :white_check_mark:                 |
-| `svs/family/{family_id}/{family_id}_{hificnv,sawfish,severus,sniffles}_svs.vcf.gz.tbi` | Index of the merged VCF file                       |                    | :white_check_mark:                 |
-| `svs/family/{family_id}/{family_id}_svs.vcf.gz`                                        | VCF file with merged SVs/CNVs by family            | :white_check_mark: |                                    |
-| `svs/family/{family_id}/{family_id}_svs.vcf.gz.tbi`                                    | Index of the merged VCF file                       | :white_check_mark: |                                    |
+| Path                                                                                                     | Description                                                   | Call SVs           | `--publish_unannotated_family_svs` |
+| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------ | ---------------------------------- |
+| `svs/family/{family_id}/{family_id}_{debreak,hificnv,sawfish,severus,sniffles,sniffles1}_svs.vcf.gz`     | VCF file with merged SVs/CNVs by family and caller            |                    | :white_check_mark:                 |
+| `svs/family/{family_id}/{family_id}_{debreak,hificnv,sawfish,severus,sniffles,sniffles1}_svs.vcf.gz.tbi` | Index of the merged VCF file                                  |                    | :white_check_mark:                 |
+| `svs/family/{family_id}/{family_id}_svs.vcf.gz`                                                          | VCF file with merged SVs/CNVs by family                       | :white_check_mark: |                                    |
+| `svs/family/{family_id}/{family_id}_svs.vcf.gz.tbi`                                                      | Index of the merged VCF file                                  | :white_check_mark: |                                    |
+| `svs/family/{family_id}/{family_id}_svs_unphased.vcf.gz`                                                 | Pre-phasing SVDB-merged family SV VCF (vcf entry point input) | :white_check_mark: |                                    |
+| `svs/family/{family_id}/{family_id}_svs_unphased.vcf.gz.tbi`                                             | Index of the pre-phasing SV VCF                               | :white_check_mark: |                                    |
 
 #### Annotation
 
@@ -304,7 +309,7 @@ When `--skip_prepare_gens_input` is disabled, the pipeline prepares coverage and
 
 #### Filtering
 
-[Filter_vep](https://www.ensembl.org/vep) and [bcftools](https://samtools.github.io/bcftools/bcftools.html) can be used to filter variants after annotation. These will be output if either of `--filter_variants_hgnc_id` and `--filter_svs_expression` has been used, and only family VCFs are filtered.
+[Filter_vep](https://www.ensembl.org/vep) and [bcftools](https://samtools.github.io/bcftools/bcftools.html) can be used to filter variants after annotation. These will be output if any of `--filter_variants_hgnc_ids`, `--filter_bcftools_svs_expression`, or `--filter_vep_svs_expression` has been used, and only family VCFs are filtered.
 
 | Path                                          | Description                                  |
 | --------------------------------------------- | -------------------------------------------- |

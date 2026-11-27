@@ -117,9 +117,19 @@
                     "description": "Skip preparing input data for Gens",
                     "default": false
                 },
+                "skip_mitochondrial_calling": {
+                    "type": "boolean",
+                    "description": "Skip mitochondrial variant calling",
+                    "default": false
+                },
                 "skip_sex_check": {
                     "type": "boolean",
                     "description": "Skip sex check",
+                    "default": false
+                },
+                "skip_portello": {
+                    "type": "boolean",
+                    "description": "Skip Portello analysis",
                     "default": false
                 }
             },
@@ -252,6 +262,13 @@
                     "description": "A tsv file with only regions of interest (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv) or with both regions and background cohort values (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv), made with methbat build",
                     "exists": true
                 },
+                "cramino_regions": {
+                    "type": "string",
+                    "pattern": "^\\S+\\.bed$",
+                    "format": "file-path",
+                    "description": "A BED file used to filter reads to on-target regions before cramino QC. By default this is the same as `target_regions`.",
+                    "exists": true
+                },
                 "modkit_call_regions": {
                     "type": "string",
                     "pattern": "^\\S+\\.bed$",
@@ -329,7 +346,14 @@
                     "exists": true,
                     "format": "path",
                     "fa_icon": "fas fa-file",
-                    "description": "A SNV rank model config file for genmod."
+                    "description": "A rank model config file for genmod, used for nuclear SNV scoring."
+                },
+                "genmod_score_config_snvs_mito": {
+                    "type": "string",
+                    "exists": true,
+                    "format": "path",
+                    "fa_icon": "fas fa-file",
+                    "description": "A rank model config file for genmod, used for mitochondrial SNV scoring. Should reference only fields produced by the MT VEP command."
                 },
                 "genmod_score_config_svs": {
                     "type": "string",
@@ -415,18 +439,18 @@
                 "create_maf_track": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Whether to create a MAF track from SNV calls when calling SVs with HiFiCNV or Sawfish. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Defaults to `true`"
+                    "description": "Whether to create a MAF track from SNV calls when calling SVs with HiFiCNV or Sawfish. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Set to `false` to run HiFiCNV or Sawfish with `--skip_snv_calling`. Defaults to `true`"
                 },
                 "create_hificnv_maf_track": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Whether to create a MAF track from SNV calls when calling CNVs with HiFiCNV. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Defaults to `create_maf_track`",
+                    "description": "Whether to create a MAF track from SNV calls when calling CNVs with HiFiCNV. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Set to `false` to run HiFiCNV with `--skip_snv_calling`. Defaults to `create_maf_track`",
                     "hidden": true
                 },
                 "create_sawfish_maf_track": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Whether to create a MAF track from SNV calls when calling SVs with Sawfish. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Defaults to `create_maf_track`",
+                    "description": "Whether to create a MAF track from SNV calls when calling SVs with Sawfish. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Set to `false` to run Sawfish with `--skip_snv_calling`. Defaults to `create_maf_track`",
                     "hidden": true
                 },
                 "modules_testdata_base_path": {
@@ -511,6 +535,12 @@
                     "description": "Publish unannotated SVs and CNVs per family and caller.",
                     "hidden": true,
                     "fa_icon": "fas fa-users-cog"
+                },
+                "publish_input_aligned_bams": {
+                    "type": "boolean",
+                    "description": "Publish the aligned BAMs provided in the samplesheet (aligned_bam) as aligned reads, even if the pipeline has not changed them.",
+                    "hidden": true,
+                    "fa_icon": "fas fa-users-cog"
                 }
             }
         },
@@ -564,13 +594,6 @@
                     "fa_icon": "fas fa-palette",
                     "hidden": true
                 },
-                "hook_url": {
-                    "type": "string",
-                    "description": "Incoming hook URL for messaging service",
-                    "fa_icon": "fas fa-people-group",
-                    "help_text": "Incoming hook URL for messaging service. Currently, MS Teams and Slack are supported.",
-                    "hidden": true
-                },
                 "multiqc_config": {
                     "type": "string",
                     "format": "file-path",
@@ -600,7 +623,7 @@
                     "type": "string",
                     "fa_icon": "far fa-check-circle",
                     "description": "Base URL or local path to location of pipeline test dataset files",
-                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/",
+                    "default": "https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8cf6216b9cbf96f6bcfc918610182708e3796ad9/",
                     "hidden": true
                 },
                 "trace_report_suffix": {
@@ -640,32 +663,32 @@
                 "preset": {
                     "type": "string",
                     "default": "revio",
-                    "description": "Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`)",
-                    "enum": ["revio", "pacbio", "ONT_R10"]
+                    "description": "Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`, `ONT_R10_AS`)",
+                    "enum": ["revio", "pacbio", "ONT_R10", "ONT_R10_AS"]
                 },
                 "sv_callers": {
                     "type": "string",
                     "description": "Which SV callers to use. Several callers can be specified, separated by commas (e.g. sniffles,severus,hificnv,sawfish). The order of the SV callers in this list will determine the priority of the calls when merging them if not overwritten by `sv_caller_priority`.",
                     "default": "sniffles,hificnv",
-                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus)(,(sniffles|hificnv|sawfish|severus))*$"
+                    "pattern": "(?i)^(sniffles|sniffles1|hificnv|sawfish|severus|debreak)(,(sniffles|sniffles1|hificnv|sawfish|severus|debreak))*$"
                 },
                 "sv_callers_merge_priority": {
                     "type": "string",
                     "description": "The order of the SV callers in this list will determine the priority of the calls when merging them. All callers that has been specified in `sv_callers` should also be specified here separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as `--sv_callers`.",
                     "default": "sniffles,hificnv",
-                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus)(,(sniffles|hificnv|sawfish|severus))*$"
+                    "pattern": "(?i)^(sniffles|sniffles1|hificnv|sawfish|severus|debreak)(,(sniffles|sniffles1|hificnv|sawfish|severus|debreak))*$"
                 },
                 "sv_callers_to_run": {
                     "type": "string",
                     "description": "Which SV callers to run, separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as `--sv_callers`",
                     "default": "sniffles,hificnv",
-                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus)(,(sniffles|hificnv|sawfish|severus))*$"
+                    "pattern": "(?i)^(sniffles|sniffles1|hificnv|sawfish|severus|debreak)(,(sniffles|sniffles1|hificnv|sawfish|severus|debreak))*$"
                 },
                 "sv_callers_to_merge": {
                     "type": "string",
                     "description": "Which SV callers to merge into family VCFs (that are also used for annotation and ranking), separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as `--sv_callers`",
                     "default": "sniffles,hificnv",
-                    "pattern": "(?i)^(sniffles|hificnv|sawfish|severus)(,(sniffles|hificnv|sawfish|severus))*$"
+                    "pattern": "(?i)^(sniffles|sniffles1|hificnv|sawfish|severus|debreak)(,(sniffles|sniffles1|hificnv|sawfish|severus|debreak))*$"
                 },
                 "snv_caller": {
                     "type": "string",
@@ -693,6 +716,11 @@
                     "description": "Which phasing software to use (`longphase`, `whatshap`, `hiphase`)",
                     "enum": ["longphase", "whatshap", "hiphase"]
                 },
+                "whatshap_pedigree_phasing": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/disable pedigree phasing when phasing with whatshap"
+                },
                 "hifiasm_mode": {
                     "type": "string",
                     "description": "Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`)",
@@ -705,13 +733,12 @@
                     "enum": ["", "--ont"],
                     "default": null
                 },
-                "run_methbat": {
-                    "type": "boolean",
-                    "description": "Run methbat for methylation analysis, set to `true` by default when `--preset revio` is active."
-                },
-                "run_modkit": {
-                    "type": "boolean",
-                    "description": "Run modkit for methylation analysis, set to `true` by default when `--preset ONT_R10` is active."
+                "methylation_callers": {
+                    "type": "string",
+                    "description": "Which methylation callers to use. Several callers can be specified, separated by commas (e.g. methbat,modkit). Defaults to `methbat` when `--preset revio` is active and `modkit` when `--preset ONT_R10` is active.",
+                    "default": "methbat",
+                    "fa_icon": "fas fa-dna",
+                    "pattern": "(?i)^$|^(methbat|modkit)(,(methbat|modkit))*$"
                 },
                 "methbat_male_label": {
                     "type": "string",
@@ -730,8 +757,126 @@
                 },
                 "mitochondrial_caller": {
                     "type": "string",
-                    "default": "deepvariant",
-                    "description": "Which mitochondrial caller to use for mitochondrial variant calling (`deepvariant`)"
+                    "default": "mitorsaw",
+                    "description": "Which mitochondrial caller to use for mitochondrial variant calling"
+                },
+                "mitorsaw_minimum_maf": {
+                    "type": "number",
+                    "default": 0.1,
+                    "minimum": 0.0,
+                    "maximum": 0.5,
+                    "description": "Minimum minor allele frequency (MAF) for mitorsaw variant calling."
+                },
+                "mitorsaw_minimum_read_count": {
+                    "type": "integer",
+                    "default": 3,
+                    "minimum": 1,
+                    "description": "Minimum read count to consider a heteroplasmic variant."
+                },
+                "mitochondrial_sv_min_size": {
+                    "type": "integer",
+                    "default": 50,
+                    "minimum": 1,
+                    "description": "Minimum allele length difference (abs(strlen(REF)-strlen(ALT))) to classify a mitochondrial variant as an SV rather than a SNV/small indel."
+                },
+                "svdb_merge_by_caller_overlap": {
+                    "type": "number",
+                    "default": 0.5,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Minimum reciprocal overlap (`svdb --overlap`) for deletions and duplications when merging the SVs of one caller across the samples of a family."
+                },
+                "svdb_merge_by_caller_bnd_distance": {
+                    "type": "integer",
+                    "default": 1000,
+                    "minimum": 0,
+                    "description": "Maximum distance in bp between breakpoints (`svdb --bnd_distance`) of translocations and inversions when merging the SVs of one caller across the samples of a family."
+                },
+                "svdb_merge_by_caller_ins_distance": {
+                    "type": "integer",
+                    "default": 100,
+                    "minimum": 0,
+                    "description": "Maximum distance in bp between insertion positions (`svdb --ins_distance`) when merging the SVs of one caller across the samples of a family."
+                },
+                "svdb_merge_by_caller_ins_svlen_ratio": {
+                    "type": "number",
+                    "default": 0.5,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Minimum ratio of the smaller to the larger insertion length (`svdb --ins_svlen_ratio`) when merging the SVs of one caller across the samples of a family."
+                },
+                "svdb_merge_by_caller_ins_seq_similarity": {
+                    "type": "number",
+                    "default": 0,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Minimum sequence similarity of insertions (`svdb --ins_seq_similarity`) when merging the SVs of one caller across the samples of a family; 0 disables the sequence comparison."
+                },
+                "svdb_merge_by_family_overlap": {
+                    "type": "number",
+                    "default": 0.7,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Minimum reciprocal overlap (`svdb --overlap`) for deletions and duplications when merging the SVs of different callers into one family VCF."
+                },
+                "svdb_merge_by_family_bnd_distance": {
+                    "type": "integer",
+                    "default": 2000,
+                    "minimum": 0,
+                    "description": "Maximum distance in bp between breakpoints (`svdb --bnd_distance`) of translocations and inversions when merging the SVs of different callers into one family VCF."
+                },
+                "svdb_merge_by_family_ins_distance": {
+                    "type": "integer",
+                    "default": 100,
+                    "minimum": 0,
+                    "description": "Maximum distance in bp between insertion positions (`svdb --ins_distance`) when merging the SVs of different callers into one family VCF."
+                },
+                "svdb_merge_by_family_ins_svlen_ratio": {
+                    "type": "number",
+                    "default": 0.5,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Minimum ratio of the smaller to the larger insertion length (`svdb --ins_svlen_ratio`) when merging the SVs of different callers into one family VCF."
+                },
+                "svdb_merge_by_family_ins_seq_similarity": {
+                    "type": "number",
+                    "default": 0,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Minimum sequence similarity of insertions (`svdb --ins_seq_similarity`) when merging the SVs of different callers into one family VCF; 0 disables the sequence comparison."
+                },
+                "svdb_query_overlap": {
+                    "type": "number",
+                    "default": 0.7,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Minimum reciprocal overlap (`svdb --overlap`) for deletions and duplications when annotating SVs against the databases in `--svdb_sv_databases`."
+                },
+                "svdb_query_bnd_distance": {
+                    "type": "integer",
+                    "default": 1000,
+                    "minimum": 0,
+                    "description": "Maximum distance in bp between breakpoints (`svdb --bnd_distance`) of translocations and inversions when annotating SVs against the databases in `--svdb_sv_databases`."
+                },
+                "svdb_query_ins_distance": {
+                    "type": "integer",
+                    "default": 100,
+                    "minimum": 0,
+                    "description": "Maximum distance in bp between insertion positions (`svdb --ins_distance`) when annotating SVs against the databases in `--svdb_sv_databases`."
+                },
+                "svdb_query_ins_svlen_ratio": {
+                    "type": "number",
+                    "default": 0.5,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Minimum ratio of the smaller to the larger insertion length (`svdb --ins_svlen_ratio`) when annotating SVs against the databases in `--svdb_sv_databases`."
+                },
+                "svdb_query_ins_seq_similarity": {
+                    "type": "number",
+                    "default": 0,
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "Minimum sequence similarity of insertions (`svdb --ins_seq_similarity`) when annotating SVs against the databases in `--svdb_sv_databases`; 0 disables the sequence comparison."
                 },
                 "alignment_processes": {
                     "type": "integer",
@@ -747,7 +892,7 @@
                 },
                 "vep_cache_version": {
                     "type": "integer",
-                    "default": 110,
+                    "default": 116,
                     "description": "VEP cache version"
                 },
                 "vep_mitochondrial_genome_distance": {
@@ -764,7 +909,7 @@
                     "type": "string",
                     "mimetype": "text/csv",
                     "pattern": "^\\S+\\.(csv|tsv|json|ya?ml)$",
-                    "description": "Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required.",
+                    "description": "Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required for SNV annotation; only pLI_values.txt is required for SV annotation.",
                     "schema": "assets/vep_plugin_files_schema.json"
                 },
                 "force_sawfish_joint_call_single_samples": {
@@ -779,15 +924,25 @@
                     "exits": true,
                     "schema": "assets/schema_hgnc_ids.json"
                 },
-                "filter_snvs_expression": {
+                "filter_bcftools_snvs_expression": {
                     "type": "string",
                     "default": null,
-                    "description": "An expression that is passed to bcftools view to filter SNVs, e.g. --filter_snvs_expression \"-e 'INFO/AQ>60'\""
+                    "description": "An expression that is passed to bcftools view to filter SNVs, e.g. --filter_bcftools_snvs_expression \"-e 'INFO/AQ>60'\""
                 },
-                "filter_svs_expression": {
+                "filter_bcftools_svs_expression": {
                     "type": "string",
                     "default": null,
-                    "description": "An expression that is passed to bcftools view to filter SVs, e.g. --filter_svs_expression \"-e 'INFO/AQ>60'\""
+                    "description": "An expression that is passed to bcftools view to filter SVs, e.g. --filter_bcftools_svs_expression \"-e 'INFO/AQ>60'\""
+                },
+                "filter_vep_snvs_expression": {
+                    "type": "string",
+                    "default": "",
+                    "description": "An expression passed to filter_vep to filter SNVs, e.g. --filter_vep_snvs_expression \"IMPACT is HIGH\". Combined with the HGNC ID restriction using AND when filter_variants_hgnc_ids is supplied. Do not include --filter."
+                },
+                "filter_vep_svs_expression": {
+                    "type": "string",
+                    "default": "",
+                    "description": "An expression passed to filter_vep to filter SVs, e.g. --filter_vep_svs_expression \"IMPACT is HIGH\". Combined with the HGNC ID restriction using AND when filter_variants_hgnc_ids is supplied. Do not include --filter."
                 },
                 "deepvariant_model_type": {
                     "type": "string",
@@ -828,10 +983,20 @@
                     "hidden": true,
                     "description": "Extra options to Sawfish, used for test profile."
                 },
-                "extra_vep_options": {
+                "extra_vep_options_snv": {
                     "type": "string",
-                    "hidden": true,
-                    "description": "Extra options to VEP, used for test profile."
+                    "default": "--buffer_size 20000 --appris --biotype --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --humdiv --no_progress --numbers --polyphen p --protein --regulatory --sift p --symbol --tsl --uniprot --no_stats",
+                    "description": "Options appended to the VEP core command for nuclear SNV annotation. The default enables standard enrichment annotations. To add plugins such as CADD or SpliceAI, supply the default flags plus your additions. Plugin files must be included in `vep_plugin_files`."
+                },
+                "extra_vep_options_snv_mito": {
+                    "type": "string",
+                    "default": "--appris --biotype --buffer_size 20000 --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --no_progress --numbers --protein --regulatory --symbol --tsl --uniprot --no_stats",
+                    "description": "Options appended to the VEP core command for mitochondrial SNV annotation. Nuclear-specific flags (--sift, --polyphen, --humdiv) are excluded. To add MT-specific plugins such as gnomADMt, supply the default flags plus your additions. Plugin files must be included in `vep_plugin_files`."
+                },
+                "extra_vep_options_sv": {
+                    "type": "string",
+                    "default": "--appris --biotype --buffer_size 100 --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --no_progress --numbers --protein --regulatory --symbol --tsl --uniprot --no_stats",
+                    "description": "Options appended to the VEP core command for SV annotation. The default enables standard enrichment annotations. To add plugins, supply the default flags plus your additions. Plugin files must be included in `vep_plugin_files`."
                 },
                 "extra_yak_options": {
                     "type": "string",
@@ -932,7 +1097,19 @@
                     "type": "string",
                     "format": "file-path",
                     "exists": true,
-                    "description": "The location of the DNAscope model bundle. Model bundle files can be found in the sentieon-models Github repository."
+                    "description": "The location of the DNAscope model bundle. Model bundle files can be found in the sentieon-models Github repository. Some model bundles require a matching population VCF."
+                },
+                "sentieon_population_vcf": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "description": "Population VCF containing annotations for DNAModelApply. Required for some DNAscope model bundles; the population VCF must match --sentieon_model_bundle."
+                },
+                "sentieon_population_tbi": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "description": "Tabix index for --sentieon_population_vcf. Provide the matching .tbi file alongside the population VCF."
                 },
                 "sentieon_tech": {
                     "type": "string",
@@ -986,20 +1163,71 @@
                     "default": 500,
                     "description": "Discard a read if none of its segment is larger than this in Sniffles."
                 },
-                "sniffles_min_heterozygous_allele_frequency": {
-                    "type": "number",
-                    "default": 0,
-                    "description": "Threshold on heterozygous allele frequency in Sniffles (0-1)."
-                },
                 "sniffles_min_sv_size": {
                     "type": "number",
                     "default": 50,
                     "description": "Minimum length of SV to be reported in Sniffles."
                 },
+                "sniffles_min_heterozygous_allele_frequency": {
+                    "type": "number",
+                    "default": 0,
+                    "description": "Threshold on heterozygous allele frequency in Sniffles v1 (`--sv_callers sniffles1`). Has no effect when using Sniffles v2."
+                },
                 "sawfish_min_sv_size": {
                     "type": "number",
                     "default": 50,
                     "description": "Co-linear SVs must have either an insertion or deletion of this size or greater to be included in the output in Sawfish. All other SV evidence patterns such as those consistent with duplications, inversions and translocations will always be included in the output."
+                },
+                "read_aligner": {
+                    "type": "string",
+                    "default": "pbmm2",
+                    "description": "Which aligner to use for read alignment. Supported arguments are mm2plus, minimap2 or pbmm2.",
+                    "enum": ["minimap2", "pbmm2", "mm2plus"]
+                },
+                "pbmm2_preset": {
+                    "type": "string",
+                    "default": "CCS",
+                    "description": "Preset to use for pbmm2. Supported arguments are HIFI, CCS, or SUBREAD.",
+                    "enum": ["HIFI", "CCS", "SUBREAD"]
+                },
+                "glnexus_config": {
+                    "type": "string",
+                    "default": null,
+                    "description": "Glnexus config to use for merging gVCFs. If no file is provided, the default config `assets/glnexus_config_dp1.yml` will be used."
+                },
+                "assembly_aligner": {
+                    "type": "string",
+                    "default": "minimap2",
+                    "description": "Which aligner to use for assembly alignment. Supported arguments are mm2plus or minimap2.",
+                    "enum": ["mm2plus", "minimap2"]
+                },
+                "methbat_map": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "Mapping file that can be used to filter and annotate the methbat output based on regions."
+                },
+                "kivvi_preset": {
+                    "type": "string",
+                    "default": "d4z4",
+                    "description": "Preset to use for Kivvi. Supported arguments are d4z4 or kiv2.",
+                    "enum": ["d4z4", "kiv2"]
+                },
+                "skip_kivvi": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Whether to skip running Kivvi."
+                },
+                "paraphase_config": {
+                    "type": "string",
+                    "format": "file-path",
+                    "default": null,
+                    "description": "Configuration file for Paraphase."
+                },
+                "trgt_spanning_repeats_output_format": {
+                    "type": "string",
+                    "default": "bam",
+                    "description": "Output format for TRGT spanning repeats. Supported arguments are BAM or CRAM.",
+                    "enum": ["bam", "cram"]
                 }
             },
             "required": ["preset"]

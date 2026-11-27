@@ -27,7 +27,9 @@ Allows skipping certain parts of the pipeline
 | `skip_call_paralogs` | Skip the calling of specific paralogous genes | `boolean` | False |  |  |
 | `skip_rank_variants` | Skip ranking of short variants | `boolean` | False |  |  |
 | `skip_prepare_gens_input` | Skip preparing input data for Gens | `boolean` | False |  |  |
+| `skip_mitochondrial_calling` | Skip mitochondrial variant calling | `boolean` | False |  |  |
 | `skip_sex_check` | Skip sex check | `boolean` | False |  |  |
+| `skip_portello` | Skip Portello analysis | `boolean` | False |  |  |
 
 ## Input/output options
 
@@ -52,6 +54,7 @@ Define where the pipeline should find input data and save output data.
 | `vep_cache` | A path to the VEP cache location | `string` |  |  |  |
 | `target_regions` | A BED file with regions of interest. | `string` |  |  |  |
 | `methbat_regions` | A tsv file with only regions of interest (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/cpgIslandExt.sorted.hg38.tsv) or with both regions and background cohort values (example here: https://github.com/PacificBiosciences/MethBat/blob/main/data/meth_profile_model.tsv), made with methbat build | `string` |  |  |  |
+| `cramino_regions` | A BED file used to filter reads to on-target regions before cramino QC. By default this is the same as `target_regions`. | `string` |  |  |  |
 | `modkit_call_regions` | A BED file with regions of interest for the methylation pileups. By default this is the same as `target_regions`. | `string` |  |  |  |
 | `mosdepth_regions` | A BED file with regions of interest used in mosdepth. By default this is the same as `qc_regions`. | `string` |  |  |  |
 | `mosdepth_d4_output` | Should mosdepth output d4-files. | `boolean` | False |  |  |
@@ -63,7 +66,8 @@ Define where the pipeline should find input data and save output data.
 | `cnv_expected_xx_cn` | A BED file containing expected copy number regions for XX samples. | `string` |  |  |  |
 | `cnv_excluded_regions` | A BED file specifying regions to exclude with HiFiCNV or Sawfish, such as centromeres. | `string` |  |  |  |
 | `genmod_reduced_penetrance` | A file with gene ids that have reduced penetrance. For use with genmod. | `string` |  |  |  |
-| `genmod_score_config_snvs` | A SNV rank model config file for genmod. | `string` |  |  |  |
+| `genmod_score_config_snvs` | A rank model config file for genmod, used for nuclear SNV scoring. | `string` |  |  |  |
+| `genmod_score_config_snvs_mito` | A rank model config file for genmod, used for mitochondrial SNV scoring. Should reference only fields produced by the MT VEP command. | `string` |  |  |  |
 | `genmod_score_config_svs` | A SV rank model config file for genmod. | `string` |  |  |  |
 | `somalier_sites` | A VCF of known polymorphic sites for somalier | `string` |  |  |  |
 | `gens_baf_positions` | Tab-delimited file with variant positions used to calculate B-allele frequencies for Gens inputs. | `string` |  |  |  |
@@ -76,9 +80,9 @@ Define where the pipeline should find input data and save output data.
 | `peddy_sites` | A file path to a VCF of known polymorphic sites for peddy. You may need to create a custom sites file if you have incomplete or targeted data. | `string` |  |  |  |
 | `sambamba_regions` | A BED file with regions of interest used in sambamba depth. By default this is the same as `qc_regions`. | `string` |  |  |  |
 | `alignment_output_format` | Output format for alignment files. Either `bam` or `cram` (accepted: `bam`\|`cram`) | `string` | bam |  |  |
-| `create_maf_track` | Whether to create a MAF track from SNV calls when calling SVs with HiFiCNV or Sawfish. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Defaults to `true` | `boolean` | True |  |  |
-| `create_hificnv_maf_track` | Whether to create a MAF track from SNV calls when calling CNVs with HiFiCNV. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Defaults to `create_maf_track` | `boolean` | True |  | True |
-| `create_sawfish_maf_track` | Whether to create a MAF track from SNV calls when calling SVs with Sawfish. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Defaults to `create_maf_track` | `boolean` | True |  | True |
+| `create_maf_track` | Whether to create a MAF track from SNV calls when calling SVs with HiFiCNV or Sawfish. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Set to `false` to run HiFiCNV or Sawfish with `--skip_snv_calling`. Defaults to `true` | `boolean` | True |  |  |
+| `create_hificnv_maf_track` | Whether to create a MAF track from SNV calls when calling CNVs with HiFiCNV. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Set to `false` to run HiFiCNV with `--skip_snv_calling`. Defaults to `create_maf_track` | `boolean` | True |  | True |
+| `create_sawfish_maf_track` | Whether to create a MAF track from SNV calls when calling SVs with Sawfish. Requires SNV calling to finish before calling SVs, so deactivating this can speed up the pipeline. Set to `false` to run Sawfish with `--skip_snv_calling`. Defaults to `create_maf_track` | `boolean` | True |  | True |
 | `modules_testdata_base_path` | Base URL or local path to location of modules test dataset files | `string` | https://raw.githubusercontent.com/nf-core/test-datasets/modules/data/ |  | True |
 
 ## Reference genome options
@@ -103,6 +107,7 @@ Parameters used to describe centralised config profiles. These should not be edi
 | `config_profile_contact` | Institutional config contact information. | `string` |  |  | True |
 | `config_profile_url` | Institutional config URL link. | `string` |  |  | True |
 | `publish_unannotated_family_svs` | Publish unannotated SVs and CNVs per family and caller. | `boolean` |  |  | True |
+| `publish_input_aligned_bams` | Publish the aligned BAMs provided in the samplesheet (aligned_bam) as aligned reads, even if the pipeline has not changed them. | `boolean` |  |  | True |
 
 ## Generic options
 
@@ -116,12 +121,11 @@ Less common options for the pipeline, typically set in a config file.
 | `plaintext_email` | Send plain-text email instead of HTML. | `boolean` |  |  | True |
 | `max_multiqc_email_size` | File size limit when attaching MultiQC reports to summary emails. | `string` | 25.MB |  | True |
 | `monochrome_logs` | Do not use coloured log outputs. | `boolean` |  |  | True |
-| `hook_url` | Incoming hook URL for messaging service <details><summary>Help</summary><small>Incoming hook URL for messaging service. Currently, MS Teams and Slack are supported.</small></details>| `string` |  |  | True |
 | `multiqc_config` | Custom config file to supply to MultiQC. | `string` |  |  | True |
 | `multiqc_logo` | Custom logo file to supply to MultiQC. File name must also be set in the MultiQC config file | `string` |  |  | True |
 | `multiqc_methods_description` | Custom MultiQC yaml file containing HTML including a methods description. | `string` |  |  |  |
 | `validate_params` | Boolean whether to validate parameters against the schema at runtime | `boolean` | True |  | True |
-| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/59c411038dac1e4dab2d745c80d382f047433539/ |  | True |
+| `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/8cf6216b9cbf96f6bcfc918610182708e3796ad9/ |  | True |
 | `trace_report_suffix` | Suffix to add to the trace report filename. Default is the date and time in the format yyyy-MM-dd_HH-mm-ss. | `string` |  |  | True |
 | `help` | Display the help message. | `['boolean', 'string']` |  |  |  |
 | `help_full` | Display the full detailed help message. | `boolean` |  |  |  |
@@ -135,7 +139,7 @@ Workflow options specific to genomic-medicine-sweden/nallo
 |-----------|-----------|-----------|-----------|-----------|-----------|
 | `bcftools_roh_af_tag` | AF-tag that variants have been annotated with for use in the chromograph subworkflow. By default set to `--chromograph_af_tag`. | `string` |  |  |  |
 | `chromograph_af_tag` | AF-tag to use in the chromograph subworkflow to generate plots of autozygosity. SNVs need to be annotated with allele frequencies specified by this tag for autozygosity plotting to work. | `string` |  |  |  |
-| `preset` | Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`) (accepted: `revio`\|`pacbio`\|`ONT_R10`) | `string` | revio | True |  |
+| `preset` | Enable or disable certain parts of the pipeline by default, depending on data type (`revio`, `pacbio`, `ONT_R10`, `ONT_R10_AS`) (accepted: `revio`\|`pacbio`\|`ONT_R10`\|`ONT_R10_AS`) | `string` | revio | True |  |
 | `sv_callers` | Which SV callers to use. Several callers can be specified, separated by commas (e.g. sniffles,severus,hificnv,sawfish). The order of the SV callers in this list will determine the priority of the calls when merging them if not overwritten by `sv_caller_priority`. | `string` | sniffles,hificnv |  |  |
 | `sv_callers_merge_priority` | The order of the SV callers in this list will determine the priority of the calls when merging them. All callers that has been specified in `sv_callers` should also be specified here separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as `--sv_callers`. | `string` | sniffles,hificnv |  |  |
 | `sv_callers_to_run` | Which SV callers to run, separated by commas (e.g. sniffles,severus,hificnv,sawfish). By default same as `--sv_callers` | `string` | sniffles,hificnv |  |  |
@@ -145,24 +149,44 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `paraphrase_genes` | An optional comma-separated list of genes to run Paraphrase on for paralog annotation. By default all genes called by paraphase are used. | `string` |  |  |  |
 | `paraphrase_skip_keys` | An optional comma-separated list of keys to skip when running Paraphrase. By default the default skip keys are determined by Paraphrase. | `string` |  |  |  |
 | `phaser` | Which phasing software to use (`longphase`, `whatshap`, `hiphase`) (accepted: `longphase`\|`whatshap`\|`hiphase`) | `string` | longphase |  |  |
+| `whatshap_pedigree_phasing` | Enable/disable pedigree phasing when phasing with whatshap | `boolean` | True |  |  |
 | `hifiasm_mode` | Run hifiasm in hifi-only or hifi-trio mode (`hifi-only`, `trio-binning`) (accepted: `hifi-only`\|`trio-binning`) | `string` | trio-binning |  |  |
 | `hifiasm_preset` | Hifiasm preset, is set to `--ont` when `--preset ONT_R10` is active. (accepted: ``\|`--ont`) | `string` | None |  |  |
-| `run_methbat` | Run methbat for methylation analysis, set to `true` by default when `--preset revio` is active. | `boolean` |  |  |  |
-| `run_modkit` | Run modkit for methylation analysis, set to `true` by default when `--preset ONT_R10` is active. | `boolean` |  |  |  |
+| `methylation_callers` | Which methylation callers to use. Several callers can be specified, separated by commas (e.g. methbat,modkit). Defaults to `methbat` when `--preset revio` is active and `modkit` when `--preset ONT_R10` is active. | `string` | methbat |  |  |
 | `methbat_male_label` | Label used for male samples in methbat profile. | `string` | MALE |  |  |
 | `methbat_female_label` | Label used for female samples in methbat profile. | `string` | FEMALE |  |  |
 | `modkit_modified_bases` | Modkit modified bases, separated by space. E.g. '5mC 5hmC' | `string` | 5mC |  |  |
-| `mitochondrial_caller` | Which mitochondrial caller to use for mitochondrial variant calling (`deepvariant`) | `string` | deepvariant |  |  |
+| `mitochondrial_caller` | Which mitochondrial caller to use for mitochondrial variant calling | `string` | mitorsaw |  |  |
+| `mitorsaw_minimum_maf` | Minimum minor allele frequency (MAF) for mitorsaw variant calling. | `number` | 0.1 |  |  |
+| `mitorsaw_minimum_read_count` | Minimum read count to consider a heteroplasmic variant. | `integer` | 3 |  |  |
+| `mitochondrial_sv_min_size` | Minimum allele length difference (abs(strlen(REF)-strlen(ALT))) to classify a mitochondrial variant as an SV rather than a SNV/small indel. | `integer` | 50 |  |  |
+| `svdb_merge_by_caller_overlap` | Minimum reciprocal overlap (`svdb --overlap`) for deletions and duplications when merging the SVs of one caller across the samples of a family. | `number` | 0.5 |  |  |
+| `svdb_merge_by_caller_bnd_distance` | Maximum distance in bp between breakpoints (`svdb --bnd_distance`) of translocations and inversions when merging the SVs of one caller across the samples of a family. | `integer` | 1000 |  |  |
+| `svdb_merge_by_caller_ins_distance` | Maximum distance in bp between insertion positions (`svdb --ins_distance`) when merging the SVs of one caller across the samples of a family. | `integer` | 100 |  |  |
+| `svdb_merge_by_caller_ins_svlen_ratio` | Minimum ratio of the smaller to the larger insertion length (`svdb --ins_svlen_ratio`) when merging the SVs of one caller across the samples of a family. | `number` | 0.5 |  |  |
+| `svdb_merge_by_caller_ins_seq_similarity` | Minimum sequence similarity of insertions (`svdb --ins_seq_similarity`) when merging the SVs of one caller across the samples of a family; 0 disables the sequence comparison. | `number` | 0 |  |  |
+| `svdb_merge_by_family_overlap` | Minimum reciprocal overlap (`svdb --overlap`) for deletions and duplications when merging the SVs of different callers into one family VCF. | `number` | 0.7 |  |  |
+| `svdb_merge_by_family_bnd_distance` | Maximum distance in bp between breakpoints (`svdb --bnd_distance`) of translocations and inversions when merging the SVs of different callers into one family VCF. | `integer` | 2000 |  |  |
+| `svdb_merge_by_family_ins_distance` | Maximum distance in bp between insertion positions (`svdb --ins_distance`) when merging the SVs of different callers into one family VCF. | `integer` | 100 |  |  |
+| `svdb_merge_by_family_ins_svlen_ratio` | Minimum ratio of the smaller to the larger insertion length (`svdb --ins_svlen_ratio`) when merging the SVs of different callers into one family VCF. | `number` | 0.5 |  |  |
+| `svdb_merge_by_family_ins_seq_similarity` | Minimum sequence similarity of insertions (`svdb --ins_seq_similarity`) when merging the SVs of different callers into one family VCF; 0 disables the sequence comparison. | `number` | 0 |  |  |
+| `svdb_query_overlap` | Minimum reciprocal overlap (`svdb --overlap`) for deletions and duplications when annotating SVs against the databases in `--svdb_sv_databases`. | `number` | 0.7 |  |  |
+| `svdb_query_bnd_distance` | Maximum distance in bp between breakpoints (`svdb --bnd_distance`) of translocations and inversions when annotating SVs against the databases in `--svdb_sv_databases`. | `integer` | 1000 |  |  |
+| `svdb_query_ins_distance` | Maximum distance in bp between insertion positions (`svdb --ins_distance`) when annotating SVs against the databases in `--svdb_sv_databases`. | `integer` | 100 |  |  |
+| `svdb_query_ins_svlen_ratio` | Minimum ratio of the smaller to the larger insertion length (`svdb --ins_svlen_ratio`) when annotating SVs against the databases in `--svdb_sv_databases`. | `number` | 0.5 |  |  |
+| `svdb_query_ins_seq_similarity` | Minimum sequence similarity of insertions (`svdb --ins_seq_similarity`) when annotating SVs against the databases in `--svdb_sv_databases`; 0 disables the sequence comparison. | `number` | 0 |  |  |
 | `alignment_processes` | If alignment_processes is bigger than 1, input files will be split and aligned in parallel to reduce processing time. | `integer` | 8 |  |  |
 | `snv_calling_processes` | If snv_calling_processes is bigger than 1, short variant calling will be done in parallel to reduce processing time. Must be `1` when `--snv_caller sentieon` is used. | `integer` | 13 |  |  |
-| `vep_cache_version` | VEP cache version | `integer` | 110 |  |  |
+| `vep_cache_version` | VEP cache version | `integer` | 116 |  |  |
 | `vep_mitochondrial_genome_distance` | The distance parameter used in VEP for mitochondrial SNVs | `integer` | 0 |  |  |
 | `vep_nuclear_genome_distance` | The distance parameter used in VEP for nuclear SNVs | `integer` | 5000 |  |  |
-| `vep_plugin_files` | Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required. | `string` |  |  |  |
+| `vep_plugin_files` | Path to a CSV/TSV/JSON/YAML file with vep_files as header, and then paths to vep plugin files. Paths to pLI_values.txt and LoFtool_scores.txt are required for SNV annotation; only pLI_values.txt is required for SV annotation. | `string` |  |  |  |
 | `force_sawfish_joint_call_single_samples` | Force sawfish to run joint-call on single samples instead of all samples from the same family. This effectively causes SVDB to merge the samples into family VCFs instead. | `boolean` |  |  |  |
 | `filter_variants_hgnc_ids` | A tsv/csv file with a `hgnc_ids` column header, and then one numerical HGNC ID per row. E.g. `4281` or `HGNC:4281`. | `string` |  |  |  |
-| `filter_snvs_expression` | An expression that is passed to bcftools view to filter SNVs, e.g. --filter_snvs_expression "-e 'INFO/AQ>60'" | `string` | None |  |  |
-| `filter_svs_expression` | An expression that is passed to bcftools view to filter SVs, e.g. --filter_svs_expression "-e 'INFO/AQ>60'" | `string` | None |  |  |
+| `filter_bcftools_snvs_expression` | An expression that is passed to bcftools view to filter SNVs, e.g. --filter_bcftools_snvs_expression "-e 'INFO/AQ>60'" | `string` | None |  |  |
+| `filter_bcftools_svs_expression` | An expression that is passed to bcftools view to filter SVs, e.g. --filter_bcftools_svs_expression "-e 'INFO/AQ>60'" | `string` | None |  |  |
+| `filter_vep_snvs_expression` | An expression passed to filter_vep to filter SNVs, e.g. --filter_vep_snvs_expression "IMPACT is HIGH". Combined with the HGNC ID restriction using AND when filter_variants_hgnc_ids is supplied. Do not include --filter. | `string` |  |  |  |
+| `filter_vep_svs_expression` | An expression passed to filter_vep to filter SVs, e.g. --filter_vep_svs_expression "IMPACT is HIGH". Combined with the HGNC ID restriction using AND when filter_variants_hgnc_ids is supplied. Do not include --filter. | `string` |  |  |  |
 | `deepvariant_model_type` | Sets the model type used for DeepVariant. This is set automatically using `--preset` by default. (accepted: `PACBIO`\|`ONT_R104`) | `string` | PACBIO |  | True |
 | `minimap2_read_mapping_preset` | Sets the minimap2-preset (-x) for read alignment. This is set automatically using the pipeline `--preset` by default. (accepted: `map-hifi`\|`map-ont`\|`lr:hq`\|`lr:hqae`) | `string` | map-hifi |  | True |
 | `extra_hifiasm_options` | Extra options to hifiasm, used for test profile. | `string` |  |  | True |
@@ -170,7 +194,9 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `extra_modkit_options` | Extra options to modkit, used for test profile. | `string` |  |  | True |
 | `extra_paraphase_options` | Extra options to Paraphase, used for test profile. | `string` |  |  | True |
 | `extra_sawfish_options` | Extra options to Sawfish, used for test profile. | `string` |  |  | True |
-| `extra_vep_options` | Extra options to VEP, used for test profile. | `string` |  |  | True |
+| `extra_vep_options_snv` | Options appended to the VEP core command for nuclear SNV annotation. The default enables standard enrichment annotations. To add plugins such as CADD or SpliceAI, supply the default flags plus your additions. Plugin files must be included in `vep_plugin_files`. | `string` | --buffer_size 20000 --appris --biotype --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --humdiv --no_progress --numbers --polyphen p --protein --regulatory --sift p --symbol --tsl --uniprot --no_stats |  |  |
+| `extra_vep_options_snv_mito` | Options appended to the VEP core command for mitochondrial SNV annotation. Nuclear-specific flags (--sift, --polyphen, --humdiv) are excluded. To add MT-specific plugins such as gnomADMt, supply the default flags plus your additions. Plugin files must be included in `vep_plugin_files`. | `string` | --appris --biotype --buffer_size 20000 --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --no_progress --numbers --protein --regulatory --symbol --tsl --uniprot --no_stats |  |  |
+| `extra_vep_options_sv` | Options appended to the VEP core command for SV annotation. The default enables standard enrichment annotations. To add plugins, supply the default flags plus your additions. Plugin files must be included in `vep_plugin_files`. | `string` | --appris --biotype --buffer_size 100 --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --no_progress --numbers --protein --regulatory --symbol --tsl --uniprot --no_stats |  |  |
 | `extra_yak_options` | Extra options to yak, used for test profile. | `string` |  |  | True |
 | `extra_somalier_relate_infer_options` | Extra options to somalier relate infer, used for test profile. | `string` |  |  | True |
 | `genmod_compound_snv_penalty` | Genmod compound penalty for SNVs. | `integer` | 6 |  |  |
@@ -192,7 +218,9 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `rhocallviz_min_af` | Minimum allele frequency for variants to be included in rhocall viz within the chromograph subworkflow. | `number` | 0.0001 |  |  |
 | `rhocallviz_min_qual` | Minimum quality for variants to be included in rhocall viz within the chromograph subworkflow. | `number` | 10.0 |  |  |
 | `tiddit_bin_size` | Bin size to use for TIDDIT coverage wig generation in the chromograph subworkflow. | `integer` | 500 |  |  |
-| `sentieon_model_bundle` | The location of the DNAscope model bundle. Model bundle files can be found in the sentieon-models Github repository. | `string` |  |  |  |
+| `sentieon_model_bundle` | The location of the DNAscope model bundle. Model bundle files can be found in the sentieon-models Github repository. Some model bundles require a matching population VCF. | `string` |  |  |  |
+| `sentieon_population_vcf` | Population VCF containing annotations for DNAModelApply. Required for some DNAscope model bundles; the population VCF must match --sentieon_model_bundle. | `string` |  |  |  |
+| `sentieon_population_tbi` | Tabix index for --sentieon_population_vcf. Provide the matching .tbi file alongside the population VCF. | `string` |  |  |  |
 | `sentieon_tech` | Sequencing technology used to generate the reads. Supported arguments are ONT or HiFi. (accepted: `HiFi`\|`ONT`) | `string` | HiFi |  |  |
 | `sentieon_male_haploid_bed` | Interval in the reference to restrict haploid variant calling for males, in BED file format. | `string` |  |  |  |
 | `sentieon_male_diploid_bed` | Interval in the reference to restrict diploid variant calling for males, in BED file format. | `string` |  |  |  |
@@ -202,6 +230,15 @@ Workflow options specific to genomic-medicine-sweden/nallo
 | `strdrop_edit` | Allele similarity Levenshtein edit distance ratio cutoff in strdrop. | `number` | 0.9 |  |  |
 | `sniffles_min_support_reads` | Minimum number of reads to support a SV in Sniffles. | `number` | 3 |  |  |
 | `sniffles_min_segment_length` | Discard a read if none of its segment is larger than this in Sniffles. | `number` | 500 |  |  |
-| `sniffles_min_heterozygous_allele_frequency` | Threshold on heterozygous allele frequency in Sniffles (0-1). | `number` | 0 |  |  |
 | `sniffles_min_sv_size` | Minimum length of SV to be reported in Sniffles. | `number` | 50 |  |  |
+| `sniffles_min_heterozygous_allele_frequency` | Threshold on heterozygous allele frequency in Sniffles v1 (`--sv_callers sniffles1`). Has no effect when using Sniffles v2. | `number` | 0 |  |  |
 | `sawfish_min_sv_size` | Co-linear SVs must have either an insertion or deletion of this size or greater to be included in the output in Sawfish. All other SV evidence patterns such as those consistent with duplications, inversions and translocations will always be included in the output. | `number` | 50 |  |  |
+| `read_aligner` | Which aligner to use for read alignment. Supported arguments are mm2plus, minimap2 or pbmm2. (accepted: `minimap2`\|`pbmm2`\|`mm2plus`) | `string` | pbmm2 |  |  |
+| `pbmm2_preset` | Preset to use for pbmm2. Supported arguments are HIFI, CCS, or SUBREAD. (accepted: `HIFI`\|`CCS`\|`SUBREAD`) | `string` | CCS |  |  |
+| `glnexus_config` | Glnexus config to use for merging gVCFs. If no file is provided, the default config `assets/glnexus_config_dp1.yml` will be used. | `string` | None |  |  |
+| `assembly_aligner` | Which aligner to use for assembly alignment. Supported arguments are mm2plus or minimap2. (accepted: `mm2plus`\|`minimap2`) | `string` | minimap2 |  |  |
+| `methbat_map` | Mapping file that can be used to filter and annotate the methbat output based on regions. | `string` |  |  |  |
+| `kivvi_preset` | Preset to use for Kivvi. Supported arguments are d4z4 or kiv2. (accepted: `d4z4`\|`kiv2`) | `string` | d4z4 |  |  |
+| `skip_kivvi` | Whether to skip running Kivvi. | `boolean` | False |  |  |
+| `paraphase_config` | Configuration file for Paraphase. | `string` | None |  |  |
+| `trgt_spanning_repeats_output_format` | Output format for TRGT spanning repeats. Supported arguments are BAM or CRAM. (accepted: `bam`\|`cram`) | `string` | bam |  |  |

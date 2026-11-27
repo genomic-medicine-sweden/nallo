@@ -4,62 +4,70 @@
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS
+IMPORT FUNCTIONS / MODULES / SUBWORKFLOWS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+ */
 
-include { UTILS_NFSCHEMA_PLUGIN     } from '../../nf-core/utils_nfschema_plugin'
-include { paramsSummaryMap          } from 'plugin/nf-schema'
-include { samplesheetToList         } from 'plugin/nf-schema'
-include { paramsHelp                } from 'plugin/nf-schema'
-include { completionEmail           } from '../../nf-core/utils_nfcore_pipeline'
-include { completionSummary         } from '../../nf-core/utils_nfcore_pipeline'
-include { imNotification            } from '../../nf-core/utils_nfcore_pipeline'
-include { UTILS_NFCORE_PIPELINE     } from '../../nf-core/utils_nfcore_pipeline'
-include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipeline'
+include { UTILS_NFSCHEMA_PLUGIN   } from '../../nf-core/utils_nfschema_plugin'
+include { paramsSummaryMap        } from 'plugin/nf-schema'
+include { samplesheetToList       } from 'plugin/nf-schema'
+include { paramsHelp              } from 'plugin/nf-schema'
+include { completionEmail         } from '../../nf-core/utils_nfcore_pipeline'
+include { completionSummary       } from '../../nf-core/utils_nfcore_pipeline'
+include { UTILS_NFCORE_PIPELINE   } from '../../nf-core/utils_nfcore_pipeline'
+include { UTILS_NEXTFLOW_PIPELINE } from '../../nf-core/utils_nextflow_pipeline'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    SUBWORKFLOW TO INITIALISE PIPELINE
+SUBWORKFLOW TO INITIALISE PIPELINE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+ */
 
 workflow PIPELINE_INITIALISATION {
-
     take:
-    help // boolean: Display help message and exit
-    help_full // boolean: Show the full help message
-    nextflow_cli_args //   array: List of positional nextflow CLI args
-    outdir //  string: The output directory where the results will be saved
-    show_hidden  // boolean: Show hidden parameters in the help message
-    validate_params // boolean: Boolean whether to validate parameters against the schema at runtime
+    help                              // boolean: Display help message and exit
+    help_full                         // boolean: Show the full help message
+    monochrome_logs                   // boolean: Do not use coloured log outputs
+    nextflow_cli_args                 // array: List of positional nextflow CLI args
+    outdir                            // string: The output directory where the results will be saved
+    show_hidden                       // boolean: Show hidden parameters in the help message
+    validate_params                   // boolean: Boolean whether to validate parameters against the schema at runtime
     val_cnv_excluded_regions
     val_cnv_expected_xx_cn
     val_cnv_expected_xy_cn
+    val_create_hificnv_maf_track
+    val_create_sawfish_maf_track
     val_echtvar_snv_databases
     val_fasta
     val_genmod_reduced_penetrance
     val_genmod_score_config_snvs
+    val_genmod_score_config_snvs_mito
     val_genmod_score_config_svs
     val_gens_baf_positions
     val_gens_coverage_bins
     val_gens_panel_of_normals_female
     val_gens_panel_of_normals_male
     val_input
+    val_methbat_map
     val_methbat_regions
+    val_methylation_callers
+    val_mitochondrial_caller
     val_par_regions
     val_phaser
-    val_run_methbat
+    val_preset
     val_sambamba_regions
     val_skip_alignment
     val_skip_annotate_paralogs
     val_skip_call_paralogs
     val_skip_chromograph
     val_skip_genome_assembly
+    val_skip_kivvi
     val_skip_methylation_calling
     val_skip_methylation_annotation
+    val_skip_mitochondrial_calling
     val_skip_peddy
     val_skip_phasing
+    val_skip_portello
     val_skip_prepare_gens_input
     val_skip_qc
     val_skip_rank_variants
@@ -82,28 +90,27 @@ workflow PIPELINE_INITIALISATION {
     val_sv_callers_merge_priority
     val_sv_callers_to_merge
     val_sv_callers_to_run
+    val_target_regions
     val_variant_consequences_snvs
     val_variant_consequences_svs
     val_vep_cache
     val_vep_plugin_files
-    version // boolean: Display version and exit
+    version                           // boolean: Display version and exit
 
     main:
     //
     // Print version and exit if required and dump pipeline parameters to JSON file
     //
-    UTILS_NEXTFLOW_PIPELINE (
+    UTILS_NEXTFLOW_PIPELINE(
         version,
         true,
         outdir,
-        workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1
+        workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1,
     )
 
     //
     // Validate parameters and generate parameter summary to stdout
     //
-    command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>"
-
     nallo_gms_logo = """
     \033[0;34m                                   _                              _ _      _
     \033[0;34m   __ _  ___ _ __   ___  _ __ ___ (_) ___      _ __ ___   ___  __| (_) ___(_)_ __   ___
@@ -117,22 +124,30 @@ workflow PIPELINE_INITIALISATION {
     \033[0;34m
     """
 
-    UTILS_NFSCHEMA_PLUGIN (
+    def before_text = nallo_gms_logo
+    def after_text = ""
+    if (monochrome_logs) {
+        before_text = before_text.replaceAll(/\033\[[0-9;]*m/, '')
+    }
+
+    command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>"
+
+    UTILS_NFSCHEMA_PLUGIN(
         workflow,
         validate_params,
         null,
         help,
         help_full,
         show_hidden,
-        nallo_gms_logo,
-        "",
-        command
+        before_text,
+        after_text,
+        command,
     )
 
     //
     // Check config provided to the pipeline
     //
-    UTILS_NFCORE_PIPELINE (
+    UTILS_NFCORE_PIPELINE(
         nextflow_cli_args
     )
 
@@ -145,49 +160,55 @@ workflow PIPELINE_INITIALISATION {
     // Define subworkflows and their associated "--skip"
     //
     def workflowSkips = [
-        annotate_paralogs     : "skip_annotate_paralogs",
-        assembly              : "skip_genome_assembly",
-        sambamba_depth        : "skip_sambamba_depth",
-        mapping               : "skip_alignment",
-        snv_calling           : "skip_snv_calling",
-        snv_annotation        : "skip_snv_annotation",
-        sv_calling            : "skip_sv_calling",
-        sv_annotation         : "skip_sv_annotation",
-        call_paralogs         : "skip_call_paralogs",
-        peddy                 : "skip_peddy",
-        phasing               : "skip_phasing",
-        rank_variants         : "skip_rank_variants",
-        repeat_calling        : "skip_repeat_calling",
-        repeat_annotation     : "skip_repeat_annotation",
-        chromograph           : "skip_chromograph",
-        methylation           : "skip_methylation_calling",
+        annotate_paralogs: "skip_annotate_paralogs",
+        assembly: "skip_genome_assembly",
+        sambamba_depth: "skip_sambamba_depth",
+        mapping: "skip_alignment",
+        snv_calling: "skip_snv_calling",
+        snv_annotation: "skip_snv_annotation",
+        sv_calling: "skip_sv_calling",
+        sv_annotation: "skip_sv_annotation",
+        call_paralogs: "skip_call_paralogs",
+        peddy: "skip_peddy",
+        phasing: "skip_phasing",
+        rank_variants: "skip_rank_variants",
+        repeat_calling: "skip_repeat_calling",
+        repeat_annotation: "skip_repeat_annotation",
+        chromograph: "skip_chromograph",
+        methylation: "skip_methylation_calling",
         methylation_annotation: "skip_methylation_annotation",
-        qc                    : "skip_qc",
-        gens                  : "skip_prepare_gens_input",
-        sex_check             : "skip_sex_check",
+        mitochondrial: "skip_mitochondrial_calling",
+        qc: "skip_qc",
+        gens: "skip_prepare_gens_input",
+        sex_check: "skip_sex_check",
+        portello: "skip_portello",
+        kivvi: "skip_kivvi",
     ]
 
     //
     //  E.g., the CNV-calling workflow depends on mapping and snv_calling and can't run without them.
     //
     def workflowDependencies = [
-        call_paralogs         : ["mapping"],
-        chromograph           : ["mapping"],
-        snv_calling           : ["mapping"],
-        qc                    : ["mapping"],
-        sambamba_depth        : ["mapping"],
-        sv_calling            : ["mapping"],
-        annotate_paralogs     : ["mapping", "call_paralogs"],
-        sv_annotation         : ["mapping", "sv_calling"],
-        peddy                 : ["mapping", "snv_calling"],
-        snv_annotation        : ["mapping", "snv_calling"],
-        phasing               : ["mapping", "snv_calling"],
-        rank_variants         : ["mapping", "snv_calling", "snv_annotation", "sv_annotation"],
-        repeat_calling        : ["mapping", "snv_calling", "phasing"],
-        repeat_annotation     : ["mapping", "snv_calling", "phasing", "repeat_calling"],
-        methylation           : ["mapping", "snv_calling"],
+        call_paralogs: ["mapping"],
+        chromograph: ["mapping"],
+        snv_calling: ["mapping"],
+        qc: ["mapping"],
+        sambamba_depth: ["mapping"],
+        sex_check: ["mapping"],
+        sv_calling: ["mapping"],
+        annotate_paralogs: ["mapping", "call_paralogs"],
+        sv_annotation: ["mapping", "sv_calling"],
+        peddy: ["mapping", "snv_calling"],
+        snv_annotation: ["mapping", "snv_calling"],
+        phasing: ["mapping", "snv_calling"],
+        rank_variants: ["mapping", "snv_calling", "snv_annotation", "sv_annotation"],
+        repeat_calling: ["mapping", "snv_calling", "phasing"],
+        repeat_annotation: ["mapping", "snv_calling", "phasing", "repeat_calling"],
+        methylation: ["mapping", "snv_calling"],
         methylation_annotation: ["mapping", "snv_calling", "methylation"],
-        gens                  : ["mapping", "snv_calling"],
+        mitochondrial: ["mapping"],
+        gens: ["mapping", "snv_calling"],
+        portello: ["mapping", "assembly"],
     ]
 
 
@@ -195,125 +216,168 @@ workflow PIPELINE_INITIALISATION {
     // E.g., the par_regions file is required by the assembly workflow and the assembly workflow can't run without par_regions
     //
     def fileDependencies = [
-        mapping          : ["fasta"],
-        assembly         : ["fasta"], // The assembly workflow should perhaps be split into two - assembly and alignment (requires ref)
-        sambamba_depth   : ["sambamba_regions"],
-        snv_calling      : ["fasta", "par_regions"],
-        snv_annotation   : ["vep_cache", "vep_plugin_files", "variant_consequences_snvs"],
-        sv_calling       : ["fasta"],
-        sv_annotation    : ["svdb_sv_databases", "vep_cache", "vep_plugin_files", "variant_consequences_svs"],
-        rank_variants    : ["genmod_reduced_penetrance", "genmod_score_config_snvs", "genmod_score_config_svs"],
-        repeat_calling   : ["str_bed"],
+        mapping: ["fasta"],
+        assembly: ["fasta"],
+        sambamba_depth: ["sambamba_regions"],
+        snv_calling: ["fasta", "par_regions"],
+        snv_annotation: ["vep_cache", "vep_plugin_files", "variant_consequences_snvs"],
+        sv_calling: ["fasta"],
+        sv_annotation: ["svdb_sv_databases", "vep_cache", "vep_plugin_files", "variant_consequences_svs"],
+        rank_variants: ["genmod_reduced_penetrance", "genmod_score_config_snvs", "genmod_score_config_svs"],
+        repeat_calling: ["str_bed"],
         repeat_annotation: ["stranger_repeat_catalog"],
-        gens             : ["gens_baf_positions", "gens_panel_of_normals_female", "gens_panel_of_normals_male", "gens_coverage_bins"],
-        sex_check        : ["somalier_sites"],
+        gens: ["gens_baf_positions", "gens_panel_of_normals_female", "gens_panel_of_normals_male", "gens_coverage_bins"],
+        sex_check: ["somalier_sites"],
     ]
 
-    def parameterStatus = [
-        workflow: [
-            skip_annotate_paralogs      : val_skip_annotate_paralogs,
-            skip_snv_calling            : val_skip_snv_calling,
-            skip_peddy                  : val_skip_peddy,
-            skip_phasing                : val_skip_phasing,
-            skip_methylation_calling    : val_skip_methylation_calling,
-            skip_methylation_annotation : val_skip_methylation_annotation,
-            skip_rank_variants          : val_skip_rank_variants,
-            skip_repeat_calling         : val_skip_repeat_calling,
-            skip_repeat_annotation      : val_skip_repeat_annotation,
-            skip_chromograph            : val_skip_chromograph,
-            skip_sambamba_depth         : val_skip_sambamba_depth,
-            skip_snv_annotation         : val_skip_snv_annotation,
-            skip_sv_calling             : val_skip_sv_calling,
-            skip_sv_annotation          : val_skip_sv_annotation,
-            skip_call_paralogs          : val_skip_call_paralogs,
-            skip_alignment              : val_skip_alignment,
-            skip_qc                     : val_skip_qc,
-            skip_genome_assembly        : val_skip_genome_assembly,
-            skip_prepare_gens_input     : val_skip_prepare_gens_input,
-            skip_sex_check              : val_skip_sex_check,
-        ],
-        files: [
-            par_regions                 : val_par_regions,
-            echtvar_snv_databases       : val_echtvar_snv_databases,
-            sambamba_regions            : val_sambamba_regions,
-            svdb_sv_databases           : val_svdb_sv_databases,
-            somalier_sites              : val_somalier_sites,
-            vep_cache                   : val_vep_cache,
-            cnv_expected_xy_cn          : val_cnv_expected_xy_cn,
-            cnv_expected_xx_cn          : val_cnv_expected_xx_cn,
-            cnv_excluded_regions        : val_cnv_excluded_regions,
-            fasta                       : val_fasta,
-            str_bed                     : val_str_bed,
-            stranger_repeat_catalog     : val_stranger_repeat_catalog,
-            genmod_reduced_penetrance   : val_genmod_reduced_penetrance,
-            genmod_score_config_snvs    : val_genmod_score_config_snvs,
-            genmod_score_config_svs     : val_genmod_score_config_svs,
-            variant_consequences_snvs   : val_variant_consequences_snvs,
-            variant_consequences_svs    : val_variant_consequences_svs,
-            vep_plugin_files            : val_vep_plugin_files,
-            gens_baf_positions          : val_gens_baf_positions,
-            gens_panel_of_normals_female: val_gens_panel_of_normals_female,
-            gens_panel_of_normals_male  : val_gens_panel_of_normals_male,
-            gens_coverage_bins          : val_gens_coverage_bins,
-        ]
-    ]
+    def parameterStatus = [workflow: [
+        skip_annotate_paralogs: val_skip_annotate_paralogs,
+        skip_snv_calling: val_skip_snv_calling,
+        skip_peddy: val_skip_peddy,
+        skip_phasing: val_skip_phasing,
+        skip_methylation_calling: val_skip_methylation_calling,
+        skip_methylation_annotation: val_skip_methylation_annotation,
+        skip_mitochondrial_calling: val_skip_mitochondrial_calling,
+        skip_rank_variants: val_skip_rank_variants,
+        skip_repeat_calling: val_skip_repeat_calling,
+        skip_repeat_annotation: val_skip_repeat_annotation,
+        skip_chromograph: val_skip_chromograph,
+        skip_sambamba_depth: val_skip_sambamba_depth,
+        skip_snv_annotation: val_skip_snv_annotation,
+        skip_sv_calling: val_skip_sv_calling,
+        skip_sv_annotation: val_skip_sv_annotation,
+        skip_call_paralogs: val_skip_call_paralogs,
+        skip_alignment: val_skip_alignment,
+        skip_qc: val_skip_qc,
+        skip_genome_assembly: val_skip_genome_assembly,
+        skip_prepare_gens_input: val_skip_prepare_gens_input,
+        skip_sex_check: val_skip_sex_check,
+        skip_portello: val_skip_portello,
+    ], files: [
+        par_regions: val_par_regions,
+        echtvar_snv_databases: val_echtvar_snv_databases,
+        sambamba_regions: val_sambamba_regions,
+        svdb_sv_databases: val_svdb_sv_databases,
+        somalier_sites: val_somalier_sites,
+        vep_cache: val_vep_cache,
+        cnv_expected_xy_cn: val_cnv_expected_xy_cn,
+        cnv_expected_xx_cn: val_cnv_expected_xx_cn,
+        cnv_excluded_regions: val_cnv_excluded_regions,
+        fasta: val_fasta,
+        str_bed: val_str_bed,
+        stranger_repeat_catalog: val_stranger_repeat_catalog,
+        genmod_reduced_penetrance: val_genmod_reduced_penetrance,
+        genmod_score_config_snvs: val_genmod_score_config_snvs,
+        genmod_score_config_snvs_mito: val_genmod_score_config_snvs_mito,
+        genmod_score_config_svs: val_genmod_score_config_svs,
+        variant_consequences_snvs: val_variant_consequences_snvs,
+        variant_consequences_svs: val_variant_consequences_svs,
+        vep_plugin_files: val_vep_plugin_files,
+        gens_baf_positions: val_gens_baf_positions,
+        gens_panel_of_normals_female: val_gens_panel_of_normals_female,
+        gens_panel_of_normals_male: val_gens_panel_of_normals_male,
+        gens_coverage_bins: val_gens_coverage_bins,
+    ]]
 
     //
     // Custom validation for pipeline parameters
     //
-    validateInputParameters(parameterStatus, workflowSkips, workflowDependencies, fileDependencies, val_skip_methylation_calling, val_run_methbat, val_methbat_regions)
-    validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs)
-    validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge)
+    validateInputParameters(parameterStatus, workflowSkips, workflowDependencies, fileDependencies)
+    validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs, val_mitochondrial_caller, val_skip_portello, val_skip_kivvi)
+    validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge, val_skip_portello, val_create_hificnv_maf_track, val_create_sawfish_maf_track)
 
     //
     // Create channel from input file provided through val_input
     //
-    channel
-        .fromList(
+    ch_samplesheet = channel.fromList(
             samplesheetToList(val_input, "${projectDir}/assets/schema_input.json")
         )
         .map { meta, reads ->
-            [ meta.id, meta, reads ] // add sample as groupTuple key
+            [meta.id, meta, reads]
         }
-        .groupTuple() // group by sample
+        .groupTuple()
         .map { id_meta_reads ->
             validateUniqueFilenamesPerSample(id_meta_reads)
             validateUniqueSampleIDs(id_meta_reads)
         }
-        // Add single_end information to meta
         .map { sample, metas, reads ->
-            [ sample, metas[0] + [ single_end:true ], reads ]
+            [sample, metas[0] + [single_end: true], reads]
         }
-        // Convert back to [ meta, reads ]
-        .flatMap { _sample, meta, reads ->
-            reads.collect { read -> return [ meta, read ] }
-        }
-        // Add relationships to meta
-        .map { meta, reads -> [ meta.family_id, meta, reads ] }
+        .map { _sample, meta, reads -> tuple(meta, reads) }
+        .transpose()
+        .map { meta, reads -> [meta.family_id, meta, reads] }
         .groupTuple()
         .map { _family, metas, reads ->
-            [ addRelationshipsToMeta(metas), reads ]
+            [addRelationshipsToMeta(metas), reads]
         }
         .transpose()
-        .set { ch_samplesheet }
+        .map { meta, reads ->
+            // Derive entry_point from which column carries the input file (not from extension:
+            // uBAM and aligned BAM share ".bam"; column position is the only signal).
+            def aligned_bam = meta.aligned_bam
+            def snv = meta.snv_vcf
+            def sv = meta.sv_vcf
+            def entry_point
+            if (aligned_bam && aligned_bam != "0") {
+                entry_point = (snv && snv != "0" && sv && sv != "0") ? "vcf" : "bam"
+            }
+            else if (reads.name =~ /\.bam$/) {
+                entry_point = "ubam"
+            }
+            else {
+                entry_point = "fastq"
+            }
+            [meta + [entry_point: entry_point], reads]
+        }
 
-        // Check that all families has at least one sample with affected phenotype if ranking is active
-        validateAllFamiliesHasAffectedSamples(ch_samplesheet, val_skip_rank_variants)
+    validateEntryPointConsistency(ch_samplesheet)
 
-        // Check that sex check is not skipped if there are samples with unknown sex
-        validateRequiresSexCheck(ch_samplesheet, val_skip_sex_check, val_skip_snv_calling, val_skip_methylation_calling, val_run_methbat, val_skip_peddy, val_skip_prepare_gens_input, val_skip_repeat_calling, val_str_caller)
+    // Check that all families has at least one sample with affected phenotype if ranking is active
+    validateAllFamiliesHasAffectedSamples(ch_samplesheet, val_skip_rank_variants)
 
-        // Check that there's no more than one project
-        validateSingleProjectPerRun(ch_samplesheet)
+    // Mitochondrial SNVs are only ranked when both ranking and mitochondrial calling are active
+    if (!val_skip_rank_variants && !val_skip_mitochondrial_calling && !val_genmod_score_config_snvs_mito) {
+        error("Error: --genmod_score_config_snvs_mito must be provided when running without --skip_rank_variants and --skip_mitochondrial_calling. Provide a rank model config or use --skip_rank_variants or --skip_mitochondrial_calling.")
+    }
 
-        // Check that the SV calling parameters are valid
-        validateSVCallingParameters(val_sv_callers_to_merge, val_sv_callers_merge_priority)
+    // Check that methbat_regions is provided when methbat is active
+    if (!val_skip_methylation_calling && val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }.contains('methbat') && !val_methbat_regions) {
+        error("Error: --methbat_regions file must be provided when methbat is in --methylation_callers. Remove methbat from --methylation_callers or use --skip_methylation_calling to disable methylation calling.")
+    }
 
-        // Check that mothers are female, and fathers are male
-        validateParentalSex(ch_samplesheet)
+    // Check that methbat_map is provided when methylation annotation is active
+    if (!val_skip_methylation_annotation && !val_methbat_map) {
+        error("Error: --methbat_map must be provided when running without --skip_methylation_annotation. Provide a mapping file or use --skip_methylation_annotation to disable methylation annotation.")
+    }
 
-        // Check that the parents are present in the samplesheet
-        validateParentExistsInFamily(ch_samplesheet)
+    // Check that methbat is in --methylation_callers when methylation annotation is active
+    if (!val_skip_methylation_annotation && !val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }.contains('methbat')) {
+        error("Error: methbat must be in --methylation_callers when running without --skip_methylation_annotation. Add methbat to --methylation_callers or use --skip_methylation_annotation to disable methylation annotation.")
+    }
+
+    // Check that target_regions is provided when using the ONT_R10_AS preset
+    if (val_preset == 'ONT_R10_AS' && !val_target_regions) {
+        error("Error: --target_regions must be provided when using --preset ONT_R10_AS. The ONT_R10_AS preset is designed for adaptive sampling runs which require target regions for calling and QC.")
+    }
+
+    // Check that sex check is not skipped if there are samples with unknown sex
+    validateRequiresSexCheck(ch_samplesheet, val_skip_sex_check, val_skip_snv_calling, val_skip_methylation_calling, val_methylation_callers, val_skip_peddy, val_skip_prepare_gens_input, val_skip_repeat_calling, val_str_caller)
+
+    // Check that there's no more than one project
+    validateSingleProjectPerRun(ch_samplesheet)
+
+    // Check that the SV calling parameters are valid
+    validateSVCallingParameters(val_sv_callers_to_merge, val_sv_callers_merge_priority)
+
+    // Check that mothers are female, and fathers are male
+    validateParentalSex(ch_samplesheet)
+
+    // Check that the parents are present in the samplesheet
+    validateParentExistsInFamily(ch_samplesheet)
+
+    validatePortelloEntryPoint(ch_samplesheet, val_skip_portello)
+    validateVcfEntryPointColumns(ch_samplesheet)
+    validateVcfEntryPointRequiresPhasing(ch_samplesheet, val_skip_phasing)
 
     emit:
     samplesheet = ch_samplesheet
@@ -321,19 +385,17 @@ workflow PIPELINE_INITIALISATION {
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    SUBWORKFLOW FOR PIPELINE COMPLETION
+SUBWORKFLOW FOR PIPELINE COMPLETION
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+ */
 
 workflow PIPELINE_COMPLETION {
-
     take:
     email           //  string: email address
     email_on_fail   //  string: email address sent on pipeline failure
     plaintext_email // boolean: Send plain-text email instead of HTML
     outdir          //    path: Path to output directory where results will be published
     monochrome_logs // boolean: Disable ANSI colour codes in log output
-    hook_url        //  string: hook URL for notifications
     multiqc_report  //  string: Path to MultiQC report
 
     main:
@@ -357,27 +419,25 @@ workflow PIPELINE_COMPLETION {
         }
 
         completionSummary(monochrome_logs)
-        if (hook_url) {
-            imNotification(summary_params, hook_url)
-        }
     }
 
     workflow.onError {
-        log.error "Pipeline failed. Please refer to troubleshooting docs: https://nf-co.re/docs/usage/troubleshooting"
+        log.error("Pipeline failed. Please refer to troubleshooting docs for common issues: https://nf-co.re/docs/running/troubleshooting")
     }
 }
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    FUNCTIONS
+FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
+ */
 //
 // Check and validate pipeline parameters
 //
-def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDependencies, val_skip_methylation_calling, val_run_methbat, val_methbat_regions) {
-    validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies, val_skip_methylation_calling, val_run_methbat, val_methbat_regions)
+def validateInputParameters(statusMap, workflowMap, workflowDependencies, fileDependencies) {
+    validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies)
 }
+
 //
 // Validate channels from input samplesheet
 //
@@ -385,7 +445,7 @@ def validateUniqueFilenamesPerSample(input) {
     // Filenames needs to be unique for each sample to avoid collisions when merging
     def fileNames = input[2].collect { input_path -> new File(input_path.toString()).name }
     if (fileNames.size() != fileNames.unique().size()) {
-        error "Error: Input filenames needs to be unique for each sample."
+        error("Error: Input filenames needs to be unique for each sample.")
     }
 
     return input
@@ -400,8 +460,9 @@ def validateUniqueSampleIDs(input) {
     def families = metas.collect { meta -> meta.family_id }.unique()
 
     if (families.size() > 1) {
-        error "Sample '${sample}' belongs to multiple families: ${families}. " +
-              "Please make sure that there are no duplicate samples in the samplesheet."
+        error(
+            "Sample '${sample}' belongs to multiple families: ${families}. " + "Please make sure that there are no duplicate samples in the samplesheet."
+        )
     }
 
     return input
@@ -427,12 +488,15 @@ def methodsDescriptionText(mqc_methods_yaml) {
             temp_doi_ref += "(doi: <a href=\'https://doi.org/${doi_ref.replace("https://doi.org/", "").replace(" ", "")}\'>${doi_ref.replace("https://doi.org/", "").replace(" ", "")}</a>), "
         }
         meta["doi_text"] = temp_doi_ref.substring(0, temp_doi_ref.length() - 2)
-    } else meta["doi_text"] = ""
+    }
+    else {
+        meta["doi_text"] = ""
+    }
     meta["nodoi_text"] = meta.manifest_map.doi ? "" : "<li>If available, make sure to update the text to include the Zenodo DOI of version of the pipeline used. </li>"
 
     def methods_text = mqc_methods_yaml.text
 
-    def engine =  new groovy.text.SimpleTemplateEngine()
+    def engine = new groovy.text.SimpleTemplateEngine()
     def description_html = engine.createTemplate(methods_text).make(meta)
 
     return description_html.toString()
@@ -448,24 +512,24 @@ def extractSoftwareFromVersions(module_yaml_file) {
 }
 
 def extractSoftwareFromTopics(topics_channel) {
-    topics_channel
-       .map { toolBlockText ->
-            toolBlockText
-                .readLines()
-                .drop(1) // Drop process name
-                .collect { line -> line.trim().split(':')[0] }
+    topics_channel.map { toolBlockText ->
+        toolBlockText
+            .readLines()
+            .drop(1)
+            .collect { line -> line.trim().split(':')[0] }
     }
 }
 
 def generateReferenceHTML(tool_list, description) {
     def items = tool_list
         .collect { citation -> citation.trim() }
-        .unique()                                // e.g. samtools and bcftools share citation
-        .findAll { citation -> citation != "" }  // some tools does not have a citation, e.g. awk, gunzip
+        .unique()
+        .findAll { citation -> citation != "" }
 
     if (description == 'citation') {
         return "  <p>Tools used in the workflow included: ${items.join(', ')}.</p>"
-    } else if (description == 'bibliography') {
+    }
+    else if (description == 'bibliography') {
         return "  <h4>References</h4><ul><li>${items.join('</li><li>')}</li></ul>"
     }
 }
@@ -479,7 +543,7 @@ def citationBibliographyText(ch_topic_versions_string, references_yaml, descript
     def baseTools = channel.from(['nextflow', 'nf_core', 'bioconda', 'biocontainers', 'multiqc'])
 
     extractSoftwareFromTopics(ch_topic_versions_string)
-        .flatten() // split multi-tool modules
+        .flatten()
         .unique()
         .filter { tool -> !unwantedReferences.contains(tool) }
         .concat(baseTools)
@@ -497,7 +561,7 @@ def citationBibliographyText(ch_topic_versions_string, references_yaml, descript
 //
 // Validate  workflow skip combinations
 //
-def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies, val_skip_methylation_calling, val_run_methbat, val_methbat_regions) {
+def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, fileDependencies) {
     // Array to store errors
     def errors = []
     // For each of the "workflow", "files"
@@ -505,38 +569,31 @@ def validateParameterCombinations(statusMap, workflowMap, workflowDependencies, 
         paramsMap.each { param, _paramStatus ->
             if (paramsType == "files") {
                 checkFileDependencies(param, fileDependencies, statusMap, workflowMap, errors)
-            } else if (paramsType == "workflow") {
+            }
+            else if (paramsType == "workflow") {
                 checkWorkflowDependencies(param, workflowDependencies, statusMap, workflowMap, errors)
             }
         }
     }
     // Give error if there are any
-    if(errors) {
-        def error_string =
-            "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" +
-            "  " + errors.join("\n  ") + "\n" +
-            "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+    if (errors) {
+        def error_string = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" + "  " + errors.join("\n  ") + "\n" + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         error(error_string)
-    }
-    // Extra case for checking if methbat regions are provided when needed.
-    // The above error would suggest the opposite of the fix
-    if (!val_skip_methylation_calling && val_run_methbat && !val_methbat_regions) {
-        error("Error: --methbat_regions file must be provided when --run_methbat is set to true. Set --run_methbat=false or --skip_methylation_calling to disable MethBat.")
     }
 }
 
 //
 // Lookup all workflows that needs to be active for another workflow
 //
-def checkWorkflowDependencies(String skip, Map combinationsMap, Map statusMap, Map workflowMap, List errors) {
+def checkWorkflowDependencies(skip: String, combinationsMap: Map, statusMap: Map, workflowMap: Map, errors: List) {
 
     // Lookup the workflow associated with the --skip_xxx parameter
     def currentWorkflow = workflowMap.find { _key, mapValue -> mapValue == skip }?.key
 
     // If the --skip is not set, then the workflow is active, give no error
     def workflowIsActive = !statusMap["workflow"][skip]
-    if(workflowIsActive) {
-        return
+    if (workflowIsActive) {
+        return null
     }
 
     // Get all other workflows that are required for a certain workflow
@@ -547,20 +604,20 @@ def checkWorkflowDependencies(String skip, Map combinationsMap, Map statusMap, M
     }
     // Collect the required --skips that are not active for the current workflow
     def dependencyString = findRequiredSkips("workflow", requiredWorkflows, statusMap, workflowMap)
-        .collect { skip_parameter -> [ '--', skip_parameter ].join('') }
+        .collect { skip_parameter -> ['--', skip_parameter].join('') }
         .join(" ")
     // If all required sets are set, give no error
     if (!dependencyString) {
-        return
+        return null
     }
-    errors << "--$skip is active, the pipeline has to be run with: $dependencyString"
+    errors << "--${skip} is active, the pipeline has to be run with: ${dependencyString}"
     return errors
 }
 
 //
 // Lookup if a file is required by any workflows, and add to errors
 //
-def checkFileDependencies(String file, Map combinationsMap, Map statusMap, Map workflowMap, List errors) {
+def checkFileDependencies(file: String, combinationsMap: Map, statusMap: Map, workflowMap: Map, errors: List) {
     // Get all workflows required by a file
     def workflowThatRequiresFile = findKeysForValue(file, combinationsMap)
 
@@ -572,8 +629,8 @@ def checkFileDependencies(String file, Map combinationsMap, Map statusMap, Map w
         // Get the file path
         def FilePath = statusMap["files"][file]
         // If the workflow that requires the file is active & theres no file available
-        if(WorkflowIsActive && FilePath == null) {
-            errors << "--$workflowSkip is NOT active, the following files are required: --$file"
+        if (WorkflowIsActive && FilePath == null) {
+            errors << "--${workflowSkip} is NOT active, the following files are required: --${file}"
         }
     }
 
@@ -583,7 +640,7 @@ def checkFileDependencies(String file, Map combinationsMap, Map statusMap, Map w
 //
 // Find the workflow skips that are not currently active
 //
-def findRequiredSkips(paramType, Set<String> requiredWorkflows, Map statusMap, Map workflowMap) {
+def findRequiredSkips(paramType, requiredWorkflows: Set<String>, statusMap: Map, workflowMap: Map) {
 
     def requiredSkips = []
 
@@ -593,8 +650,8 @@ def findRequiredSkips(paramType, Set<String> requiredWorkflows, Map statusMap, M
 
         def workflowIsSkipped = !statusMap[paramType][skip]
 
-        if(paramType == "workflow") {
-            if(workflowIsSkipped) {
+        if (paramType == "workflow") {
+            if (workflowIsSkipped) {
                 requiredSkips << skip
             }
         }
@@ -602,7 +659,7 @@ def findRequiredSkips(paramType, Set<String> requiredWorkflows, Map statusMap, M
     return requiredSkips
 }
 
-def findKeysForValue(def valueToFind, Map map) {
+def findKeysForValue(valueToFind, map: Map) {
 
     def keys = []
 
@@ -619,32 +676,34 @@ def findKeysForValue(def valueToFind, Map map) {
 
 // Utility function to create channels from references
 def createReferenceChannelFromPath(param, defaultValue = '', id = null) {
-    return param ? channel.fromPath(param, checkIfExists: true)
-        .map { file_path -> [ [ id: id ?: file_path.simpleName ], file_path ] }
-        .collect() : defaultValue
+    return param
+        ? channel.fromPath(param, checkIfExists: true).map { file_path -> [[id: id ?: file_path.simpleName], file_path] }.collect()
+        : defaultValue
 }
 // Utility function to create channels from samplesheets
 def createReferenceChannelFromSamplesheet(param, schema, defaultValue = '') {
     return param ? channel.fromList(samplesheetToList(param, schema)) : defaultValue
 }
 
-def validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs) {
-     def pacbioTools = [
-        (val_phaser)             : 'HiPhase',
-        (val_str_caller)         : 'TRGT',
-        (val_sv_callers)         : 'Sawfish',
-        (val_sv_callers_to_run)  : 'Sawfish',
+def validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_callers_to_run, val_sv_callers_to_merge, val_skip_call_paralogs, val_mitochondrial_caller, val_skip_portello, val_skip_kivvi) {
+    def pacbioTools = [
+        (val_phaser): 'HiPhase',
+        (val_str_caller): 'TRGT',
+        (val_sv_callers): 'Sawfish',
+        (val_sv_callers_to_run): 'Sawfish',
         (val_sv_callers_to_merge): 'Sawfish',
         (!val_skip_call_paralogs): 'Paraphase',
-    ].findAll { k, v -> (k instanceof Boolean) ? k : k.toString().contains(v.toLowerCase())  }
-     .values() as List
+        (val_mitochondrial_caller): 'Mitorsaw',
+        (!val_skip_portello): 'Portello',
+        (!val_skip_kivvi): 'Kivvi',
+    ].findAll { k, v -> (k instanceof Boolean) ? k : k.toString().contains(v.toLowerCase()) }.values() as List
 
-    if (!pacbioTools) return
+    if (!pacbioTools) {
+        return null
+    }
 
     log.warn(
-        "The software license of ${pacbioTools.join(', ')} states that you may only use the software " +
-        "to process or analyze data generated on a PacBio instrument or otherwise provided to you by PacBio. " +
-        "Please make sure your data comes from PacBio or one of their instruments."
+        "The software license of ${pacbioTools.join(', ')} states that you may only use the software " + "to process or analyze data generated on a PacBio instrument or otherwise provided to you by PacBio. " + "Please make sure your data comes from PacBio or one of their instruments."
     )
 }
 
@@ -653,15 +712,14 @@ def validatePacBioLicense(val_phaser, val_str_caller, val_sv_callers, val_sv_cal
 def validateAllFamiliesHasAffectedSamples(ch_samplesheet, val_skip_rank_variants) {
 
     if (val_skip_rank_variants) {
-        return
+        return null
     }
 
     def familiesWithPhenotypes = ch_samplesheet
-        .map { meta, _reads -> [ meta.family_id, meta.phenotype ] }
+        .map { meta, _reads -> [meta.family_id, meta.phenotype] }
         .groupTuple()
 
-    def familiesWithoutAffected = familiesWithPhenotypes
-        .filter { _family, phenotype -> !phenotype.contains(2) }
+    def familiesWithoutAffected = familiesWithPhenotypes.filter { _family, phenotype -> !phenotype.contains(2) }
 
     familiesWithoutAffected
         .map { family, _phenotype -> family }
@@ -675,21 +733,21 @@ def validateAllFamiliesHasAffectedSamples(ch_samplesheet, val_skip_rank_variants
 
 // SNV calling, methylation with MethBat, Peddy, prepare_gens_inputs and call_repeat_expansions with TRGT require known sex.
 // This is a convenience function to fail early if there are samples without known sex.
-def validateRequiresSexCheck(ch_samplesheet, val_skip_sex_check, val_skip_snv_calling, val_skip_methylation_calling, val_run_methbat, val_skip_peddy, val_skip_prepare_gens_input, val_skip_repeat_calling, val_str_caller) {
+def validateRequiresSexCheck(ch_samplesheet, val_skip_sex_check, val_skip_snv_calling, val_skip_methylation_calling, val_methylation_callers, val_skip_peddy, val_skip_prepare_gens_input, val_skip_repeat_calling, val_str_caller) {
 
     if (!val_skip_sex_check) {
-        return
+        return null
     }
 
     def samplesWithUnknownSex = ch_samplesheet
-        .map { meta, _reads -> [ meta.id, meta.sex ] }
+        .map { meta, _reads -> [meta.id, meta.sex] }
         .filter { _id, sex -> sex == 0 }
 
     samplesWithUnknownSex
         .map { sample, _sex -> sample }
         .collect()
         .subscribe { sampleList ->
-            if (sampleList && ( !val_skip_snv_calling || ( !val_skip_methylation_calling && val_run_methbat == true ) || !val_skip_peddy || !val_skip_prepare_gens_input || ( !val_skip_repeat_calling && val_str_caller == 'trgt' ))) {
+            if (sampleList && (!val_skip_snv_calling || (!val_skip_methylation_calling && val_methylation_callers.tokenize(',').collect { caller -> caller.trim().toLowerCase() }.contains('methbat')) || !val_skip_peddy || !val_skip_prepare_gens_input || (!val_skip_repeat_calling && val_str_caller == 'trgt'))) {
                 error("ERROR: Unknown sex for sample(s): ${sampleList.join(", ")} while pipeline requires known sex; --skip_sex_check cannot be active.")
             }
         }
@@ -701,41 +759,101 @@ def validateSingleProjectPerRun(ch_samplesheet) {
         .unique()
         .count()
         .map { n ->
-            if ( n > 1 ) {
+            if (n > 1) {
                 error("ERROR: Only one project may be specified per run.")
             }
         }
 }
 
-def validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge) {
+def validateWorkflowCompatibility(val_str_caller, val_skip_repeat_annotation, val_snv_caller, val_snv_calling_processes, val_skip_sv_calling, val_sv_callers_to_run, val_skip_snv_calling, val_cnv_expected_xy_cn, val_cnv_expected_xx_cn, val_cnv_excluded_regions, val_skip_phasing, val_phaser, val_sv_callers_to_merge, val_skip_portello, val_create_hificnv_maf_track, val_create_sawfish_maf_track) {
     if (val_str_caller.matches('strdust') && !val_skip_repeat_annotation) {
-        error "ERROR: Repeat annotation is not supported for STRdust. Run with --skip_repeat_annotation if you want to use STRdust."
+        error("ERROR: Repeat annotation is not supported for STRdust. Run with --skip_repeat_annotation if you want to use STRdust.")
     }
 
     if (val_snv_caller == 'sentieon' && val_snv_calling_processes != 1) {
-        error "ERROR: --snv_calling_processes must be 1 when --snv_caller sentieon is used."
+        error("ERROR: --snv_calling_processes must be 1 when --snv_caller sentieon is used.")
     }
 
-    if (
-        !val_skip_sv_calling && val_sv_callers_to_run
-            .split(',')
-            .collect { caller -> caller.toLowerCase().trim() }
-            .any { caller -> caller in ['hificnv', 'sawfish'] }
-    ) {
-        // We could probably change to not enforce this.
+    def sv_callers_to_run = val_sv_callers_to_run.split(',').collect { caller -> caller.toLowerCase().trim() }
+    if (!val_skip_sv_calling && sv_callers_to_run.any { caller -> caller in ['hificnv', 'sawfish'] }) {
+        // The MAF tracks are made from the SNV calls
         if (val_skip_snv_calling) {
-            error "ERROR: HiFiCNV and Sawfish requires SNV calling to be active. Run without --skip_snv_calling if you want to use HiFiCNV or Sawfish."
+            [
+                hificnv: [create_maf_track: val_create_hificnv_maf_track, name: 'HiFiCNV'],
+                sawfish: [create_maf_track: val_create_sawfish_maf_track, name: 'Sawfish'],
+            ].each { caller, maf_track ->
+                if (sv_callers_to_run.contains(caller) && maf_track.create_maf_track) {
+                    error("ERROR: The ${maf_track.name} MAF track requires SNV calling. Run with --create_${caller}_maf_track false (or --create_maf_track false) if you want to use ${maf_track.name} with --skip_snv_calling.")
+                }
+            }
         }
         // We could probably change to not enforce this.
         if (!val_cnv_expected_xy_cn || !val_cnv_expected_xx_cn || !val_cnv_excluded_regions) {
-            error "ERROR: HiFiCNV and Sawfish requires expected XY and XX CN files and excluded regions to be provided. Please provide --cnv_expected_xy_cn, --cnv_expected_xx_cn and --cnv_excluded_regions parameters."
+            error("ERROR: HiFiCNV and Sawfish requires expected XY and XX CN files and excluded regions to be provided. Please provide --cnv_expected_xy_cn, --cnv_expected_xx_cn and --cnv_excluded_regions parameters.")
         }
     }
 
-    if ( !val_skip_phasing && !val_skip_sv_calling && val_phaser == 'hiphase' && val_sv_callers_to_merge != 'sawfish') {
-        error "ERROR: HiPhase SV phasing only supports Sawfish at the moment. Set --sv_callers to 'sawfish' if you want to use HiPhase. You may run other SV callers without passing them to HiPhase using --sv_callers_to_run."
+    if (!val_skip_phasing && !val_skip_sv_calling && val_phaser == 'hiphase' && val_sv_callers_to_merge != 'sawfish') {
+        error("ERROR: HiPhase SV phasing only supports Sawfish at the moment. Set --sv_callers to 'sawfish' if you want to use HiPhase. You may run other SV callers without passing them to HiPhase using --sv_callers_to_run.")
     }
+}
 
+def validatePortelloEntryPoint(input, val_skip_portello) {
+    if (!val_skip_portello) {
+        input
+            .filter { meta, _reads -> meta.entry_point != 'ubam' }
+            .map { meta, _reads ->
+                error("Sample '${meta.id}' uses ${meta.entry_point} entry_point but --skip_portello is not set. Portello requires uBAM input. Run with --skip_portello or provide uBAM input.")
+            }
+    }
+}
+
+def validateVcfEntryPointColumns(input) {
+    // snv_vcf or sv_vcf without aligned_bam is not a valid combination
+    input
+        .filter { meta, _reads ->
+            def snvSet = meta.snv_vcf && meta.snv_vcf != "0"
+            def svSet = meta.sv_vcf && meta.sv_vcf != "0"
+            def bamSet = meta.aligned_bam && meta.aligned_bam != "0"
+            (snvSet || svSet) && !bamSet
+        }
+        .map { meta, _reads ->
+            error("Sample '${meta.id}': snv_vcf or sv_vcf provided without aligned_bam. The vcf entry_point requires aligned_bam for QC and phasing.")
+        }
+
+    // Only one of snv_vcf/sv_vcf provided — both or neither
+    input
+        .filter { meta, _reads ->
+            def snvSet = meta.snv_vcf && meta.snv_vcf != "0"
+            def svSet = meta.sv_vcf && meta.sv_vcf != "0"
+            snvSet != svSet
+        }
+        .map { meta, _reads ->
+            error("Sample '${meta.id}': only one of snv_vcf/sv_vcf is set. Both must be provided together for vcf entry_point.")
+        }
+}
+
+def validateVcfEntryPointRequiresPhasing(input, val_skip_phasing) {
+    if (val_skip_phasing) {
+        input
+            .filter { meta, _reads -> meta.entry_point == 'vcf' }
+            .map { meta, _reads ->
+                error("Sample '${meta.id}' uses vcf entry_point but --skip_phasing is set. Phasing is required to integrate vcf entry_point VCFs into the annotation pipeline.")
+            }
+    }
+}
+
+def validateEntryPointConsistency(input) {
+    input
+        .map { meta, _reads -> [meta.family_id, meta.entry_point, meta.id] }
+        .groupTuple()
+        .map { family_id, entry_points, sample_ids ->
+            def unique_entrypoints = entry_points.unique()
+            if (unique_entrypoints.size() > 1) {
+                def detail = [entry_points, sample_ids].transpose().collect { entrypoint, sample_id -> "${sample_id}=${entrypoint}" }.join(', ')
+                error("Error: All samples in family '${family_id}' must use the same entry point (file, aligned_bam, or vcf entry_point columns). Found: ${detail}")
+            }
+        }
 }
 
 def validateSVCallingParameters(val_sv_callers_to_merge, val_sv_callers_merge_priority) {
@@ -743,7 +861,11 @@ def validateSVCallingParameters(val_sv_callers_to_merge, val_sv_callers_merge_pr
     def sv_caller_priority = val_sv_callers_merge_priority.split(',').collect { caller -> caller.toLowerCase().trim() }
 
     if (sv_callers.toSet() != sv_caller_priority.toSet()) {
-        error "ERROR: The --sv_callers_merge_priority list must contain the same items as --sv_callers_to_merge (order may differ)."
+        error("ERROR: The --sv_callers_merge_priority list must contain the same items as --sv_callers_to_merge (order may differ).")
+    }
+
+    if (sv_callers.contains('sniffles') && sv_callers.contains('sniffles1')) {
+        error("ERROR: --sv_callers_to_merge cannot contain both 'sniffles' (v2) and 'sniffles1' (v1). Choose one Sniffles version to merge; both can be run with --sv_callers_to_run.")
     }
 }
 
@@ -753,7 +875,7 @@ def validateSVCallingParameters(val_sv_callers_to_merge, val_sv_callers_merge_pr
 def validateParentExistsInFamily(input) {
     input
         .map { meta, _reads ->
-            [ meta.family_id, meta ]
+            [meta.family_id, meta]
         }
         .groupTuple()
         .map { family_id, metas ->
@@ -766,31 +888,31 @@ def validateParentExistsInFamily(input) {
                 def paternal_id = meta.paternal_id
 
                 if (isNonZeroNonEmpty(maternal_id) && !(maternal_id in sampleIds)) {
-                    errors <<  "maternal_id set to ${maternal_id}"
+                    errors << "maternal_id set to ${maternal_id}"
                 }
                 if (isNonZeroNonEmpty(paternal_id) && !(paternal_id in sampleIds)) {
                     errors << "paternal_id set to ${paternal_id}"
                 }
 
                 if (errors) {
-                    error "ERROR: Sample ${meta.id} has " + errors.join(' and ') + ", but they are not present in the family ${family_id}. " +
-                          "Please check the samplesheet and correct the parental IDs, or remove them from the sample."
+                    error(
+                        "ERROR: Sample ${meta.id} has " + errors.join(' and ') + ", but they are not present in the family ${family_id}. " + "Please check the samplesheet and correct the parental IDs, or remove them from the sample."
+                    )
                 }
             }
         }
 }
 
 def validateParentalSex(input) {
-    input
-        .map { meta, _reads ->
-            def sex_as_string = meta.sex == 1 ? 'male' : meta.sex == 2 ? 'female' : 'unknown'
+    input.map { meta, _reads ->
+        def sex_as_string = meta.sex == 1 ? 'male' : meta.sex == 2 ? 'female' : 'unknown'
 
-            if ((meta.relationship == 'mother' && !isFemale(meta)) ||
-                (meta.relationship == 'father' && !isMale(meta))) {
-                error "ERROR: Sample ${meta.id} has been set as ${meta.relationship}, but sex is ${meta.sex} (=${sex_as_string}) in samplesheet. " +
-                      "Please check the samplesheet and correct the sex or releationship."
-            }
+        if ((meta.relationship == 'mother' && !isFemale(meta)) || (meta.relationship == 'father' && !isMale(meta))) {
+            error(
+                "ERROR: Sample ${meta.id} has been set as ${meta.relationship}, but sex is ${meta.sex} (=${sex_as_string}) in samplesheet. " + "Please check the samplesheet and correct the sex or releationship."
+            )
         }
+    }
 }
 
 def getParentalIds(samples, parental_id_type) {
@@ -805,14 +927,16 @@ def addRelationshipsToMeta(samples) {
     def maternal_ids = getParentalIds(samples, 'maternal_id')
     def paternal_ids = getParentalIds(samples, 'paternal_id')
     def parents_ids = maternal_ids + paternal_ids
-    def grandparents_ids = samples.findAll { sample -> sample.id in parents_ids }.collect { sample -> sample.maternal_id } +
-                           samples.findAll { sample -> sample.id in parents_ids }.collect { sample -> sample.paternal_id }
+    def grandparents_ids = samples.findAll { sample -> sample.id in parents_ids }.collect { sample -> sample.maternal_id } + samples.findAll { sample -> sample.id in parents_ids }.collect { sample -> sample.paternal_id }
 
     samples.each { sample ->
-        sample.relationship = sample.id in grandparents_ids ? 'unknown' :
-                              sample.id in maternal_ids ? 'mother' :
-                              sample.id in paternal_ids ? 'father' :
-                              isChild(sample, maternal_ids, paternal_ids) ? 'child' : 'unknown'
+        sample.relationship = sample.id in grandparents_ids
+            ? 'unknown'
+            : sample.id in maternal_ids
+                ? 'mother'
+                : sample.id in paternal_ids
+                    ? 'father'
+                    : isChild(sample, maternal_ids, paternal_ids) ? 'child' : 'unknown'
 
         sample.two_parents = isChildWithTwoParents(sample, maternal_ids, paternal_ids)
 
@@ -820,35 +944,34 @@ def addRelationshipsToMeta(samples) {
         sample.children = []
         sample.has_other_parent = false
 
-        if (isParent(sample)){
-            def children = getChildrenForParent(samples, sample.id) // Get metadata of children
-            sample.children = children.collect{ meta -> meta.id } // Store children IDs in parent meta
+        if (isParent(sample)) {
+            // Get metadata of children
+            def children = getChildrenForParent(samples, sample.id)
+            // Store children IDs in parent meta
+            sample.children = children.collect { meta -> meta.id }
+
 
             // For those children, check if they have a father or mother
             if (isMother(sample)) {
                 sample.has_other_parent = children.any { child -> hasFather(child, paternal_ids) }
-            } else if (isFather(sample)) {
+            }
+            else if (isFather(sample)) {
                 sample.has_other_parent = children.any { child -> hasMother(child, maternal_ids) }
             }
         }
-
     }
-
 }
 
 def getChildrenForParent(samples, parent_id) {
-    samples
-        .findAll { sample -> sample.maternal_id == parent_id || sample.paternal_id == parent_id }
+    samples.findAll { sample -> sample.maternal_id == parent_id || sample.paternal_id == parent_id }
 }
 
 def isChild(sample, maternal_ids, paternal_ids) {
-    hasMother (sample, maternal_ids) ||
-    hasFather (sample, paternal_ids)
+    hasMother(sample, maternal_ids) || hasFather(sample, paternal_ids)
 }
 
 def isChildWithTwoParents(sample, maternal_ids, paternal_ids) {
-    hasMother (sample, maternal_ids) &&
-    hasFather (sample, paternal_ids)
+    hasMother(sample, maternal_ids) && hasFather(sample, paternal_ids)
 }
 
 def hasMother(sample, maternal_ids) {
@@ -879,7 +1002,6 @@ def isParent(sample) {
     isMother(sample) || isFather(sample)
 }
 
-def boolean isNonZeroNonEmpty(value) {
-    (value instanceof String && value != "" && value != "0") ||
-    (value instanceof Number && value != 0)
+def isNonZeroNonEmpty(value) -> Boolean {
+    (value instanceof String && value != "" && value != "0") || (value instanceof Number && value != 0)
 }

@@ -65,6 +65,8 @@ nextflow_workflow {
         then {
             assertAll (
                 { assert workflow.success },
+                { assert workflow.out.bed_nuclear_intervals.collect { _meta, bed, _num_intervals -> file(bed).name }.sort() == ['nuclear_chunk.00001.bed', 'nuclear_chunk.00002.bed'] },
+                { assert workflow.out.bed_mitochondrial_intervals.collect { _meta, bed, _num_intervals -> file(bed).name } == ['mitochondrial.bed'] },
                 { assert snapshot(workflow.out, path(workflow.out.bed.get(0).get(1)).readLines()).match() },
             )
         }
@@ -90,6 +92,8 @@ nextflow_workflow {
         then {
             assertAll (
                 { assert workflow.success },
+                { assert workflow.out.bed_nuclear_intervals.collect { _meta, bed, _num_intervals -> file(bed).name }.sort() == ['nuclear_chunk.0001.bed', 'nuclear_chunk.0002.bed'] },
+                { assert workflow.out.bed_mitochondrial_intervals.collect { _meta, bed, _num_intervals -> file(bed).name } == ['mitochondrial.bed'] },
                 { assert snapshot(workflow.out, path(workflow.out.bed.get(0).get(1)).readLines()).match() },
             )
         }

@@ -17,7 +17,7 @@ workflow CHROMOGRAPH {
     plot_autozygosity // boolean
 
     main:
-    ch_autozyg  = channel.empty()
+    ch_autozyg = channel.empty()
     ch_coverage = channel.empty()
 
     if (plot_coverage) {
@@ -26,19 +26,15 @@ workflow CHROMOGRAPH {
             [[], []],
         )
 
-        TIDDIT_COV.out.wig
-            .map { meta, wig ->
-                // To match the VCF meta, which only has ID due to being split by bcftools +split
-                def new_meta = [id: meta.id]
-                [new_meta, wig]
-            }
-            .set { ch_coverage }
+        ch_coverage = TIDDIT_COV.out.wig.map { meta, wig ->
+            // To match the VCF meta, which only has ID due to being split by bcftools +split
+            def new_meta = [id: meta.id]
+            [new_meta, wig]
+        }
     }
 
     if (plot_autozygosity) {
-        ch_vcf
-            .join(ch_tbi, failOnMismatch: true, failOnDuplicate: true)
-            .set { ch_vcf_tbi }
+        ch_vcf_tbi = ch_vcf.join(ch_tbi, failOnMismatch: true, failOnDuplicate: true)
 
         BCFTOOLS_ROH(
             ch_vcf_tbi,
@@ -56,35 +52,38 @@ workflow CHROMOGRAPH {
             [],
         )
 
-        BCFTOOLS_VIEW_UNCOMPRESS.out.vcf
+        ch_rhocall_viz_input = BCFTOOLS_VIEW_UNCOMPRESS.out.vcf
             .join(BCFTOOLS_ROH.out.roh)
             .multiMap { meta, vcf, roh ->
                 vcf: [meta, vcf]
                 roh: [meta, roh]
             }
-            .set { ch_rhocall_viz_input }
 
         RHOCALL_VIZ(
             ch_rhocall_viz_input.vcf,
             ch_rhocall_viz_input.roh,
         )
 
-        RHOCALL_VIZ.out.bed.set { ch_autozyg }
+        ch_autozyg = RHOCALL_VIZ.out.bed
     }
 
     // Combine and filter only if there's data
-    ch_autozyg.ifEmpty([[],[]])
-        .combine(ch_coverage.ifEmpty([[],[]]))
+    ch_chromograph_input = ch_autozyg
+        .ifEmpty([[], []])
+        .combine(ch_coverage.ifEmpty([[], []]))
         .filter { autozyg_meta, _autozyg, coverage_meta, _coverage ->
-            if(!autozyg_meta || !coverage_meta)
+            if (!autozyg_meta || !coverage_meta) {
                 return true
+            }
             autozyg_meta.id == coverage_meta.id
         }
         .multiMap { autozyg_meta, autozyg, coverage_meta, coverage ->
-            autozyg: [autozyg_meta, autozyg]
+            // The module emits metadata from its first input, so coverage-only runs
+            // need the coverage metadata there for workflow output publishing.
+            def plot_meta = autozyg_meta ?: coverage_meta
+            autozyg: [plot_meta, autozyg]
             coverage: [coverage_meta, coverage]
         }
-        .set { ch_chromograph_input }
 
     RUN_CHROMOGRAPH(
         ch_chromograph_input.autozyg,

@@ -35,13 +35,14 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_deepvariant_norm.vcf.gz', checkIfExists: true)
                     ]
                 )
-                input[1] = [
-                    file(params.pipelines_testdata_base_path + 'reference/gnomad_af.zip', checkIfExists: true)
-                ]
+                input[1] = channel.value([
+                    [ id: 'db' ],
+                    [file(params.pipelines_testdata_base_path + 'reference/gnomad_af.zip', checkIfExists: true)]
+                ])
                 input[2] = PREPARE_REFERENCES.out.fasta
                 input[3] = PREPARE_REFERENCES.out.fai
                 input[4] = PREPARE_REFERENCES.out.vep_resources
-                input[5] = channel.value('110')
+                input[5] = channel.value(params.vep_cache_version as String)
                 input[6] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
                 ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
@@ -68,8 +69,8 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[1] = ANNOTATE_SNVS.out.vcf
-                input[2] = ANNOTATE_SNVS.out.tbi
+                input[1] = ANNOTATE_SNVS.out.echtvar_annotated_vcf
+                input[2] = ANNOTATE_SNVS.out.echtvar_annotated_tbi
                 input[3] = true
                 input[4] = true
                 """
@@ -97,8 +98,8 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[1] = ANNOTATE_SNVS.out.vcf
-                input[2] = ANNOTATE_SNVS.out.tbi
+                input[1] = ANNOTATE_SNVS.out.echtvar_annotated_vcf
+                input[2] = ANNOTATE_SNVS.out.echtvar_annotated_tbi
                 input[3] = true
                 input[4] = false
                 """
@@ -108,6 +109,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
+                { assert workflow.out.chromograph_plots.every { meta, _plots -> meta.id == 'HG003' } },
                 { assert snapshot(workflow.out).match() }
             )
         }
@@ -126,8 +128,8 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[1] = ANNOTATE_SNVS.out.vcf
-                input[2] = ANNOTATE_SNVS.out.tbi
+                input[1] = ANNOTATE_SNVS.out.echtvar_annotated_vcf
+                input[2] = ANNOTATE_SNVS.out.echtvar_annotated_tbi
                 input[3] = false
                 input[4] = true
                 """
@@ -155,8 +157,8 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[1] = ANNOTATE_SNVS.out.vcf
-                input[2] = ANNOTATE_SNVS.out.tbi
+                input[1] = ANNOTATE_SNVS.out.echtvar_annotated_vcf
+                input[2] = ANNOTATE_SNVS.out.echtvar_annotated_tbi
                 input[3] = false
                 input[4] = false
                 """
@@ -186,8 +188,8 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[1] = ANNOTATE_SNVS.out.vcf
-                input[2] = ANNOTATE_SNVS.out.tbi
+                input[1] = ANNOTATE_SNVS.out.echtvar_annotated_vcf
+                input[2] = ANNOTATE_SNVS.out.echtvar_annotated_tbi
                 input[3] = true
                 input[4] = true
                 """
@@ -217,8 +219,8 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[1] = ANNOTATE_SNVS.out.vcf
-                input[2] = ANNOTATE_SNVS.out.tbi
+                input[1] = ANNOTATE_SNVS.out.echtvar_annotated_vcf
+                input[2] = ANNOTATE_SNVS.out.echtvar_annotated_tbi
                 input[3] = true
                 input[4] = false
                 """
@@ -228,6 +230,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
+                { assert workflow.out.chromograph_plots.every { meta, _plots -> meta.id == 'HG003' } },
                 { assert snapshot(workflow.out).match() }
             )
         }
@@ -248,8 +251,8 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[1] = ANNOTATE_SNVS.out.vcf
-                input[2] = ANNOTATE_SNVS.out.tbi
+                input[1] = ANNOTATE_SNVS.out.echtvar_annotated_vcf
+                input[2] = ANNOTATE_SNVS.out.echtvar_annotated_tbi
                 input[3] = false
                 input[4] = true
                 """
@@ -279,8 +282,8 @@ nextflow_workflow {
                         file(params.pipelines_testdata_base_path + 'testdata/HG003_PacBio_Revio.bam.bai', checkIfExists: true)
                     ]
                 )
-                input[1] = ANNOTATE_SNVS.out.vcf
-                input[2] = ANNOTATE_SNVS.out.tbi
+                input[1] = ANNOTATE_SNVS.out.echtvar_annotated_vcf
+                input[2] = ANNOTATE_SNVS.out.echtvar_annotated_tbi
                 input[3] = false
                 input[4] = false
                 """

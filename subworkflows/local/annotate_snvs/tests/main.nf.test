@@ -40,7 +40,7 @@ nextflow_workflow {
 
     }
 
-    test("bcf, db, vep_cache, '110'") {
+    test("bcf, db, vep_cache, '116'") {
 
         when {
             workflow {
@@ -49,13 +49,14 @@ nextflow_workflow {
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
-                input[1] = [
-                    file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
-                ]
+                input[1] = channel.value([
+                    [ id: 'db' ],
+                    [file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)]
+                ])
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
                 input[4] = UNTAR.out.untar
-                input[5] = channel.value('110')
+                input[5] = channel.value(params.vep_cache_version as String)
                 input[6] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
                 ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
@@ -73,16 +74,19 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    file(workflow.out.tbi.get(0).get(1)).name,
-                    path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.vcf.get(0).get(1)).vcf.summary,
+                    file(workflow.out.vep_annotated_tbi.get(0).get(1)).name,
+                    path(workflow.out.vep_annotated_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.vep_annotated_vcf.get(0).get(1)).vcf.summary,
+                    file(workflow.out.echtvar_annotated_tbi.get(0).get(1)).name,
+                    path(workflow.out.echtvar_annotated_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.echtvar_annotated_vcf.get(0).get(1)).vcf.summary,
                 ).match() }
             )
         }
 
     }
 
-    test("bcf, db, vep_cache, '110', filter before vep") {
+    test("bcf, db, vep_cache, '116', filter before vep") {
 
         when {
             workflow {
@@ -91,13 +95,14 @@ nextflow_workflow {
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
-                input[1] = [
-                    file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
-                ]
+                input[1] = channel.value([
+                    [ id: 'db' ],
+                    [file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)]
+                ])
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
                 input[4] = UNTAR.out.untar
-                input[5] = channel.value('110')
+                input[5] = channel.value(params.vep_cache_version as String)
                 input[6] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
                 ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
@@ -115,16 +120,19 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    file(workflow.out.tbi.get(0).get(1)).name,
-                    path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.vcf.get(0).get(1)).vcf.summary,
+                    file(workflow.out.vep_annotated_tbi.get(0).get(1)).name,
+                    path(workflow.out.vep_annotated_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.vep_annotated_vcf.get(0).get(1)).vcf.summary,
+                    file(workflow.out.echtvar_annotated_tbi.get(0).get(1)).name,
+                    path(workflow.out.echtvar_annotated_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.echtvar_annotated_vcf.get(0).get(1)).vcf.summary,
                 ).match() }
             )
         }
 
     }
 
-    test("bcf, [], vep_cache, '110' - no echtvar annotation") {
+    test("bcf, [], vep_cache, '116' - no echtvar annotation") {
 
         when {
             workflow {
@@ -133,11 +141,11 @@ nextflow_workflow {
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
-                input[1] = channel.value([])
+                input[1] = [[:], []]
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
                 input[4] = UNTAR.out.untar
-                input[5] = channel.value('110')
+                input[5] = channel.value(params.vep_cache_version as String)
                 input[6] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
                 ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
@@ -155,16 +163,18 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    file(workflow.out.tbi.get(0).get(1)).name,
-                    path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.vcf.get(0).get(1)).vcf.summary,
+                    file(workflow.out.vep_annotated_tbi.get(0).get(1)).name,
+                    path(workflow.out.vep_annotated_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.vep_annotated_vcf.get(0).get(1)).vcf.summary,
+                    workflow.out.echtvar_annotated_vcf.isEmpty(),
+                    workflow.out.echtvar_annotated_tbi.isEmpty(),
                 ).match() }
             )
         }
 
     }
 
-    test("bcf, [], vep_cache, '110' - no echtvar annotation - filter before vep") {
+    test("bcf, [], vep_cache, '116' - no echtvar annotation - filter before vep") {
 
         when {
             workflow {
@@ -173,11 +183,11 @@ nextflow_workflow {
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
-                input[1] = channel.value([])
+                input[1] = [[:], []]
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
                 input[4] = UNTAR.out.untar
-                input[5] = channel.value('110')
+                input[5] = channel.value(params.vep_cache_version as String)
                 input[6] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
                 ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
@@ -195,21 +205,22 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    file(workflow.out.tbi.get(0).get(1)).name,
-                    path(workflow.out.vcf.get(0).get(1)).vcf.variantsMD5,
-                    path(workflow.out.vcf.get(0).get(1)).vcf.summary,
+                    file(workflow.out.vep_annotated_tbi.get(0).get(1)).name,
+                    path(workflow.out.vep_annotated_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.vep_annotated_vcf.get(0).get(1)).vcf.summary,
+                    workflow.out.echtvar_annotated_vcf.isEmpty(),
+                    workflow.out.echtvar_annotated_tbi.isEmpty(),
                 ).match() }
             )
         }
 
     }
 
-    test("bcf, db, vep_cache, '110', -stub") {
-
-        options "-stub"
+    test("bcf, db, vep_cache, '116', with extra_vep_options_snv") {
 
         when {
             params {
+                extra_vep_options_snv = '--buffer_size 20000 --appris --biotype --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --humdiv --no_progress --numbers --polyphen p --protein --regulatory --sift p --symbol --tsl --uniprot --no_stats'
             }
             workflow {
                 """
@@ -217,13 +228,14 @@ nextflow_workflow {
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
-                input[1] = [
-                    file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
-                ]
+                input[1] = channel.value([
+                    [ id: 'db' ],
+                    [file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)]
+                ])
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
                 input[4] = UNTAR.out.untar
-                input[5] = channel.value('110')
+                input[5] = channel.value(params.vep_cache_version as String)
                 input[6] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
                 ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
@@ -241,15 +253,19 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.tbi,
-                    workflow.out.vcf
+                    file(workflow.out.vep_annotated_tbi.get(0).get(1)).name,
+                    path(workflow.out.vep_annotated_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.vep_annotated_vcf.get(0).get(1)).vcf.summary,
+                    file(workflow.out.echtvar_annotated_tbi.get(0).get(1)).name,
+                    path(workflow.out.echtvar_annotated_vcf.get(0).get(1)).vcf.variantsMD5,
+                    path(workflow.out.echtvar_annotated_vcf.get(0).get(1)).vcf.summary,
                 ).match() }
             )
         }
 
     }
 
-    test("bcf, db, vep_cache, '110', -stub with CADD") {
+    test("bcf, db, vep_cache, '116', -stub") {
 
         options "-stub"
 
@@ -262,13 +278,101 @@ nextflow_workflow {
                     [ id: 'test' ],
                     file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
-                input[1] = [
-                    file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
-                ]
+                input[1] = channel.value([
+                    [ id: 'db' ],
+                    [file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)]
+                ])
                 input[2] = GUNZIP.out.gunzip
                 input[3] = SAMTOOLS_FAIDX.out.fai
                 input[4] = UNTAR.out.untar
-                input[5] = channel.value('110')
+                input[5] = channel.value(params.vep_cache_version as String)
+                input[6] = channel.of([
+                    file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
+                ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
+                input[7] = false
+                input[8] = true
+                input[9] = channel.value([])
+                input[10] = null
+                input[11] = null
+                input[12] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+
+    }
+
+    test("bcf, db, vep_cache, '116', -stub with extra_vep_options_snv") {
+
+        options "-stub"
+
+        when {
+            params {
+                extra_vep_options_snv = '--buffer_size 20000 --appris --biotype --canonical --ccds --domains --exclude_predicted --force_overwrite --hgvs --humdiv --no_progress --numbers --polyphen p --protein --regulatory --sift p --symbol --tsl --uniprot --no_stats'
+            }
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.vcf.gz', checkIfExists: true)
+                ])
+                input[1] = channel.value([
+                    [ id: 'db' ],
+                    [file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)]
+                ])
+                input[2] = GUNZIP.out.gunzip
+                input[3] = SAMTOOLS_FAIDX.out.fai
+                input[4] = UNTAR.out.untar
+                input[5] = channel.value(params.vep_cache_version as String)
+                input[6] = channel.of([
+                    file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
+                ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
+                input[7] = false
+                input[8] = true
+                input[9] = channel.value([])
+                input[10] = null
+                input[11] = null
+                input[12] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+
+    }
+
+    test("bcf, db, vep_cache, '116', -stub with CADD") {
+
+        options "-stub"
+
+        when {
+            params {
+            }
+            workflow {
+                """
+                input[0] = channel.of([
+                    [ id: 'test' ],
+                    file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.vcf.gz', checkIfExists: true)
+                ])
+                input[1] = channel.value([
+                    [ id: 'db' ],
+                    [file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)]
+                ])
+                input[2] = GUNZIP.out.gunzip
+                input[3] = SAMTOOLS_FAIDX.out.fai
+                input[4] = UNTAR.out.untar
+                input[5] = channel.value(params.vep_cache_version as String)
                 input[6] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
                 ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
@@ -294,10 +398,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success },
-                { assert snapshot(
-                    workflow.out.tbi,
-                    workflow.out.vcf
-                ).match() }
+                { assert snapshot(workflow.out).match() }
             )
         }
 

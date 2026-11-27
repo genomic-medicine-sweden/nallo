@@ -1,14 +1,14 @@
 {
     "[bam, bai], fasta, fai, bed": {
         "content": [
-            "60649062509e961181d2e3c2020ef361",
-            "c03b8d167105a2e60cf5b73df61f17d0"
+            "60e47a5cb2dd72efeca7fa6756218ab5",
+            "baaf8d30d259672e76dca2e5416e7c70"
         ],
+        "timestamp": "2026-07-08T10:44:35.294685594",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-23T15:10:55.471745285"
+            "nf-test": "0.9.5",
+            "nextflow": "26.03.4"
+        }
     },
     "[bam, bai], fasta, fai, bed - stub": {
         "content": [
@@ -21,7 +21,7 @@
                             "family_id": "family",
                             "sex": 1
                         },
-                        "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_strdust_found_in.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "1": [
@@ -32,7 +32,7 @@
                             "family_id": "family",
                             "sex": 1
                         },
-                        "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_strdust_found_in_indexed.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
@@ -75,7 +75,7 @@
                             "family_id": "family",
                             "sex": 1
                         },
-                        "test.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_strdust_found_in_indexed.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "sample_vcf": [
@@ -86,15 +86,15 @@
                             "family_id": "family",
                             "sex": 1
                         },
-                        "test.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "test_strdust_found_in.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ]
             }
         ],
+        "timestamp": "2026-11-16T14:06:51.526886206",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-23T15:11:06.089477716"
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.4"
+        }
     }
 }

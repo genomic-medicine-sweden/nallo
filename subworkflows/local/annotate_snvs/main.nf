@@ -1,17 +1,17 @@
-include { ANNOTATE_CADD                       } from '../annotate_cadd/main'
-include { BCFTOOLS_VIEW                       } from '../../../modules/nf-core/bcftools/view/main'
-include { ECHTVAR_ANNO                        } from '../../../modules/local/echtvar/anno/main'
-include { ENSEMBLVEP_VEP as ENSEMBLVEP_SNV    } from '../../../modules/nf-core/ensemblvep/vep/main'
-include { TABIX_TABIX as TABIX_ENSEMBLVEP_SNV } from '../../../modules/nf-core/tabix/tabix/main'
+include { ANNOTATE_CADD                    } from '../annotate_cadd/main'
+include { BCFTOOLS_VIEW                    } from '../../../modules/nf-core/bcftools/view/main'
+include { ECHTVAR_ANNO                     } from '../../../modules/nf-core/echtvar/anno/main'
+include { ENSEMBLVEP_VEP as ENSEMBLVEP_SNV } from '../../../modules/nf-core/ensemblvep/vep/main'
+include { HTSLIB_BGZIPTABIX                } from '../../../modules/nf-core/htslib/bgziptabix/main'
 
 workflow ANNOTATE_SNVS {
     take:
     ch_vcf                   // channel: [mandatory] [ val(meta), path(vcf) ]
-    ch_echtvar_databases     // channel:  [optional] [ path(db) ]
+    ch_echtvar_databases     // channel:  [optional] [ val(meta), path(db) ]
     ch_fasta                 // channel: [mandatory] [ val(meta), path(fasta) ]
     ch_fai                   // channel: [mandatory] [ val(meta), path(fai) ]
     ch_vep_cache             // channel: [mandatory] [ val(meta), path(cache) ]
-    val_vep_cache_version    //  string: [mandatory] default: 110
+    val_vep_cache_version    //  string: [mandatory] default: 116
     ch_vep_extra_files       // channel: [mandatory] [ path(files) ]
     annotate_cadd            //    bool: [mandatory] should CADD be used to annotate indels
     annotate_echtvar         //    bool: [mandatory] should echtvar be used to annotate variants
@@ -26,14 +26,20 @@ workflow ANNOTATE_SNVS {
         ECHTVAR_ANNO(
             ch_vcf,
             ch_echtvar_databases,
+            'bcf.gz',
+        )
+
+        HTSLIB_BGZIPTABIX(
+            ECHTVAR_ANNO.out.vcf.map { meta, vcf -> [meta, vcf, [], []] },
+            'compress',
+            true,
+            'bcf',
         )
     }
 
     // Allows for filtering before annotating with VEP
     if (pre_vep_filter) {
-        (annotate_echtvar ? ECHTVAR_ANNO.out.bcf : ch_vcf)
-            .map { meta, vcf -> [meta, vcf, []] }
-            .set { ch_bcftools_view_input }
+        ch_bcftools_view_input = (annotate_echtvar ? ECHTVAR_ANNO.out.vcf : ch_vcf).map { meta, vcf -> [meta, vcf, []] }
 
         BCFTOOLS_VIEW(
             ch_bcftools_view_input,
@@ -50,7 +56,7 @@ workflow ANNOTATE_SNVS {
     if (annotate_cadd) {
         ANNOTATE_CADD(
             ch_fai,
-            pre_vep_filter ? BCFTOOLS_VIEW.out.vcf : annotate_echtvar ? ECHTVAR_ANNO.out.bcf : ch_vcf,
+            pre_vep_filter ? BCFTOOLS_VIEW.out.vcf : annotate_echtvar ? ECHTVAR_ANNO.out.vcf : ch_vcf,
             pre_vep_filter ? BCFTOOLS_VIEW.out.tbi : ch_vcf.map { meta, _vcf -> [meta, []] },
             ch_cadd_header,
             ch_cadd_resources,
@@ -58,9 +64,7 @@ workflow ANNOTATE_SNVS {
         )
     }
 
-    (annotate_cadd ? ANNOTATE_CADD.out.vcf : pre_vep_filter ? BCFTOOLS_VIEW.out.vcf : annotate_echtvar ? ECHTVAR_ANNO.out.bcf : ch_vcf)
-        .map { meta, vcf -> [meta, vcf, []] }
-        .set { ch_vep_in }
+    ch_vep_in = (annotate_cadd ? ANNOTATE_CADD.out.vcf : pre_vep_filter ? BCFTOOLS_VIEW.out.vcf : annotate_echtvar ? ECHTVAR_ANNO.out.vcf : ch_vcf).map { meta, vcf -> [meta, vcf, []] }
 
     // Always annotate with VEP
     ENSEMBLVEP_SNV(
@@ -71,13 +75,12 @@ workflow ANNOTATE_SNVS {
         ch_vep_cache,
         ch_fasta,
         ch_vep_extra_files,
-    )
-
-    TABIX_ENSEMBLVEP_SNV(
-        ENSEMBLVEP_SNV.out.vcf
+        [[], []],
     )
 
     emit:
-    vcf      = ENSEMBLVEP_SNV.out.vcf
-    tbi      = TABIX_ENSEMBLVEP_SNV.out.index
+    vep_annotated_vcf     = ENSEMBLVEP_SNV.out.vcf
+    vep_annotated_tbi     = ENSEMBLVEP_SNV.out.tbi
+    echtvar_annotated_vcf = annotate_echtvar ? HTSLIB_BGZIPTABIX.out.output : channel.empty()
+    echtvar_annotated_tbi = annotate_echtvar ? HTSLIB_BGZIPTABIX.out.index : channel.empty()
 }

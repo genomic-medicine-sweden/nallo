@@ -18,7 +18,7 @@ nextflow_workflow {
             }
 
         }
-        run("SAMTOOLS_FAIDX") {
+        run("SAMTOOLS_FAIDX", alias: "SAMTOOLS_FAIDX_SETUP") {
             script "../../../../modules/nf-core/samtools/faidx/main.nf"
             process {
                 """
@@ -67,7 +67,7 @@ nextflow_workflow {
                     [ id:'hg38' ],
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
-                input[1] = SAMTOOLS_FAIDX.out.fai
+                input[1] = SAMTOOLS_FAIDX_SETUP.out.fai
                 input[2] = channel.of([
                     [ id: 'vep_cache' ],
                     file(params.pipelines_testdata_base_path + 'reference/vep_cache_test_data.tar.gz', checkIfExists:true)
@@ -157,7 +157,7 @@ nextflow_workflow {
                     [ id:'hg38' ],
                     file(params.pipelines_testdata_base_path + 'reference/hg38.test.fa.gz', checkIfExists: true)
                 ])
-                input[1] = SAMTOOLS_FAIDX.out.fai
+                input[1] = SAMTOOLS_FAIDX_SETUP.out.fai
                 input[2] = channel.of([
                     [ id: 'vep_cache' ],
                     file(params.pipelines_testdata_base_path + 'reference/vep_cache_test_data.tar.gz', checkIfExists:true)

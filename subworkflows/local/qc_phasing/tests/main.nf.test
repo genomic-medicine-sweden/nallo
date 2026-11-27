@@ -28,7 +28,7 @@ nextflow_workflow {
             }
         }
 
-        run("BCFTOOLS_MERGE") {
+        run("BCFTOOLS_MERGE", alias: "BCFTOOLS_MERGE_SETUP") {
             script "../../../../modules/nf-core/bcftools/merge/main.nf"
             process {
                 """
@@ -56,7 +56,7 @@ nextflow_workflow {
                 script "../../../../subworkflows/local/longphase/main.nf"
                 process {
                     """
-                    input[0] = BCFTOOLS_MERGE.out.vcf
+                    input[0] = BCFTOOLS_MERGE_SETUP.out.vcf
                     input[1] = channel.empty()
                     input[2] = channel.of(
                         [
@@ -106,6 +106,7 @@ nextflow_workflow {
                 { assert workflow.out.phasing_blocks.size() == 2 },
                 { assert workflow.out.phasing_blocks_index.size() == 2 },
                 { assert workflow.out.haplotagging_stats.size() == 2 },
+                { assert workflow.out.haplotagging_arrow.size() == 2 },
                 { // Making sure that the samples are actually different
                     with(workflow.out.phasing_stats) {
                         assert path(get(0).get(1)).md5 != path(get(1).get(1)).md5
@@ -116,6 +117,7 @@ nextflow_workflow {
                     workflow.out.phasing_stats,
                     workflow.out.phasing_blocks,
                     workflow.out.phasing_blocks_index,
+                    workflow.out.haplotagging_arrow.collect { meta, arrow -> [meta, file(arrow).name] },
                     workflow.out.haplotagging_stats.collect { meta, file -> path(file).readLines()[0..-2]} // Last line contains timestamp
                 ).match() }
             )
@@ -177,7 +179,7 @@ nextflow_workflow {
                 script "../../../../subworkflows/local/longphase/main.nf"
                 process {
                     """
-                    input[0] = BCFTOOLS_MERGE.out.vcf
+                    input[0] = BCFTOOLS_MERGE_SETUP.out.vcf
                     input[1] = SAWFISH_JOINTCALL.out.vcf
                     input[2] = channel.of(
                         [
@@ -227,6 +229,7 @@ nextflow_workflow {
                 { assert workflow.out.phasing_blocks.size() == 2 },
                 { assert workflow.out.phasing_blocks_index.size() == 2 },
                 { assert workflow.out.haplotagging_stats.size() == 2 },
+                { assert workflow.out.haplotagging_arrow.size() == 2 },
                 { // Making sure that the samples are actually different
                     with(workflow.out.phasing_stats) {
                         assert path(get(0).get(1)).md5 != path(get(1).get(1)).md5
@@ -237,6 +240,7 @@ nextflow_workflow {
                     workflow.out.phasing_stats,
                     workflow.out.phasing_blocks,
                     workflow.out.phasing_blocks_index,
+                    workflow.out.haplotagging_arrow.collect { meta, arrow -> [meta, file(arrow).name] },
                     workflow.out.haplotagging_stats.collect { meta, file -> path(file).readLines()[0..-2]} // Last line contains timestamp
                 ).match() }
             )
@@ -252,7 +256,7 @@ nextflow_workflow {
                 script "../../../../subworkflows/local/longphase/main.nf"
                 process {
                     """
-                    input[0] = BCFTOOLS_MERGE.out.vcf
+                    input[0] = BCFTOOLS_MERGE_SETUP.out.vcf
                     input[1] = channel.empty()
                     input[2] = channel.of(
                         [
@@ -301,6 +305,7 @@ nextflow_workflow {
                 { assert workflow.out.phasing_blocks.size() == 2 },
                 { assert workflow.out.phasing_blocks_index.size() == 2 },
                 { assert workflow.out.haplotagging_stats.size() == 2 },
+                { assert workflow.out.haplotagging_arrow.size() == 2 },
                 { assert snapshot(workflow.out).match() }
             )
         }
@@ -361,7 +366,7 @@ nextflow_workflow {
                 script "../../../../subworkflows/local/longphase/main.nf"
                 process {
                     """
-                    input[0] = BCFTOOLS_MERGE.out.vcf
+                    input[0] = BCFTOOLS_MERGE_SETUP.out.vcf
                     input[1] = SAWFISH_JOINTCALL.out.vcf
                     input[2] = channel.of(
                         [
@@ -411,6 +416,7 @@ nextflow_workflow {
                 { assert workflow.out.phasing_blocks.size() == 2 },
                 { assert workflow.out.phasing_blocks_index.size() == 2 },
                 { assert workflow.out.haplotagging_stats.size() == 2 },
+                { assert workflow.out.haplotagging_arrow.size() == 2 },
                 { assert snapshot(workflow.out).match() }
             )
         }

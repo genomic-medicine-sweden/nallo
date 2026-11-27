@@ -33,13 +33,14 @@ nextflow_workflow {
                     [ id: 'project', num_intervals:1 ],
                     file(params.pipelines_testdata_base_path + 'testdata/NIST_deepvariant_norm.bcf', checkIfExists: true)
                 ])
-                input[1] = channel.of([
-                    file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)
+                input[1] = channel.value([
+                    [ id: 'db' ],
+                    [file(params.pipelines_testdata_base_path + 'reference/cadd.v1.6.hg38.test_data.zip', checkIfExists: true)]
                 ])
                 input[2] = PREPARE_REFERENCES.out.fasta
                 input[3] = PREPARE_REFERENCES.out.fai
                 input[4] = PREPARE_REFERENCES.out.vep_resources
-                input[5] = channel.value('110')
+                input[5] = channel.value(params.vep_cache_version as String)
                 input[6] = channel.of([
                     file(params.pipelines_testdata_base_path + 'reference/vep_plugin_files.csv', checkIfExists: true)
                 ]).splitCsv(header:true).map { row -> row.vep_files }.collect()
@@ -56,7 +57,7 @@ nextflow_workflow {
             script "../../annotate_consequence_pli/main.nf"
             process {
                 """
-                input[0] = ANNOTATE_SNVS.out.vcf
+                input[0] = ANNOTATE_SNVS.out.vep_annotated_vcf
                 input[1] = [
                     [ id: 'variant_consequences' ],
                     [ file(params.pipelines_testdata_base_path + 'reference/variant_consequences_v2.txt', checkIfExists: true) ]

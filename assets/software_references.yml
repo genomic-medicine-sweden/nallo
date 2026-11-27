@@ -42,8 +42,8 @@ tool:
     citation: "chromograph (Laaksonen et al. 2019)"
     bibliography: ""
 
-  clean_sniffles:
-    citation: "clean_sniffles (Eisfeldt 2024)"
+  vep_prep_sv:
+    citation: "vep_prep_sv"
     bibliography: ""
   cramino:
     citation: "cramino (De Coster & Rademakers 2023)"
@@ -96,6 +96,9 @@ tool:
   hiphase:
     citation: "HiPhase (Holt et al. 2024)"
     bibliography: "James M Holt, Christopher T Saunders, William J Rowell, Zev Kronenberg, Aaron M Wenger, Michael Eberle, HiPhase: jointly phasing small, structural, and tandem repeat variants from HiFi sequencing, Bioinformatics, Volume 40, Issue 2, February 2024, btae042, https://doi.org/10.1093/bioinformatics/btae042"
+  htslib:
+    citation: "HTSlib (Bonfield et al. 2021)"
+    bibliography: "Bonfield JK, Marshall J, Danecek P, et al. HTSlib: C library for reading/writing high-throughput sequencing data. Gigascience. 2021;10(2):giab007. doi:10.1093/gigascience/giab007"
   longphase:
     citation: "LongPhase (Lin et al. 2024)"
     bibliography: "Jyun-Hong Lin, Liang-Chi Chen, Shu-Chi Yu, Yao-Ting Huang, LongPhase: an ultra-fast chromosome-scale phasing algorithm for small and large variants, Bioinformatics, Volume 38, Issue 7, March 2022, Pages 1816–1822, https://doi.org/10.1093/bioinformatics/btac058"
@@ -144,9 +147,12 @@ tool:
   sawfish:
     citation: "Sawfish (Saunders et al. 2025)"
     bibliography: "Christopher T Saunders, James M Holt, Daniel N Baker, Juniper A Lake, Jonathan R Belyeu, Zev Kronenberg, William J Rowell, Michael A Eberle, Sawfish: improving long-read structural variant discovery and genotyping with local haplotype modeling, Bioinformatics, Volume 41, Issue 4, April 2025, btaf136, https://doi.org/10.1093/bioinformatics/btaf136"
+  debreak:
+    citation: "DeBreak (Jiang et al. 2023)"
+    bibliography: "Jiang, T., Liu, B., Jiang, W. et al. Long-read sequencing-based structural variation detection with debreak. Nat Commun 14, 7658 (2023). https://doi.org/10.1038/s41467-023-35996-1"
   sniffles:
-    citation: "Sniffles (Sedlazeck et al. 2018)"
-    bibliography: "Sedlazeck, F.J., Rescheneder, P., Smolka, M. et al. Accurate detection of complex structural variations using single-molecule sequencing. Nat Methods 15, 461-468 (2018). https://doi.org/10.1038/s41592-018-0001-7"
+    citation: "Sniffles (Sedlazeck et al. 2018; Smolka et al. 2024)"
+    bibliography: "Sedlazeck, F.J., Rescheneder, P., Smolka, M. et al. Accurate detection of complex structural variations using single-molecule sequencing. Nat Methods 15, 461-468 (2018). https://doi.org/10.1038/s41592-018-0001-7; Smolka, M., Paulin, L.F., Grochowski, C.M. et al. Detection of mosaic and population-level structural variants with Sniffles2. Nat Biotechnol 42, 1571-1580 (2024). https://doi.org/10.1038/s41587-023-02024-y"
   severus:
     citation: "Severus (Keskus et al. 2024)"
     bibliography: "Ayse Keskus, Asher Bryant, Tanveer Ahmad, Byunggil Yoo, Sergey Aganezov, Anton Goretsky, Ataberk Donmez, Lisa A. Lansdon, Isabel Rodriguez, Jimin Park, Yuelin Liu, Xiwen Cui, Joshua Gardner, Brandy McNulty, Samuel Sacco, Jyoti Shetty, Yongmei Zhao, Bao Tran, Giuseppe Narzisi, Adrienne Helland, Daniel E. Cook, Pi-Chuan Chang, Alexey Kolesnikov, Andrew Carroll, Erin K. Molloy, Irina Pushel, Erin Guest, Tomi Pastinen, Kishwar Shafin, Karen H. Miga, Salem Malikic, Chi-Ping Day, Nicolas Robine, Cenk Sahinalp, Michael Dean, Midhat S. Farooqi, Benedict Paten, Mikhail Kolmogorov. Severus: accurate detection and characterization of somatic structural variation in tumor genomes using long reads. medRxiv 2024.03.22.24304756; doi: https://doi.org/10.1101/2024.03.22.24304756"
@@ -186,6 +192,9 @@ tool:
   vcfexpress:
     citation: "Vcfexpress (Pedersen & Quinlan 2020)"
     bibliography: "Pedersen BS, Quinlan AR. Vcfexpress: a high-performance variant manipulation tool. Bioinformatics. 2020;36(1):259-260. doi:10.1093/bioinformatics/btz483"
+  xz:
+    citation: "XZ Utils"
+    bibliography: ""
   yak:
     citation: "yak"
     bibliography: ""
@@ -195,6 +204,36 @@ tool:
   perl-math-cdf:
     citation: "perl-math-cdf"
     bibliography: ""
+  portello:
+    citation: "Portello (Saunders et al. 2025)"
+    bibliography: "Saunders, C., Kronenberg, Z., Holt, J., Rowell, W., & Eberle, M. (2025). Portello: Making global assembly more effective for rare-disease WGS. CSHL Genome Informatics, CSHL. Zenodo."
+  coreutils:
+    citation: "GNU coreutils"
+    bibliography: ""
+  find:
+    citation: "find/concatenate"
+    bibliography: ""
+  gatk:
+    citation: "GATK (Van der Auwera & O'Connor 2020)"
+    bibliography: "Van der Auwera GA & O'Connor BD. (2020). Genomics in the Cloud: Using Docker, GATK, and WDL in Terra (1st Edition). O'Reilly Media."
+  mitorsaw:
+    citation: "Mitorsaw"
+    bibliography: ""
   csvtk:
     citation: "csvtk"
     bibliography: "Wei Shen (2026) csvtk: a cross-platform, efficient and practical CSV/TSV toolkit. https://github.com/shenwei356/csvtk"
+  pbmm2:
+    citation: "pbmm2 (Li 2022)"
+    bibliography: "Li H. pbmm2: PacBio's implementation of minimap2 for PacBio data. Bioinformatics. 2022;38(10):2621-2623. doi:10.1093/bioinformatics/btac123"
+  mm2plus:
+    citation: "mm2plus (Chandra et al. 2024)"
+    bibliography: "Ghanshyam Chandra, Md Vasimuddin, Sanchit Misra and Chirag Jain. Accelerating whole-genome alignment in the age of complete genome assemblies. bioRxiv 2024. doi: https://doi.org/10.1101/2024.11.25.625328"
+  kivvi:
+    citation: "kivvi (Chen et al. 2026)"
+    bibliography: "Chen Xiao, Lemmers Richard, Kronenberg Zev, Devaney Joseph, Noya Jessica, Berlyoung April, Yusuff Shamila, Lynch Solomon, Nykamp Keith, Lyndy Amanda, Dolzhenko Egor, Maarel Silvere, Eberle Michael. Resolution of the D4Z4 repeat responsible for facioscapulohumeral muscular dystrophy with HiFi sequencing. bioRxiv. doi: 10.64898/2026.04.10.717730"
+  collapse_mitochondrial_gt:
+    citation: "collapse_mitochondrial_gt"
+    bibliography: ""
+  gzip:
+    citation: "gzip"
+    bibliography: ""

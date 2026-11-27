@@ -1,0 +1,48 @@
+{
+    "1 sample": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "HG002_Revio",
+                        "family_id": "FAM",
+                        "sex": 1,
+                        "sv_caller": "debreak",
+                        "needs_reheader": true,
+                        "skip_vep_prep": false
+                    },
+                    "e502d2147f4b3b00450c5d8f0fc5ec79"
+                ]
+            ]
+        ],
+        "timestamp": "2026-09-15T17:00:12.58527714",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
+    "1 sample - stub": {
+        "content": [
+            {
+                "vcf": [
+                    [
+                        {
+                            "family_id": "FAM",
+                            "id": "HG002_Revio",
+                            "needs_reheader": true,
+                            "sex": 1,
+                            "skip_vep_prep": false,
+                            "sv_caller": "debreak"
+                        },
+                        "HG002_Revio_debreak_for_reheader.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-09-15T17:00:03.95841257",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    }
+}

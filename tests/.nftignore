@@ -36,3 +36,4 @@ repeats/**/*.{vcf.gz,tbi,bam,bai,cram,crai}
 snvs/**/*.{vcf.gz,tbi}
 svs/**/*.{vcf.gz,tbi}
 paraphase/**/*.{vcf.gz,tbi,bam,bai,cram,crai,json}
+kivvi/**/*.{json,svg}

@@ -6,147 +6,147 @@
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_combined.bed.gz:md5,bd708105f0971c5cf5179e0acd6ba87b"
+                        "HG002_modkit_pileup_combined_indexed.bed.gz:md5,7e756f5347ddb54b78f6b0941ef24f77"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_hp1.bed.gz:md5,10ccd369659c2c8da00f4132c9419c1e"
+                        "HG002_modkit_pileup_hp1_indexed.bed.gz:md5,3f12cbd2e85a88df7247f78c3b5c5c2b"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_hp2.bed.gz:md5,d3d3b476313ce028561e764d0f7a88ff"
+                        "HG002_modkit_pileup_hp2_indexed.bed.gz:md5,41723af80e1ab93d156e1e89961343ac"
                     ]
                 ],
                 "1": [
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_combined.bed.gz.tbi:md5,7645a2d740824e2a67d832c2978af453"
+                        "HG002_modkit_pileup_combined_indexed.bed.gz.tbi:md5,868af9e42725f6803e0ea0c994ce43d8"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_hp1.bed.gz.tbi:md5,50031563fdff1fb928010e222973508d"
+                        "HG002_modkit_pileup_hp1_indexed.bed.gz.tbi:md5,1cc886862cfefd686a2b6e479f5653df"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_hp2.bed.gz.tbi:md5,37745a1a80c32a2861fbbc5e7ba63e70"
+                        "HG002_modkit_pileup_hp2_indexed.bed.gz.tbi:md5,eee7f62c330e0682680d09e68ce7e1a4"
                     ]
                 ],
                 "2": [
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_combined.bw:md5,0074b79dc647ac737ddf27cf699480c8"
+                        "HG002_modkit_pileup_combined.bw:md5,0afad3b3eee0c8d4e402e13b5871cf9c"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_hp1.bw:md5,075961eff9ee156c86a15d7e7c6ab548"
+                        "HG002_modkit_pileup_hp1.bw:md5,259089eb8d5c4f472c4f0f9cfcdaa9dd"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_hp2.bw:md5,4c9a4d8e4bd86b1fdf48d90d66ad98a5"
+                        "HG002_modkit_pileup_hp2.bw:md5,d076b83debcf3063024ed13ddb89e87d"
                     ]
                 ],
                 "bed": [
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_combined.bed.gz:md5,bd708105f0971c5cf5179e0acd6ba87b"
+                        "HG002_modkit_pileup_combined_indexed.bed.gz:md5,7e756f5347ddb54b78f6b0941ef24f77"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_hp1.bed.gz:md5,10ccd369659c2c8da00f4132c9419c1e"
+                        "HG002_modkit_pileup_hp1_indexed.bed.gz:md5,3f12cbd2e85a88df7247f78c3b5c5c2b"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_hp2.bed.gz:md5,d3d3b476313ce028561e764d0f7a88ff"
+                        "HG002_modkit_pileup_hp2_indexed.bed.gz:md5,41723af80e1ab93d156e1e89961343ac"
                     ]
                 ],
                 "bigwig": [
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_combined.bw:md5,0074b79dc647ac737ddf27cf699480c8"
+                        "HG002_modkit_pileup_combined.bw:md5,0afad3b3eee0c8d4e402e13b5871cf9c"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_hp1.bw:md5,075961eff9ee156c86a15d7e7c6ab548"
+                        "HG002_modkit_pileup_hp1.bw:md5,259089eb8d5c4f472c4f0f9cfcdaa9dd"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_hp2.bw:md5,4c9a4d8e4bd86b1fdf48d90d66ad98a5"
+                        "HG002_modkit_pileup_hp2.bw:md5,d076b83debcf3063024ed13ddb89e87d"
                     ]
                 ],
                 "tbi": [
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_combined.bed.gz.tbi:md5,7645a2d740824e2a67d832c2978af453"
+                        "HG002_modkit_pileup_combined_indexed.bed.gz.tbi:md5,868af9e42725f6803e0ea0c994ce43d8"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_hp1.bed.gz.tbi:md5,50031563fdff1fb928010e222973508d"
+                        "HG002_modkit_pileup_hp1_indexed.bed.gz.tbi:md5,1cc886862cfefd686a2b6e479f5653df"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_hp2.bed.gz.tbi:md5,37745a1a80c32a2861fbbc5e7ba63e70"
+                        "HG002_modkit_pileup_hp2_indexed.bed.gz.tbi:md5,eee7f62c330e0682680d09e68ce7e1a4"
                     ]
                 ]
             }
         ],
+        "timestamp": "2026-11-17T13:30:47.51704964",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:45:05.357386535"
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.4"
+        }
     },
     "1 sample - bed unphased - stub": {
         "content": [
@@ -157,7 +157,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_modkit_pileup.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_modkit_pileup_indexed.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "1": [
@@ -166,7 +166,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_modkit_pileup.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_modkit_pileup_indexed.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
@@ -178,7 +178,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_modkit_pileup.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_modkit_pileup_indexed.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "bigwig": [
@@ -190,16 +190,16 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_modkit_pileup.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_modkit_pileup_indexed.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ]
             }
         ],
+        "timestamp": "2026-11-17T13:32:34.026345222",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:46:43.44710899"
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.4"
+        }
     },
     "1 sample - [] unphased - stub": {
         "content": [
@@ -210,7 +210,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_modkit_pileup.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_modkit_pileup_indexed.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "1": [
@@ -219,7 +219,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_modkit_pileup.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_modkit_pileup_indexed.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
@@ -231,7 +231,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_modkit_pileup.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_modkit_pileup_indexed.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "bigwig": [
@@ -243,16 +243,16 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_modkit_pileup.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_modkit_pileup_indexed.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ]
             }
         ],
+        "timestamp": "2026-11-17T13:32:20.941105526",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:46:30.180086909"
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.4"
+        }
     },
     "1 sample - [] phased - stub": {
         "content": [
@@ -261,18 +261,18 @@
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_modkit_pileup_indexed.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "1": [
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_modkit_pileup_indexed.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
@@ -282,9 +282,9 @@
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_modkit_pileup_indexed.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "bigwig": [
@@ -294,18 +294,18 @@
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_modkit_pileup_indexed.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ]
             }
         ],
+        "timestamp": "2026-11-17T13:31:47.924203449",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:46:02.481677603"
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.4"
+        }
     },
     "1 sample - [] unphased": {
         "content": [
@@ -316,7 +316,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_modkit_pileup.bed.gz:md5,67cd9fa3c333ea5cf0134ada729ce558"
+                        "HG002_modkit_pileup_indexed.bed.gz:md5,7e756f5347ddb54b78f6b0941ef24f77"
                     ]
                 ],
                 "1": [
@@ -325,7 +325,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_modkit_pileup.bed.gz.tbi:md5,fc44e2cbc025dcf65dff4cd63d74be04"
+                        "HG002_modkit_pileup_indexed.bed.gz.tbi:md5,868af9e42725f6803e0ea0c994ce43d8"
                     ]
                 ],
                 "2": [
@@ -334,7 +334,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_modkit_pileup.bw:md5,ac0d38a6146944334a201853c2a582cc"
+                        "HG002_modkit_pileup.bw:md5,0afad3b3eee0c8d4e402e13b5871cf9c"
                     ]
                 ],
                 "bed": [
@@ -343,7 +343,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_modkit_pileup.bed.gz:md5,67cd9fa3c333ea5cf0134ada729ce558"
+                        "HG002_modkit_pileup_indexed.bed.gz:md5,7e756f5347ddb54b78f6b0941ef24f77"
                     ]
                 ],
                 "bigwig": [
@@ -352,7 +352,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_modkit_pileup.bw:md5,ac0d38a6146944334a201853c2a582cc"
+                        "HG002_modkit_pileup.bw:md5,0afad3b3eee0c8d4e402e13b5871cf9c"
                     ]
                 ],
                 "tbi": [
@@ -361,16 +361,16 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_modkit_pileup.bed.gz.tbi:md5,fc44e2cbc025dcf65dff4cd63d74be04"
+                        "HG002_modkit_pileup_indexed.bed.gz.tbi:md5,868af9e42725f6803e0ea0c994ce43d8"
                     ]
                 ]
             }
         ],
+        "timestamp": "2026-11-17T13:31:02.960202875",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:45:19.031256013"
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.4"
+        }
     },
     "1 sample - bed phased": {
         "content": [
@@ -379,119 +379,119 @@
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_combined.bed.gz:md5,f1a2fcef218abb83cf6f62954b64b414"
+                        "HG002_modkit_pileup_combined_indexed.bed.gz:md5,0cedc523ad93f257a8f686bb5b274759"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_hp1.bed.gz:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_modkit_pileup_hp1_indexed.bed.gz:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_hp2.bed.gz:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_modkit_pileup_hp2_indexed.bed.gz:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "1": [
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_combined.bed.gz.tbi:md5,961a2339fa8d6a711567a8726f279f3b"
+                        "HG002_modkit_pileup_combined_indexed.bed.gz.tbi:md5,9dd2223a7e86f6df9d936778497c1e01"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_hp1.bed.gz.tbi:md5,ec06685d85d15d8f118a789a9ccc42ad"
+                        "HG002_modkit_pileup_hp1_indexed.bed.gz.tbi:md5,ec06685d85d15d8f118a789a9ccc42ad"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_hp2.bed.gz.tbi:md5,ec06685d85d15d8f118a789a9ccc42ad"
+                        "HG002_modkit_pileup_hp2_indexed.bed.gz.tbi:md5,ec06685d85d15d8f118a789a9ccc42ad"
                     ]
                 ],
                 "2": [
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_combined.bw:md5,1a576df86c653462aab6f0b26f20a523"
+                        "HG002_modkit_pileup_combined.bw:md5,4a497de45d4fbe04c3555a6b7cc40438"
                     ]
                 ],
                 "bed": [
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_combined.bed.gz:md5,f1a2fcef218abb83cf6f62954b64b414"
+                        "HG002_modkit_pileup_combined_indexed.bed.gz:md5,0cedc523ad93f257a8f686bb5b274759"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_hp1.bed.gz:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_modkit_pileup_hp1_indexed.bed.gz:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_hp2.bed.gz:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_modkit_pileup_hp2_indexed.bed.gz:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "bigwig": [
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_combined.bw:md5,1a576df86c653462aab6f0b26f20a523"
+                        "HG002_modkit_pileup_combined.bw:md5,4a497de45d4fbe04c3555a6b7cc40438"
                     ]
                 ],
                 "tbi": [
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_combined.bed.gz.tbi:md5,961a2339fa8d6a711567a8726f279f3b"
+                        "HG002_modkit_pileup_combined_indexed.bed.gz.tbi:md5,9dd2223a7e86f6df9d936778497c1e01"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_hp1.bed.gz.tbi:md5,ec06685d85d15d8f118a789a9ccc42ad"
+                        "HG002_modkit_pileup_hp1_indexed.bed.gz.tbi:md5,ec06685d85d15d8f118a789a9ccc42ad"
                     ],
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup_hp2.bed.gz.tbi:md5,ec06685d85d15d8f118a789a9ccc42ad"
+                        "HG002_modkit_pileup_hp2_indexed.bed.gz.tbi:md5,ec06685d85d15d8f118a789a9ccc42ad"
                     ]
                 ]
             }
         ],
+        "timestamp": "2026-11-17T13:31:19.916843693",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:45:34.287334374"
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.4"
+        }
     },
     "1 sample - bed phased - stub": {
         "content": [
@@ -500,18 +500,18 @@
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_modkit_pileup_indexed.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "1": [
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_modkit_pileup_indexed.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
@@ -521,9 +521,9 @@
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                        "HG002_modkit_pileup_indexed.bed.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
                     ]
                 ],
                 "bigwig": [
@@ -533,18 +533,18 @@
                     [
                         {
                             "id": "HG002",
-                            "family_id": "HG002"
+                            "family_id": "FAM"
                         },
-                        "HG002_modkit_pileup.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HG002_modkit_pileup_indexed.bed.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ]
             }
         ],
+        "timestamp": "2026-11-17T13:32:03.901918988",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:46:16.612189381"
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.4"
+        }
     },
     "1 sample - bed unphased": {
         "content": [
@@ -555,7 +555,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_modkit_pileup.bed.gz:md5,f1a2fcef218abb83cf6f62954b64b414"
+                        "HG002_modkit_pileup_indexed.bed.gz:md5,0cedc523ad93f257a8f686bb5b274759"
                     ]
                 ],
                 "1": [
@@ -564,7 +564,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_modkit_pileup.bed.gz.tbi:md5,961a2339fa8d6a711567a8726f279f3b"
+                        "HG002_modkit_pileup_indexed.bed.gz.tbi:md5,9dd2223a7e86f6df9d936778497c1e01"
                     ]
                 ],
                 "2": [
@@ -573,7 +573,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_modkit_pileup.bw:md5,1a576df86c653462aab6f0b26f20a523"
+                        "HG002_modkit_pileup.bw:md5,4a497de45d4fbe04c3555a6b7cc40438"
                     ]
                 ],
                 "bed": [
@@ -582,7 +582,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_modkit_pileup.bed.gz:md5,f1a2fcef218abb83cf6f62954b64b414"
+                        "HG002_modkit_pileup_indexed.bed.gz:md5,0cedc523ad93f257a8f686bb5b274759"
                     ]
                 ],
                 "bigwig": [
@@ -591,7 +591,7 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_modkit_pileup.bw:md5,1a576df86c653462aab6f0b26f20a523"
+                        "HG002_modkit_pileup.bw:md5,4a497de45d4fbe04c3555a6b7cc40438"
                     ]
                 ],
                 "tbi": [
@@ -600,15 +600,15 @@
                             "id": "HG002",
                             "family_id": "HG002"
                         },
-                        "HG002_modkit_pileup.bed.gz.tbi:md5,961a2339fa8d6a711567a8726f279f3b"
+                        "HG002_modkit_pileup_indexed.bed.gz.tbi:md5,9dd2223a7e86f6df9d936778497c1e01"
                     ]
                 ]
             }
         ],
+        "timestamp": "2026-11-17T13:31:34.700726884",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-27T16:45:48.594445792"
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.4"
+        }
     }
 }

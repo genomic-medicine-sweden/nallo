@@ -15,10 +15,22 @@
                 "meta": ["id"]
             },
             "file": {
-                "format": "file-path",
-                "type": "string",
-                "pattern": "^\\S+\\.(f(ast)?q\\.gz|bam)$",
-                "errorMessage": "FastQ or BAM file must be provided, cannot contain spaces and must have extension '.fq.gz', '.fastq.gz' or '.bam'"
+                "anyOf": [
+                    {
+                        "type": "string",
+                        "format": "file-path",
+                        "pattern": "^\\S+\\.(f(ast)?q\\.gz|bam)$"
+                    },
+                    {
+                        "type": "string",
+                        "enum": ["0"]
+                    },
+                    {
+                        "type": "integer",
+                        "enum": [0]
+                    }
+                ],
+                "errorMessage": "FastQ or BAM file must have extension '.fq.gz', '.fastq.gz' or '.bam', or use '0' when providing an aligned BAM via the aligned_bam column"
             },
             "family_id": {
                 "type": "string",
@@ -71,6 +83,63 @@
                 "pattern": "^\\S+$",
                 "errorMessage": "Project name must be provided and cannot contain spaces, needs to be the same for all samples",
                 "meta": ["project"]
+            },
+            "aligned_bam": {
+                "anyOf": [
+                    {
+                        "type": "string",
+                        "format": "file-path",
+                        "pattern": "^\\S+\\.bam$"
+                    },
+                    {
+                        "type": "string",
+                        "enum": ["0"]
+                    },
+                    {
+                        "type": "integer",
+                        "enum": [0]
+                    }
+                ],
+                "errorMessage": "aligned_bam must have extension '.bam'. Set to '0' on rows that do not provide an aligned BAM (required when the column is present in the header). The column can be omitted entirely from samplesheets where all samples start from FASTQ or uBAM.",
+                "meta": ["aligned_bam"]
+            },
+            "snv_vcf": {
+                "anyOf": [
+                    {
+                        "type": "string",
+                        "format": "file-path",
+                        "pattern": "^\\S+\\.vcf\\.gz$"
+                    },
+                    {
+                        "type": "string",
+                        "enum": ["0"]
+                    },
+                    {
+                        "type": "integer",
+                        "enum": [0]
+                    }
+                ],
+                "errorMessage": "snv_vcf must be bgzipped (.vcf.gz). Set to '0' on rows that do not provide a SNV VCF (required when the column is present in the header). The column can be omitted entirely from samplesheets that never use vcf entry_point.",
+                "meta": ["snv_vcf"]
+            },
+            "sv_vcf": {
+                "anyOf": [
+                    {
+                        "type": "string",
+                        "format": "file-path",
+                        "pattern": "^\\S+\\.vcf\\.gz$"
+                    },
+                    {
+                        "type": "string",
+                        "enum": ["0"]
+                    },
+                    {
+                        "type": "integer",
+                        "enum": [0]
+                    }
+                ],
+                "errorMessage": "sv_vcf must be bgzipped (.vcf.gz). Set to '0' on rows that do not provide a SV VCF (required when the column is present in the header). The column can be omitted entirely from samplesheets that never use vcf entry_point.",
+                "meta": ["sv_vcf"]
             }
         },
         "required": ["sample", "file", "family_id", "paternal_id", "maternal_id", "sex", "phenotype", "project"]

@@ -8,7 +8,7 @@ include { BCFTOOLS_VIEW                        } from '../../../modules/nf-core/
 include { CADD                                 } from '../../../modules/nf-core/cadd/main'
 include { GAWK as REFERENCE_TO_CADD_CHRNAMES   } from '../../../modules/nf-core/gawk/main'
 include { GAWK as CADD_TO_REFERENCE_CHRNAMES   } from '../../../modules/nf-core/gawk/main'
-include { TABIX_TABIX as TABIX_CADD            } from '../../../modules/nf-core/tabix/tabix/main'
+include { HTSLIB_BGZIPTABIX as TABIX_CADD      } from '../../../modules/nf-core/htslib/bgziptabix/main'
 
 workflow ANNOTATE_CADD {
     take:
@@ -21,25 +21,24 @@ workflow ANNOTATE_CADD {
 
     main:
     REFERENCE_TO_CADD_CHRNAMES(
-        ch_fai,
+        ch_fai.map { meta, fai -> [meta, fai, 'txt'] },
         [],
         false,
     )
 
     CADD_TO_REFERENCE_CHRNAMES(
-        ch_fai,
+        ch_fai.map { meta, fai -> [meta, fai, 'txt'] },
         [],
         false,
     )
 
-    ch_vcf
+    ch_rename_chrnames_in = ch_vcf
         .join(ch_index, failOnMismatch: true, failOnDuplicate: true)
         .map { meta, vcf, tbi -> [meta, vcf, tbi, [], [], [], []] }
         .combine(REFERENCE_TO_CADD_CHRNAMES.out.output.map { _meta, txt -> txt })
-        .set { rename_chrnames_in }
 
     RENAME_CHRNAMES(
-        rename_chrnames_in,
+        ch_rename_chrnames_in
     )
 
     BCFTOOLS_VIEW(
@@ -51,21 +50,25 @@ workflow ANNOTATE_CADD {
 
     CADD(BCFTOOLS_VIEW.out.vcf, ch_cadd_resources, ch_cadd_prescored_indels)
 
-    TABIX_CADD(CADD.out.tsv)
+    TABIX_CADD(
+        CADD.out.tsv.map { meta, tsv -> [meta, tsv, [], []] },
+        'compress',
+        true,
+        'tsv',
+    )
 
-    RENAME_CHRNAMES.out.vcf
-        .join(CADD.out.tsv, failOnMismatch: true, failOnDuplicate: true)
+    ch_annotate_indels_in = RENAME_CHRNAMES.out.vcf
+        .join(TABIX_CADD.out.output, failOnMismatch: true, failOnDuplicate: true)
         .join(TABIX_CADD.out.index, failOnMismatch: true, failOnDuplicate: true)
         .map { meta, vcf, annotations, annotations_index -> [meta, vcf, [], annotations, annotations_index, []] }
         .combine(ch_header.map { _meta, header -> header })
         .combine(CADD_TO_REFERENCE_CHRNAMES.out.output.map { _meta, txt -> txt })
-        .set { ch_annotate_indels_in }
 
     ANNOTATE_INDELS(
-        ch_annotate_indels_in,
+        ch_annotate_indels_in
     )
 
     emit:
-    vcf      = ANNOTATE_INDELS.out.vcf // channel: [ val(meta), path(vcf) ]
-    tbi      = ANNOTATE_INDELS.out.tbi // channel: [ val(meta), path(tbi) ]
+    vcf = ANNOTATE_INDELS.out.vcf // channel: [ val(meta), path(vcf) ]
+    tbi = ANNOTATE_INDELS.out.tbi // channel: [ val(meta), path(tbi) ]
 }

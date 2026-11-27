@@ -1,0 +1,130 @@
+{
+    "1 sample, no MAF track - stub": {
+        "content": [
+            {
+                "copynum_bedgraph": [
+                    [
+                        {
+                            "family_id": "FAM",
+                            "id": "test"
+                        },
+                        "copynum.bedgraph:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "depth_bw": [
+                    [
+                        {
+                            "family_id": "FAM",
+                            "id": "test"
+                        },
+                        "depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "gc_bias_corrected_depth_bw": [
+                    [
+                        {
+                            "family_id": "FAM",
+                            "id": "test"
+                        },
+                        "gc_bias_corrected_depth.bw:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "maf_bw": [
+                    
+                ],
+                "tbi": [
+                    [
+                        {
+                            "family_id": "FAM",
+                            "id": "FAM",
+                            "needs_reheader": false,
+                            "skip_vep_prep": true,
+                            "sv_caller": "sawfish"
+                        },
+                        "FAM_sawfish_sv_genotyped.sv.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "vcf": [
+                    [
+                        {
+                            "family_id": "FAM",
+                            "id": "FAM",
+                            "needs_reheader": false,
+                            "skip_vep_prep": true,
+                            "sv_caller": "sawfish"
+                        },
+                        "FAM_sawfish_sv_genotyped.sv.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-09-15T17:00:34.253688086",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
+    "1 sample, no MAF track": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "FAM",
+                        "family_id": "FAM",
+                        "sv_caller": "sawfish",
+                        "needs_reheader": false,
+                        "skip_vep_prep": true
+                    },
+                    "FAM_sawfish_sv_genotyped.sv.vcf.gz"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "FAM",
+                        "family_id": "FAM",
+                        "sv_caller": "sawfish",
+                        "needs_reheader": false,
+                        "skip_vep_prep": true
+                    },
+                    "FAM_sawfish_sv_genotyped.sv.vcf.gz.tbi"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "depth.bw:md5,0f2388d565456986f628932e6a1e1778"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "copynum.bedgraph:md5,035508c2ed50050144632a54b60453eb"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "gc_bias_corrected_depth.bw:md5,0f2388d565456986f628932e6a1e1778"
+                ]
+            ],
+            [
+                
+            ]
+        ],
+        "timestamp": "2026-09-15T17:00:43.679297844",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    }
+}

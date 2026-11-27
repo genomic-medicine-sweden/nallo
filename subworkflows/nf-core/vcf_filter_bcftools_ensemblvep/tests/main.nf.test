@@ -8,9 +8,12 @@ nextflow_workflow {
     tag "subworkflows"
     tag "subworkflows_nfcore"
     tag "subworkflows/vcf_filter_bcftools_ensemblvep"
+    tag "bcftools"
     tag "bcftools/view"
+    tag "ensemblvep"
     tag "ensemblvep/filtervep"
-    tag "tabix/bgziptabix"
+    tag "htslib"
+    tag "htslib/bgziptabix"
 
     test("vcf, hgnc_ids - filter on expression") {
 
@@ -34,7 +37,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    .collect { it instanceof String ? path(it).yaml : it },
+                    workflow.out.versions.collect { it instanceof String ? path(it).yaml : it },
                     file(workflow.out.tbi[0][1]).name,
                     path(workflow.out.vcf[0][1]).vcf.variantsMD5,
                     path(workflow.out.vcf[0][1]).vcf.summary,
@@ -65,7 +68,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    .collect { it instanceof String ? path(it).yaml : it },
+                    workflow.out.versions.collect { it instanceof String ? path(it).yaml : it },
                     file(workflow.out.tbi[0][1]).name,
                     path(workflow.out.vcf[0][1]).vcf.variantsMD5,
                     path(workflow.out.vcf[0][1]).vcf.summary,
@@ -96,7 +99,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    .collect { it instanceof String ? path(it).yaml : it },
+                    workflow.out.versions.collect { it instanceof String ? path(it).yaml : it },
                     file(workflow.out.tbi[0][1]).name,
                     path(workflow.out.vcf[0][1]).vcf.variantsMD5,
                     path(workflow.out.vcf[0][1]).vcf.summary,

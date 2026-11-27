@@ -1,0 +1,1735 @@
+{
+    "1 sample - SNVs only - Whatshap - bam output - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_whatshap_phase.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_whatshap_phase.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "10": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino.arrow:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    
+                ],
+                "3": [
+                    
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_whatshap_haplotag.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "HG002_whatshap_haplotag.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "5": [
+                    
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_whatshap_stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "9": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "blocks": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "blocks_index": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "haplotagged_bam_bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_whatshap_haplotag.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "HG002_whatshap_haplotag.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "haplotagged_cram_crai": [
+                    
+                ],
+                "haplotagging_arrow": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino.arrow:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "haplotagging_stats": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "phased_family_snvs": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_whatshap_phase.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "phased_family_snvs_tbi": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_whatshap_phase.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "phased_family_svs": [
+                    
+                ],
+                "phased_family_svs_tbi": [
+                    
+                ],
+                "stats": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_whatshap_stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-08T13:09:36.974051363",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.4"
+        }
+    },
+    "1 sample - SNVs only - Hiphase - bam output": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "FAM"
+                    },
+                    "FAM_hiphase_snv_phased.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=169, phased=false, phasedAutodetect=false]",
+                    "76f36e0c1c6e484aa3e4520862609ccf"
+                ]
+            ],
+            "FAM_hiphase_snv_phased.vcf.gz.tbi",
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_PacBio_Revio_haplotagged.bam:md5,8a974a28fcdab98f4d751e4202850fce",
+                    "HG002_PacBio_Revio_haplotagged.bam.bai:md5,ab8ec29cbca9bf749ba37803249ff64e"
+                ]
+            ],
+            [
+                
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_whatshap_stats.tsv:md5,5737a4e56e2adff2c3e985a6a2b66339"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002.gtf.gz:md5,072b94b49e22c91ce228fd7af61478f9"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002.gtf.gz.tbi:md5,d7f6a35681a1f666c917ec58d1f6800c"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_cramino.txt",
+                    "d2ca4af553c68064d8d3ecba4eb2cd34"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_cramino.arrow"
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-17T13:44:28.643972257",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.4"
+        }
+    },
+    "1 sample - SNVs only - Whatshap - bam output": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "FAM"
+                    },
+                    "FAM_whatshap_phase.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=169, phased=false, phasedAutodetect=false]",
+                    "26a12e1137e18ee25afb458306773433"
+                ]
+            ],
+            "FAM_whatshap_phase.vcf.gz.tbi",
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_whatshap_haplotag.bam:md5,a97a893068343cd4c0cefed0b54b1c83",
+                    "HG002_whatshap_haplotag.bam.bai:md5,defc32743c1d1acf391640a2b0acd7ea"
+                ]
+            ],
+            [
+                
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_whatshap_stats.tsv:md5,ceed1d55b400ac6209b9ad7a20bd8007"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002.gtf.gz:md5,34b08e4e8f9c2f0f6352459791d5f9f9"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002.gtf.gz.tbi:md5,d7f6a35681a1f666c917ec58d1f6800c"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_cramino.txt",
+                    "dd1223f58692187b55c004105a66bc70"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_cramino.arrow"
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-17T13:46:52.475936367",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.4"
+        }
+    },
+    "2 samples - SNVs only - Longphase - bam output - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_snv_bcftools_merge.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_snv_bcftools_merge.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "10": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino.arrow:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM"
+                        },
+                        "HG003_cramino.arrow:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    
+                ],
+                "3": [
+                    
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_longphase_haplotag.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "HG002_longphase_haplotag.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM"
+                        },
+                        "HG003_longphase_haplotag.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "HG003_longphase_haplotag.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "5": [
+                    
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_whatshap_stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM"
+                        },
+                        "HG003_whatshap_stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM"
+                        },
+                        "HG003.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM"
+                        },
+                        "HG003.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "9": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM"
+                        },
+                        "HG003_cramino.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "blocks": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM"
+                        },
+                        "HG003.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "blocks_index": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM"
+                        },
+                        "HG003.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "haplotagged_bam_bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_longphase_haplotag.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "HG002_longphase_haplotag.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM"
+                        },
+                        "HG003_longphase_haplotag.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "HG003_longphase_haplotag.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "haplotagged_cram_crai": [
+                    
+                ],
+                "haplotagging_arrow": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino.arrow:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM"
+                        },
+                        "HG003_cramino.arrow:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "haplotagging_stats": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM"
+                        },
+                        "HG003_cramino.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "phased_family_snvs": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_snv_bcftools_merge.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "phased_family_snvs_tbi": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_snv_bcftools_merge.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "phased_family_svs": [
+                    
+                ],
+                "phased_family_svs_tbi": [
+                    
+                ],
+                "stats": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_whatshap_stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ],
+                    [
+                        {
+                            "id": "HG003",
+                            "family_id": "FAM"
+                        },
+                        "HG003_whatshap_stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-08T13:51:17.848364164",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.4"
+        }
+    },
+    "1 sample - SNVs only - Hiphase - cram output": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "FAM"
+                    },
+                    "FAM_hiphase_snv_phased.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=169, phased=false, phasedAutodetect=false]",
+                    "76f36e0c1c6e484aa3e4520862609ccf"
+                ]
+            ],
+            "FAM_hiphase_snv_phased.vcf.gz.tbi",
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_PacBio_Revio_haplotagged.bam:md5,8a974a28fcdab98f4d751e4202850fce",
+                    "HG002_PacBio_Revio_haplotagged.bam.bai:md5,ab8ec29cbca9bf749ba37803249ff64e"
+                ]
+            ],
+            "HG002.cram",
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_whatshap_stats.tsv:md5,5737a4e56e2adff2c3e985a6a2b66339"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002.gtf.gz:md5,072b94b49e22c91ce228fd7af61478f9"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002.gtf.gz.tbi:md5,d7f6a35681a1f666c917ec58d1f6800c"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_cramino.txt",
+                    "d2ca4af553c68064d8d3ecba4eb2cd34"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_cramino.arrow"
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-17T13:45:03.942280477",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.4"
+        }
+    },
+    "1 sample - SNVs only - Longphase - bam output": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "FAM"
+                    },
+                    "FAM_snv_bcftools_merge.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=169, phased=false, phasedAutodetect=false]",
+                    "4a750d03056aaf7050ffbdbab1f04aba"
+                ]
+            ],
+            "FAM_snv_bcftools_merge.vcf.gz.tbi",
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_longphase_haplotag.bam:md5,4384378e90e8661f63b7a88df40234e7",
+                    "HG002_longphase_haplotag.bam.bai:md5,55bc8a4497f405704c1757be9739da57"
+                ]
+            ],
+            [
+                
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_whatshap_stats.tsv:md5,5d2a8f6644dfc685dac0a7eab5d241e1"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002.gtf.gz:md5,750a622d3c4a7eaa8d63fefeedd29238"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002.gtf.gz.tbi:md5,9652f3682663f5a4690d82be0443b0f4"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_cramino.txt",
+                    "7c4db6add18de12a0d57e60d82368ba3"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_cramino.arrow"
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-17T13:45:19.775398534",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.4"
+        }
+    },
+    "2 samples - SNVs only - Longphase - bam output": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "FAM"
+                    },
+                    "FAM_snv_bcftools_merge.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=236, phased=false, phasedAutodetect=false]",
+                    "29ad7b4ef2b210c1b8cf973e47746255"
+                ]
+            ],
+            "FAM_snv_bcftools_merge.vcf.gz.tbi",
+            [
+                
+            ],
+            [
+                
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_longphase_haplotag.bam:md5,4384378e90e8661f63b7a88df40234e7",
+                    "HG002_longphase_haplotag.bam.bai:md5,55bc8a4497f405704c1757be9739da57"
+                ],
+                [
+                    {
+                        "id": "HG003",
+                        "family_id": "FAM"
+                    },
+                    "HG003_longphase_haplotag.bam:md5,80a9ae63e7554f450a21aeddb5c15284",
+                    "HG003_longphase_haplotag.bam.bai:md5,01695bdc11ce8903dd1f86676dc2ff83"
+                ]
+            ],
+            [
+                
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_whatshap_stats.tsv:md5,70981f017bd1017d84dd3aa829c6f60d"
+                ],
+                [
+                    {
+                        "id": "HG003",
+                        "family_id": "FAM"
+                    },
+                    "HG003_whatshap_stats.tsv:md5,96933e7b02634379891d7ff398804ca1"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002.gtf.gz:md5,750a622d3c4a7eaa8d63fefeedd29238"
+                ],
+                [
+                    {
+                        "id": "HG003",
+                        "family_id": "FAM"
+                    },
+                    "HG003.gtf.gz:md5,657726193f1e04e3cf55982a503bb670"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002.gtf.gz.tbi:md5,9652f3682663f5a4690d82be0443b0f4"
+                ],
+                [
+                    {
+                        "id": "HG003",
+                        "family_id": "FAM"
+                    },
+                    "HG003.gtf.gz.tbi:md5,85dc3db86bb82e7f21d9d3296e651bed"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_cramino.txt",
+                    "7c4db6add18de12a0d57e60d82368ba3"
+                ],
+                [
+                    {
+                        "id": "HG003",
+                        "family_id": "FAM"
+                    },
+                    "HG003_cramino.txt",
+                    "35bf7563597d5476e77595eea5049135"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_cramino.arrow"
+                ],
+                [
+                    {
+                        "id": "HG003",
+                        "family_id": "FAM"
+                    },
+                    "HG003_cramino.arrow"
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-17T13:45:58.257438651",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.4"
+        }
+    },
+    "2 samples - SNVs + SVs - Longphase - bam output": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "FAM"
+                    },
+                    "FAM_snv_bcftools_merge.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=2, variantCount=236, phased=false, phasedAutodetect=false]",
+                    "d5a60f1570ac1e8d1566c19f581e8235"
+                ]
+            ],
+            "FAM_snv_bcftools_merge.vcf.gz.tbi",
+            [
+                [
+                    {
+                        "id": "FAM"
+                    },
+                    "FAM_sv_bcftools_merge.vcf.gz",
+                    "268f14081c4b2b250fb1ab05e70e22d9"
+                ]
+            ],
+            "FAM_sv_bcftools_merge.vcf.gz.tbi",
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_longphase_haplotag.bam:md5,2c14eab2f36f750084c09ec4ed791d8b",
+                    "HG002_longphase_haplotag.bam.bai:md5,a7fe605e6dd6eca3e95e63e93e09512c"
+                ],
+                [
+                    {
+                        "id": "HG003",
+                        "family_id": "FAM"
+                    },
+                    "HG003_longphase_haplotag.bam:md5,285ff85904faee7906c597ad01e27fe2",
+                    "HG003_longphase_haplotag.bam.bai:md5,0b7f390a27efe5fa267d0fc71b4568a1"
+                ]
+            ],
+            [
+                
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_whatshap_stats.tsv:md5,7f3eb0175cebc45cb9e6ba36a3746e41"
+                ],
+                [
+                    {
+                        "id": "HG003",
+                        "family_id": "FAM"
+                    },
+                    "HG003_whatshap_stats.tsv:md5,2f96e7d1f14e091cc9c5fb6420cd65a1"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002.gtf.gz:md5,99494b5e433dc389f98bd124c1734645"
+                ],
+                [
+                    {
+                        "id": "HG003",
+                        "family_id": "FAM"
+                    },
+                    "HG003.gtf.gz:md5,0f348ba650c5861f3f13b9df8851a3f3"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002.gtf.gz.tbi:md5,515313bc779aafb210ca68fb369f05a2"
+                ],
+                [
+                    {
+                        "id": "HG003",
+                        "family_id": "FAM"
+                    },
+                    "HG003.gtf.gz.tbi:md5,829ab6c5f5638f26227f131a450268fe"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_cramino.txt",
+                    "7c4db6add18de12a0d57e60d82368ba3"
+                ],
+                [
+                    {
+                        "id": "HG003",
+                        "family_id": "FAM"
+                    },
+                    "HG003_cramino.txt",
+                    "35bf7563597d5476e77595eea5049135"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_cramino.arrow"
+                ],
+                [
+                    {
+                        "id": "HG003",
+                        "family_id": "FAM"
+                    },
+                    "HG003_cramino.arrow"
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-17T13:46:19.783461937",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.4"
+        }
+    },
+    "1 sample - SNVs only - Hiphase - bam output - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_hiphase_snv_phased.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_hiphase_snv_phased.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "10": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino.arrow:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    
+                ],
+                "3": [
+                    
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_PacBio_Revio_haplotagged.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "HG002_PacBio_Revio_haplotagged.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "5": [
+                    
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_whatshap_stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "9": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "blocks": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "blocks_index": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "haplotagged_bam_bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_PacBio_Revio_haplotagged.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "HG002_PacBio_Revio_haplotagged.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "haplotagged_cram_crai": [
+                    
+                ],
+                "haplotagging_arrow": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino.arrow:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "haplotagging_stats": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "phased_family_snvs": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_hiphase_snv_phased.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "phased_family_snvs_tbi": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_hiphase_snv_phased.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "phased_family_svs": [
+                    
+                ],
+                "phased_family_svs_tbi": [
+                    
+                ],
+                "stats": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_whatshap_stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-21T14:00:56.665763239",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.2"
+        }
+    },
+    "1 sample - SNVs only - Longphase - bam output - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_snv_bcftools_merge.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_snv_bcftools_merge.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "10": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino.arrow:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    
+                ],
+                "3": [
+                    
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_longphase_haplotag.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "HG002_longphase_haplotag.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "5": [
+                    
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_whatshap_stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "9": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "blocks": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "blocks_index": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "haplotagged_bam_bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_longphase_haplotag.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "HG002_longphase_haplotag.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "haplotagged_cram_crai": [
+                    
+                ],
+                "haplotagging_arrow": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino.arrow:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "haplotagging_stats": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "phased_family_snvs": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_snv_bcftools_merge.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "phased_family_snvs_tbi": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_snv_bcftools_merge.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "phased_family_svs": [
+                    
+                ],
+                "phased_family_svs_tbi": [
+                    
+                ],
+                "stats": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_whatshap_stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-08T13:51:58.870969693",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.4"
+        }
+    },
+    "1 sample - SNVs only - Hiphase - cram output - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_hiphase_snv_phased.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_hiphase_snv_phased.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "10": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino.arrow:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    
+                ],
+                "3": [
+                    
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_PacBio_Revio_haplotagged.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "HG002_PacBio_Revio_haplotagged.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002.cram:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "HG002.cram.crai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_whatshap_stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "9": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "blocks": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002.gtf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "blocks_index": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002.gtf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "haplotagged_bam_bai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_PacBio_Revio_haplotagged.bam:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "HG002_PacBio_Revio_haplotagged.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "haplotagged_cram_crai": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002.cram:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "HG002.cram.crai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "haplotagging_arrow": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino.arrow:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "haplotagging_stats": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_cramino.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "phased_family_snvs": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_hiphase_snv_phased.vcf.gz:md5,68b329da9893e34099c7d8ad5cb9c940"
+                    ]
+                ],
+                "phased_family_snvs_tbi": [
+                    [
+                        {
+                            "id": "FAM"
+                        },
+                        "FAM_hiphase_snv_phased.vcf.gz.tbi:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "phased_family_svs": [
+                    
+                ],
+                "phased_family_svs_tbi": [
+                    
+                ],
+                "stats": [
+                    [
+                        {
+                            "id": "HG002",
+                            "family_id": "FAM"
+                        },
+                        "HG002_whatshap_stats.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-21T14:01:10.427387318",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.2"
+        }
+    },
+    "1 sample - SNVs + SVs - Longphase - bam output": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "FAM"
+                    },
+                    "FAM_snv_bcftools_merge.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=169, phased=false, phasedAutodetect=false]",
+                    "3fa2f376b8dcf77482efbaba843c6f97"
+                ]
+            ],
+            "FAM_snv_bcftools_merge.vcf.gz.tbi",
+            [
+                [
+                    {
+                        "id": "FAM"
+                    },
+                    "FAM_sv_bcftools_merge.vcf.gz",
+                    "07a229241a0c3ed213f1c5f71a7e9080"
+                ]
+            ],
+            "FAM_sv_bcftools_merge.vcf.gz.tbi",
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_longphase_haplotag.bam:md5,76930ca5a88637c13e490e52e496b7fc",
+                    "HG002_longphase_haplotag.bam.bai:md5,4a95a46db8b84b34268bf0daa27fac22"
+                ]
+            ],
+            [
+                
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_whatshap_stats.tsv:md5,e5250615d2bc5284de5fae838b77e509"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002.gtf.gz:md5,efb2b9ac544d340755c171879315f382"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002.gtf.gz.tbi:md5,70dcea94ec45886a6e52241437dc9953"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_cramino.txt",
+                    "7c4db6add18de12a0d57e60d82368ba3"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_cramino.arrow"
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-17T13:45:40.364554946",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.4"
+        }
+    },
+    "1 sample - SNVs + SVs - Hiphase - bam output": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "FAM"
+                    },
+                    "FAM_hiphase_snv_phased.vcf.gz",
+                    "VcfFile [chromosomes=[chrX, chr16, chr17, chr20], sampleCount=1, variantCount=169, phased=false, phasedAutodetect=false]",
+                    "aab6dbef7714080a79738b5e610fc2f5"
+                ]
+            ],
+            "FAM_hiphase_snv_phased.vcf.gz.tbi",
+            [
+                [
+                    {
+                        "id": "FAM"
+                    },
+                    "FAM_hiphase_sv_phased.vcf.gz",
+                    "6ca4b1b6902d75c5d106fa3c25c83087"
+                ]
+            ],
+            "FAM_hiphase_sv_phased.vcf.gz.tbi",
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_PacBio_Revio_haplotagged.bam:md5,f4a2bc37b043e30b19252dbc61f34f30",
+                    "HG002_PacBio_Revio_haplotagged.bam.bai:md5,33fb8115ec3e1fc0c97e27cacb640350"
+                ]
+            ],
+            [
+                
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_whatshap_stats.tsv:md5,ee9f3e1a6a7a2f438a8e0137ee0e5d9f"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002.gtf.gz:md5,40e489a4687aab73fbc816f1a85769d1"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002.gtf.gz.tbi:md5,7e0d021bdc476a355348004258a07b21"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_cramino.txt",
+                    "d2ca4af553c68064d8d3ecba4eb2cd34"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "HG002",
+                        "family_id": "FAM"
+                    },
+                    "HG002_cramino.arrow"
+                ]
+            ]
+        ],
+        "timestamp": "2026-11-17T13:44:46.921005576",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.4"
+        }
+    }
+}

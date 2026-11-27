@@ -17,13 +17,6 @@
                         "1.0"
                     ]
                 ],
-                "2": [
-                    [
-                        "CREATE_PEDIGREE_FILE",
-                        "python",
-                        "3.8.3"
-                    ]
-                ],
                 "ped": [
                     [
                         {
@@ -38,21 +31,14 @@
                         "create_pedigree_file",
                         "1.0"
                     ]
-                ],
-                "versions_python": [
-                    [
-                        "CREATE_PEDIGREE_FILE",
-                        "python",
-                        "3.8.3"
-                    ]
                 ]
             }
         ],
+        "timestamp": "2026-11-04T11:19:16.392258584",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-19T17:17:47.510828921"
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.3"
+        }
     },
     "create_pedigree_file - one sample": {
         "content": [
@@ -67,21 +53,14 @@
                         "create_pedigree_file",
                         "1.0"
                     ]
-                ],
-                "versions_python": [
-                    [
-                        "CREATE_PEDIGREE_FILE",
-                        "python",
-                        "3.8.3"
-                    ]
                 ]
             }
         ],
+        "timestamp": "2026-11-04T11:19:05.541523236",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-19T17:17:32.568980984"
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.3"
+        }
     },
     "create_pedigree_file - multiple samples": {
         "content": [
@@ -99,20 +78,13 @@
                         "create_pedigree_file",
                         "1.0"
                     ]
-                ],
-                "versions_python": [
-                    [
-                        "CREATE_PEDIGREE_FILE",
-                        "python",
-                        "3.8.3"
-                    ]
                 ]
             }
         ],
+        "timestamp": "2026-11-04T11:19:11.069925109",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-19T17:17:40.202656949"
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.3"
+        }
     }
 }

@@ -84,11 +84,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-05-27T10:49:38.698058487",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-20T15:49:27.837045994"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "1 sample - 2 bed, fasta, fai, [], deepvariant -stub": {
         "content": [
@@ -239,11 +239,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-05-27T10:51:33.664455277",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-20T15:52:58.524003222"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "1 sample female - sentieon diploid and haploid beds -stub": {
         "content": [
@@ -346,11 +346,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-05-27T10:52:13.200837995",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-20T15:54:10.258447501"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "2 samples - 2 bed, fasta, fai, par_bed, deepvariant -stub": {
         "content": [
@@ -629,11 +629,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-05-27T10:51:57.607422414",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-20T15:53:47.983413603"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "1 sample - 1 bed, fasta, fai, [], deepvariant -stub": {
         "content": [
@@ -720,11 +720,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-05-27T10:51:24.690009571",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-20T15:52:38.398912067"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "1 sample male - sentieon diploid and haploid beds -stub": {
         "content": [
@@ -827,11 +827,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-05-27T10:52:05.481403857",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-20T15:54:00.279590223"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "1 sample - 2 bed, fasta, fai, [], deepvariant": {
         "content": [
@@ -982,11 +982,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-05-27T10:50:10.383850588",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-20T15:50:16.428724092"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "1 sample - no bed, fasta, fai, [], deepvariant -stub": {
         "content": [
@@ -1073,11 +1073,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-05-27T10:51:15.928963043",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-20T15:52:20.515962842"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "2 samples - 2 bed, fasta, fai, par_bed, deepvariant": {
         "content": [
@@ -1356,11 +1356,11 @@
                 ]
             }
         ],
+        "timestamp": "2026-05-27T10:51:06.813890102",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-20T15:52:02.820272336"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     },
     "2 samples - 2 bed, fasta, fai, [], deepvariant -stub": {
         "content": [
@@ -1639,10 +1639,10 @@
                 ]
             }
         ],
+        "timestamp": "2026-05-27T10:51:45.585832317",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.4"
-        },
-        "timestamp": "2026-03-20T15:53:22.272718067"
+            "nf-test": "0.9.5",
+            "nextflow": "26.02.0"
+        }
     }
 }

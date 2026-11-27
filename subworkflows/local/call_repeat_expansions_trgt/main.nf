@@ -8,17 +8,15 @@ include { VCFEXPRESS       } from '../../../modules/nf-core/vcfexpress/main'
 
 workflow CALL_REPEAT_EXPANSIONS_TRGT {
     take:
-    ch_bam_bai              // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
-    ch_fasta                // channel: [mandatory] [ val(meta), path(fasta) ]
-    ch_fai                  // channel: [mandatory] [ val(meta), path(fai) ]
-    ch_bed                  // channel: [mandatory] [ val(meta), path(bed) ]
-    cram_output             // bool: Publish alignments as CRAM (true) or BAM (false)
-    ch_vcfexpress_prelude   // path: [mandatory] lua file
+    ch_bam_bai            // channel: [mandatory] [ val(meta), path(bam), path(bai) ]
+    ch_fasta              // channel: [mandatory] [ val(meta), path(fasta) ]
+    ch_fai                // channel: [mandatory] [ val(meta), path(fai) ]
+    ch_bed                // channel: [mandatory] [ val(meta), path(bed) ]
+    val_cram_output       // bool: Publish alignments as CRAM (true) or BAM (false)
+    ch_vcfexpress_prelude // path: [mandatory] lua file
 
     main:
-    ch_bam_bai
-        .map { meta, bam, bai -> [meta, bam, bai, meta.sex == 1 ? 'XY' : 'XX'] }
-        .set { ch_trgt_input }
+    ch_trgt_input = ch_bam_bai.map { meta, bam, bai -> [meta, bam, bai, [], [], meta.sex == 1 ? 'XY' : 'XX'] }
 
     // Run TRGT
     TRGT_GENOTYPE(
@@ -31,7 +29,7 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     // Sort and index bam
     SAMTOOLS_SORT(
         TRGT_GENOTYPE.out.bam,
-        [[], [],[]],
+        [[], [], []],
         '',
     )
 
@@ -40,7 +38,7 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     )
 
     // Publish spanning reads as CRAM if requested
-    if (cram_output) {
+    if (val_cram_output) {
         SAMTOOLS_CONVERT(
             SAMTOOLS_SORT.out.bam.join(SAMTOOLS_INDEX.out.index, failOnDuplicate: true, failOnMismatch: true),
             ch_fasta.join(ch_fai).collect(),
@@ -48,9 +46,10 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     }
 
     // Add FOUND_IN=TRGT tag
-    VCFEXPRESS (
+    VCFEXPRESS(
         TRGT_GENOTYPE.out.vcf,
-        ch_vcfexpress_prelude
+        ch_vcfexpress_prelude,
+        'bcf.gz',
     )
 
     // Sort and index bcf
@@ -59,7 +58,7 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     )
 
     // Add sample IDs for all XY samples in family to meta for later repeat annotation with strdrop
-    BCFTOOLS_SORT.out.vcf
+    ch_trgt_merge_in = BCFTOOLS_SORT.out.vcf
         .join(BCFTOOLS_SORT.out.tbi, failOnMismatch: true, failOnDuplicate: true)
         .map { meta, vcf, tbi -> [[id: meta.family_id], meta, vcf, tbi] }
         .groupTuple()
@@ -71,7 +70,6 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
 
             [meta + [xy_samples: xy_ids], vcf, tbi]
         }
-        .set { ch_trgt_merge_in }
 
     TRGT_MERGE(
         ch_trgt_merge_in,
@@ -80,10 +78,12 @@ workflow CALL_REPEAT_EXPANSIONS_TRGT {
     )
 
     emit:
-    sample_vcf = BCFTOOLS_SORT.out.vcf    // channel: [ val(meta), path(vcf) ]
-    sample_tbi = BCFTOOLS_SORT.out.tbi    // channel: [ val(meta), path(tbi) ]
-    family_vcf = TRGT_MERGE.out.vcf       // channel: [ val(meta), path(vcf) ]
-    family_tbi = TRGT_MERGE.out.index     // channel: [ val(meta), path(tbi) ]
-    sample_bam = SAMTOOLS_SORT.out.bam    // channel: [ val(meta), path(bam) ]
-    sample_bai = SAMTOOLS_INDEX.out.index // channel: [ val(meta), path(bai) ]
+    sample_vcf  = BCFTOOLS_SORT.out.vcf                                         // channel: [ val(meta), path(vcf) ]
+    sample_tbi  = BCFTOOLS_SORT.out.tbi                                         // channel: [ val(meta), path(tbi) ]
+    family_vcf  = TRGT_MERGE.out.vcf                                            // channel: [ val(meta), path(vcf) ]
+    family_tbi  = TRGT_MERGE.out.index                                          // channel: [ val(meta), path(tbi) ]
+    sample_bam  = SAMTOOLS_SORT.out.bam                                         // channel: [ val(meta), path(bam) ]
+    sample_bai  = SAMTOOLS_INDEX.out.index                                      // channel: [ val(meta), path(bai) ]
+    sample_cram = val_cram_output ? SAMTOOLS_CONVERT.out.cram : channel.empty() // channel: [ val(meta), path(cram) ]
+    sample_crai = val_cram_output ? SAMTOOLS_CONVERT.out.crai : channel.empty() // channel: [ val(meta), path(crai) ]
 }

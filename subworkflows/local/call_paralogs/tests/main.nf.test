@@ -33,7 +33,7 @@ nextflow_workflow {
         when {
             params {
                 publish_alignments_as_cram   = false
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/'
                 fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
             }
             workflow {
@@ -46,6 +46,7 @@ nextflow_workflow {
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
                 input[3] = params.publish_alignments_as_cram
+                input[4] = [[],[]]
                 """
             }
         }
@@ -53,7 +54,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert workflow.out.bai.get(0).get(1).endsWith("bai") },
-                { assert workflow.out.tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
                 { assert workflow.out.cram.empty },
                 { assert workflow.out.crai.empty },
                 { assert snapshot(
@@ -62,8 +63,8 @@ nextflow_workflow {
                     workflow.out.bai.collect { [ it[0], file(it[1]).name ] },
                     workflow.out.json.collect { [ it[0], file(it[1]).name ] },
                     // Snapshot the samples in the VCF with linesGzip[13]
-                    workflow.out.vcf.collect { [ it[0], file(it[1]).name, path(it[1]).vcf.summary, path(it[1]).linesGzip[13] ]},
-                    workflow.out.tbi.collect { [ it[0], file(it[1]).name ] },
+                    workflow.out.family_vcf.collect { [ it[0], file(it[1]).name, path(it[1]).vcf.summary, path(it[1]).linesGzip[13] ]},
+                    workflow.out.family_tbi.collect { [ it[0], file(it[1]).name ] },
 
                 ).match() }
             )
@@ -74,7 +75,7 @@ nextflow_workflow {
         when {
             params {
                 publish_alignments_as_cram   = true
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/'
                 fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
             }
             workflow {
@@ -87,6 +88,7 @@ nextflow_workflow {
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
                 input[3] = params.publish_alignments_as_cram
+                input[4] = [[],[]]
                 """
             }
         }
@@ -94,7 +96,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert workflow.out.bai.get(0).get(1).endsWith("bai") },
-                { assert workflow.out.tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
                 { assert snapshot(
                     // The order paraphase outputs reads in is unstable, so we can only snapshot the name
                     workflow.out.bam.collect { [ it[0], file(it[1]).name ] },
@@ -103,8 +105,8 @@ nextflow_workflow {
                     workflow.out.crai.collect { [ it[0], file(it[1]).name ] },
                     workflow.out.json.collect { [ it[0], file(it[1]).name ] },
                     // Snapshot the samples in the VCF with linesGzip[13]
-                    workflow.out.vcf.collect { [ it[0], file(it[1]).name, path(it[1]).vcf.summary, path(it[1]).linesGzip[13] ]},
-                    workflow.out.tbi.collect { [ it[0], file(it[1]).name ] },
+                    workflow.out.family_vcf.collect { [ it[0], file(it[1]).name, path(it[1]).vcf.summary, path(it[1]).linesGzip[13] ]},
+                    workflow.out.family_tbi.collect { [ it[0], file(it[1]).name ] },
 
                 ).match() }
             )
@@ -115,7 +117,7 @@ nextflow_workflow {
         when {
             params {
                 publish_alignments_as_cram   = false
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/'
                 fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
             }
             workflow {
@@ -145,6 +147,7 @@ nextflow_workflow {
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
                 input[3] = params.publish_alignments_as_cram
+                input[4] = [[],[]]
                 """
             }
         }
@@ -152,7 +155,7 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert workflow.out.bai.get(0).get(1).endsWith("bai") },
-                { assert workflow.out.tbi.get(0).get(1).endsWith("tbi") },
+                { assert workflow.out.family_tbi.get(0).get(1).endsWith("tbi") },
                 { assert workflow.out.cram.empty },
                 { assert workflow.out.crai.empty },
                 { assert snapshot(
@@ -161,8 +164,8 @@ nextflow_workflow {
                     workflow.out.bai.collect { [ it[0], file(it[1]).name ] },
                     workflow.out.json.collect { [ it[0], file(it[1]).name ] },
                     // Snapshot the samples in the VCF with linesGzip[13]
-                    workflow.out.vcf.collect { [ it[0], file(it[1]).name, path(it[1]).vcf.summary, path(it[1]).linesGzip[13] ]},
-                    workflow.out.tbi.collect { [ it[0], file(it[1]).name ] },
+                    workflow.out.family_vcf.collect { [ it[0], file(it[1]).name, path(it[1]).vcf.summary, path(it[1]).linesGzip[13] ]},
+                    workflow.out.family_tbi.collect { [ it[0], file(it[1]).name ] },
 
                 ).match() }
             )
@@ -174,7 +177,7 @@ nextflow_workflow {
         when {
             params {
                 publish_alignments_as_cram   = false
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/'
                 fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
             }
             workflow {
@@ -204,6 +207,7 @@ nextflow_workflow {
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
                 input[3] = params.publish_alignments_as_cram
+                input[4] = [[],[]]
                 """
             }
         }
@@ -222,7 +226,7 @@ nextflow_workflow {
         when {
             params {
                 publish_alignments_as_cram   = true
-                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/543ca28898e220a4b1e072248968ac248203eb72/'
+                pipelines_testdata_base_path = 'https://raw.githubusercontent.com/genomic-medicine-sweden/test-datasets/0a5412d2064120f06d87c327026e03bbf9e50835/'
                 fasta                        = params.pipelines_testdata_base_path + 'reference/hg38.test.fa'
             }
             workflow {
@@ -252,6 +256,7 @@ nextflow_workflow {
                 input[1] = GUNZIP.out.gunzip
                 input[2] = SAMTOOLS_FAIDX.out.fai
                 input[3] = params.publish_alignments_as_cram
+                input[4] = [[],[]]
                 """
             }
         }

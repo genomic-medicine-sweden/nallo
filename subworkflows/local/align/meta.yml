@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "align"
+description: Map reads in BAM files to a reference genome using minimap2.
+keywords:
+  - alignment
+  - bam
+  - cram
+  - minimap2
+components:
+  - minimap2/align
+  - minimap2/index
+input:
+  - ch_ubam:
+      type: file
+      description: |
+        The input channel containing unmapped BAM files.
+        Structure: [ val(meta), path(bam) ]
+      pattern: "*.{bam/cram/sam}"
+  - ch_fasta:
+      type: file
+      description: |
+        Channel containing fasta reference file
+        Structure: [ val(meta), path(fasta) ]
+      pattern: "*.{fa,fasta,fna}{,.gz}"
+output:
+  - bam:
+      type: file
+      description: |
+        Channel containing mapped BAM files.
+        Structure: [ val(meta), path(bam) ]
+      pattern: "*.bam"
+  - index:
+      type: file
+      description: |
+        Channel containing BAM index files.
+        Structure: [ val(meta), path(bai) ]
+      pattern: "*.bai"
+authors:
+  - "@Schmytzi"
+maintainers:
+  - "@Schmytzi"

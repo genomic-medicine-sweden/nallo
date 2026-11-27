@@ -1,0 +1,149 @@
+nextflow_workflow {
+
+    name "Test Workflow REHEADER_SV_VCF"
+    script "../main.nf"
+    config "./nextflow.config"
+    workflow "REHEADER_SV_VCF"
+
+    test("severus, sniffles, sniffles1, and debreak VCFs are reheadered to meta.id") {
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'debreak', needs_reheader: true ],
+                        file(params.pipelines_testdata_base_path + 'testdata/debreak_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/debreak_test.vcf.gz.tbi', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'hificnv', needs_reheader: false ],
+                        file(params.pipelines_testdata_base_path + 'testdata/hificnv_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/hificnv_test.vcf.gz.tbi', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sawfish', needs_reheader: false ],
+                        file(params.pipelines_testdata_base_path + 'testdata/sawfish_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/sawfish_test.vcf.gz.tbi', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'severus', needs_reheader: true ],
+                        file(params.pipelines_testdata_base_path + 'testdata/severus_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/severus_test.vcf.gz.tbi', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sniffles', needs_reheader: true ],
+                        file(params.pipelines_testdata_base_path + 'testdata/sniffles2_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/sniffles2_test.vcf.gz.tbi', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sniffles1', needs_reheader: true ],
+                        file(params.pipelines_testdata_base_path + 'testdata/sniffles1_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/sniffles1_test.vcf.gz.tbi', checkIfExists: true)
+                    ]
+                )
+                input[1] = channel.of([[], []])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.vcf.size() == 6 },
+                { assert workflow.out.tbi.size() == 6 },
+                { assert workflow.out.vcf.every { meta, _vcf -> meta.id == 'HG002_Revio' } },
+                { assert workflow.out.tbi.every { meta, _tbi -> meta.id == 'HG002_Revio' } },
+                { assert snapshot(
+                    workflow.out.vcf
+                        // Only inspect reheadered callers — hificnv and sawfish pass through without any
+                        // process, so their remote input files are never staged to a local path.
+                        .findAll { meta, _vcf -> meta.sv_caller in ['debreak', 'severus', 'sniffles', 'sniffles1'] }
+                        .collect { meta, vcf ->
+                            [
+                                'sv_vcf_output:',
+                                [id: meta.id, sv_caller: meta.sv_caller],
+                                [vcf_sample_name: path(vcf).vcf.header.getSampleNamesInOrder()],
+                                [file_name: file(vcf).name],
+                                [summary: path(vcf).vcf.summary],
+                                [variants_md5:path(vcf).vcf.variantsMD5],
+                            ]
+                        }.sort { it[1].sv_caller },
+                    workflow.out.vcf
+                        .findAll { meta, _vcf -> meta.sv_caller in ['hificnv', 'sawfish'] }
+                        .collect { meta, vcf ->
+                            [
+                                'sv_vcf_output:',
+                                [id: meta.id, sv_caller: meta.sv_caller],
+                                [file_name: file(vcf).name],
+                            ]
+                        }.sort { it[1].sv_caller },
+                    workflow.out.tbi
+                        .collect { meta, tbi ->
+                            [
+                                'sv_tbi_output:',
+                                [id: meta.id, sv_caller: meta.sv_caller],
+                                file(tbi).name
+                            ]
+                        }.sort { it[1].sv_caller },
+                ).match()
+            }
+
+            )
+        }
+    }
+
+    test("severus, sniffles, sniffles1, and debreak VCFs are reheadered to meta.id - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = channel.of(
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'debreak', needs_reheader: true ],
+                        file(params.pipelines_testdata_base_path + 'testdata/debreak_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/debreak_test.vcf.gz.tbi', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'hificnv', needs_reheader: false ],
+                        file(params.pipelines_testdata_base_path + 'testdata/hificnv_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/hificnv_test.vcf.gz.tbi', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sawfish', needs_reheader: false ],
+                        file(params.pipelines_testdata_base_path + 'testdata/sawfish_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/sawfish_test.vcf.gz.tbi', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'severus', needs_reheader: true ],
+                        file(params.pipelines_testdata_base_path + 'testdata/severus_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/severus_test.vcf.gz.tbi', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sniffles', needs_reheader: true ],
+                        file(params.pipelines_testdata_base_path + 'testdata/sniffles2_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/sniffles2_test.vcf.gz.tbi', checkIfExists: true)
+                    ],
+                    [
+                        [ id: 'HG002_Revio', family_id: 'FAM', sv_caller: 'sniffles1', needs_reheader: true ],
+                        file(params.pipelines_testdata_base_path + 'testdata/sniffles1_test.vcf.gz', checkIfExists: true),
+                        file(params.pipelines_testdata_base_path + 'testdata/sniffles1_test.vcf.gz.tbi', checkIfExists: true)
+                    ]
+                )
+                input[1] = channel.of([[], []])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert workflow.out.vcf.size() == 6 },
+                { assert workflow.out.tbi.size() == 6 },
+                { assert snapshot(workflow.out).match() }
+            )
+        }
+    }
+}

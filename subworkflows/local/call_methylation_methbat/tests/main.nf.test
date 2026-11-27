@@ -27,26 +27,30 @@ nextflow_workflow {
             process {
                 """
                 input[0] = channel.of([
-                    [ id: 'HG002' ],
+                    [ id: 'FAM' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz', checkIfExists: true)
                 ])
                 input[1] = channel.of([
-                    [ id: 'HG002' ],
+                    [ id: 'FAM' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_deepvariant_norm.vcf.gz.tbi', checkIfExists: true)
                 ])
                 input[2] = channel.empty()
                 input[3] = channel.empty()
                 input[4] = channel.of([
-                    [ id: 'HG002', family_id: 'HG002' ],
+                    [ id: 'HG002', family_id: 'FAM' ],
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam', checkIfExists: true),
                     file(params.pipelines_testdata_base_path + 'testdata/HG002_PacBio_Revio.bam.bai', checkIfExists: true)
                 ])
-                input[5] = channel.of( [ [ id : 'HG002' ], 'HG002' ] )
+                input[5] = channel.of( [ [ id : 'FAM' ], 'HG002' ] )
                 input[6] = PREPARE_REFERENCES.out.fasta
                 input[7] = PREPARE_REFERENCES.out.fai
                 input[8] = 'longphase'
                 input[9] = false
                 input[10] = false
+                input[11] = [
+                    [ id:'FAM' ], // meta map
+                    []
+                ]
                 """
             }
         }
@@ -72,9 +76,15 @@ nextflow_workflow {
                 { assert workflow.success },
                 // Note: the region profile contains a header, so we need to ignore the first 3 lines to get to the actual data for the snapshot test
                 { assert snapshot(
-                    workflow.out.pbcpg_biwgig_combined,
-                    workflow.out.pbcpg_biwgig_hap1,
-                    workflow.out.pbcpg_biwgig_hap2,
+                    workflow.out.pbcpg_combined_bigwig,
+                    workflow.out.pbcpg_hap1_bigwig,
+                    workflow.out.pbcpg_hap2_bigwig,
+                    workflow.out.pbcpg_combined_bed,
+                    workflow.out.pbcpg_combined_bed_index,
+                    workflow.out.pbcpg_hap1_bed,
+                    workflow.out.pbcpg_hap1_bed_index,
+                    workflow.out.pbcpg_hap2_bed,
+                    workflow.out.pbcpg_hap2_bed_index,
                     file(workflow.out.region_profile[0][1])
                         .readLines()[3..5]
                 ).match() }
@@ -105,9 +115,15 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.pbcpg_biwgig_combined,
-                    workflow.out.pbcpg_biwgig_hap1,
-                    workflow.out.pbcpg_biwgig_hap2,
+                    workflow.out.pbcpg_combined_bigwig,
+                    workflow.out.pbcpg_hap1_bigwig,
+                    workflow.out.pbcpg_hap2_bigwig,
+                    workflow.out.pbcpg_combined_bed,
+                    workflow.out.pbcpg_combined_bed_index,
+                    workflow.out.pbcpg_hap1_bed,
+                    workflow.out.pbcpg_hap1_bed_index,
+                    workflow.out.pbcpg_hap2_bed,
+                    workflow.out.pbcpg_hap2_bed_index,
                     file(workflow.out.region_profile[0][1])
                         .readLines()[3..5]
                 ).match() }
@@ -134,9 +150,15 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.pbcpg_biwgig_combined,
-                    workflow.out.pbcpg_biwgig_hap1,
-                    workflow.out.pbcpg_biwgig_hap2,
+                    workflow.out.pbcpg_combined_bigwig,
+                    workflow.out.pbcpg_hap1_bigwig,
+                    workflow.out.pbcpg_hap2_bigwig,
+                    workflow.out.pbcpg_combined_bed,
+                    workflow.out.pbcpg_combined_bed_index,
+                    workflow.out.pbcpg_hap1_bed,
+                    workflow.out.pbcpg_hap1_bed_index,
+                    workflow.out.pbcpg_hap2_bed,
+                    workflow.out.pbcpg_hap2_bed_index,
                     file(workflow.out.region_profile[0][1])
                         .readLines()[3..5]
                 ).match() }
@@ -165,9 +187,15 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     file(workflow.out.asm_bed[0][1]).readLines()[3..15],
-                    workflow.out.pbcpg_biwgig_combined,
-                    workflow.out.pbcpg_biwgig_hap1,
-                    workflow.out.pbcpg_biwgig_hap2,
+                    workflow.out.pbcpg_combined_bigwig,
+                    workflow.out.pbcpg_hap1_bigwig,
+                    workflow.out.pbcpg_hap2_bigwig,
+                    workflow.out.pbcpg_combined_bed,
+                    workflow.out.pbcpg_combined_bed_index,
+                    workflow.out.pbcpg_hap1_bed,
+                    workflow.out.pbcpg_hap1_bed_index,
+                    workflow.out.pbcpg_hap2_bed,
+                    workflow.out.pbcpg_hap2_bed_index,
                     file(workflow.out.region_profile[0][1])
                         .readLines()[3..5]
                 ).match() }
@@ -199,9 +227,15 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert snapshot(
                     file(workflow.out.asm_bed[0][1]).name,
-                    workflow.out.pbcpg_biwgig_combined,
-                    workflow.out.pbcpg_biwgig_hap1,
-                    workflow.out.pbcpg_biwgig_hap2,
+                    workflow.out.pbcpg_combined_bigwig,
+                    workflow.out.pbcpg_hap1_bigwig,
+                    workflow.out.pbcpg_hap2_bigwig,
+                    workflow.out.pbcpg_combined_bed,
+                    workflow.out.pbcpg_combined_bed_index,
+                    workflow.out.pbcpg_hap1_bed,
+                    workflow.out.pbcpg_hap1_bed_index,
+                    workflow.out.pbcpg_hap2_bed,
+                    workflow.out.pbcpg_hap2_bed_index,
                     file(workflow.out.region_profile[0][1])
                         .readLines()[3..5]
                 ).match() }
