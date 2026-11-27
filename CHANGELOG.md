@@ -267,7 +267,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Tool                           | Old version | New version |
 | ------------------------------ | ----------- | ----------- |
-| sentieon-cli/dnascope-longread | 1.5.2       | 2.0.0       |
+| sentieon-cli/dnascope-longread | 1.5.2       | 2.0.1       |
 | hiphase                        | 1.4.0       | 1.6.0       |
 | echtvar/anno                   | 0.2.2       | 0.2.4       |
 | portello                       |             | 0.7.0       |
